@@ -1,0 +1,21 @@
+<h1>Listing divers</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @divers.each do |diver| %>
+  <tr>
+    <td><%= link_to 'Show', diver %></td>
+    <td><%= link_to 'Edit', edit_diver_path(diver) %></td>
+    <td><%= link_to 'Destroy', diver, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Diver', new_diver_path %>

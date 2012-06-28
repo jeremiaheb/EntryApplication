@@ -1,0 +1,40 @@
+<%= form_for(@animal) do |f| %>
+  <% if @animal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@animal.errors.count, "error") %> prohibited this animal from being saved:</h2>
+
+      <ul>
+      <% @animal.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class='field'>
+    <%= f.label :'Species Code' %><br />
+    <%= f.text_field :species_code %>
+  </div>
+  <div class='field'>
+    <%= f.label :'Scientific name' %><br />
+    <%= f.text_field :scientific_name %>
+  </div>
+  <div class='field'>
+    <%= f.label :'Common Name' %><br />
+    <%= f.text_field :common_name %>
+  </div>
+  <div class='field'>
+    <%= f.label :'Maximum size' %><br />
+    <%= f.text_field :max_size %>
+  </div>
+  <div class='field'>
+    <%= f.label :'Minimum size' %><br />
+    <%= f.text_field :min_size %>
+  </div>
+  <div class='field'>
+    <%= f.label :'Maximum number' %><br />
+    <%= f.text_field :max_number %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

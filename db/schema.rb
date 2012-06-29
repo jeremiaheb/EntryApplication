@@ -25,8 +25,11 @@ ActiveRecord::Schema.define(:version => 20120628183117) do
   end
 
   create_table "diver_samples", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "sample_id"
+    t.integer  "diver_id"
+    t.boolean  "primary_diver"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "divers", :force => true do |t|

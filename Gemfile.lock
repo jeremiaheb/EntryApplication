@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/ryanb/nested_form.git
+  revision: 504985118c2205f36e42417e6d99cecf23385290
+  specs:
+    nested_form (0.2.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -108,6 +114,7 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
   jquery-rails
+  nested_form!
   pg
   rails (= 3.2.2)
   sass-rails (~> 3.2.3)

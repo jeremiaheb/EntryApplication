@@ -2,13 +2,15 @@
 
 <table>
   <tr>
-    <th></th>
-    <th></th>
+    <th>Diver Number</th>
+    <th>Diver Name</th>
     <th></th>
   </tr>
 
 <% @divers.each do |diver| %>
   <tr>
+    <td><%= diver.diver_number %></td>
+    <td><%= diver.diver_name %></td>
     <td><%= link_to 'Show', diver %></td>
     <td><%= link_to 'Edit', edit_diver_path(diver) %></td>
     <td><%= link_to 'Destroy', diver, confirm: 'Are you sure?', method: :delete %></td>

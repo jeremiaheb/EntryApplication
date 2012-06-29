@@ -2,13 +2,15 @@
 
 <table>
   <tr>
-    <th></th>
-    <th></th>
+    <th>Diver</th>
+    <th>Date</th>
     <th></th>
   </tr>
 
 <% @samples.each do |sample| %>
   <tr>
+    <td><%= sample.dive_begin_time %></td>
+    <td><%= sample.sample_date %></td>
     <td><%= link_to 'Show', sample %></td>
     <td><%= link_to 'Edit', edit_sample_path(sample) %></td>
     <td><%= link_to 'Destroy', sample, confirm: 'Are you sure?', method: :delete %></td>

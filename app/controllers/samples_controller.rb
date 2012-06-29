@@ -26,6 +26,9 @@ class SamplesController < ApplicationController
   def new
     @sample = Sample.new
 
+    # build twice, once for primary another for buddy
+    @sample.diver_samples.build
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @sample }

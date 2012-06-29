@@ -1,4 +1,4 @@
-<%= form_for(@sample) do |f| %>
+<%= nested_form_for @sample do |f| %>
   <% if @sample.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@sample.errors.count, "error") %> prohibited this sample from being saved:</h2>
@@ -10,7 +10,35 @@
       </ul>
     </div>
   <% end %>
+  <div id='section_1'>
+    <%= f.label "Date" %>
+    <%= f.date_select :sample_date %><br />
 
+    <%= f.fields_for :diver_samples do |builder| %>    
+      <%= builder.label "Diver" %>  
+      <%= builder.collection_select :diver_id, Diver.all, :id, :diver_name, { :include_blank => "" } %><br />
+      <%= builder.hidden_field :primary_diver, :value => true  %>
+    <% end %>
+    <%= f.fields_for :diver_samples do |builder| %>    
+      <%= builder.label "Buddy" %>  
+      <%= builder.collection_select :diver_id, Diver.all, :id, :diver_name, { :include_blank => "" } %><br />
+      <%= builder.hidden_field :primary_diver, :value => false  %>
+    <% end %>
+
+    <%= f.label "Sample Type" %>
+    <%= f.collection_select :sample_type_id, SampleType.all, :id, :sample_type_name, { :include_blank => "" } %><br />
+
+    <%= f.label "Habitat Type" %>
+    <%= f.collection_select :habitat_type_id, HabitatType.all, :id, :habitat_name, { :include_blank => "" } %><br />
+
+    <%= f.label "Dive Begin Time" %>
+    <%= f.time_select :dive_begin_time, { :include_blank => "" } %><br />
+
+    <%= f.label "Dive End Time" %>
+    <%= f.time_select :dive_end_time, { :include_blank => "" } %><br />
+
+
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

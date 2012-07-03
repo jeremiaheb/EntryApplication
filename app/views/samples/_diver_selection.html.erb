@@ -1,0 +1,12 @@
+<% primary_diver = true %>
+<%= object.fields_for :diver_samples do |builder| %>
+  <% if primary_diver == true %>
+    <%= builder.label "Primary Diver"%>
+    <%= builder.hidden_field :primary_diver, :value => true %>
+    <% primary_diver = false %>
+  <% else %>
+    <%= builder.label "Secondary Diver"%>
+    <%= builder.hidden_field :primary_diver, :value => false %>
+  <% end %>
+  <%= builder.collection_select :diver_id, Diver.all, :id, :diver_name, { :include_blank => "" } %><br />
+<% end %>

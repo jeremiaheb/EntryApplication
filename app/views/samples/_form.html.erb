@@ -14,16 +14,8 @@
     <%= f.label "Date" %>
     <%= f.date_select :sample_date %><br />
 
-    <%= f.fields_for :diver_samples do |builder| %>    
-      <%= builder.label "Diver" %>  
-      <%= builder.collection_select :diver_id, Diver.all, :id, :diver_name, { :include_blank => "" } %><br />
-      <%= builder.hidden_field :primary_diver, :value => true  %>
-    <% end %>
-    <%= f.fields_for :diver_samples do |builder| %>    
-      <%= builder.label "Buddy" %>  
-      <%= builder.collection_select :diver_id, Diver.all, :id, :diver_name, { :include_blank => "" } %><br />
-      <%= builder.hidden_field :primary_diver, :value => false  %>
-    <% end %>
+    <%= render "diver_selection", :object => f %>
+
 
     <%= f.label "Sample Type" %>
     <%= f.collection_select :sample_type_id, SampleType.all, :id, :sample_type_name, { :include_blank => "" } %><br />

@@ -27,7 +27,7 @@ class SamplesController < ApplicationController
     @sample = Sample.new
 
     # build twice, once for primary another for buddy
-    @sample.diver_samples.build
+    2.times { @sample.diver_samples.build }
     
     respond_to do |format|
       format.html # new.html.erb

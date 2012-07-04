@@ -28,7 +28,8 @@ class SamplesController < ApplicationController
 
     # build twice, once for primary another for buddy
     2.times { @sample.diver_samples.build }
-    
+    @sample.sample_animals.build
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @sample }

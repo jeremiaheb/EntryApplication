@@ -10,45 +10,81 @@
       </ul>
     </div>
   <% end %>
-  <div id='section_1'>
-    <%= f.label "Date" %>
-    <%= f.date_select :sample_date %><br />
+<div class='formContainer'>
+  <div class='section_1'>
+    <div id='section_1_part_1'>
+      <%= f.label "Date" %>
+      <%= f.date_select :sample_date %>
+        
+      <%= render "diver_selection", :object => f %>
 
-    <%= render "diver_selection", :object => f %>
 
+      <%= f.label "Sample Type" %>
+      <%= f.collection_select :sample_type_id, SampleType.all, :id, :sample_type_name, { :include_blank => "" } %><br />
 
-    <%= f.label "Sample Type" %>
-    <%= f.collection_select :sample_type_id, SampleType.all, :id, :sample_type_name, { :include_blank => "" } %><br />
+      <%= f.label "Habitat Type" %>
+      <%= f.collection_select :habitat_type_id, HabitatType.all, :id, :habitat_name, { :include_blank => "" } %><br />
 
-    <%= f.label "Habitat Type" %>
-    <%= f.collection_select :habitat_type_id, HabitatType.all, :id, :habitat_name, { :include_blank => "" } %><br />
+      <%= f.label "Dive Begin Time" %>
+      <%= f.time_select :dive_begin_time, { :include_blank => "" } %><br />
 
-    <%= f.label "Dive Begin Time" %>
-    <%= f.time_select :dive_begin_time, { :include_blank => "" } %><br />
+      <%= f.label "Dive End Time" %>
+      <%= f.time_select :dive_end_time, { :include_blank => "" } %><br />
 
-    <%= f.label "Dive End Time" %>
-    <%= f.time_select :dive_end_time, { :include_blank => "" } %><br />
+      <%= f.label "Sample Begin Time" %>
+      <%= f.time_select :sample_begin_time, { :include_blank => "" } %><br />
+      
+      <%= f.label "Sample End Time" %>
+      <%= f.time_select :sample_end_time, { :include_blank => "" } %><br />
+    </div>
+    <div id='section_1_part_2'>
+      <%= f.label "Max Dive Depth" %>
+      <%= f.text_field :dive_depth %><br />
+
+      <%= f.label "Station Depth" %>
+      <%= f.text_field :sample_depth %><br />
+
+      <%= f.label "Fishing gear" %>
+      <%= f.text_field :fishing_gear %><br />
+
+      <%= f.label "Field Number" %>
+      <%= f.text_field :field_id %><br />
+
+      <%= f.label "Underwater Visibility" %>
+      <%= f.text_field :underwater_visibility %><br />
+
+      <%= f.label "Comments" %>
+      <%= f.text_area :sample_description, { :size => '60x3' } %><br />
+    </div>
   </div>
-  <div id='section_2'>
-    <%= f.fields_for :sample_animals do |builder| %>
-      <%= builder.label "Species" %>
-      <%= builder.collection_select :animal_id, Animal.all, :id, :common_name, {:include_blank => ""} %>
-      <%= builder.label "N" %>
-      <%= builder.number_field :number_individuals %>
-      <%= builder.label "Mean" %>
-      <%= builder.number_field :average_length %>
-      <%= builder.label "Min" %>
-      <%= builder.number_field :min_length %>
-      <%= builder.label "Max" %>
-      <%= builder.number_field :max_length %>
-      <%= builder.link_to_remove "Remove Species"  %>
+  <p class="flip">Validate Section 1</p>
+  <div class='section_2'>
+    <div id='section_2_part_1'>
+      <h3>Substrate Slope</h3>
+         <%= f.label "Max Substrate Depth" %>
+         <%= f.text_field :substrate_max_depth %><br />
 
-    <% end %>
+         <%= f.label "Min Substrate Depth" %>
+         <%= f.text_field :substrate_min_depth %><br />
+         <h3>Max Verticle Relief</h3>
+         <%= f.label "Hard Substrate" %>
+         <%= f.text_field :hard_verticle_relief %><br />
 
-    <p> <%= f.link_to_add "Add species", :sample_animals %></p>
+         <%= f.label "Soft Substrate" %>
+         <%= f.text_field :soft_verticle_relief %><br />
+  
+          
   </div>
 
+  <div id='section_3'>
+    <%#= render "animals", :object => f %>
+    
+    <p> <%#= f.link_to_add "Add species", :sample_animals %></p>
+  </div>
+
+</div>
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>

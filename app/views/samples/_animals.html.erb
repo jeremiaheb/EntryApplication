@@ -1,0 +1,17 @@
+
+<%= object.fields_for :sample_animals do |builder| %>
+  
+      <%= builder.label "Species" %>
+      <%= builder.collection_select :animal_id, Animal.all, :id, :common_name, {:include_blank => ""} %>
+      <%= builder.label "N" %>
+      <%= builder.number_field :number_individuals %>
+      <%= builder.label "Mean" %>
+      <%= builder.number_field :average_length %>
+      <%= builder.label "Min" %>
+      <%= builder.number_field :min_length %>
+      <%= builder.label "Max" %>
+      <%= builder.number_field :max_length %>
+      <%= builder.link_to_remove "Remove Species"  %>
+
+    <% end %>
+

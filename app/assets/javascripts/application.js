@@ -14,3 +14,10 @@
 //= require jquery_ujs
 //= require jquery_nested_form
 //= require_tree .
+//
+
+$(document).ready(function(){
+  $('.flip').click(function(){
+    $(".section_1").slideToggle('slow');
+  });
+});

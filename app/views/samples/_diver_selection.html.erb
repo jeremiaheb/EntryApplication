@@ -8,5 +8,5 @@
     <%= builder.label "Buddy"%>
     <%= builder.hidden_field :primary_diver, :value => false %>
   <% end %>
-  <%= builder.collection_select :diver_id, Diver.all, :id, :diver_name, { :include_blank => "" } %><br />
+  <%= builder.collection_select :diver_id, Diver.all, :id, :diver_name, { :include_blank => "" }, { :class => 'tab_1' } %><br />
 <% end %>

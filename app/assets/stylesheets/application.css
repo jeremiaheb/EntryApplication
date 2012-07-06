@@ -36,7 +36,7 @@
  
 }
 
-div.section_1, p.flip {
+div.section_1, p.flipSection_1 {
     width: 920px;
     background: #f0f0f0;
  
@@ -56,7 +56,7 @@ div.section_1, p.flip {
   height: 240px;
 }
 
-.flip {
+.flipSection_1 {
   text-align: center;
 }
 
@@ -74,6 +74,10 @@ div.section_1, p.flip {
   top: 5px;
   left: 400px;
   width: 310px;
+}
+
+.section_2 {
+
 }
 
 #section_2_part_1 {

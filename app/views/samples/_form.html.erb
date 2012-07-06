@@ -10,57 +10,64 @@
       </ul>
     </div>
   <% end %>
+<select class="changeSection">
+  <option value="sampleSection">Sample Section</option>
+  <option value="substrateSection">Substrate Section</option>
+  <option value="speciesSection">Species Section</option>
+</select>
 <div class='formContainer'>
+  <div id="sampleSection" class="sectionDiv">
   <div class='section_1'>
     <div id='section_1_part_1'>
       <%= f.label "Date" %>
-      <%= f.date_select :sample_date %>
+      <%= f.date_select :sample_date, { :class => 'tab_1' } %>
         
       <%= render "diver_selection", :object => f %>
 
 
       <%= f.label "Sample Type" %>
-      <%= f.collection_select :sample_type_id, SampleType.all, :id, :sample_type_name, { :include_blank => "" } %><br />
+      <%= f.collection_select :sample_type_id, SampleType.all, :id, :sample_type_name, { :include_blank => "" }, { :class => 'tab_1' } %><br />
 
       <%= f.label "Habitat Type" %>
-      <%= f.collection_select :habitat_type_id, HabitatType.all, :id, :habitat_name, { :include_blank => "" } %><br />
+      <%= f.collection_select :habitat_type_id, HabitatType.all, :id, :habitat_name, { :include_blank => "" }, { :class => 'tab_1' } %><br />
 
       <%= f.label "Dive Begin Time" %>
-      <%= f.time_select :dive_begin_time, { :include_blank => "" } %><br />
+      <%= f.time_select :dive_begin_time, { :include_blank => "" }, { :class => 'tab_1' } %><br />
 
       <%= f.label "Dive End Time" %>
-      <%= f.time_select :dive_end_time, { :include_blank => "" } %><br />
+      <%= f.time_select :dive_end_time, { :include_blank => "" }, { :class => 'tab_1' } %><br />
 
       <%= f.label "Sample Begin Time" %>
-      <%= f.time_select :sample_begin_time, { :include_blank => "" } %><br />
+      <%= f.time_select :sample_begin_time, { :include_blank => "" }, { :class => 'tab_1' } %><br />
       
       <%= f.label "Sample End Time" %>
-      <%= f.time_select :sample_end_time, { :include_blank => "" } %><br />
+      <%= f.time_select :sample_end_time, { :include_blank => "" }, { :class => 'tab_1' } %><br />
     </div>
     <div id='section_1_part_2'>
       <%= f.label "Max Dive Depth" %>
-      <%= f.text_field :dive_depth %><br />
+      <%= f.text_field :dive_depth, { :class => 'tab_1' } %><br />
 
       <%= f.label "Station Depth" %>
-      <%= f.text_field :sample_depth %><br />
+      <%= f.text_field :sample_depth, { :class => 'tab_1' } %><br />
 
       <%= f.label "Fishing gear" %>
-      <%= f.text_field :fishing_gear %><br />
+      <%= f.text_field :fishing_gear, { :class => 'tab_1' } %><br />
 
       <%= f.label "Field Number" %>
-      <%= f.text_field :field_id %><br />
+      <%= f.text_field :field_id, { :class => 'tab_1' } %><br />
 
       <%= f.label "Underwater Visibility" %>
-      <%= f.text_field :underwater_visibility %><br />
+      <%= f.text_field :underwater_visibility, { :class => 'tab_1' } %><br />
 
       <%= f.label "Comments" %>
-      <%= f.text_area :sample_description, { :size => '60x3' } %><br />
+      <%= f.text_area :sample_description, { :size => '60x3', :class => 'tab_1' } %><br />
     </div>
   </div>
-  <p class="flip">Validate Section 1</p>
+</div>
+<div id="substrateSection" class="sectionDiv">
   <div class='section_2'>
     <div id='section_2_part_1'>
-      <h3>Substrate Slope</h3>
+         <h3>Substrate Slope</h3>
          <%= f.label "Max Substrate Depth" %>
          <%= f.text_field :substrate_max_depth %><br />
 
@@ -72,15 +79,23 @@
 
          <%= f.label "Soft Substrate" %>
          <%= f.text_field :soft_verticle_relief %><br />
-  
-          
-  </div>
+        
+         <h3> Surface Relief Coverage %</h3>
 
-  <div id='section_3'>
-    <%#= render "animals", :object => f %>
-    
-    <p> <%#= f.link_to_add "Add species", :sample_animals %></p>
+         <%= render "surface_relief_coverage", :object => f, :klass => 'hard_relief' %><br />
+         
+         <%= render "surface_relief_coverage", :object => f, :klass => 'soft_relief' %>
+    </div>
   </div>
+</div>
+
+<div id="speciesSection" class="sectionDiv">
+  <div class='section_3'>
+    <%= render "animals", :object => f %>
+    
+    <p> <%= f.link_to_add "Add species", :sample_animals %></p>
+  </div>
+</div>
 
 </div>
   <div class="actions">

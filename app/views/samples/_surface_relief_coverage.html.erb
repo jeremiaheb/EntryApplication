@@ -1,0 +1,18 @@
+
+    <%= object.label(:name, "< 0.2m") %>
+    <%= object.text_field "#{ klass + '_cat_0' }".to_sym, {:class => klass } %><br />
+
+    <%= object.label(:name, "0.2 - 0.5m") %>
+    <%= object.text_field "#{ klass + '_cat_1' }".to_sym, {:class => klass } %><br />
+
+    <%= object.label(:name, "0.5 - 1.0 m") %>
+    <%= object.text_field "#{ klass + '_cat_2' }".to_sym, {:class => klass } %><br />
+
+    <%= object.label(:name, "1.0 - 1.5 m") %>
+    <%= object.text_field "#{ klass + '_cat_3' }".to_sym, {:class => klass } %><br />
+
+    <%= object.label(:name, "> 1.5 m") %>
+    <%= object.text_field "#{ klass + '_cat_4' }".to_sym, {:class => klass } %><br />
+    
+    <%= text_field_tag "#{ klass + '_total'}", '0', :disabled => true %>
+ 

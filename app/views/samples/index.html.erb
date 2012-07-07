@@ -9,7 +9,7 @@
 
 <% @samples.each do |sample| %>
   <tr>
-    <td><%= sample.diver_samples.primary[0].diver.diver_name %></td>
+    <td><%= sample.diver_samples.primary.first.diver.diver_name %></td>
     <td><%= sample.sample_date %></td>
     <td><%= link_to 'Show', sample %></td>
     <td><%= link_to 'Edit', edit_sample_path(sample) %></td>

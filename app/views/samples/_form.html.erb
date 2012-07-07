@@ -67,39 +67,40 @@
 <div id="substrateSection" class="sectionDiv">
   <div class='section_2'>
     <div id='section_2_part_1'>
-         <h3>Substrate Slope</h3>
          <%= f.label "Max Substrate Depth" %>
          <%= f.text_field :substrate_max_depth %><br />
 
          <%= f.label "Min Substrate Depth" %>
          <%= f.text_field :substrate_min_depth %><br />
-         <h3>Max Verticle Relief</h3>
+
          <%= f.label "Hard Substrate" %>
          <%= f.text_field :hard_verticle_relief %><br />
 
          <%= f.label "Soft Substrate" %>
          <%= f.text_field :soft_verticle_relief %><br />
         
-         <h3> Surface Relief Coverage %</h3>
-
-         <%= render "surface_relief_coverage", :object => f, :klass => 'hard_relief' %><br />
+         <%= render "surface_relief_coverage", :object => f %>
+         <%#= render "surface_relief_coverage", :object => f, :klass => 'hard_relief' %><br />
          
-         <%= render "surface_relief_coverage", :object => f, :klass => 'soft_relief' %>
+         <%#= render "surface_relief_coverage", :object => f, :klass => 'soft_relief' %>
     </div>
   </div>
 </div>
 
 <div id="speciesSection" class="sectionDiv">
   <div class='section_3'>
+    
     <%= render "animals", :object => f %>
     
     <p> <%= f.link_to_add "Add species", :sample_animals %></p>
-  </div>
-</div>
 
-</div>
   <div class="actions">
     <%= f.submit %>
   </div>
 
+  </div>
+</div>
+
 <% end %>
+</div>
+ 

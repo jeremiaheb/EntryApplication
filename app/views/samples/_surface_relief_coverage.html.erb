@@ -1,18 +1,38 @@
 
-    <%= object.label(:name, "< 0.2m") %>
-    <%= object.text_field "#{ klass + '_cat_0' }".to_sym, {:class => klass } %><br />
-
-    <%= object.label(:name, "0.2 - 0.5m") %>
-    <%= object.text_field "#{ klass + '_cat_1' }".to_sym, {:class => klass } %><br />
-
-    <%= object.label(:name, "0.5 - 1.0 m") %>
-    <%= object.text_field "#{ klass + '_cat_2' }".to_sym, {:class => klass } %><br />
-
-    <%= object.label(:name, "1.0 - 1.5 m") %>
-    <%= object.text_field "#{ klass + '_cat_3' }".to_sym, {:class => klass } %><br />
-
-    <%= object.label(:name, "> 1.5 m") %>
-    <%= object.text_field "#{ klass + '_cat_4' }".to_sym, {:class => klass } %><br />
-    
-    <%= text_field_tag "#{ klass + '_total'}", '0', :disabled => true %>
- 
+    <table id="surfaceReliefTable">
+      <tr>
+        <th>  </th>
+        <th> Hard </th>
+        <th> Soft </th>
+      </tr>
+      <tr>
+        <td> <%= object.label(:name, "< 0.2m") %>         </td>
+        <td> <%= object.text_field :hard_relief_cat_0, { :class => "hard_relief" } %>  </td>
+        <td> <%= object.text_field :soft_relief_cat_0, { :class => "soft_relief" } %>  </td>
+      </tr>
+      <tr>
+        <td> <%= object.label(:name, "0.2 - 0.5m") %>     </td>
+        <td> <%= object.text_field :hard_relief_cat_1, { :class => "hard_relief" } %>  </td>
+        <td> <%= object.text_field :soft_relief_cat_1, { :class => "soft_relief" } %>  </td>
+      </tr>
+      <tr>
+        <td> <%= object.label(:name, "0.5 - 1.0m") %>     </td>
+        <td> <%= object.text_field :hard_relief_cat_2, { :class => "hard_relief" } %>  </td>
+        <td> <%= object.text_field :soft_relief_cat_2, { :class => "soft_relief" } %>  </td>
+      </tr>
+      <tr>
+        <td> <%= object.label(:name, "1.0 - 1.5m") %>     </td>
+        <td> <%= object.text_field :hard_relief_cat_3, { :class => "hard_relief" } %>  </td>
+        <td> <%= object.text_field :soft_relief_cat_3, { :class => "soft_relief" } %>  </td>
+      </tr>
+      <tr>
+        <td> <%= object.label(:name, "> 1.5m") %>         </td>
+        <td> <%= object.text_field :hard_relief_cat_4, { :class => "hard_relief" } %>  </td>
+        <td> <%= object.text_field :soft_relief_cat_4, { :class => "soft_relief" } %>  </td>
+      </tr>
+      <tr>
+        <td> <%= label(:name, "Total") %></td>
+        <td> <%= text_field_tag "hard_relief_total", "0", :disabled => true %> </td>
+        <td> <%= text_field_tag "soft_relief_total", "0", :disabled => true %> </td>
+      </tr>
+    </table>

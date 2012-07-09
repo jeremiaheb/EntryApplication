@@ -1,5 +1,5 @@
-
-<%= object.fields_for :sample_animals do |builder| %>
+  <%# if false %>
+    <%= object.fields_for :sample_animals do |builder| %>
   
       <%= builder.label "Species" %>
       <%= builder.collection_select :animal_id, Animal.all, :id, :common_name, {:include_blank => ""} %>
@@ -14,4 +14,56 @@
       <%= builder.link_to_remove "Remove Species"  %>
 
     <% end %>
+  <%# end %>
 
+  <% if false%>
+  <%= object.fields_for :sample_animals do |builder| %>
+    <table id="speciesTable">
+      <tr>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+      </tr>
+      <tr>
+        <td> <%#= builder.label "Species" %> </td>
+        <td> <%= builder.collection_select :animal_id, Animal.all, :id, :common_name, {:include_blank => ""} %> </td>
+        <td> <%#= builder.label "N" %> </td>
+        <td> <%= builder.number_field :number_individuals %> </td>
+        <td> <%#= builder.label "Mean" %> </td>
+        <td> <%= builder.number_field :average_length %> </td>
+        <td> <%#= builder.label "Min" %> </td>
+        <td> <%= builder.number_field :min_length %> </td>
+        <td> <%#= builder.label "Max" %> </td>
+        <td> <%= builder.number_field :max_length %> </td>
+        <td> <%= builder.link_to_remove "Remove Species"  %> </td>
+      </tr>
+    </table>
+  <% end %>
+  <% end %>
+<% if false %> 
+    <table id="speciesTable">
+      <tr>
+        <th> Species </th>
+        <th> Number </th>
+        <th> Mean </th>
+        <th> Min </th>
+        <th> Max </th>
+      </tr>
+      <%= object.fields_for :sample_animals do |builder| %>
+      <tr>
+        <td> <%= builder.collection_select :animal_id, Animal.all, :id, :common_name, {:include_blank => ""} %> </td>
+        <td> <%= builder.number_field :number_individuals %> </td>
+        <td> <%= builder.number_field :average_length %> </td>
+        <td> <%= builder.number_field :min_length %> </td>
+        <td> <%= builder.number_field :max_length %> </td>
+        <td> <%= builder.link_to_remove "Remove Species"  %> </td>
+      <% end %>
+      </tr>
+    </table>
+<% end %>

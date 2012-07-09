@@ -15,7 +15,7 @@
 .formContainer {
     position: relative;
     width: 960px;
-    height: 320px;
+    height: 500px;
     padding: 20px;
     background: #f0f0f0;
     overflow:auto;
@@ -36,7 +36,7 @@
  
 }
 
-div.section_1, p.flipSection_1 {
+div.section_1,div.section_2, p.flipSection_1 {
     width: 920px;
     background: #f0f0f0;
  
@@ -53,7 +53,7 @@ div.section_1, p.flipSection_1 {
 }
 
 .section_1 {
-  height: 240px;
+  height: 310px;
 }
 
 .flipSection_1 {
@@ -77,25 +77,49 @@ div.section_1, p.flipSection_1 {
 }
 
 .section_2 {
-
+  height: 490px;
 }
 
 #section_2_part_1 {
-  width: 375px;
+  width: 250px;
+  padding: 20px;
+  position: absolute;
+  top: 5px;
+  left: 0;
 }
 
-#surfaceReliefTable {
-
-}
 
 #section_2_part_2 {
-  left: 400px;
+  left: 550px;
   width: 310px;
+  padding: 20px;
+  position: absolute;
+  top: 5px;
+}
+
+#section_2_part_3 {
+  left: 275px;
+  width: 310px;
+  padding: 20px;
+  position: absolute;
+  top: 175px;
+}
+
+#section_2_part_4 {
+  left: 600px;
+  width: 310px;
+  padding: 20px;
+  position: absolute;
+  top: 175px;
+}
+
+#speciesTable label {
+  width: 50px;
 }
 
 label {
   display: block;
-  width: 156px;
+  width: 100px;
   float: left;
   text-align: center;
     
@@ -112,6 +136,7 @@ label {
  
 
 }
+
 
 input {
   width: 50px;

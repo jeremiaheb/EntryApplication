@@ -67,22 +67,33 @@
 <div id="substrateSection" class="sectionDiv">
   <div class='section_2'>
     <div id='section_2_part_1'>
-         <%= f.label "Max Substrate Depth" %>
-         <%= f.text_field :substrate_max_depth %><br />
+      <fieldset>
+        <legend> Substrate Slope </legend>
+          <%= f.label "Max Substrate Depth" %>
+          <%= f.text_field :substrate_max_depth %><br />
 
-         <%= f.label "Min Substrate Depth" %>
-         <%= f.text_field :substrate_min_depth %><br />
+          <%= f.label "Min Substrate Depth" %>
+          <%= f.text_field :substrate_min_depth %><br />
+        </fieldset>
+        <fieldset>
+          <legend> Max Verticle Relief </legend>
+          <%= f.label "Hard Substrate" %>
+          <%= f.text_field :hard_verticle_relief %><br />
 
-         <%= f.label "Hard Substrate" %>
-         <%= f.text_field :hard_verticle_relief %><br />
-
-         <%= f.label "Soft Substrate" %>
-         <%= f.text_field :soft_verticle_relief %><br />
-        
-         <%= render "surface_relief_coverage", :object => f %>
-         <%#= render "surface_relief_coverage", :object => f, :klass => 'hard_relief' %><br />
-         
-         <%#= render "surface_relief_coverage", :object => f, :klass => 'soft_relief' %>
+          <%= f.label "Soft Substrate" %>
+          <%= f.text_field :soft_verticle_relief %><br />
+        </fieldset>
+      
+      <%= render "surface_relief_coverage", :object => f %>
+    </div>
+    <div id='section_2_part_2'>
+      <%= render "abiotic_footprint", :object => f %>
+    </div>
+    <div id='section_2_part_3'>
+      <%= render "biotic_cover_sand", :object => f %>
+    </div>
+    <div id='section_2_part_4'>
+      <%= render "biotic_cover_hardbottom", :object => f %>
     </div>
   </div>
 </div>

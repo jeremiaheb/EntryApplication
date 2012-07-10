@@ -21,6 +21,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'client_side_validations'
 
 gem 'nested_form', :git => "git://github.com/ryanb/nested_form.git"
 # To use ActiveModel has_secure_password

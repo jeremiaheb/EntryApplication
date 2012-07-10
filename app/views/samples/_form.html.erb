@@ -1,15 +1,7 @@
-<%= nested_form_for @sample do |f| %>
-  <% if @sample.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@sample.errors.count, "error") %> prohibited this sample from being saved:</h2>
+<%= nested_form_for @sample, :validate => true do |f| %>
 
-      <ul>
-      <% @sample.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render "shared/error_messages", :target => @sample %>
+
 <select class="changeSection">
   <option value="sampleSection">Sample Section</option>
   <option value="substrateSection">Substrate Section</option>
@@ -105,13 +97,13 @@
     
     <p> <%= f.link_to_add "Add species", :sample_animals %></p>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 
   </div>
 </div>
 
+  <div class="actions">
+    <%= f.submit %>
+  </div>
 <% end %>
 </div>
  

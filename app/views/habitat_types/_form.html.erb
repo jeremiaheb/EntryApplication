@@ -1,15 +1,6 @@
 <%= form_for(@habitat_type) do |f| %>
-  <% if @habitat_type.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@habitat_type.errors.count, "error") %> prohibited this habitat_type from being saved:</h2>
-
-      <ul>
-      <% @habitat_type.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  
+  <%= render "shared/error_messages", :target => @habitat_type %>
 
   <div class='field'>
     <%= f.label :'Habitat Name' %><br />

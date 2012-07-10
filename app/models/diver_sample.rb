@@ -4,4 +4,6 @@ class DiverSample < ActiveRecord::Base
 
 
   scope :primary, lambda { where(primary_diver: true) }
+
+  validates :diver_id, :presence => true
 end

@@ -1,15 +1,8 @@
-<%= form_for(@sample_type) do |f| %>
-  <% if @sample_type.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@sample_type.errors.count, "error") %> prohibited this sample_type from being saved:</h2>
-
-      <ul>
-      <% @sample_type.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div class="formContainer">
+  <div class="section_1">
+<%= form_for @sample_type, :validate => true do |f| %>
+  
+  <%= render "shared/error_messages", :target => @sample_type %>
 
   <div class='field'>
     <%= f.label :'Sample Type Name' %><br />
@@ -23,3 +16,5 @@
     <%= f.submit %>
   </div>
 <% end %>
+</div>
+</div>

@@ -1,15 +1,6 @@
 <%= form_for(@diver) do |f| %>
-  <% if @diver.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@diver.errors.count, "error") %> prohibited this diver from being saved:</h2>
-
-      <ul>
-      <% @diver.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  
+  <%= render "shared/error_messages", :target => @diver %>
 
   <div class='field'>
     <%= f.label :'Diver Number' %><br />

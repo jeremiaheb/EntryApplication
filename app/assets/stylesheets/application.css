@@ -145,3 +145,11 @@ input {
 h3 {
   text-align: left;
 }
+
+
+label.message {
+  color: blue;
+  display: inline;
+  float: center;
+  text-align: center;
+}

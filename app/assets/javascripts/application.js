@@ -13,14 +13,16 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery_nested_form
+//= require rails.validations
 //= require_tree .
 //
 
 $(function(){
+   
     $("#substrateSection").hide();
     $("#speciesSection").hide();
     $(".changeSection").change(function() {
-    // hide all brands first
+    // hide
     $("div.sectionDiv").hide();
     // val is something like #div1 or #div2
     var targetId = $(this).val();
@@ -29,10 +31,29 @@ $(function(){
     // show the new selected one
     $("#"+targetId).show();
   });
-  
+    
+    $(".changeSection option[value='substrateSection']").remove();
+    $(".changeSection option[value='speciesSection']").remove();
+   
+    function show_or_hide_section(){
 
-  
+      var should_display_div = new Array();
 
+      $('#sampleSection').find('.tab_1').each(function(){
+        // This equality test does NOT work with '0' because they time
+        // option_selects can be '0'
+        if ( $(this).val() == '' )
+          {
+            should_display_div.push( $(this) );
+          };
+      });
+
+      if ( should_display_div.length == 0 )
+        { 
+          $(".changeSection").append('<option value="substrateSection">Substrate Section</option>');
+        };
+    };
+  
 
   function calculate_totals( input_class_to_sum, id_to_display_total){
   
@@ -67,15 +88,13 @@ $(function(){
   
       };    
 
-  
-    /*// Check to see if section should be shown or hidden when page loads
+   // Show or hide sections
     show_or_hide_section();
 
-    // Onchange check to see if all values have been filled out. If so, then show the next div.
-    $('.tab_1').change(function(){ 
+   // on change check if section should show
+     $('.tab_1').change(function(){ 
         show_or_hide_section();
-    });*/
-
+    });
 
    // Calculate total for 'surface_hard' when page loads
     calculate_totals( 'hard_relief', 'hard_relief_total' );

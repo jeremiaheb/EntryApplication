@@ -149,7 +149,13 @@ h3 {
 
 label.message {
   color: blue;
+  width: 300px;
+  font-size: 8px;
   display: inline;
-  float: center;
+  float: right;
   text-align: center;
+  border: none;
+  border-radius: none;
+  border-shadow: none;
+  box-shadow: none;
 }

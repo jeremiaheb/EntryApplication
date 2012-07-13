@@ -77,7 +77,7 @@ div.section_1,div.section_2, p.flipSection_1 {
 }
 
 .section_2 {
-  height: 490px;
+  height: 460px;
 }
 
 #section_2_part_1 {
@@ -102,7 +102,7 @@ div.section_1,div.section_2, p.flipSection_1 {
   width: 310px;
   padding: 20px;
   position: absolute;
-  top: 175px;
+  top: 150px;
 }
 
 #section_2_part_4 {
@@ -115,6 +115,10 @@ div.section_1,div.section_2, p.flipSection_1 {
 
 #speciesTable label {
   width: 50px;
+}
+
+.totals {
+  text-align: center;
 }
 
 label {

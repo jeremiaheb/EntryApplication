@@ -35,4 +35,11 @@ class Sample < ActiveRecord::Base
       self.sample_begin_time < self.sample_end_time
   end
 
+before_save :default_values
+
+def default_values
+  self.hard_relief_cat_0 ||= 0
+end
+
+
 end

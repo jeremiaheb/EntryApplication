@@ -31,7 +31,7 @@ $(function(){
     // show the new selected one
     $("#"+targetId).show();
   });
-    
+/*   
     $(".changeSection option[value='substrateSection']").remove();
     $(".changeSection option[value='speciesSection']").remove();
    
@@ -53,7 +53,7 @@ $(function(){
           $(".changeSection").append('<option value="substrateSection">Substrate Section</option>');
         };
     };
-  
+ */ 
 
   function calculate_totals( input_class_to_sum, id_to_display_total){
   
@@ -72,7 +72,7 @@ $(function(){
             total += parseFloat( this );
         });
   
-        // If total is greater than 100 then flag it by add a red background.
+      // If total is greater than 100 then flag it by add a red background.
         if ( total != 100 )
           {
             $( '#' + id_to_display_total).removeClass('one_hundred_ok_flag');
@@ -84,13 +84,12 @@ $(function(){
             $( '#' + id_to_display_total).removeClass('one_hundred_flag');
           }
   
-        $( '#' + id_to_display_total).val( total );
-  
+        $( '#' + id_to_display_total).val( total ); 
       };    
-
+/*
    // Show or hide sections
     show_or_hide_section();
-
+*/
    // on change check if section should show
      $('.tab_1').change(function(){ 
         show_or_hide_section();

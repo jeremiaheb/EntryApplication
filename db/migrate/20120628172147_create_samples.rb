@@ -16,8 +16,8 @@ class CreateSamples < ActiveRecord::Migration
       t.text    :sample_description
       t.integer :substrate_max_depth
       t.integer :substrate_min_depth
-      t.integer :hard_verticle_relief
-      t.integer :soft_verticle_relief
+      t.float   :hard_verticle_relief
+      t.float   :soft_verticle_relief
       t.integer :hard_relief_cat_0
       t.integer :hard_relief_cat_1
       t.integer :hard_relief_cat_2
@@ -35,8 +35,8 @@ class CreateSamples < ActiveRecord::Migration
       t.integer :sand_macro_algae
       t.integer :sand_seagrass
       t.integer :sand_sponge
-      t.integer :sand_pcov_other1_lab
-      t.integer :sand_pcov_other2_lab
+      t.string  :sand_pcov_other1_lab
+      t.string  :sand_pcov_other2_lab
       t.integer :sand_pcov_other1
       t.integer :sand_pcov_other2
       t.integer :hardbottom_algal_turf
@@ -44,8 +44,8 @@ class CreateSamples < ActiveRecord::Migration
       t.integer :hardbottom_live_coral
       t.integer :hardbottom_octocoral
       t.integer :hardbottom_sponge
-      t.integer :hard_pcov_other1_lab
-      t.integer :hard_pcov_other2_lab
+      t.string  :hard_pcov_other1_lab
+      t.string  :hard_pcov_other2_lab
       t.integer :hard_pcov_other1
       t.integer :hard_pcov_other2
 

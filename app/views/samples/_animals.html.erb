@@ -1,4 +1,4 @@
-  <%# if false %>
+  <% if false %>
     <%= object.fields_for :sample_animals do |builder| %>
   
       <%= builder.label "Species" %>
@@ -14,7 +14,7 @@
       <%= builder.link_to_remove "Remove Species"  %>
 
     <% end %>
-  <%# end %>
+  <% end %>
 
   <% if false%>
   <%= object.fields_for :sample_animals do |builder| %>
@@ -46,7 +46,7 @@
     </table>
   <% end %>
   <% end %>
-<% if false %> 
+<%# if false %> 
     <table id="speciesTable">
       <tr>
         <th> Species </th>
@@ -57,13 +57,13 @@
       </tr>
       <%= object.fields_for :sample_animals do |builder| %>
       <tr>
-        <td> <%= builder.collection_select :animal_id, Animal.all, :id, :common_name, {:include_blank => ""} %> </td>
-        <td> <%= builder.number_field :number_individuals %> </td>
-        <td> <%= builder.number_field :average_length %> </td>
-        <td> <%= builder.number_field :min_length %> </td>
-        <td> <%= builder.number_field :max_length %> </td>
-        <td> <%= builder.link_to_remove "Remove Species"  %> </td>
+        <td> <%= builder.collection_select :animal_id, Animal.all, :id, :species_code, {:include_blank => ""} %> </td>
+        <td> <%= builder.text_field :number_individuals %> </td>
+        <td> <%= builder.text_field :average_length %> </td>
+        <td> <%= builder.text_field :min_length %> </td>
+        <td> <%= builder.text_field :max_length %> </td>
+        <td> <%#= builder.link_to_remove "Remove Species"  %> </td>
       <% end %>
       </tr>
     </table>
-<% end %>
+<%# end %>

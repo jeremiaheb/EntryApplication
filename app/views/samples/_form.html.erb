@@ -1,4 +1,4 @@
-<%= nested_form_for @sample, :validate => true do |f| %>
+<%= nested_form_for @sample do |f| %>
 
   <%= render "shared/error_messages", :target => @sample %>
 
@@ -95,7 +95,7 @@
   <div class='section_3'>
     
     <%= render "animals", :object => f %>
-    
+
     <p> <%= f.link_to_add "Add species", :sample_animals %></p>
 
 

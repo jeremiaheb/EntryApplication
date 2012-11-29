@@ -55,6 +55,45 @@ $(function(){
     };
  */ 
 
+/*    
+    $("#changeToCode").click(function(){
+      $('.section_3 #common').hide();
+    })
+*/
+/*    
+    $("#changeToCode").toggle(function(){
+      $(".section_3 #common").attr('disabled', 'true');
+      $(".section_3 #common").hide();
+      $(".section_3 #code").removeAttr('disabled');
+      $(".section_3 #code").show();},
+      function(){
+      $(".section_3 #code").attr('disabled', 'true');
+      $(".section_3 #code").hide();
+      $(".section_3 #common").removeAttr('disabled');
+      $(".section_3 #common").show();
+    });
+*/
+
+  function display_code_or_common(){
+    if ( $('input:radio[name=rl]:checked').val() == '0'){
+      $(".section_3 #common").attr('disabled', 'true');
+      $(".section_3 #common").hide();
+      $(".section_3 #code").removeAttr('disabled');
+      $(".section_3 #code").show();
+    }; 
+    if ( $('input:radio[name=rl]:checked').val() == '1'){
+      $(".section_3 #code").attr('disabled', 'true');
+      $(".section_3 #code").hide();
+      $(".section_3 #common").removeAttr('disabled');
+      $(".section_3 #common").show();
+    };
+  };
+
+   // on change check if section should show
+     $('.radio_button').change(function(){ 
+        display_code_or_common();
+    });
+
   function calculate_totals( input_class_to_sum, id_to_display_total){
   
         var sum_for_display_total = new Array();
@@ -86,6 +125,7 @@ $(function(){
   
         $( '#' + id_to_display_total).val( total ); 
       };    
+
 /*
    // Show or hide sections
     show_or_hide_section();

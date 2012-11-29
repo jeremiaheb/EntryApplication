@@ -113,8 +113,23 @@ div.section_1,div.section_2, p.flipSection_1 {
   top: 175px;
 }
 
-#speciesTable label {
-  width: 50px;
+#speciesTable {
+  padding: 10px;
+  top: 25px;
+  left: 10px;
+  width: 800px;
+  background: white;
+  
+  /* Border style */
+    border: 1px solid #cccccc;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+ 
+    /* Border Shadow */
+    -moz-box-shadow: 2px 2px 2px #cccccc;
+    -webkit-box-shadow: 2px 2px 2px #cccccc;
+    box-shadow: 2px 2px 2px #cccccc;
 }
 
 .totals {

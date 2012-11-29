@@ -32,9 +32,11 @@ gem 'nested_form', :git => "git://github.com/ryanb/nested_form.git"
 
 # Use unicorn as the app server
 # gem 'unicorn'
-
 # Deploy with Capistrano
 # gem 'capistrano'
 
 # To use debugger
+# group :development, :test do
+#
 # gem 'ruby-debug19', :require => 'ruby-debug'
+#end

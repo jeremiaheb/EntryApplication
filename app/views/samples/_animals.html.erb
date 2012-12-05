@@ -2,15 +2,13 @@
 
 <%= object.fields_for :sample_animals do |builder| %>
 
-  <div>
-    <%= builder.collection_select :animal_id, Animal.all, :id, :common_name, {:include_blank => ""}, {:id=>"common", :disabled => true, :style => 'display:none'} %>
-    <%= builder.collection_select :animal_id, Animal.all, :id, :species_code, {:include_blank => ""}, {:id=> "code"} %>
-  <%= builder.number_field :number_individuals %>
-  <%= builder.number_field :average_length %>
-  <%= builder.number_field :min_length %>
-  <%= builder.number_field :max_length %>
+  <%= builder.collection_select :animal_id, Animal.all, :id, :common_name, {:include_blank => ""}, {:class=>"common", :disabled => true, :style => 'display:none'} %>
+  <%= builder.collection_select :animal_id, Animal.all, :id, :species_code, {:include_blank => ""}, {:class=> "code"} %>
+  <%= builder.text_field :number_individuals %>
+  <%= builder.text_field :average_length %>
+  <%= builder.text_field :min_length %>
+  <%= builder.text_field :max_length %>
   <%= builder.link_to_remove "Remove Species"  %>
-  </div>
 
 <% end %>
 

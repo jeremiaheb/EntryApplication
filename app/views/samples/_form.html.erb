@@ -94,12 +94,12 @@
 <div id="speciesSection" class="sectionDiv">
   <div class='section_3'>
 
-    <Input class='radio_button' type='radio' Name='rl' Value='0' checked='checked'>Display Species Code
-    <Input class='radio_button' type='radio' Name='rl' Value='1'>Display Common Name
+    <Input class='radio_button' type='radio' Name='displayType' Value='0' checked='checked'>Display Species Code
+    <Input class='radio_button' type='radio' Name='displayType' Value='1'>Display Common Name
 
     <%= render "animals", :object => f %>
-
-    <p> <%= f.link_to_add "Add species", :sample_animals %></p>
+  
+    <%= f.link_to_add "Add species", :sample_animals %>
 
 <% if false %>
    <div id="speciesTable">

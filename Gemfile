@@ -40,3 +40,9 @@ gem 'nested_form', :git => "git://github.com/ryanb/nested_form.git"
 #
 # gem 'ruby-debug19', :require => 'ruby-debug'
 #end
+#
+
+group :development, :test do
+  gem 'debugger'
+end
+

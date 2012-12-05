@@ -55,43 +55,39 @@ $(function(){
     };
  */ 
 
-/*    
-    $("#changeToCode").click(function(){
-      $('.section_3 #common').hide();
-    })
-*/
-/*    
-    $("#changeToCode").toggle(function(){
-      $(".section_3 #common").attr('disabled', 'true');
-      $(".section_3 #common").hide();
-      $(".section_3 #code").removeAttr('disabled');
-      $(".section_3 #code").show();},
-      function(){
-      $(".section_3 #code").attr('disabled', 'true');
-      $(".section_3 #code").hide();
-      $(".section_3 #common").removeAttr('disabled');
-      $(".section_3 #common").show();
-    });
-*/
 
   function display_code_or_common(){
-    if ( $('input:radio[name=rl]:checked').val() == '0'){
-      $(".section_3 #common").attr('disabled', 'true');
-      $(".section_3 #common").hide();
-      $(".section_3 #code").removeAttr('disabled');
-      $(".section_3 #code").show();
+    var sppVal = $('select.code').slice(-2).val();
+    var commonVal = $('select.common').slice(-2).val();
+    var radioVal = $('input:radio[name=displayType]:checked').val();
+    if ( radioVal == '0'){
+      $('select.code option[value="' + commonVal + '"]').slice(-2).attr('selected', 'selected');
+      $(".section_3 .common").attr('disabled', 'true');
+      $(".section_3 .common").hide();
+      $(".section_3 .code").removeAttr('disabled');
+      $(".section_3 .code").show();
     }; 
-    if ( $('input:radio[name=rl]:checked').val() == '1'){
-      $(".section_3 #code").attr('disabled', 'true');
-      $(".section_3 #code").hide();
-      $(".section_3 #common").removeAttr('disabled');
-      $(".section_3 #common").show();
+    if ( radioVal == '1'){
+      $('select.common option[value="' + sppVal + '"]').slice(-2).attr('selected', 'selected');
+      $(".section_3 .code").attr('disabled', 'true');
+      $(".section_3 .code").hide();
+      $(".section_3 .common").removeAttr('disabled');
+      $(".section_3 .common").show();
     };
+
   };
 
-   // on change check if section should show
-     $('.radio_button').change(function(){ 
+   // On radio button change display code or common name
+     
+     $('.radio_button').on("change", function(e){ 
         display_code_or_common();
+    });
+     
+     $(document).delegate(".add_nested_fields", "click", function(e){ 
+        display_code_or_common();
+      $('select.code option[value=""]').slice(-2).attr('selected', 'selected');
+      $('select.common option[value=""]').slice(-2).attr('selected', 'selected');
+
     });
 
   function calculate_totals( input_class_to_sum, id_to_display_total){

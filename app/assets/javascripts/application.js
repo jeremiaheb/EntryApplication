@@ -55,7 +55,7 @@ $(function(){
     };
  */ 
 
-
+/*
   function display_code_or_common(){
     var sppVal = $('select.code').slice(-2).val();
     var commonVal = $('select.common').slice(-2).val();
@@ -76,7 +76,32 @@ $(function(){
     };
 
   };
+*/
 
+  function display_code_or_common(){
+    var radioVal = $('input:radio[name=displayType]:checked').val();
+    if ( radioVal == '0'){
+      $('select.common').each(function(index){
+        var $commonVal = $('select.common').slice(index).val();
+        $('select.code option[value="' + $commonVal + '"]').slice(index).attr('selected', 'selected');
+      });
+      $(".section_3 .common").attr('disabled', 'true');
+      $(".section_3 .common").hide();
+      $(".section_3 .code").removeAttr('disabled');
+      $(".section_3 .code").show();
+    }; 
+    if ( radioVal == '1'){
+      $('select.code').each(function(index){
+        var $codeVal = $('select.code').slice(index).val();
+        $('select.common option[value="' + $codeVal + '"]').slice(index).attr('selected', 'selected');
+      });
+      $(".section_3 .code").attr('disabled', 'true');
+      $(".section_3 .code").hide();
+      $(".section_3 .common").removeAttr('disabled');
+      $(".section_3 .common").show();
+    };
+
+  };
    // On radio button change display code or common name
      
      $('.radio_button').on("change", function(e){ 

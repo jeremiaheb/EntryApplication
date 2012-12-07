@@ -100,8 +100,21 @@ $(function(){
       $(".section_3 .common").removeAttr('disabled');
       $(".section_3 .common").show();
     };
-
   };
+
+  function set_time_seen_field_on_focus(){
+      $('select').on('focus', function(){
+        var $thisID = $(this).attr('id').slice(0, -10);
+        var $radioTimeSeenVal = $('input:radio[name=timeSeen]:checked').val();
+
+        $('input#' + $thisID + '_time_seen').attr('value', $radioTimeSeenVal );
+        $('input#' + $thisID + '_number_individuals').attr('class', 'timeSeen_' + $radioTimeSeenVal);
+        $('input#' + $thisID + '_average_length').attr('class', 'timeSeen_' + $radioTimeSeenVal);
+        $('input#' + $thisID + '_min_length').attr('class', 'timeSeen_' + $radioTimeSeenVal);
+        $('input#' + $thisID + '_max_length').attr('class', 'timeSeen_' + $radioTimeSeenVal);
+      });  
+  };
+
    // On radio button change display code or common name
      
      $('.radio_button').on("change", function(e){ 
@@ -112,7 +125,6 @@ $(function(){
         display_code_or_common();
       $('select.code option[value=""]').slice(-2).attr('selected', 'selected');
       $('select.common option[value=""]').slice(-2).attr('selected', 'selected');
-
     });
 
   function calculate_totals( input_class_to_sum, id_to_display_total){

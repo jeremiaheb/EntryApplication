@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120628183117) do
+ActiveRecord::Schema.define(:version => 20121207141707) do
 
   create_table "animals", :force => true do |t|
     t.string   "species_code"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20120628183117) do
     t.string   "diver_name"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.boolean  "active"
   end
 
   create_table "habitat_types", :force => true do |t|

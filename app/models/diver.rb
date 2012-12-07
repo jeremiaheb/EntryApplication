@@ -5,4 +5,7 @@ class Diver < ActiveRecord::Base
 
   validates :diver_number, :presence => true
   validates :diver_name, :presence => true
+
+
+  scope :active_divers,      lambda { where(:active => true) }
 end

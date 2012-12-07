@@ -2,7 +2,7 @@ class DiversController < ApplicationController
   # GET /divers
   # GET /divers.json
   def index
-    @divers = Diver.all
+    @divers = Diver.order(:diver_number).all
 
     respond_to do |format|
       format.html # index.html.erb

@@ -178,3 +178,10 @@ label.message {
   border-shadow: none;
   box-shadow: none;
 }
+
+.timeSeen_2 {
+  background-color: LightSkyBlue;
+}
+.timeSeen_3 {
+  background-color: DeepSkyBlue;
+}

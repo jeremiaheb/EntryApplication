@@ -96,6 +96,11 @@
 
     <Input class='radio_button' type='radio' Name='displayType' Value='0' checked='checked'>Display Species Code
     <Input class='radio_button' type='radio' Name='displayType' Value='1'>Display Common Name
+    <br />
+
+    <Input class='time_seen_button' type='radio' Name='timeSeen' Value='1' checked='checked'>First 5 Minutes
+    <Input class='time_seen_button' type='radio' Name='timeSeen' Value='2'>5 to 10 Minutes
+    <Input class='time_seen_button' type='radio' Name='timeSeen' Value='3'>After 10 Minutes
 
     <%= render "animals", :object => f %>
   

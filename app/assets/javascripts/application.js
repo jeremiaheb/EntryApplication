@@ -22,61 +22,53 @@ $(function(){
     $("#substrateSection").hide();
     $("#speciesSection").hide();
     $(".changeSection").change(function() {
-    // hide
-    $("div.sectionDiv").hide();
-    // val is something like #div1 or #div2
-    var targetId = $(this).val();
-    
-    console.log($(targetId).html());
-    // show the new selected one
-    $("#"+targetId).show();
+      // hide
+      $("div.sectionDiv").hide();
+      // val is something like #div1 or #div2
+      var targetId = $(this).val();
+      // show the new selected one
+      $("#"+targetId).show();
   });
-/*   
-    $(".changeSection option[value='substrateSection']").remove();
-    $(".changeSection option[value='speciesSection']").remove();
    
+    $(".changeSection option[value='substrateSection']").attr("disabled", "disabled");
+    $(".changeSection option[value='speciesSection']").attr("disabled", "disabled");
+ 
     function show_or_hide_section(){
 
-      var should_display_div = new Array();
+      var should_display_substrate = new Array();
+      var should_display_species = new Array();
 
       $('#sampleSection').find('.tab_1').each(function(){
         // This equality test does NOT work with '0' because they time
         // option_selects can be '0'
         if ( $(this).val() == '' )
           {
-            should_display_div.push( $(this) );
+            should_display_substrate.push( $(this) );
           };
       });
 
-      if ( should_display_div.length == 0 )
+      if ( should_display_substrate.length == 0 )
         { 
-          $(".changeSection").append('<option value="substrateSection">Substrate Section</option>');
+          $(".changeSection option[value='substrateSection']").removeAttr("disabled");
         };
-    };
- */ 
 
-/*
-  function display_code_or_common(){
-    var sppVal = $('select.code').slice(-2).val();
-    var commonVal = $('select.common').slice(-2).val();
-    var radioVal = $('input:radio[name=displayType]:checked').val();
-    if ( radioVal == '0'){
-      $('select.code option[value="' + commonVal + '"]').slice(-2).attr('selected', 'selected');
-      $(".section_3 .common").attr('disabled', 'true');
-      $(".section_3 .common").hide();
-      $(".section_3 .code").removeAttr('disabled');
-      $(".section_3 .code").show();
-    }; 
-    if ( radioVal == '1'){
-      $('select.common option[value="' + sppVal + '"]').slice(-2).attr('selected', 'selected');
-      $(".section_3 .code").attr('disabled', 'true');
-      $(".section_3 .code").hide();
-      $(".section_3 .common").removeAttr('disabled');
-      $(".section_3 .common").show();
-    };
+      $('#substrateSection').find('.tab_2').each(function(){
+        // This equality test does NOT work with '0' because they time
+        // option_selects can be '0'
+        if ( $(this).val() == '' )
+          {
+            should_display_species.push( $(this) );
+          };
+      });
 
-  };
-*/
+      if ( should_display_species.length == 0 )
+        { 
+          $(".changeSection option[value='speciesSection']").removeAttr("disabled");
+        };
+
+
+    };
+ 
   
   function set_option_select(){
     var radioVal = $('input:radio[name=displayType]:checked').val();
@@ -189,12 +181,16 @@ $(function(){
         $( '#' + id_to_display_total).val( total ); 
       };    
 
-/*
+
    // Show or hide sections
-    show_or_hide_section();
-*/
+ //   show_or_hide_section();
+
    // on change check if section should show
      $('.tab_1').change(function(){ 
+        show_or_hide_section();
+    });
+     
+     $('.tab_2').change(function(){ 
         show_or_hide_section();
     });
 

@@ -63,18 +63,18 @@
       <fieldset>
         <legend> Substrate Slope </legend>
           <%= f.label "Max Substrate Depth" %>
-          <%= f.text_field :substrate_max_depth, { :autocomplete => :off } %><br />
+          <%= f.text_field :substrate_max_depth, {:class => "tab_2", :autocomplete => :off } %><br />
 
           <%= f.label "Min Substrate Depth" %>
-          <%= f.text_field :substrate_min_depth, { :autocomplete => :off } %><br />
+          <%= f.text_field :substrate_min_depth, {:class => "tab_2", :autocomplete => :off } %><br />
         </fieldset>
         <fieldset>
           <legend> Max Verticle Relief </legend>
           <%= f.label "Hard Substrate" %>
-          <%= f.text_field :hard_verticle_relief, { :autocomplete => :off } %><br />
+          <%= f.text_field :hard_verticle_relief, {:class => "tab_2", :autocomplete => :off } %><br />
 
           <%= f.label "Soft Substrate" %>
-          <%= f.text_field :soft_verticle_relief, { :autocomplete => :off } %><br />
+          <%= f.text_field :soft_verticle_relief, {:class => "tab_2", :autocomplete => :off } %><br />
         </fieldset>
       
       <%= render "surface_relief_coverage", :object => f %>
@@ -107,6 +107,7 @@
       
       <%= f.link_to_add "Add species", :sample_animals %>
     </ol>
+
   </div>
 </div>
 

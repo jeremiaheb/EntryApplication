@@ -77,28 +77,54 @@ $(function(){
 
   };
 */
+  
+  function set_option_select(){
+    var radioVal = $('input:radio[name=displayType]:checked').val();
+    if ( radioVal == "0"){
+      var $codeVal = $(this).val();
+      console.log($codeVal);
+    };  
+  };
+  
+  function show_code(){
+      $(".section_3 .common").attr('disabled', 'true');
+      $(".section_3 .common").hide();
+      $(".section_3 .code").removeAttr('disabled');
+      $(".section_3 .code").show();
+  };
 
+  function show_common(){
+      $(".section_3 .code").attr('disabled', 'true');
+      $(".section_3 .code").hide();
+      $(".section_3 .common").removeAttr('disabled');
+      $(".section_3 .common").show();
+  };
+  
   function display_code_or_common(){
+    var radioVal = $('input:radio[name=displayType]:checked').val();
+    if ( radioVal == '0' ){
+      show_code();
+    };
+    if ( radioVal == '1'){
+      show_common();
+    };
+  };
+
+  function change_code_or_common(){
     var radioVal = $('input:radio[name=displayType]:checked').val();
     if ( radioVal == '0'){
       $('select.common').each(function(index){
         var $commonVal = $('select.common').slice(index).val();
         $('select.code option[value="' + $commonVal + '"]').slice(index).attr('selected', 'selected');
       });
-      $(".section_3 .common").attr('disabled', 'true');
-      $(".section_3 .common").hide();
-      $(".section_3 .code").removeAttr('disabled');
-      $(".section_3 .code").show();
+      show_code();
     }; 
     if ( radioVal == '1'){
       $('select.code').each(function(index){
         var $codeVal = $('select.code').slice(index).val();
         $('select.common option[value="' + $codeVal + '"]').slice(index).attr('selected', 'selected');
       });
-      $(".section_3 .code").attr('disabled', 'true');
-      $(".section_3 .code").hide();
-      $(".section_3 .common").removeAttr('disabled');
-      $(".section_3 .common").show();
+      show_common();
     };
   };
 
@@ -115,17 +141,21 @@ $(function(){
       });  
   };
 
+    set_time_seen_field_on_focus();
+
    // On radio button change display code or common name
      
-     $('.radio_button').on("change", function(e){ 
-        display_code_or_common();
+     $('.radio_button').on("change", function(){ 
+        change_code_or_common();
     });
      
-     $(document).delegate(".add_nested_fields", "click", function(e){ 
+     $(document).delegate(".add_nested_fields", "click", function(){ 
         display_code_or_common();
-      $('select.code option[value=""]').slice(-2).attr('selected', 'selected');
-      $('select.common option[value=""]').slice(-2).attr('selected', 'selected');
-    });
+        set_time_seen_field_on_focus();
+        $('select.code option[value=""]').slice(-2).attr('selected', 'selected');
+        $('select.common option[value=""]').slice(-2).attr('selected', 'selected');
+   });
+
 
   function calculate_totals( input_class_to_sum, id_to_display_total){
   

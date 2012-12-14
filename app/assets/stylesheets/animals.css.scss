@@ -1,3 +1,30 @@
 // Place all the styles related to the Animals controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+div.animalsListContainer {
+    margin: 0 auto;
+    width: 480px;
+    height: 480px;
+    background: #DDD;
+    overflow: auto;
+ 
+    /* Border style */
+    border: 1px solid #cccccc;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+ 
+    /* Border Shadow */
+    -moz-box-shadow: 2px 2px 2px #cccccc;
+    -webkit-box-shadow: 2px 2px 2px #cccccc;
+    box-shadow: 2px 2px 2px #cccccc;
+
+}
+
+div.animalsListContainer td {
+text-align: center;
+}
+
+div.animalsListContainer h1 {
+text-align: center;
+}

@@ -6,3 +6,7 @@
 #
 #
 #
+
+jQuery ->
+  $("#sampleList").dataTable
+    bjQueryUI: true

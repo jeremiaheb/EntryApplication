@@ -12,13 +12,30 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require dataTables/jquery.dataTables
 //= require jquery_nested_form
 //= require rails.validations
 //= require_tree .
 //
 
 $(function(){
-   
+    
+    $('tr[data-link]').click(function(){
+      window.location = this.dataset.link
+    });
+
+    $('tr[data-link]').hover(
+      function(){
+        $(this).css("background", "yellow");
+        $(this).css("cursor", "pointer");
+      },
+      function(){
+        $(this).css("background", "");
+      }
+    );
+
+
+
     $("#substrateSection").hide();
     $("#speciesSection").hide();
     $(".changeSection").change(function() {
@@ -68,8 +85,65 @@ $(function(){
 
 
     };
- 
+
+  function disable_hard_surface_relief_coverage(){
+    
+    $('#sample_hard_relief_cat_1, #sample_hard_relief_cat_2, #sample_hard_relief_cat_3, #sample_hard_relief_cat_4').attr('disabled', false);
+    var $hardVertVal = $('#sample_hard_verticle_relief').val();
+      
+        if ( $hardVertVal <= 0.2 ){
+          $('#sample_hard_relief_cat_1, #sample_hard_relief_cat_2, #sample_hard_relief_cat_3, #sample_hard_relief_cat_4').attr('disabled', true); 
+    }  else if ( $hardVertVal > 0.2 && $hardVertVal <= 0.5 ){
+          $('#sample_hard_relief_cat_2, #sample_hard_relief_cat_3, #sample_hard_relief_cat_4').attr('disabled', true); 
+    }  else if ( $hardVertVal > 0.5 && $hardVertVal <= 1.0 ){
+          $('#sample_hard_relief_cat_3, #sample_hard_relief_cat_4').attr('disabled', true);
+    }  else if ( $hardVertVal > 1.0 && $hardVertVal <= 1.5 ){
+          $('#sample_hard_relief_cat_4').attr('disabled', true);
+    }  else {
+    }
+  };
+   
+  function disable_soft_surface_relief_coverage(){
+    
+    $('#sample_soft_relief_cat_1, #sample_soft_relief_cat_2, #sample_soft_relief_cat_3, #sample_soft_relief_cat_4').attr('disabled', false);
+    var $softVertVal = $('#sample_soft_verticle_relief').val();
+      
+        if ( $softVertVal <= 0.2 ){
+          $('#sample_soft_relief_cat_1, #sample_soft_relief_cat_2, #sample_soft_relief_cat_3, #sample_soft_relief_cat_4').attr('disabled', true); 
+    }  else if ( $softVertVal > 0.2 && $softVertVal <= 0.5 ){
+          $('#sample_soft_relief_cat_2, #sample_soft_relief_cat_3, #sample_soft_relief_cat_4').attr('disabled', true); 
+    }  else if ( $softVertVal > 0.5 && $softVertVal <= 1.0 ){
+          $('#sample_soft_relief_cat_3, #sample_soft_relief_cat_4').attr('disabled', true);
+    }  else if ( $softVertVal > 1.0 && $softVertVal <= 1.5 ){
+          $('#sample_soft_relief_cat_4').attr('disabled', true);
+    }  else {
+    }
+  };
+
+  $('#sample_hard_verticle_relief').on('focusout', function(){
+    disable_hard_surface_relief_coverage();
+  });  
   
+  $('#sample_soft_verticle_relief').on('focusout', function(){
+    disable_soft_surface_relief_coverage();
+  });  
+
+  function disable_biotic_perc_sand(){
+
+    $('.biotic_percentage_sand').attr('disabled', false);
+    $('#sample_sand_pcov_other1_lab, #sample_sand_pcov_other2_lab').attr('disabled', false);
+    var $bioticSandVal = $('#sample_sand_percentage').val();
+
+    if ( $bioticSandVal == "" || $bioticSandVal == 0 ){
+      $('.biotic_percentage_sand').attr('disabled', true);
+      $('#sample_sand_pcov_other1_lab, #sample_sand_pcov_other2_lab').attr('disabled', true);
+    }
+  };
+  
+  $('#sample_sand_percentage').on('focusout', function(){
+    disable_biotic_perc_sand();
+  });
+
   function set_option_select(){
     var radioVal = $('input:radio[name=displayType]:checked').val();
     if ( radioVal == "0"){
@@ -183,7 +257,7 @@ $(function(){
 
 
    // Show or hide sections
- //   show_or_hide_section();
+     show_or_hide_section();
 
    // on change check if section should show
      $('.tab_1').change(function(){ 

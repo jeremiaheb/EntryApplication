@@ -1,23 +1,30 @@
-<h1>Listing divers</h1>
-
-<table>
-  <tr>
-    <th>Diver Number</th>
-    <th>Diver Name</th>
-    <th>Active Diver?</th>
-  </tr>
-
-<% @divers.each do |diver| %>
-  <tr>
-    <td><%= diver.diver_number %></td>
-    <td><%= diver.diver_name %></td>
-    <td><%= diver.active %></td>
-    <td><%= link_to 'Edit', edit_diver_path(diver) %></td>
-    <td><%= link_to 'Destroy', diver, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
+<div class="appContainer">
+  <div class="diverListContainer">
+    <h1>Listing divers</h1>
+    
+      <table id="diversList", class="display">
+        <thead>
+        <tr>
+          <th>Diver Number</th>
+          <th>Diver Name</th>
+          <th>Active Diver?</th>
+          <th>edit</th>
+          <th>destroy</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @divers.each do |diver| %>
+        <tr>
+          <td><%= diver.diver_number %></td>
+          <td><%= diver.diver_name %></td>
+          <td><%= diver.active %></td>
+          <td><%= link_to 'Edit', edit_diver_path(diver) %></td>
+          <td><%= link_to 'Destroy', diver, confirm: 'Are you sure?', method: :delete %></td>
+        </tr>
+      <% end %>
+      </tbody>
+      </table>
+  </div>
+</div>
 
 <%= link_to 'New Diver', new_diver_path %>

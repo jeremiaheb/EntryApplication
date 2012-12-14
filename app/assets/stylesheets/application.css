@@ -9,9 +9,35 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require jquery.ui.core
+ *= require jquery.ui.theme
+ *= require dataTables/src/demo_table_jui
  *= require_tree .
 */
 
+.appContainer {
+    position: relative;
+    width: 960px;
+    height: 500px;
+    padding: 20px;
+    background: #f0f0f0;
+    overflow:auto;
+ 
+    /* Border style */
+    border: 1px solid #cccccc;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+ 
+    /* Border Shadow */
+    -moz-box-shadow: 2px 2px 2px #cccccc;
+    -webkit-box-shadow: 2px 2px 2px #cccccc;
+    box-shadow: 2px 2px 2px #cccccc;
+
+    /* Font Styles */
+    font-size: 10px;
+ 
+}
 .formContainer {
     position: relative;
     width: 960px;
@@ -34,6 +60,31 @@
     /* Font Styles */
     font-size: 10px;
  
+}
+
+div.sampleListContainer {
+    width: 420px;
+    background: #DDD;
+ 
+    /* Border style */
+    border: 1px solid #cccccc;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+ 
+    /* Border Shadow */
+    -moz-box-shadow: 2px 2px 2px #cccccc;
+    -webkit-box-shadow: 2px 2px 2px #cccccc;
+    box-shadow: 2px 2px 2px #cccccc;
+
+}
+
+div.sampleListContainer td {
+text-align: center;
+}
+
+div.sampleListContainer h1 {
+text-align: center;
 }
 
 div.section_1,div.section_2, p.flipSection_1 {
@@ -136,7 +187,7 @@ div.section_1,div.section_2, p.flipSection_1 {
   text-align: center;
 }
 
-label {
+.formContainer label {
   display: block;
   width: 100px;
   float: left;
@@ -157,16 +208,16 @@ label {
 }
 
 
-input {
+.formContainer input {
   width: 50px;
 }
 
-h3 {
+.formContainer h3 {
   text-align: left;
 }
 
 
-label.message {
+.formContainer label.message {
   color: blue;
   width: 300px;
   font-size: 8px;
@@ -183,5 +234,5 @@ label.message {
   background-color: LightSkyBlue;
 }
 .timeSeen_3 {
-  background-color: DodgerBlue;
+  background-color: Yellow;
 }

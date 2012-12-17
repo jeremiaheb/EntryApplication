@@ -50,10 +50,9 @@ $(function(){
     $(".changeSection option[value='substrateSection']").attr("disabled", "disabled");
     $(".changeSection option[value='speciesSection']").attr("disabled", "disabled");
  
-    function show_or_hide_section(){
+    function show_or_hide_substrate(){
 
       var should_display_substrate = new Array();
-      var should_display_species = new Array();
 
       $('#sampleSection').find('.tab_1').each(function(){
         // This equality test does NOT work with '0' because they time
@@ -67,8 +66,24 @@ $(function(){
       if ( should_display_substrate.length == 0 )
         { 
           $(".changeSection option[value='substrateSection']").removeAttr("disabled");
+        } else {
+          $(".changeSection option[value='substrateSection']").attr("disabled", true);
         };
+    };
 
+    function show_or_hide_species(){
+
+      var should_display_species = new Array();
+      var all_totals_equal_hundred = new Boolean();
+
+      if ( $("#sample_sand_percentage").val() == 0 && $("#substrateSection .one_hundred_ok_flag").length == 4 ){
+        all_totals_equal_hundred = true;
+      } else if ( $("#sample_sand_percentage").val() > 0 && $("#substrateSection .one_hundred_ok_flag").length == 5 ){
+        all_totals_equal_hundred = true;
+      } else {
+        all_totals_equal_hundred = false;
+      };
+      
       $('#substrateSection').find('.tab_2').each(function(){
         // This equality test does NOT work with '0' because they time
         // option_selects can be '0'
@@ -78,12 +93,12 @@ $(function(){
           };
       });
 
-      if ( should_display_species.length == 0 )
+      if ( should_display_species.length == 0 && all_totals_equal_hundred == true)
         { 
           $(".changeSection option[value='speciesSection']").removeAttr("disabled");
+        } else {
+          $(".changeSection option[value='speciesSection']").attr("disabled", true);
         };
-
-
     };
 
   function disable_hard_surface_relief_coverage(){
@@ -120,6 +135,9 @@ $(function(){
     }
   };
 
+  disable_hard_surface_relief_coverage();
+  disable_soft_surface_relief_coverage();
+
   $('#sample_hard_verticle_relief').on('focusout', function(){
     disable_hard_surface_relief_coverage();
   });  
@@ -140,6 +158,8 @@ $(function(){
     }
   };
   
+  disable_biotic_perc_sand();
+
   $('#sample_sand_percentage').on('focusout', function(){
     disable_biotic_perc_sand();
   });
@@ -257,15 +277,17 @@ $(function(){
 
 
    // Show or hide sections
-     show_or_hide_section();
+     show_or_hide_substrate();
+     show_or_hide_species();
 
    // on change check if section should show
      $('.tab_1').change(function(){ 
-        show_or_hide_section();
+        show_or_hide_substrate();
     });
      
-     $('.tab_2').change(function(){ 
-        show_or_hide_section();
+     $('#substrateSection').change(function(){ 
+        show_or_hide_species();
+        $("#substrateSection").find(".hard_relief[disabled=disabled], .biotic_percentage_sand[disabled=disabled] ").val("");
     });
 
    // Calculate total for 'surface_hard' when page loads

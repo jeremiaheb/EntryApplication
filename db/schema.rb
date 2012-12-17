@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121207141707) do
+ActiveRecord::Schema.define(:version => 20121217132926) do
 
   create_table "animals", :force => true do |t|
     t.string   "species_code"
@@ -35,9 +35,9 @@ ActiveRecord::Schema.define(:version => 20121207141707) do
   create_table "divers", :force => true do |t|
     t.string   "diver_number"
     t.string   "diver_name"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.boolean  "active"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.boolean  "active",       :default => false
   end
 
   create_table "habitat_types", :force => true do |t|
@@ -114,6 +114,9 @@ ActiveRecord::Schema.define(:version => 20121207141707) do
     t.integer  "hard_pcov_other2"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
+    t.float    "water_temp"
+    t.float    "cylinder_radius"
+    t.string   "current"
   end
 
 end

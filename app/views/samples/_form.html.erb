@@ -48,6 +48,15 @@
 
       <%= f.label "Underwater Visibility" %>
       <%= f.text_field :underwater_visibility, { :class => 'tab_1', :autocomplete => :off } %><br />
+      
+      <%= f.label "Water temperature" %>
+      <%= f.text_field :water_temp, { :class => 'tab_1', :autocomplete => :off } %><br />
+
+      <%= f.label "Cylinder radius" %>
+      <%= f.select( :cylinder_radius,{ "7.5m" => 7.5, "5.0m" => 5.0 } , {}, { :class => 'tab_1' } ) %><br />
+      
+      <%= f.label "Current" %>
+      <%= f.select( :current, { "None" => "none", "Moderate" => "moderate", "Strong" => "strong" }, {}, { :class => 'tab_1' } ) %><br />
 
       <%= f.label "Fishing gear" %>
       <%= f.text_area :fishing_gear, { :size => "60x1", :autocomplete => :off } %><br />

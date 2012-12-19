@@ -285,7 +285,7 @@ $(function(){
         show_or_hide_substrate();
     });
      
-     $('#substrateSection').change(function(){ 
+     $('#substrateSection').on("focusout", function(){ 
         show_or_hide_species();
         $("#substrateSection").find(".hard_relief[disabled=disabled], .biotic_percentage_sand[disabled=disabled] ").val("");
     });

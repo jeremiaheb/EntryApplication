@@ -15,6 +15,8 @@
 //= require dataTables/jquery.dataTables
 //= require jquery_nested_form
 //= require rails.validations
+//= require select2
+//= require chosen-jquery
 //= require_tree .
 //
 
@@ -164,58 +166,13 @@ $(function(){
     disable_biotic_perc_sand();
   });
 
-  function set_option_select(){
-    var radioVal = $('input:radio[name=displayType]:checked').val();
-    if ( radioVal == "0"){
-      var $codeVal = $(this).val();
-      console.log($codeVal);
-    };  
-  };
   
-  function show_code(){
-      $(".section_3 .common").attr('disabled', 'true');
-      $(".section_3 .common").hide();
-      $(".section_3 .code").removeAttr('disabled');
-      $(".section_3 .code").show();
-  };
 
-  function show_common(){
-      $(".section_3 .code").attr('disabled', 'true');
-      $(".section_3 .code").hide();
-      $(".section_3 .common").removeAttr('disabled');
-      $(".section_3 .common").show();
-  };
+
   
-  function display_code_or_common(){
-    var radioVal = $('input:radio[name=displayType]:checked').val();
-    if ( radioVal == '0' ){
-      show_code();
-    };
-    if ( radioVal == '1'){
-      show_common();
-    };
-  };
-
-  function change_code_or_common(){
-    var radioVal = $('input:radio[name=displayType]:checked').val();
-    if ( radioVal == '0'){
-      $('select.common').each(function(index){
-        var $commonVal = $('select.common').slice(index).val();
-        $('select.code option[value="' + $commonVal + '"]').slice(index).attr('selected', 'selected');
-      });
-      show_code();
-    }; 
-    if ( radioVal == '1'){
-      $('select.code').each(function(index){
-        var $codeVal = $('select.code').slice(index).val();
-        $('select.common option[value="' + $codeVal + '"]').slice(index).attr('selected', 'selected');
-      });
-      show_common();
-    };
-  };
 
   function set_time_seen_field_on_focus(){
-      $('select').on('focus', function(){
+      $('.sppCommon').on('open', function(){
         var $thisID = $(this).attr('id').slice(0, -10);
         var $radioTimeSeenVal = $('input:radio[name=timeSeen]:checked').val();
 
@@ -228,20 +185,17 @@ $(function(){
   };
 
     set_time_seen_field_on_focus();
-
-   // On radio button change display code or common name
-     
-     $('.radio_button').on("change", function(){ 
-        change_code_or_common();
-    });
      
      $(document).delegate(".add_nested_fields", "click", function(){ 
-        display_code_or_common();
         set_time_seen_field_on_focus();
-        $('select.code option[value=""]').slice(-2).attr('selected', 'selected');
-        $('select.common option[value=""]').slice(-2).attr('selected', 'selected');
    });
 
+
+  $("#speciesSection").find(".sppCommon").select2(); 
+  $(document).on('nested:fieldAdded', function(event){
+    event.field.find(".sppCommon").select2();
+  });
+  
 
   function calculate_totals( input_class_to_sum, id_to_display_total){
   
@@ -289,6 +243,9 @@ $(function(){
         show_or_hide_species();
         $("#substrateSection").find(".hard_relief[disabled=disabled], .biotic_percentage_sand[disabled=disabled] ").val("");
     });
+
+     
+
 
    // Calculate total for 'surface_hard' when page loads
     calculate_totals( 'hard_relief', 'hard_relief_total' );

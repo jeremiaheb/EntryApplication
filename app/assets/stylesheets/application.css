@@ -12,6 +12,8 @@
  *= require jquery.ui.core
  *= require jquery.ui.theme
  *= require dataTables/src/demo_table_jui
+ *= require select2
+ *= require chosen
  *= require_tree .
 */
 
@@ -235,4 +237,8 @@ div.section_1,div.section_2, p.flipSection_1 {
 }
 .timeSeen_3 {
   background-color: Yellow;
+}
+
+.select2-container {
+  width: 200px;
 }

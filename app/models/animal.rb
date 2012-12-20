@@ -6,4 +6,9 @@ class Animal < ActiveRecord::Base
   validates :species_code,    :presence => true
   validates :scientific_name, :presence => true
   validates :common_name,     :presence => true
+
+    
+  def spp_code_common
+    [self.species_code, self.common_name].join(" __ ")
+  end
 end

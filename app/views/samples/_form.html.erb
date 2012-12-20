@@ -103,16 +103,12 @@
 <div id="speciesSection" class="sectionDiv">
   <div class='section_3'>
 
-    <Input class='radio_button' type='radio' Name='displayType' Value='0' checked='checked'>Display Species Code
-    <Input class='radio_button' type='radio' Name='displayType' Value='1'>Display Common Name
-    <br />
-
     <Input class='time_seen_button' type='radio' Name='timeSeen' Value='1' checked='checked'>First 5 Minutes
     <Input class='time_seen_button' type='radio' Name='timeSeen' Value='2'>5 to 10 Minutes
     <Input class='time_seen_button' type='radio' Name='timeSeen' Value='3'>After 10 Minutes
     
     <ol>   
-      <%= render "animals", :object => f %>
+      <%= render "animals_2", :object => f %>
       
       <%= f.link_to_add "Add species", :sample_animals %>
     </ol>

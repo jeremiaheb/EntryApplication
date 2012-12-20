@@ -66,6 +66,7 @@ jQuery(function($) {
     }
   };
 
+
   window.nestedFormEvents = new NestedFormEvents();
   $('form a.add_nested_fields').live('click', nestedFormEvents.addFields);
   $('form a.remove_nested_fields').live('click', nestedFormEvents.removeFields);

@@ -16,7 +16,6 @@
 //= require jquery_nested_form
 //= require rails.validations
 //= require select2
-//= require chosen-jquery
 //= require_tree .
 //
 

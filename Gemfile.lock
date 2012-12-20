@@ -43,10 +43,6 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     builder (3.0.0)
-    chosen-rails (0.9.11)
-      coffee-rails (~> 3.2)
-      railties (~> 3.0)
-      sass-rails (~> 3.2)
     client_side_validations (3.1.4)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -137,7 +133,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  chosen-rails
   client_side_validations
   coffee-rails (~> 3.2.1)
   debugger

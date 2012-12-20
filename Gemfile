@@ -28,7 +28,6 @@ gem 'jquery-rails'
 gem 'client_side_validations'
 
 gem 'select2-rails'
-gem 'chosen-rails'
 gem 'nested_form', :git => "git://github.com/ryanb/nested_form.git"
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

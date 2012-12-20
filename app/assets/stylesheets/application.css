@@ -13,7 +13,6 @@
  *= require jquery.ui.theme
  *= require dataTables/src/demo_table_jui
  *= require select2
- *= require chosen
  *= require_tree .
 */
 

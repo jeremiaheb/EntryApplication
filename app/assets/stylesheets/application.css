@@ -241,3 +241,7 @@ div.section_1,div.section_2, p.flipSection_1 {
 .select2-container {
   width: 200px;
 }
+
+.show {
+  margin-right: 10px;
+}

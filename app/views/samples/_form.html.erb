@@ -59,7 +59,7 @@
       <%= f.select( :current, { "None" => "none", "Moderate" => "moderate", "Strong" => "strong" }, {}, { :class => 'tab_1' } ) %><br />
 
       <%= f.label "Fishing gear" %>
-      <%= f.select :fishing_gear, { "None" => "none", "Fishing Traps" => "fishing traps", "Fishing Line" => "fishing line" } %><br />
+      <%= f.select :fishing_gear, { "None" => "none", "Trap" => "trap", "Trap Debris" => "trap debris", "Fishing" => "fishing", "Other" => "other" } %><br />
 
       <%= f.label "Comments" %>
       <%= f.text_area :sample_description, { :size => '60x3', :autocomplete => :off } %><br />

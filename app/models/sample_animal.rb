@@ -10,6 +10,7 @@ class SampleAnimal < ActiveRecord::Base
     Animal.find(self.animal.id).common_name
   end
 
+  default_scope :order => "id ASC"
 
   validates :number_individuals,       :presence => :true
 #  validates :average_length,       :presence => :true

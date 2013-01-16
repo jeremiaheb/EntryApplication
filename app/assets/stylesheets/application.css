@@ -45,7 +45,7 @@
     height: 500px;
     padding: 20px;
     background: #f0f0f0;
-    overflow:auto;
+    overflow: auto;
  
     /* Border style */
     border: 1px solid #cccccc;
@@ -232,9 +232,6 @@ div.section_1,div.section_2, p.flipSection_1 {
 }
 
 .timeSeen_2 {
-  background-color: LightSkyBlue;
-}
-.timeSeen_3 {
   background-color: Yellow;
 }
 
@@ -244,4 +241,51 @@ div.section_1,div.section_2, p.flipSection_1 {
 
 .show {
   margin-right: 10px;
+}
+
+#animals {
+  padding-top: 10px;
+  width: 960px;
+  height: 375px;
+  overflow: auto;
+}
+
+#species {
+  position: relative;
+  left: 100px;
+  width: 40px;
+}
+
+#fixed_elements {
+  position: relative;
+}
+
+#num {
+  position: relative;
+  left: 210px;
+  width: 25px;
+}
+
+#mean {
+  position: relative;
+  left: 240px;
+  width: 25px;
+}
+
+#min {
+  position: relative;
+  left: 272px;
+  width: 25px;
+}
+
+#max {
+  position: relative;
+  left: 300px;
+  width: 25px;
+}
+
+#newSampleButton {
+  position: fixed;
+  left: 100px;
+  top: 100px;
 }

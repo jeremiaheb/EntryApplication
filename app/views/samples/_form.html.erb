@@ -102,17 +102,24 @@
 
 <div id="speciesSection" class="sectionDiv">
   <div class='section_3'>
-
-    <Input class='time_seen_button' type='radio' Name='timeSeen' Value='1' checked='checked'>First 5 Minutes
-    <Input class='time_seen_button' type='radio' Name='timeSeen' Value='2'>5 to 10 Minutes
-    <Input class='time_seen_button' type='radio' Name='timeSeen' Value='3'>After 10 Minutes
+    <div>
+    <div>
+      <Input class='time_seen_button' type='radio' Name='timeSeen' Value='1' checked='checked'>First 5 Minutes
+      <Input class='time_seen_button' type='radio' Name='timeSeen' Value='2'>5 to 10 Minutes
+      <Input class='time_seen_button' type='radio' Name='timeSeen' Value='3'>After 10 Minutes
+    <div>
+    <div>
+      <label id="species"> Species </label> <label id="num"> Num </label> <label id="mean"> Mean </label> <label id="min"> Min </label> <label id="max"> Max </label>
+     </div>
+  </div>
     
+    <div id="animals">
     <ol>   
       <%= render "animals", :object => f %>
       
       <%= f.link_to_add "Add species", :sample_animals %>
     </ol>
-
+    </div>
   </div>
 </div>
 

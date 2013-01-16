@@ -190,10 +190,73 @@ $(function(){
    });
 
 
-  $("#speciesSection").find(".sppCommon").select2(); 
+  $("#animals").find(".sppCommon").select2(); 
   $(document).on('nested:fieldAdded', function(event){
     event.field.find(".sppCommon").select2();
   });
+
+  function enable_disable_animals_fields_on_load(){
+    $("#animals").find(".fields [id$=number_individuals]").each(function(){
+      var $indValue = $(this).val();
+      var $recordID = $(this).attr('id');
+      var $mean = $recordID.replace('_number_individuals', '_average_length');
+      var $min = $recordID.replace('_number_individuals', '_min_length');
+      var $max = $recordID.replace('_number_individuals', '_max_length');
+
+        if ($indValue >= 3) {
+          $('input#' + $mean).attr('disabled', false)
+          $('input#' + $min).attr('disabled', false)
+          $('input#' + $max).attr('disabled', false)
+      } else if ($indValue == 1) {
+          $('input#' + $mean).attr('disabled', false)
+          $('input#' + $min).attr('disabled', true)
+          $('input#' + $max).attr('disabled', true)
+      } else if ( $indValue == 2 ){
+          $('input#' + $mean).attr('disabled', true)
+          $('input#' + $min).attr('disabled', false)
+          $('input#' + $max).attr('disabled', false)
+      }
+    })
+  };
+
+  function enable_disable_animals_fields(){
+    $("[id$=number_individuals]").on('focusout', function(){  
+    var $indValue = $(this).val();
+    var $recordID = $(this).attr('id');
+    var $mean = $recordID.replace('_number_individuals', '_average_length');
+    var $min = $recordID.replace('_number_individuals', '_min_length');
+    var $max = $recordID.replace('_number_individuals', '_max_length');
+
+      if ($indValue >= 3) {
+        $('input#' + $mean).attr('disabled', false)
+        $('input#' + $min).attr('disabled', false)
+        $('input#' + $max).attr('disabled', false)
+    } else if ($indValue == 1) {
+        $('input#' + $mean).attr('disabled', false)
+        $('input#' + $min).val("")
+        $('input#' + $min).attr('disabled', true)
+        $('input#' + $max).val("")
+        $('input#' + $max).attr('disabled', true)
+    } else if ( $indValue == 2 ){
+        $('input#' + $mean).val("").attr('disabled', true)
+        $('input#' + $min).attr('disabled', false).val("")
+        $('input#' + $max).attr('disabled', false).val("")
+    }
+    });
+  };
+  
+  enable_disable_animals_fields_on_load();
+  enable_disable_animals_fields();
+  $(document).on('nested:fieldAdded', function(){
+    enable_disable_animals_fields();
+  });
+
+
+  $(".new_sample, .edit_sample").submit(function(){
+    $(".section_3 :input").attr('disabled', false);
+    return true;
+  });
+
   
 
   function calculate_totals( input_class_to_sum, id_to_display_total){

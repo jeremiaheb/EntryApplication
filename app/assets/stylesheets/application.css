@@ -232,7 +232,11 @@ div.section_1,div.section_2, p.flipSection_1 {
 }
 
 .timeSeen_2 {
-  background-color: Yellow;
+  background-color: LightBlue;  
+}
+
+.timeSeen_3 {
+  background-color: LightYellow;  
 }
 
 .select2-container {
@@ -244,10 +248,13 @@ div.section_1,div.section_2, p.flipSection_1 {
 }
 
 #animals {
-  padding-top: 10px;
+  padding-top: 0px;
   width: 960px;
   height: 375px;
   overflow: auto;
+  position: relative;
+  top: 10px;
+
 }
 
 #species {
@@ -256,8 +263,8 @@ div.section_1,div.section_2, p.flipSection_1 {
   width: 40px;
 }
 
-#fixed_elements {
-  position: relative;
+#fixedElements {
+  
 }
 
 #num {
@@ -288,4 +295,12 @@ div.section_1,div.section_2, p.flipSection_1 {
   position: fixed;
   left: 100px;
   top: 100px;
+}
+
+.ActionBar {
+  margin-right: 15px;
+}
+
+#animals input[disabled='disabled'] {
+  opacity: 0.30;
 }

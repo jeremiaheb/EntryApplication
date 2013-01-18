@@ -7,6 +7,6 @@
   <%= builder.text_field :min_length, {:class => "timeSeen_#{builder.object.time_seen }"} %>
   <%= builder.text_field :max_length, {:class => "timeSeen_#{builder.object.time_seen }"} %>
   <%= builder.hidden_field :time_seen %>
-  <%= builder.link_to_remove "Remove Species"  %>
+  <%= builder.link_to_remove "Remove Species", {:tabindex => "-1"}  %>
   </li>
 <% end %>

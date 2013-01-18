@@ -19,6 +19,9 @@
 //= require_tree .
 //
 
+
+
+
 $(function(){
     
     $('tr[data-link]').click(function(){
@@ -187,6 +190,8 @@ $(function(){
      
      $(document).delegate(".add_nested_fields", "click", function(){ 
         set_time_seen_field_on_focus();
+        enable_disable_animals_fields();
+        $(".section_3 input:text:visible").eq(-5).focus();
    });
 
 
@@ -239,21 +244,18 @@ $(function(){
         $('input#' + $max).attr('disabled', true)
     } else if ( $indValue == 2 ){
         $('input#' + $mean).val("").attr('disabled', true)
-        $('input#' + $min).attr('disabled', false).val("")
-        $('input#' + $max).attr('disabled', false).val("")
+        $('input#' + $min).attr('disabled', false)
+        $('input#' + $max).attr('disabled', false)
     }
     });
   };
   
   enable_disable_animals_fields_on_load();
   enable_disable_animals_fields();
-  $(document).on('nested:fieldAdded', function(){
-    enable_disable_animals_fields();
-  });
 
 
   $(".new_sample, .edit_sample").submit(function(){
-    $(".section_3 :input").attr('disabled', false);
+    $(".formContainer :input").attr('disabled', false);
     return true;
   });
 
@@ -313,7 +315,7 @@ $(function(){
     calculate_totals( 'hard_relief', 'hard_relief_total' );
 
     // Calculate total for 'surface_hard' on change
-    $('.hard_relief').change(function(){
+    $('.hard_relief').focusout(function(){
         calculate_totals( 'hard_relief', 'hard_relief_total' );
     });
 
@@ -347,6 +349,13 @@ $(function(){
     // Calculate total for 'biotic_percentage_hardbottom' on change
     $('.biotic_percentage_hardbottom').change(function(){
         calculate_totals( 'biotic_percentage_hardbottom', 'biotic_percentage_hardbottom_total' );
+    });
+
+    $("form").bind("keypress", function(e){
+      if (e.keyCode ==13){
+        e.preventDefault();
+        $(".add_nested_fields").trigger("click");
+      }
     });
 
 });

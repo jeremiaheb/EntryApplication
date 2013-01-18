@@ -1,4 +1,6 @@
 EntryApplication::Application.routes.draw do
+  devise_for :users
+
   resources :divers
 
   resources :habitat_types

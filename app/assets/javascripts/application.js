@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require dataTables/jquery.dataTables
 //= require jquery_nested_form
-//= require rails.validations
 //= require select2
 //= require_tree .
 //

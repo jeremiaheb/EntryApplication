@@ -16,4 +16,17 @@ class SampleAnimal < ActiveRecord::Base
 #  validates :average_length,       :presence => :true
 #  validates :min_length,       :presence => :true
 #  validates :max_length,       :presence => :true
+
+  validate :validate_min_mean
+
+
+  private
+
+  def validate_min_mean
+    if  self.average_length < self.min_length
+      errors.add(:min_length, "Min length cannot be greater than mean length")
+    end
+  end
+
+
 end

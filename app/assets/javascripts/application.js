@@ -193,13 +193,16 @@ $(function(){
         set_time_seen_field_on_focus();
         enable_disable_animals_fields();
         $(".section_3 input:text:visible").eq(-5).focus();
-
    });
 
 
   $("#animals").find(".sppCommon").select2(); 
   $(document).on('nested:fieldAdded', function(event){
     event.field.find(".sppCommon").select2();
+  });
+
+   $('form').on('nested:fieldAdded', function(event) {
+    $(event.target).find(':input').enableClientSideValidations();
   });
 
 

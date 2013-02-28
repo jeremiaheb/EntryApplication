@@ -22,15 +22,15 @@ class Sample < ActiveRecord::Base
 
   validates :dive_depth,                  :presence => true
   validates :sample_depth,                :presence => true          
-  validates :field_id,                    :presence => true
-  validates_format_of :field_id,          :with => /\d\d\d\d[A-Z]/
+  #validates :field_id,                    :presence => true
+  #validates_format_of :field_id,          :with => /\d\d\d\d[A-Z]/
   validates :underwater_visibility,       :presence => true
   validates :fishing_gear,                :length => { :maximum => 50 }
   validates :sample_description,          :length => { :maximum => 150 }                    
 
   validate :sample_start_before_sample_end
 
-
+  validates :field_id, :fieldid => true
 
   def sample_start_before_sample_end
     errors.add(:sample_begin_time, "must be before end time") unless

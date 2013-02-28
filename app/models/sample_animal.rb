@@ -13,9 +13,11 @@ class SampleAnimal < ActiveRecord::Base
   default_scope :order => "id ASC"
 
   validates :number_individuals,          :presence => :true
-  validates_presence_of :average_length,  :if => :has_ind_equal_1?
-  validates_presence_of :min_length,      :if => :has_ind_equal_2?
-  validates_presence_of :max_length,      :if => :has_ind_equal_2?
+  #validates_presence_of :average_length,  :if => :has_ind_equal_1?
+  #validates_presence_of :min_length,      :if => :has_ind_equal_2?
+  #validates_presence_of :max_length,      :if => :has_ind_equal_2?
+  #validates :average_length,              :presence => true, :if => :has_ind_equal_1?
+
 
   def has_ind_equal_1?
     if self.number_individuals == 1

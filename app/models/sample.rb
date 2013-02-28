@@ -4,7 +4,7 @@ class Sample < ActiveRecord::Base
 
   has_many :sample_animals, :dependent => :destroy
   has_many :animals, :through => :sample_animals
-  accepts_nested_attributes_for :sample_animals, :reject_if => lambda {  |a| a[:number_individuals].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :sample_animals, :reject_if => lambda {  |a| a[:animal_id].blank? }, :allow_destroy => true
 
   has_many :diver_samples
   has_many :divers, :through => :diver_samples, :dependent => :destroy

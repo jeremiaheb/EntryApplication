@@ -217,14 +217,18 @@ div.section_1,div.section_2, p.flipSection_1 {
   text-align: left;
 }
 
+.field_with_errors{
+  display: inline;
+}
 
 .formContainer label.message {
+  position: inline;
   color: blue;
   width: 300px;
   font-size: 8px;
   display: inline;
   float: right;
-  text-align: center;
+  text-align: left;
   border: none;
   border-radius: none;
   border-shadow: none;
@@ -304,3 +308,7 @@ div.section_1,div.section_2, p.flipSection_1 {
 #animals input[disabled='disabled'] {
   opacity: 0.30;
 }
+
+
+
+

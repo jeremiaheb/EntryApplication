@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require dataTables/jquery.dataTables
 //= require jquery_nested_form
+//= require rails.validations
+//= require rails.validations.nested_form
 //= require select2
 //= require_tree .
 //
@@ -191,6 +193,7 @@ $(function(){
         set_time_seen_field_on_focus();
         enable_disable_animals_fields();
         $(".section_3 input:text:visible").eq(-5).focus();
+
    });
 
 
@@ -198,6 +201,7 @@ $(function(){
   $(document).on('nested:fieldAdded', function(event){
     event.field.find(".sppCommon").select2();
   });
+
 
   function enable_disable_animals_fields_on_load(){
     $("#animals").find(".fields [id$=number_individuals]").each(function(){
@@ -258,7 +262,7 @@ $(function(){
     return true;
   });
 
-  
+
 
   function calculate_totals( input_class_to_sum, id_to_display_total){
   

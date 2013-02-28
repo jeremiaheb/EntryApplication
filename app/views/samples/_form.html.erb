@@ -1,4 +1,4 @@
-<%= nested_form_for @sample do |f| %>
+<%= nested_form_for @sample, :validate => true do |f| %>
 
   <%= render "shared/error_messages", :target => @sample %>
 

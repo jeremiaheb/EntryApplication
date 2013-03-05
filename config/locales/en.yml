@@ -4,4 +4,4 @@
 en:
   errors:
     messages:
-      field_id: "format is not correct"
+      field_format: "format is not correct"

@@ -18,19 +18,28 @@ class Sample < ActiveRecord::Base
   validates :dive_end_time,               :presence => true
   validates :sample_begin_time,           :presence => true
   validates :sample_end_time,             :presence => true
-
+  #validate :sample_starts_before_ends
 
   validates :dive_depth,                  :presence => true
   validates :sample_depth,                :presence => true          
-  #validates :field_id,                    :presence => true
-  #validates_format_of :field_id,          :with => /\d\d\d\d[A-Z]/
+  validates :field_id,                    :presence => true
+  validates_format_of :field_id,          :with => /\d\d\d\d[A-Z]/
   validates :underwater_visibility,       :presence => true
-  validates :fishing_gear,                :length => { :maximum => 50 }
   validates :sample_description,          :length => { :maximum => 150 }                    
 
-  validate :sample_start_before_sample_end
+  #validate :sample_start_before_sample_end
 
-  validates :field_id, :fieldid => true
+  #validates_field_format :field_id
+
+
+  private
+
+  def sample_starts_before_ends
+    if self.sample_begin_time >= self.sample_end_time
+      self.errors.add :sample_end_time, ' has to end after begin time '
+    end
+  end
+
 
   def sample_start_before_sample_end
     errors.add(:sample_begin_time, "must be before end time") unless

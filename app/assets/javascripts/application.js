@@ -202,9 +202,9 @@ $(function(){
     event.field.find(".sppCommon").select2();
   });
 
-   $('form').on('nested:fieldAdded', function(event) {
-    $(event.target).find(':input').enableClientSideValidations();
-  });
+   //$('form').on('nested:fieldAdded', function(event) {
+    //$(event.target).find(':input').enableClientSideValidations();
+  //});
 
 
   function enable_disable_animals_fields_on_load(){

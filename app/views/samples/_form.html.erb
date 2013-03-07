@@ -1,4 +1,4 @@
-<%= nested_form_for @sample, :validate => true do |f| %>
+<%= nested_form_for @sample, :validate => false do |f| %>
 
   <%= render "shared/error_messages", :target => @sample %>
 
@@ -12,7 +12,7 @@
   <div class='section_1'>
     <div id='section_1_part_1'>
       <%= f.label "Date" %>
-      <%= f.date_select :sample_date, { :class => 'tab_1' } %>
+      <%= f.text_field :sample_date, { :class => 'tab_1' } %>
         
       <%= render "diver_selection", :object => f %>
 

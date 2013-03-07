@@ -18,7 +18,7 @@ class Sample < ActiveRecord::Base
   validates :dive_end_time,               :presence => true
   validates :sample_begin_time,           :presence => true
   validates :sample_end_time,             :presence => true
-  #validate :sample_starts_before_ends
+  validate :sample_starts_before_ends
 
   validates :dive_depth,                  :presence => true
   validates :sample_depth,                :presence => true          
@@ -30,6 +30,8 @@ class Sample < ActiveRecord::Base
   #validate :sample_start_before_sample_end
 
   #validates_field_format :field_id
+
+
 
 
   private

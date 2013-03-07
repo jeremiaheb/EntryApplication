@@ -9,6 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require jquery.ui.datepicker
  *= require jquery.ui.core
  *= require jquery.ui.theme
  *= require dataTables/src/demo_table_jui
@@ -208,6 +209,9 @@ div.section_1,div.section_2, p.flipSection_1 {
 
 }
 
+#sample_sample_date {
+  width: 80px;
+}
 
 .formContainer input {
   width: 50px;

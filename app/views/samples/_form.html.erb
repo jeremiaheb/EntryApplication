@@ -12,7 +12,7 @@
   <div class='section_1'>
     <div id='section_1_part_1'>
       <%= f.label "Date" %>
-      <%= f.text_field :sample_date, { :class => 'tab_1' } %>
+      <%= f.text_field :sample_date, { :class => 'tab_1', :name => 'date' } %>
         
       <%= render "diver_selection", :object => f %>
 
@@ -24,16 +24,16 @@
       <%= f.collection_select :habitat_type_id, HabitatType.all, :id, :habitat_name, { :include_blank => "" }, { :class => 'tab_1' } %><br />
 
       <%= f.label "Dive Begin Time" %>
-      <%= f.time_select :dive_begin_time, { :include_blank => "" }, { :class => 'tab_1' } %><br />
+      <%= f.text_field :dive_begin_time, { :class => 'tab_1' } %><br />
 
       <%= f.label "Dive End Time" %>
-      <%= f.time_select :dive_end_time, { :include_blank => "" }, { :class => 'tab_1' } %><br />
+      <%= f.text_field :dive_end_time, { :class => 'tab_1' } %><br />
 
       <%= f.label "Sample Begin Time" %>
-      <%= f.time_select :sample_begin_time, { :include_blank => "" }, { :class => 'tab_1' } %><br />
+      <%= f.text_field :sample_begin_time, { :class => 'tab_1' } %><br />
       
       <%= f.label "Sample End Time" %>
-      <%= f.time_select :sample_end_time, { :include_blank => "" }, { :class => 'tab_1' } %><br />
+      <%= f.text_field :sample_end_time, { :class => 'tab_1' } %><br />
     </div>
     <div id='section_1_part_2'>
 

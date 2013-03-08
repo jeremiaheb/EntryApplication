@@ -272,7 +272,7 @@ $(function(){
   
         var sum_for_display_total = new Array();
   
-        $('.section_2').find('.' + input_class_to_sum).each(function(){
+        $('.section_2').find('.' + input_class_to_sum ).each(function(){
           if ( $(this).val() != 0 )
             {
               sum_for_display_total.push( $(this).val() );
@@ -312,7 +312,7 @@ $(function(){
      
      $('#substrateSection').on("focusout", function(){ 
         show_or_hide_species();
-        $("#substrateSection").find(".hard_relief[disabled=disabled], .biotic_percentage_sand[disabled=disabled] ").val("");
+        $("#substrateSection").find(".hard_relief[disabled=disabled], .soft_relief[disabled=disabled], .biotic_percentage_sand[disabled=disabled] ").val("");
     });
 
      
@@ -322,6 +322,9 @@ $(function(){
     calculate_totals( 'hard_relief', 'hard_relief_total' );
 
     // Calculate total for 'surface_hard' on change
+    $('#sample_hard_verticle_relief').change(function(){
+        calculate_totals( 'hard_relief', 'hard_relief_total' );
+    });
     $('.hard_relief').focusout(function(){
         calculate_totals( 'hard_relief', 'hard_relief_total' );
     });
@@ -330,7 +333,10 @@ $(function(){
     calculate_totals('soft_relief', 'soft_relief_total' );
 
     // Calculate total for 'surface_soft' on change
-    $('.soft_relief').change(function(){
+    $('#sample_soft_verticle_relief').change(function(){
+        calculate_totals( 'soft_relief', 'soft_relief_total' );
+    });
+    $('.soft_relief').focusout(function(){
         calculate_totals( 'soft_relief', 'soft_relief_total' );
     });
     
@@ -365,5 +371,178 @@ $(function(){
       }
     });
 
+    $("#sample_dive_begin_time").timeEntry({ show24Hours: true });
+    $("#sample_dive_end_time").timeEntry({ show24Hours: true });
+    $("#sample_sample_begin_time").timeEntry({ show24Hours: true });
+    $("#sample_sample_end_time").timeEntry({ show24Hours: true });
+
+    $.validator.addMethod("greaterThan", function(value, element, params){
+      return value > $(params).val();
+    });
+    
+    $.validator.addMethod("fieldidFormat", function(value, element){
+      return value.match(/\d\d\d\d[A-B]/);
+    });
+
+
+
+    $(".new_sample, .edit_sample").validate({
+      onfocusout: function(element) {
+        this.element(element);
+      },
+        rules: {
+                date: {
+                         required: true
+                       },
+                'sample[sample_type_id]': {
+                         required: true
+                       },
+                'sample[habitat_type_id]': {
+                         required: true
+                       },
+                'sample[dive_begin_time]': {
+                         required: true
+                       },
+                'sample[dive_end_time]': {
+                         required: true,
+                          greaterThan: '#sample_dive_begin_time'
+                       },
+                'sample[sample_begin_time]': {
+                         required: true
+                       },
+                'sample[sample_end_time]': {
+                         required: true,
+                          greaterThan: '#sample_sample_begin_time'
+                       },
+                'sample[field_id]': {
+                         required: true,
+                          fieldidFormat: true
+                       },
+                'sample[dive_depth]': {
+                        required: true,
+                        digits: true
+                      },
+                'sample[sample_depth]': {
+                        required: true,
+                        digits: true
+                      },
+                'sample[underwater_visibility]': {
+                        required: true,
+                        digits: true
+                      },
+                'sample[water_temp]': {
+                        required: true,
+                        digits: true
+                      },
+                'sample[sample_description]': {
+                        maxlength: 150
+                      },
+                'sample[substrate_max_depth]': {
+                        required: true,
+                        digits: true
+                      },
+                'sample[substrate_min_depth]': {
+                        required: true,
+                        digits: true
+                      },
+                'sample[hard_verticle_relief]': {
+                        required: true,
+                        number: true
+                      },
+                'sample[soft_verticle_relief]': {
+                        required: true,
+                        number: true
+                      },
+                'sample[hard_relief_cat_0]': {
+                        required: true,
+                        number: true,
+                        min: 1
+                      },
+                'sample[hard_relief_cat_1]': {
+                        required: function(element) {
+                                    return $('#sample_hard_verticle_relief').val() > 0.2;
+                                  },
+                        number: true,
+                        min: 1
+                      },
+                'sample[hard_relief_cat_2]': {
+                        required: function(element) {
+                                    return $('#sample_hard_verticle_relief').val() > 0.5;
+                                  },
+                        number: true,
+                        min: 1
+                      },
+                'sample[hard_relief_cat_3]': {
+                        required: function(element) {
+                                    return $('#sample_hard_verticle_relief').val() > 1.0;
+                                  },
+                        number: true,
+                        min: 1
+                      },
+                'sample[hard_relief_cat_4]': {
+                        required: function(element) {
+                                    return $('#sample_hard_verticle_relief').val() > 1.5;
+                                  },
+                        number: true,
+                        min: 1
+                      },
+                'sample[soft_relief_cat_0]': {
+                        required: true,
+                        number: true
+                      },
+                'sample[soft_relief_cat_1]': {
+                        required: function(element) {
+                                    return $('#sample_soft_verticle_relief').val() > 0.2;
+                                  },
+                        number: true
+                      },
+                'sample[soft_relief_cat_2]': {
+                        required: function(element) {
+                                    return $('#sample_soft_verticle_relief').val() > 0.5;
+                                  },
+                        number: true
+                      },
+                'sample[soft_relief_cat_3]': {
+                        required: function(element) {
+                                    return $('#sample_soft_verticle_relief').val() > 1.0;
+                                  },
+                        number: true
+                      },
+                'sample[soft_relief_cat_4]': {
+                        required: function(element) {
+                                    return $('#sample_soft_verticle_relief').val() > 1.5;
+                                  },
+                        number: true
+                      }
+               },
+        messages: {
+                'sample[dive_end_time]': {
+                  greaterThan: "Dive end cannot be before dive begin"
+                    },
+                'sample[sample_end_time]': {
+                  greaterThan: "Sample end time cannot be before begin time"
+                },
+                'sample[field_id]': {
+                  fieldidFormat: "Format is invalid"
+                }
+                  }
+    });
+
+    $('[name*="diver_id"]').each(function(){
+      $(this).rules("add", { required: true });
+    });
+    
+    function validate_fields() {
+    $('[name*="number_individuals"]').each(function(){
+      $(this).rules('add', {
+        required: true
+      });
+    });
+    };
+
+    validate_fields();
+    $(document).delegate(".add_nested_fields", "click", function(){ 
+      validate_fields();
+    });
 });
 

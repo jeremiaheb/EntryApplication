@@ -20,8 +20,7 @@ class SampleAnimal < ActiveRecord::Base
   private 
 
   def has_ind_equal_1?
-    if  self.number_individuals == 1 ||
-        self.number_individuals >= 3
+    if  self.number_individuals == 1 || self.number_individuals >= 3
         true
     else
       false

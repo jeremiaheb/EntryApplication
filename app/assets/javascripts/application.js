@@ -53,8 +53,8 @@ $(function(){
       $("#"+targetId).show();
   });
    
-    $(".changeSection option[value='substrateSection']").attr("disabled", "disabled");
-    $(".changeSection option[value='speciesSection']").attr("disabled", "disabled");
+    //$(".changeSection option[value='substrateSection']").attr("disabled", "disabled");
+    //$(".changeSection option[value='speciesSection']").attr("disabled", "disabled");
  
     function show_or_hide_substrate(){
 
@@ -82,7 +82,7 @@ $(function(){
       var should_display_species = new Array();
       var all_totals_equal_hundred = new Boolean();
 
-      if ( $("#sample_sand_percentage").val() == 0 && $("#substrateSection .one_hundred_ok_flag").length == 4 ){
+      if ( $("#sample_sand_percentage").val() == 0 && $("#hard_relief_total").val() == 100 && $("#soft_relief_total").val() == 100 && $("#biotic_percentage_hardbottom_total").val() == 100 && $("#abiotic_percentage_total").val() == 100 ){
         all_totals_equal_hundred = true;
       } else if ( $("#sample_sand_percentage").val() > 0 && $("#substrateSection .one_hundred_ok_flag").length == 5 ){
         all_totals_equal_hundred = true;
@@ -106,6 +106,22 @@ $(function(){
           $(".changeSection option[value='speciesSection']").attr("disabled", true);
         };
     };
+
+
+    //Show or hide sections
+     //show_or_hide_substrate();
+     //show_or_hide_species();
+
+    //on change check if section should show
+     //$('.tab_1').change(function(){ 
+        //show_or_hide_substrate();
+    //});
+     
+     //$('#substrateSection').focusout(function(){ 
+        //show_or_hide_species();
+        //$("#substrateSection").find(".hard_relief[disabled=disabled], .soft_relief[disabled=disabled], .biotic_percentage_sand[disabled=disabled] ").val("");
+    //});
+
 
   function disable_hard_surface_relief_coverage(){
     
@@ -159,7 +175,7 @@ $(function(){
     var $bioticSandVal = $('#sample_sand_percentage').val();
 
     if ( $bioticSandVal == "" || $bioticSandVal == 0 ){
-      $('.biotic_percentage_sand').attr('disabled', true);
+      $('.biotic_percentage_sand').val("").attr('disabled', true);
       $('#sample_sand_pcov_other1_lab, #sample_sand_pcov_other2_lab').attr('disabled', true);
     }
   };
@@ -261,11 +277,19 @@ $(function(){
   enable_disable_animals_fields();
 
 
-  $(".new_sample, .edit_sample").submit(function(){
-    $(".formContainer :input").attr('disabled', false);
-    return true;
-  });
+  //$(".new_sample, .edit_sample").submit(function(){
+    //$(".formContainer :input").attr('disabled', false);
+    //return true;
+  //});
 
+  $("#submitButton").click(function() {
+    $(".edit_sample").validate().cancelSubmit = true;
+    $(".formContainer :input").attr('disabled', false);
+    $(".edit_sample").validate().submit();
+
+    return false;
+
+  });
 
 
   function calculate_totals( input_class_to_sum, id_to_display_total){
@@ -300,20 +324,6 @@ $(function(){
         $( '#' + id_to_display_total).val( total ); 
       };    
 
-
-   // Show or hide sections
-     show_or_hide_substrate();
-     show_or_hide_species();
-
-   // on change check if section should show
-     $('.tab_1').change(function(){ 
-        show_or_hide_substrate();
-    });
-     
-     $('#substrateSection').on("focusout", function(){ 
-        show_or_hide_species();
-        $("#substrateSection").find(".hard_relief[disabled=disabled], .soft_relief[disabled=disabled], .biotic_percentage_sand[disabled=disabled] ").val("");
-    });
 
      
 
@@ -376,15 +386,79 @@ $(function(){
     $("#sample_sample_begin_time").timeEntry({ show24Hours: true });
     $("#sample_sample_end_time").timeEntry({ show24Hours: true });
 
+
     $.validator.addMethod("greaterThan", function(value, element, params){
       return value > $(params).val();
     });
-    
-    $.validator.addMethod("fieldidFormat", function(value, element){
-      return value.match(/\d\d\d\d[A-B]/);
-    });
+ 
+    $.validator.addMethod(
+    "lessThan",
+    function(value, element, params) {
+      function prevIsEnabled(e) {
+        return e.prev().is(":enabled");
+      }
+ 
+      if (prevIsEnabled($(element))) {
+        return parseFloat(value) <= parseFloat($(element).prev().val());;
+      }
+ 
+      return true;
+    },
+    "must be less than or equal to average length"
+  );
+ 
+    $.validator.addMethod(
+    "greaterThanEqualToAvg",
+    function(value, element, params) {
+      function prevIsEnabled(e) {
+        return e.prev().prev().is(":enabled");
+      }
+ 
+      if (prevIsEnabled($(element))) {
+        return parseFloat(value) >= parseFloat($(element).prev().prev().val());;
+      }
+ 
+      return true;
+    },
+    "must be greater than or equal to average length"
+  );
+ 
+    $.validator.addMethod(
+    "greaterThanEqualToMin",
+    function(value, element, params) {
+      function prevIsEnabled(e) {
+        return e.prev().is(":enabled");
+      }
+ 
+      if (prevIsEnabled($(element))) {
+        return parseFloat(value) >= parseFloat($(element).prev().val());;
+      }
+ 
+      return true;
+    },
+    "must be greater than or equal to min length"
+  );
 
+   // modified from http://orip.org/2010/06/jquery-validate-required-if-visible.html 
 
+    $.validator.addMethod(
+    "requiredIfEnabled",
+    function(value, element, params) {
+      function isEnabled(e) {
+        // the element and all of its parents must be :visible
+        // inspiration: http://remysharp.com/2008/10/17/jquery-really-visible/
+        return e.is(":enabled");
+      }
+ 
+      if (isEnabled($(element))) {
+        // call the "required" method
+        return $.validator.methods.required.call(this, $.trim(element.value), element);
+      }
+ 
+      return true;
+    },
+    $.validator.messages.required
+  );
 
     $(".new_sample, .edit_sample").validate({
       onfocusout: function(element) {
@@ -513,7 +587,7 @@ $(function(){
                                     return $('#sample_soft_verticle_relief').val() > 1.5;
                                   },
                         number: true
-                      }
+                      }   
                },
         messages: {
                 'sample[dive_end_time]': {
@@ -538,7 +612,27 @@ $(function(){
         required: true
       });
     });
+    $('[name*="average_length"]').each(function(){
+      $(this).rules('add', {
+        requiredIfEnabled: true
+      });
+    });
+    $('[name*="min_length"]').each(function(){
+      $(this).rules('add', {
+        requiredIfEnabled: true,
+        number: true,
+        lessThan: true
+      });
+    });
+    $('[name*="max_length"]').each(function(){
+      $(this).rules('add', {
+        requiredIfEnabled: true,
+        greaterThanEqualToAvg: true,
+        greaterThanEqualToMin: true
+      });
+    });
     };
+
 
     validate_fields();
     $(document).delegate(".add_nested_fields", "click", function(){ 

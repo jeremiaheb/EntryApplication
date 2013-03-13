@@ -638,5 +638,7 @@ $(function(){
     $(document).delegate(".add_nested_fields", "click", function(){ 
       validate_fields();
     });
+  
+
 });
 

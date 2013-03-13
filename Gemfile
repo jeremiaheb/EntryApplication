@@ -26,6 +26,7 @@ end
 
 gem 'jquery-rails'
 
+
 gem 'select2-rails'
 #gem 'nested_form', :git => "git://github.com/ryanb/nested_form.git"
 gem 'nested_form'

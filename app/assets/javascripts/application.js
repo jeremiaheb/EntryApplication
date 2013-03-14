@@ -53,8 +53,8 @@ $(function(){
       $("#"+targetId).show();
   });
    
-    //$(".changeSection option[value='substrateSection']").attr("disabled", "disabled");
-    //$(".changeSection option[value='speciesSection']").attr("disabled", "disabled");
+    $(".changeSection option[value='substrateSection']").attr("disabled", "disabled");
+    $(".changeSection option[value='speciesSection']").attr("disabled", "disabled");
  
     function show_or_hide_substrate(){
 
@@ -109,18 +109,18 @@ $(function(){
 
 
     //Show or hide sections
-     //show_or_hide_substrate();
-     //show_or_hide_species();
+     show_or_hide_substrate();
+     show_or_hide_species();
 
     //on change check if section should show
-     //$('.tab_1').change(function(){ 
-        //show_or_hide_substrate();
-    //});
+     $('.tab_1').change(function(){ 
+        show_or_hide_substrate();
+    });
      
-     //$('#substrateSection').focusout(function(){ 
-        //show_or_hide_species();
-        //$("#substrateSection").find(".hard_relief[disabled=disabled], .soft_relief[disabled=disabled], .biotic_percentage_sand[disabled=disabled] ").val("");
-    //});
+     $('#substrateSection').focusout(function(){ 
+        show_or_hide_species();
+        $("#substrateSection").find(".hard_relief[disabled=disabled], .soft_relief[disabled=disabled], .biotic_percentage_sand[disabled=disabled] ").val("");
+    });
 
 
   function disable_hard_surface_relief_coverage(){
@@ -387,10 +387,73 @@ $(function(){
     $("#sample_sample_end_time").timeEntry({ show24Hours: true });
 
 
+    $.validator.addMethod("fieldidFormat", function(value, element, params){
+      return /\d\d\d\d[A-B]/.test(value);
+    });
+
+
     $.validator.addMethod("greaterThan", function(value, element, params){
       return value > $(params).val();
     });
- 
+    
+// Check that a species record does not have overlapping sizes with another
+// record of the same species
+
+    $.validator.addMethod("doesNotHaveOverlap", function(value, element, params){
+     	spp = {}
+	    var $index = $(element).parent().parent().index();
+	    var $thisSpecies = $(element).parent().find('.sppCommon').select2("val");
+	    var $thisNumber = $(element).parent().find('[id$="number_individuals"]').val();
+	    var $thisMean = $(element).parent().find('[id$="average_length"]').val();
+	    var $thisMin = $(element).parent().find('[id$="min_length"]').val();
+	    var $thisMax = $(element).parent().find('[id$="max_length"]').val();
+	
+    	var $thisRange
+
+    	if ( $thisNumber == 1 ){
+    				$thisRange = [parseFlost($thisMean)];	
+    			} else if ( $thisNumber == 2 ) {
+    				$thisRange = [parseFloat($thisMin), parseFloat($thisMax)];		
+    			} else {
+    				$thisRange = _.range(parseFloat($thisMin), parseFloat($thisMax) + 1);	
+    			}
+     
+      	$(".fields:visible").each(function(i){
+		      if ($(this).find(".sppCommon").select2("val") == $thisSpecies && i != $index ) { 
+
+			      var $animal = $(this).find('.sppCommon').select2("val"); 
+		      	var $number = $(this).find('[id$="number_individuals"]').val();
+		      	var $mean = $(this).find('[id$="average_length"]').val();
+		      	var $min = $(this).find('[id$="min_length"]').val();
+		      	var $max = $(this).find('[id$="max_length"]').val();
+	 
+		      	var $range
+		      	if ( $number == 1 ){
+		      		$range = [parseFlost($mean)];	
+		      	} else if ( $number == 2 ) {
+		      		$range = [parseFloat($min), parseFloat($max)];		
+		      	} else {
+		      		$range = _.range(parseFloat($min), parseFloat($max) + 1);	
+		      	}	
+
+		      	spp[i] = { "species": $animal, "range": $range}; 
+		      };
+	      });
+      
+      var hasOverlap;
+      if ( _.isEmpty(spp) ) { hasOverlap = false; }
+      else {
+        var checkBool = []
+        for ( rec in spp ) { checkBool.push( _.intersection(spp[rec].range, $thisRange).length>0); };
+        hasOverlap = _.contains( checkBool, true );
+      }
+      console.log(checkBool);
+      return hasOverlap == false;
+    }, "record overlaps with other record"
+    );
+
+
+
     $.validator.addMethod(
     "lessThan",
     function(value, element, params) {
@@ -459,6 +522,8 @@ $(function(){
     },
     $.validator.messages.required
   );
+
+
 
     $(".new_sample, .edit_sample").validate({
       onfocusout: function(element) {
@@ -609,26 +674,30 @@ $(function(){
     function validate_fields() {
     $('[name*="number_individuals"]').each(function(){
       $(this).rules('add', {
-        required: true
+        required: true,
+        doesNotHaveOverlap: true
       });
     });
     $('[name*="average_length"]').each(function(){
       $(this).rules('add', {
-        requiredIfEnabled: true
+        requiredIfEnabled: true,
+        doesNotHaveOverlap: true
       });
     });
     $('[name*="min_length"]').each(function(){
       $(this).rules('add', {
         requiredIfEnabled: true,
         number: true,
-        lessThan: true
+        lessThan: true,
+        doesNotHaveOverlap: true
       });
     });
     $('[name*="max_length"]').each(function(){
       $(this).rules('add', {
         requiredIfEnabled: true,
         greaterThanEqualToAvg: true,
-        greaterThanEqualToMin: true
+        greaterThanEqualToMin: true,
+        doesNotHaveOverlap: true
       });
     });
     };

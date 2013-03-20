@@ -400,7 +400,7 @@ $(function(){
 // record of the same species
 
     $.validator.addMethod("doesNotHaveOverlap", function(value, element, params){
-     	spp = {}
+     	var spp = {}
 	    var $index = $(element).parent().parent().index();
 	    var $thisSpecies = $(element).parent().find('.sppCommon').select2("val");
 	    var $thisNumber = $(element).parent().find('[id$="number_individuals"]').val();
@@ -411,15 +411,15 @@ $(function(){
     	var $thisRange
 
     	if ( $thisNumber == 1 ){
-    				$thisRange = [parseFlost($thisMean)];	
+    				$thisRange = [parseFloat($thisMean)];	
     			} else if ( $thisNumber == 2 ) {
     				$thisRange = [parseFloat($thisMin), parseFloat($thisMax)];		
     			} else {
     				$thisRange = _.range(parseFloat($thisMin), parseFloat($thisMax) + 1);	
     			}
      
-      	$(".fields:visible").each(function(i){
-		      if ($(this).find(".sppCommon").select2("val") == $thisSpecies && i != $index ) { 
+      	$("#animals .fields").each(function(i){
+		      if ($(this).is(":visible") && $(this).find(".sppCommon").select2("val") == $thisSpecies && i != $index ) { 
 
 			      var $animal = $(this).find('.sppCommon').select2("val"); 
 		      	var $number = $(this).find('[id$="number_individuals"]').val();
@@ -429,7 +429,7 @@ $(function(){
 	 
 		      	var $range
 		      	if ( $number == 1 ){
-		      		$range = [parseFlost($mean)];	
+		      		$range = [parseFloat($mean)];	
 		      	} else if ( $number == 2 ) {
 		      		$range = [parseFloat($min), parseFloat($max)];		
 		      	} else {
@@ -447,6 +447,7 @@ $(function(){
         for ( rec in spp ) { checkBool.push( _.intersection(spp[rec].range, $thisRange).length>0); };
         hasOverlap = _.contains( checkBool, true );
       }
+      console.log(spp);
       console.log(checkBool);
       return hasOverlap == false;
     }, "record overlaps with other record"
@@ -457,12 +458,12 @@ $(function(){
     $.validator.addMethod(
     "lessThan",
     function(value, element, params) {
-      function prevIsEnabled(e) {
-        return e.prev().is(":enabled");
+      function meanIsEnabled(e) {
+        return e.parent().find('[id$="average_length"]').is(":enabled");
       }
  
-      if (prevIsEnabled($(element))) {
-        return parseFloat(value) <= parseFloat($(element).prev().val());;
+      if (meanIsEnabled($(element))) {
+        return parseFloat(value) <= parseFloat($(element).parent().find('[id$="average_length"]').val());;
       }
  
       return true;
@@ -473,12 +474,12 @@ $(function(){
     $.validator.addMethod(
     "greaterThanEqualToAvg",
     function(value, element, params) {
-      function prevIsEnabled(e) {
-        return e.prev().prev().is(":enabled");
+      function avgIsEnabled(e) {
+        return e.parent().find('[id$="average_length"]').is(":enabled");
       }
- 
-      if (prevIsEnabled($(element))) {
-        return parseFloat(value) >= parseFloat($(element).prev().prev().val());;
+
+      if (avgIsEnabled($(element))) {
+        return parseFloat(value) >= parseFloat($(element).parent().find('[id$="average_length"]').val());;
       }
  
       return true;
@@ -489,12 +490,12 @@ $(function(){
     $.validator.addMethod(
     "greaterThanEqualToMin",
     function(value, element, params) {
-      function prevIsEnabled(e) {
-        return e.prev().is(":enabled");
+      function minIsEnabled(e) {
+        return e.parent().find('[id$="min_length"]').is(":enabled");
       }
  
-      if (prevIsEnabled($(element))) {
-        return parseFloat(value) >= parseFloat($(element).prev().val());;
+      if (minIsEnabled($(element))) {
+        return parseFloat(value) >= parseFloat($(element).parent().find('[id$="min_length"]').val());;
       }
  
       return true;
@@ -523,12 +524,25 @@ $(function(){
     $.validator.messages.required
   );
 
-
+    $.validator.setDefaults ({
+      errorPlacement: function (error, element) {
+        if ( element.is('[id$="number_individuals"]') || element.is('[id$="average_length"]') || element.is('[id$="min_length"]') || element.is('[id$="max_length"]') ) {
+          error.insertAfter(element.parent().find('[id$="max_length"]'));
+          } else {
+            error.insertAfter(element);
+          }
+        }
+    });
 
     $(".new_sample, .edit_sample").validate({
+
+      errorElement: "span",
+
+
       onfocusout: function(element) {
         this.element(element);
       },
+
         rules: {
                 date: {
                          required: true
@@ -547,7 +561,8 @@ $(function(){
                           greaterThan: '#sample_dive_begin_time'
                        },
                 'sample[sample_begin_time]': {
-                         required: true
+                         required: true,
+                         greaterThan: '#sample_dive_begin_time'
                        },
                 'sample[sample_end_time]': {
                          required: true,
@@ -658,6 +673,9 @@ $(function(){
                 'sample[dive_end_time]': {
                   greaterThan: "Dive end cannot be before dive begin"
                     },
+                'sample[sample_begin_time]': {
+                  greaterThan: "Sample begin cannot be before dive begin"
+                    },
                 'sample[sample_end_time]': {
                   greaterThan: "Sample end time cannot be before begin time"
                 },
@@ -675,12 +693,14 @@ $(function(){
     $('[name*="number_individuals"]').each(function(){
       $(this).rules('add', {
         required: true,
+        number: true,
         doesNotHaveOverlap: true
       });
     });
     $('[name*="average_length"]').each(function(){
       $(this).rules('add', {
         requiredIfEnabled: true,
+        number: true,
         doesNotHaveOverlap: true
       });
     });
@@ -695,6 +715,7 @@ $(function(){
     $('[name*="max_length"]').each(function(){
       $(this).rules('add', {
         requiredIfEnabled: true,
+        number: true,
         greaterThanEqualToAvg: true,
         greaterThanEqualToMin: true,
         doesNotHaveOverlap: true
@@ -707,6 +728,8 @@ $(function(){
     $(document).delegate(".add_nested_fields", "click", function(){ 
       validate_fields();
     });
+
+
   
 
 });

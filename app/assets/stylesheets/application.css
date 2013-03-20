@@ -64,6 +64,21 @@
  
 }
 
+input.error {
+  background: #fed;
+  border: 1px solid red;
+}
+
+/*span.error {*/
+  /*position: absolute;*/
+/*}*/
+
+#submitButton {
+  position: relative;
+  top: 70px;
+  left: 800px;
+}
+
 div.sampleListContainer {
     width: 420px;
     background: #DDD;

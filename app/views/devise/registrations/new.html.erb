@@ -4,7 +4,13 @@
   <%= devise_error_messages! %>
 
   <div><%= f.label :username %><br />
-  <%= f.text_field :username %></div>
+    <%= f.text_field :username %></div>
+
+  <div><%= f.label :firstname %><br />
+    <%= f.text_field :firstname %></div>
+
+  <div><%= f.label :lastname %><br />
+  <%= f.text_field :lastname %></div>
 
   <div><%= f.label :email %><br />
   <%= f.email_field :email %></div>

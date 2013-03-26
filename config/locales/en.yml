@@ -5,3 +5,7 @@ en:
   errors:
     messages:
       field_format: "format is not correct"
+ 
+  date:
+    formats:
+      default: ‘%yy-%m-%d’

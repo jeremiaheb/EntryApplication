@@ -121,7 +121,12 @@ $(function(){
         show_or_hide_species();
         $("#substrateSection").find(".hard_relief[disabled=disabled], .soft_relief[disabled=disabled], .biotic_percentage_sand[disabled=disabled] ").val("");
     });
-
+ 
+  //$(function(){   
+  //$('#sample_sample_date').datepicker({
+    //dateFormat: "mm-dd-yy"
+  //});
+  //});
 
   function disable_hard_surface_relief_coverage(){
     

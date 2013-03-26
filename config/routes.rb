@@ -1,9 +1,10 @@
 EntryApplication::Application.routes.draw do
+  devise_for :divers
+
   get "static_pages/home"
 
   get "static_pages/help"
 
-  devise_for :users
 
   resources :divers
 

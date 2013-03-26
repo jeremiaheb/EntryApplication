@@ -9,13 +9,13 @@
 <body>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
-  <div id="user_nav">
-    <% if user_signed_in? %>
-      Logged in as <strong><%= current_user.username %></strong>.
-      <%= link_to "Edit profile", edit_user_registration_path %> |
-      <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+  <div id="diver_nav">
+    <% if diver_signed_in? %>
+      Logged in as <strong><%= current_diver.username %></strong>.
+      <%= link_to "Edit profile", edit_diver_registration_path %> |
+      <%= link_to "Logout", destroy_diver_session_path, method: :delete %>
     <% else %>
-      <%= link_to "Sign up", new_user_registration_path %> <%= link_to "Log in", new_user_session_path %>
+      <%= link_to "Sign up", new_diver_registration_path %> <%= link_to "Log in", new_diver_session_path %>
     <% end %>
   </div>
   

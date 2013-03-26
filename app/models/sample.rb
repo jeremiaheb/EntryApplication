@@ -11,8 +11,7 @@ class Sample < ActiveRecord::Base
   accepts_nested_attributes_for :diver_samples, :allow_destroy => true
 
 
-
-  validates :sample_date,                 :presence => true 
+  #validates :sample_date,                 :presence => true 
   validates :sample_type_id,              :presence => true
   validates :habitat_type_id,             :presence => true
 
@@ -68,66 +67,66 @@ class Sample < ActiveRecord::Base
   def hard_relief_cats_equal_100
       values = []
       [self.hard_relief_cat_0, self.hard_relief_cat_1, self.hard_relief_cat_2, self.hard_relief_cat_3, self.hard_relief_cat_4 ].each do |cat|
-      if !cat.nil?
-        values.push(cat)
+        if !cat.nil?
+          values.push(cat)
+        end
       end
       values.delete_if { |x| x == nil }
-      end
       if (values.sum) != 100
         errors.add( :base, "hard relief categories do not add to 100" )
-    end
+      end
   end
 
   def soft_relief_cats_equal_100
       values = []
       [self.soft_relief_cat_0, self.soft_relief_cat_1, self.soft_relief_cat_2, self.soft_relief_cat_3, self.soft_relief_cat_4 ].each do |cat|
-      if !cat.nil?
-        values.push(cat)
+        if !cat.nil?
+          values.push(cat)
+        end
       end
       values.delete_if { |x| x == nil }
-      end
       if (values.sum) != 100
         errors.add( :base, "soft relief categories do not add to 100" )
-    end
+      end
   end
 
   def abiotic_percentage_equal_100
       values = []
       [ self.sand_percentage, self.hardbottom_percentage, rubble_percentage ].each do |cat|
-      if !cat.nil?
-        values.push(cat)
+        if !cat.nil?
+          values.push(cat)
+        end
       end
       values.delete_if { |x| x == nil }
-      end
       if (values.sum) != 100
         errors.add( :base, "abiotic percentages do not add to 100" )
-    end
+      end
   end
 
   def biotic_percentage_sand_equal_100
       values = []
       [ self.sand_bare, self.sand_macro_algae, self.sand_seagrass, self.sand_sponge, self.sand_pcov_other1, self.sand_pcov_other2 ].each do |cat|
-      if !cat.nil?
-        values.push(cat)
+        if !cat.nil?
+          values.push(cat)
+        end
       end
       values.delete_if { |x| x == nil }
-      end
       if (values.sum) != 100
         errors.add( :base, "Sand biotic percentages do not add to 100" )
-    end
+      end
   end
 
   def biotic_percentage_hardbottom_equal_100
       values = []
       [ self.hardbottom_algal_turf, self.hardbottom_macro_algae, self.hardbottom_live_coral, self.hardbottom_octocoral, self.hardbottom_sponge, self.sand_pcov_other2 ].each do |cat|
-      if !cat.nil?
-        values.push(cat)
+        if !cat.nil?
+          values.push(cat)
+        end
       end
       values.delete_if { |x| x == nil }
-      end
       if (values.sum) != 100
         errors.add( :base, "Hardbottom biotic percentages do not add to 100" )
-    end
+      end
   end
 
 end

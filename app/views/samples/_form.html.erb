@@ -12,7 +12,7 @@
   <div class='section_1'>
     <div id='section_1_part_1'>
       <%= f.label "Date" %>
-      <%= f.text_field :sample_date, { :class => 'tab_1', :name => 'date' } %>
+      <%= f.date_select :sample_date, { :class => 'tab_1', :name => 'date' } %>
         
       <%= render "diver_selection", :object => f %>
 

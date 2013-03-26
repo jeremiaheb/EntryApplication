@@ -11,6 +11,6 @@ jQuery ->
   $("#sampleList").dataTable
     bjQueryUI: true
 
-  $('#sample_sample_date').datepicker
-    dateFormat: 'yy-mm-dd'
+  #$("#sample_sample_date").datepicker
+    #dateFormat: 'yy-mm-dd'
 

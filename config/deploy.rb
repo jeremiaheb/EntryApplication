@@ -7,7 +7,7 @@ set :scm, :git
 set :deploy_via, :remote_cache
 
 set :use_sudo, false
-set :user, 'developer'
+set :user, 'jeremiah'
 set :branch, :master
 set :rails_env, :production
 set :deploy_to, "/var/www/apps/#{application}"

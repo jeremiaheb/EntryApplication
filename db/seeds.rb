@@ -29,7 +29,7 @@ end
 
 Diver.delete_all
 Diver.connection.execute( 'ALTER SEQUENCE divers_id_seq RESTART WITH 1' )
-open("#{Rails.root}/db/SupportData/DiverList.csv") do |divers|
+open("#{Rails.root}/db/SupportData/DeviseDivers.csv") do |divers|
   divers.read.each_line do|diver|
     DiverNumber, DiverName = diver.chomp.split(",")
     Diver.create( :diver_number => DiverNumber, :diver_name => DiverName )

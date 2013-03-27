@@ -7,7 +7,7 @@ class Diver < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :firstname, :lastname, :role
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :firstname, :lastname, :role, :diver_name, :diver_number
   
   has_many :diver_samples
   has_many :samples, :through => :diver_samples, :dependent => :destroy

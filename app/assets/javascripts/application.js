@@ -734,8 +734,19 @@ $(function(){
       validate_fields();
     });
 
-
+    $('#animals').change(function(){
+        $('input.error').each(function(){
+          $('form').validate().element(this);
+        });
+    });
   
+    $('form').bind('change keyup', function() {
+      if ( $('input.error').length == 0 ) {
+        $('#submitButton').attr('disabled', false);
+      } else {
+        $('#submitButton').attr('disabled', true);
+      }
+    });
 
 });
 

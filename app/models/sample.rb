@@ -11,6 +11,10 @@ class Sample < ActiveRecord::Base
   accepts_nested_attributes_for :diver_samples, :allow_destroy => true
 
 
+  def myId
+    return self.diver_samples.primary.first.diver_id
+  end
+
   #validates :sample_date,                 :presence => true 
   validates :sample_type_id,              :presence => true
   validates :habitat_type_id,             :presence => true

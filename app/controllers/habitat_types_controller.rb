@@ -1,4 +1,8 @@
 class HabitatTypesController < ApplicationController
+ 
+  before_filter :authenticate_diver!
+  load_and_authorize_resource
+  
   # GET /habitat_types
   # GET /habitat_types.json
   def index

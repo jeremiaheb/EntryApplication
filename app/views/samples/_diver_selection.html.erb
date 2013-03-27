@@ -1,3 +1,5 @@
+
+<% if @sample.new_record? %>
 <% primary_diver = true %>
 <%= object.fields_for :diver_samples do |builder| %>
   <% if primary_diver == true %>
@@ -11,6 +13,22 @@
     <%= builder.hidden_field :primary_diver, :value => false %>
   <% end %>
   <%= builder.collection_select :diver_id, Diver.active_divers.order(:diver_number).all, :id, :diver_name, { :include_blank => true, :selected => if_primary }, { :class => 'tab_1'} %><br />
+<% end %>
+<% else %>
+
+<% primary_diver = true %>
+<%= object.fields_for :diver_samples do |builder| %>
+  <% if primary_diver == true %>
+    <%= builder.label "Diver"%>
+    <%= builder.hidden_field :primary_diver, :value => true %>
+    <% primary_diver = false %>
+  <% else %>
+    <%= builder.label "Buddy"%>
+    <%= builder.hidden_field :primary_diver, :value => false %>
+  <% end %>
+  <%= builder.collection_select :diver_id, Diver.active_divers.order(:diver_number).all, :id, :diver_name, { :include_blank => true }, { :class => 'tab_1'} %><br />
+<% end %>
+
 <% end %>
 
 

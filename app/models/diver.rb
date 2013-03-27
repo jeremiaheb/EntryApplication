@@ -1,11 +1,13 @@
 class Diver < ActiveRecord::Base
+
+  ROLES = %w[admin manager diver]
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :firstname, :lastname
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :firstname, :lastname, :role
   
   has_many :diver_samples
   has_many :samples, :through => :diver_samples, :dependent => :destroy

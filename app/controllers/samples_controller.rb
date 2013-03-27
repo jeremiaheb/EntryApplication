@@ -1,6 +1,11 @@
 class SamplesController < ApplicationController
 
   before_filter :authenticate_diver!
+  load_and_authorize_resource
+
+  def current_ability
+    @current_ability ||= Ability.new(current_diver)
+  end
 
   # GET /samples
   # GET /samples.json
@@ -42,8 +47,9 @@ class SamplesController < ApplicationController
   # GET /samples/1/edit
   def edit
     @sample = Sample.find(params[:id])
-  end
 
+  end
+    
   # POST /samples
   # POST /samples.json
   def create

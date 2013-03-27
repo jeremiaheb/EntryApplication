@@ -43,7 +43,7 @@ gem 'client_side_validations'
 # Use unicorn as the app server
 # gem 'unicorn'
 # Deploy with Capistrano
-# gem 'capistrano'
+ gem 'capistrano'
 
 # To use debugger
 # group :development, :test do

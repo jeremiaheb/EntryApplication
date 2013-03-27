@@ -52,5 +52,5 @@ production:
   encoding: unicode
   database: entryapplication_production
   pool: 5
-  username: EntryApplication
-  password:
+  username: developer
+  password: noaaRails

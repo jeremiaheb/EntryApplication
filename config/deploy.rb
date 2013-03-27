@@ -1,7 +1,7 @@
 require 'bundler/capistrano'
 load 'deploy/assets'
 set :application, "entryApplication"
-set :repository,  "git@github.com:jeremiaheb/EntryApplication.git"
+set :repository,  "https://github.com/jeremiaheb/EntryApplication.git"
 
 set :scm, :git
 set :deploy_via, :remote_cache

@@ -10,7 +10,7 @@ class SamplesController < ApplicationController
   # GET /samples
   # GET /samples.json
   def index
-    @samples = current_diver.samples.merge(DiverSample.primary)
+    @samples = current_diver.role == 'admin' || current_diver.role == 'manager' ? Sample.all : current_diver.samples.merge(DiverSample.primary) 
 
     respond_to do |format|
       format.html # index.html.erb

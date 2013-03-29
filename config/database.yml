@@ -44,8 +44,9 @@ test:
   encoding: unicode
   database: entryapplication_test
   pool: 5
-  username: jeremiah
-  password:
+  host: localhost
+  username: developer
+  password: noaaRails
 
 production:
   adapter: postgresql

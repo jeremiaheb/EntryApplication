@@ -1,7 +1,41 @@
 @import "twitter/bootstrap/bootstrap";
 @import "twitter/bootstrap/responsive";
 
-body {padding-top: 40px;  }
+body {padding-top: 60px;  }
+
+select { width: 150px; }
+
+.form-horizontal .control-label {
+  float: left;
+  width: 150;
+  padding-top: 5px;
+  text-align: center;
+}
+
+.form-horizontal .control-group {
+  margin-bottom: 0px;
+  *zoom: 1;
+}
+
+legend {
+  display: inline;
+  text-align: center;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 0;
+  font-size: 15px;
+  line-height: 10px;
+  color: #333333;
+  border: 1px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+fieldset {
+  padding: 5;
+  margin: 5;
+  border: 1px solid black;
+  
+}
 
 // Set the correct sprite paths
 @iconSpritePath: asset-path("twitter/bootstrap/glyphicons-halflings.png");

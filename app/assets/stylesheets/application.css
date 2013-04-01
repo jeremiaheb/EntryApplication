@@ -121,7 +121,12 @@ div.section_1,div.section_2, p.flipSection_1 {
 }
 
 .section_1 {
-  height: 310px;
+  position: absolute;
+  height: 100%;
+}
+
+.show_section_1 {
+  height: 410px;
 }
 
 .flipSection_1 {
@@ -145,12 +150,13 @@ div.section_1,div.section_2, p.flipSection_1 {
 }
 
 .section_2 {
-  height: 460px;
+  position: absolute;
+  height: 100%;
 }
 
 #section_2_part_1 {
   width: 250px;
-  padding: 20px;
+  padding: 0px;
   position: absolute;
   top: 5px;
   left: 0;
@@ -160,7 +166,7 @@ div.section_1,div.section_2, p.flipSection_1 {
 #section_2_part_2 {
   left: 550px;
   width: 310px;
-  padding: 20px;
+  padding: 0px;
   position: absolute;
   top: 5px;
 }
@@ -168,7 +174,7 @@ div.section_1,div.section_2, p.flipSection_1 {
 #section_2_part_3 {
   left: 275px;
   width: 310px;
-  padding: 20px;
+  padding: 0px;
   position: absolute;
   top: 150px;
 }
@@ -176,7 +182,7 @@ div.section_1,div.section_2, p.flipSection_1 {
 #section_2_part_4 {
   left: 600px;
   width: 310px;
-  padding: 20px;
+  padding: 0px;
   position: absolute;
   top: 175px;
 }

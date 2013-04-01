@@ -742,7 +742,7 @@ $(function(){
     });
   
     $('form').bind('change keyup', function() {
-      if ( $('input.error').length == 0 ) {
+      if ( $('#animals input.error').length == 0 ) {
         $('#submitButton').attr('disabled', false);
       } else {
         $('#submitButton').attr('disabled', true);

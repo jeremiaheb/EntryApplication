@@ -1,6 +1,6 @@
+<div class="form-horizontal">
 <%= nested_form_for @sample, :validate => false do |f| %>
 
-  <%= render "shared/error_messages", :target => @sample %>
 
 <select class="changeSection">
   <option value="sampleSection">Sample Section</option>
@@ -9,94 +9,184 @@
 </select>
 <div class='formContainer'>
   <div id="sampleSection" class="sectionDiv">
-  <div class='section_1'>
-    <div id='section_1_part_1'>
-      <%= f.label "Date" %>
-      <%= f.date_select :sample_date, { :class => 'tab_1', :name => 'date' } %>
+    <div class='section_1'>
+     <div id='section_1_part_1'>
+        <div class="control-group">
+          <label class="control-label">Sample Date</label>
+          <div class="controls">
+            <%= f.date_select :sample_date, { :class => 'tab_1', :name => 'date' } %>
+          </div>
+        </div>
         
       <%= render "diver_selection", :object => f %>
 
 
-      <%= f.label "Sample Type" %>
-      <%= f.collection_select :sample_type_id, SampleType.all, :id, :sample_type_name, { :include_blank => "" }, { :class => 'tab_1' } %><br />
+        <div class="control-group">
+          <label class="control-label">Sample Type</label>
+          <div class="controls">
+            <%= f.collection_select :sample_type_id, SampleType.all, :id, :sample_type_name, { :include_blank => "" }, { :class => 'tab_1' } %><br />
+          </div>
+        </div>
 
-      <%= f.label "Habitat Type" %>
-      <%= f.collection_select :habitat_type_id, HabitatType.all, :id, :habitat_name, { :include_blank => "" }, { :class => 'tab_1' } %><br />
+        <div class="control-group">
+          <label class="control-label">Habitat Type</label>
+          <div class="controls">
+            <%= f.collection_select :habitat_type_id, HabitatType.all, :id, :habitat_name, { :include_blank => "" }, { :class => 'tab_1' } %><br />
+          </div>
+        </div>
 
-      <%= f.label "Dive Begin Time" %>
-      <%= f.text_field :dive_begin_time, { :class => 'tab_1' } %><br />
+        <div class="control-group">
+          <label class="control-label">Dive Begin Time</label>
+          <div class="controls">
+            <%= f.text_field :dive_begin_time, { :class => 'tab_1' } %>
+          </div>
+        </div>
 
-      <%= f.label "Dive End Time" %>
-      <%= f.text_field :dive_end_time, { :class => 'tab_1' } %><br />
+        <div class="control-group">
+          <label class="control-label">Dive End Time</label>
+          <div class="controls">
+            <%= f.text_field :dive_end_time, { :class => 'tab_1' } %>
+          </div>
+        </div>
 
-      <%= f.label "Sample Begin Time" %>
-      <%= f.text_field :sample_begin_time, { :class => 'tab_1' } %><br />
+        <div class="control-group">
+          <label class="control-label">Sample Begin Time</label>
+          <div class="controls">
+            <%= f.text_field :sample_begin_time, { :class => 'tab_1' } %>
+          </div>
+        </div>
       
-      <%= f.label "Sample End Time" %>
-      <%= f.text_field :sample_end_time, { :class => 'tab_1' } %><br />
-    </div>
+        <div class="control-group">
+          <label class="control-label">Sample End Time</label>
+          <div class="controls">
+            <%= f.text_field :sample_end_time, { :class => 'tab_1' } %>
+          </div>
+        </div>
+      </div>
+
     <div id='section_1_part_2'>
 
-      <%= f.label "Field Number" %>
-      <%= f.text_field :field_id, { :class => 'tab_1', :autocomplete => :off, :validate => true } %><br />
+        <div class="control-group">
+          <label class="control-label">Field ID</label>
+          <div class="controls">
+            <%= f.text_field :field_id, { :class => 'tab_1', :autocomplete => :off, :validate => true } %>
+          </div>
+        </div>
 
-      <%= f.label "Max Dive Depth" %>
-      <%= f.text_field :dive_depth, { :class => 'tab_1', :autocomplete => :off } %><br />
+        <div class="control-group">
+          <label class="control-label">Dive Depth</label>
+          <div class="controls">
+            <%= f.text_field :dive_depth, { :class => 'tab_1', :autocomplete => :off } %>
+          </div>
+        </div>
 
-      <%= f.label "Station Depth" %>
-      <%= f.text_field :sample_depth, { :class => 'tab_1', :autocomplete => :off } %><br />
+        <div class="control-group">
+          <label class="control-label">Sample Depth</label>
+          <div class="controls">
+            <%= f.text_field :sample_depth, { :class => 'tab_1', :autocomplete => :off } %>
+          </div>
+        </div>
 
-      <%= f.label "Underwater Visibility" %>
-      <%= f.text_field :underwater_visibility, { :class => 'tab_1', :autocomplete => :off } %><br />
+        <div class="control-group">
+          <label class="control-label">Visibility</label>
+          <div class="controls">
+            <%= f.text_field :underwater_visibility, { :class => 'tab_1', :autocomplete => :off } %>
+          </div>
+        </div>
       
-      <%= f.label "Water temperature" %>
-      <%= f.text_field :water_temp, { :class => 'tab_1', :autocomplete => :off } %><br />
+        <div class="control-group">
+          <label class="control-label">Water Temp</label>
+          <div class="controls">
+            <%= f.text_field :water_temp, { :class => 'tab_1', :autocomplete => :off } %>
+          </div>
+        </div>
 
-      <%= f.label "Cylinder radius" %>
-      <%= f.select( :cylinder_radius,{ "7.5m" => 7.5, "5.0m" => 5.0 } , {}, { :class => 'tab_1' } ) %><br />
+        <div class="control-group">
+          <label class="control-label">Cylinder Radius</label>
+          <div class="controls">
+            <%= f.select( :cylinder_radius,{ "7.5m" => 7.5, "5.0m" => 5.0 } , {}, { :class => 'tab_1' } ) %>
+          </div>
+        </div>
       
-      <%= f.label "Current" %>
-      <%= f.select( :current, { "None" => "none", "Moderate" => "moderate", "Strong" => "strong" }, {}, { :class => 'tab_1' } ) %><br />
+        <div class="control-group">
+          <label class="control-label">Current</label>
+          <div class="controls">
+            <%= f.select( :current, { "None" => "none", "Moderate" => "moderate", "Strong" => "strong" }, {}, { :class => 'tab_1' } ) %>
+          </div>
+        </div>
 
-      <%= f.label "Fishing gear" %>
-      <%= f.select :fishing_gear, { "None" => "none", "Trap" => "trap", "Trap Debris" => "trap debris", "Fishing" => "fishing", "Other" => "other" } %><br />
+        <div class="control-group">
+          <label class="control-label">Fishing Gear</label>
+          <div class="controls">
+            <%= f.select :fishing_gear, { "None" => "none", "Trap" => "trap", "Trap Debris" => "trap debris", "Fishing" => "fishing", "Other" => "other" } %>
+          </div>
+        </div>
 
-      <%= f.label "Comments" %>
-      <%= f.text_area :sample_description, { :size => '60x3', :autocomplete => :off } %><br />
+        <div class="control-group">
+          <label class="control-label">Comments</label>
+          <div class="controls">
+            <%= f.text_area :sample_description, { :size => '60x3', :autocomplete => :off } %>
+          </div>
+        </div>
+
     </div>
   </div>
 </div>
+
 <div id="substrateSection" class="sectionDiv">
   <div class='section_2'>
     <div id='section_2_part_1'>
+      
       <fieldset>
         <legend> Substrate Slope </legend>
-          <%= f.label "Max Substrate Depth" %>
-          <%= f.text_field :substrate_max_depth, {:class => "tab_2", :autocomplete => :off } %><br />
+        <div class="control-group">
+          <label class="control-label">Max Substrate Depth</label>
+          <div class="controls">
+            <%= f.text_field :substrate_max_depth, {:class => "tab_2", :autocomplete => :off } %>
+          </div>
+        </div>
+          
+        <div class="control-group">
+          <label class="control-label">Min Substrate Depth</label>
+          <div class="controls">
+            <%= f.text_field :substrate_min_depth, {:class => "tab_2", :autocomplete => :off } %>
+          </div>
+        </div>
+      </fieldset>
+      <div></div>
+      <fieldset>
+        <legend> Max Verticle Relief </legend>
+        <div class="control-group">
+          <label class="control-label">Hard Substrate</label>
+          <div class="controls">
+            <%= f.text_field :hard_verticle_relief, {:class => "tab_2", :autocomplete => :off } %>
+          </div>
+        </div>
 
-          <%= f.label "Min Substrate Depth" %>
-          <%= f.text_field :substrate_min_depth, {:class => "tab_2", :autocomplete => :off } %><br />
-        </fieldset>
-        <fieldset>
-          <legend> Max Verticle Relief </legend>
-          <%= f.label "Hard Substrate" %>
-          <%= f.text_field :hard_verticle_relief, {:class => "tab_2", :autocomplete => :off } %><br />
-
-          <%= f.label "Soft Substrate" %>
-          <%= f.text_field :soft_verticle_relief, {:class => "tab_2", :autocomplete => :off } %><br />
-        </fieldset>
+        <div class="control-group">
+          <label class="control-label">Soft Substrate</label>
+          <div class="controls">
+            <%= f.text_field :soft_verticle_relief, {:class => "tab_2", :autocomplete => :off } %>
+          </div>
+        </div>
+      </fieldset>
       
       <%= render "surface_relief_coverage", :object => f %>
+    
     </div>
+
     <div id='section_2_part_2'>
       <%= render "abiotic_footprint", :object => f %>
     </div>
+
     <div id='section_2_part_3'>
       <%= render "biotic_cover_sand", :object => f %>
     </div>
+
     <div id='section_2_part_4'>
       <%= render "biotic_cover_hardbottom", :object => f %>
-    </div>
+    </div
+    >
   </div>
 </div>
 
@@ -129,3 +219,4 @@
     <%= f.submit "Submit Sample", :id => "submitButton" %>
   </div>
 <% end %>
+</form>

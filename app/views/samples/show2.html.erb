@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<div class='formContainer'>
+  <div id="sampleSection" class="sectionDiv">
+  <div class='section_1'>
+    <div id='section_1_part_1'>
+      <p><label class="show">Date</label>                    <%= @sample.sample_date %></p>
+      <p><label class="show">Diver</label>                   <%= @sample.diver_samples.primary.first.diver.diver_name %></p>
+      <p><label class="show">Buddy</label>                   <%= @sample.diver_samples.secondary.first.diver.diver_name %></p>
+      <p><label class="show">Sample Type</label>             <%= @sample.sample_type.sample_type_name %></p>
+      <p><label class="show">Habitat Type</label>            <%= @sample.habitat_type.habitat_name %></p>
+      <p><label class="show">Dive Begin Time</label>         <%= @sample.dive_begin_time.strftime("%H:%M") %></p>
+      <p><label class="show">Dive End Time</label>           <%= @sample.dive_end_time.strftime("%H:%M") %></p>
+      <p><label class="show">Sample Begin Time</label>       <%= @sample.sample_begin_time.strftime("%H:%M") %></p>
+      <p><label class="show">Sample End Time</label>         <%= @sample.sample_end_time.strftime("%H:%M") %></p>
+
+    </div>
+    <div id='section_1_part_2'>
+      <p><label class="show">Field ID</label>                <%= @sample.field_id %></p>
+      <p><label class="show">Max Dive Depth</label>          <%= @sample.dive_depth %></p>
+      <p><label class="show">Station Depth</label>           <%= @sample.sample_depth %></p>
+      <p><label class="show">Underwater Visibility</label>   <%= @sample.underwater_visibility %></p>
+      <p><label class="show">Water Temperature</label>       <%= @sample.water_temp %></p>
+      <p><label class="show">Cylinder Radius</label>         <%= @sample.cylinder_radius %></p>
+      <p><label class="show">Current</label>                 <%= @sample.current %></p>
+      <p><label class="show">Fishing Gear</label>            <%= @sample.fishing_gear %></p>
+      <p><label class="show">Comments</label>                <%= @sample.sample_description %></p>
+
+    </div>
+  </div>
+</div>
+
+<h1>
+  <span class="ActionBar"><%= link_to image_tag("edit-6.png") + "Edit Sample", edit_sample_path(@sample) %></span>
+  <span class="ActionBar"><%= link_to image_tag("view-list-multicolumn.png") + "View Sample List", samples_path %></span>
+  <span class="ActionBar"><%= link_to image_tag("dialog-cancel-7.png") + "Delete Sample", @sample, confirm: 'Are you sure?', method: :delete %></span>
+<h1>

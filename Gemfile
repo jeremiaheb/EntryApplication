@@ -18,14 +18,14 @@ group :assets do
   gem 'therubyracer', '>= 0.11.4'
 
   gem 'uglifier', '>= 1.0.3'
-
+  gem 'twitter-bootstrap-rails'
+  gem 'less-rails-bootstrap'
 
   gem 'jquery-datatables-rails', :git => 'git://github.com/rweng/jquery-datatables-rails.git'
   gem 'jquery-ui-rails'
 end
 
 gem 'jquery-rails'
-
 
 gem 'select2-rails'
 #gem 'nested_form', :git => "git://github.com/ryanb/nested_form.git"

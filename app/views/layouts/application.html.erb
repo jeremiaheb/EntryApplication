@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>EntryApplication</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-  <div id="diver_nav">
-    <% if diver_signed_in? %>
-      Logged in as <strong><%= current_diver.username %></strong>.
-      <%= link_to "Edit profile", edit_diver_registration_path %> |
-      <%= link_to "Logout", destroy_diver_session_path, method: :delete %>
-    <% else %>
-      <%= link_to "Sign up", new_diver_registration_path %> <%= link_to "Log in", new_diver_session_path %>
-    <% end %>
-  </div>
-  
-  
-
-  <%= yield %>
-
-</body>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "RVC Data Entry" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "App_Name" %>">
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <%= yield(:head) %>
+  </head>
+  <body class="<%= controller_name %> <%= action_name %>">
+    <div id="container" class="container">
+      <header>
+        <%= render 'layouts/navigation' %>
+        <%= render 'layouts/messages' %>
+      </header>
+      <div id="main" role="main">
+        <%= yield %>
+      </div>
+      <footer>
+      </footer>
+    </div> <!--! end of #container -->
+  </body>
 </html>

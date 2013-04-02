@@ -200,7 +200,7 @@ $(function(){
   function set_time_seen_field_on_focus(){
       $('.sppCommon').on('open', function(){
         var $thisID = $(this).attr('id').slice(0, -10);
-        var $radioTimeSeenVal = $('input:radio[name=timeSeen]:checked').val();
+        var $radioTimeSeenVal = $('.time_seen_button[class*="active"]').val();
 
         $('input#' + $thisID + '_time_seen').attr('value', $radioTimeSeenVal );
         $('input#' + $thisID + '_number_individuals').attr('class', 'timeSeen_' + $radioTimeSeenVal);
@@ -742,7 +742,7 @@ $(function(){
     });
   
     $('form').bind('change keyup', function() {
-      if ( $('#animals input.error').length == 0 ) {
+      if ( $('#animals input:visible.error').length == 0 ) {
         $('#submitButton').attr('disabled', false);
       } else {
         $('#submitButton').attr('disabled', true);

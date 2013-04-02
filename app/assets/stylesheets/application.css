@@ -73,11 +73,11 @@ input.error {
   /*position: absolute;*/
 /*}*/
 
-#submitButton {
-  position: relative;
-  top: 70px;
-  left: 800px;
-}
+/*#submitButton {*/
+  /*position: relative;*/
+  /*top: 70px;*/
+  /*left: 800px;*/
+/*}*/
 
 div.sampleListContainer {
     width: 420px;
@@ -105,7 +105,7 @@ text-align: center;
 }
 
 div.section_1,div.section_2, p.flipSection_1 {
-    width: 920px;
+    /*width: 920px;*/
     background: #f0f0f0;
  
     /* Border style */
@@ -122,7 +122,7 @@ div.section_1,div.section_2, p.flipSection_1 {
 
 .section_1 {
   position: absolute;
-  height: 100%;
+  /*height: 100%;*/
 }
 
 .show_section_1 {
@@ -138,33 +138,48 @@ div.section_1,div.section_2, p.flipSection_1 {
   position: absolute;
   top: 5px;
   left: 0;
-  width: 375px;
+  width: 450px;
 }
 
 #section_1_part_2 {
   padding: 20px;
   position: absolute;
   top: 5px;
-  left: 400px;
-  width: 310px;
+  left: 500px;
+  width: 425px;
 }
 
 .section_2 {
   position: absolute;
-  height: 100%;
+  /*height: 100%;*/
 }
 
 #section_2_part_1 {
   width: 250px;
+  height: 500px;
   padding: 0px;
   position: absolute;
   top: 5px;
   left: 0;
 }
 
+#slope {
+  position: absolute;
+  top: 5px;
+}
+
+#vertRelief {
+  position: absolute;
+  top: 140px;
+}
+
+#reliefCoverage {
+  position: absolute;
+  bottom: 25px;
+}
 
 #section_2_part_2 {
-  left: 550px;
+  left: 535px;
   width: 310px;
   padding: 0px;
   position: absolute;
@@ -172,19 +187,19 @@ div.section_1,div.section_2, p.flipSection_1 {
 }
 
 #section_2_part_3 {
-  left: 275px;
+  left: 325px;
   width: 310px;
   padding: 0px;
   position: absolute;
-  top: 150px;
+  top: 225px;
 }
 
 #section_2_part_4 {
-  left: 600px;
+  left: 650px;
   width: 310px;
   padding: 0px;
   position: absolute;
-  top: 175px;
+  top: 225px;
 }
 
 #speciesTable {
@@ -230,6 +245,10 @@ div.section_1,div.section_2, p.flipSection_1 {
 
 }
 
+.speciesLabels label {
+
+}
+
 #sample_sample_date {
   width: 80px;
 }
@@ -260,12 +279,63 @@ div.section_1,div.section_2, p.flipSection_1 {
   box-shadow: none;
 }
 
-.timeSeen_2 {
-  background-color: LightBlue;  
+#timeSeen1 {
+  background-color: hsl(0, 0%, 100%) !important;
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#ffffff");
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#ffffff), to(#ffffff));
+  background-image: -moz-linear-gradient(top, #ffffff, #ffffff);
+  background-image: -ms-linear-gradient(top, #ffffff, #ffffff);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #ffffff));
+  background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
+  background-image: -o-linear-gradient(top, #ffffff, #ffffff);
+  background-image: linear-gradient(#ffffff, #ffffff);
+  border-color: #ffffff #ffffff hsl(0, 0%, 100%);
+  color: #333 !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.00);
+  -webkit-font-smoothing: antialiased;
 }
 
-.timeSeen_3 {
-  background-color: LightYellow;  
+#timeSeen2 {
+  background-color: hsl(195, 79%, 43%) !important;
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#56c5eb), to(#1798c4));
+  background-image: -moz-linear-gradient(top, #56c5eb, #1798c4);
+  background-image: -ms-linear-gradient(top, #56c5eb, #1798c4);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #56c5eb), color-stop(100%, #1798c4));
+  background-image: -webkit-linear-gradient(top, #56c5eb, #1798c4);
+  background-image: -o-linear-gradient(top, #56c5eb, #1798c4);
+  background-image: linear-gradient(#56c5eb, #1798c4);
+  border-color: #1798c4 #1798c4 hsl(195, 79%, 38%);
+  color: #333 !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.33);
+  -webkit-font-smoothing: antialiased;
+}
+
+#timeSeen3 {
+  background-color: hsl(145, 62%, 68%) !important;
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#cdf3dd), to(#7adfa4));
+  background-image: -moz-linear-gradient(top, #cdf3dd, #7adfa4);
+  background-image: -ms-linear-gradient(top, #cdf3dd, #7adfa4);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cdf3dd), color-stop(100%, #7adfa4));
+  background-image: -webkit-linear-gradient(top, #cdf3dd, #7adfa4);
+  background-image: -o-linear-gradient(top, #cdf3dd, #7adfa4);
+  background-image: linear-gradient(#cdf3dd, #7adfa4);
+  border-color: #7adfa4 #7adfa4 hsl(145, 62%, 63%);
+  color: #333 !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.33);
+  -webkit-font-smoothing: antialiased;
+}
+
+input.timeSeen_2 {
+  background-color: hsl(195, 79%, 43%) !important;  
+}
+
+input.timeSeen_3 {
+  background-color: hsl(145, 62%, 68%) !important;  
+}
+
+.time_seen_button.active {
+  border: solid 5px !important;
 }
 
 .select2-container {
@@ -286,42 +356,52 @@ div.section_1,div.section_2, p.flipSection_1 {
 
 }
 
-#species {
+.btn-group {
   position: relative;
-  left: 100px;
-  width: 40px;
+  width: auto;
+  height: auto;
+  left: 60px;
 }
 
-#fixedElements {
-  
+.speciesLabels {
+  position: relative;
+  width: auto;
+  height: auto;
+  top: 20px;
 }
 
-#num {
+.speciesLabels #species {
   position: relative;
+  font-size: 15px;
+  left: 75px;
+}
+.speciesLabels #num {
+  position: relative;
+  font-size: 15px;
+  left: 168px;
+}
+
+.speciesLabels #mean {
+  position: relative;
+  font-size: 15px;
+  left: 188px;
+}
+
+.speciesLabels #min {
+  position: relative;
+  font-size: 15px;
   left: 210px;
-  width: 25px;
 }
 
-#mean {
+.speciesLabels #max {
   position: relative;
-  left: 240px;
-  width: 25px;
+  font-size: 15px;
+  left: 239px;
 }
 
-#min {
-  position: relative;
-  left: 272px;
-  width: 25px;
-}
-
-#max {
-  position: relative;
-  left: 300px;
-  width: 25px;
-}
 
 #newSampleButton {
-  position: fixed;
+  position: absolute;
   left: 100px;
   top: 100px;
 }
@@ -332,6 +412,17 @@ div.section_1,div.section_2, p.flipSection_1 {
 
 #animals input[disabled='disabled'] {
   opacity: 0.30;
+}
+
+.actions {
+  position: relative;
+  height: 30px;
+  bottom: -25px;
+}
+
+#submitButton {
+  position: relative;
+  float: right;
 }
 
 

@@ -137,8 +137,9 @@
   <div class='section_2'>
     <div id='section_2_part_1'>
       
-      <fieldset>
+      <fieldset id="slope">
         <legend> Substrate Slope </legend>
+        <em>
         <div class="control-group">
           <label class="control-label">Max Substrate Depth</label>
           <div class="controls">
@@ -152,10 +153,13 @@
             <%= f.text_field :substrate_min_depth, {:class => "tab_2", :autocomplete => :off } %>
           </div>
         </div>
+      </em>
       </fieldset>
-      <div></div>
-      <fieldset>
+      
+     
+      <fieldset id="vertRelief">
         <legend> Max Verticle Relief </legend>
+        <em>
         <div class="control-group">
           <label class="control-label">Hard Substrate</label>
           <div class="controls">
@@ -169,6 +173,7 @@
             <%= f.text_field :soft_verticle_relief, {:class => "tab_2", :autocomplete => :off } %>
           </div>
         </div>
+      </em>
       </fieldset>
       
       <%= render "surface_relief_coverage", :object => f %>
@@ -192,16 +197,18 @@
 
 <div id="speciesSection" class="sectionDiv">
   <div class='section_3'>
-    <div id="fixedElements">
-    <div>
-      <Input class='time_seen_button' type='radio' Name='timeSeen' Value='1' checked='checked'>First 5 Minutes
-      <Input class='time_seen_button' type='radio' Name='timeSeen' Value='2'>5 to 10 Minutes
-      <Input class='time_seen_button' type='radio' Name='timeSeen' Value='3'>After 10 Minutes
-    <div>
-    <div>
-      <label id="species"> Species </label> <label id="num"> Num </label> <label id="mean"> Mean </label> <label id="min"> Min </label> <label id="max"> Max </label>
-     </div>
-  </div>
+
+      <div class="btn-group" data-toggle="buttons-radio">
+        <button class='btn btn-primary time_seen_button active' type='button' id='timeSeen1' Value='1' >First 5 Minutes </button>
+        <button class='btn btn-primary time_seen_button' type='button' id='timeSeen2' Value='2'>5 to 10 Minutes </button>
+        <button class='btn btn-primary time_seen_button' type='button' id='timeSeen3' Value='3'>After 10 Minutes </button>
+      </div>
+     
+      <div class="speciesLabels">
+        <ul class="inline">
+          <li id="species"> Species </li> <li id="num"> Num </li> <li id="mean"> Mean </li> <li id="min"> Min </li> <li id="max"> Max </li>
+        </ul>
+      </div>
     
     <div id="animals">
     <ol>   
@@ -211,12 +218,14 @@
     </ol>
     </div>
   </div>
-</div>
 
-</div>
- 
+
   <div class="actions">
     <%= f.submit "Submit Sample", :id => "submitButton" %>
   </div>
+
+</div>
+</div>
+
 <% end %>
 </form>

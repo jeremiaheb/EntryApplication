@@ -1,32 +1,49 @@
+<div class="form-horizontal">
 <%= form_for(@animal) do |f| %>
   
-  <%= render "shared/error_messages", :target => @animal %>
+  <div class="control-group">
+    <label class="control-label">Species Code</label>
+    <div class="controls">
+      <%= f.text_field :species_code %>
+    </div>
+  </div>
 
-  <div class='field'>
-    <%= f.label :'Species Code' %><br />
-    <%= f.text_field :species_code %>
+  <div class="control-group">
+    <label class="control-label">Scientific name</label>
+    <div class="controls">
+      <%= f.text_field :scientific_name %>
+    </div>
   </div>
-  <div class='field'>
-    <%= f.label :'Scientific name' %><br />
-    <%= f.text_field :scientific_name %>
+
+  <div class="control-group">
+    <label class="control-label">Common Name</label>
+    <div class="controls">
+      <%= f.text_field :common_name %>
+    </div>
   </div>
-  <div class='field'>
-    <%= f.label :'Common Name' %><br />
-    <%= f.text_field :common_name %>
+
+  <div class="control-group">
+    <label class="control-label">Minimum size</label>
+    <div class="controls">
+      <%= f.text_field :min_size %>
+    </div>
   </div>
-  <div class='field'>
-    <%= f.label :'Maximum size' %><br />
-    <%= f.text_field :max_size %>
+
+  <div class="control-group">
+    <label class="control-label">Maximum size</label>
+    <div class="controls">
+      <%= f.text_field :max_size %>
+    </div>
   </div>
-  <div class='field'>
-    <%= f.label :'Minimum size' %><br />
-    <%= f.text_field :min_size %>
-  </div>
-  <div class='field'>
-    <%= f.label :'Maximum number' %><br />
-    <%= f.text_field :max_number %>
+
+  <div class="control-group">
+    <label class="control-label">Max number</label>
+    <div class="controls">
+      <%= f.text_field :max_number %>
+    </div>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+</div>

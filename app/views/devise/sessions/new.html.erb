@@ -1,17 +1,40 @@
-<h2>Sign in</h2>
 
+
+<div class="form-horizontal">
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div><%= f.label :username %><br />
-  <%= f.text_field :username %></div>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
 
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
+  <fieldset>
+    <div id="legend">
+      <legend class="">Login</legend>
+    </div>
+    <div class="control-group">
+      <!-- Username -->
+      <label class="control-label"  for="username">Username</label>
+      <div class="controls">
+        <%= f.text_field :username %>
+      </div>
+    </div>
+ 
+    <div class="control-group">
+      <!-- Password-->
+      <label class="control-label" for="password">Password</label>
+      <div class="controls">
+        <%= f.text_field :password %>
+      </div>
+    </div>
+ 
+ 
+    <div class="control-group">
+      <!-- Button -->
+      <div class="controls">
+        <%= f.submit "Sign in" %>
+        <%= render "links" %>
+      </div>
+    </div>
+  </fieldset>
 
-  <div><%= f.submit "Sign in" %></div>
 <% end %>
 
-<%= render "links" %>
+
+</div>

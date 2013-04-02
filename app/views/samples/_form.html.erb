@@ -1,6 +1,7 @@
 <div class="form-horizontal">
 <%= nested_form_for @sample, :validate => false do |f| %>
 
+  <%= render "shared/error_messages", :target => @sample %>
 
 <select class="changeSection">
   <option value="sampleSection">Sample Section</option>

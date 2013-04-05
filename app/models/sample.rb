@@ -122,7 +122,7 @@ class Sample < ActiveRecord::Base
 
   def biotic_percentage_hardbottom_equal_100
       values = []
-      [ self.hardbottom_algal_turf, self.hardbottom_macro_algae, self.hardbottom_live_coral, self.hardbottom_octocoral, self.hardbottom_sponge, self.sand_pcov_other2 ].each do |cat|
+      [ self.hardbottom_algal_turf, self.hardbottom_macro_algae, self.hardbottom_live_coral, self.hardbottom_octocoral, self.hardbottom_sponge, self.hard_pcov_other1, self.hard_pcov_other2 ].each do |cat|
         if !cat.nil?
           values.push(cat)
         end

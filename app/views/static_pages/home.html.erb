@@ -1,5 +1,6 @@
-            <h2>Example carousel</h2>
-            <p>The slideshow below shows a generic plugin and component for cycling through elements like a carousel.</p>
+<div class="container">
+  <div class="row">
+       <div class="span6 offset3">
             <div class="bs-docs-example">
               <div id="myCarousel" class="carousel slide">
                 <ol class="carousel-indicators">
@@ -34,9 +35,63 @@
                 <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
               </div>
             </div>
+        </div>
+    <div class="span3">
 
-  <p> <%= link_to "Sample List", samples_path %> </p>
-
-  <p> <%= link_to "Diver List", divers_path  %> </p>
-
-
+    </div>
+  </div>
+</div>
+    <div id="showcase">
+        <div class="container">
+            <div class="section_header">
+                <h3>Selection of Available Applications</h3>
+            </div>            
+            <div class="row feature_wrapper">
+                <!-- Features Row -->
+                <div class="features_op1_row">
+                    <!-- Feature -->
+                    <div class="span4 feature first">
+                        <div class="img_box">
+                            <a href= <%= url_for samples_path %>>
+                              <img <%= image_tag 'FormButton.jpg' %>> 
+                            </a>
+                        </div>
+                        <div class="text">
+                            <h6>Click here for list of your samples</h6>
+                            <p>
+                              Some text about where you are going when clicked.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Feature -->
+                    <div class="span4 feature">
+                        <div class="img_box">
+                            <a href="http://rvcmaps.herokuapp.com/">
+                                <img <%= image_tag 'FormButton.jpg' %>>
+                            </a>
+                        </div>
+                        <div class="text">
+                            <h6>Click here to go to the RVC mapping application</h6>
+                            <p>
+                              Some text about where you are going when clicked
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Feature -->
+                    <div class="span4 feature last">
+                        <div class="img_box">
+                            <a href="services.html">
+                                <img <%= image_tag "FormButton.jpg" %>>
+                            </a>
+                        </div>
+                        <div class="text">
+                            <h6>Another link to url of my choice</h6>
+                            <p>
+                              Some text about where you are going when clicked
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

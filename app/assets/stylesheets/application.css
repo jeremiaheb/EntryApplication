@@ -17,6 +17,15 @@
  *= require_tree .
 */
 
+#homeSidebar p {
+  display: inline;
+  float: none;
+}
+
+.section_header h3 {
+  text-align: center;
+}
+
 .appContainer {
     position: relative;
     width: 960px;

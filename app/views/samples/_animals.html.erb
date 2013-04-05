@@ -1,4 +1,3 @@
-
 <%= object.fields_for :sample_animals do |builder| %>
   <li>
   <%= builder.collection_select :animal_id, Animal.all, :id, :spp_code_common, {:include_blank => ""}, {:class=>"sppCommon" } %>
@@ -11,4 +10,7 @@
   </li>
 
 <% end %>
+
+
+
 

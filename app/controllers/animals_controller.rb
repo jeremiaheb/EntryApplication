@@ -9,6 +9,7 @@ class AnimalsController < ApplicationController
   def index
     @animals = Animal.all
 
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @animals }
@@ -40,6 +41,9 @@ class AnimalsController < ApplicationController
   # GET /animals/1/edit
   def edit
     @animal = Animal.find(params[:id])
+
+    
+
   end
 
   # POST /animals
@@ -85,4 +89,5 @@ class AnimalsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 end

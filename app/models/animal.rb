@@ -11,4 +11,6 @@ class Animal < ActiveRecord::Base
   def spp_code_common
     [self.species_code, self.common_name].join(" __ ")
   end
+
+
 end

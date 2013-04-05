@@ -215,6 +215,7 @@ $(function(){
      $(document).delegate(".add_nested_fields", "click", function(){ 
         set_time_seen_field_on_focus();
         enable_disable_animals_fields();
+        alertSpeciesSizes();
         $(".section_3 input:text:visible").eq(-5).focus();
    });
 
@@ -224,9 +225,6 @@ $(function(){
     event.field.find(".sppCommon").select2();
   });
 
-   //$('form').on('nested:fieldAdded', function(event) {
-    //$(event.target).find(':input').enableClientSideValidations();
-  //});
 
 
   function enable_disable_animals_fields_on_load(){
@@ -453,8 +451,6 @@ $(function(){
         for ( rec in spp ) { checkBool.push( _.intersection(spp[rec].range, $thisRange).length>0); };
         hasOverlap = _.contains( checkBool, true );
       }
-      console.log(spp);
-      console.log(checkBool);
       return hasOverlap == false;
     }, "record overlaps with other record"
     );
@@ -749,5 +745,47 @@ $(function(){
       }
     });
 
-});
+  speciesInformation = {}
+  $.each(animal_info, function(a){
+    speciesInformation[animal_info[a].id] = { "max_num": animal_info[a].max_number, "min_size": animal_info[a].min_size, "max_size": animal_info[a].max_size };
+  });
 
+  function alertSpeciesSizes() {
+    $('[id$="number_individuals"]').on('focusout', function(){
+      var $species = $(this).parent().find('.sppCommon').select2('val');
+      if ( $(this).val() > speciesInformation[$species].max_num) {
+        alert("over max number");
+      }; 
+    });
+
+    $('[id$="average_length"]').on('focusout', function(){
+      var $species = $(this).parent().find('.sppCommon').select2('val');
+      var $speciesNumber = $(this).parent().find('[id$="number_individuals"]').val();
+      if ( $speciesNumber == 1 ) {
+        if ( $(this).val() < speciesInformation[$species].min_size ) {
+          alert("under min size");
+        } else if ( $(this).val() > speciesInformation[$species].max_size ) {
+          alert("over max size");
+        };
+      };
+    });
+
+    $('[id$="min_length"]').on('focusout', function(){
+      var $species = $(this).parent().find('.sppCommon').select2('val');
+      if ( $(this).val() < speciesInformation[$species].min_size) {
+        alert("under min size");
+      }; 
+    });
+    $('[id$="max_length"]').on('focusout', function(){
+      var $species = $(this).parent().find('.sppCommon').select2('val');
+      if ( $(this).val() > speciesInformation[$species].max_size) {
+        alert("over max size");
+      }; 
+    });
+  };
+  
+  alertSpeciesSizes();
+
+
+
+});

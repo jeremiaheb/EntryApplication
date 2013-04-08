@@ -1,6 +1,73 @@
 <h1>Editing diver</h1>
 
-<%= render 'form' %>
+<div class="form-horizontal">
+<%= form_for(@diver) do |f| %>
+
+ 
+  <div class="control-group">
+    <label class="control-label">Active</label>
+    <div class="controls">
+      <%= f.check_box :active %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label">Diver number</label>
+    <div class="controls">
+      <%= f.text_field :diver_number %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label">Diver name</label>
+    <div class="controls">
+      <%= f.text_field :diver_name %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label">Username</label>
+    <div class="controls">
+      <%= f.text_field :username %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label">First name</label>
+    <div class="controls">
+      <%= f.text_field :firstname %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label">Last name</label>
+    <div class="controls">
+      <%= f.text_field :lastname %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label">Email</label>
+    <div class="controls">
+      <%= f.text_field :email %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label">Roles</label>
+    <div class="controls">
+      <%= f.collection_select :role, Diver::ROLES, :to_s, :humanize %>
+    </div>
+  </div>
+
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
 
 <%= link_to 'Show', @diver %> |
 <%= link_to 'Back', divers_path %>
+
+</div>

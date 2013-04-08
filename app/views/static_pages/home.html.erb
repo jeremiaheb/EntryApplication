@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-       <div class="span6 offset3">
+       <div class="span12">
             <div class="bs-docs-example">
               <div id="myCarousel" class="carousel slide">
                 <ol class="carousel-indicators">
@@ -10,21 +10,21 @@
                 </ol>
                 <div class="carousel-inner">
                   <div class="item active">
-                   <img <%= image_tag 'image1.jpg' %> >
+                   <img <%= image_tag 'sunset.jpg' %> >
                     <div class="carousel-caption">
                       <h4>First Thumbnail label</h4>
                       <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
                     </div>
                   </div>
                   <div class="item">
-                    <img <%= image_tag 'image2.jpg' %> >
+                    <img <%= image_tag 'sunset.jpg' %> >
                     <div class="carousel-caption">
                       <h4>Second Thumbnail label</h4>
                       <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
                     </div>
                   </div>
                   <div class="item">
-                    <img <%= image_tag 'image3.jpg' %> >
+                    <img <%= image_tag 'sunset.jpg' %> >
                     <div class="carousel-caption">
                       <h4>Third Thumbnail label</h4>
                       <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
@@ -36,62 +36,78 @@
               </div>
             </div>
         </div>
-    <div class="span3">
-
-    </div>
   </div>
 </div>
-    <div id="showcase">
-        <div class="container">
-            <div class="section_header">
-                <h3>Selection of Available Applications</h3>
-            </div>            
-            <div class="row feature_wrapper">
-                <!-- Features Row -->
-                <div class="features_op1_row">
-                    <!-- Feature -->
-                    <div class="span4 feature first">
-                        <div class="img_box">
-                            <a href= <%= url_for samples_path %>>
-                              <img <%= image_tag 'FormButton.jpg' %>> 
-                            </a>
-                        </div>
-                        <div class="text">
-                            <h6>Click here for list of your samples</h6>
-                            <p>
-                              Some text about where you are going when clicked.
-                            </p>
-                        </div>
-                    </div>
-                    <!-- Feature -->
-                    <div class="span4 feature">
-                        <div class="img_box">
-                            <a href="http://rvcmaps.herokuapp.com/">
-                                <img <%= image_tag 'FormButton.jpg' %>>
-                            </a>
-                        </div>
-                        <div class="text">
-                            <h6>Click here to go to the RVC mapping application</h6>
-                            <p>
-                              Some text about where you are going when clicked
-                            </p>
-                        </div>
-                    </div>
-                    <!-- Feature -->
-                    <div class="span4 feature last">
-                        <div class="img_box">
-                            <a href="services.html">
-                                <img <%= image_tag "FormButton.jpg" %>>
-                            </a>
-                        </div>
-                        <div class="text">
-                            <h6>Another link to url of my choice</h6>
-                            <p>
-                              Some text about where you are going when clicked
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+<div class="container">          
+  <div class="row home">
+    <div class="span4">
+      <div class="img_box">
+        <a href= <%= url_for samples_path %>>
+          <img <%= image_tag 'FormButton.jpg' %>
+        </a>
+      </div>
+      <div class="text">
+        <h6>Click here for list of your samples</h6>
+          <p>
+            Some text about where you are going when clicked.
+          </p>
+      </div>
     </div>
+    <div class="span4">
+      <div class="img_box">
+       <a href="http://rvcmaps.herokuapp.com/">
+           <img <%= image_tag 'FormButton.jpg' %>
+       </a>
+      </div>
+      <div class="text">
+        <h6>Click here to go to the RVC mapping application</h6>
+          <p>
+            Some text about where you are going when clicked
+          </p>
+      </div>
+    </div>
+    <div class="span4">
+      <div class="img_box">
+       <a href="services.html">
+           <img <%= image_tag "FormButton.jpg" %>
+       </a>
+      </div>
+      <div class="text">
+        <h6>Another link to url of my choice</h6>
+          <p>
+            Some text about where you are going when clicked
+          </p>
+      </div>
+    </div>
+    <%#<div class="span1">%>
+      
+    <%#</div>%>
+    <%#<div class="span1">%>
+      
+    <%#</div>%>
+    <%#<div class="span1">%>
+      
+    <%#</div>%>
+    <%#<div class="span1">%>
+      
+    <%#</div>%>
+    <%#<div class="span1">%>
+      
+    <%#</div>%>
+    <%#<div class="span1">%>
+      
+    <%#</div>%>
+    <%#<div class="span1">%>
+      
+    <%#</div>%>
+    <%#<div class="span1">%>
+      
+    <%#</div>%>
+    <%#<div class="span1">%>
+      
+    <%#</div>%>
+  </div>
+</div>
+
+ 

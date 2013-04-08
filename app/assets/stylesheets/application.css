@@ -26,6 +26,10 @@
   text-align: center;
 }
 
+.home {
+  text-align: center;
+}
+
 .appContainer {
     position: relative;
     width: 960px;

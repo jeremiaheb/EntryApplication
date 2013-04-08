@@ -15,7 +15,7 @@
         <div class="control-group">
           <label class="control-label">Sample Date</label>
           <div class="controls">
-            <%= f.date_select :sample_date, { :class => 'tab_1', :name => 'date' } %>
+            <%= f.date_select :sample_date, { :prompt => { :year => "year", :month => "month", :day => "day" } }, { :class => 'tab_1', :name => 'date' } %>
           </div>
         </div>
         
@@ -75,37 +75,37 @@
         </div>
 
         <div class="control-group">
-          <label class="control-label">Dive Depth</label>
+          <label class="control-label">Dive Depth (ft)</label>
           <div class="controls">
             <%= f.text_field :dive_depth, { :class => 'tab_1', :autocomplete => :off } %>
           </div>
         </div>
 
         <div class="control-group">
-          <label class="control-label">Sample Depth</label>
+          <label class="control-label">Sample Depth (ft)</label>
           <div class="controls">
             <%= f.text_field :sample_depth, { :class => 'tab_1', :autocomplete => :off } %>
           </div>
         </div>
 
         <div class="control-group">
-          <label class="control-label">Visibility</label>
+          <label class="control-label">Visibility (ft)</label>
           <div class="controls">
             <%= f.text_field :underwater_visibility, { :class => 'tab_1', :autocomplete => :off } %>
           </div>
         </div>
       
         <div class="control-group">
-          <label class="control-label">Water Temp</label>
+          <label class="control-label">Water Temp (°F)</label>
           <div class="controls">
             <%= f.text_field :water_temp, { :class => 'tab_1', :autocomplete => :off } %>
           </div>
         </div>
 
         <div class="control-group">
-          <label class="control-label">Cylinder Radius</label>
+          <label class="control-label">Cylinder Radius (m)</label>
           <div class="controls">
-            <%= f.select( :cylinder_radius,{ "7.5m" => 7.5, "5.0m" => 5.0 } , {}, { :class => 'tab_1' } ) %>
+            <%= f.select( :cylinder_radius,{ "7.5" => 7.5, "5.0" => 5.0 } , {}, { :class => 'tab_1' } ) %>
           </div>
         </div>
       
@@ -142,14 +142,14 @@
         <legend> Substrate Slope </legend>
         <em>
         <div class="control-group">
-          <label class="control-label">Max Substrate Depth</label>
+          <label class="control-label">Max Substrate Depth (ft)</label>
           <div class="controls">
             <%= f.text_field :substrate_max_depth, {:class => "tab_2", :autocomplete => :off } %>
           </div>
         </div>
           
         <div class="control-group">
-          <label class="control-label">Min Substrate Depth</label>
+          <label class="control-label">Min Substrate Depth (ft)</label>
           <div class="controls">
             <%= f.text_field :substrate_min_depth, {:class => "tab_2", :autocomplete => :off } %>
           </div>
@@ -162,14 +162,14 @@
         <legend> Max Verticle Relief </legend>
         <em>
         <div class="control-group">
-          <label class="control-label">Hard Substrate</label>
+          <label class="control-label">Hard Substrate (m)</label>
           <div class="controls">
             <%= f.text_field :hard_verticle_relief, {:class => "tab_2", :autocomplete => :off } %>
           </div>
         </div>
 
         <div class="control-group">
-          <label class="control-label">Soft Substrate</label>
+          <label class="control-label">Soft Substrate (m)</label>
           <div class="controls">
             <%= f.text_field :soft_verticle_relief, {:class => "tab_2", :autocomplete => :off } %>
           </div>
@@ -191,8 +191,8 @@
 
     <div id='section_2_part_4'>
       <%= render "biotic_cover_hardbottom", :object => f %>
-    </div
-    >
+    </div>
+
   </div>
 </div>
 

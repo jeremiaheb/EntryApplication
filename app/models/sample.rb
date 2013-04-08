@@ -27,7 +27,7 @@ class Sample < ActiveRecord::Base
   validate  :sample_starts_before_ends
 
   validates :field_id,                    :presence => true
-  validates_format_of :field_id,          :with => /\d\d\d\d[A-B]/
+  validates_format_of :field_id,          :with => /...\d[a-zA-B]/
   validates :dive_depth,                  :presence => true, :numericality => true
   validates :sample_depth,                :presence => true, :numericality => true          
   validates :underwater_visibility,       :presence => true, :numericality => true
@@ -35,7 +35,7 @@ class Sample < ActiveRecord::Base
   validates :sample_description,          :length => { :maximum => 150 }                    
 
   validates :substrate_max_depth,         :presence => true, :numericality => { :only_integer => true }
-  validates :substrate_min_depth,         :presence => true, :numericality => { :only_integer => true }
+  validates :substrate_min_depth,         :presence => true, :numericality => { :only_integer => true, :less_than_or_equal_to => :substrate_max_depth }
 
   validates :hard_verticle_relief,         :presence => true, :numericality => true
   validates :soft_verticle_relief,         :presence => true, :numericality => true
@@ -50,8 +50,12 @@ class Sample < ActiveRecord::Base
   validate :soft_relief_cats_equal_100
   validate :abiotic_percentage_equal_100
   validate :biotic_percentage_sand_equal_100, :if => :sand_percentage?
-  validate :biotic_percentage_hardbottom_equal_100
+  validate :biotic_percentage_hardbottom_equal_100, :if => :hardbottom_percentage?
 
+
+  def field_id=(value)
+    write_attribute(:field_id, value.upcase)
+  end
 
    private
 

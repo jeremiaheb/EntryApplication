@@ -186,10 +186,24 @@ $(function(){
     }
   };
   
-  disable_biotic_perc_sand();
+  function disable_biotic_perc_hard(){
 
-  $('#sample_sand_percentage').on('focusout', function(){
+    $('.biotic_percentage_hardbottom').attr('disabled', false);
+    $('#sample_hard_pcov_other1_lab, #sample_hard_pcov_other2_lab').attr('disabled', false);
+    var $bioticHardVal = $('#sample_hardbottom_percentage').val();
+
+    if ( $bioticHardVal == "" || $bioticHardVal == 0 ){
+      $('.biotic_percentage_hardbottom').val("").attr('disabled', true);
+      $('#sample_hard_pcov_other1_lab, #sample_hard_pcov_other2_lab').attr('disabled', true);
+    }
+  };
+
+  disable_biotic_perc_sand();
+  disable_biotic_perc_hard();
+
+  $('#sample_sand_percentage, #sample_hardbottom_percentage').on('focusout', function(){
     disable_biotic_perc_sand();
+    disable_biotic_perc_hard();
   });
 
   
@@ -392,12 +406,20 @@ $(function(){
 
 
     $.validator.addMethod("fieldidFormat", function(value, element, params){
-      return /\d\d\d\d[A-B]/.test(value);
+      return /...\d[a-zA-B]/.test(value);
     });
 
 
     $.validator.addMethod("greaterThan", function(value, element, params){
       return value > $(params).val();
+    });
+    
+    $.validator.addMethod("before", function(value, element, params){
+      return value < $(params).val();
+    });
+
+    $.validator.addMethod("lessThanEqualTo", function(value, element, params){
+      return value <= $(params).val();
     });
     
 // Check that a species record does not have overlapping sizes with another
@@ -564,11 +586,13 @@ $(function(){
                        },
                 'sample[sample_begin_time]': {
                          required: true,
-                         greaterThan: '#sample_dive_begin_time'
+                         greaterThan: '#sample_dive_begin_time',
+                         before: '#sample_dive_end_time'
                        },
                 'sample[sample_end_time]': {
                          required: true,
-                          greaterThan: '#sample_sample_begin_time'
+                          greaterThan: '#sample_sample_begin_time',
+                          before: '#sample_dive_end_time'
                        },
                 'sample[field_id]': {
                          required: true,
@@ -576,11 +600,13 @@ $(function(){
                        },
                 'sample[dive_depth]': {
                         required: true,
-                        digits: true
+                        digits: true,
+                        max: 200
                       },
                 'sample[sample_depth]': {
                         required: true,
-                        digits: true
+                        digits: true,
+                        max: 200
                       },
                 'sample[underwater_visibility]': {
                         required: true,
@@ -599,7 +625,8 @@ $(function(){
                       },
                 'sample[substrate_min_depth]': {
                         required: true,
-                        digits: true
+                        digits: true,
+                        lessThanEqualTo: '#sample_substrate_max_depth'
                       },
                 'sample[hard_verticle_relief]': {
                         required: true,
@@ -676,13 +703,18 @@ $(function(){
                   greaterThan: "Dive end cannot be before dive begin"
                     },
                 'sample[sample_begin_time]': {
-                  greaterThan: "Sample begin cannot be before dive begin"
+                  greaterThan: "Sample begin cannot be before dive begin",
+                  before: "Sample begin time cannot be after dive end time"
                     },
                 'sample[sample_end_time]': {
-                  greaterThan: "Sample end time cannot be before begin time"
+                  greaterThan: "Sample end time cannot be before begin time",
+                  before: "Sample end time cannot be after dive end time"
                 },
                 'sample[field_id]': {
                   fieldidFormat: "Format is invalid"
+                },
+                'sample[substrate_min_depth]': {
+                  lessThanEqualTo: "must less than equal to max depth"
                 }
                   }
     });

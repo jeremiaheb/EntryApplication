@@ -7,10 +7,17 @@
 #
 #
 
-jQuery ->
-  $("#sampleList").dataTable
-    bjQueryUI: true
+#jQuery ->
+  #$("#sampleList").dataTable
+    #bjQueryUI: true
+
+#jQuery ->
+  #$("#sampleList").dataTable();
 
   #$("#sample_sample_date").datepicker
     #dateFormat: 'yy-mm-dd'
 
+$('.datatable').dataTable({
+  "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+  "sPaginationType": "bootstrap"
+});

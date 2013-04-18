@@ -1,7 +1,7 @@
 <div class="form-horizontal">
 <%= nested_form_for @sample, :validate => false do |f| %>
 
-  <%= render "shared/error_messages", :target => @sample %>
+  <%= render "shared/error_messages", :target => @sample%>
 
 <select class="changeSection">
   <option value="sampleSection">Sample Section</option>
@@ -15,7 +15,7 @@
         <div class="control-group">
           <label class="control-label">Sample Date</label>
           <div class="controls">
-            <%= f.date_select :sample_date, { :prompt => { :year => "year", :month => "month", :day => "day" } }, { :class => 'tab_1', :name => 'date' } %>
+            <%= f.text_field :sample_date, { :class => 'tab_1', :name => 'date' } %>
           </div>
         </div>
         
@@ -39,28 +39,28 @@
         <div class="control-group">
           <label class="control-label">Dive Begin Time</label>
           <div class="controls">
-            <%= f.text_field :dive_begin_time, { :class => 'tab_1' } %>
+            <%= f.text_field :dive_begin_time, { :class => 'tab_1 timimg' } %>
           </div>
         </div>
 
         <div class="control-group">
           <label class="control-label">Dive End Time</label>
           <div class="controls">
-            <%= f.text_field :dive_end_time, { :class => 'tab_1' } %>
+            <%= f.text_field :dive_end_time, { :class => 'tab_1 timimg' } %>
           </div>
         </div>
 
         <div class="control-group">
           <label class="control-label">Sample Begin Time</label>
           <div class="controls">
-            <%= f.text_field :sample_begin_time, { :class => 'tab_1' } %>
+            <%= f.text_field :sample_begin_time, { :class => 'tab_1 timimg' } %>
           </div>
         </div>
       
         <div class="control-group">
           <label class="control-label">Sample End Time</label>
           <div class="controls">
-            <%= f.text_field :sample_end_time, { :class => 'tab_1' } %>
+            <%= f.text_field :sample_end_time, { :class => 'tab_1 timing' } %>
           </div>
         </div>
       </div>

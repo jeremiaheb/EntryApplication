@@ -12,7 +12,7 @@
  *= require jquery.ui.datepicker
  *= require jquery.ui.core
  *= require jquery.ui.theme
- *= require dataTables/src/demo_table_jui
+ *= require dataTables/jquery.dataTables.bootstrap
  *= require select2
  *= require_tree .
 */
@@ -77,6 +77,10 @@
  
 }
 
+/*#sampleList tr:hover {*/
+  /*background-color: yellow !important;*/
+/*}*/
+
 input.error {
   background: #fed;
   border: 1px solid red;
@@ -92,30 +96,30 @@ input.error {
   /*left: 800px;*/
 /*}*/
 
-div.sampleListContainer {
-    width: 420px;
-    background: #DDD;
+/*div.sampleListContainer {*/
+    /*width: 420px;*/
+    /*background: #DDD;*/
  
-    /* Border style */
-    border: 1px solid #cccccc;
-    -moz-border-radius: 7px;
-    -webkit-border-radius: 7px;
-    border-radius: 7px;
+    /*[> Border style <]*/
+    /*border: 1px solid #cccccc;*/
+    /*-moz-border-radius: 7px;*/
+    /*-webkit-border-radius: 7px;*/
+    /*border-radius: 7px;*/
  
-    /* Border Shadow */
-    -moz-box-shadow: 2px 2px 2px #cccccc;
-    -webkit-box-shadow: 2px 2px 2px #cccccc;
-    box-shadow: 2px 2px 2px #cccccc;
+    /*[> Border Shadow <]*/
+    /*-moz-box-shadow: 2px 2px 2px #cccccc;*/
+    /*-webkit-box-shadow: 2px 2px 2px #cccccc;*/
+    /*box-shadow: 2px 2px 2px #cccccc;*/
 
-}
+/*}*/
 
-div.sampleListContainer td {
-text-align: center;
-}
+/*div.sampleListContainer td {*/
+/*text-align: center;*/
+/*}*/
 
-div.sampleListContainer h1 {
-text-align: center;
-}
+/*div.sampleListContainer h1 {*/
+/*text-align: center;*/
+/*}*/
 
 div.section_1,div.section_2, p.flipSection_1 {
     /*width: 920px;*/
@@ -415,8 +419,8 @@ input.timeSeen_3 {
 
 #newSampleButton {
   position: absolute;
-  left: 100px;
-  top: 100px;
+  left: 50px;
+  top: 25px;
 }
 
 .ActionBar {

@@ -15,6 +15,7 @@
 //= require twitter/bootstrap
 //= require jquery.ui.datepicker
 //= require dataTables/jquery.dataTables
+//= require dataTables/jquery.dataTables.bootstrap
 //= require jquery_nested_form
 //= require rails.validations
 //= require rails.validations.nested_form
@@ -40,8 +41,11 @@ $(function(){
         $(this).css("background", "");
       }
     );
-
-
+    
+    $('.display').dataTable( {
+        "sDom": "<'row'<'span7'lf>r>t<'row'<'span7'ip>>",
+        "sPaginationType": "bootstrap"
+    } );
 
     $("#substrateSection").hide();
     $("#speciesSection").hide();
@@ -83,9 +87,11 @@ $(function(){
       var should_display_species = new Array();
       var all_totals_equal_hundred = new Boolean();
 
-      if ( $("#sample_sand_percentage").val() == 0 && $("#hard_relief_total").val() == 100 && $("#soft_relief_total").val() == 100 && $("#biotic_percentage_hardbottom_total").val() == 100 && $("#abiotic_percentage_total").val() == 100 ){
+      if ( $("#sample_sand_percentage").val() > 0 && $("#sample_hardbottom_percentage").val() > 0 && $("#hard_relief_total").val() == 100 && $("#soft_relief_total").val() == 100 && $("#biotic_percentage_hardbottom_total").val() == 100 && $("#biotic_percentage_sand_total").val() == 100 &&  $("#abiotic_percentage_total").val() == 100 ){
         all_totals_equal_hundred = true;
-      } else if ( $("#sample_sand_percentage").val() > 0 && $("#substrateSection .one_hundred_ok_flag").length == 5 ){
+      } else if ($("#sample_sand_percentage").val() == 0 && $("#sample_hardbottom_percentage").val() > 0 && $("#hard_relief_total").val() == 100 && $("#soft_relief_total").val() == 100 && $("#biotic_percentage_hardbottom_total").val() == 100 && $("#abiotic_percentage_total").val() == 100 ){
+        all_totals_equal_hundred = true;
+      } else if ( $("#sample_sand_percentage").val() > 0 && $("#sample_hardbottom_percentage").val() == 0 && $("#hard_relief_total").val() == 100 && $("#soft_relief_total").val() == 100 && $("#biotic_percentage_sand_total").val() == 100 && $("#abiotic_percentage_total").val() == 100){
         all_totals_equal_hundred = true;
       } else {
         all_totals_equal_hundred = false;
@@ -123,11 +129,7 @@ $(function(){
         $("#substrateSection").find(".hard_relief[disabled=disabled], .soft_relief[disabled=disabled], .biotic_percentage_sand[disabled=disabled] ").val("");
     });
  
-  //$(function(){   
-  //$('#sample_sample_date').datepicker({
-    //dateFormat: "mm-dd-yy"
-  //});
-  //});
+
 
   function disable_hard_surface_relief_coverage(){
     
@@ -262,7 +264,7 @@ $(function(){
           $('input#' + $min).attr('disabled', false)
           $('input#' + $max).attr('disabled', false)
       }
-    })
+    });
   };
 
   function enable_disable_animals_fields(){
@@ -398,7 +400,8 @@ $(function(){
         $(".add_nested_fields").trigger("click");
       }
     });
-
+    
+    $("#sample_sample_date").dateEntry({dateFormat: "ymd-"});
     $("#sample_dive_begin_time").timeEntry({ show24Hours: true });
     $("#sample_dive_end_time").timeEntry({ show24Hours: true });
     $("#sample_sample_begin_time").timeEntry({ show24Hours: true });
@@ -433,7 +436,7 @@ $(function(){
 	    var $thisMean = $(element).parent().find('[id$="average_length"]').val();
 	    var $thisMin = $(element).parent().find('[id$="min_length"]').val();
 	    var $thisMax = $(element).parent().find('[id$="max_length"]').val();
-	
+
     	var $thisRange
 
     	if ( $thisNumber == 1 ){
@@ -452,7 +455,7 @@ $(function(){
 		      	var $mean = $(this).find('[id$="average_length"]').val();
 		      	var $min = $(this).find('[id$="min_length"]').val();
 		      	var $max = $(this).find('[id$="max_length"]').val();
-	 
+
 		      	var $range
 		      	if ( $number == 1 ){
 		      		$range = [parseFloat($mean)];	
@@ -596,7 +599,9 @@ $(function(){
                        },
                 'sample[field_id]': {
                          required: true,
-                          fieldidFormat: true
+                          fieldidFormat: true,
+                          minlength: 5,
+                          maxlength: 5
                        },
                 'sample[dive_depth]': {
                         required: true,
@@ -818,6 +823,19 @@ $(function(){
   
   alertSpeciesSizes();
 
+
+  function alert24HourClock() {
+    $("#sample_dive_begin_time, #sample_dive_end_time, #sample_sample_begin_time, #sample_sample_end_time").on("focusout", function(){
+      var $time = $(this).val();
+      var b = ($time.split(":")[0]) + ($time.split(":")[1]);
+      var $time2 = parseInt(b, 10);
+      if ( $time2 >= "700" && $time2 <= "1900" ){
+      
+      } else { alert("why are you diving in the dark?"); }
+    });
+  };
+
+  alert24HourClock();
 
 
 });

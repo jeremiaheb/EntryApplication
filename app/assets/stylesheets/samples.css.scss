@@ -4,8 +4,10 @@
 
 
 div.sampleListContainer {
+    position: relative;
+    left: 100px;
     margin: 0 auto;
-    width: 480px;
+    width: 80%;
     height: 480px;
     background: #DDD;
     overflow: auto;
@@ -23,10 +25,3 @@ div.sampleListContainer {
 
 }
 
-div.sampleListContainer td {
-text-align: center;
-}
-
-div.sampleListContainer h1 {
-text-align: center;
-}

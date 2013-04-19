@@ -1,5 +1,6 @@
 class BoatlogManager < ActiveRecord::Base
-  has_many :samples
+  has_many  :samples
+  has_one   :diver
 
   def agency_name
     [self.agency, self.lastname].join('/')

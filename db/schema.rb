@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130326170611) do
+ActiveRecord::Schema.define(:version => 20130419165835) do
 
   create_table "animals", :force => true do |t|
     t.string   "species_code"
@@ -22,6 +22,14 @@ ActiveRecord::Schema.define(:version => 20130326170611) do
     t.integer  "max_number"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+  end
+
+  create_table "boatlog_managers", :force => true do |t|
+    t.string   "agency"
+    t.string   "firstname"
+    t.string   "lastname"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "diver_samples", :force => true do |t|
@@ -131,6 +139,7 @@ ActiveRecord::Schema.define(:version => 20130326170611) do
     t.float    "water_temp"
     t.float    "cylinder_radius"
     t.string   "current"
+    t.integer  "boatlog_manager_id"
   end
 
 end

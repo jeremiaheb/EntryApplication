@@ -1,0 +1,30 @@
+<div class="form-horizontal">
+<%= form_for(@boatlog_manager) do |f| %>
+  <%= render "shared/error_messages", :target => @boatlog_manager%>
+
+
+<div class="control-group">
+    <label class="control-label">Agency</label>
+    <div class="controls">
+      <%= f.text_field :agency %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label">First name</label>
+    <div class="controls">
+      <%= f.text_field :firstname %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label">Last name</label>
+    <div class="controls">
+      <%= f.text_field :lastname %>
+    </div>
+  </div>
+
+
+  <div><%= f.submit "Update" %></div>
+<% end %>
+</div>

@@ -575,6 +575,9 @@ $(function(){
       },
 
         rules: {
+                'sample[boatlog_manager_id]': {
+                         required: true
+                       },
                 date: {
                          required: true
                        },

@@ -1,0 +1,27 @@
+<div class="appContainer">
+<h3>Boatlog Managers</h3>
+<table class="display table table-bordered table-condensed">
+  <thead>
+  <tr>
+    <th>Agency</th>
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+<% @boatlog_managers.each do |boatlog_manager| %>
+  <tr data-link=" <%= edit_boatlog_manager_path(boatlog_manager.id) %> ">
+    <td><%= boatlog_manager.agency %></td>
+    <td><%= boatlog_manager.firstname %></td>
+    <td><%= boatlog_manager.lastname %></td>
+    <td><%= link_to 'Destroy', boatlog_manager, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= link_to 'New Boatlog manager', new_boatlog_manager_path %>
+</div>

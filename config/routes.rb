@@ -1,4 +1,6 @@
 EntryApplication::Application.routes.draw do
+  resources :boatlog_managers
+
   devise_for :divers
 
   get "static_pages/home"

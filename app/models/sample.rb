@@ -1,6 +1,7 @@
 class Sample < ActiveRecord::Base
   belongs_to :sample_type
   belongs_to :habitat_type
+  belongs_to :boatlog_manager
 
   has_many :sample_animals, :dependent => :destroy
   validates_presence_of :sample_animals, :message => "you must have at leat one species record (can be NO FISH)"

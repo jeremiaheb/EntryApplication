@@ -439,10 +439,12 @@ $(function(){
 
     	var $thisRange
 
-    	if ( $thisNumber == 1 ){
+    	    if ( $thisNumber == 1 ){
     				$thisRange = [parseFloat($thisMean)];	
     			} else if ( $thisNumber == 2 ) {
     				$thisRange = [parseFloat($thisMin), parseFloat($thisMax)];		
+    			} else if ( $thisNumber == 3 ) {
+    				$thisRange = [parseFloat($thisMean), parseFloat($thisMin), parseFloat($thisMax)];		
     			} else {
     				$thisRange = _.range(parseFloat($thisMin), parseFloat($thisMax) + 1);	
     			}
@@ -461,6 +463,8 @@ $(function(){
 		      		$range = [parseFloat($mean)];	
 		      	} else if ( $number == 2 ) {
 		      		$range = [parseFloat($min), parseFloat($max)];		
+		      	} else if ( $number == 3 ) {
+		      		$range = [parseFloat($mean), parseFloat($min), parseFloat($max)];		
 		      	} else {
 		      		$range = _.range(parseFloat($min), parseFloat($max) + 1);	
 		      	}	

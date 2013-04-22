@@ -10,15 +10,15 @@ class SamplesController < ApplicationController
   # GET /samples
   # GET /samples.json
   def index
-    #@samples = current_diver.role == 'admin' || current_diver.role == 'manager' ? Sample.all : current_diver.samples.merge(DiverSample.primary) 
-    
     if current_diver.role == 'admin'
       @samples = Sample.all
     elsif current_diver.role == 'manager'
-      @samples = Sample.find(:all, :conditions => { :boatlog_manager_id => current_diver.boatlog_manager_id })
+      @samples = Sample.joins(:diver_samples).where( "diver_samples.diver_id=? AND diver_samples.primary_diver=? OR boatlog_manager_id=?", current_diver, true, current_diver.boatlog_manager_id ).uniq
     else
       @samples = current_diver.samples.merge(DiverSample.primary)
     end
+
+    #@samples = Sample.available_for(current_diver.role)
 
     respond_to do |format|
       format.html # index.html.erb

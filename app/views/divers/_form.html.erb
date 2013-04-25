@@ -71,6 +71,13 @@
     </div>
   </div>
 
+  <div class="control-group">
+    <label class="control-label">Boatlog Manager</label>
+    <div class="controls">
+      <%= f.collection_select :boatlog_manager_id, BoatlogManager.all, :id, :agency_name, { :include_blank => true } %>
+    </div>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

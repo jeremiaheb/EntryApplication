@@ -57,6 +57,7 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'ruby-prof'
   gem 'test-unit'
+  gem 'rails-erd'
 end
 
 

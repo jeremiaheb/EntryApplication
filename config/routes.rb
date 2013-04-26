@@ -1,4 +1,6 @@
 EntryApplication::Application.routes.draw do
+  resources :benthic_covers
+
   resources :boatlog_managers
 
   devise_for :divers

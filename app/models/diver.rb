@@ -12,6 +12,8 @@ class Diver < ActiveRecord::Base
   has_many    :diver_samples
   has_many    :samples, :through => :diver_samples, :dependent => :destroy
 
+  has_many    :benthic_covers
+  
   validates   :diver_number, :presence => true
   validates   :diver_name, :presence => true
 

@@ -1,0 +1,21 @@
+<h1>Listing benthic_covers</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @benthic_covers.each do |benthic_cover| %>
+  <tr>
+    <td><%= link_to 'Show', benthic_cover %></td>
+    <td><%= link_to 'Edit', edit_benthic_cover_path(benthic_cover) %></td>
+    <td><%= link_to 'Destroy', benthic_cover, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Benthic cover', new_benthic_cover_path %>

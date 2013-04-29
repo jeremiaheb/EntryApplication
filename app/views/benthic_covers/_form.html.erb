@@ -1,5 +1,11 @@
 <div class="form-horizontal">
 <%= nested_form_for @benthic_cover do |f| %>
+  <%= render "shared/error_messages", :target => @benthic_cover%>
+
+
+    <div class="formContainer">
+      <div class="row">
+        <div class="span4 part_1">
 
         <div class="control-group">
           <label class="control-label">Diver</label>
@@ -36,6 +42,9 @@
           </div>
         </div>
 
+        </div> 
+        <div class="span4 part_2">
+
         <div class="control-group">
           <label class="control-label">Habitat Type</label>
           <div class="controls">
@@ -54,11 +63,25 @@
          <div class="control-group">
           <label class="control-label">Notes</label>
           <div class="controls">
-            <%= f.text_field :sample_description %>
+            <%= f.text_area :sample_description, { :size => "60x3" } %>
           </div>
         </div> 
 
-        
+      </div>
+      </div>
+
+  <div class="row">
+    <div class="span6">
+      <fieldset>
+        <legend> Cover Points </legend>
+          <%= f.fields_for :point_intercepts do |builder| %>
+            <%= render 'point_intercept_fields', f: builder %>
+          <% end %>
+          <%= f.link_to_add "Add Cover", :point_intercepts %>
+      </fieldset>
+    </div>
+
+    <div class=span3>
       <%= f.fields_for :invert_belts do |builder| %>
         <%= render 'invert_belt_fields', f: builder %>
       <% end %>
@@ -66,12 +89,8 @@
       <%= f.fields_for :presence_belts do |builder| %>
         <%= render 'presence_belt_fields', f: builder %>
       <% end %>
-
-      <%= f.fields_for :point_intercepts do |builder| %>
-        <%= render 'point_intercept_fields', f: builder %>
-      <% end %>
-      <%= f.link_to_add "Add Cover", :point_intercepts %>
-
+    </div>
+  </div>
 
   <div class="actions">
     <%= f.submit %>
@@ -79,5 +98,5 @@
 
 
 <% end %>
-
+</div>
 </div>

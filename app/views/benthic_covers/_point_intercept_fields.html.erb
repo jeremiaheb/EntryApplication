@@ -1,7 +1,9 @@
-  <li>
-  <%= f.collection_select :cover_cat_id, CoverCat.all, :id, :name, {:include_blank => ""} %>
-  <%= f.text_field :hardbottom_num %>
-  <%= f.text_field :softbottom_num %>
-  <%= f.text_field :rubble_num %>
-  <%= f.link_to_remove "Remove Cover", {:tabindex => "-1"}  %>
-  </li>
+
+    <li>
+      <%= f.collection_select :cover_cat_id, CoverCat.all, :id, :name, {:include_blank => ""} %>
+      <%= f.text_field :hardbottom_num %>
+      <%= f.text_field :softbottom_num %>
+      <%= f.text_field :rubble_num %>
+      <%= f.link_to_remove "Remove Cover", {:tabindex => "-1"}  %>
+      </li>
+

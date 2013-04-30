@@ -49,6 +49,6 @@ CoverCat.delete_all
 CoverCat.connection.execute( 'ALTER SEQUENCE cover_cats_id_seq RESTART WITH 1' )
 open("#{Rails.root}/db/SupportData/PointInterceptCats.csv") do |corals|
   corals.read.each_line do |coral|
-    CoverCat.create( :name => coral )
+    CoverCat.create( :name => coral.chomp )
   end
 end

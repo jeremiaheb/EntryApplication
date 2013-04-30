@@ -80,7 +80,14 @@
   <div class="row">
     <div class="span6 coverCats">
       <fieldset>
-        <legend> Cover Points </legend>
+
+        <ul class="inline lpiHeaders">
+          <li id="cover"> Cover </li> <li id="hard"> Hard </li> <li id=soft> Soft </li> <li id="rubble"> Rubble </li>
+        </ul>
+
+        
+
+        <legend> Cover Categories <span class="label coverTotal">  </span></legend>
           <%= f.fields_for :point_intercepts do |builder| %>
             <%= render 'point_intercept_fields', f: builder %>
           <% end %>

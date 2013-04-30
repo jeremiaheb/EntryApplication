@@ -15,6 +15,28 @@ $(function(){
     event.field.find(".coverCategory").select2();
   });
   
+    function getCoverTotals() {
+      var $coverTotals = 0;
+
+      $('.coverCats').find('.coverPoints:visible').each(function(){
+        if ( $(this).val() != "" ) {  
+        $coverTotals += parseFloat($(this).val());
+        }
+      });
+      console.log($coverTotals);
+      $('.coverTotal').text(" Total Points " + $coverTotals)
+    };  
+
+    getCoverTotals();
+    $('.coverCats').change(function(){
+      getCoverTotals();
+    });
+
+     $(document).delegate(".remove_nested_fields", "click", function(){ 
+      getCoverTotals();
+     });
+
+
     $.validator.addMethod("isOnlyCat", function(value, element, params){
       var $catList = []
       var $thisCat = $(element).parent().find(".coverCategory").select2('val');
@@ -22,8 +44,8 @@ $(function(){
 
       	$(".coverCats .fields").each(function(i){
           if ( $(this).is(":visible") ) {
-            var $animal = $(this).find('.coverCategory').select2("val");          
-          $catList.push( $animal );
+            var $category = $(this).find('.coverCategory').select2("val");          
+          $catList.push( $category );
           }
 
           
@@ -75,6 +97,15 @@ $(function(){
                       },
                 'benthic_cover[sample_description]': {
                         maxlength: 150
+                      },
+                'benthic_cover[invert_belts_attributes][0][lobster_num]': {
+                        required: true
+                      },
+                'benthic_cover[invert_belts_attributes][0][conch_num]': {
+                        required: true
+                      },
+                'benthic_cover[invert_belts_attributes][0][diadema_num]': {
+                        required: true
                       },
                 'benthic_cover[presence_belts_attributes][0][a_palmata]': {
                         required: true

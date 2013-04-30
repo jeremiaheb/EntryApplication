@@ -26,4 +26,10 @@ class BenthicCover < ActiveRecord::Base
   validates :habitat_type,          :presence => true
   validates :meters_completed,      :presence => true
 
+
+
+  def field_id=(value)
+    write_attribute(:field_id, value.upcase)
+  end
+
 end

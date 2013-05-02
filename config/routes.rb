@@ -1,4 +1,8 @@
 EntryApplication::Application.routes.draw do
+  resources :corals
+
+  resources :coral_demographics
+
   resources :benthic_covers
 
   resources :boatlog_managers

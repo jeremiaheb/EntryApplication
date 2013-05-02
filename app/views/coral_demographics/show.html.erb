@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Diver:</b>
+  <%= @coral_demographic.diver_id %>
+</p>
+
+<p>
+  <b>Habitat type:</b>
+  <%= @coral_demographic.habitat_type_id %>
+</p>
+
+<p>
+  <b>Buddy:</b>
+  <%= @coral_demographic.buddy %>
+</p>
+
+<p>
+  <b>Field:</b>
+  <%= @coral_demographic.field_id %>
+</p>
+
+<p>
+  <b>Sample date:</b>
+  <%= @coral_demographic.sample_date %>
+</p>
+
+<p>
+  <b>Sample begin time:</b>
+  <%= @coral_demographic.sample_begin_time %>
+</p>
+
+<p>
+  <b>Meters completed:</b>
+  <%= @coral_demographic.meters_completed %>
+</p>
+
+<p>
+  <b>Sample description:</b>
+  <%= @coral_demographic.sample_description %>
+</p>
+
+
+<%= link_to 'Edit', edit_coral_demographic_path(@coral_demographic) %> |
+<%= link_to 'Back', coral_demographics_path %>

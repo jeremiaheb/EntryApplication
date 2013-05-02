@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130429152433) do
+ActiveRecord::Schema.define(:version => 20130502125923) do
 
   create_table "animals", :force => true do |t|
     t.string   "species_code"
@@ -46,6 +46,27 @@ ActiveRecord::Schema.define(:version => 20130429152433) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "coral_demographics", :force => true do |t|
+    t.integer  "diver_id"
+    t.integer  "habitat_type_id"
+    t.integer  "buddy"
+    t.string   "field_id"
+    t.date     "sample_date"
+    t.time     "sample_begin_time"
+    t.integer  "meters_completed"
+    t.text     "sample_description"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "boatlog_manager_id"
+  end
+
+  create_table "corals", :force => true do |t|
+    t.string   "code"
+    t.string   "scientific_name"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
   create_table "cover_cats", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -56,6 +77,19 @@ ActiveRecord::Schema.define(:version => 20130429152433) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "demographic_corals", :force => true do |t|
+    t.integer  "coral_demographic_id"
+    t.integer  "coral_id"
+    t.float    "max_diameter"
+    t.float    "perpendicular_diameter"
+    t.float    "height"
+    t.float    "old_mortality"
+    t.float    "recent_mortality"
+    t.string   "bleach_condition"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
   end
 
   create_table "diver_samples", :force => true do |t|

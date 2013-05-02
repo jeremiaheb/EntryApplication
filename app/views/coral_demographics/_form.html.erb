@@ -1,6 +1,6 @@
 <div class="form-horizontal">
-<%= nested_form_for @benthic_cover do |f| %>
-  <%= render "shared/error_messages", :target => @benthic_cover%>
+<%= nested_form_for @coral_demographic do |f| %>
+  <%= render "shared/error_messages", :target => @coral_demographic%>
 
 
     <div class="formContainer">
@@ -78,33 +78,24 @@
       </div>
 
   <div class="row">
-    <div class="span6 coverCats">
+    <div class="span8">
       <fieldset>
 
         <ul class="inline lpiHeaders">
-          <li id="cover"> Cover </li> <li id="hard"> Hard </li> <li id=soft> Soft </li> <li id="rubble"> Rubble </li>
+          <li id="coral"> Coral </li> <li id="max_diam"> Max Diameter </li> <li id=perp_diam> Perp Diameter </li> <li id="height"> Heigth </li> <li id="old_mort"> Old Mortality </li> <li id="recent_mort"> Recent Mortality </li> <li id="bleach_cond"> Bleached </li>
         </ul>
 
         
 
-        <legend> Cover Categories <span class="label coverTotal">  </span></legend>
-          <%= f.fields_for :point_intercepts do |builder| %>
-            <%= render 'point_intercept_fields', f: builder %>
+        <legend> Individual Corals </legend>
+          <%= f.fields_for :demographic_corals do |builder| %>
+            <%= render 'demographic_coral_fields', f: builder %>
           <% end %>
-          <%= f.link_to_add "Add Cover", :point_intercepts %>
+          <%= f.link_to_add "Add Cover", :demographic_corals %>
       </fieldset>
     </div>
 
-    <div class=span3>
-      <%= f.fields_for :invert_belts do |builder| %>
-        <%= render 'invert_belt_fields', f: builder %>
-      <% end %>
 
-      <%= f.fields_for :presence_belts do |builder| %>
-        <%= render 'presence_belt_fields', f: builder %>
-      <% end %>
-    </div>
-  </div>
 
   <div class="actions">
     <%= f.submit %>

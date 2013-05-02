@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Code:</b>
+  <%= @coral.code %>
+</p>
+
+<p>
+  <b>Scientific name:</b>
+  <%= @coral.scientific_name %>
+</p>
+
+
+<%= link_to 'Edit', edit_coral_path(@coral) %> |
+<%= link_to 'Back', corals_path %>

@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  diver_id: 1
+  habitat_type_id: 1
+  buddy: 1
+  field_id: MyString
+  sample_date: 2013-05-02
+  sample_begin_time: 2013-05-02 08:26:03
+  meters_completed: 1
+  sample_description: MyText
+
+two:
+  diver_id: 1
+  habitat_type_id: 1
+  buddy: 1
+  field_id: MyString
+  sample_date: 2013-05-02
+  sample_begin_time: 2013-05-02 08:26:03
+  meters_completed: 1
+  sample_description: MyText

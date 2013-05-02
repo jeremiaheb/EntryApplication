@@ -8,4 +8,9 @@ class CoralDemographic < ActiveRecord::Base
   belongs_to :habitat_type
   belongs_to :boatlog_manager
 
+  def myId
+    return self.diver_id
+  end
+
+
 end

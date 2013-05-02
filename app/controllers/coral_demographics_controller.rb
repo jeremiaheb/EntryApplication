@@ -1,8 +1,19 @@
 class CoralDemographicsController < ApplicationController
+
+  before_filter :authenticate_diver!
+  load_and_authorize_resource
+
   # GET /coral_demographics
   # GET /coral_demographics.json
   def index
-    @coral_demographics = CoralDemographic.all
+    if current_diver.role == 'admin'
+      @coral_demographics = CoralDemographic.all
+    elsif current_diver.role == 'manager'
+      @coral_demographics = CoralDemographic.where( "diver_id=? OR boatlog_manager_id=?", current_diver, current_diver.boatlog_manager_id )
+    else
+      @coral_demographics = current_diver.coral_demographics
+    end
+
 
     respond_to do |format|
       format.html # index.html.erb

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130502125923) do
+ActiveRecord::Schema.define(:version => 20130502133422) do
 
   create_table "animals", :force => true do |t|
     t.string   "species_code"
@@ -73,31 +73,21 @@ ActiveRecord::Schema.define(:version => 20130502125923) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "covers", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "demographic_corals", :force => true do |t|
-    t.integer  "coral_demographic_id"
-    t.integer  "coral_id"
-    t.float    "max_diameter"
-    t.float    "perpendicular_diameter"
-    t.float    "height"
-    t.float    "old_mortality"
-    t.float    "recent_mortality"
-    t.string   "bleach_condition"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.integer "coral_demographic_id"
+    t.integer "coral_id"
+    t.float   "max_diameter"
+    t.float   "perpendicular_diameter"
+    t.float   "height"
+    t.float   "old_mortality"
+    t.float   "recent_mortality"
+    t.string  "bleach_condition"
   end
 
   create_table "diver_samples", :force => true do |t|
-    t.integer  "sample_id"
-    t.integer  "diver_id"
-    t.boolean  "primary_diver"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.integer "sample_id"
+    t.integer "diver_id"
+    t.boolean "primary_diver"
   end
 
   create_table "divers", :force => true do |t|
@@ -135,22 +125,6 @@ ActiveRecord::Schema.define(:version => 20130502125923) do
     t.integer "lobster_num"
     t.integer "conch_num"
     t.integer "diadema_num"
-  end
-
-  create_table "line_point_covers", :force => true do |t|
-    t.integer  "line_point_id"
-    t.integer  "cover_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.integer  "hardbottom_num"
-    t.integer  "sand_num"
-    t.integer  "rubble_num"
-  end
-
-  create_table "line_points", :force => true do |t|
-    t.string   "field_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "point_intercepts", :force => true do |t|

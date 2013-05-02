@@ -35,7 +35,7 @@
           </div>
         </div>
 
-        <div class="control-group">
+        <div class="control-group date">
           <label class="control-label">Sample Date</label>
           <div class="controls">
             <%= f.text_field :sample_date %>
@@ -88,10 +88,12 @@
         
 
         <legend> Cover Categories <span class="label coverTotal">  </span></legend>
+        <div class="cover_data">
           <%= f.fields_for :point_intercepts do |builder| %>
             <%= render 'point_intercept_fields', f: builder %>
           <% end %>
           <%= f.link_to_add "Add Cover", :point_intercepts %>
+        </div>
       </fieldset>
     </div>
 

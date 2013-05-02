@@ -35,7 +35,7 @@
           </div>
         </div>
 
-        <div class="control-group">
+        <div class="control-group date">
           <label class="control-label">Sample Date</label>
           <div class="controls">
             <%= f.text_field :sample_date %>
@@ -88,20 +88,25 @@
         
 
         <legend> Individual Corals </legend>
-          <%= f.fields_for :demographic_corals do |builder| %>
-            <%= render 'demographic_coral_fields', f: builder %>
-          <% end %>
-          <%= f.link_to_add "Add Cover", :demographic_corals %>
+        <div class="demo_corals">
+          <ol>
+            <%= f.fields_for :demographic_corals do |builder| %>
+              <%= render 'demographic_coral_fields', f: builder %>
+            <% end %>
+            <%= f.link_to_add "Add Cover", :demographic_corals %>
+          </ol>
+        </div>
       </fieldset>
     </div>
+  </div>
 
 
+</div>
 
   <div class="actions">
     <%= f.submit %>
   </div>
 
+</div>
 
 <% end %>
-</div>
-</div>

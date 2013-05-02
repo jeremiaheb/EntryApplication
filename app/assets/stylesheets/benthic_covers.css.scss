@@ -48,3 +48,15 @@ fieldset {
   float: right;
 
 }
+
+
+.cover_data {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  overflow: auto;
+}
+
+.date input {
+  width: 80px; 
+}

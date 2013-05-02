@@ -7,7 +7,11 @@
 $(function(){
  
   
-  $("#benthic_cover_sample_date").dateEntry({dateFormat: "ymd-"});
+  $("#benthic_cover_sample_date").datepicker({
+    format: 'yyyy-mm-dd',
+    autoclose: true
+  });
+
   $("#benthic_cover_sample_begin_time").timeEntry({ show24Hours: true });
 
   $(".coverCats").find(".coverCategory").select2(); 
@@ -58,7 +62,7 @@ $(function(){
     }, "Only one entry per cover Category"
     );
 
-    $("form").validate({
+    $(".new_benthic_cover, .edit_benthic_cover").validate({
 
       errorElement: "span",
 

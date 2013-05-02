@@ -1,6 +1,6 @@
 
   <li>
-    <%= f.collection_select :coral_id, Coral.order(:id).all, :id, :code, {:include_blank => ""} %>
+  <%= f.collection_select :coral_id, Coral.order(:id).all, :id, :code, {:include_blank => ""}, { :class => "coralSpecies" } %>
     <%= f.text_field :max_diameter %>
     <%= f.text_field :perpendicular_diameter %>
     <%= f.text_field :height %>

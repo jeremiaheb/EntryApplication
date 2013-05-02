@@ -401,7 +401,7 @@ $(function(){
       }
     });
     
-    $("#sample_sample_date").dateEntry({dateFormat: "ymd-"});
+    $("#sample_sample_date").datepicker({format: 'yyyy-mm-dd'});
     $("#sample_dive_begin_time").timeEntry({ show24Hours: true });
     $("#sample_dive_end_time").timeEntry({ show24Hours: true });
     $("#sample_sample_begin_time").timeEntry({ show24Hours: true });
@@ -578,7 +578,7 @@ $(function(){
                 'sample[boatlog_manager_id]': {
                          required: true
                        },
-                date: {
+                'sample[sample_date]': {
                          required: true
                        },
                 'sample[sample_type_id]': {

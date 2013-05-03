@@ -18,11 +18,12 @@ class SamplesController < ApplicationController
       @samples = current_diver.samples.merge(DiverSample.primary)
     end
 
-    #@samples = Sample.available_for(current_diver.role)
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @samples }
+      format.csv  { send_data Sample.to_csv }
+      format.xls
     end
   end
 

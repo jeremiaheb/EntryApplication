@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<Workbook
+   xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+   xmlns:o="urn:schemas-microsoft-com:office:office"
+   xmlns:x="urn:schemas-microsoft-com:office:excel"
+   xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+   xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sample">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">MASTER_SAMPLE_CD</Data></Cell>
+        <Cell><Data ss:Type="String">DIVER_NR</Data></Cell>
+        <Cell><Data ss:Type="String">BUDDY_NR</Data></Cell>
+        <Cell><Data ss:Type="String">SAMPLE_TYPE_NR</Data></Cell>
+        <Cell><Data ss:Type="String">divhab</Data></Cell>
+        <Cell><Data ss:Type="String">habname</Data></Cell>
+        <Cell><Data ss:Type="String">YEAR</Data></Cell>
+        <Cell><Data ss:Type="String">MONTH</Data></Cell>
+        <Cell><Data ss:Type="String">DAY</Data></Cell>
+      </Row>
+    <% @samples.each do |sample| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= sample.msn %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= sample.diver_samples.primary[0].diver.diver_number %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= sample.diver_samples.secondary[0].diver.diver_number %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.sample_type.id %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.habitat_type.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= sample.habitat_type.habitat_name %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.sample_date.strftime('%Y') %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.sample_date.strftime('%m') %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.sample_date.strftime('%d') %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+  <Worksheet ss:Name="Substrate">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">MASTER_SAMPLE_CD</Data></Cell>
+        <Cell><Data ss:Type="String">SUBSTRATE_MAX_DEPTH</Data></Cell>
+        <Cell><Data ss:Type="String">SUBSTRATE_MIN_DEPTH</Data></Cell>
+        <Cell><Data ss:Type="String">HARD_VERTICLE_RELIEF</Data></Cell>
+        <Cell><Data ss:Type="String">SOFT_VERTICLE_RELIEF</Data></Cell>
+      </Row>
+    <% @samples.each do |sample| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= sample.msn %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.substrate_max_depth %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.substrate_min_depth %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.hard_verticle_relief %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.soft_verticle_relief %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+  <Worksheet ss:Name="Species">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">msn</Data></Cell>
+        <Cell><Data ss:Type="String">species</Data></Cell>
+        <Cell><Data ss:Type="String">number</Data></Cell>
+        <Cell><Data ss:Type="String">mean</Data></Cell>
+        <Cell><Data ss:Type="String">min</Data></Cell>
+        <Cell><Data ss:Type="String">max</Data></Cell>
+      </Row>
+      <% @samples.each do |sample| %>
+        <% sample.sample_animals.each do |spp| %>
+          <Row>
+            <Cell><Data ss:Type="String"><%= spp.sample.msn %></Data></Cell>
+            <Cell><Data ss:Type="Date"><%= spp.animal.species_code%></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= spp.number_individuals %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= spp.average_length %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= spp.min_length %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= spp.max_length %></Data></Cell>
+          </Row>
+        <% end %>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

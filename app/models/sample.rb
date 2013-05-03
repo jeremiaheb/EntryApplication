@@ -72,6 +72,10 @@ class Sample < ActiveRecord::Base
   def field_id=(value)
     write_attribute(:field_id, value.upcase)
   end
+ 
+  def msn
+    return [ self.sample_date.strftime('%Y%m%d'), self.sample_begin_time.strftime('%H%M'), self.diver_samples.primary[0].diver.diver_number ].join('')
+  end
 
    private
 
@@ -164,5 +168,15 @@ class Sample < ActiveRecord::Base
         errors.add( :base, "Hardbottom biotic percentages do not add to 100" )
       end
   end
+
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names
+      all.each do |sample|
+        csv << sample.attributes.values_at(*column_names)
+      end
+    end
+  end
+
 
 end

@@ -442,6 +442,10 @@ input.timeSeen_3 {
   float: right;
 }
 
+#substrateSection fieldset {
+  
+  margin-top: 0px !important;
 
+}
 
 

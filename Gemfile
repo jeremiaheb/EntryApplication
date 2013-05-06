@@ -22,11 +22,11 @@ group :assets do
   gem 'twitter-bootstrap-rails'
   gem 'less-rails-bootstrap'
 
-  gem 'jquery-datatables-rails', :git => 'git://github.com/rweng/jquery-datatables-rails.git'
 end
 
 gem 'jquery-ui-rails'
 gem 'jquery-rails'
+gem 'jquery-datatables-rails', :git => 'git://github.com/rweng/jquery-datatables-rails.git'
 
 gem 'select2-rails'
 #gem 'nested_form', :git => "git://github.com/ryanb/nested_form.git"

@@ -23,9 +23,9 @@ group :assets do
   gem 'less-rails-bootstrap'
 
   gem 'jquery-datatables-rails', :git => 'git://github.com/rweng/jquery-datatables-rails.git'
-  gem 'jquery-ui-rails'
 end
 
+gem 'jquery-ui-rails'
 gem 'jquery-rails'
 
 gem 'select2-rails'

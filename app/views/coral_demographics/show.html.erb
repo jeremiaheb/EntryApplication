@@ -1,0 +1,46 @@
+
+<div class='formContainer'>
+  <div id="sampleSection" class="sectionDiv">
+  <div class='show_section_1'>
+    <div id='section_1_part_1'>
+
+      <dl class="dl-horizontal">
+        <dt>Boatlog/Manager</dt><dd><%= @coral_demographic.boatlog_manager.agency_name %></dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt>Diver</dt><dd><%= @coral_demographic.diver.diver_name %></dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt>Buddy</dt><dd><%= Diver.find(@coral_demographic.buddy).diver_name %></dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt>Field ID</dt><dd><%= @coral_demographic.field_id %></dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt>Sample Date</dt><dd><%= @coral_demographic.sample_date %></dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt>Sample Time</dt><dd><%= @coral_demographic.sample_begin_time.strftime("%H:%M") %></dd>
+      </dl>
+
+    </div>
+
+    <div id='section_1_part_2'>
+
+      <dl class="dl-horizontal">
+        <dt>Habitat Type</dt><dd><%= @coral_demographic.habitat_type.habitat_name %></dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt>Meters Completed</dt><dd><%= @coral_demographic.meters_completed %></dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt>Notes</dt><dd><%= @coral_demographic.sample_description %></dd>
+      </dl>
+      </div>
+  </div>
+</div>
+
+<h3>
+  <span class="ActionBar"><%= link_to image_tag("edit-6.png") + "Edit Sample", edit_coral_demographic_path(@coral_demographic) %></span>
+  <span class="ActionBar"><%= link_to image_tag("dialog-cancel-7.png") + "Delete Sample", @coral_demographic, confirm: 'Are you sure?', method: :delete %></span>
+<h3>

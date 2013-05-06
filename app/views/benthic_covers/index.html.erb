@@ -1,0 +1,28 @@
+<div class="appContainer">
+  <div class="sampleListContainer">
+    <h3><%= current_diver.whole_name %> Samples</h3>
+  
+      <table id="sampleList" class="display table table-condensed">
+        <thead>
+         <tr>
+           <th>Diver</th>
+           <th>field ID</th>
+           <th>Date</th>
+           <th>Sample Start Time</th>
+         </tr>
+       </thead>
+       <tbody>
+      <% @benthic_covers.each do |benthic_cover| %>
+        <tr data-link=" <%= benthic_cover_path(benthic_cover.id) %> ">
+          <td><%= benthic_cover.diver.diver_name %></td>
+          <td class='fieldid_check'><%= benthic_cover.field_id %></td>
+          <td><%= benthic_cover.sample_date %></td>
+          <td><%= benthic_cover.sample_begin_time.strftime("%H:%M") %></td>
+        </tr>
+      <% end %>
+      </tbody>
+      </table>
+  </div>
+<div id="newSampleButton"><%= link_to image_tag("NewSampleButton.png"), new_benthic_cover_path %></div>
+</div>
+

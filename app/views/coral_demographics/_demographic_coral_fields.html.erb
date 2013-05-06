@@ -1,0 +1,11 @@
+
+  <li>
+  <%= f.collection_select :coral_id, Coral.order(:id).all, :id, :code, {:include_blank => ""}, { :class => "coralSpecies" } %>
+    <%= f.text_field :max_diameter %>
+    <%= f.text_field :perpendicular_diameter %>
+    <%= f.text_field :height %>
+    <%= f.text_field :old_mortality %>
+    <%= f.text_field :recent_mortality %>
+    <%= f.select( :bleach_condition, { "None" => "N", "Partial" => "P", "Total" => "T" } , {:include_blank => ""} ) %>
+    <%= f.link_to_remove "Remove Coral", {:tabindex => "-1"}  %>
+  </li>

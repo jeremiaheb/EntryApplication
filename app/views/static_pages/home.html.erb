@@ -56,12 +56,12 @@
     </div>
     <div class="span4">
       <div class="img_box">
-       <a href="http://rvcmaps.herokuapp.com/">
+       <a href=<%= url_for benthic_covers_path %>>
            <img <%= image_tag 'FormButton.jpg' %>
        </a>
       </div>
       <div class="text">
-        <h6>Click here to go to the RVC mapping application</h6>
+        <h6>Click here for list of your benthic(LPI) samples</h6>
           <p>
             Some text about where you are going when clicked
           </p>
@@ -69,44 +69,22 @@
     </div>
     <div class="span4">
       <div class="img_box">
-       <a href="http://femar.rsmas.miami.edu/rvc.html">
+       <a href=<%= url_for coral_demographics_path %> >
            <img <%= image_tag "FormButton.jpg" %>
        </a>
       </div>
       <div class="text">
-        <h6>Another link to url of my choice</h6>
+        <h6>Click here for list of you coral demographic samples</h6>
           <p>
             Some text about where you are going when clicked
           </p>
       </div>
     </div>
-    <%#<div class="span1">%>
-      
-    <%#</div>%>
-    <%#<div class="span1">%>
-      
-    <%#</div>%>
-    <%#<div class="span1">%>
-      
-    <%#</div>%>
-    <%#<div class="span1">%>
-      
-    <%#</div>%>
-    <%#<div class="span1">%>
-      
-    <%#</div>%>
-    <%#<div class="span1">%>
-      
-    <%#</div>%>
-    <%#<div class="span1">%>
-      
-    <%#</div>%>
-    <%#<div class="span1">%>
-      
-    <%#</div>%>
-    <%#<div class="span1">%>
-      
-    <%#</div>%>
+
+    <% if diver_signed_in? && current_diver.role == "admin" %>
+      <%= render "admin" %>
+    <% end %>
+
   </div>
 </div>
 

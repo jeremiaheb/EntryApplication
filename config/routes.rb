@@ -1,8 +1,23 @@
 EntryApplication::Application.routes.draw do
+  resources :corals
+
+  resources :coral_demographics
+
+  resources :benthic_covers
+
   resources :boatlog_managers
 
-  devise_for :divers
-
+  #devise_for :divers
+  devise_for :divers, :skip => [:registrations]
+  devise_scope :diver do
+    get "signup",   :to => "accounts#new"
+    get "signin",   :to => "devise/sessions#new"
+    get "signout",  :to => "devise/sessions#destroy"
+    get "cancel_diver_registration", :to => "devise/registrations#cancel"
+    post "diver_registration",       :to => "divers#create"
+    get "new_diver_registration",    :to => "accounts#new"
+    get "edit_diver_registration",   :to => "divers#edit"
+  end
   get "static_pages/home"
 
   get "static_pages/help"

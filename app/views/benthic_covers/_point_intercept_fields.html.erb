@@ -1,0 +1,9 @@
+
+    <li>
+    <%= f.collection_select :cover_cat_id, CoverCat.order(:id).all, :id, :name, {:include_blank => ""}, { :class => "coverCategory" } %>
+    <%= f.text_field :hardbottom_num, { :class => "coverPoints" } %>
+      <%= f.text_field :softbottom_num, { :class => "coverPoints" } %>
+      <%= f.text_field :rubble_num, { :class => "coverPoints" } %>
+      <%= f.link_to_remove "Remove Cover", {:tabindex => "-1"}  %>
+      </li>
+

@@ -1,0 +1,27 @@
+<div class="appContainer">
+  <div class="sampleListContainer">
+    <h3><%= current_diver.whole_name %> Coral Demographic Samples</h3>
+  
+      <table id="sampleList" class="display table table-condensed">
+        <thead>
+         <tr>
+           <th>Diver</th>
+           <th>field ID</th>
+           <th>Date</th>
+           <th>Sample Start Time</th>
+         </tr>
+       </thead>
+       <tbody>
+      <% @coral_demographics.each do |coral_demographic| %>
+        <tr data-link=" <%= coral_demographic_path(coral_demographic.id) %> ">
+          <td><%= coral_demographic.diver.diver_name %></td>
+          <td class='fieldid_check'><%= coral_demographic.field_id %></td>
+          <td><%= coral_demographic.sample_date %></td>
+          <td><%= coral_demographic.sample_begin_time.strftime("%H:%M") %></td>
+        </tr>
+      <% end %>
+      </tbody>
+      </table>
+  </div>
+<div id="newSampleButton"><%= link_to image_tag("NewSampleButton.png"), new_coral_demographic_path %></div>
+</div>

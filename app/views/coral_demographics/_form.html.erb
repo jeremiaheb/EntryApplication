@@ -1,0 +1,112 @@
+<div class="form-horizontal">
+<%= nested_form_for @coral_demographic do |f| %>
+  <%= render "shared/error_messages", :target => @coral_demographic%>
+
+
+    <div class="formContainer">
+      <div class="row">
+        <div class="span4 part_1">
+
+       <div class="control-group">
+          <label class="control-label">Boatlog/Manager</label>
+          <div class="controls">
+            <%= f.collection_select :boatlog_manager_id, BoatlogManager.all, :id, :agency_name, { :include_blank => "" } %><br />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Diver</label>
+          <div class="controls">
+            <%= f.collection_select :diver_id, Diver.order(:diver_number).all, :id, :diver_name, { :include_blank => "" }%><br />
+          </div>
+        </div>
+         
+        <div class="control-group">
+          <label class="control-label">Buddy</label>
+          <div class="controls">
+            <%= f.collection_select :buddy, Diver.all, :id, :diver_name, { :include_blank => "" }%><br />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Field ID</label>
+          <div class="controls">
+            <%= f.text_field :field_id %>
+          </div>
+        </div>
+
+        <div class="control-group date">
+          <label class="control-label">Sample Date</label>
+          <div class="controls">
+            <%= f.text_field :sample_date %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Sample Begin Time</label>
+          <div class="controls">
+            <%= f.text_field :sample_begin_time %>
+          </div>
+        </div>
+
+        </div> 
+        <div class="span4 part_2">
+
+        <div class="control-group">
+          <label class="control-label">Habitat Type</label>
+          <div class="controls">
+            <%= f.collection_select :habitat_type_id, HabitatType.all, :id, :habitat_name, { :include_blank => "" } %><br />
+          </div>
+        </div>
+
+
+        <div class="control-group">
+          <label class="control-label">Meters Completed</label>
+          <div class="controls">
+            <%= f.text_field :meters_completed %>
+          </div>
+        </div>
+
+         <div class="control-group">
+          <label class="control-label">Notes</label>
+          <div class="controls">
+            <%= f.text_area :sample_description, { :size => "200x5" } %>
+          </div>
+        </div> 
+
+      </div>
+      </div>
+
+  <div class="row">
+    <div class="span10">
+      <fieldset>
+
+        <ul class="inline lpiHeaders">
+          <li id="coral"> Coral </li> <li id="max_diam"> Max Diameter </li> <li id=perp_diam> Perp Diameter </li> <li id="height"> Heigth </li> <li id="old_mort"> Old Mortality </li> <li id="recent_mort"> Recent Mortality </li> <li id="bleach_cond"> Bleached </li>
+        </ul>
+
+        
+
+        <legend> Individual Corals </legend>
+        <div class="demo_corals">
+          <ol>
+            <%= f.fields_for :demographic_corals do |builder| %>
+              <%= render 'demographic_coral_fields', f: builder %>
+            <% end %>
+            <%= f.link_to_add "Add Cover", :demographic_corals %>
+          </ol>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+
+
+</div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+</div>
+
+<% end %>

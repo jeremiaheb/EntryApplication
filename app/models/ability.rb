@@ -33,12 +33,19 @@ class Ability
     if current_diver.role == 'admin'
       can :manage, :all
     elsif current_diver.role == 'manager'
-      can :manage, Sample
+      can :manage, [Sample, BenthicCover, CoralDemographic]
     elsif current_diver.role == 'diver'
-      can :create, Sample
-      can :read, Sample
+      can :create, [Sample, BenthicCover, CoralDemographic]
+      can :read, [Sample, BenthicCover, CoralDemographic]
+      can :destroy, [Sample, BenthicCover, CoralDemographic]
       can :update, Sample do |sample|
         sample.try(:myId) == current_diver.id
+      end
+      can :update, BenthicCover do |cover|
+        cover.try(:myId) == current_diver.id
+      end
+      can :update, CoralDemographic do |coral_demographic|
+        coral_demographic.try(:myId) == current_diver.id
       end
     end
 

@@ -1,0 +1,122 @@
+<div class="form-horizontal">
+<%= nested_form_for @benthic_cover do |f| %>
+  <%= render "shared/error_messages", :target => @benthic_cover%>
+
+
+    <div class="formContainer">
+      <div class="row">
+        <div class="span4 part_1">
+
+       <div class="control-group">
+          <label class="control-label">Boatlog/Manager</label>
+          <div class="controls">
+            <%= f.collection_select :boatlog_manager_id, BoatlogManager.all, :id, :agency_name, { :include_blank => "" } %><br />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Diver</label>
+          <div class="controls">
+            <%= f.collection_select :diver_id, Diver.order(:diver_number).all, :id, :diver_name, { :include_blank => "" }%><br />
+          </div>
+        </div>
+         
+        <div class="control-group">
+          <label class="control-label">Buddy</label>
+          <div class="controls">
+            <%= f.collection_select :buddy, Diver.all, :id, :diver_name, { :include_blank => "" }%><br />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Field ID</label>
+          <div class="controls">
+            <%= f.text_field :field_id %>
+          </div>
+        </div>
+
+        <div class="control-group date">
+          <label class="control-label">Sample Date</label>
+          <div class="controls">
+            <%= f.text_field :sample_date %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Sample Begin Time</label>
+          <div class="controls">
+            <%= f.text_field :sample_begin_time %>
+          </div>
+        </div>
+
+        </div> 
+        <div class="span4 part_2">
+
+        <div class="control-group">
+          <label class="control-label">Habitat Type</label>
+          <div class="controls">
+            <%= f.collection_select :habitat_type_id, HabitatType.all, :id, :habitat_name, { :include_blank => "" } %><br />
+          </div>
+        </div>
+
+
+        <div class="control-group">
+          <label class="control-label">Meters Completed</label>
+          <div class="controls">
+            <%= f.text_field :meters_completed %>
+          </div>
+        </div>
+
+         <div class="control-group">
+          <label class="control-label">Notes</label>
+          <div class="controls">
+            <%= f.text_area :sample_description, { :size => "200x5" } %>
+          </div>
+        </div> 
+
+      </div>
+      </div>
+
+  <div class="row">
+    <div class="span6 coverCats">
+      <fieldset>
+
+        <ul class="inline lpiHeaders">
+          <li id="cover"> Cover </li> <li id="hard"> Hard </li> <li id=soft> Soft </li> <li id="rubble"> Rubble </li>
+        </ul>
+
+        
+
+        <legend> Cover Categories <span class="label coverTotal">  </span></legend>
+        <div class="cover_data">
+          <%= f.fields_for :point_intercepts do |builder| %>
+            <%= render 'point_intercept_fields', f: builder %>
+          <% end %>
+          <%= f.link_to_add "Add Cover", :point_intercepts %>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class=span3>
+      <%= f.fields_for :invert_belts do |builder| %>
+        <%= render 'invert_belt_fields', f: builder %>
+      <% end %>
+
+      <%= f.fields_for :presence_belts do |builder| %>
+        <%= render 'presence_belt_fields', f: builder %>
+      <% end %>
+    </div>
+  </div>
+
+
+
+
+</div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+</div>
+
+<% end %>

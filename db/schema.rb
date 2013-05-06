@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130419185612) do
+ActiveRecord::Schema.define(:version => 20130502133422) do
 
   create_table "animals", :force => true do |t|
     t.string   "species_code"
@@ -24,6 +24,20 @@ ActiveRecord::Schema.define(:version => 20130419185612) do
     t.datetime "updated_at",      :null => false
   end
 
+  create_table "benthic_covers", :force => true do |t|
+    t.integer  "diver_id"
+    t.integer  "habitat_type_id"
+    t.integer  "buddy"
+    t.string   "field_id"
+    t.date     "sample_date"
+    t.time     "sample_begin_time"
+    t.integer  "meters_completed"
+    t.text     "sample_description"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "boatlog_manager_id"
+  end
+
   create_table "boatlog_managers", :force => true do |t|
     t.string   "agency"
     t.string   "firstname"
@@ -32,12 +46,48 @@ ActiveRecord::Schema.define(:version => 20130419185612) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "diver_samples", :force => true do |t|
-    t.integer  "sample_id"
+  create_table "coral_demographics", :force => true do |t|
     t.integer  "diver_id"
-    t.boolean  "primary_diver"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.integer  "habitat_type_id"
+    t.integer  "buddy"
+    t.string   "field_id"
+    t.date     "sample_date"
+    t.time     "sample_begin_time"
+    t.integer  "meters_completed"
+    t.text     "sample_description"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "boatlog_manager_id"
+  end
+
+  create_table "corals", :force => true do |t|
+    t.string   "code"
+    t.string   "scientific_name"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "cover_cats", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "demographic_corals", :force => true do |t|
+    t.integer "coral_demographic_id"
+    t.integer "coral_id"
+    t.float   "max_diameter"
+    t.float   "perpendicular_diameter"
+    t.float   "height"
+    t.float   "old_mortality"
+    t.float   "recent_mortality"
+    t.string  "bleach_condition"
+  end
+
+  create_table "diver_samples", :force => true do |t|
+    t.integer "sample_id"
+    t.integer "diver_id"
+    t.boolean "primary_diver"
   end
 
   create_table "divers", :force => true do |t|
@@ -68,6 +118,34 @@ ActiveRecord::Schema.define(:version => 20130419185612) do
     t.string   "habitat_description"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+  end
+
+  create_table "invert_belts", :force => true do |t|
+    t.integer "benthic_cover_id"
+    t.integer "lobster_num"
+    t.integer "conch_num"
+    t.integer "diadema_num"
+  end
+
+  create_table "point_intercepts", :force => true do |t|
+    t.integer "benthic_cover_id"
+    t.integer "cover_cat_id"
+    t.integer "hardbottom_num"
+    t.integer "softbottom_num"
+    t.integer "rubble_num"
+  end
+
+  create_table "presence_belts", :force => true do |t|
+    t.integer "benthic_cover_id"
+    t.integer "a_palmata"
+    t.integer "a_cervicornis"
+    t.integer "d_cylindrus"
+    t.integer "m_ferox"
+    t.integer "m_annularis"
+    t.integer "m_franksi"
+    t.integer "m_faveolata"
+    t.integer "d_stokesii"
+    t.integer "a_lamarcki"
   end
 
   create_table "sample_animals", :force => true do |t|

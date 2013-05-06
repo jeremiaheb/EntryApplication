@@ -1,0 +1,25 @@
+<%= form_for(@coral) do |f| %>
+  <% if @coral.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@coral.errors.count, "error") %> prohibited this coral from being saved:</h2>
+
+      <ul>
+      <% @coral.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :code %><br />
+    <%= f.text_field :code %>
+  </div>
+  <div class="field">
+    <%= f.label :scientific_name %><br />
+    <%= f.text_field :scientific_name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

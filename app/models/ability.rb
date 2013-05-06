@@ -37,6 +37,7 @@ class Ability
     elsif current_diver.role == 'diver'
       can :create, [Sample, BenthicCover, CoralDemographic]
       can :read, [Sample, BenthicCover, CoralDemographic]
+      can :destroy, [Sample, BenthicCover, CoralDemographic]
       can :update, Sample do |sample|
         sample.try(:myId) == current_diver.id
       end

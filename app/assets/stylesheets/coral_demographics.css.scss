@@ -10,6 +10,55 @@
   overflow: auto;
 }
 
+.demo_corals input  {
+  width: 75px;
+}
+
 .date input {
   width: 80px; 
+}
+
+.lpiHeaders li {
+  width: 20px;
+}
+
+#coral {
+  position: relative;
+  left: 90px;
+
+}
+
+#max_diam {
+  position: relative;
+  left: 200px;
+
+}
+
+#perp_diam {
+  position: relative;
+  left: 260px;
+
+}
+
+#height {
+  position: relative;
+  left: 325px;
+
+}
+
+#old_mort {
+  position: relative;
+  left: 375px;
+
+}
+
+#recent_mort {
+  position: relative;
+  left: 435px;
+
+}
+
+#bleach_cond {
+  position: relative;
+  left: 485px;
 }

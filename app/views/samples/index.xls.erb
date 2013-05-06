@@ -8,27 +8,55 @@
   <Worksheet ss:Name="Sample">
     <Table>
       <Row>
-        <Cell><Data ss:Type="String">MASTER_SAMPLE_CD</Data></Cell>
-        <Cell><Data ss:Type="String">DIVER_NR</Data></Cell>
-        <Cell><Data ss:Type="String">BUDDY_NR</Data></Cell>
-        <Cell><Data ss:Type="String">SAMPLE_TYPE_NR</Data></Cell>
-        <Cell><Data ss:Type="String">divhab</Data></Cell>
-        <Cell><Data ss:Type="String">habname</Data></Cell>
-        <Cell><Data ss:Type="String">YEAR</Data></Cell>
-        <Cell><Data ss:Type="String">MONTH</Data></Cell>
-        <Cell><Data ss:Type="String">DAY</Data></Cell>
+        <Cell><Data ss:Type="String"> MASTER_SAMPLE_CD            </Data></Cell>
+        <Cell><Data ss:Type="String"> DIVER_NR                    </Data></Cell>
+        <Cell><Data ss:Type="String"> BUDDY_NR                    </Data></Cell>
+        <Cell><Data ss:Type="String"> SAMPLE_TYPE_NR              </Data></Cell>
+        <Cell><Data ss:Type="String"> divhab                      </Data></Cell>
+        <Cell><Data ss:Type="String"> habname                     </Data></Cell>
+        <Cell><Data ss:Type="String"> YEAR                        </Data></Cell>
+        <Cell><Data ss:Type="String"> MONTH                       </Data></Cell>
+        <Cell><Data ss:Type="String"> DAY                         </Data></Cell>
+        <Cell><Data ss:Type="String"> divbegh                     </Data></Cell>
+        <Cell><Data ss:Type="String"> divbegm                     </Data></Cell>
+        <Cell><Data ss:Type="String"> divendh                     </Data></Cell>
+        <Cell><Data ss:Type="String"> divendm                     </Data></Cell>
+        <Cell><Data ss:Type="String"> SAMPLE_START_TIME_HOURS     </Data></Cell>
+        <Cell><Data ss:Type="String"> SAMPLE_START_TIME_MINUTES   </Data></Cell>
+        <Cell><Data ss:Type="String"> SAMPLE_END_TIME_HOURS       </Data></Cell>
+        <Cell><Data ss:Type="String"> SAMPLE_END_TIME_MINUTES     </Data></Cell>
+        <Cell><Data ss:Type="String"> divdepth                    </Data></Cell>
+        <Cell><Data ss:Type="String"> SAMPLE_DEPTH                </Data></Cell>
+        <Cell><Data ss:Type="String"> FISHING_GEAR                </Data></Cell>
+        <Cell><Data ss:Type="String"> fieldid                     </Data></Cell>
+        <Cell><Data ss:Type="String"> UNDERWATER_VISIBILITY       </Data></Cell>
+        <Cell><Data ss:Type="String"> SAMPLE_DESCR                </Data></Cell>
       </Row>
     <% @samples.each do |sample| %>
       <Row>
-        <Cell><Data ss:Type="String"><%= sample.msn %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= sample.diver_samples.primary[0].diver.diver_number %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= sample.diver_samples.secondary[0].diver.diver_number %></Data></Cell>
-        <Cell><Data ss:Type="Number"><%= sample.sample_type.id %></Data></Cell>
-        <Cell><Data ss:Type="Number"><%= sample.habitat_type.id %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= sample.habitat_type.habitat_name %></Data></Cell>
-        <Cell><Data ss:Type="Number"><%= sample.sample_date.strftime('%Y') %></Data></Cell>
-        <Cell><Data ss:Type="Number"><%= sample.sample_date.strftime('%m') %></Data></Cell>
-        <Cell><Data ss:Type="Number"><%= sample.sample_date.strftime('%d') %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= sample.msn                                           %>  </Data></Cell>
+        <Cell><Data ss:Type="String"><%= sample.diver_samples.primary[0].diver.diver_number   %>  </Data></Cell>
+        <Cell><Data ss:Type="String"><%= sample.diver_samples.secondary[0].diver.diver_number %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.sample_type.id                                %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.habitat_type.id                               %>  </Data></Cell>
+        <Cell><Data ss:Type="String"><%= sample.habitat_type.habitat_name                     %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.sample_date.strftime('%Y')                    %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.sample_date.strftime('%m')                    %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.sample_date.strftime('%d')                    %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.dive_begin_time.strftime('%H')                %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.dive_begin_time.strftime('%M')                %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.dive_end_time.strftime('%H')                  %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.dive_end_time.strftime('%M')                  %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.sample_begin_time.strftime('%H')              %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.sample_begin_time.strftime('%M')              %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.sample_end_time.strftime('%H')                %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.sample_end_time.strftime('%M')                %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.dive_depth                                    %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.sample_depth                                  %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.fishing_gear                                  %>  </Data></Cell>
+        <Cell><Data ss:Type="String"><%= sample.field_id                                      %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.underwater_visibility                         %>  </Data></Cell>
+        <Cell><Data ss:Type="String"><%= sample.sample_description                            %>  </Data></Cell>
       </Row>
     <% end %>
     </Table>
@@ -36,19 +64,79 @@
   <Worksheet ss:Name="Substrate">
     <Table>
       <Row>
-        <Cell><Data ss:Type="String">MASTER_SAMPLE_CD</Data></Cell>
-        <Cell><Data ss:Type="String">SUBSTRATE_MAX_DEPTH</Data></Cell>
-        <Cell><Data ss:Type="String">SUBSTRATE_MIN_DEPTH</Data></Cell>
-        <Cell><Data ss:Type="String">HARD_VERTICLE_RELIEF</Data></Cell>
-        <Cell><Data ss:Type="String">SOFT_VERTICLE_RELIEF</Data></Cell>
+        <Cell><Data ss:Type="String">MASTER_SAMPLE_CD             </Data></Cell>
+        <Cell><Data ss:Type="String">SUBSTRATE_MAX_DEPTH          </Data></Cell>
+        <Cell><Data ss:Type="String">SUBSTRATE_MIN_DEPTH          </Data></Cell>
+        <Cell><Data ss:Type="String">HARD_VERTICLE_RELIEF         </Data></Cell>
+        <Cell><Data ss:Type="String">SOFT_VERTICLE_RELIEF         </Data></Cell>
+        <Cell><Data ss:Type="String">h_relcat_0                   </Data></Cell>
+        <Cell><Data ss:Type="String">h_relcat_1                   </Data></Cell>
+        <Cell><Data ss:Type="String">h_relcat_2                   </Data></Cell>
+        <Cell><Data ss:Type="String">h_relcat_3                   </Data></Cell>
+        <Cell><Data ss:Type="String">h_relcat_4                   </Data></Cell>
+        <Cell><Data ss:Type="String">s_relcat_0                   </Data></Cell>
+        <Cell><Data ss:Type="String">s_relcat_1                   </Data></Cell>
+        <Cell><Data ss:Type="String">s_relcat_2                   </Data></Cell>
+        <Cell><Data ss:Type="String">s_relcat_3                   </Data></Cell>
+        <Cell><Data ss:Type="String">s_relcat_4                   </Data></Cell>
+        <Cell><Data ss:Type="String">SAND_PERCENTAGE              </Data></Cell>
+        <Cell><Data ss:Type="String">HARDB_PRECENTAGE             </Data></Cell>
+        <Cell><Data ss:Type="String">RUBBLE_PERCENTAGE            </Data></Cell>
+        <Cell><Data ss:Type="String">SAND_BARE                    </Data></Cell>
+        <Cell><Data ss:Type="String">SAND_MACRO_ALGAE             </Data></Cell>
+        <Cell><Data ss:Type="String">SAND_SEAGRASS                </Data></Cell>
+        <Cell><Data ss:Type="String">SAND_SPONGE                  </Data></Cell>
+        <Cell><Data ss:Type="String">s_pcov_oth1_lab              </Data></Cell>
+        <Cell><Data ss:Type="String">s_pcov_oth2_lab              </Data></Cell>
+        <Cell><Data ss:Type="String">s_pcov_oth1                  </Data></Cell>
+        <Cell><Data ss:Type="String">s_pcov_oth2                  </Data></Cell>
+        <Cell><Data ss:Type="String">HARDBOTTOM_ALGAL_TURF        </Data></Cell>
+        <Cell><Data ss:Type="String">HARBOTTOM_MACRO_ALGAE        </Data></Cell>
+        <Cell><Data ss:Type="String">HARDBOTTOM_LIVE_CORAL        </Data></Cell>
+        <Cell><Data ss:Type="String">HARDBOTTOM_OCTOCORAL         </Data></Cell>
+        <Cell><Data ss:Type="String">HARDBOTTOM_SPONGE            </Data></Cell>
+        <Cell><Data ss:Type="String">h_pcov_oth1_lab              </Data></Cell>
+        <Cell><Data ss:Type="String">h_pcov_oth2_lab              </Data></Cell>
+        <Cell><Data ss:Type="String">h_pcov_oth1                  </Data></Cell>
+        <Cell><Data ss:Type="String">h_pcov_oth2                  </Data></Cell>
       </Row>
     <% @samples.each do |sample| %>
       <Row>
-        <Cell><Data ss:Type="String"><%= sample.msn %></Data></Cell>
-        <Cell><Data ss:Type="Number"><%= sample.substrate_max_depth %></Data></Cell>
-        <Cell><Data ss:Type="Number"><%= sample.substrate_min_depth %></Data></Cell>
-        <Cell><Data ss:Type="Number"><%= sample.hard_verticle_relief %></Data></Cell>
-        <Cell><Data ss:Type="Number"><%= sample.soft_verticle_relief %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= sample.msn                                           %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.substrate_max_depth                           %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.substrate_min_depth                           %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.hard_verticle_relief                          %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.soft_verticle_relief                          %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.hard_relief_cat_0                             %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.hard_relief_cat_1                             %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.hard_relief_cat_2                             %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.hard_relief_cat_3                             %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.hard_relief_cat_4                             %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.soft_relief_cat_0                             %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.soft_relief_cat_1                             %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.soft_relief_cat_2                             %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.soft_relief_cat_3                             %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.soft_relief_cat_4                             %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.sand_percentage                               %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.hardbottom_percentage                         %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.rubble_percentage                             %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.sand_bare                                     %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.sand_macro_algae                              %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.sand_seagrass                                 %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.sand_sponge                                   %>  </Data></Cell>
+        <Cell><Data ss:Type="String"><%= sample.sand_pcov_other1_lab                          %>  </Data></Cell>
+        <Cell><Data ss:Type="String"><%= sample.sand_pcov_other2_lab                          %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.sand_pcov_other1                              %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.sand_pcov_other2                              %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.hardbottom_algal_turf                         %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.hardbottom_macro_algae                        %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.hardbottom_live_coral                         %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.hardbottom_octocoral                          %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.hardbottom_sponge                             %>  </Data></Cell>
+        <Cell><Data ss:Type="String"><%= sample.hard_pcov_other1_lab                          %>  </Data></Cell>
+        <Cell><Data ss:Type="String"><%= sample.hard_pcov_other2_lab                          %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.hard_pcov_other1                              %>  </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= sample.hard_pcov_other2                              %>  </Data></Cell>
       </Row>
     <% end %>
     </Table>
@@ -56,22 +144,26 @@
   <Worksheet ss:Name="Species">
     <Table>
       <Row>
-        <Cell><Data ss:Type="String">msn</Data></Cell>
-        <Cell><Data ss:Type="String">species</Data></Cell>
-        <Cell><Data ss:Type="String">number</Data></Cell>
-        <Cell><Data ss:Type="String">mean</Data></Cell>
-        <Cell><Data ss:Type="String">min</Data></Cell>
-        <Cell><Data ss:Type="String">max</Data></Cell>
+        <Cell><Data ss:Type="String">MASTER_SAMPLE_CD             </Data></Cell>
+        <Cell><Data ss:Type="String">SPECIES_CD                   </Data></Cell>
+        <Cell><Data ss:Type="String">NUMBER_OF_INDIVIDUALS        </Data></Cell>
+        <Cell><Data ss:Type="String">AVERAGE_LENGTH               </Data></Cell>
+        <Cell><Data ss:Type="String">MIN_LENGTH                   </Data></Cell>
+        <Cell><Data ss:Type="String">MAX_LENGTH                   </Data></Cell>
+        <Cell><Data ss:Type="String">TIME_SEEN                    </Data></Cell>
+        <Cell><Data ss:Type="String">instance_field               </Data></Cell>
+        <Cell><Data ss:Type="String">instance_key                 </Data></Cell>
       </Row>
       <% @samples.each do |sample| %>
         <% sample.sample_animals.each do |spp| %>
           <Row>
-            <Cell><Data ss:Type="String"><%= spp.sample.msn %></Data></Cell>
-            <Cell><Data ss:Type="Date"><%= spp.animal.species_code%></Data></Cell>
-            <Cell><Data ss:Type="Number"><%= spp.number_individuals %></Data></Cell>
-            <Cell><Data ss:Type="Number"><%= spp.average_length %></Data></Cell>
-            <Cell><Data ss:Type="Number"><%= spp.min_length %></Data></Cell>
-            <Cell><Data ss:Type="Number"><%= spp.max_length %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= spp.sample.msn                                   %>  </Data></Cell>
+            <Cell><Data ss:Type="Date"><%= spp.animal.species_code                            %>  </Data></Cell>
+            <Cell><Data ss:Type="Number"><%= spp.number_individuals                           %>  </Data></Cell>
+            <Cell><Data ss:Type="Number"><%= spp.average_length                               %>  </Data></Cell>
+            <Cell><Data ss:Type="Number"><%= spp.min_length                                   %>  </Data></Cell>
+            <Cell><Data ss:Type="Number"><%= spp.max_length                                   %>  </Data></Cell>
+            <Cell><Data ss:Type="Number"><%= spp.time_seen                                    %>  </Data></Cell>
           </Row>
         <% end %>
     <% end %>

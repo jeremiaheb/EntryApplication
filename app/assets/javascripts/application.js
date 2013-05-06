@@ -231,7 +231,7 @@ $(function(){
      $(document).delegate(".add_nested_fields", "click", function(){ 
         set_time_seen_field_on_focus();
         enable_disable_animals_fields();
-        alertSpeciesSizes();
+        //alertSpeciesSizes();
         $(".section_3 input:text:visible").eq(-5).focus();
    });
 
@@ -828,7 +828,7 @@ $(function(){
     });
   };
   
-  alertSpeciesSizes();
+  //alertSpeciesSizes();
 
 
   function alert24HourClock() {

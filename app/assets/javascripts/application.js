@@ -279,16 +279,19 @@ $(function(){
         $('input#' + $mean).attr('disabled', false)
         $('input#' + $min).attr('disabled', false)
         $('input#' + $max).attr('disabled', false)
+        $('input#' + $mean).focus()
     } else if ($indValue == 1) {
         $('input#' + $mean).attr('disabled', false)
         $('input#' + $min).val("")
         $('input#' + $min).attr('disabled', true)
         $('input#' + $max).val("")
         $('input#' + $max).attr('disabled', true)
+        $('input#' + $mean).focus()
     } else if ( $indValue == 2 ){
         $('input#' + $mean).val("").attr('disabled', true)
         $('input#' + $min).attr('disabled', false)
         $('input#' + $max).attr('disabled', false)
+        $('input#' + $min).focus()
     }
     });
   };
@@ -739,8 +742,7 @@ $(function(){
     $('[name*="number_individuals"]').each(function(){
       $(this).rules('add', {
         required: true,
-        number: true,
-        doesNotHaveOverlap: true
+        number: true
       });
     });
     $('[name*="average_length"]').each(function(){
@@ -775,11 +777,18 @@ $(function(){
       validate_fields();
     });
 
+    //$('#animals').change(function(){
+        //$('input.error').each(function(){
+          //$('form').validate().element(this);
+        //});
+    //});
+
     $('#animals').change(function(){
         $('input.error').each(function(){
           $('form').validate().element(this);
         });
     });
+
   
     $('form').bind('change keyup', function() {
       if ( $('#animals input:visible.error').length == 0 ) {

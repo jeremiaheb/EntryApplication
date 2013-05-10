@@ -66,7 +66,7 @@ class SamplesController < ApplicationController
 
     respond_to do |format|
       if @sample.save
-        format.html { redirect_to @sample, notice: 'Sample was successfully created.' }
+        format.html { redirect_to samples_path, notice: 'Sample was successfully created.' }
         format.json { render json: @sample, status: :created, location: @sample }
       else
         format.html { render action: "new" }
@@ -82,7 +82,7 @@ class SamplesController < ApplicationController
 
     respond_to do |format|
       if @sample.update_attributes(params[:sample])
-        format.html { redirect_to @sample, notice: 'Sample was successfully updated.' }
+        format.html { redirect_to samples_path, notice: 'Sample was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

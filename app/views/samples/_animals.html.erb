@@ -1,10 +1,10 @@
 <%= object.fields_for :sample_animals do |builder| %>
   <li>
   <%= builder.collection_select :animal_id, Animal.all, :id, :spp_code_common, {:include_blank => ""}, {:class=>"sppCommon" } %>
-  <%= builder.text_field :number_individuals, {:class => "timeSeen_#{builder.object.time_seen }"}%>
-  <%= builder.text_field :average_length, {:class => "timeSeen_#{builder.object.time_seen }" } %>
-  <%= builder.text_field :min_length, {:class => "timeSeen_#{builder.object.time_seen }" } %>
-  <%= builder.text_field :max_length, {:class => "timeSeen_#{builder.object.time_seen }" } %>
+  <%= builder.text_field :number_individuals, {:class => "timeSeen_#{builder.object.time_seen } valCheck"}%>
+  <%= builder.text_field :average_length, {:class => "timeSeen_#{builder.object.time_seen } valCheck" } %>
+  <%= builder.text_field :min_length, {:class => "timeSeen_#{builder.object.time_seen } valCheck" } %>
+  <%= builder.text_field :max_length, {:class => "timeSeen_#{builder.object.time_seen } valCheck" } %>
   <%= builder.hidden_field :time_seen %>
   <%= builder.link_to_remove "Remove Species", {:tabindex => "-1"}  %>
   </li>

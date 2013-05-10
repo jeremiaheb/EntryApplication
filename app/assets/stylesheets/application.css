@@ -136,6 +136,9 @@ div.section_1,div.section_2, p.flipSection_1 {
     -webkit-box-shadow: 2px 2px 2px #cccccc;
     box-shadow: 2px 2px 2px #cccccc;
 }
+#substrateSection #speciesSection {
+  visibility: hidden;
+}
 
 .section_1 {
   position: absolute;
@@ -217,6 +220,10 @@ div.section_1,div.section_2, p.flipSection_1 {
   padding: 0px;
   position: absolute;
   top: 225px;
+}
+
+.one_hundred_flag {
+  background: yellow !important;
 }
 
 #speciesTable {
@@ -442,10 +449,15 @@ input.timeSeen_3 {
   float: right;
 }
 
+
+
 #substrateSection fieldset {
   
   margin-top: 0px !important;
 
 }
 
+.error {
+  color: red !important;
+}
 

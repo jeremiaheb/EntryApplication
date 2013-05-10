@@ -1,11 +1,11 @@
-<%= link_to "Home", root_path, :class => 'brand' %>
+<%= link_to "Home", root_path, :class => 'brand', :tabindex => "-1" %>
 <ul class="nav">
   <% if diver_signed_in? %>
     <li style="font-weight:900;font-size:12px" >
-    <%= link_to "Logged in as #{current_diver.username}", edit_diver_registration_path %>
+    <%= link_to "Logged in as #{current_diver.username}", edit_diver_registration_path, :tabindex => "-1" %>
     </li>
     <li>
-    <%= link_to 'Logout', destroy_diver_session_path, :method=>'delete' %>
+    <%= link_to 'Logout', destroy_diver_session_path, :method=>'delete', :tabindex => "-1" %>
     </li>
   <% else %>
     <li>

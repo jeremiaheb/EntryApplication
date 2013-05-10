@@ -64,7 +64,8 @@ $(function(){
     function show_or_hide_substrate(){
 
       var should_display_substrate = new Array();
-
+      var errorCount = $('#sampleSection :input.error').length;
+      
       $('#sampleSection').find('.tab_1').each(function(){
         // This equality test does NOT work with '0' because they time
         // option_selects can be '0'
@@ -74,7 +75,7 @@ $(function(){
           };
       });
 
-      if ( should_display_substrate.length == 0 )
+      if ( should_display_substrate.length == 0 && errorCount == 0)
         { 
           $(".changeSection option[value='substrateSection']").removeAttr("disabled");
         } else {
@@ -120,7 +121,7 @@ $(function(){
      show_or_hide_species();
 
     //on change check if section should show
-     $('.tab_1').change(function(){ 
+     $('.tab_1').focusout(function(){ 
         show_or_hide_substrate();
     });
      
@@ -185,6 +186,7 @@ $(function(){
     if ( $bioticSandVal == "" || $bioticSandVal == 0 ){
       $('.biotic_percentage_sand').val("").attr('disabled', true);
       $('#sample_sand_pcov_other1_lab, #sample_sand_pcov_other2_lab').attr('disabled', true);
+      $('#biotic_percentage_sand_total').removeClass();
     }
   };
   
@@ -197,6 +199,7 @@ $(function(){
     if ( $bioticHardVal == "" || $bioticHardVal == 0 ){
       $('.biotic_percentage_hardbottom').val("").attr('disabled', true);
       $('#sample_hard_pcov_other1_lab, #sample_hard_pcov_other2_lab').attr('disabled', true);
+      $('#biotic_percentage_hardbottom_total').removeClass();
     }
   };
 
@@ -300,17 +303,26 @@ $(function(){
   enable_disable_animals_fields();
 
 
-  //$(".new_sample, .edit_sample").submit(function(){
-    //$(".formContainer :input").attr('disabled', false);
-    //return true;
-  //});
+  $("#validateAnimals").click(function(){
+    $('.validateIcon').empty();
+    
+    $('#animals').find('input:enabled').each(function(){
+      $('.new_sample, .edit_sample').validate().element(this);
+    });
+       
+    if ( $('#animals').find('input:visible.error').length > 0 ) {
+      $('.validateIcon').prepend('<img src="/assets/cross.png"/>');
+    } else { 
+      $('.validateIcon').prepend('<img src="/assets/check.png" />'); 
+      $('#submitButton').attr('disabled', false);
+    }
+  });
 
   $("#submitButton").click(function() {
-    $(".edit_sample").validate().cancelSubmit = true;
+    $(".new_sample, .edit_sample").validate().cancelSubmit = true;
     $(".formContainer :input").attr('disabled', false);
-    $(".edit_sample").validate().submit();
-
-    return false;
+    $(".new_sample, .edit_sample").validate().submit();
+      return false;
 
   });
 
@@ -382,7 +394,9 @@ $(function(){
     });
 
     // Calculate total for 'biotic_percentage_sand' when page loads
-    calculate_totals('biotic_percentage_sand', 'biotic_percentage_sand_total' );
+    if ( $('#sample_sand_percentage').val() != 0 ) {  
+      calculate_totals('biotic_percentage_sand', 'biotic_percentage_sand_total' );
+    };
 
     // Calculate total for 'biotic_percentage_sand' on change
     $('.biotic_percentage_sand').change(function(){
@@ -390,7 +404,9 @@ $(function(){
     });
 
     // Calculate total for 'biotic_percentage_hardbottom' when page loads
-    calculate_totals('biotic_percentage_hardbottom', 'biotic_percentage_hardbottom_total' );
+    if ( $('#sample_hardbottom_percentage').val() != 0 ) {  
+      calculate_totals('biotic_percentage_hardbottom', 'biotic_percentage_hardbottom_total' );
+    };
 
     // Calculate total for 'biotic_percentage_hardbottom' on change
     $('.biotic_percentage_hardbottom').change(function(){
@@ -493,7 +509,8 @@ $(function(){
     "lessThan",
     function(value, element, params) {
       function meanIsEnabled(e) {
-        return e.parent().find('[id$="average_length"]').is(":enabled");
+        //return e.parent().find('[id$="average_length"]').is(":enabled");
+        return e.parent().find('[id$="number_individuals"]').val() >= 3;
       }
  
       if (meanIsEnabled($(element))) {
@@ -509,7 +526,8 @@ $(function(){
     "greaterThanEqualToAvg",
     function(value, element, params) {
       function avgIsEnabled(e) {
-        return e.parent().find('[id$="average_length"]').is(":enabled");
+        //return e.parent().find('[id$="average_length"]').is(":enabled");
+        return e.parent().find('[id$="number_individuals"]').val() >= 3;
       }
 
       if (avgIsEnabled($(element))) {
@@ -571,7 +589,7 @@ $(function(){
     $(".new_sample, .edit_sample").validate({
 
       errorElement: "span",
-
+      ignore: ".ignore",
 
       onfocusout: function(element) {
         this.element(element);
@@ -775,28 +793,27 @@ $(function(){
     validate_fields();
     $(document).delegate(".add_nested_fields", "click", function(){ 
       validate_fields();
+      $('.validateIcon').empty();
+      $('#submitButton').attr('disabled', true);
     });
-
-    //$('#animals').change(function(){
-        //$('input.error').each(function(){
-          //$('form').validate().element(this);
-        //});
-    //});
 
     $('#animals').change(function(){
         $('input.error').each(function(){
           $('form').validate().element(this);
         });
+        $('.validateIcon').empty();
+        $('#submitButton').attr('disabled', true);
     });
 
   
-    $('form').bind('change keyup', function() {
-      if ( $('#animals input:visible.error').length == 0 ) {
-        $('#submitButton').attr('disabled', false);
-      } else {
-        $('#submitButton').attr('disabled', true);
-      }
-    });
+    //$('form').bind('change keyup', function() {
+      //if ( $('#animals input:visible.error').length == 0 ) {
+        //$('#submitButton').attr('disabled', false);
+      //} else {
+        //$('#submitButton').attr('disabled', true);
+      //}
+    //});
+
 
   speciesInformation = {}
   $.each(animal_info, function(a){
@@ -852,6 +869,6 @@ $(function(){
   };
 
   alert24HourClock();
-
+  $('#submitButton').attr('disabled', true);
 
 });

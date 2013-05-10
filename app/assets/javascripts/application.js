@@ -413,7 +413,7 @@ $(function(){
         calculate_totals( 'biotic_percentage_hardbottom', 'biotic_percentage_hardbottom_total' );
     });
 
-    $("form").bind("keypress", function(e){
+    $("#animals").bind("keypress", function(e){
       if (e.keyCode ==13){
         e.preventDefault();
         $(".add_nested_fields").trigger("click");

@@ -78,8 +78,10 @@ $(function(){
       if ( should_display_substrate.length == 0 && errorCount == 0)
         { 
           $(".changeSection option[value='substrateSection']").removeAttr("disabled");
+          $('#gotoSubstrate').attr('disabled', false);
         } else {
           $(".changeSection option[value='substrateSection']").attr("disabled", true);
+          $('#gotoSubstrate').attr('disabled', true);
         };
     };
 
@@ -110,11 +112,24 @@ $(function(){
       if ( should_display_species.length == 0 && all_totals_equal_hundred == true)
         { 
           $(".changeSection option[value='speciesSection']").removeAttr("disabled");
+          $('#gotoSpecies').attr('disabled', false);
         } else {
           $(".changeSection option[value='speciesSection']").attr("disabled", true);
+          $('#gotoSpecies').attr('disabled', true);
         };
     };
 
+    $('#gotoSubstrate').click(function(){
+      $('#sampleSection').hide();
+      $('#substrateSection').show();
+      $('.changeSection').val('substrateSection');
+    });
+
+    $('#gotoSpecies').click(function(){
+      $('#substrateSection').hide();
+      $('#speciesSection').show();
+      $('.changeSection').val('speciesSection');
+    });
 
     //Show or hide sections
      show_or_hide_substrate();

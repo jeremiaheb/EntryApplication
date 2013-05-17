@@ -86,40 +86,7 @@ input.error {
   border: 1px solid red;
 }
 
-/*span.error {*/
-  /*position: absolute;*/
-/*}*/
 
-/*#submitButton {*/
-  /*position: relative;*/
-  /*top: 70px;*/
-  /*left: 800px;*/
-/*}*/
-
-/*div.sampleListContainer {*/
-    /*width: 420px;*/
-    /*background: #DDD;*/
- 
-    /*[> Border style <]*/
-    /*border: 1px solid #cccccc;*/
-    /*-moz-border-radius: 7px;*/
-    /*-webkit-border-radius: 7px;*/
-    /*border-radius: 7px;*/
- 
-    /*[> Border Shadow <]*/
-    /*-moz-box-shadow: 2px 2px 2px #cccccc;*/
-    /*-webkit-box-shadow: 2px 2px 2px #cccccc;*/
-    /*box-shadow: 2px 2px 2px #cccccc;*/
-
-/*}*/
-
-/*div.sampleListContainer td {*/
-/*text-align: center;*/
-/*}*/
-
-/*div.sampleListContainer h1 {*/
-/*text-align: center;*/
-/*}*/
 
 div.section_1,div.section_2, p.flipSection_1 {
     /*width: 920px;*/
@@ -169,6 +136,13 @@ div.section_1,div.section_2, p.flipSection_1 {
   width: 425px;
 }
 
+.gotoButton {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 10px !important; 
+}
+
 .section_2 {
   position: absolute;
   /*height: 100%;*/
@@ -211,7 +185,7 @@ div.section_1,div.section_2, p.flipSection_1 {
   width: 310px;
   padding: 0px;
   position: absolute;
-  top: 225px;
+  top: 175px;
 }
 
 #section_2_part_4 {
@@ -219,7 +193,7 @@ div.section_1,div.section_2, p.flipSection_1 {
   width: 310px;
   padding: 0px;
   position: absolute;
-  top: 225px;
+  top: 175px;
 }
 
 .one_hundred_flag {

@@ -15,7 +15,7 @@
         <div class="control-group">
           <label class="control-label"><%= thisDiver %></label>
           <div class="controls">
-            <%= builder.collection_select :diver_id, Diver.active_divers.order(:diver_number).all, :id, :diver_name, { :include_blank => true, :selected => if_primary }, { :class => 'tab_1'} %>
+            <%= builder.collection_select :diver_id, Diver.active_divers.order(:diver_number).all, :id, :diver_name, { :include_blank => true, :selected => if_primary }, { :class => 'tab_1', :tabindex => "1"} %>
           </div>
         </div>
 <% end %>
@@ -34,7 +34,7 @@
         <div class="control-group">
           <label class="control-label"><%= thisDiver %></label>
           <div class="controls">
-            <%= builder.collection_select :diver_id, Diver.active_divers.order(:diver_number).all, :id, :diver_name, { :include_blank => true }, { :class => 'tab_1'} %>
+            <%= builder.collection_select :diver_id, Diver.active_divers.order(:diver_number).all, :id, :diver_name, { :include_blank => true }, { :class => 'tab_1', :tabindex => "1"} %>
           </div>
         </div>
 <% end %>

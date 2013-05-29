@@ -14,7 +14,7 @@
      <div id='section_1_part_1'>
        
        <div class="control-group">
-          <label class="control-label" title="dows this work">Boatlog/Manager</label>
+          <label class="control-label" title="The person/agency who is responsible for this data">Boatlog/Manager</label>
           <div class="controls">
             <%= f.collection_select :boatlog_manager_id, BoatlogManager.all, :id, :agency_name, { :include_blank => "" }, {  :class => 'tab_1', :tabindex => "1" } %><br />
           </div>

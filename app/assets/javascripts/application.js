@@ -43,7 +43,8 @@ $(function(){
     );
     
     $('.display').dataTable( {
-        "sDom": "<'row'<'span7'lf>r>t<'row'<'span7'ip>>",
+        //"sDom": "<'row'<'span7'lf>r>t<'row'<'span7'ip>>",
+        "sDom": '<"top"ifp<"clear">>rt<"bottom"<"clear">>',
         "sPaginationType": "bootstrap"
     } );
 
@@ -58,9 +59,11 @@ $(function(){
       $("#"+targetId).show();
   });
    
+    if ( $("form").hasClass("new_sample") ) {
     $(".changeSection option[value='substrateSection']").attr("disabled", "disabled");
     $(".changeSection option[value='speciesSection']").attr("disabled", "disabled");
- 
+    }; 
+
     function show_or_hide_substrate(){
 
       var should_display_substrate = new Array();
@@ -132,8 +135,10 @@ $(function(){
     });
 
     //Show or hide sections
+    if ( $("form").hasClass("new_sample") ) {
      show_or_hide_substrate();
      show_or_hide_species();
+    }; 
 
     //on change check if section should show
      $('.tab_1').focusout(function(){ 
@@ -595,6 +600,8 @@ $(function(){
       errorPlacement: function (error, element) {
         if ( element.is('[id$="number_individuals"]') || element.is('[id$="average_length"]') || element.is('[id$="min_length"]') || element.is('[id$="max_length"]') ) {
           error.insertAfter(element.parent().find('[id$="max_length"]'));
+          } else if ( element.is(".hard_relief") || element.is(".soft_relief") ) { 
+          error.insertAfter(element.parent().parent().parent().parent());
           } else {
             error.insertAfter(element);
           }

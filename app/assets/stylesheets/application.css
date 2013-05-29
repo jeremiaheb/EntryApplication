@@ -435,3 +435,14 @@ input.timeSeen_3 {
   color: red !important;
 }
 
+.top {
+  text-align: justify;
+  -ms-text-justify: distribute-all-lines;
+  text-justify: distribute-all-lines;
+}
+
+.dataTables_filter, .dataTables_paginate {
+    vertical-align: top;
+    display: inline-block;
+    *display: inline;
+}

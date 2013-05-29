@@ -1,6 +1,6 @@
 <div class="appContainer">
   <div class="sampleListContainer">
-    <h3><%= current_diver.whole_name %> Samples</h3>
+    <h3><%= current_diver.whole_name %> Benthic Cover Samples</h3>
   
       <table id="sampleList" class="display table table-condensed">
         <thead>
@@ -23,6 +23,8 @@
       </tbody>
       </table>
   </div>
-<div id="newSampleButton"><%= link_to image_tag("NewSampleButton.png"), new_benthic_cover_path %></div>
+  <div id="newSampleButton"> 
+    <%= button_to('New Sample', new_benthic_cover_path, :method => "get", :class => 'btn btn-large btn-primary wrap')  %>   
+  </div>
 </div>
 

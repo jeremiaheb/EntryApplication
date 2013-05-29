@@ -57,7 +57,7 @@ class CoralDemographicsController < ApplicationController
 
     respond_to do |format|
       if @coral_demographic.save
-        format.html { redirect_to @coral_demographic, notice: 'Coral demographic was successfully created.' }
+        format.html { redirect_to coral_demographics_path, notice: 'Coral demographic was successfully created.' }
         format.json { render json: @coral_demographic, status: :created, location: @coral_demographic }
       else
         format.html { render action: "new" }
@@ -73,7 +73,7 @@ class CoralDemographicsController < ApplicationController
 
     respond_to do |format|
       if @coral_demographic.update_attributes(params[:coral_demographic])
-        format.html { redirect_to @coral_demographic, notice: 'Coral demographic was successfully updated.' }
+        format.html { redirect_to coral_demographics_path, notice: 'Coral demographic was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

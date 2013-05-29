@@ -70,9 +70,8 @@
     </div>
   </div>
 </div>
-
-<h3>
-  <span class="ActionBar"><%= link_to image_tag("edit-6.png") + "Edit Sample", edit_sample_path(@sample) %></span>
-  <span class="ActionBar"><%= link_to image_tag("dialog-cancel-7.png") + "Delete Sample", @sample, confirm: 'Are you sure?', method: :delete %></span>
-  <span class="ActionBar"><%= link_to image_tag("edit-6.png") + "Sample List", samples_path %></span>
-<h3>
+<div class="showActions" >
+ <%= button_to('Edit Sample', edit_sample_path(@sample), :method => "get", :class => 'btn btn-large btn-primary showAction') %>
+ <%= button_to("Delete Sample", @sample, confirm: 'Are you sure?', method: :delete, :class => 'btn btn-large btn-primary showAction') %>
+ <%= button_to('Samples List', samples_path, :method => "get", :class => 'btn btn-large btn-primary showAction') %>
+</div>

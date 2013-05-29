@@ -82,8 +82,8 @@
 /*}*/
 
 input.error {
-  background: #fed;
-  border: 1px solid red;
+  background: yellow !important;
+  border: 1px solid yellow !important;
 }
 
 
@@ -406,6 +406,17 @@ input.timeSeen_3 {
 
 .ActionBar {
   margin-right: 15px;
+}
+
+.showActions {
+  width: 100%;
+  text-align: center;
+}
+
+.showActions form{ 
+  display: inline-block;
+  margin-right: 8px;
+  text-align:center;
 }
 
 #animals input[disabled='disabled'] {

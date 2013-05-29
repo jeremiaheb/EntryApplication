@@ -23,5 +23,7 @@
       </tbody>
       </table>
   </div>
-<div id="newSampleButton"><%= link_to image_tag("NewSampleButton.png"), new_coral_demographic_path %></div>
+  <div id="newSampleButton"> 
+    <%= button_to('New Sample', new_coral_demographic_path, :method => "get", :class => 'btn btn-large btn-primary wrap')  %>   
+  </div>
 </div>

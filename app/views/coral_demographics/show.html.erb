@@ -40,7 +40,8 @@
   </div>
 </div>
 
-<h3>
-  <span class="ActionBar"><%= link_to image_tag("edit-6.png") + "Edit Sample", edit_coral_demographic_path(@coral_demographic) %></span>
-  <span class="ActionBar"><%= link_to image_tag("dialog-cancel-7.png") + "Delete Sample", @coral_demographic, confirm: 'Are you sure?', method: :delete %></span>
-<h3>
+<div class="showActions" >
+ <%= button_to('Edit Sample', edit_coral_demographic_path(@coral_demographic), :method => "get", :class => 'btn btn-large btn-primary showAction') %>
+ <%= button_to("Delete Sample", @coral_demographic, confirm: 'Are you sure?', method: :delete, :class => 'btn btn-large btn-primary showAction') %>
+ <%= button_to('Samples List', coral_demographics_path, :method => "get", :class => 'btn btn-large btn-primary showAction') %>
+</div>

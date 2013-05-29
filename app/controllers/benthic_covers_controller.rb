@@ -60,7 +60,7 @@ class BenthicCoversController < ApplicationController
 
     respond_to do |format|
       if @benthic_cover.save
-        format.html { redirect_to @benthic_cover, notice: 'Benthic cover was successfully created.' }
+        format.html { redirect_to benthic_covers_path, notice: 'Benthic cover was successfully created.' }
         format.json { render json: @benthic_cover, status: :created, location: @benthic_cover }
       else
         format.html { render action: "new" }
@@ -76,7 +76,7 @@ class BenthicCoversController < ApplicationController
 
     respond_to do |format|
       if @benthic_cover.update_attributes(params[:benthic_cover])
-        format.html { redirect_to @benthic_cover, notice: 'Benthic cover was successfully updated.' }
+        format.html { redirect_to benthic_covers_path, notice: 'Benthic cover was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

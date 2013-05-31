@@ -1,6 +1,6 @@
 class BenthicCover < ActiveRecord::Base
 
-  has_many :point_intercepts
+  has_many :point_intercepts, :dependent => :destroy
   has_many :cover_cats, :through => :point_intercepts
   accepts_nested_attributes_for :point_intercepts, :allow_destroy => true
 
@@ -8,10 +8,10 @@ class BenthicCover < ActiveRecord::Base
   belongs_to :habitat_type
   belongs_to :boatlog_manager
 
-  has_many    :invert_belts
-  accepts_nested_attributes_for     :invert_belts
-  has_many     :presence_belts
-  accepts_nested_attributes_for     :presence_belts
+  has_many    :invert_belts, :dependent => :destroy
+  accepts_nested_attributes_for     :invert_belts, :allow_destroy => true
+  has_many     :presence_belts, :dependent => :destroy
+  accepts_nested_attributes_for     :presence_belts, :allow_destroy => true
 
   def myId
     return self.diver_id

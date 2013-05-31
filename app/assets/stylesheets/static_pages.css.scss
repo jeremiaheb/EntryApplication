@@ -1,3 +1,85 @@
 // Place all the styles related to the StaticPages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.samplePDF {
+   border: 1;
+  cellspacing: 0;
+  cellpadding: 0;
+  width: 8.5in;
+  border: none;
+}
+
+.samplePDF tr td {
+  height: 8pt;
+  /*border: solid windowtext 1.0pt;*/
+  padding: 0in 5.4pt 0in 5.4pt;
+  text-align: left;
+}
+
+.sampleC1, .sampleC3, .sampleC5, .sampleC7{
+  width: 50pt;
+}
+
+.sampleC2 {
+  width: 70pt;
+}
+
+.sampleC6 {
+  width: 130pt;
+}
+
+.sampleC4 {
+  width: 50pt;
+}
+
+
+
+.substratePDF {
+  border: 1;
+  cellspacing: 0;
+  cellpadding: 0;
+  width: 8.5in;
+  border: none;
+  
+}
+
+
+.sppPDF {
+  border: 1;
+  cellspacing: 0;
+  cellpadding: 0;
+  width: 4.25in;
+  border: none;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.sppPDF tr td{
+  height: 15pt;
+  border: solid windowtext 1.0pt;
+  padding: 0in 5.5pt 0in 5.5pt;
+  text-align: center;
+}
+
+.instance {
+  width: 10pt;
+
+}
+
+.period {
+  width: 20pt;
+}
+
+.spp {
+  width: 120pt;
+}
+
+.sppData {
+  width: 100pt;
+}
+
+.blank {
+  width: 1pt;
+}
+

@@ -9,21 +9,11 @@ class Sample < ActiveRecord::Base
   accepts_nested_attributes_for :sample_animals, :reject_if => lambda {  |a| a[:animal_id].blank? }, :allow_destroy => true
   
 
-  has_many :diver_samples
-  has_many :divers, :through => :diver_samples, :dependent => :destroy
+  has_many :diver_samples, :dependent => :destroy
+  has_many :divers, :through => :diver_samples
   accepts_nested_attributes_for :diver_samples, :allow_destroy => true
 
 
-    #scope :available_for, lambda { |role|
-    #case role
-    #when 'admin'
-      #find(:all)
-    #when 'manager'
-      #joins(:diver_samples).where( "diver_samples.diver_id=? AND diver_samples.primary_diver=? OR boatlog_manager_id=?", current_diver, true, current_diver.boatlog_manager_id ).uniq
-    #else
-      #joins(:diver_samples).where( "diver_samples.diver_id=? AND diver_samples.primary_diver=?", current_diver, true )
-    #end
-  #}
 
   def myId
     return self.diver_samples.primary.first.diver_id

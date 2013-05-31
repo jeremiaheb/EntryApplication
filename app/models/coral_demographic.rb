@@ -1,6 +1,6 @@
 class CoralDemographic < ActiveRecord::Base
 
-  has_many :demographic_corals
+  has_many :demographic_corals, :dependent => :destroy
   has_many :corals, :through => :demographic_corals
   accepts_nested_attributes_for :demographic_corals, :allow_destroy => true
   validates_presence_of :demographic_corals, :message => "you must have at leat one coral record (can be NO CORAL)"

@@ -1,0 +1,543 @@
+<div class=WordSection1>
+  <table class="samplePDF">
+    <tr>
+      <td class="sampleC1">
+        <p class=MsoNormal> Boatlog/Manger </p>
+      </td>
+      <td class="sampleC4">
+        <p class=MsoNormal> <%= @sample.boatlog_manager.agency_name %> </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="sampleC1">
+        <p class=MsoNormal> Diver </p>
+      </td>
+      <td class="sampleC2">
+        <p class=MsoNormal> <%= @sample.diver_samples.primary.first.diver.diver_name %> </p>
+      </td>
+      <td class="sampleC3">
+        <p class=MsoNormal> Date </p>
+      </td>
+      <td class="sampleC4">
+        <p class=MsoNormal> <%= @sample.sample_date %></p>
+      </td>
+      <td class="sampleC5">
+        <p class=MsoNormal> Field Number </p>
+      </td>
+      <td class="sampleC6">
+        <p class=MsoNormal> <%= @sample.field_id %></p>
+      </td>
+      <td class="sampleC7">
+        <p class=MsoNormal> Visibility </p>
+      </td>
+      <td class="sampleC8">
+        <p class=MsoNormal> <%= @sample.underwater_visibility %> </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="sampleC1">
+        <p class=MsoNormal> Buddy </p>
+      </td>
+      <td class="sampleC2">
+        <p class=MsoNormal> <%= @sample.diver_samples.secondary.first.diver.diver_name %> </p>
+      </td>
+      <td class="sampleC3">
+        <p class=MsoNormal> Sample Start </p>
+      </td>
+      <td class="sampleC4">
+        <p class=MsoNormal> <%= @sample.sample_begin_time.strftime("%H:%M") %> </p>
+      </td>
+      <td class="sampleC5">
+        <p class=MsoNormal> Habitat </p>
+      </td>
+      <td class="sampleC6">
+        <p class=MsoNormal> <%= @sample.habitat_type.habitat_name %></p>
+      </td>
+      <td class="sampleC7">
+        <p class=MsoNormal> Water Temp </p>
+      </td>
+      <td class="sampleC8">
+        <p class=MsoNormal> <%= @sample.water_temp %></p>
+      </td>
+    </tr>
+    <tr>
+      <td class="sampleC1">
+        <p class=MsoNormal> Dive Start </p>
+      </td>
+      <td class="sampleC2">
+        <p class=MsoNormal> <%= @sample.dive_begin_time.strftime("%H:%M") %></p>
+      </td>
+      <td class="sampleC3">
+        <p class=MsoNormal> Sample End </p>
+      </td>
+      <td class="sampleC4">
+        <p class=MsoNormal> <%= @sample.sample_end_time.strftime("%H:%M") %></p>
+      </td>
+      <td class="sampleC5">
+        <p class=MsoNormal> Fish Gear </p>
+      </td>
+      <td class="sampleC6">
+        <p class=MsoNormal> <%= @sample.fishing_gear %></p>
+      </td>
+      <td class="sampleC7">
+        <p class=MsoNormal> Cylinder Rad </p>
+      </td>
+      <td class="sampleC8">
+        <p class=MsoNormal> <%= @sample.cylinder_radius %></p>
+      </td>
+    </tr>
+    <tr>
+      <td class="sampleC1">
+        <p class=MsoNormal> Dive End </p>
+      </td>
+      <td class="sampleC2">
+        <p class=MsoNormal> <%= @sample.dive_end_time.strftime("%H:%M") %></p>
+      </td>
+      <td class="sampleC3">
+        <p class=MsoNormal> Max Depth </p>
+      </td>
+      <td class="sampleC4">
+        <p class=MsoNormal> <%= @sample.dive_depth %></p>
+      </td>
+      <td class="sampleC5">
+        <p class=MsoNormal> Stn Depth </p>
+      </td>
+      <td class="sampleC6">
+        <p class=MsoNormal> <%= @sample.sample_depth %></p>
+      </td>
+      <td class="sampleC7">
+        <p class=MsoNormal> Current </p>
+      </td>
+      <td class="sampleC8">
+        <p class=MsoNormal> <%= @sample.current %></p>
+      </td>
+    </tr>
+
+  </table>
+
+<table class="substratePDF">
+ <tr>
+  <td width=182 colspan=3 valign=top style='width:136.3pt;border:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Substrate Slope</p>
+  </td>
+  <td width=125 colspan=2 rowspan=4 valign=top style='width:93.5pt;border:solid windowtext 1.0pt;
+  border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>&nbsp;</p>
+  </td>
+  <td width=428 colspan=4 rowspan=2 valign=top style='width:321.0pt;border:
+  solid windowtext 1.0pt;border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Comments:  <%= @sample.sample_description %></p>
+  </td>
+ </tr>
+ <tr style='height:27.5pt'>
+  <td width=182 colspan=3 valign=top style='width:136.3pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt;height:27.5pt'>
+  <p class=MsoNormal>Max depth:   <%= @sample.substrate_max_depth %>       </p>
+  <p class=MsoNormal>Min depth:   <%= @sample.substrate_min_depth %>      </p>
+  </td>
+ </tr>
+ <tr>
+  <td width=182 colspan=3 valign=top style='width:136.3pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>Max vertical relief</p>
+  </td>
+  <td width=428 colspan=4 valign=top style='width:321.0pt;border-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>Biotic Cover %</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=182 colspan=3 valign=top style='width:136.3pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Hard Relief: <%= @sample.hard_verticle_relief %>  </p>
+  </td>
+  <td width=212 colspan=2 valign=top style='width:158.95pt;border-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>Sand</p>
+  </td>
+  <td width=216 colspan=2 valign=top style='width:162.05pt;border-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>Hardbottom</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=182 colspan=3 valign=top style='width:136.3pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Soft Relief:<%= @sample.soft_verticle_relief %></p>
+  </td>
+  <td width=125 colspan=2 valign=top style='width:93.5pt;border-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Abiotic Foot</p>
+  </td>
+  <td width=112 valign=top style='width:84.15pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=right style='text-align:right'>Bare</p>
+  </td>
+  <td width=100 valign=top style='width:74.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=right style='text-align:right'> <%= @sample.sand_bare %> </p>
+  </td>
+  <td width=100 valign=top style='width:74.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=right style='text-align:right'>Algae(&lt;1)</p>
+  </td>
+  <td width=116 valign=top style='width:87.25pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal> <%= @sample.hardbottom_algal_turf %> </p>
+  </td>
+ </tr>
+ <tr>
+  <td width=182 colspan=3 rowspan=2 valign=top style='width:136.3pt;border:
+  solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>Surface Relief %</p>
+  <p class=MsoNormal align=right style='text-align:center'>Hard    Avg.  soft </p>
+  </td>
+  <td width=62 valign=top style='width:46.75pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Sand</p>
+  </td>
+  <td width=62 valign=top style='width:46.75pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal> <%= @sample.sand_percentage %> </p>
+  </td>
+  <td width=112 valign=top style='width:84.15pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=right style='text-align:right'>Macro Algae</p>
+  </td>
+  <td width=100 valign=top style='width:74.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=right style='text-align:right'> <%= @sample.sand_macro_algae %> </p>
+  </td>
+  <td width=100 valign=top style='width:74.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=right style='text-align:right'>Algae (&gt;1)</p>
+  </td>
+  <td width=116 valign=top style='width:87.25pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal> <%= @sample.hardbottom_macro_algae %> </p>
+  </td>
+ </tr>
+ <tr>
+  <td width=62 valign=top style='width:46.75pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Hard-b</p>
+  </td>
+  <td width=62 valign=top style='width:46.75pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal> <%= @sample.hardbottom_percentage %> </p>
+  </td>
+  <td width=112 valign=top style='width:84.15pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=right style='text-align:right'>Sea grass</p>
+  </td>
+  <td width=100 valign=top style='width:74.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=right style='text-align:right'> <%= @sample.sand_seagrass %> </p>
+  </td>
+  <td width=100 valign=top style='width:74.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=right style='text-align:right'>Live Coral</p>
+  </td>
+  <td width=116 valign=top style='width:87.25pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal> <%= @sample.hardbottom_live_coral %> </p>
+  </td>
+ </tr>
+ <tr>
+  <td width=45 valign=top style='width:33.45pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>&lt;0.2</p>
+  </td>
+  <td width=62 valign=top style='width:46.75pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal> <%= @sample.hard_relief_cat_0 %> </p>
+  </td>
+  <td width=75 valign=top style='width:56.1pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><%= @sample.soft_relief_cat_0 %></p>
+  </td>
+  <td width=62 valign=top style='width:46.75pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Rubble</p>
+  </td>
+  <td width=62 valign=top style='width:46.75pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal> <%= @sample.rubble_percentage %> </p>
+  </td>
+  <td width=112 valign=top style='width:84.15pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=right style='text-align:right'>Sponge</p>
+  </td>
+  <td width=100 valign=top style='width:74.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=right style='text-align:right'> <%= @sample.sand_sponge %> </p>
+  </td>
+  <td width=100 valign=top style='width:74.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=right style='text-align:right'>Octocoral</p>
+  </td>
+  <td width=116 valign=top style='width:87.25pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal> <%= @sample.hardbottom_octocoral %> </p>
+  </td>
+ </tr>
+ <tr>
+  <td width=45 valign=top style='width:33.45pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>0.2-0.5</p>
+  </td>
+  <td width=62 valign=top style='width:46.75pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal> <%= @sample.hard_relief_cat_1 %> </p>
+  </td>
+  <td width=75 valign=top style='width:56.1pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><%= @sample.soft_relief_cat_1 %></p>
+  </td>
+  <td width=125 colspan=2 rowspan=4 valign=top style='width:93.5pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>&nbsp;</p>
+  </td>
+  <td width=112 valign=top style='width:84.15pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>1: <%= @sample.sand_pcov_other1_lab %> </p>
+  </td>
+  <td width=100 valign=top style='width:74.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><%= @sample.sand_pcov_other1 %></p>
+  </td>
+  <td width=100 valign=top style='width:74.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=right style='text-align:right'>Sponge</p>
+  </td>
+  <td width=116 valign=top style='width:87.25pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><%= @sample.hardbottom_sponge %></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=45 valign=top style='width:33.45pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>0.5-1.0</p>
+  </td>
+  <td width=62 valign=top style='width:46.75pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal> <%= @sample.hard_relief_cat_2 %> </p>
+  </td>
+  <td width=75 valign=top style='width:56.1pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><%= @sample.soft_relief_cat_2 %></p>
+  </td>
+  <td width=112 valign=top style='width:84.15pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>2: <%= @sample.sand_pcov_other2_lab %> </p>
+  </td>
+  <td width=100 valign=top style='width:74.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><%= @sample.sand_pcov_other2 %></p>
+  </td>
+  <td width=100 valign=top style='width:74.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>1: <%= @sample.hard_pcov_other1_lab %> </p>
+  </td>
+  <td width=116 valign=top style='width:87.25pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal> <%= @sample.hard_pcov_other1 %> </p>
+  </td>
+ </tr>
+ <tr>
+  <td width=45 valign=top style='width:33.45pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>1.0-1.5</p>
+  </td>
+  <td width=62 valign=top style='width:46.75pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal> <%= @sample.hard_relief_cat_3 %> </p>
+  </td>
+  <td width=75 valign=top style='width:56.1pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal> <%= @sample.soft_relief_cat_3 %> </p>
+  </td>
+  <td width=112 valign=top style='width:84.15pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>&nbsp;</p>
+  </td>
+  <td width=100 valign=top style='width:74.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>&nbsp;</p>
+  </td>
+  <td width=100 valign=top style='width:74.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>2: <%= @sample.hard_pcov_other2_lab %> </p>
+  </td>
+  <td width=116 valign=top style='width:87.25pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal> <%= @sample.hard_pcov_other2 %> </p>
+  </td>
+ </tr>
+ <tr>
+  <td width=45 valign=top style='width:33.45pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>&gt;1.5</p>
+  </td>
+  <td width=62 valign=top style='width:46.75pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal> <%= @sample.hard_relief_cat_4 %> </p>
+  </td>
+  <td width=75 valign=top style='width:56.1pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal> <%= @sample.soft_relief_cat_4 %> </p>
+  </td>
+  <td width=112 valign=top style='width:84.15pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>&nbsp;</p>
+  </td>
+  <td width=100 valign=top style='width:74.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>&nbsp;</p>
+  </td>
+  <td width=100 valign=top style='width:74.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>&nbsp;</p>
+  </td>
+  <td width=116 valign=top style='width:87.25pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>&nbsp;</p>
+  </td>
+ </tr>
+</table>
+
+
+<table class="sppPDF">
+ <%#headers for all the species%>
+ <tr>
+  <td class="instance">
+  </td>
+  <td class="period" >
+    <p class=MsoNormal>Period</p>
+  </td>
+  <td class="spp">
+    <p class=MsoNormal>Species</p>
+  </td>
+  <td class="sppData">
+    <p class=MsoNormal><span style='font-size:10.0pt'>N - Avg - Min - Max</span></p>
+  </td>
+  <td class="blank">
+    <p class=MsoNormal>&nbsp;</p>
+  </td>
+</tr>
+
+<%#End of headers%>
+<% @sample.sample_animals[0..24].each_with_index do | spp, index | -%>
+    <tr>
+     <td class="instance">
+       <p class=MsoNormal><span style='font-size:8.0pt'> <%= index+1 %> </span></p>
+     </td>
+     <td class="period">
+       <p class=MsoNormal> <%= spp.time_seen %> </p>
+     </td>
+     <td class="spp">
+       <p class=MsoNormal>  <%= spp.animal.species_code %></p>
+     </td>
+     <td class="sppData">
+       <p class=MsoNormal> <%= spp.number_individuals %> / <%= spp.average_length %> - <%= spp.min_length %> - <%= spp.max_length %></p>
+     </td>
+     <td class="blank">
+       <p class=MsoNormal> </p>
+     </td>
+    </tr>
+  <% end -%>
+  <% if @sample.sample_animals.length >25  %>
+</table>
+<table class="sppPDF">
+ <%#headers for all the species%>
+ <tr>
+  <td class="instance">
+  </td>
+  <td class="period" >
+    <p class=MsoNormal>Period</p>
+  </td>
+  <td class="spp">
+    <p class=MsoNormal>Species</p>
+  </td>:
+  <td class="sppData">
+    <p class=MsoNormal><span style='font-size:10.0pt'>N - Avg - Min - Max</span></p>
+  </td>
+
+</tr>
+
+<%#End of headers%>
+<% @sample.sample_animals[25..@sample.sample_animals.length].each_with_index do | spp, index | -%>
+    <tr>
+     <td class="instance">
+       <p class=MsoNormal><span style='font-size:8.0pt'> <%= index+26 %> </span></p>
+     </td>
+     <td class="period">
+       <p class=MsoNormal> <%= spp.time_seen %> </p>
+     </td>
+     <td class="spp">
+       <p class=MsoNormal>  <%= spp.animal.species_code %></p>
+     </td>
+     <td class="sppData">
+       <p class=MsoNormal> <%= spp.number_individuals %> / <%= spp.average_length %> - <%= spp.min_length %> - <%= spp.max_length %></p>
+     </td>
+
+    </tr>
+  <% end -%>
+  <% end %>
+</table>
+</div>

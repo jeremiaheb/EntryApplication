@@ -34,6 +34,8 @@ EntryApplication::Application.routes.draw do
 
   resources :animals
 
+  match 'samples/:id/proofing_template' => 'samples#proofing_template'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

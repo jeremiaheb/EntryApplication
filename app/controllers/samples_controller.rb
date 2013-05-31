@@ -102,4 +102,14 @@ class SamplesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def proofing_template
+
+    @sample = Sample.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @sample }
+    end
+  end
 end

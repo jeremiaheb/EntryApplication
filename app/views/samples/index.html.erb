@@ -26,4 +26,8 @@
   <div id="newSampleButton"> 
     <%= button_to('New Sample', new_sample_path, :method => "get", :class => 'btn btn-large btn-primary')  %>   
   </div>
+  
+  <div id="downloadSampleButton"> 
+    <%= button_to('Download Samples', samples_path(format: "pdf"), :method => "get", :class => 'btn btn-small btn-primary')  %>   
+  </div>
 </div>

@@ -400,8 +400,14 @@ input.timeSeen_3 {
 
 #newSampleButton {
   position: absolute;
-  left: 50px;
+  left: 5px;
   top: 25px;
+}
+
+#downloadSampleButton {
+  position: absolute;
+  left: 5px;
+  top: 100px;
 }
 
 .ActionBar {

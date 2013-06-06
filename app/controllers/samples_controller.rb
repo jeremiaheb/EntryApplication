@@ -18,12 +18,21 @@ class SamplesController < ApplicationController
       @samples = current_diver.samples.merge(DiverSample.primary)
     end
 
+    @proofing_samples = current_diver.samples.merge(DiverSample.primary) 
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @samples }
       format.csv  { send_data Sample.to_csv }
       format.xls
+      format.pdf do 
+
+        pdf = SamplePdf.new(@proofing_samples)
+        send_data pdf.render, filename: "#{current_diver.whole_name}.pdf",
+                              type: "application/pdf",
+                              disposition: "inline"
+      
+      end
     end
   end
 
@@ -35,6 +44,12 @@ class SamplesController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @sample }
+      format.pdf do
+        pdf = SamplePdf.new(@sample)
+        send_data pdf.render, filename: "sample_#{@sample.field_id}.pdf",
+                              type: "application/pdf",
+                              disposition: "inline"
+      end
     end
   end
 
@@ -110,6 +125,12 @@ class SamplesController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @sample }
+      format.pdf do
+        pdf = SamplePdf.new(@sample)
+        send_data pdf.render, filename: "sample_#{@sample.field_id}.pdf",
+                              type: "application/pdf",
+                              disposition: "inline"
+      end
     end
   end
 end

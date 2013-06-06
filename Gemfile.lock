@@ -1,4 +1,14 @@
 GIT
+  remote: git://github.com/prawnpdf/prawn.git
+  revision: 8028ca0cd2aae8c72df9fc4bf16388948423bcb2
+  specs:
+    prawn (1.0.0.rc2)
+      afm
+      pdf-reader (~> 1.2)
+      ruby-rc4
+      ttfunk (~> 1.0.3)
+
+GIT
   remote: git://github.com/rweng/jquery-datatables-rails.git
   revision: 2024c99b26f94a036629ac04bd158c70d2f4f11b
   specs:
@@ -8,6 +18,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    Ascii85 (1.0.2)
     actionmailer (3.2.2)
       actionpack (= 3.2.2)
       mail (~> 2.4.0)
@@ -35,6 +46,7 @@ GEM
     activesupport (3.2.2)
       i18n (~> 0.6)
       multi_json (~> 1.0)
+    afm (0.2.0)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
     better_errors (0.3.2)
@@ -70,6 +82,7 @@ GEM
     eventmachine (1.0.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    hashery (2.1.0)
     highline (1.6.16)
     hike (1.2.1)
     i18n (0.6.0)
@@ -104,6 +117,12 @@ GEM
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
     orm_adapter (0.0.7)
+    pdf-reader (1.3.3)
+      Ascii85 (~> 1.0.0)
+      afm (~> 0.2.0)
+      hashery (~> 2.0)
+      ruby-rc4
+      ttfunk
     pg (0.14.0)
     polyglot (0.3.3)
     rack (1.4.1)
@@ -139,6 +158,7 @@ GEM
     ref (1.0.4)
     ruby-graphviz (1.0.8)
     ruby-prof (0.13.0)
+    ruby-rc4 (0.1.5)
     sass (3.1.19)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -163,6 +183,7 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
+    ttfunk (1.0.3)
     twitter-bootstrap-rails (2.2.6)
       actionpack (>= 3.1)
       execjs
@@ -191,6 +212,7 @@ DEPENDENCIES
   less-rails-bootstrap
   nested_form
   pg
+  prawn!
   rails (= 3.2.2)
   rails-erd
   ruby-prof

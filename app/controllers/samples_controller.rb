@@ -18,7 +18,7 @@ class SamplesController < ApplicationController
       @samples = current_diver.samples.merge(DiverSample.primary)
     end
 
-    @proofing_samples = current_diver.samples.merge(DiverSample.primary) 
+    @proofing_samples = current_diver.samples.merge(DiverSample.primary).order("sample_date") 
 
     respond_to do |format|
       format.html # index.html.erb
@@ -28,9 +28,8 @@ class SamplesController < ApplicationController
       format.pdf do 
 
         pdf = SamplePdf.new(@proofing_samples)
-        send_data pdf.render, filename: "#{current_diver.whole_name}.pdf",
-                              type: "application/pdf",
-                              disposition: "inline"
+        send_data pdf.render, filename: "#{current_diver.lastname}_ProofingReport.pdf",
+                              type: "application/pdf"
       
       end
     end

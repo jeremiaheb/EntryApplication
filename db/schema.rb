@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130502133422) do
+ActiveRecord::Schema.define(:version => 20130613143352) do
 
   create_table "animals", :force => true do |t|
     t.string   "species_code"
@@ -36,6 +36,16 @@ ActiveRecord::Schema.define(:version => 20130502133422) do
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.integer  "boatlog_manager_id"
+  end
+
+  create_table "boat_logs", :force => true do |t|
+    t.string   "primary_sample_unit"
+    t.date     "date"
+    t.integer  "boatlog_manager_id"
+    t.float    "surface_temperature"
+    t.float    "surface_salinity"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "boatlog_managers", :force => true do |t|
@@ -148,6 +158,12 @@ ActiveRecord::Schema.define(:version => 20130502133422) do
     t.integer "a_lamarcki"
   end
 
+  create_table "rep_logs", :force => true do |t|
+    t.integer "station_log_id"
+    t.string  "replicate"
+    t.integer "diver_id"
+  end
+
   create_table "sample_animals", :force => true do |t|
     t.integer "sample_id"
     t.integer "animal_id"
@@ -219,6 +235,15 @@ ActiveRecord::Schema.define(:version => 20130502133422) do
     t.float    "cylinder_radius"
     t.string   "current"
     t.integer  "boatlog_manager_id"
+  end
+
+  create_table "station_logs", :force => true do |t|
+    t.integer "boat_log_id"
+    t.integer "stn_number"
+    t.time    "time"
+    t.string  "boat_coordiantes"
+    t.string  "flag_coordiates"
+    t.text    "comments"
   end
 
 end

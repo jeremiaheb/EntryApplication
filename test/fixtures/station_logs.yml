@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  boat_log_id: 1
+  stn_number: 1
+  time: 2013-06-13 09:29:00
+  boat_coordiantes: MyString
+  flag_coordiates: MyString
+  comments: MyText
+
+two:
+  boat_log_id: 1
+  stn_number: 1
+  time: 2013-06-13 09:29:00
+  boat_coordiantes: MyString
+  flag_coordiates: MyString
+  comments: MyText

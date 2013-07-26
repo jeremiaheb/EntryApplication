@@ -1,8 +1,16 @@
 class BoatLogsController < ApplicationController
+  
+  before_filter :authenticate_diver!
+  load_and_authorize_resource
+  
   # GET /boat_logs
   # GET /boat_logs.json
   def index
-    @boat_logs = BoatLog.all
+    if current_diver.role == 'admin'
+      @boat_logs = BoatLog.all
+    elsif current_diver.role == 'manager'
+      @boat_logs = BoatLog.where( "boatlog_manager_id=?", current_diver.boatlog_manager_id )
+    end
 
     respond_to do |format|
       format.html # index.html.erb

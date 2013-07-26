@@ -40,11 +40,22 @@
   </div>
 
 
-<%# if false %>
+
 <%= f.fields_for :rep_logs do |builder| %>
   <%= render 'replicate_fields', f: builder %>
 <% end %>
 <%= f.link_to_add "Add Rep", :rep_logs %>
-<%# end %>
+
+<div class="row">
+  <div class="span6">
+      <div class="control-group">
+        <label class="control-label">Station Comments</label>
+        <div class="controls">
+          <%= f.text_area :comments, { :size => '60x3', :autocomplete => :off } %>
+        </div>
+      </div>
+    
+  </div>  
+</div>
 
 </fieldset>

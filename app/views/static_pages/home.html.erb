@@ -75,6 +75,8 @@
 
     <% if diver_signed_in? && current_diver.role == "admin" %>
       <%= render "admin" %>
+    <% elsif diver_signed_in? && current_diver.role == 'manager' %>
+      <%= render 'manager' %>'
     <% end %>
 
   </div>

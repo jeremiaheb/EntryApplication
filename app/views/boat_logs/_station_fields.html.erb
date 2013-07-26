@@ -1,36 +1,50 @@
+<fieldset class="fieldset">
+    <div class="row">
 
-<div class="control-group">
-  <label class="control-label">Station</label>
-  <div class="controls">
-    <%= f.text_field :stn_number %>
+    <div class="span4">
+      <div class="control-group">
+        <label class="control-label">Station</label>
+        <div class="controls">
+          <%= f.text_field :stn_number %>
+        </div>
+      </div>
+    </div>
+
+    <div class="span4">  
+       <div class="control-group">
+        <label class="control-label">Time</label>
+        <div class="controls">
+          <%= f.text_field :time %>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 
-<div class="control-group">
-  <label class="control-label">Time</label>
-  <div class="controls">
-    <%= f.text_field :time %>
+  <div class="row">
+    <div class="span4">
+      <div class="control-group">
+        <label class="control-label"> Boat Coordinats</label>
+        <div class="controls">
+          <%= f.text_field :boat_coordiantes %>
+        </div>
+      </div>
+    </div>
+    <div class="span4">
+      <div class="control-group">
+        <label class="control-label">Flag Coordinats</label>
+        <div class="controls">
+          <%= f.text_field :flag_coordiates %>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-
-<div class="control-group">
-  <label class="control-label">Boat Coordinats</label>
-  <div class="controls">
-    <%= f.text_field :boat_coordiantes %>
-  </div>
-</div>
-
-<div class="control-group">
-  <label class="control-label">Flag Coordinats</label>
-  <div class="controls">
-    <%= f.text_field :flag_coordiates %>
-  </div>
-</div>
 
 
-<%= f.link_to_remove "Remove Station", {:tabindex => "-1"}  %>
-
+<%# if false %>
 <%= f.fields_for :rep_logs do |builder| %>
   <%= render 'replicate_fields', f: builder %>
 <% end %>
+<%= f.link_to_add "Add Rep", :rep_logs %>
+<%# end %>
 
+</fieldset>

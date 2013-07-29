@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130613143352) do
+ActiveRecord::Schema.define(:version => 20130729142601) do
 
   create_table "animals", :force => true do |t|
     t.string   "species_code"
@@ -241,9 +241,9 @@ ActiveRecord::Schema.define(:version => 20130613143352) do
     t.integer "boat_log_id"
     t.integer "stn_number"
     t.time    "time"
-    t.string  "boat_coordiantes"
-    t.string  "flag_coordiates"
     t.text    "comments"
+    t.decimal "latitude"
+    t.decimal "longitude"
   end
 
 end

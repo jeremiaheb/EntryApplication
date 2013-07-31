@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130729142601) do
+ActiveRecord::Schema.define(:version => 20130730133314) do
 
   create_table "animals", :force => true do |t|
     t.string   "species_code"
@@ -242,8 +242,8 @@ ActiveRecord::Schema.define(:version => 20130729142601) do
     t.integer "stn_number"
     t.time    "time"
     t.text    "comments"
-    t.decimal "latitude"
-    t.decimal "longitude"
+    t.float   "latitude"
+    t.float   "longitude"
   end
 
 end

@@ -150,16 +150,16 @@ class SamplePdf < Prawn::Document
  end
 
  def spp_1_27
-  [["", "Period", "Species", "N/Avg-Min_Max"]] + 
+  [["", "Period", "Species", "N/Avg-Min-Max"]] + 
   @sample.sample_animals[0..26].map.with_index do |spp, index|
-    [index + 1 , spp.time_seen, spp.animal.species_code, spp.number_individuals ]
+    [index + 1 , spp.time_seen, spp.animal.species_code, "%s / %s - %s - %s" % [spp.number_individuals, spp.try(:average_length), spp.try(:min_length), spp.try(:max_length)]]
   end
  end
 
  def spp_28_54
-  [["", "Period", "Species", "N/Avg-Min_Max"]] + 
+  [["", "Period", "Species", "N/Avg-Min-Max"]] + 
   @sample.sample_animals[27..@sample.sample_animals.length].map.with_index do |spp, index|
-    [index + 28 , spp.time_seen, spp.animal.species_code, spp.number_individuals ]
+    [index + 28 , spp.time_seen, spp.animal.species_code, "%s / %s - %s - %s" % [spp.number_individuals, spp.try(:average_length), spp.try(:min_length), spp.try(:max_length)] ]
   end 
  end
 

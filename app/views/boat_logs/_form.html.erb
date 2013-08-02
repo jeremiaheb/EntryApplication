@@ -41,6 +41,7 @@
       <%= f.fields_for :station_logs do |builder| %>
         <%= render 'station_fields', f: builder %>
       <% end %>
+      <%= f.link_to_add "Add Station", :station_logs %>
       
 <fieldset class="fieldset">
   <div class="row">

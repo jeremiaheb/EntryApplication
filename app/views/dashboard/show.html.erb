@@ -1,0 +1,47 @@
+
+    <h3><%= current_diver.whole_name %> Boat Logs</h3>
+  
+      <table id="sampleList" class="display table table-condensed">
+        <thead>
+         <tr>
+           <th>field ID</th>
+           <th>Date</th>
+           <th>Time</th>
+           <th>Diver</th>
+         </tr>
+       </thead>
+       <tbody>
+      <% @boat_logs.each do |log| %>
+         <% log.rep_logs.each do |rep|  %>
+            <tr data-link=" <%= boat_log_path(log.id) %> ">
+              <td><%= rep.field_id %></td>
+              <td><%= log.date %></td>
+              <td><%= rep.station_log.time.strftime("%H:%M") %></td>
+              <td><%= rep.diver.diver_name %></td>
+            </tr>
+        <% end %>
+      <% end %>
+      </tbody>
+    </table>
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Diver</th>
+          <th>Boatlog Count</th>
+          <th>Samples Count</th>
+        </tr>
+      <tbody>
+      <% @boatlog_divers.each do |key, value| %>
+        <tr>
+          <td> <%= Diver.find(key).diver_name %></td>
+          <td> <%= value %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <%= @data_by_divers %>
+  </div>

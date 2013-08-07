@@ -1,4 +1,6 @@
 class BoatLog < ActiveRecord::Base
+  
+  belongs_to :boatlog_manager
 
   has_many :station_logs, :dependent => :destroy
   has_many :rep_logs, :through => :station_logs

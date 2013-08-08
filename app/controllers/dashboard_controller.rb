@@ -1,6 +1,7 @@
 class DashboardController < ApplicationController
 
   before_filter :authenticate_diver!
+  authorize_resource
 
   def show
     if current_diver.role == 'admin'

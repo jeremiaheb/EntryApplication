@@ -1,0 +1,75 @@
+<div class="form-horizontal">
+<%= nested_form_for @boat_log do |f| %>
+  <%= render "shared/error_messages", :target => @boat_log%>
+
+    <div class="formContainer">
+      <div class="row">
+        
+        <div class="span3">
+          <div class="control-group">
+             <label class="control-label">Boatlog/Manager</label>
+             <div class="controls">
+               <%= f.collection_select :boatlog_manager_id, BoatlogManager.all, :id, :agency_name, { :include_blank => "" } %><br />
+             </div>
+           </div>
+         </div>
+       </div>
+
+      <div class="row">  
+        
+        <div class="span3">
+           <div class="control-group date">
+             <label class="control-label">Sample Date</label>
+             <div class="controls">
+               <%= f.text_field :date %>
+             </div>
+           </div>
+        </div>
+        <div class="span3">
+           <div class="control-group">
+             <label class="control-label">PSU</label>
+             <div class="controls">
+               <%= f.text_field :primary_sample_unit %>
+             </div>
+           </div>
+        </div>
+        <div class="span3">
+          <div>Distance Between Stations <span class="distanceBetweenStations">  0 </span></div>
+        </div>
+      </div>
+
+      <%= f.fields_for :station_logs do |builder| %>
+        <%= render 'station_fields', f: builder %>
+      <% end %>
+      <%= f.link_to_add "Add Station", :station_logs %>
+      
+<fieldset class="fieldset">
+  <div class="row">
+    <div class="span3">   
+      <div class="control-group date">
+        <label class="control-label">Surface Temp</label>
+        <div class="controls">
+          <%= f.text_field :surface_temperature %>
+        </div>
+      </div>
+    </div>
+  
+    <div class="span3">   
+      <div class="control-group date">
+        <label class="control-label">Surface Salinity</label>
+        <div class="controls">
+          <%= f.text_field :surface_salinity %>
+        </div>
+      </div>
+    </div>
+  </div>
+</fieldset>
+
+</div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+</div>
+
+<% end %>

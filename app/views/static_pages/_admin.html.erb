@@ -1,6 +1,28 @@
 <div class="container">          
   <div class="row home">
+    
+    <div class="span1">
+     <div class="img_box">
+       <a href=<%= url_for 'dashboard/show' %>>
+           <img <%= image_tag 'FormButton.jpg' %>
+       </a>
+      </div>
+      <div class="text">
+        <h6>Dashboard</h6>
+      </div>
+    </div>
  
+    <div class="span1">
+     <div class="img_box">
+       <a href=<%= url_for boat_logs_path %>>
+           <img <%= image_tag 'FormButton.jpg' %>
+       </a>
+      </div>
+      <div class="text">
+        <h6>Boatlogs</h6>
+      </div>
+    </div>
+
     <div class="span1">
      <div class="img_box">
        <a href=<%= url_for divers_path %>>

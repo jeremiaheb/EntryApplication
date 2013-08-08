@@ -1,0 +1,29 @@
+<p>
+  <b>Primary sample unit:</b>
+  <%= @boat_log.primary_sample_unit %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @boat_log.date %>
+</p>
+
+<p>
+  <b>Boatlog manager:</b>
+  <%= @boat_log.boatlog_manager_id %>
+</p>
+
+<p>
+  <b>Surface temperature:</b>
+  <%= @boat_log.surface_temperature %>
+</p>
+
+<p>
+  <b>Surface salinity:</b>
+  <%= @boat_log.surface_salinity %>
+</p>
+
+
+<%= link_to 'Edit', edit_boat_log_path(@boat_log) %> |
+<%= link_to 'Back', boat_logs_path %>
+<%= link_to 'Destroy', @boat_log, confirm: 'Are you sure?', method: :delete %>

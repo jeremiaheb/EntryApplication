@@ -14,6 +14,8 @@ class Diver < ActiveRecord::Base
 
   has_many    :benthic_covers
   has_many    :coral_demographics
+
+  has_many    :rep_logs
   
   validates   :diver_number, :presence => true
   validates   :diver_name, :presence => true

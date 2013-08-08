@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="span3">
+    <div class="control-group">
+      <label class="control-label">Replicate</label>
+      <div class="controls">
+        <%= f.text_field :replicate %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="span6">
+    <div class="control-group">
+      <label class="control-label">Diver</label>
+      <div class="controls">
+        <%= f.collection_select :diver_id, Diver.order(:diver_number).all, :id, :diver_name, { :include_blank => "" }%>
+        <%= f.link_to_remove "Remove Replicate", {:tabindex => "-1"}  %>
+      </div>
+    </div>
+  </div>
+</div>

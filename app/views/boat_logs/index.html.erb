@@ -1,0 +1,28 @@
+<div class="appContainer">
+  <div class="sampleListContainer">
+    <h3><%= current_diver.whole_name %> Boat Logs</h3>
+  
+      <table id="sampleList" class="display table table-condensed">
+        <thead>
+         <tr>
+           <th>Primary Sample Unit</th>
+           <th>Date</th>
+           <th>Time</th>
+           <th>Comments</th>
+         </tr>
+       </thead>
+       <tbody>
+      <% @boat_logs.each do |log| %>
+        <tr data-link=" <%= boat_log_path(log.id) %> ">
+          <td><%= log.primary_sample_unit %></td>
+          <td class='fieldid_check'><%= log.date %></td>
+          <td><%= log.station_logs.first.time.strftime("%H:%M") %></td>
+          <td><%= log.station_logs.first.comments %></td>
+        </tr>
+      <% end %>
+      </tbody>
+      </table>
+  </div>
+  <div id="newSampleButton"> 
+    <%= button_to('New Boat Log', new_boat_log_path, :method => "get", :class => 'btn btn-large btn-primary')  %>   
+  </div>

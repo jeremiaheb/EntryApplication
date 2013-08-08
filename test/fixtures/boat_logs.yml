@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  primary_sample_unit: MyString
+  date: 2013-06-13
+  boatlog_manager_id: 1
+  surface_temperature: 1.5
+  surface_salinity: 1.5
+
+two:
+  primary_sample_unit: MyString
+  date: 2013-06-13
+  boatlog_manager_id: 1
+  surface_temperature: 1.5
+  surface_salinity: 1.5

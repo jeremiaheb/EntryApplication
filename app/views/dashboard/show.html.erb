@@ -1,6 +1,13 @@
-
-  
-      <table id="sampleList" class="display table table-condensed">
+<div class="container">
+  <div class="row">
+    <div class="span2"> 
+      <%= button_to('Boat Logs', boat_logs_path, :method => "get", :class => 'btn btn-sm btn-primary')  %>   
+      <%= button_to('Fish Samples', samples_path, :method => "get", :class => 'btn btn-sm btn-primary')  %>   
+      <%= button_to('LPI', benthic_covers_path, :method => "get", :class => 'btn btn-sm btn-primary')  %>   
+      <%= button_to('Demo', coral_demographics_path, :method => "get", :class => 'btn btn-sm btn-primary')  %>   
+    </div>
+    <div class="span10 dashboardContainer">
+      <table id="sampleList" class="display table table-condensed table-striped table-bordered">
         <thead>
          <tr>
            <th>field ID</th>
@@ -22,25 +29,34 @@
       <% end %>
       </tbody>
     </table>
-  <div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Diver</th>
-          <th>Boatlog Count</th>
-          <th>Samples Count</th>
-        </tr>
-      <tbody>
-      <% @boatlog_divers.each do |key, value| %>
-        <tr>
-          <td> <%= Diver.find(key).diver_name %></td>
-          <td> <%= value %></td>
+    </div>  
+  </div>
+  <div class="row">
+    <div class="span2">
+      
+    </div>
+    <div class="span5"> 
+      <table class="table table-striped table-bordered table-condensed">
+        <thead>
+          <tr>
+            <th>Diver</th>
+            <th>Boatlog Count</th>
+            <th>Samples Count</th>
+            <th>LPI Count</th>
+            <th>Demographic Count</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        <tbody>
+        <% @data_by_divers.each do |key, value| %>
+          <tr>
+            <td> <%= Diver.find(key).diver_name %></td>
+            <td> <%= value["boat"] %></td>
+            <td> <%= value["sample"] %></td>
+            <td> <%= value["lpi"] %></td>
+            <td> <%= value["demo"] %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
-
-  <div>
-    <%= @data_by_divers %>
-  </div>
+</div>

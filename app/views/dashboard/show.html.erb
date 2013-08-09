@@ -6,31 +6,31 @@
       <%= button_to('LPI', benthic_covers_path, :method => "get", :class => 'btn btn-sm btn-primary')  %>   
       <%= button_to('Demo', coral_demographics_path, :method => "get", :class => 'btn btn-sm btn-primary')  %>   
     </div>
-    <%#<div class="span10 dashboardContainer">%>
-      <%#<table id="sampleList" class="display table table-condensed table-striped table-bordered">%>
-        <%#<thead>%>
-         <%#<tr>%>
-           <%#<th>field ID</th>%>
-           <%#<th>Date</th>%>
-           <%#<th>Time</th>%>
-           <%#<th>Diver</th>%>
-         <%#</tr>%>
-       <%#</thead>%>
-       <%#<tbody>%>
-      <%#<% @boat_logs.each do |log| %>%>
-         <%#<% log.rep_logs.each do |rep|  %>%>
-            <%#<tr data-link=" <%= boat_log_path(log.id) %> ">%>
-              <%#<td><%= rep.field_id %></td>%>
-              <%#<td><%= log.date %></td>%>
-              <%#<td><%= rep.station_log.time.strftime("%H:%M") %></td>%>
-              <%#<td><%= rep.diver.diver_name %></td>%>
-            <%#</tr>%>
-        <%#<% end %>%>
-      <%#<% end %>%>
-      <%#</tbody>%>
-    <%#</table>%>
-    <%#</div>  %>
-  <%#</div>%>
+    <div class="span10 dashboardContainer">
+      <table id="sampleList" class="display table table-condensed table-striped table-bordered">
+        <thead>
+         <tr>
+           <th>field ID</th>
+           <th>Date</th>
+           <th>Time</th>
+           <th>Diver</th>
+         </tr>
+       </thead>
+       <tbody>
+      <% @boat_logs.each do |log| %>
+         <% log.rep_logs.each do |rep|  %>
+            <tr data-link=" <%= boat_log_path(log.id) %> ">
+              <td><%= rep.field_id %></td>
+              <td><%= log.date %></td>
+              <td><%= rep.station_log.time.strftime("%H:%M") %></td>
+              <td><%= rep.diver.diver_name %></td>
+            </tr>
+        <% end %>
+      <% end %>
+      </tbody>
+    </table>
+    </div>  
+  </div>
   <div class="row">
     <div class="span2">
       

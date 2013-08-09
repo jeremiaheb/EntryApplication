@@ -1,4 +1,4 @@
-class Dashboard < ActiveRecord::Base  
+class Dashboard
  
 def diver_list(current_diver)
   if current_diver.role == "admin"
@@ -17,7 +17,7 @@ def diver_list(current_diver)
     hash_merge(@boatlog_divers, @sample_divers, @lpi_divers, @demo_divers).keys
   end
 end
- 
+
     def hash_merge *hashes
       hashes.inject :merge
     end
@@ -27,11 +27,13 @@ end
     end
  
   def divers(current_diver)
-    diver_list(current_diver).map do |diver|
+    organized_hash = {}
+    diver_list(current_diver).each do |diver|
       organized_hash[diver] = { "boat"   => check_val(@boatlog_divers[diver]), 
                                 "sample" => check_val(@sample_divers[diver]), 
                                 "lpi"    => check_val(@lpi_divers[diver]), 
                                  "demo" => check_val(@demo_divers[diver]) }
     end
+    return organized_hash
   end
 end

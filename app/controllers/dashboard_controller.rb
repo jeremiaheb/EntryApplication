@@ -4,6 +4,12 @@ class DashboardController < ApplicationController
   authorize_resource
  
  def show
+   
+  if current_diver.role == "admin"
+    @boat_logs      = BoatLog.all
+  else
+    @boat_logs      = BoatLog.where( "boatlog_manager_id=?", current_diver.boatlog_manager_id )
+  end
    @data_by_divers = Dashboard.new.divers(current_diver)
  end
 end

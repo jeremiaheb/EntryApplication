@@ -22,6 +22,7 @@ class Diver < ActiveRecord::Base
 
 
   scope       :active_divers,      lambda { where(:active => true) }
+  
 
   def whole_name
     [ self.firstname, self.lastname ].join("  ")

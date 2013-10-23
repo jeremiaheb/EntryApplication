@@ -29,11 +29,11 @@ end
   def divers(current_diver)
     organized_hash = {}
     diver_list(current_diver).each do |diver|
-      organized_hash[diver] = { "boat"   => check_val(@boatlog_divers[diver]), 
+      organized_hash[Diver.find(diver).diver_name] = { "boat"   => check_val(@boatlog_divers[diver]), 
                                 "sample" => check_val(@sample_divers[diver]), 
                                 "lpi"    => check_val(@lpi_divers[diver]), 
-                                 "demo" => check_val(@demo_divers[diver]) }
+                                "demo"   => check_val(@demo_divers[diver]) }
     end
-    return organized_hash
+    organized_hash.sort_by { |diver, data| diver }
   end
 end

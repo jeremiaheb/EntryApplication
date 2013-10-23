@@ -1,29 +1,31 @@
-<p>
-  <b>Primary sample unit:</b>
-  <%= @boat_log.primary_sample_unit %>
-</p>
 
-<p>
-  <b>Date:</b>
-  <%= @boat_log.date %>
-</p>
+<div class='formContainer'>
+  <div id="sampleSection" class="sectionDiv">
+  <div class='show_section_1'>
+    <div id='section_1_part_1'>
 
-<p>
-  <b>Boatlog manager:</b>
-  <%= @boat_log.boatlog_manager_id %>
-</p>
+      <dl class="dl-horizontal">
+        <dt>Boatlog Manager</dt><dd><%= @boat_log.boatlog_manager.agency_name %></dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt>Sample Date</dt><dd><%= @boat_log.date %></dd>
+      </dl>
+      <dl class="dl-horizontal">
+        <dt>PSU</dt><dd><%= @boat_log.primary_sample_unit %></dd>
+      </dl>
+    </div>
 
-<p>
-  <b>Surface temperature:</b>
-  <%= @boat_log.surface_temperature %>
-</p>
-
-<p>
-  <b>Surface salinity:</b>
-  <%= @boat_log.surface_salinity %>
-</p>
-
-
-<%= link_to 'Edit', edit_boat_log_path(@boat_log) %> |
-<%= link_to 'Back', boat_logs_path %>
-<%= link_to 'Destroy', @boat_log, confirm: 'Are you sure?', method: :delete %>
+    <div id='section_1_part_2'>
+      <% @boat_log.boatlog_divers.each do |b_divers|  %>
+       <dl class="dl-horizontal">
+        <dt> <%= b_divers[0] %> </dt><dd><%= b_divers[1] %></dd>
+      </dl>   
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="showActions" >
+ <%= button_to('Edit Boatlog', edit_boat_log_path(@boat_log), :method => "get", :class => 'btn btn-large btn-primary showAction') %>
+ <%= button_to("Delete Boatlog", @boat_log, confirm: 'Are you sure?', method: :delete, :class => 'btn btn-large btn-primary showAction') %>
+ <%= button_to('Boatlog List', boat_logs_path, :method => "get", :class => 'btn btn-large btn-primary showAction') %>
+</div>

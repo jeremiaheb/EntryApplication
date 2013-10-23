@@ -4,7 +4,7 @@ class DashboardController < ApplicationController
   authorize_resource
  
  def show
-   
+  #binding.pry
   if current_diver.role == "admin"
     @boat_logs      = BoatLog.all
   else

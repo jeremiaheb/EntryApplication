@@ -48,7 +48,7 @@
         <tbody>
         <% @data_by_divers.each do |key, value| %>
           <tr>
-            <td> <%= Diver.find(key).diver_name %></td>
+            <td> <%= key %></td>
             <td> <%= value["boat"] %></td>
             <td> <%= value["sample"] %></td>
             <td> <%= value["lpi"] %></td>

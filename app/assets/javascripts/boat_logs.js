@@ -14,16 +14,6 @@ $(function(){
       return this * Math.PI / 180;
     }
 
-    //function getStationDistance() {
-      //var $stationDistance = 0;
-
-      //$('.coords:visible').each(function(){
-        //if ( $(this).val() != "" ) {  
-        //$stationDistance += parseFloat($(this).val());
-        //}
-      //});
-      //$('.distanceBetweenStations').text($stationDistance)
-    //};  
 
     function getStationDistance() {
       var lat2 = parseFloat($('#boat_log_station_logs_attributes_1_latitude').val()); 

@@ -1,6 +1,6 @@
 class BoatLog < ActiveRecord::Base
-  
-  belongs_to :boatlog_manager
+    
+  benthic_coverslongs_to :boatlog_manager
 
   has_many :station_logs, :dependent => :destroy
   has_many :rep_logs, :through => :station_logs
@@ -19,4 +19,12 @@ class BoatLog < ActiveRecord::Base
 
   validates :primary_sample_unit, :presence => true
 
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names
+      all.each do |boatlog|
+        csv << boatlog.attributes.values_at(*column_names)
+      end
+    end
+  end
 end

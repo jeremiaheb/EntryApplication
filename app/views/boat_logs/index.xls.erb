@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<Workbook
+   xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+   xmlns:o="urn:schemas-microsoft-com:office:office"
+   xmlns:x="urn:schemas-microsoft-com:office:excel"
+   xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+   xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Boatlog_initial">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">fieldid</Data></Cell>
+        <Cell><Data ss:Type="String">date</Data></Cell>
+        <Cell><Data ss:Type="String">time</Data></Cell>
+        <Cell><Data ss:Type="String">DIVER_NR</Data></Cell>
+        <Cell><Data ss:Type="String">lat</Data></Cell>
+        <Cell><Data ss:Type="String">lon</Data></Cell>
+        <Cell><Data ss:Type="String">SURFACE_TEMPERATURE</Data></Cell>
+        <Cell><Data ss:Type="String">SURFACE_SALINITY</Data></Cell>
+        <Cell><Data ss:Type="String">LOG_COMMENTS</Data></Cell>
+      </Row>
+      <% @boat_logs.each do |boatlog| %>
+        <% boatlog.station_logs.each do |station_log| %>
+          <% station_log.rep_logs.each do |rep_log| %>
+            <Row>
+              <Cell><Data ss:Type="String"><%= rep_log.field_id                             %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= boatlog.date                                 %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= station_log.time.strftime('%H:%M')           %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= rep_log.diver.diver_number                   %></Data></Cell>
+              <Cell><Data ss:Type="Number"><%= station_log.latitude                         %></Data></Cell>
+              <Cell><Data ss:Type="Number"><%= station_log.longitude                        %></Data></Cell>
+              <Cell><Data ss:Type="Number"><%= boatlog.surface_temperature                  %></Data></Cell>
+              <Cell><Data ss:Type="Number"><%= boatlog.surface_salinity                     %></Data></Cell>
+              <Cell><Data ss:Type="String"><%= station_log.comments                         %></Data></Cell>
+            </Row>
+          <% end %>
+        <% end %>
+      <% end %>
+    </Table>
+  </Worksheet>
+ </Workbook>

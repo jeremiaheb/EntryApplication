@@ -23,8 +23,9 @@ class SamplesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @samples }
-      format.csv  { send_data Sample.to_csv }
-      format.xls
+      #format.csv  { send_data Sample.to_csv }
+      #format.xls
+      format.xlsx
       format.pdf do 
 
         pdf = SamplePdf.new(@proofing_samples)

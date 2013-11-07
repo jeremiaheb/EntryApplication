@@ -35,6 +35,7 @@ gem 'devise'
 gem 'cancan'
 gem 'prawn', :git => 'git://github.com/prawnpdf/prawn.git'
 gem 'client_side_validations'
+gem 'axlsx_rails'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

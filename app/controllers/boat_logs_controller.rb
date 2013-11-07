@@ -15,8 +15,9 @@ class BoatLogsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @boat_logs }
-      format.csv  { send_data BoatLog.to_csv }
-      format.xls
+      #format.csv  { send_data BoatLog.to_csv }
+      #format.xls
+      format.xlsx
     end
   end
 

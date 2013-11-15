@@ -1,0 +1,619 @@
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>/home/jeremiah/railsProjects/EntryApplication/app/models/sample.rb</title>
+    <link rel="stylesheet" href="css/coco.css" type="text/css" />
+  </head>
+  <body>
+    <p class="menu">
+      <a href="index.html">Index</a> <img src="img/coconut16.png" width="16" height="16" />
+      <a href="https://github.com/lkdjiin/coco/wiki">Wiki</a> <img src="img/coconut16.png" width="16" height="16" />
+      <a href="https://github.com/lkdjiin/coco">Source</a> <img src="img/coconut16.png" width="16" height="16" />
+      <a href="http://lkdjiin.github.com/coco/">Web site</a>
+    </p>
+    <h2>/home/jeremiah/railsProjects/EntryApplication/app/models/sample.rb</h2>
+    <p class="date">2013-11-15 14:46:05 -0500</p>
+    
+    <table class="source">
+      
+                    <tr class="hit" %>      
+      <td><pre>1 </pre></td><td><pre>class Sample &lt; ActiveRecord::Base</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>2 </pre></td><td><pre>  belongs_to :sample_type</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>3 </pre></td><td><pre>  belongs_to :habitat_type</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>4 </pre></td><td><pre>  belongs_to :boatlog_manager</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>5 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>6 </pre></td><td><pre>  has_many :sample_animals, :dependent =&gt; :destroy</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>7 </pre></td><td><pre>  validates_presence_of :sample_animals, :message =&gt; "you must have at leat one species record (can be NO FISH)"</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>8 </pre></td><td><pre>  has_many :animals, :through =&gt; :sample_animals</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>9 </pre></td><td><pre>  accepts_nested_attributes_for :sample_animals, :reject_if =&gt; lambda {  |a| a[:animal_id].blank? }, :allow_destroy =&gt; true</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>10 </pre></td><td><pre>  </pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>11 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>12 </pre></td><td><pre>  has_many :diver_samples, :dependent =&gt; :destroy</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>13 </pre></td><td><pre>  has_many :divers, :through =&gt; :diver_samples</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>14 </pre></td><td><pre>  accepts_nested_attributes_for :diver_samples, :allow_destroy =&gt; true</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>15 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>16 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>17 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>18 </pre></td><td><pre>  def myId</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>19 </pre></td><td><pre>    return self.diver_samples.primary.first.diver_id</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>20 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>21 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>22 </pre></td><td><pre>  #validates :sample_date,                 :presence =&gt; true </pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>23 </pre></td><td><pre>  validates :sample_type_id,              :presence =&gt; true</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>24 </pre></td><td><pre>  validates :habitat_type_id,             :presence =&gt; true</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>25 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>26 </pre></td><td><pre>  validates :dive_begin_time,             :presence =&gt; true</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>27 </pre></td><td><pre>  validates :dive_end_time,               :presence =&gt; true</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>28 </pre></td><td><pre>  validate  :dive_starts_before_ends</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>29 </pre></td><td><pre>  validates :sample_begin_time,           :presence =&gt; true</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>30 </pre></td><td><pre>  validate  :sample_starts_after_dive_and_before_end</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>31 </pre></td><td><pre>  validates :sample_end_time,             :presence =&gt; true</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>32 </pre></td><td><pre>  validate  :sample_ends_before_dive_ends</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>33 </pre></td><td><pre>  validate  :sample_starts_before_ends</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>34 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>35 </pre></td><td><pre>  validates :field_id,                    :presence =&gt; true</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>36 </pre></td><td><pre>  validates_format_of :field_id,          :with =&gt; /...\d[a-zA-Z]/</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>37 </pre></td><td><pre>  validates :dive_depth,                  :presence =&gt; true, :numericality =&gt; true</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>38 </pre></td><td><pre>  validates :sample_depth,                :presence =&gt; true, :numericality =&gt; true          </pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>39 </pre></td><td><pre>  validates :underwater_visibility,       :presence =&gt; true, :numericality =&gt; true</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>40 </pre></td><td><pre>  validates :water_temp,                  :presence =&gt; true, :numericality =&gt; true</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>41 </pre></td><td><pre>  validates :sample_description,          :length =&gt; { :maximum =&gt; 150 }                    </pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>42 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>43 </pre></td><td><pre>  validates :substrate_max_depth,         :presence =&gt; true, :numericality =&gt; { :only_integer =&gt; true }</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>44 </pre></td><td><pre>  validates :substrate_min_depth,         :presence =&gt; true, :numericality =&gt; { :only_integer =&gt; true, :less_than_or_equal_to =&gt; :substrate_max_depth }</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>45 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>46 </pre></td><td><pre>  validates :hard_verticle_relief,         :presence =&gt; true, :numericality =&gt; true</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>47 </pre></td><td><pre>  validates :soft_verticle_relief,         :presence =&gt; true, :numericality =&gt; true</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>48 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>49 </pre></td><td><pre>  validates :hard_relief_cat_0,           :presence =&gt; true, :numericality =&gt; { :only_integer =&gt; true, :greater_than =&gt; 0 }</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>50 </pre></td><td><pre>  validates :hard_relief_cat_1,           :presence =&gt; true, :if =&gt; "hard_verticle_relief &gt; 0.2", :numericality =&gt; { :only_integer =&gt; true, :greater_than =&gt; 0 }</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>51 </pre></td><td><pre>  validates :hard_relief_cat_2,           :presence =&gt; true, :if =&gt; "hard_verticle_relief &gt; 0.5", :numericality =&gt; { :only_integer =&gt; true, :greater_than =&gt; 0 }</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>52 </pre></td><td><pre>  validates :hard_relief_cat_3,           :presence =&gt; true, :if =&gt; "hard_verticle_relief &gt; 1.0", :numericality =&gt; { :only_integer =&gt; true, :greater_than =&gt; 0 }</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>53 </pre></td><td><pre>  validates :hard_relief_cat_4,           :presence =&gt; true, :if =&gt; "hard_verticle_relief &gt; 1.5", :numericality =&gt; { :only_integer =&gt; true, :greater_than =&gt; 0 }</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>54 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>55 </pre></td><td><pre>  validate :hard_relief_cats_equal_100</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>56 </pre></td><td><pre>  validate :soft_relief_cats_equal_100</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>57 </pre></td><td><pre>  validate :abiotic_percentage_equal_100</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>58 </pre></td><td><pre>  validate :biotic_percentage_sand_equal_100, :if =&gt; :sand_percentage?</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>59 </pre></td><td><pre>  validate :biotic_percentage_hardbottom_equal_100, :if =&gt; :hardbottom_percentage?</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>60 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>61 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>62 </pre></td><td><pre>  def field_id=(value)</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>63 </pre></td><td><pre>    write_attribute(:field_id, value.upcase)</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>64 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>65 </pre></td><td><pre> </pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>66 </pre></td><td><pre>  def msn</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>67 </pre></td><td><pre>    return [ self.sample_date.strftime('%Y%m%d'), self.sample_begin_time.strftime('%H%M'), self.diver_samples.primary[0].diver.diver_number ].join('')</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>68 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>69 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>70 </pre></td><td><pre>   private</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>71 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>72 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>73 </pre></td><td><pre>  def sample_starts_before_ends</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>74 </pre></td><td><pre>    if self.sample_begin_time &gt;= self.sample_end_time</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>75 </pre></td><td><pre>      self.errors.add :sample_end_time, ' has to end after begin time '</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>76 </pre></td><td><pre>    end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>77 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>78 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>79 </pre></td><td><pre>  def dive_starts_before_ends</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>80 </pre></td><td><pre>    if self.dive_begin_time &gt;= self.dive_end_time</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>81 </pre></td><td><pre>      self.errors.add :dive_end_time, ' has to end after begin time '</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>82 </pre></td><td><pre>    end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>83 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>84 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>85 </pre></td><td><pre>  def sample_starts_after_dive_and_before_end</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>86 </pre></td><td><pre>    if self.sample_begin_time &lt;= self.dive_begin_time || self.sample_begin_time &gt; self.dive_end_time</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>87 </pre></td><td><pre>      self.errors.add :sample_begin_time, "Sample start time has to be after dive start or before dive end"</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>88 </pre></td><td><pre>    end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>89 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>90 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>91 </pre></td><td><pre>  def sample_ends_before_dive_ends</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>92 </pre></td><td><pre>    if self.sample_end_time &gt; self.dive_end_time</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>93 </pre></td><td><pre>      self.errors.add :sample_end_time, "Sample end time has to be before dive end time"</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>94 </pre></td><td><pre>    end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>95 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>96 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>97 </pre></td><td><pre>  def hard_relief_cats_equal_100</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>98 </pre></td><td><pre>      values = []</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>99 </pre></td><td><pre>      [self.hard_relief_cat_0, self.hard_relief_cat_1, self.hard_relief_cat_2, self.hard_relief_cat_3, self.hard_relief_cat_4 ].each do |cat|</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>100 </pre></td><td><pre>        if !cat.nil?</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>101 </pre></td><td><pre>          values.push(cat)</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>102 </pre></td><td><pre>        end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>103 </pre></td><td><pre>      end</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>104 </pre></td><td><pre>      values.delete_if { |x| x == nil }</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>105 </pre></td><td><pre>      if (values.sum) != 100</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>106 </pre></td><td><pre>        errors.add( :base, "hard relief categories do not add to 100" )</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>107 </pre></td><td><pre>      end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>108 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>109 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>110 </pre></td><td><pre>  def soft_relief_cats_equal_100</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>111 </pre></td><td><pre>      values = []</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>112 </pre></td><td><pre>      [self.soft_relief_cat_0, self.soft_relief_cat_1, self.soft_relief_cat_2, self.soft_relief_cat_3, self.soft_relief_cat_4 ].each do |cat|</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>113 </pre></td><td><pre>        if !cat.nil?</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>114 </pre></td><td><pre>          values.push(cat)</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>115 </pre></td><td><pre>        end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>116 </pre></td><td><pre>      end</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>117 </pre></td><td><pre>      values.delete_if { |x| x == nil }</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>118 </pre></td><td><pre>      if (values.sum) != 100</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>119 </pre></td><td><pre>        errors.add( :base, "soft relief categories do not add to 100" )</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>120 </pre></td><td><pre>      end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>121 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>122 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>123 </pre></td><td><pre>  def abiotic_percentage_equal_100</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>124 </pre></td><td><pre>      values = []</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>125 </pre></td><td><pre>      [ self.sand_percentage, self.hardbottom_percentage, rubble_percentage ].each do |cat|</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>126 </pre></td><td><pre>        if !cat.nil?</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>127 </pre></td><td><pre>          values.push(cat)</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>128 </pre></td><td><pre>        end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>129 </pre></td><td><pre>      end</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>130 </pre></td><td><pre>      values.delete_if { |x| x == nil }</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>131 </pre></td><td><pre>      if (values.sum) != 100</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>132 </pre></td><td><pre>        errors.add( :base, "abiotic percentages do not add to 100" )</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>133 </pre></td><td><pre>      end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>134 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>135 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>136 </pre></td><td><pre>  def biotic_percentage_sand_equal_100</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>137 </pre></td><td><pre>      values = []</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>138 </pre></td><td><pre>      [ self.sand_bare, self.sand_macro_algae, self.sand_seagrass, self.sand_sponge, self.sand_pcov_other1, self.sand_pcov_other2 ].each do |cat|</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>139 </pre></td><td><pre>        if !cat.nil?</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>140 </pre></td><td><pre>          values.push(cat)</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>141 </pre></td><td><pre>        end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>142 </pre></td><td><pre>      end</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>143 </pre></td><td><pre>      values.delete_if { |x| x == nil }</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>144 </pre></td><td><pre>      if (values.sum) != 100</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>145 </pre></td><td><pre>        errors.add( :base, "Sand biotic percentages do not add to 100" )</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>146 </pre></td><td><pre>      end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>147 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>148 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>149 </pre></td><td><pre>  def biotic_percentage_hardbottom_equal_100</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>150 </pre></td><td><pre>      values = []</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>151 </pre></td><td><pre>      [ self.hardbottom_algal_turf, self.hardbottom_macro_algae, self.hardbottom_live_coral, self.hardbottom_octocoral, self.hardbottom_sponge, self.hard_pcov_other1, self.hard_pcov_other2 ].each do |cat|</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>152 </pre></td><td><pre>        if !cat.nil?</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>153 </pre></td><td><pre>          values.push(cat)</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>154 </pre></td><td><pre>        end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>155 </pre></td><td><pre>      end</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>156 </pre></td><td><pre>      values.delete_if { |x| x == nil }</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>157 </pre></td><td><pre>      if (values.sum) != 100</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>158 </pre></td><td><pre>        errors.add( :base, "Hardbottom biotic percentages do not add to 100" )</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>159 </pre></td><td><pre>      end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>160 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>161 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>162 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>163 </pre></td><td><pre>end</pre></td>
+        </tr>
+            
+    </table>
+  </body>
+</html>

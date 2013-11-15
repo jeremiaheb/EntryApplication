@@ -1,0 +1,103 @@
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>/home/jeremiah/railsProjects/EntryApplication/app/models/boat_log.rb</title>
+    <link rel="stylesheet" href="css/coco.css" type="text/css" />
+  </head>
+  <body>
+    <p class="menu">
+      <a href="index.html">Index</a> <img src="img/coconut16.png" width="16" height="16" />
+      <a href="https://github.com/lkdjiin/coco/wiki">Wiki</a> <img src="img/coconut16.png" width="16" height="16" />
+      <a href="https://github.com/lkdjiin/coco">Source</a> <img src="img/coconut16.png" width="16" height="16" />
+      <a href="http://lkdjiin.github.com/coco/">Web site</a>
+    </p>
+    <h2>/home/jeremiah/railsProjects/EntryApplication/app/models/boat_log.rb</h2>
+    <p class="date">2013-11-15 14:46:05 -0500</p>
+    
+    <table class="source">
+      
+                    <tr class="hit" %>      
+      <td><pre>1 </pre></td><td><pre>class BoatLog &lt; ActiveRecord::Base</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>2 </pre></td><td><pre>    </pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>3 </pre></td><td><pre>  belongs_to :boatlog_manager</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>4 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>5 </pre></td><td><pre>  has_many :station_logs, :dependent =&gt; :destroy</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>6 </pre></td><td><pre>  has_many :rep_logs, :through =&gt; :station_logs</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>7 </pre></td><td><pre>  accepts_nested_attributes_for :station_logs, :reject_if =&gt; lambda {  |a| a[:stn_number].blank? }, :allow_destroy =&gt; true</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>8 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>9 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>10 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>11 </pre></td><td><pre>  def boatlog_divers</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>12 </pre></td><td><pre>    boatlog_divers_list = []</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>13 </pre></td><td><pre>    rep_logs.each do |rep|</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>14 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>15 </pre></td><td><pre>      boatlog_divers_list &lt;&lt; [rep.field_id, rep.diver.diver_name ]</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>16 </pre></td><td><pre>    end</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>17 </pre></td><td><pre>    boatlog_divers_list.sort_by { |e| e[0] }</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>18 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>19 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>20 </pre></td><td><pre>  validates :primary_sample_unit, :presence =&gt; true</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>21 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>22 </pre></td><td><pre>end</pre></td>
+        </tr>
+            
+    </table>
+  </body>
+</html>

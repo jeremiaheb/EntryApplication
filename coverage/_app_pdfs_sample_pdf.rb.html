@@ -1,0 +1,675 @@
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>/home/jeremiah/railsProjects/EntryApplication/app/pdfs/sample_pdf.rb</title>
+    <link rel="stylesheet" href="css/coco.css" type="text/css" />
+  </head>
+  <body>
+    <p class="menu">
+      <a href="index.html">Index</a> <img src="img/coconut16.png" width="16" height="16" />
+      <a href="https://github.com/lkdjiin/coco/wiki">Wiki</a> <img src="img/coconut16.png" width="16" height="16" />
+      <a href="https://github.com/lkdjiin/coco">Source</a> <img src="img/coconut16.png" width="16" height="16" />
+      <a href="http://lkdjiin.github.com/coco/">Web site</a>
+    </p>
+    <h2>/home/jeremiah/railsProjects/EntryApplication/app/pdfs/sample_pdf.rb</h2>
+    <p class="date">2013-11-15 14:46:05 -0500</p>
+    
+    <table class="source">
+      
+                    <tr class="hit" %>      
+      <td><pre>1 </pre></td><td><pre>class SamplePdf &lt; Prawn::Document</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>2 </pre></td><td><pre>  </pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>3 </pre></td><td><pre>  def initialize(samples)</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>4 </pre></td><td><pre>      super(margin: 2)</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>5 </pre></td><td><pre>    samples.each do |sample|</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>6 </pre></td><td><pre>      @sample = sample</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>7 </pre></td><td><pre>      sample_head</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>8 </pre></td><td><pre>      substrate_slope</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>9 </pre></td><td><pre>      max_vert_relief</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>10 </pre></td><td><pre>      surface_relief_perc</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>11 </pre></td><td><pre>      blank1</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>12 </pre></td><td><pre>      abiotic_footprint</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>13 </pre></td><td><pre>      blank2</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>14 </pre></td><td><pre>      comments</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>15 </pre></td><td><pre>      biotic_cover</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>16 </pre></td><td><pre>      species_data_27</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>17 </pre></td><td><pre>      if @sample.sample_animals.length &gt; 27</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>18 </pre></td><td><pre>        species_data_54</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>19 </pre></td><td><pre>      end</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>20 </pre></td><td><pre>      start_new_page</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>21 </pre></td><td><pre>    end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>22 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>23 </pre></td><td><pre>  </pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>24 </pre></td><td><pre>  def sample_head</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>25 </pre></td><td><pre>    data =  [ ["Boatlog/Manger:", "#{@sample.boatlog_manager.agency_name}"],</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>26 </pre></td><td><pre>            ["Diver","#{@sample.diver_samples.primary[0].diver.diver_name}","Date","#{@sample.sample_date}","Field Number","#{@sample.field_id}","Visibility","#{@sample.underwater_visibility}"],</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>27 </pre></td><td><pre>            ["Buddy","#{@sample.diver_samples.secondary[0].diver.diver_name}","Sample Start","#{@sample.sample_begin_time.strftime("%H:%M")}","Habitat","#{@sample.habitat_type.habitat_name}","Water Temp","#{@sample.water_temp}"],</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>28 </pre></td><td><pre>            ["Dive Start",@sample.dive_begin_time.strftime("%H:%M"),"Sample End","#{@sample.sample_end_time.strftime("%H:%M")}","Fish Gear","#{@sample.fishing_gear}","Cylinder Radius","#{@sample.cylinder_radius}"],</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>29 </pre></td><td><pre>            ["Dive End",@sample.dive_end_time.strftime("%H:%M"),"Max Depth","#{@sample.dive_depth}","Stn Depth","#{@sample.sample_depth}","Current","#{@sample.current}"]</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>30 </pre></td><td><pre>          ]</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>31 </pre></td><td><pre>    table data, :cell_style =&gt; { :size =&gt; 8, :border_width =&gt; 0, :height =&gt; 17, :padding =&gt; 5 }</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>32 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>33 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>34 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>35 </pre></td><td><pre> def substrate_slope</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>36 </pre></td><td><pre>   data = [ [{content: "Substrate Slope", align: :center, colspan: 2}], [ {content: "Max Depth:", border_right_width: 0}, {content: "#{@sample.substrate_max_depth}", border_left_width: 0} ], [ {content: "Min Depth:", border_right_width: 0}, {content: "#{@sample.substrate_min_depth}", border_left_width: 0} ] ]</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>37 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>38 </pre></td><td><pre>   table data,</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>39 </pre></td><td><pre>     :cell_style =&gt; { :size =&gt; 8, :height =&gt; 17, :padding =&gt; 2  },</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>40 </pre></td><td><pre>     :column_widths =&gt; { 0 =&gt; 75, 1 =&gt; 75 }</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>41 </pre></td><td><pre> end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>42 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>43 </pre></td><td><pre> def max_vert_relief</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>44 </pre></td><td><pre>   data = [ [{content: "Max Vertical Relief", align: :center, colspan: 2}], [ {content: "Hard Relief:", border_right_width: 0}, {content: "#{@sample.hard_verticle_relief}", border_left_width: 0} ], [ {content: "Soft Relief:", border_right_width: 0}, {content: "#{@sample.soft_verticle_relief}", border_left_width: 0} ] ]</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>45 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>46 </pre></td><td><pre>   table data,</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>47 </pre></td><td><pre>     :cell_style =&gt; { :size =&gt; 8, :height =&gt; 17, :padding =&gt; 2 },</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>48 </pre></td><td><pre>     :column_widths =&gt; { 0 =&gt; 75, 1 =&gt; 75 }</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>49 </pre></td><td><pre> end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>50 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>51 </pre></td><td><pre> def surface_relief_perc</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>52 </pre></td><td><pre>   data = [ </pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>53 </pre></td><td><pre>          [ {content: "Surface Relief %", colspan: 3}],</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>54 </pre></td><td><pre>          [ {content: "", }, {content: "Hard"}, {content: "Avg. Soft", align: :center} ],</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>55 </pre></td><td><pre>          [ {content: "&lt;0.2"}, {content: "#{@sample.hard_relief_cat_0}"}, {content: "#{@sample.soft_relief_cat_0}"} ],</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>56 </pre></td><td><pre>          [ {content: "0.2-0.5"}, {content: "#{@sample.hard_relief_cat_1}"}, {content: "#{@sample.soft_relief_cat_1}"} ],</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>57 </pre></td><td><pre>          [ {content: "0.5-1.0"}, {content: "#{@sample.hard_relief_cat_2}"}, {content: "#{@sample.soft_relief_cat_2}"} ],</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>58 </pre></td><td><pre>          [ {content: "1.0-1.5"}, {content: "#{@sample.hard_relief_cat_3}"}, {content: "#{@sample.soft_relief_cat_3}"} ],</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>59 </pre></td><td><pre>          [ {content: "&gt;1.5"}, {content: "#{@sample.hard_relief_cat_4}"}, {content: "#{@sample.soft_relief_cat_4}"} ]</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>60 </pre></td><td><pre>          ]</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>61 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>62 </pre></td><td><pre>   table data,</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>63 </pre></td><td><pre>     :cell_style =&gt; { :size =&gt; 8, :align =&gt; :center, :height =&gt; 17, :padding =&gt; 2 },</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>64 </pre></td><td><pre>     :column_widths =&gt; { 0 =&gt; 50, 1 =&gt; 50, 2 =&gt; 50}</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>65 </pre></td><td><pre> end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>66 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>67 </pre></td><td><pre> def blank1</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>68 </pre></td><td><pre>   move_up 221</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>69 </pre></td><td><pre>   indent(150) do</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>70 </pre></td><td><pre>    data = [[""]]</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>71 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>72 </pre></td><td><pre>    table data,</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>73 </pre></td><td><pre>      :cell_style =&gt; {:height =&gt; 85},</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>74 </pre></td><td><pre>      :column_widths =&gt; { 0 =&gt; 100 }</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>75 </pre></td><td><pre>   end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>76 </pre></td><td><pre> end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>77 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>78 </pre></td><td><pre> def abiotic_footprint</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>79 </pre></td><td><pre>   indent(150) do</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>80 </pre></td><td><pre>    data = [ </pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>81 </pre></td><td><pre>           [ {content: "Abiotic Footprint", align: :center, colspan: 2}],</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>82 </pre></td><td><pre>           [ {content: "Sand"}, {content: "#{@sample.sand_percentage}"} ],</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>83 </pre></td><td><pre>           [ {content: "Hard-B"}, {content: "#{@sample.hardbottom_percentage}"} ],</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>84 </pre></td><td><pre>           [ {content: "Rubble"}, {content: "#{@sample.rubble_percentage}"} ]</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>85 </pre></td><td><pre>    ]</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>86 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>87 </pre></td><td><pre>    table data,</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>88 </pre></td><td><pre>      :cell_style =&gt; { :size =&gt; 8, :height =&gt; 17, :padding =&gt; 2, :align =&gt; :center  },</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>89 </pre></td><td><pre>      :column_widths =&gt; { 0 =&gt; 50, 1 =&gt; 50 }</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>90 </pre></td><td><pre>   end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>91 </pre></td><td><pre> end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>92 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>93 </pre></td><td><pre> def blank2</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>94 </pre></td><td><pre>   indent(150) do</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>95 </pre></td><td><pre>    data = [[""]]</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>96 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>97 </pre></td><td><pre>    table data,</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>98 </pre></td><td><pre>      :cell_style =&gt; {:height =&gt; 68},</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>99 </pre></td><td><pre>      :column_widths =&gt; { 0 =&gt; 100 }</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>100 </pre></td><td><pre>   end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>101 </pre></td><td><pre> end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>102 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>103 </pre></td><td><pre> def comments</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>104 </pre></td><td><pre>  move_up 221</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>105 </pre></td><td><pre>  indent(250) do</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>106 </pre></td><td><pre>    data =  [</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>107 </pre></td><td><pre>              [{content: "Comments: " + "#{@sample.sample_description}", align: :left, colspan: 4 } ]</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>108 </pre></td><td><pre>            ]</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>109 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>110 </pre></td><td><pre>    table data,</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>111 </pre></td><td><pre>     :cell_style =&gt; { :size =&gt; 8, :height =&gt; 51, :padding =&gt; 2 },</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>112 </pre></td><td><pre>     :column_widths =&gt; { 0 =&gt; 85, 1 =&gt; 85, 2 =&gt; 85, 3 =&gt; 85}</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>113 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>114 </pre></td><td><pre> end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>115 </pre></td><td><pre> </pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>116 </pre></td><td><pre> def biotic_cover</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>117 </pre></td><td><pre>  indent(250) do</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>118 </pre></td><td><pre>    data =  [</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>119 </pre></td><td><pre>              [{content: "Biotic Cover %", align: :center, colspan: 4 } ],</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>120 </pre></td><td><pre>              [{content: "Sand", align: :center, colspan: 2 },{content: "Hardbottom", align: :center, colspan: 2 } ],</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>121 </pre></td><td><pre>              [{content: "Bare", align: :center, colspan: 1 }, {content: "#{@sample.sand_bare}", align: :center, colspan: 1 }, {content: "Algae(&lt;1)", align: :center, colspan: 1 }, {content: "#{@sample.hardbottom_algal_turf}", align: :center, colspan: 1 } ],</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>122 </pre></td><td><pre>              [{content: "Macro Algae", align: :center, colspan: 1 }, {content: "#{@sample.sand_macro_algae}", align: :center, colspan: 1 }, {content: "Algae(&gt;1)", align: :center, colspan: 1 }, {content: "#{@sample.hardbottom_macro_algae}", align: :center, colspan: 1 } ],</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>123 </pre></td><td><pre>              [{content: "Seagrass", align: :center, colspan: 1 }, {content: "#{@sample.sand_seagrass}", align: :center, colspan: 1 }, {content: "Live Coral", align: :center, colspan: 1 }, {content: "#{@sample.hardbottom_live_coral}", align: :center, colspan: 1 } ],</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>124 </pre></td><td><pre>              [{content: "Sponge", align: :center, colspan: 1 }, {content: "#{@sample.sand_sponge}", align: :center, colspan: 1 }, {content: "Octocoral", align: :center, colspan: 1 }, {content: "#{@sample.hardbottom_octocoral}", align: :center, colspan: 1 } ],</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>125 </pre></td><td><pre>              [{content: "1:" + "#{@sample.sand_pcov_other1_lab}", align: :left, colspan: 1 }, {content: "#{@sample.sand_pcov_other1}", align: :center, colspan: 1 }, {content: "Sponge", align: :center, colspan: 1 }, {content: "#{@sample.hardbottom_sponge}", align: :center, colspan: 1 } ],</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>126 </pre></td><td><pre>              [{content: "2:" + "#{@sample.sand_pcov_other2_lab}", align: :left, colspan: 1 }, {content: "#{@sample.sand_pcov_other2}", align: :center, colspan: 1 }, {content: "1: " + "#{@sample.hard_pcov_other1_lab}", align: :left, colspan: 1 }, {content: "#{@sample.hard_pcov_other1}", align: :center, colspan: 1 } ],</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>127 </pre></td><td><pre>              [{content: "", align: :center, colspan: 1 }, {content: "", align: :center, colspan: 1 }, {content: "2: " + "#{@sample.hard_pcov_other2_lab}", align: :left, colspan: 1 }, {content: "#{@sample.hard_pcov_other2}", align: :center, colspan: 1 } ],</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>128 </pre></td><td><pre>              [{content: "", align: :center, colspan: 1 }, {content: "", align: :center, colspan: 1 }, {content: "", align: :center, colspan: 1 }, {content: "", align: :center, colspan: 1 } ],</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>129 </pre></td><td><pre>            ]</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>130 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>131 </pre></td><td><pre>    table data,</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>132 </pre></td><td><pre>     :cell_style =&gt; { :size =&gt; 8, :height =&gt; 17, :padding =&gt; 2 },</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>133 </pre></td><td><pre>     :column_widths =&gt; { 0 =&gt; 85, 1 =&gt; 85, 2 =&gt; 85, 3 =&gt; 85}</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>134 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>135 </pre></td><td><pre> end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>136 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>137 </pre></td><td><pre> def species_data_27</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>138 </pre></td><td><pre>   table spp_1_27, </pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>139 </pre></td><td><pre>    :cell_style =&gt; { :size =&gt; 8, :height =&gt; 17, :align =&gt; :center, :padding =&gt; 2 },</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>140 </pre></td><td><pre>    :column_widths =&gt; { 0 =&gt; 15, 1 =&gt; 30, 2 =&gt; 129, 3 =&gt; 129}</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>141 </pre></td><td><pre> end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>142 </pre></td><td><pre> </pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>143 </pre></td><td><pre> def species_data_54</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>144 </pre></td><td><pre>   move_up 476</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>145 </pre></td><td><pre>   indent(304) do</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>146 </pre></td><td><pre>   table spp_28_54, </pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>147 </pre></td><td><pre>    :cell_style =&gt; { :size =&gt; 8, :height =&gt; 17, :align =&gt; :center, :padding =&gt; 2 },</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>148 </pre></td><td><pre>    :column_widths =&gt; { 0 =&gt; 15, 1 =&gt; 30, 2 =&gt; 129, 3 =&gt; 129}</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>149 </pre></td><td><pre> end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>150 </pre></td><td><pre> end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>151 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>152 </pre></td><td><pre> def spp_1_27</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>153 </pre></td><td><pre>  [["", "Period", "Species", "N/Avg-Min-Max"]] + </pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>154 </pre></td><td><pre>  @sample.sample_animals[0..26].map.with_index do |spp, index|</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>155 </pre></td><td><pre>    [index + 1 , spp.time_seen, spp.animal.species_code, "%s / %s - %s - %s" % [spp.number_individuals, spp.try(:average_length), spp.try(:min_length), spp.try(:max_length)]]</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>156 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>157 </pre></td><td><pre> end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>158 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>159 </pre></td><td><pre> def spp_28_54</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>160 </pre></td><td><pre>  [["", "Period", "Species", "N/Avg-Min-Max"]] + </pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>161 </pre></td><td><pre>  @sample.sample_animals[27..@sample.sample_animals.length].map.with_index do |spp, index|</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>162 </pre></td><td><pre>    [index + 28 , spp.time_seen, spp.animal.species_code, "%s / %s - %s - %s" % [spp.number_individuals, spp.try(:average_length), spp.try(:min_length), spp.try(:max_length)] ]</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>163 </pre></td><td><pre>  end </pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>164 </pre></td><td><pre> end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>165 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>166 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>167 </pre></td><td><pre>end</pre></td>
+        </tr>
+            
+    </table>
+  </body>
+</html>

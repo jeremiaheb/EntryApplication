@@ -1,0 +1,546 @@
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>/home/jeremiah/railsProjects/EntryApplication/app/controllers/samples_controller.rb</title>
+    <link rel="stylesheet" href="css/coco.css" type="text/css" />
+  </head>
+  <body>
+    <p class="menu">
+      <a href="index.html">Index</a> <img src="img/coconut16.png" width="16" height="16" />
+      <a href="https://github.com/lkdjiin/coco/wiki">Wiki</a> <img src="img/coconut16.png" width="16" height="16" />
+      <a href="https://github.com/lkdjiin/coco">Source</a> <img src="img/coconut16.png" width="16" height="16" />
+      <a href="http://lkdjiin.github.com/coco/">Web site</a>
+    </p>
+    <h2>/home/jeremiah/railsProjects/EntryApplication/app/controllers/samples_controller.rb</h2>
+    <p class="date">2013-11-15 14:46:05 -0500</p>
+    
+    <table class="source">
+      
+                    <tr class="hit" %>      
+      <td><pre>1 </pre></td><td><pre>class SamplesController &lt; ApplicationController</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>2 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>3 </pre></td><td><pre>  before_filter :authenticate_diver!</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>4 </pre></td><td><pre>  load_and_authorize_resource</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>5 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>6 </pre></td><td><pre>  def current_ability</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>7 </pre></td><td><pre>    @current_ability ||= Ability.new(current_diver)</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>8 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>9 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>10 </pre></td><td><pre>  # GET /samples</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>11 </pre></td><td><pre>  # GET /samples.json</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>12 </pre></td><td><pre>  def index</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>13 </pre></td><td><pre>    if current_diver.role == 'admin'</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>14 </pre></td><td><pre>      @samples = Sample.all</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>15 </pre></td><td><pre>    elsif current_diver.role == 'manager'</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>16 </pre></td><td><pre>      @samples = Sample.joins(:diver_samples).where( "diver_samples.diver_id=? AND diver_samples.primary_diver=? OR boatlog_manager_id=?", current_diver, true, current_diver.boatlog_manager_id ).uniq</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>17 </pre></td><td><pre>    else</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>18 </pre></td><td><pre>      @samples = current_diver.samples.merge(DiverSample.primary)</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>19 </pre></td><td><pre>    end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>20 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>21 </pre></td><td><pre>    @proofing_samples = current_diver.samples.merge(DiverSample.primary).order("sample_date") </pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>22 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>23 </pre></td><td><pre>    respond_to do |format|</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>24 </pre></td><td><pre>      format.html # index.html.erb</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>25 </pre></td><td><pre>      format.json { render json: @samples }</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>26 </pre></td><td><pre>      format.xlsx</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>27 </pre></td><td><pre>      format.pdf do </pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>28 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>29 </pre></td><td><pre>        pdf = SamplePdf.new(@proofing_samples)</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>30 </pre></td><td><pre>        send_data pdf.render, filename: "#{current_diver.lastname}_ProofingReport.pdf",</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>31 </pre></td><td><pre>                              type: "application/pdf"</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>32 </pre></td><td><pre>      </pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>33 </pre></td><td><pre>      end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>34 </pre></td><td><pre>    end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>35 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>36 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>37 </pre></td><td><pre>  # GET /samples/1</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>38 </pre></td><td><pre>  # GET /samples/1.json</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>39 </pre></td><td><pre>  def show</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>40 </pre></td><td><pre>    @sample = Sample.find(params[:id])</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>41 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>42 </pre></td><td><pre>    respond_to do |format|</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>43 </pre></td><td><pre>      format.html # show.html.erb</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>44 </pre></td><td><pre>      format.json { render json: @sample }</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>45 </pre></td><td><pre>      format.pdf do</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>46 </pre></td><td><pre>        pdf = SamplePdf.new(@sample)</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>47 </pre></td><td><pre>        send_data pdf.render, filename: "sample_#{@sample.field_id}.pdf",</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>48 </pre></td><td><pre>                              type: "application/pdf",</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>49 </pre></td><td><pre>                              disposition: "inline"</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>50 </pre></td><td><pre>      end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>51 </pre></td><td><pre>    end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>52 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>53 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>54 </pre></td><td><pre>  # GET /samples/new</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>55 </pre></td><td><pre>  # GET /samples/new.json</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>56 </pre></td><td><pre>  def new</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>57 </pre></td><td><pre>    @sample = Sample.new</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>58 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>59 </pre></td><td><pre>    2.times { @sample.diver_samples.build }</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>60 </pre></td><td><pre>    @sample.sample_animals.build</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>61 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>62 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>63 </pre></td><td><pre>    respond_to do |format|</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>64 </pre></td><td><pre>      format.html # new.html.erb</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>65 </pre></td><td><pre>      format.json { render json: @sample }</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>66 </pre></td><td><pre>    end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>67 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>68 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>69 </pre></td><td><pre>  # GET /samples/1/edit</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>70 </pre></td><td><pre>  def edit</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>71 </pre></td><td><pre>    @sample = Sample.find(params[:id])</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>72 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>73 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>74 </pre></td><td><pre>    </pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>75 </pre></td><td><pre>  # POST /samples</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>76 </pre></td><td><pre>  # POST /samples.json</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>77 </pre></td><td><pre>  def create</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>78 </pre></td><td><pre>    @sample = Sample.new(params[:sample])</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>79 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>80 </pre></td><td><pre>    respond_to do |format|</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>81 </pre></td><td><pre>      if @sample.save</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>82 </pre></td><td><pre>        format.html { redirect_to samples_path, notice: 'Sample was successfully created.' }</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>83 </pre></td><td><pre>        format.json { render json: @sample, status: :created, location: @sample }</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>84 </pre></td><td><pre>      else</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>85 </pre></td><td><pre>        format.html { render action: "new" }</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>86 </pre></td><td><pre>        format.json { render json: @sample.errors, status: :unprocessable_entity }</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>87 </pre></td><td><pre>      end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>88 </pre></td><td><pre>    end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>89 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>90 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>91 </pre></td><td><pre>  # PUT /samples/1</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>92 </pre></td><td><pre>  # PUT /samples/1.json</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>93 </pre></td><td><pre>  def update</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>94 </pre></td><td><pre>    @sample = Sample.find(params[:id])</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>95 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>96 </pre></td><td><pre>    respond_to do |format|</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>97 </pre></td><td><pre>      if @sample.update_attributes(params[:sample])</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>98 </pre></td><td><pre>        format.html { redirect_to samples_path, notice: 'Sample was successfully updated.' }</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>99 </pre></td><td><pre>        format.json { head :no_content }</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>100 </pre></td><td><pre>      else</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>101 </pre></td><td><pre>        format.html { render action: "edit" }</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>102 </pre></td><td><pre>        format.json { render json: @sample.errors, status: :unprocessable_entity }</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>103 </pre></td><td><pre>      end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>104 </pre></td><td><pre>    end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>105 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>106 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>107 </pre></td><td><pre>  # DELETE /samples/1</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>108 </pre></td><td><pre>  # DELETE /samples/1.json</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>109 </pre></td><td><pre>  def destroy</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>110 </pre></td><td><pre>    @sample = Sample.find(params[:id])</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>111 </pre></td><td><pre>    @sample.destroy</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>112 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>113 </pre></td><td><pre>    respond_to do |format|</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>114 </pre></td><td><pre>      format.html { redirect_to samples_url }</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>115 </pre></td><td><pre>      format.json { head :no_content }</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>116 </pre></td><td><pre>    end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>117 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>118 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>119 </pre></td><td><pre>  def proofing_template</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>120 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>121 </pre></td><td><pre>    @sample = Sample.find(params[:id])</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>122 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>123 </pre></td><td><pre>    respond_to do |format|</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>124 </pre></td><td><pre>      format.html # show.html.erb</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>125 </pre></td><td><pre>      format.json { render json: @sample }</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>126 </pre></td><td><pre>      format.pdf do</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>127 </pre></td><td><pre>        pdf = SamplePdf.new(@sample)</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>128 </pre></td><td><pre>        send_data pdf.render, filename: "sample_#{@sample.field_id}.pdf",</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>129 </pre></td><td><pre>                              type: "application/pdf",</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>130 </pre></td><td><pre>                              disposition: "inline"</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>131 </pre></td><td><pre>      end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>132 </pre></td><td><pre>    end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>133 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>134 </pre></td><td><pre>end</pre></td>
+        </tr>
+            
+    </table>
+  </body>
+</html>

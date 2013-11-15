@@ -1,0 +1,360 @@
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>/home/jeremiah/railsProjects/EntryApplication/app/controllers/boatlog_managers_controller.rb</title>
+    <link rel="stylesheet" href="css/coco.css" type="text/css" />
+  </head>
+  <body>
+    <p class="menu">
+      <a href="index.html">Index</a> <img src="img/coconut16.png" width="16" height="16" />
+      <a href="https://github.com/lkdjiin/coco/wiki">Wiki</a> <img src="img/coconut16.png" width="16" height="16" />
+      <a href="https://github.com/lkdjiin/coco">Source</a> <img src="img/coconut16.png" width="16" height="16" />
+      <a href="http://lkdjiin.github.com/coco/">Web site</a>
+    </p>
+    <h2>/home/jeremiah/railsProjects/EntryApplication/app/controllers/boatlog_managers_controller.rb</h2>
+    <p class="date">2013-11-15 14:46:05 -0500</p>
+    
+    <table class="source">
+      
+                    <tr class="hit" %>      
+      <td><pre>1 </pre></td><td><pre>class BoatlogManagersController &lt; ApplicationController</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>2 </pre></td><td><pre>  </pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>3 </pre></td><td><pre>  before_filter :authenticate_diver!</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>4 </pre></td><td><pre>  load_and_authorize_resource</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>5 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>6 </pre></td><td><pre>  # GET /boatlog_managers</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>7 </pre></td><td><pre>  # GET /boatlog_managers.json</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>8 </pre></td><td><pre>  def index</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>9 </pre></td><td><pre>    @boatlog_managers = BoatlogManager.all</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>10 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>11 </pre></td><td><pre>    respond_to do |format|</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>12 </pre></td><td><pre>      format.html # index.html.erb</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>13 </pre></td><td><pre>      format.json { render json: @boatlog_managers }</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>14 </pre></td><td><pre>    end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>15 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>16 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>17 </pre></td><td><pre>  # GET /boatlog_managers/1</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>18 </pre></td><td><pre>  # GET /boatlog_managers/1.json</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>19 </pre></td><td><pre>  def show</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>20 </pre></td><td><pre>    @boatlog_manager = BoatlogManager.find(params[:id])</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>21 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>22 </pre></td><td><pre>    respond_to do |format|</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>23 </pre></td><td><pre>      format.html # show.html.erb</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>24 </pre></td><td><pre>      format.json { render json: @boatlog_manager }</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>25 </pre></td><td><pre>    end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>26 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>27 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>28 </pre></td><td><pre>  # GET /boatlog_managers/new</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>29 </pre></td><td><pre>  # GET /boatlog_managers/new.json</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>30 </pre></td><td><pre>  def new</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>31 </pre></td><td><pre>    @boatlog_manager = BoatlogManager.new</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>32 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>33 </pre></td><td><pre>    respond_to do |format|</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>34 </pre></td><td><pre>      format.html # new.html.erb</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>35 </pre></td><td><pre>      format.json { render json: @boatlog_manager }</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>36 </pre></td><td><pre>    end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>37 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>38 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>39 </pre></td><td><pre>  # GET /boatlog_managers/1/edit</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>40 </pre></td><td><pre>  def edit</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>41 </pre></td><td><pre>    @boatlog_manager = BoatlogManager.find(params[:id])</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>42 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>43 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>44 </pre></td><td><pre>  # POST /boatlog_managers</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>45 </pre></td><td><pre>  # POST /boatlog_managers.json</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>46 </pre></td><td><pre>  def create</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>47 </pre></td><td><pre>    @boatlog_manager = BoatlogManager.new(params[:boatlog_manager])</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>48 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>49 </pre></td><td><pre>    respond_to do |format|</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>50 </pre></td><td><pre>      if @boatlog_manager.save</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>51 </pre></td><td><pre>        format.html { redirect_to @boatlog_manager, notice: 'Boatlog manager was successfully created.' }</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>52 </pre></td><td><pre>        format.json { render json: @boatlog_manager, status: :created, location: @boatlog_manager }</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>53 </pre></td><td><pre>      else</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>54 </pre></td><td><pre>        format.html { render action: "new" }</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>55 </pre></td><td><pre>        format.json { render json: @boatlog_manager.errors, status: :unprocessable_entity }</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>56 </pre></td><td><pre>      end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>57 </pre></td><td><pre>    end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>58 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>59 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>60 </pre></td><td><pre>  # PUT /boatlog_managers/1</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>61 </pre></td><td><pre>  # PUT /boatlog_managers/1.json</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>62 </pre></td><td><pre>  def update</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>63 </pre></td><td><pre>    @boatlog_manager = BoatlogManager.find(params[:id])</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>64 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>65 </pre></td><td><pre>    respond_to do |format|</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>66 </pre></td><td><pre>      if @boatlog_manager.update_attributes(params[:boatlog_manager])</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>67 </pre></td><td><pre>        format.html { redirect_to @boatlog_manager, notice: 'Boatlog manager was successfully updated.' }</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>68 </pre></td><td><pre>        format.json { head :no_content }</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>69 </pre></td><td><pre>      else</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>70 </pre></td><td><pre>        format.html { render action: "edit" }</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>71 </pre></td><td><pre>        format.json { render json: @boatlog_manager.errors, status: :unprocessable_entity }</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>72 </pre></td><td><pre>      end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>73 </pre></td><td><pre>    end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>74 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>75 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>76 </pre></td><td><pre>  # DELETE /boatlog_managers/1</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>77 </pre></td><td><pre>  # DELETE /boatlog_managers/1.json</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>78 </pre></td><td><pre>  def destroy</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>79 </pre></td><td><pre>    @boatlog_manager = BoatlogManager.find(params[:id])</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>80 </pre></td><td><pre>    @boatlog_manager.destroy</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>81 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>82 </pre></td><td><pre>    respond_to do |format|</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>83 </pre></td><td><pre>      format.html { redirect_to boatlog_managers_url }</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>84 </pre></td><td><pre>      format.json { head :no_content }</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>85 </pre></td><td><pre>    end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>86 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>87 </pre></td><td><pre>end</pre></td>
+        </tr>
+            
+    </table>
+  </body>
+</html>

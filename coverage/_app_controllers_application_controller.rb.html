@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>/home/jeremiah/railsProjects/EntryApplication/app/controllers/application_controller.rb</title>
+    <link rel="stylesheet" href="css/coco.css" type="text/css" />
+  </head>
+  <body>
+    <p class="menu">
+      <a href="index.html">Index</a> <img src="img/coconut16.png" width="16" height="16" />
+      <a href="https://github.com/lkdjiin/coco/wiki">Wiki</a> <img src="img/coconut16.png" width="16" height="16" />
+      <a href="https://github.com/lkdjiin/coco">Source</a> <img src="img/coconut16.png" width="16" height="16" />
+      <a href="http://lkdjiin.github.com/coco/">Web site</a>
+    </p>
+    <h2>/home/jeremiah/railsProjects/EntryApplication/app/controllers/application_controller.rb</h2>
+    <p class="date">2013-11-15 14:46:05 -0500</p>
+    
+    <table class="source">
+      
+                    <tr class="hit" %>      
+      <td><pre>1 </pre></td><td><pre>class ApplicationController &lt; ActionController::Base</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>2 </pre></td><td><pre>  protect_from_forgery</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>3 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>4 </pre></td><td><pre>  def current_ability</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>5 </pre></td><td><pre>    @current_ability ||= Ability.new(current_diver)</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>6 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>7 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>8 </pre></td><td><pre>  </pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>9 </pre></td><td><pre>  rescue_from CanCan::AccessDenied do |exception|</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>10 </pre></td><td><pre>    flash[:alert] = "Access denied!"</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>11 </pre></td><td><pre>    redirect_to root_url</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>12 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>13 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>14 </pre></td><td><pre>end</pre></td>
+        </tr>
+            
+    </table>
+  </body>
+</html>

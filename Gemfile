@@ -57,8 +57,8 @@ gem 'axlsx_rails'
 group :test do
   gem 'rspec-rails', '~> 2.14'
   gem 'coco'
+  gem 'factory_girl_rails'
 end
-
 group :development, :test do
   gem 'ruby-prof'
   gem 'rails-erd'

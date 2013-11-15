@@ -25,6 +25,7 @@ class BenthicCover < ActiveRecord::Base
   validates :field_id,              :presence => true
   validates :habitat_type,          :presence => true
   validates :meters_completed,      :presence => true
+  validates :sample_description,    :length => { :maximum => 150 } 
 
 
 

@@ -142,6 +142,8 @@ GEM
     pry-remote (0.1.7)
       pry (~> 0.9)
       slop (~> 3.0)
+    quiet_assets (1.0.2)
+      railties (>= 3.1, < 5.0)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -233,6 +235,7 @@ DEPENDENCIES
   prawn!
   pry-rails
   pry-remote
+  quiet_assets
   rails (= 3.2.2)
   rails-erd
   ruby-prof

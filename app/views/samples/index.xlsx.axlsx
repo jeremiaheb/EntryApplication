@@ -46,7 +46,11 @@ wb.add_worksheet(name: "Sample") do |sampSheet|
                         sample.fishing_gear,                    
                         sample.field_id,                        
                         sample.underwater_visibility,           
-                        sample.sample_description ]
+                        sample.sample_description ],
+                        :types => [ :string,
+                                    :string,
+                                    :string ] 
+                                     
   end
 end
 
@@ -121,7 +125,8 @@ wb.add_worksheet(name: 'Substrate') do |subSheet|
                       sample.hard_pcov_other1_lab, 
                       sample.hard_pcov_other2_lab,  
                       sample.hard_pcov_other1,      
-                      sample.hard_pcov_other2 ] 
+                      sample.hard_pcov_other2 ],
+                      :types => [ :string ]
   end
 end
 wb.add_worksheet(name: "species") do |sppSheet|
@@ -142,7 +147,8 @@ wb.add_worksheet(name: "species") do |sppSheet|
                         spp.average_length,     
                         spp.min_length,         
                         spp.max_length,         
-                        spp.time_seen ]
+                        spp.time_seen ],
+                        :types => [ :string ]
     end
   end
 end  

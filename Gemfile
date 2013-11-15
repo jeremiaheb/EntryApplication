@@ -56,7 +56,7 @@ gem 'axlsx_rails'
 
 group :test do
   gem 'rspec-rails', '~> 2.14'
-
+  gem 'coco'
 end
 
 group :development, :test do

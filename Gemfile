@@ -54,9 +54,13 @@ gem 'axlsx_rails'
 #end
 #
 
+group :test do
+  gem 'rspec-rails', '~> 2.14'
+
+end
+
 group :development, :test do
   gem 'ruby-prof'
-  gem 'test-unit'
   gem 'rails-erd'
   gem 'pry-rails'
   gem 'pry-remote'

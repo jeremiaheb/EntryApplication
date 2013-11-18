@@ -1,0 +1,83 @@
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>/home/jeremiah/railsProjects/EntryApplication/app/models/animal.rb</title>
+    <link rel="stylesheet" href="css/coco.css" type="text/css" />
+  </head>
+  <body>
+    <p class="menu">
+      <a href="index.html">Index</a> <img src="img/coconut16.png" width="16" height="16" />
+      <a href="https://github.com/lkdjiin/coco/wiki">Wiki</a> <img src="img/coconut16.png" width="16" height="16" />
+      <a href="https://github.com/lkdjiin/coco">Source</a> <img src="img/coconut16.png" width="16" height="16" />
+      <a href="http://lkdjiin.github.com/coco/">Web site</a>
+    </p>
+    <h2>/home/jeremiah/railsProjects/EntryApplication/app/models/animal.rb</h2>
+    <p class="date">2013-11-18 15:18:06 -0500</p>
+    
+    <table class="source">
+      
+                    <tr class="hit" %>      
+      <td><pre>1 </pre></td><td><pre>class Animal &lt; ActiveRecord::Base</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>2 </pre></td><td><pre>  has_many :sample_animals, :dependent =&gt; :destroy</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>3 </pre></td><td><pre>  has_many :samples, :through =&gt; :sample_animals</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>4 </pre></td><td><pre>  accepts_nested_attributes_for :sample_animals, :allow_destroy =&gt; true</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>5 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>6 </pre></td><td><pre>  validates :species_code,    :presence =&gt; true</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>7 </pre></td><td><pre>  validates :scientific_name, :presence =&gt; true</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>8 </pre></td><td><pre>  validates :common_name,     :presence =&gt; true</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>9 </pre></td><td><pre>  validates :max_size,        :presence =&gt; true</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>10 </pre></td><td><pre>  validates :min_size,        :presence =&gt; true</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>11 </pre></td><td><pre>  validates :max_number,      :presence =&gt; true</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>12 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>13 </pre></td><td><pre>  def spp_code_common</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>14 </pre></td><td><pre>    [self.species_code, self.common_name].join(" __ ")</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>15 </pre></td><td><pre>  end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>16 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>17 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>18 </pre></td><td><pre>end</pre></td>
+        </tr>
+            
+    </table>
+  </body>
+</html>

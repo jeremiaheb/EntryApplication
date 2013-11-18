@@ -9,7 +9,7 @@ class Animal < ActiveRecord::Base
   validates :max_size,        :presence => true
   validates :min_size,        :presence => true
   validates :max_number,      :presence => true
-    
+
   def spp_code_common
     [self.species_code, self.common_name].join(" __ ")
   end

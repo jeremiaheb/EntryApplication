@@ -9,4 +9,29 @@ FactoryGirl.define do
     max_number 200
   end
 
+  factory :coral do
+    code "ACR PALM"
+    scientific_name "Acropora palmata"
+  end
+
+  factory :cover_cat do
+    name "sand"
+  end
+
+  factory :habitat_type do 
+    habitat_name "Sand"
+    habitat_description "This is sand"
+  end
+  
+  factory :sample_type do 
+    sample_type_name "Bohnsack"
+    sample_type_description "Circular point count"
+  end
+
+  factory :boatlog_manager do
+    agency "NOAA"
+    firstname "Jeremiah"
+    lastname "Blondeau"
+  end
+
 end

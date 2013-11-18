@@ -6,24 +6,11 @@ describe Animal do
       it "should have valid factory" do
         animal.should be_valid
       end
-      
-      it "should require a species code" do 
-        FactoryGirl.build(:animal, :species_code => "").should_not be_valid
-      end
-      it "should require a scientific name" do 
-        FactoryGirl.build(:animal, :scientific_name => "").should_not be_valid
-      end
-      it "should require a common name" do 
-        FactoryGirl.build(:animal, :common_name => "").should_not be_valid
-      end
-      it "should require a max size" do 
-        FactoryGirl.build(:animal, :max_size => "").should_not be_valid
-      end
-      it "should require a minimum size" do 
-        FactoryGirl.build(:animal, :min_size => "").should_not be_valid
-      end
-      it "should require a maximum number" do 
-        FactoryGirl.build(:animal, :max_number => "").should_not be_valid
+        
+      [ :species_code, :scientific_name, :common_name, :max_size, :min_size, :max_number].each do |attribute|
+        it "is invalid without #{attribute}" do
+          FactoryGirl.build(:animal, attribute => nil).should_not be_valid
+        end
       end
   end
 

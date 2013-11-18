@@ -12,7 +12,7 @@
       <a href="http://lkdjiin.github.com/coco/">Web site</a>
     </p>
     <h2>/home/jeremiah/railsProjects/EntryApplication/app/models/benthic_cover.rb</h2>
-    <p class="date">2013-11-15 14:46:05 -0500</p>
+    <p class="date">2013-11-18 15:18:06 -0500</p>
     
     <table class="source">
       
@@ -104,9 +104,8 @@
                     <tr class="hit" %>      
       <td><pre>27 </pre></td><td><pre>  validates :meters_completed,      :presence =&gt; true</pre></td>
         </tr>
-                    <tr class="never">
-      
-      <td><pre>28 </pre></td><td><pre></pre></td>
+                    <tr class="hit" %>      
+      <td><pre>28 </pre></td><td><pre>  validates :sample_description,    :length =&gt; { :maximum =&gt; 150 } </pre></td>
         </tr>
                     <tr class="never">
       
@@ -116,24 +115,28 @@
       
       <td><pre>30 </pre></td><td><pre></pre></td>
         </tr>
+                    <tr class="never">
+      
+      <td><pre>31 </pre></td><td><pre></pre></td>
+        </tr>
                     <tr class="hit" %>      
-      <td><pre>31 </pre></td><td><pre>  def field_id=(value)</pre></td>
+      <td><pre>32 </pre></td><td><pre>  def field_id=(value)</pre></td>
         </tr>
                     <tr class="miss">
       
-      <td><pre>32 </pre></td><td><pre>    write_attribute(:field_id, value.upcase)</pre></td>
+      <td><pre>33 </pre></td><td><pre>    write_attribute(:field_id, value.upcase)</pre></td>
         </tr>
                     <tr class="never">
       
-      <td><pre>33 </pre></td><td><pre>  end</pre></td>
+      <td><pre>34 </pre></td><td><pre>  end</pre></td>
         </tr>
                     <tr class="never">
       
-      <td><pre>34 </pre></td><td><pre></pre></td>
+      <td><pre>35 </pre></td><td><pre></pre></td>
         </tr>
                     <tr class="never">
       
-      <td><pre>35 </pre></td><td><pre>end</pre></td>
+      <td><pre>36 </pre></td><td><pre>end</pre></td>
         </tr>
             
     </table>

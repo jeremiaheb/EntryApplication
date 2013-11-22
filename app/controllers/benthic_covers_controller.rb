@@ -41,6 +41,7 @@ class BenthicCoversController < ApplicationController
     @benthic_cover.build_invert_belt
     @benthic_cover.build_presence_belt
     @benthic_cover.point_intercepts.build
+    @benthic_cover.build_rugosity_measure
 
     respond_to do |format|
       format.html # new.html.erb

@@ -12,6 +12,8 @@ class BenthicCover < ActiveRecord::Base
   accepts_nested_attributes_for     :invert_belt, :allow_destroy => true
   has_one     :presence_belt, :dependent => :destroy
   accepts_nested_attributes_for     :presence_belt, :allow_destroy => true
+  has_one     :rugosity_measure, :dependent => :destroy
+  accepts_nested_attributes_for     :rugosity_measure, :allow_destroy => true
 
   def myId
     return self.diver_id

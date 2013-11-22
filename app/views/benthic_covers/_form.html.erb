@@ -104,6 +104,20 @@
   </div>
 
 
+  <div class="row">
+    <div class="span9 rugosityMeasure">
+      <fieldset>
+        <legend> Rugosity Measurement </legend>
+        <div>
+          <%= f.fields_for :rugosity_measure do |builder| %>
+            <%= render 'rugosity_measure_fields', f: builder %>
+          <% end %>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+
+
 
 
 </div>

@@ -1,0 +1,76 @@
+<div class="span3">
+  <fieldset>
+    <div class="control-group">
+      <label class="control-label">Min Depth</label>
+      <div class="controls">
+        <%= f.text_field :min_depth %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label">Max Depth</label>
+      <div class="controls">
+        <%= f.text_field :max_depth %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label">Max Vert. Height</label>
+      <div class="controls">
+        <%= f.text_field :max_vert_height %>
+      </div>
+    </div>
+  </fieldset>
+</div>
+
+
+<div class="span3">
+  <fieldset>
+    <div class="control-group">
+      <label class="control-label"> &lt0.2m </label>
+      <div class="controls">
+        <%= f.text_field :cnt_less_than_20%>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label">0.2 - &lt0.5m</label>
+      <div class="controls">
+        <%= f.text_field :cnt_20_less_than_50 %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label">0.5 - &lt1.0m</label>
+      <div class="controls">
+        <%= f.text_field :cnt_50_less_than_100 %>
+      </div>
+    </div>
+  </fieldset>
+</div>
+
+
+<div class="span2">
+  <fieldset>
+    <div class="control-group">
+      <label class="control-label"> 1.0 - &lt1.5m </label>
+      <div class="controls">
+        <%= f.text_field :cnt_100_less_than_150%>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label">1.5 - &lt2.0m</label>
+      <div class="controls">
+        <%= f.text_field :cnt_150_less_than_200 %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label"> &gt2.0m </label>
+      <div class="controls">
+        <%= f.text_field :cnt_greater_than_200 %>
+      </div>
+    </div>
+  </fieldset>
+</div>

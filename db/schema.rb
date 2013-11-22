@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130730133314) do
+ActiveRecord::Schema.define(:version => 20131122155039) do
 
   create_table "animals", :force => true do |t|
     t.string   "species_code"
@@ -162,6 +162,19 @@ ActiveRecord::Schema.define(:version => 20130730133314) do
     t.integer "station_log_id"
     t.string  "replicate"
     t.integer "diver_id"
+  end
+
+  create_table "rugosity_measures", :force => true do |t|
+    t.integer "benthic_cover_id"
+    t.integer "min_depth"
+    t.integer "max_depth"
+    t.float   "max_vert_height"
+    t.integer "cnt_less_than_20"
+    t.integer "cnt_20_less_than_50"
+    t.integer "cnt_50_less_than_100"
+    t.integer "cnt_100_less_than_150"
+    t.integer "cnt_150_less_than_200"
+    t.integer "cnt_greater_than_200"
   end
 
   create_table "sample_animals", :force => true do |t|

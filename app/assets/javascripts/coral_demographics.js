@@ -15,6 +15,27 @@ $(function(){
     event.field.find(".coralSpecies").select2();
   });
 
+    //puts focus on the select_2 drop down after adding cover pressed
+     $(document).delegate(".add_nested_fields", "click", function(){ 
+        $(".demo_corals input:text:visible").eq(-6).focus();
+   });
+
+    //supress submitting form on pressing enter key, enter key adds new coral
+    //while inside coverCat class
+    
+    $("#coralDemoData").bind("keypress", function(e){
+      if (e.keyCode ==13){
+        e.preventDefault();
+      }
+    });
+
+    $(".demo_corals").bind("keypress", function(e){
+      if (e.keyCode ==13){
+        e.preventDefault();
+        $(".add_nested_fields").trigger("click");
+      }
+    });
+
 
     $(".new_coral_demographic, .edit_coral_demographic").validate({
 

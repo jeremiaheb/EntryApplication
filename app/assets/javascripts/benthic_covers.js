@@ -102,40 +102,40 @@ $(function(){
                 'benthic_cover[sample_description]': {
                         maxlength: 150
                       },
-                'benthic_cover[invert_belts_attributes][0][lobster_num]': {
+                'benthic_cover[invert_belt_attributes][lobster_num]': {
                         required: true
                       },
-                'benthic_cover[invert_belts_attributes][0][conch_num]': {
+                'benthic_cover[invert_belt_attributes][conch_num]': {
                         required: true
                       },
-                'benthic_cover[invert_belts_attributes][0][diadema_num]': {
+                'benthic_cover[invert_belt_attributes][diadema_num]': {
                         required: true
                       },
-                'benthic_cover[presence_belts_attributes][0][a_palmata]': {
+                'benthic_cover[presence_belt_attributes][a_palmata]': {
                         required: true
                       },
-                'benthic_cover[presence_belts_attributes][0][a_cervicornis]': {
+                'benthic_cover[presence_belt_attributes][a_cervicornis]': {
                         required: true
                       },
-                'benthic_cover[presence_belts_attributes][0][d_cylindrus]': {
+                'benthic_cover[presence_belt_attributes][d_cylindrus]': {
                         required: true
                       },
-                'benthic_cover[presence_belts_attributes][0][m_ferox]': {
+                'benthic_cover[presence_belt_attributes][m_ferox]': {
                         required: true
                       },
-                'benthic_cover[presence_belts_attributes][0][a_lamarcki]': {
+                'benthic_cover[presence_belt_attributes][a_lamarcki]': {
                         required: true
                       },
-                'benthic_cover[presence_belts_attributes][0][m_annularis]': {
+                'benthic_cover[presence_belt_attributes][m_annularis]': {
                         required: true
                       },
-                'benthic_cover[presence_belts_attributes][0][m_franksi]': {
+                'benthic_cover[presence_belt_attributes][m_franksi]': {
                         required: true
                       },
-                'benthic_cover[presence_belts_attributes][0][m_faveolata]': {
+                'benthic_cover[presence_belt_attributes][m_faveolata]': {
                         required: true
                       },
-                'benthic_cover[presence_belts_attributes][0][d_stokesii]': {
+                'benthic_cover[presence_belt_attributes][d_stokesii]': {
                         required: true
                       }
 

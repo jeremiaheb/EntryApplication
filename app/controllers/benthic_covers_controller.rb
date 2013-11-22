@@ -38,8 +38,8 @@ class BenthicCoversController < ApplicationController
   def new
     @benthic_cover = BenthicCover.new
 
-    @benthic_cover.invert_belts.build
-    @benthic_cover.presence_belts.build
+    @benthic_cover.build_invert_belt
+    @benthic_cover.build_presence_belt
     @benthic_cover.point_intercepts.build
 
     respond_to do |format|

@@ -8,10 +8,10 @@ class BenthicCover < ActiveRecord::Base
   belongs_to :habitat_type
   belongs_to :boatlog_manager
 
-  has_many    :invert_belts, :dependent => :destroy
-  accepts_nested_attributes_for     :invert_belts, :allow_destroy => true
-  has_many     :presence_belts, :dependent => :destroy
-  accepts_nested_attributes_for     :presence_belts, :allow_destroy => true
+  has_one    :invert_belt, :dependent => :destroy
+  accepts_nested_attributes_for     :invert_belt, :allow_destroy => true
+  has_one     :presence_belt, :dependent => :destroy
+  accepts_nested_attributes_for     :presence_belt, :allow_destroy => true
 
   def myId
     return self.diver_id

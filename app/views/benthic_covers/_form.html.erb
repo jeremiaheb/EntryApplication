@@ -93,11 +93,11 @@
     </div>
 
     <div class=span3>
-      <%= f.fields_for :invert_belts do |builder| %>
+      <%= f.fields_for :invert_belt do |builder| %>
         <%= render 'invert_belt_fields', f: builder %>
       <% end %>
 
-      <%= f.fields_for :presence_belts do |builder| %>
+      <%= f.fields_for :presence_belt do |builder| %>
         <%= render 'presence_belt_fields', f: builder %>
       <% end %>
     </div>

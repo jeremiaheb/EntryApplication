@@ -103,13 +103,16 @@ $(function(){
                         maxlength: 150
                       },
                 'benthic_cover[invert_belt_attributes][lobster_num]': {
-                        required: true
+                        required: true,
+                        digits: true
                       },
                 'benthic_cover[invert_belt_attributes][conch_num]': {
-                        required: true
+                        required: true,
+                        digits: true
                       },
                 'benthic_cover[invert_belt_attributes][diadema_num]': {
-                        required: true
+                        required: true,
+                        digits: true
                       },
                 'benthic_cover[presence_belt_attributes][a_palmata]': {
                         required: true
@@ -137,7 +140,43 @@ $(function(){
                       },
                 'benthic_cover[presence_belt_attributes][d_stokesii]': {
                         required: true
-                      }
+                      },
+                'benthic_cover[rugosity_measure_attributes][min_depth]': {
+                        required: true,
+                        digits: true
+                      },
+                'benthic_cover[rugosity_measure_attributes][max_depth]': {
+                        required: true,
+                        digits: true
+                      },
+                'benthic_cover[rugosity_measure_attributes][max_vert_height]': {
+                        required: true,
+                        number: true
+                      },
+                'benthic_cover[rugosity_measure_attributes][cnt_less_than_20]': {
+                        required: true,
+                        digits: true
+                      },
+                'benthic_cover[rugosity_measure_attributes][cnt_20_less_than_50]': {
+                        required: true,
+                        digits: true
+                      },
+                'benthic_cover[rugosity_measure_attributes][cnt_50_less_than_100]': {
+                        required: true,
+                        digits: true
+                      },
+                'benthic_cover[rugosity_measure_attributes][cnt_100_less_than_150]': {
+                        required: true,
+                        digits: true
+                      },
+                'benthic_cover[rugosity_measure_attributes][cnt_150_less_than_200]': {
+                        required: true,
+                        digits: true
+                      },
+                'benthic_cover[rugosity_measure_attributes][cnt_greater_than_200]': {
+                        required: true,
+                        digits: true
+                      },
 
                },
         messages: {

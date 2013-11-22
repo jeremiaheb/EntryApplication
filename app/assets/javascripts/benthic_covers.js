@@ -40,6 +40,26 @@ $(function(){
       getCoverTotals();
      });
 
+    //puts focus on the select_2 drop down after adding cover pressed
+     $(document).delegate(".add_nested_fields", "click", function(){ 
+        $(".cover_data input:text:visible").eq(-4).focus();
+   });
+
+    //supress submitting form on pressing enter key, enter key adds new cover
+    //cat while inside coverCat class
+    
+    $("#benthicCoverData").bind("keypress", function(e){
+      if (e.keyCode ==13){
+        e.preventDefault();
+      }
+    });
+  
+    $(".coverCats").bind("keypress", function(e){
+      if (e.keyCode ==13){
+        e.preventDefault();
+        $(".add_nested_fields").trigger("click");
+      }
+    });
 
     $.validator.addMethod("isOnlyCat", function(value, element, params){
       var $catList = []

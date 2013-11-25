@@ -15,6 +15,20 @@ $(function(){
     event.field.find(".coralSpecies").select2();
   });
 
+  function disable_fields_if_no_coral() {
+    $(".coralSpecies").on('focusout', function(){
+      $coralCat = $(this).find('span').text();
+      if ( $coralCat == "NO_Coral" ) {
+        $(this).parent().find(".coralSpeciesData").attr('disabled', true);
+      }
+    });
+  }
+
+  disable_fields_if_no_coral();
+  $(document).delegate(".add_nested_fields", "click", function(){ 
+    disable_fields_if_no_coral();    
+  });
+
     //puts focus on the select_2 drop down after adding cover pressed
      $(document).delegate(".add_nested_fields", "click", function(){ 
         $(".demo_corals input:text:visible").eq(-6).focus();

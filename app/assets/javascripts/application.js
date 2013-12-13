@@ -231,10 +231,6 @@ $(function(){
     disable_biotic_perc_hard();
   });
 
-  
-
-
-  
 
   function set_time_seen_field_on_focus(){
       $('.sppCommon').on('open', function(){
@@ -468,61 +464,100 @@ $(function(){
 // record of the same species
 
     $.validator.addMethod("doesNotHaveOverlap", function(value, element, params){
-     	var spp = {}
-	    var $index = $(element).parent().parent().index();
-	    var $thisSpecies = $(element).parent().find('.sppCommon').select2("val");
-	    var $thisNumber = $(element).parent().find('[id$="number_individuals"]').val();
-	    var $thisMean = $(element).parent().find('[id$="average_length"]').val();
-	    var $thisMin = $(element).parent().find('[id$="min_length"]').val();
-	    var $thisMax = $(element).parent().find('[id$="max_length"]').val();
+      var spp = {}
+      var $index = $(element).parent().parent().index();
+      var $thisSpecies = $(element).parent().find('.sppCommon').select2("val");
+      var $thisNumber = $(element).parent().find('[id$="number_individuals"]').val();
+      var $thisMean = $(element).parent().find('[id$="average_length"]').val();
+      var $thisMin = $(element).parent().find('[id$="min_length"]').val();
+      var $thisMax = $(element).parent().find('[id$="max_length"]').val();
 
-    	var $thisRange
+      var $thisRange
 
-    	    if ( $thisNumber == 1 ){
-    				$thisRange = [parseFloat($thisMean)];	
-    			} else if ( $thisNumber == 2 ) {
-    				$thisRange = [parseFloat($thisMin), parseFloat($thisMax)];		
-    			} else if ( $thisNumber == 3 ) {
-    				$thisRange = [parseFloat($thisMean), parseFloat($thisMin), parseFloat($thisMax)];		
-    			} else {
-    				$thisRange = _.range(parseFloat($thisMin), parseFloat($thisMax) + 1);	
-    			}
-     
-      	$("#animals .fields").each(function(i){
-		      if ($(this).is(":visible") && $(this).find(".sppCommon").select2("val") == $thisSpecies && i != $index ) { 
-
-			      var $animal = $(this).find('.sppCommon').select2("val"); 
-		      	var $number = $(this).find('[id$="number_individuals"]').val();
-		      	var $mean = $(this).find('[id$="average_length"]').val();
-		      	var $min = $(this).find('[id$="min_length"]').val();
-		      	var $max = $(this).find('[id$="max_length"]').val();
-
-		      	var $range
-		      	if ( $number == 1 ){
-		      		$range = [parseFloat($mean)];	
-		      	} else if ( $number == 2 ) {
-		      		$range = [parseFloat($min), parseFloat($max)];		
-		      	} else if ( $number == 3 ) {
-		      		$range = [parseFloat($mean), parseFloat($min), parseFloat($max)];		
-		      	} else {
-		      		$range = _.range(parseFloat($min), parseFloat($max) + 1);	
-		      	}	
-
-		      	spp[i] = { "species": $animal, "range": $range}; 
-		      };
-	      });
-      
-      var hasOverlap;
-      if ( _.isEmpty(spp) ) { hasOverlap = false; }
-      else {
-        var checkBool = []
-        for ( rec in spp ) { checkBool.push( _.intersection(spp[rec].range, $thisRange).length>0); };
-        hasOverlap = _.contains( checkBool, true );
+      if ( $thisNumber == 1 ){
+        $thisRange = [parseFloat($thisMean)];	
+      } else if ( $thisNumber == 2 ) {
+        $thisRange = [parseFloat($thisMin), parseFloat($thisMax)];		
+      } else if ( $thisNumber == 3 ) {
+        $thisRange = [parseFloat($thisMean), parseFloat($thisMin), parseFloat($thisMax)];		
+      } else {
+        $thisRange = _.range(parseFloat($thisMin), parseFloat($thisMax) + 1);	
       }
-      return hasOverlap == false;
+
+    $("#animals .fields").each(function(i){
+      if ($(this).is(":visible") && $(this).find(".sppCommon").select2("val") == $thisSpecies && i != $index ) { 
+
+        var $animal = $(this).find('.sppCommon').select2("val"); 
+        var $number = $(this).find('[id$="number_individuals"]').val();
+        var $mean = $(this).find('[id$="average_length"]').val();
+        var $min = $(this).find('[id$="min_length"]').val();
+        var $max = $(this).find('[id$="max_length"]').val();
+
+        var $range
+      if ( $number == 1 ){
+        $range = [parseFloat($mean)];	
+      } else if ( $number == 2 ) {
+        $range = [parseFloat($min), parseFloat($max)];		
+      } else if ( $number == 3 ) {
+        $range = [parseFloat($mean), parseFloat($min), parseFloat($max)];		
+      } else {
+        $range = _.range(parseFloat($min), parseFloat($max) + 1);	
+      }	
+
+    spp[i] = { "species": $animal, "range": $range}; 
+      };
+    });
+
+    var hasOverlap;
+    if ( _.isEmpty(spp) ) { hasOverlap = false; }
+    else {
+      var checkBool = []
+        for ( rec in spp ) { checkBool.push( _.intersection(spp[rec].range, $thisRange).length>0); };
+      hasOverlap = _.contains( checkBool, true );
+    }
+    return hasOverlap == false;
     }, "record overlaps with other record"
     );
 
+
+
+    $.validator.addMethod("isNotInPreviousTimePeriod",function(value, element, params) {
+
+      var time_1_spp
+      var time_2_spp
+      var $thisSpecies = $(element).parent().find('.sppCommon').select2("val");
+      var $this_spp_time_period = $(element).parent().find("[id$=time_seen]").val();
+
+
+    function setSppInTimeSeenArrays() {
+      var timeSeen_1_Array = new Array();
+      var timeSeen_2_Array = new Array();
+      $(".select2-container").each(function(){
+        if ( $(this).is(":visible") ) {
+          var $sppId = $(this).select2('val');
+          var $timePeriod = $(this).parent().find('[id$="time_seen"]').val();
+          if ($timePeriod == 1 && !_.contains(timeSeen_1_Array, $sppId)) {
+            timeSeen_1_Array.push($sppId);
+          } else if ( $timePeriod == 2 && !_.contains(timeSeen_2_Array, $sppId) ) {
+            timeSeen_2_Array.push($sppId);
+          }
+        }
+      });
+
+      time_1_spp = timeSeen_1_Array  
+      time_2_spp = timeSeen_2_Array  
+    };
+
+    if ( $this_spp_time_period == 1 ) { return true; }
+    else if ( $this_spp_time_period == 2 ) {
+      setSppInTimeSeenArrays();
+      return !_.contains(time_1_spp, $thisSpecies); }
+    else if ( $this_spp_time_period == 3 ){
+      setSppInTimeSeenArrays();
+      var previousTimeBool = [!_.contains(time_1_spp, $thisSpecies), !_.contains(time_2_spp, $thisSpecies)];
+      return !_.contains(previousTimeBool, false); }
+    }, "This species is in previous time period" 
+    );
 
 
     $.validator.addMethod(
@@ -779,38 +814,38 @@ $(function(){
     });
     
     function validate_fields() {
-    $('[name*="number_individuals"]').each(function(){
-      $(this).rules('add', {
-        required: true,
-        number: true
+      $('[name*="number_individuals"]').each(function(){
+        $(this).rules('add', {
+          required: true,
+          number: true,
+          isNotInPreviousTimePeriod: true
+        });
       });
-    });
-    $('[name*="average_length"]').each(function(){
-      $(this).rules('add', {
-        requiredIfEnabled: true,
-        number: true,
-        doesNotHaveOverlap: true
+      $('[name*="average_length"]').each(function(){
+        $(this).rules('add', {
+          requiredIfEnabled: true,
+          number: true,
+          doesNotHaveOverlap: true
+        });
       });
-    });
-    $('[name*="min_length"]').each(function(){
-      $(this).rules('add', {
-        requiredIfEnabled: true,
-        number: true,
-        lessThan: true,
-        doesNotHaveOverlap: true
+      $('[name*="min_length"]').each(function(){
+        $(this).rules('add', {
+          requiredIfEnabled: true,
+          number: true,
+          lessThan: true,
+          doesNotHaveOverlap: true
+        });
       });
-    });
-    $('[name*="max_length"]').each(function(){
-      $(this).rules('add', {
-        requiredIfEnabled: true,
-        number: true,
-        greaterThanEqualToAvg: true,
-        greaterThanEqualToMin: true,
-        doesNotHaveOverlap: true
+      $('[name*="max_length"]').each(function(){
+        $(this).rules('add', {
+          requiredIfEnabled: true,
+          number: true,
+          greaterThanEqualToAvg: true,
+          greaterThanEqualToMin: true,
+          doesNotHaveOverlap: true
+        });
       });
-    });
     };
-
 
     validate_fields();
     $(document).delegate(".add_nested_fields", "click", function(){ 
@@ -892,5 +927,7 @@ $(function(){
 
   alert24HourClock();
   $('#submitButton').attr('disabled', true);
+
+
 
 });

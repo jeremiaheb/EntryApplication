@@ -27,7 +27,6 @@ $(function(){
         $coverTotals += parseFloat($(this).val());
         }
       });
-      console.log($coverTotals);
       $('.coverTotal').text(" Total Points " + $coverTotals)
     };  
 

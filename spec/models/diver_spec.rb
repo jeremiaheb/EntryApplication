@@ -4,10 +4,21 @@ require 'cancan/matchers'
 describe Diver do
   describe 'abilities' do
     subject(:ability) { Ability.new(user) }
+
     context 'when an admin' do
       let (:user) { FactoryGirl.create(:diver, role: Diver::ADMIN) }
 
       it { should be_able_to(:manage, :all) }
+    end
+
+    context 'when a manager' do
+      let (:user) { FactoryGirl.create(:diver, role: Diver::MANAGER) }
+
+      it { should be_able_to(:manage, Sample) }
+      it { should be_able_to(:manage, CoralDemographic) }
+      it { should be_able_to(:manage, BenthicCover) }
+      it { should be_able_to(:manage, BoatLog) }
+      it { should be_able_to(:manage, Dashboard) }
     end
   end
 

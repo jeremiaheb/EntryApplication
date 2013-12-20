@@ -20,6 +20,18 @@ describe Diver do
       it { should be_able_to(:manage, BoatLog) }
       it { should be_able_to(:manage, Dashboard) }
     end
+
+    context 'when a diver' do
+      let (:user)                     { FactoryGirl.create(:diver, role: Diver::DIVER) }
+      let (:my_coral_demograhpic)     { FactoryGirl.create(:coral_demographic, diver_id: user.id) }
+      let (:not_my_coral_demographic) { FactoryGirl.create(:coral_demographic) }
+
+      it { should be_able_to(:create,      CoralDemographic) }
+      it { should be_able_to(:read,        my_coral_demograhpic) }
+      it { should be_able_to(:destroy,     CoralDemographic) }
+      it { should be_able_to(:update,      my_coral_demograhpic) }
+      it { should_not be_able_to(:update,  not_my_coral_demographic) }
+    end
   end
 
   context 'when an admin' do

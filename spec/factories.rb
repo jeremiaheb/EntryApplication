@@ -17,6 +17,15 @@ FactoryGirl.define do
     name "sand"
   end
 
+  factory :demographic_coral do
+     max_diameter           { 1 }
+     perpendicular_diameter { 1 }
+     height                 { 1 }
+     old_mortality          { 1 }
+     recent_mortality       { 1 }
+     bleach_condition       { 1 }
+  end
+
   factory :diver do
     sequence(:diver_number) { |n| "diver#{n}" }
     sequence(:diver_name)   { |n| "Random Diver#{n}" }

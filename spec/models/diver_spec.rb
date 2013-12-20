@@ -1,6 +1,16 @@
 require 'spec_helper'
+require 'cancan/matchers'
 
 describe Diver do
+  describe 'abilities' do
+    subject(:ability) { Ability.new(user) }
+    context 'when an admin' do
+      let (:user) { FactoryGirl.create(:diver, role: Diver::ADMIN) }
+
+      it { should be_able_to(:manage, :all) }
+    end
+  end
+
   context 'when an admin' do
     let (:user) { FactoryGirl.create(:diver, role: Diver::ADMIN) }
 

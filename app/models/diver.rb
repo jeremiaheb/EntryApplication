@@ -30,4 +30,15 @@ class Diver < ActiveRecord::Base
     [ self.firstname, self.lastname ].join("  ")
   end
 
+  def diver?
+    self.role == Diver::DIVER
+  end
+
+  def admin?
+    self.role == Diver::ADMIN
+  end
+
+  def manager?
+    self.role == Diver::MANAGER
+  end
 end

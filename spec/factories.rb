@@ -1,5 +1,4 @@
 FactoryGirl.define do
-
   factory :animal do
     species_code "MY_FISH"
     scientific_name "Myus fishius"
@@ -16,6 +15,13 @@ FactoryGirl.define do
 
   factory :cover_cat do
     name "sand"
+  end
+
+  factory :diver do
+    sequence(:diver_number) { |n| "diver#{n}" }
+    sequence(:diver_name)   { |n| "Random Diver#{n}" }
+    sequence(:email)        { |n| "diver#{n}@example.com" }
+    sequence(:password)     { |n| "password#{n}" }
   end
 
   factory :habitat_type do 

@@ -1,5 +1,4 @@
 FactoryGirl.define do
-
   factory :animal do
     species_code "MY_FISH"
     scientific_name "Myus fishius"
@@ -14,16 +13,44 @@ FactoryGirl.define do
     scientific_name "Acropora palmata"
   end
 
+  factory :coral_demographic do
+    sequence(:boatlog_manager_id)
+    sequence(:buddy)              { |n| "buddy#{n}" }
+    sequence(:diver_id)
+    sequence(:field_id)           { |n| "field_id#{n}" }
+    sequence(:meters_completed)
+    sequence(:sample_begin_time)  { |n| Time.current }
+    sequence(:sample_date)        { |n| Time.current }
+    habitat_type
+    demographic_corals            { build_list :demographic_coral, 1 }
+  end
+
   factory :cover_cat do
     name "sand"
   end
 
-  factory :habitat_type do 
+  factory :demographic_coral do
+     max_diameter           { 1 }
+     perpendicular_diameter { 1 }
+     height                 { 1 }
+     old_mortality          { 1 }
+     recent_mortality       { 1 }
+     bleach_condition       { 1 }
+  end
+
+  factory :diver do
+    sequence(:diver_number) { |n| "diver#{n}" }
+    sequence(:diver_name)   { |n| "Random Diver#{n}" }
+    sequence(:email)        { |n| "diver#{n}@example.com" }
+    sequence(:password)     { |n| "password#{n}" }
+  end
+
+  factory :habitat_type do
     habitat_name "Sand"
     habitat_description "This is sand"
   end
-  
-  factory :sample_type do 
+
+  factory :sample_type do
     sample_type_name "Bohnsack"
     sample_type_description "Circular point count"
   end

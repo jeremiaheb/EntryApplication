@@ -1,6 +1,8 @@
 class Diver < ActiveRecord::Base
-
-  ROLES = %w[admin manager diver]
+  ADMIN   = 'admin'
+  MANAGER = 'manager'
+  DIVER   = 'diver'
+  ROLES   = [ADMIN, MANAGER, DIVER]
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -28,4 +30,15 @@ class Diver < ActiveRecord::Base
     [ self.firstname, self.lastname ].join("  ")
   end
 
+  def diver?
+    self.role == Diver::DIVER
+  end
+
+  def admin?
+    self.role == Diver::ADMIN
+  end
+
+  def manager?
+    self.role == Diver::MANAGER
+  end
 end

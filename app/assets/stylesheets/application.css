@@ -88,7 +88,7 @@ input.error {
 
 
 
-div.section_1,div.section_2, p.flipSection_1 {
+div.section_1, p.flipSection_1 {
     /*width: 920px;*/
     background: #f0f0f0;
  
@@ -102,9 +102,6 @@ div.section_1,div.section_2, p.flipSection_1 {
     -moz-box-shadow: 2px 2px 2px #cccccc;
     -webkit-box-shadow: 2px 2px 2px #cccccc;
     box-shadow: 2px 2px 2px #cccccc;
-}
-#substrateSection #speciesSection {
-  visibility: hidden;
 }
 
 .section_1 {
@@ -143,58 +140,6 @@ div.section_1,div.section_2, p.flipSection_1 {
   margin: 10px !important; 
 }
 
-.section_2 {
-  position: absolute;
-  /*height: 100%;*/
-}
-
-#section_2_part_1 {
-  width: 250px;
-  height: 500px;
-  padding: 0px;
-  position: absolute;
-  top: 5px;
-  left: 0;
-}
-
-#slope {
-  position: absolute;
-  top: 5px;
-}
-
-#vertRelief {
-  position: absolute;
-  top: 140px;
-}
-
-#reliefCoverage {
-  position: absolute;
-  bottom: 25px;
-}
-
-#section_2_part_2 {
-  left: 535px;
-  width: 310px;
-  padding: 0px;
-  position: absolute;
-  top: 5px;
-}
-
-#section_2_part_3 {
-  left: 325px;
-  width: 310px;
-  padding: 0px;
-  position: absolute;
-  top: 175px;
-}
-
-#section_2_part_4 {
-  left: 650px;
-  width: 310px;
-  padding: 0px;
-  position: absolute;
-  top: 175px;
-}
 
 .one_hundred_flag {
   background: yellow !important;
@@ -438,14 +383,6 @@ input.timeSeen_3 {
 #submitButton {
   position: relative;
   float: right;
-}
-
-
-
-#substrateSection fieldset {
-  
-  margin-top: 0px !important;
-
 }
 
 .error {

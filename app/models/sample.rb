@@ -40,23 +40,7 @@ class Sample < ActiveRecord::Base
   validates :water_temp,                  :presence => true, :numericality => true
   validates :sample_description,          :length => { :maximum => 150 }                    
 
-  validates :substrate_max_depth,         :presence => true, :numericality => { :only_integer => true }
-  validates :substrate_min_depth,         :presence => true, :numericality => { :only_integer => true, :less_than_or_equal_to => :substrate_max_depth }
-
-  validates :hard_verticle_relief,         :presence => true, :numericality => true
-  validates :soft_verticle_relief,         :presence => true, :numericality => true
-
-  validates :hard_relief_cat_0,           :presence => true, :numericality => { :only_integer => true, :greater_than => 0 }
-  validates :hard_relief_cat_1,           :presence => true, :if => "hard_verticle_relief > 0.2", :numericality => { :only_integer => true, :greater_than => 0 }
-  validates :hard_relief_cat_2,           :presence => true, :if => "hard_verticle_relief > 0.5", :numericality => { :only_integer => true, :greater_than => 0 }
-  validates :hard_relief_cat_3,           :presence => true, :if => "hard_verticle_relief > 1.0", :numericality => { :only_integer => true, :greater_than => 0 }
-  validates :hard_relief_cat_4,           :presence => true, :if => "hard_verticle_relief > 1.5", :numericality => { :only_integer => true, :greater_than => 0 }
-
-  validate :hard_relief_cats_equal_100
-  validate :soft_relief_cats_equal_100
   validate :abiotic_percentage_equal_100
-  validate :biotic_percentage_sand_equal_100, :if => :sand_percentage?
-  validate :biotic_percentage_hardbottom_equal_100, :if => :hardbottom_percentage?
 
 
   def field_id=(value)
@@ -94,32 +78,6 @@ class Sample < ActiveRecord::Base
     end
   end
 
-  def hard_relief_cats_equal_100
-      values = []
-      [self.hard_relief_cat_0, self.hard_relief_cat_1, self.hard_relief_cat_2, self.hard_relief_cat_3, self.hard_relief_cat_4 ].each do |cat|
-        if !cat.nil?
-          values.push(cat)
-        end
-      end
-      values.delete_if { |x| x == nil }
-      if (values.sum) != 100
-        errors.add( :base, "hard relief categories do not add to 100" )
-      end
-  end
-
-  def soft_relief_cats_equal_100
-      values = []
-      [self.soft_relief_cat_0, self.soft_relief_cat_1, self.soft_relief_cat_2, self.soft_relief_cat_3, self.soft_relief_cat_4 ].each do |cat|
-        if !cat.nil?
-          values.push(cat)
-        end
-      end
-      values.delete_if { |x| x == nil }
-      if (values.sum) != 100
-        errors.add( :base, "soft relief categories do not add to 100" )
-      end
-  end
-
   def abiotic_percentage_equal_100
       values = []
       [ self.sand_percentage, self.hardbottom_percentage, rubble_percentage ].each do |cat|
@@ -132,32 +90,5 @@ class Sample < ActiveRecord::Base
         errors.add( :base, "abiotic percentages do not add to 100" )
       end
   end
-
-  def biotic_percentage_sand_equal_100
-      values = []
-      [ self.sand_bare, self.sand_macro_algae, self.sand_seagrass, self.sand_sponge, self.sand_pcov_other1, self.sand_pcov_other2 ].each do |cat|
-        if !cat.nil?
-          values.push(cat)
-        end
-      end
-      values.delete_if { |x| x == nil }
-      if (values.sum) != 100
-        errors.add( :base, "Sand biotic percentages do not add to 100" )
-      end
-  end
-
-  def biotic_percentage_hardbottom_equal_100
-      values = []
-      [ self.hardbottom_algal_turf, self.hardbottom_macro_algae, self.hardbottom_live_coral, self.hardbottom_octocoral, self.hardbottom_sponge, self.hard_pcov_other1, self.hard_pcov_other2 ].each do |cat|
-        if !cat.nil?
-          values.push(cat)
-        end
-      end
-      values.delete_if { |x| x == nil }
-      if (values.sum) != 100
-        errors.add( :base, "Hardbottom biotic percentages do not add to 100" )
-      end
-  end
-
 
 end

@@ -60,6 +60,12 @@ $(function(){
       }
     });
 
+
+      $.validator.addMethod("fieldID",function(value,element){
+        return this.optional(element) || /^\d{5}[a-zA-Z]$/i.test(value); 
+        },"FieldID is wrong format"
+      );
+
     $.validator.addMethod("isOnlyCat", function(value, element, params){
       var $catList = []
       var $thisCat = $(element).parent().find(".coverCategory").select2('val');
@@ -101,9 +107,10 @@ $(function(){
                          required: true
                        },
                 'benthic_cover[field_id]': {
-                         required: true,
-                          minlength: 5,
-                          maxlength: 5
+                          required: true,
+                          fieldID: true,
+                          minlength: 6,
+                          maxlength: 6
                        },
                 'benthic_cover[sample_date]': {
                         required: true
@@ -199,7 +206,6 @@ $(function(){
 
                },
         messages: {
-
                   }
     });
 

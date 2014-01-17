@@ -32,8 +32,8 @@ class Sample < ActiveRecord::Base
   validate  :sample_ends_before_dive_ends
   validate  :sample_starts_before_ends
 
-  validates :field_id,                    :presence => true
-  validates_format_of :field_id,          :with => /...\d[a-zA-Z]/
+  validates :field_id,                    :presence => true, :length => { :minimun => 6, :maximum => 6 }
+  validates_format_of :field_id,          :with => /....\d[a-zA-Z]/
   validates :dive_depth,                  :presence => true, :numericality => true
   validates :sample_depth,                :presence => true, :numericality => true          
   validates :underwater_visibility,       :presence => true, :numericality => true

@@ -271,9 +271,12 @@ $(function(){
     $("#sample_sample_end_time").timeEntry({ show24Hours: true });
 
 
-    $.validator.addMethod("fieldidFormat", function(value, element, params){
-      return /...\d[a-zA-B]/.test(value);
-    });
+
+    $.validator.addMethod("fieldID",function(value,element){
+        return this.optional(element) || /^\d{5}[a-zA-Z]$/i.test(value); 
+      },"FieldID is wrong format"
+    );
+
 
 
     $.validator.addMethod("greaterThan", function(value, element, params){
@@ -512,9 +515,9 @@ $(function(){
                        },
                 'sample[field_id]': {
                          required: true,
-                          fieldidFormat: true,
-                          minlength: 5,
-                          maxlength: 5
+                          fieldID: true,
+                          minlength: 6,
+                          maxlength: 6
                        },
                 'sample[dive_depth]': {
                         required: true,
@@ -553,9 +556,6 @@ $(function(){
                 'sample[sample_end_time]': {
                   greaterThan: "Sample end time cannot be before begin time",
                   before: "Sample end time cannot be after dive end time"
-                },
-                'sample[field_id]': {
-                  fieldidFormat: "Format is invalid"
                 }
                 }
     });

@@ -40,7 +40,7 @@ class Sample < ActiveRecord::Base
   validates :water_temp,                  :presence => true, :numericality => true
   validates :sample_description,          :length => { :maximum => 150 }                    
 
-  validate :abiotic_percentage_equal_100
+  #validate :abiotic_percentage_equal_100
 
 
   def field_id=(value)

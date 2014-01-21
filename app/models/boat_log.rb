@@ -17,6 +17,6 @@ class BoatLog < ActiveRecord::Base
     boatlog_divers_list.sort_by { |e| e[0] }
   end
 
-  validates :primary_sample_unit, :presence => true
+  validates :primary_sample_unit, :presence => true, length: { is: 4 } 
 
 end

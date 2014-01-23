@@ -27,4 +27,7 @@ class CoralDemographic < ActiveRecord::Base
   validates :habitat_type,          :presence => true
   validates :meters_completed,      :presence => true
 
+  def msn
+    return [ "Y", self.sample_date.strftime('%Y%m%d'), self.sample_begin_time.strftime('%H%M'), self.diver.diver_number ].join('')
+  end
 end

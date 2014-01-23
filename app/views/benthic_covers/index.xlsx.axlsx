@@ -1,0 +1,98 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "BenthicCoverSample") do |sampSheet|
+  sampSheet.add_row [ 'MASTER_SAMPLE_CD',
+                      'DIVER_NR',
+                      'BUDDY_NR',
+                      'divhab',
+                      'habname',
+                      'YEAR',
+                      'MONTH',
+                      'DAY',
+                      'divbegh',
+                      'divbegm',
+                      'fieldid',
+                      'meters_completed',
+                      'LOBSTER_NUM',
+                      'CONCH NUM',
+                      'DIADEMA_NUM',
+                      'A_PALMATA',
+                      'A_CERVICORNIS',
+                      'D_CYLINDRUS',
+                      'M_FEROX',
+                      'M_ANNULARIS',
+                      'M_FRANKSI',
+                      'M_FAVEOLATA',
+                      'D_STOKESII',
+                      'A_LAMARCKI',
+                      'min_depth',
+                      'max_depth',
+                      'max_vert_height',
+                      'cnt_less_than_20',
+                      'cnt_20_less_than_50',
+                      'cnt_50_less_than_100',
+                      'cnt_100_less_than_150',
+                      'cnt_150_less_than_200',
+                      'cnt_greater_than_200',
+                      'SAMPLE_DESCR'
+                      ]
+  @benthic_covers.each do |b_cover|
+    sampSheet.add_row [ b_cover.msn,
+                        b_cover.diver.diver_number,
+                        Diver.find(b_cover.buddy).diver_number,
+                        b_cover.habitat_type.id,
+                        b_cover.habitat_type.habitat_name,
+                        b_cover.sample_date.strftime('%Y'),       
+                        b_cover.sample_date.strftime('%m'),      
+                        b_cover.sample_date.strftime('%d'),      
+                        b_cover.sample_begin_time.strftime('%H'),  
+                        b_cover.sample_begin_time.strftime('%M'),  
+                        b_cover.field_id,                        
+                        b_cover.meters_completed,                        
+                        b_cover.invert_belt.lobster_num,                        
+                        b_cover.invert_belt.conch_num,                        
+                        b_cover.invert_belt.diadema_num,                        
+                        b_cover.presence_belt.a_palmata,                        
+                        b_cover.presence_belt.a_cervicornis,                        
+                        b_cover.presence_belt.d_cylindrus,                        
+                        b_cover.presence_belt.m_ferox,                        
+                        b_cover.presence_belt.m_annularis,                        
+                        b_cover.presence_belt.m_franksi,                        
+                        b_cover.presence_belt.m_faveolata,                        
+                        b_cover.presence_belt.d_stokesii,                        
+                        b_cover.presence_belt.a_lamarcki,                        
+                        b_cover.rugosity_measure.min_depth,                        
+                        b_cover.rugosity_measure.max_depth,                        
+                        b_cover.rugosity_measure.max_vert_height,                        
+                        b_cover.rugosity_measure.cnt_less_than_20,                        
+                        b_cover.rugosity_measure.cnt_20_less_than_50,                        
+                        b_cover.rugosity_measure.cnt_50_less_than_100,                        
+                        b_cover.rugosity_measure.cnt_100_less_than_150,                        
+                        b_cover.rugosity_measure.cnt_150_less_than_200,                        
+                        b_cover.rugosity_measure.cnt_greater_than_200,                        
+                        b_cover.sample_description ],
+                        :types => [ :string,
+                                    :string,
+                                    :string] 
+                          
+  end
+end
+
+
+wb.add_worksheet(name: "CoverCategories") do |cat_sheet|
+  cat_sheet.add_row ['MASTER_SAMPLE_CD',
+                    'COVER_CAT_CD',
+                    'HARDBOTTOM_NUM',
+                    'SOFTBOTTOM_NUM',
+                    'RUBBLE_NUM' ]
+  @benthic_covers.each do |b_cover|
+    b_cover.point_intercepts.each do |p_intercept|
+      cat_sheet.add_row [ p_intercept.benthic_cover.msn,         
+                          p_intercept.cover_cat.name,
+                          p_intercept.hardbottom_num, 
+                          p_intercept.softbottom_num,     
+                          p_intercept.rubble_num ],
+                          :types => [ :string ]
+    end
+  end
+end  
+

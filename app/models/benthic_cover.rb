@@ -31,6 +31,9 @@ class BenthicCover < ActiveRecord::Base
   validates :sample_description,    :length => { :maximum => 150 } 
 
 
+  def msn
+    return [ "X", self.sample_date.strftime('%Y%m%d'), self.sample_begin_time.strftime('%H%M'), self.diver.diver_number ].join('')
+  end
 
   def field_id=(value)
     write_attribute(:field_id, value.upcase)

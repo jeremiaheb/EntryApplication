@@ -20,6 +20,13 @@ class BenthicCoversController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @benthic_covers }
       format.xlsx
+      format.pdf do 
+
+        pdf = BenthicCoverPdf.new(@benthic_covers)
+        send_data pdf.render, filename: "#{current_diver.lastname}_BenthicCoverReport.pdf",
+                              type: "application/pdf"
+      
+      end
     end
   end
 

@@ -19,6 +19,13 @@ class CoralDemographicsController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @coral_demographics }
       format.xlsx
+      format.pdf do 
+
+        pdf = CoralDemographicPdf.new(@coral_demographics)
+        send_data pdf.render, filename: "#{current_diver.lastname}_CoralDemographicsReport.pdf",
+                              type: "application/pdf"
+      
+      end
     end
   end
 

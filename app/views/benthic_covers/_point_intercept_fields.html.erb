@@ -1,6 +1,6 @@
 
     <li>
-    <%= f.collection_select :cover_cat_id, CoverCat.order(:id).all, :id, :code, {:include_blank => ""}, { :class => "coverCategory" } %>
+    <%= f.collection_select :cover_cat_id, CoverCat.order(:id).all, :id, :cover_code_name, {:include_blank => ""}, { :class => "coverCategory" } %>
     <%= f.text_field :hardbottom_num, { :class => "coverPoints" } %>
       <%= f.text_field :softbottom_num, { :class => "coverPoints" } %>
       <%= f.text_field :rubble_num, { :class => "coverPoints" } %>

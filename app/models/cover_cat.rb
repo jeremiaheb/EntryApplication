@@ -7,4 +7,8 @@ class CoverCat < ActiveRecord::Base
 
   validates :name,   :presence => true
 
+  def cover_code_name
+    [self.code, self.name].join(" __ ")
+  end
+
 end

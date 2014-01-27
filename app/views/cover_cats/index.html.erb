@@ -1,0 +1,27 @@
+<div class="appContainer">
+  <div class="animalsListContainer">
+    <h2>Benthic Cover Categories</h2>
+      <table id="animalsList" class="display table table-striped table-condensed">
+        <thead>
+        <tr>
+          <th> Code </th>
+          <th> Name </th>
+          <th> Edit </th>
+          <th> Delete </th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @cover_cats.each do |cover_cat| %>
+        <tr>
+          <td><%= cover_cat.code %> </td>
+          <td><%= cover_cat.name %> </td>
+          <td><%= link_to 'Edit', edit_cover_cat_path(cover_cat) %></td>
+          <td><%= link_to 'Destroy', cover_cat, confirm: 'Are you sure?', method: :delete %></td>
+        </tr>
+      <% end %>
+      </tbody>
+      </table>
+  </div>
+</div>
+
+    <%= button_to('New Cover Category', new_cover_cat_path, :method => "get", :class => 'btn btn-large btn-primary wrap')  %>   

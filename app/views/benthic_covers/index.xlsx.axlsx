@@ -87,7 +87,7 @@ wb.add_worksheet(name: "CoverCategories") do |cat_sheet|
   @benthic_covers.each do |b_cover|
     b_cover.point_intercepts.each do |p_intercept|
       cat_sheet.add_row [ p_intercept.benthic_cover.msn,         
-                          p_intercept.cover_cat.name,
+                          p_intercept.cover_cat.code,
                           p_intercept.hardbottom_num, 
                           p_intercept.softbottom_num,     
                           p_intercept.rubble_num ],

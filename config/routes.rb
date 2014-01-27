@@ -4,6 +4,8 @@ EntryApplication::Application.routes.draw do
   resources :boat_logs
 
   resources :corals
+  
+  resources :cover_cats
 
   resources :coral_demographics
 

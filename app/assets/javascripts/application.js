@@ -666,7 +666,7 @@ $(function(){
 
 
   function alert24HourClock() {
-    $("#sample_dive_begin_time, #sample_dive_end_time, #sample_sample_begin_time, #sample_sample_end_time").on("focusout", function(){
+    $("#sample_dive_begin_time, #sample_dive_end_time, #sample_sample_begin_time, #sample_sample_end_time, .boatlog_time").on("focusout", function(){
       var $time = $(this).val();
       var b = ($time.split(":")[0]) + ($time.split(":")[1]);
       var $time2 = parseInt(b, 10);

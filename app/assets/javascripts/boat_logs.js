@@ -42,6 +42,33 @@ $(function(){
     });
 
 
+  function setDiverTypeLabelOnLoad() {
+    $(".diver_type_label").each(function(){
+      var $rep_type = $(this).closest(".replicate_record").find(".replicate_type :input").val().toUpperCase();
+      if ( $rep_type == "A" || $rep_type == "B") {
+        $(this).text("Fish Diver"); 
+        } 
+      else if ( $rep_type == "I" || $rep_type == "J") {  
+        $(this).text("LPI Diver"); 
+        }
+      else if ( $rep_type == "X" || $rep_type == "Y") {  
+        $(this).text("Demo Diver"); 
+        }
+      else { $(this).text("Diver"); };
+    });
+  };
 
+  function setDiverTypeLabel() {
+    $(".replicate_type :input").on('focusout', function() {
+      setDiverTypeLabelOnLoad();
+    });
+  };
+
+  setDiverTypeLabelOnLoad();
+  setDiverTypeLabel();
+  $(document).delegate(".add_nested_fields", "click", function(){ 
+    setDiverTypeLabel();
+  });
+  
 
 });

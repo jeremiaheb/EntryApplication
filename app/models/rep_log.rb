@@ -8,4 +8,8 @@ class RepLog < ActiveRecord::Base
     return [self.station_log.psu,self.station_log.stn_number, self.replicate.upcase ].join("")
   end
 
+  def replicate=(value)
+    write_attribute(:replicate, value.upcase)
+  end
+
 end

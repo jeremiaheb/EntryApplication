@@ -16,10 +16,10 @@ class SamplePdf < Prawn::Document
   end
   
   def sample_head
-    data =  [ ["Boatlog/Manger:", "#{@sample.boatlog_manager.agency_name}"],
-            ["Diver","#{@sample.diver_samples.primary[0].diver.diver_name}","Date","#{@sample.sample_date}","Field Number","#{@sample.field_id}","Visibility","#{@sample.underwater_visibility}"],
-            ["Buddy","#{@sample.diver_samples.secondary[0].diver.diver_name}","Sample Start","#{@sample.sample_begin_time.strftime("%H:%M")}","Habitat","#{@sample.habitat_type.habitat_name}","Water Temp","#{@sample.water_temp}"],
-            ["Dive Start",@sample.dive_begin_time.strftime("%H:%M"),"Sample End","#{@sample.sample_end_time.strftime("%H:%M")}","Fish Gear","#{@sample.fishing_gear}","Cylinder Radius","#{@sample.cylinder_radius}"],
+    data =  [ [],
+            ["Diver","#{@sample.diver_samples.primary[0].diver.diver_name}","Date","#{@sample.sample_date}","Field Number","#{@sample.field_id}","Boatlog/Manger:", "#{@sample.boatlog_manager.agency_name}"],
+            ["Buddy","#{@sample.diver_samples.secondary[0].diver.diver_name}","Sample Start","#{@sample.sample_begin_time.strftime("%H:%M")}","Habitat","#{@sample.habitat_type.habitat_name}","Visibility","#{@sample.underwater_visibility}"],
+            ["Dive Start",@sample.dive_begin_time.strftime("%H:%M"),"Sample End","#{@sample.sample_end_time.strftime("%H:%M")}","Fish Gear","#{@sample.fishing_gear}","Water Temp","#{@sample.water_temp}"],
             ["Dive End",@sample.dive_end_time.strftime("%H:%M"),"Max Depth","#{@sample.dive_depth}","Stn Depth","#{@sample.sample_depth}","Current","#{@sample.current}"]
           ]
     table data, :cell_style => { :size => 8, :border_width => 0, :height => 17, :padding => 5 }
@@ -50,7 +50,7 @@ class SamplePdf < Prawn::Document
 
     table data,
      :cell_style => { :size => 8, :height => 68, :padding => 2 },
-     :column_widths => { 0 => 85, 1 => 85, 2 => 85, 3 => 85}
+     :column_widths => { 0 => 100, 1 => 100, 2 => 100, 3 => 100}
   end
  end
  

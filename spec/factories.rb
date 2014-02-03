@@ -73,4 +73,25 @@ FactoryGirl.define do
     lastname "Blondeau"
   end
 
+  factory :boat_log do
+    boatlog_manager
+    primary_sample_unit "1001"
+    date Date.parse("2014-02-02")
+  end
+
+  factory :station_log do
+    boat_log
+    stn_number "1"
+    time Time.parse("2014-02-02T15:00:00Z")
+    latitude "25.12345"
+    longitude "-81.12345"
+    comments "station 1"
+  end
+
+  factory :rep_log do
+    station_log
+    diver
+    replicate "A"
+  end
+
 end

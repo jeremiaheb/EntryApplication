@@ -47,6 +47,41 @@ describe BoatlogManager do
       expect(boatlog_manager.agency_name).to eq("FWC/Johnson")
     end
 
+  describe 'divers_responsible_for' do
+    let!(:boatlog_manager) { FactoryGirl.create(:boatlog_manager) }
+    let!(:benthic_cover){FactoryGirl.create(:benthic_cover, :boatlog_manager => boatlog_manager)}
+    let!(:other_benthic_cover){FactoryGirl.create(:benthic_cover)}
+    let!(:coral_demographic) { FactoryGirl.create(:coral_demographic, :boatlog_manager => boatlog_manager) }
+    let!(:other_coral_demographic) { FactoryGirl.create(:coral_demographic) }
+    let!(:sample_animal) {FactoryGirl.create(:sample_animal, :sample => nil)}
+    let!(:sample) do 
+      s = FactoryGirl.build(:sample, :boatlog_manager => boatlog_manager)
+      s.sample_animals << sample_animal
+      s.save
+      s
+    end
+    let!(:diver_sample) {FactoryGirl.create(:diver_sample, :sample => sample)}
+    let!(:other_diver_sample) {FactoryGirl.create(:diver_sample, :sample => nil)}
+
+    it "should have correct divers" do
+      expect(BenthicCover.count).to eq(2)
+      expect(CoralDemographic.count).to eq(2)
+      expect(DiverSample.count).to eq(2)
+      expect(boatlog_manager.divers_responsible_for.size).to eq(3)
+      expect(boatlog_manager.divers_responsible_for).to match_array( [coral_demographic.diver, benthic_cover.diver, diver_sample.diver] )
+    end
+
+    describe "uniqueness" do
+      let!(:benthic2) { FactoryGirl.create(:benthic_cover, :diver => benthic_cover.diver, :boatlog_manager => boatlog_manager) }
+      it "should return a unique list" do
+        expect(BenthicCover.count).to eq(3)
+        expect(BenthicCover.where(:diver_id => benthic2.diver_id).size).to eq(2)
+        expect(boatlog_manager.divers_responsible_for).to match_array( [coral_demographic.diver, benthic_cover.diver, diver_sample.diver] )
+      end
+    end
+  end
+
+
   end
 
   #describe '#spp_code_common' do

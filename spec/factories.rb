@@ -9,8 +9,8 @@ FactoryGirl.define do
   end
 
   factory :benthic_cover do
-    sequence(:boatlog_manager_id)
-    sequence(:diver_id)
+    boatlog_manager
+    diver
     sequence(:buddy)
     sample_date { Date.parse("2013-09-15") }
     sample_begin_time { Time.parse("2013-09-15T15:00:00Z") }
@@ -26,10 +26,10 @@ FactoryGirl.define do
   end
 
   factory :coral_demographic do
-    sequence(:boatlog_manager_id)
+    boatlog_manager
+    diver
     sequence(:buddy)              { |n| "buddy#{n}" }
-    sequence(:diver_id)
-    sequence(:field_id)           { |n| "field_id#{n}" }
+    field_id "10011A"
     sequence(:meters_completed)
     sequence(:sample_begin_time)  { |n| Time.current }
     sequence(:sample_date)        { |n| Time.current }
@@ -92,6 +92,41 @@ FactoryGirl.define do
     station_log
     diver
     replicate "A"
+  end
+
+  factory :sample do
+    sample_type
+    habitat_type
+    boatlog_manager
+    sample_date Date.parse("2014-02-02")
+    dive_begin_time Time.parse("2014-02-02T09:00:00Z")
+    dive_end_time Time.parse("2014-02-02T09:45:00Z")
+    sample_begin_time Time.parse("2014-02-02T09:05:00Z")
+    sample_end_time Time.parse("2014-02-02T09:30:00Z")
+    dive_depth 45
+    sample_depth 45
+    fishing_gear "none"
+    field_id "10011A"
+    underwater_visibility 50
+    sample_description "none"
+    sand_percentage 25
+    hardbottom_percentage 75
+    rubble_percentage 0
+    water_temp 80
+    current "none"
+  end
+
+  factory :diver_sample do
+    diver
+    sample
+    primary_diver true
+  end
+
+  factory :sample_animal do
+    sample
+    animal
+    number_individuals 1
+    average_length 15
   end
 
 end

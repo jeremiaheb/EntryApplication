@@ -8,6 +8,18 @@ FactoryGirl.define do
     max_number 200
   end
 
+  factory :benthic_cover do
+    sequence(:boatlog_manager_id)
+    sequence(:diver_id)
+    sequence(:buddy)
+    sample_date { Date.parse("2013-09-15") }
+    sample_begin_time { Time.parse("2013-09-15T15:00:00Z") }
+    field_id "10011A"
+    habitat_type
+    meters_completed 20
+    sample_description "Here is my sample"
+  end
+
   factory :coral do
     code "ACR PALM"
     scientific_name "Acropora palmata"

@@ -15,10 +15,10 @@ describe Animal do
   end
 
   describe '#spp_code_common' do
-    let(:animal) { FactoryGirl.create(:animal) }
+    let(:animal) { FactoryGirl.create(:animal, :species_code => 'MY_FISH', :common_name => 'A Fish') }
 
     it 'joins #species_code and #common_name' do
-      expect(animal.spp_code_common).to eq('MY_FISH __ My Fish')
+      expect(animal.spp_code_common).to eq('MY_FISH __ A Fish')
     end
   end
 end

@@ -6,7 +6,7 @@ class BoatlogManager < ActiveRecord::Base
   has_many  :boat_logs
 
   def agency_name
-    [self.agency, self.lastname].join('/')
+    "#{agency}/#{lastname}"
   end
 
   validates :agency,        :presence => true

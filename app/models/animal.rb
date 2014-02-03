@@ -11,7 +11,7 @@ class Animal < ActiveRecord::Base
   validates :max_number,      :presence => true
 
   def spp_code_common
-    [self.species_code, self.common_name].join(" __ ")
+    "#{species_code} __ #{common_name}"
   end
 
 

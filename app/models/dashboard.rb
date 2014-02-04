@@ -27,6 +27,7 @@ class Dashboard
 
   def divers(current_diver)
     organized_hash = {}
+    #binding.pry
     diver_list(current_diver).each do |diver|
       organized_hash[Diver.find(diver).diver_name] = { "boat"   => check_val(@boatlog_divers[diver]),
         "sample" => check_val(@sample_divers[diver]),

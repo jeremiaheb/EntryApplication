@@ -9,9 +9,7 @@ class BoatlogManager < ActiveRecord::Base
     "#{agency}/#{lastname}"
   end
 
-  validates :agency,        :presence => true
-  validates :firstname,     :presence => true
-  validates :lastname,      :presence => true
+  validates :agency, :firstname, :lastname, :presence => true
 
   def divers_responsible_for
     sample_divers = samples.map { |sample| sample.diver_samples.primary }.flatten.map { |diver_sample| diver_sample.diver }
@@ -21,7 +19,7 @@ class BoatlogManager < ActiveRecord::Base
   end
 
   def benthic_covers_for_diver(diver)
-    benthic_covers.where(:diver => diver)
+    benthic_covers.where(:diver_id => diver)
   end
 
   def benthic_covers_count_for_diver(diver)

@@ -81,6 +81,14 @@ describe BoatlogManager do
     end
   end
 
+  describe "#benthic_covers_count_for_diver" do
+    let!(:boatlog_manager) {FactoryGirl.create(:boatlog_manager)}
+    let!(:benthic_cover) {FactoryGirl.create(:benthic_cover, :boatlog_manager => boatlog_manager)}
+
+    it "should return correct count of covers" do
+      expect(boatlog_manager.benthic_covers_count_for_diver(benthic_cover.diver)).to eq(1)
+    end
+  end
 
   end
 

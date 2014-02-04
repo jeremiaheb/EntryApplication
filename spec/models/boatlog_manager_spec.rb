@@ -83,13 +83,40 @@ describe BoatlogManager do
 
   describe "#benthic_covers_count_for_diver" do
     let!(:boatlog_manager) {FactoryGirl.create(:boatlog_manager)}
-    let!(:benthic_cover) {FactoryGirl.create(:benthic_cover, :boatlog_manager => boatlog_manager)}
-
+    let!(:diver) {FactoryGirl.create(:diver)}
+    let!(:benthic_cover) do
+     [ FactoryGirl.create(:benthic_cover, :boatlog_manager => boatlog_manager, :diver => diver),
+       FactoryGirl.create(:benthic_cover, :boatlog_manager => boatlog_manager, :diver => diver),
+      FactoryGirl.create(:benthic_cover, :boatlog_manager => boatlog_manager)]
+    end
+    let!(:benthic_cover_2) do
+     [ FactoryGirl.create(:benthic_cover, :diver => diver),
+       FactoryGirl.create(:benthic_cover, :diver => diver),
+      FactoryGirl.create(:benthic_cover) ]
+    end
     it "should return correct count of covers" do
-      expect(boatlog_manager.benthic_covers_count_for_diver(benthic_cover.diver)).to eq(1)
+      expect(boatlog_manager.benthic_covers_count_for_diver(diver)).to eq(2)
     end
   end
 
+  describe "#coral_demographics_count_for_diver" do
+    let!(:boatlog_manager) {FactoryGirl.create(:boatlog_manager)}
+    let!(:diver) {FactoryGirl.create(:diver)}
+    let!(:coral_demographic) do
+     [ FactoryGirl.create(:coral_demographic, :boatlog_manager => boatlog_manager, :diver => diver),
+       FactoryGirl.create(:coral_demographic, :boatlog_manager => boatlog_manager, :diver => diver),
+       FactoryGirl.create(:coral_demographic, :boatlog_manager => boatlog_manager, :diver => diver),
+       FactoryGirl.create(:coral_demographic, :boatlog_manager => boatlog_manager)]
+    end
+    let!(:coral_demographic_2) do
+     [ FactoryGirl.create(:coral_demographic, :diver => diver),
+       FactoryGirl.create(:coral_demographic, :diver => diver),
+      FactoryGirl.create(:coral_demographic) ]
+    end
+    it "should return correct count of covers" do
+      expect(boatlog_manager.coral_demographics_count_for_diver(diver)).to eq(3)
+    end
+  end
   end
 
   #describe '#spp_code_common' do

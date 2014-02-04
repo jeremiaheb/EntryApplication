@@ -19,13 +19,19 @@ class BoatlogManager < ActiveRecord::Base
   end
 
   def benthic_covers_for_diver(diver)
-    benthic_covers.where(:diver_id => diver)
+    benthic_covers.where(:diver_id => diver.id)
   end
 
   def benthic_covers_count_for_diver(diver)
     benthic_covers_for_diver(diver).count
   end
 
+  def coral_demographics_for_diver(diver)
+    coral_demographics.where(:diver_id => diver.id)
+  end
 
+  def coral_demographics_count_for_diver(diver)
+    coral_demographics_for_diver(diver).count
+  end
 
 end

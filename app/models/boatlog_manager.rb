@@ -12,14 +12,15 @@ class BoatlogManager < ActiveRecord::Base
   validates :agency, :firstname, :lastname, :presence => true
 
   def divers_responsible_for
+    boatlog_replicate_divers = boat_logs.map(&:divers).flatten
     sample_divers = samples.joins(:diver_samples).where('diver_samples.primary_diver = ?', true).map { |sample| sample.diver_samples.first.diver }
     lpi_divers = benthic_covers.map { |benthic_cover| benthic_cover.diver }
     demo_divers = coral_demographics.map { |coral_demographic| coral_demographic.diver }
-    (sample_divers + lpi_divers + demo_divers).uniq
+    (boatlog_replicate_divers + sample_divers + lpi_divers + demo_divers).uniq
   end
 
-  def benthic_covers_for_diver(diver)
-    benthic_covers.where(:diver_id => diver.id)
+  def benthic_covers_for_diver(diver, for_admin = false)
+    (for_admin ? BenthicCover : benthic_covers).where(:diver_id => diver.id)
   end
 
   def benthic_covers_count_for_diver(diver)
@@ -41,4 +42,16 @@ class BoatlogManager < ActiveRecord::Base
   def samples_count_for_diver(diver)
     samples_for_diver(diver).count
   end
+
+  def boatlog_replicates_for_diver(diver)
+    boat_logs.joins(:rep_logs).where("rep_logs.diver_id = ?", diver.id)    
+  end
+
+  def boatlog_replicates_count_for_diver(diver)
+    boatlog_replicates_for_diver(diver).count
+  end
+
+  
+
 end
+

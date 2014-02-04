@@ -46,9 +46,9 @@
             <th>Demographic Count</th>
           </tr>
         <tbody>
-        <% @data_by_divers.each do |key, value| %>
+        <% @data_by_divers.each do |diver, value| %>
           <tr>
-            <td> <%= key %></td>
+            <td> <%= diver.diver_name %></td>
             <td> <%= value["boat"] %></td>
             <td> <%= value["sample"] %></td>
             <td> <%= value["lpi"] %></td>

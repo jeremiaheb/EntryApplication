@@ -1,6 +1,10 @@
 
 
 $(function(){ 
+
+  if($('body.boat_logs.edit, body.boat_logs.new').length == 0) {
+    return;
+  }
   
   $("#boat_log_date").datepicker({
     format: 'yyyy-mm-dd',

@@ -34,4 +34,11 @@ class BoatlogManager < ActiveRecord::Base
     coral_demographics_for_diver(diver).count
   end
 
+  def samples_for_diver(diver)
+    samples.joins(:diver_samples).where('diver_samples.primary_diver = ?', true).where('diver_samples.diver_id = ?', diver.id)
+  end
+
+  def samples_count_for_diver(diver)
+    samples_for_diver(diver).count
+  end
 end

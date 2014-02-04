@@ -30,7 +30,7 @@ gem 'capistrano'
 
 group :test do
   gem 'rspec-rails', '~> 2.14'
-  gem 'coco'
+  #gem 'coco'
   gem 'factory_girl_rails'
 end
 group :development, :test do

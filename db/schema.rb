@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140131122929) do
+ActiveRecord::Schema.define(:version => 20140204192245) do
 
   create_table "animals", :force => true do |t|
     t.string   "species_code"
@@ -123,6 +123,8 @@ ActiveRecord::Schema.define(:version => 20140131122929) do
     t.string   "role"
     t.integer  "boatlog_manager_id"
   end
+
+  add_index "divers", ["boatlog_manager_id"], :name => "index_divers_on_boatlog_manager_id", :unique => true
 
   create_table "habitat_types", :force => true do |t|
     t.string   "habitat_name"

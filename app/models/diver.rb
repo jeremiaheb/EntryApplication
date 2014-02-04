@@ -21,7 +21,7 @@ class Diver < ActiveRecord::Base
   
   validates   :diver_number, :presence => true
   validates   :diver_name, :presence => true
-
+  validates   :boatlog_manager_id, :uniqueness => true, :allow_nil => true
 
   scope       :active_divers,      lambda { where(:active => true) }
   

@@ -145,11 +145,4 @@ describe BoatlogManager do
 
   end
 
-  #describe '#spp_code_common' do
-    #let(:animal) { FactoryGirl.create(:animal) }
-
-    #it 'joins #species_code and #common_name' do
-      #expect(animal.spp_code_common).to eq('MY_FISH __ My Fish')
-    #end
-  #end
 end

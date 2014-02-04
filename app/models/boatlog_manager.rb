@@ -12,7 +12,7 @@ class BoatlogManager < ActiveRecord::Base
   validates :agency, :firstname, :lastname, :presence => true
 
   def divers_responsible_for
-    sample_divers = samples.map { |sample| sample.diver_samples.primary }.flatten.map { |diver_sample| diver_sample.diver }
+    sample_divers = samples.joins(:diver_samples).where('diver_samples.primary_diver = ?', true).map { |sample| sample.diver_samples.first.diver }
     lpi_divers = benthic_covers.map { |benthic_cover| benthic_cover.diver }
     demo_divers = coral_demographics.map { |coral_demographic| coral_demographic.diver }
     (sample_divers + lpi_divers + demo_divers).uniq

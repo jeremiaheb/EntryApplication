@@ -7,7 +7,7 @@ class SampleAnimal < ActiveRecord::Base
   end
 
 
-  default_scope :order => "id ASC"
+  default_scope -> { order("id ASC") }
   validates             :animal_id,           :presence => true
   validates_presence_of :number_individuals,  :message => "There is a species with 'Num' filed blank"
   validates_presence_of :average_length,      :if => :has_ind_equal_1?, :message => "There is a species with 'Mean' field blank"

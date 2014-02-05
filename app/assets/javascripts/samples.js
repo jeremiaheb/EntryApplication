@@ -1,7 +1,7 @@
 $(function(){
 
   
-  if(!onRailsPage('samples', ['edit', 'new'])) {
+  if(!EA.onRailsPage('samples', ['edit', 'new'])) {
     return;
   }
 

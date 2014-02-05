@@ -24,8 +24,9 @@
 //= require_tree .
 //
 
-
-function onRailsPage(railsController, railsActions) {
+// Set up our EA namespace for our functions
+var EA = {};
+EA.onRailsPage = function(railsController, railsActions) {
   var selector = _.map(railsActions, function(action) {
     return "body." + railsController + "." + action;
   }).join(', ');
@@ -35,7 +36,7 @@ function onRailsPage(railsController, railsActions) {
 }
 
 $(function(){
-    
+
     $('tr[data-link]').click(function(){
       window.location = this.dataset.link
     });

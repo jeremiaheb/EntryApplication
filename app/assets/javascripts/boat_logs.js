@@ -2,7 +2,7 @@
 
 $(function(){ 
 
-  if(!onRailsPage('boat_logs', ['edit', 'new'])) {
+  if(!EA.onRailsPage('boat_logs', ['edit', 'new'])) {
     return;
   }
   

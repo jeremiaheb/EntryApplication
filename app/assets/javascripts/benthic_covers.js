@@ -6,7 +6,7 @@
 
 $(function(){
  
-  if(!onRailsPage('benthic_covers', ['edit', 'new'])) {
+  if(!EA.onRailsPage('benthic_covers', ['edit', 'new'])) {
     return;
   }
   

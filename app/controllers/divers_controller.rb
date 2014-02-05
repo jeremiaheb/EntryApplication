@@ -45,7 +45,9 @@ class DiversController < ApplicationController
   # POST /divers
   # POST /divers.json
   def create
+    role = params[:diver].delete(:role)
     @diver = Diver.new(params[:diver])
+    @diver.role = role if current_diver.admin?
 
     respond_to do |format|
       if @diver.save
@@ -62,6 +64,8 @@ class DiversController < ApplicationController
   # PUT /divers/1.json
   def update
     @diver = Diver.find(params[:id])
+    role = params[:diver].delete(:role)
+    @diver.role = role if current_diver.admin?
 
     respond_to do |format|
       if @diver.update_attributes(params[:diver])

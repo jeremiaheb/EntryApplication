@@ -18,7 +18,6 @@ describe Diver do
       it { should be_able_to(:manage, CoralDemographic) }
       it { should be_able_to(:manage, BenthicCover) }
       it { should be_able_to(:manage, BoatLog) }
-      it { should be_able_to(:manage, Dashboard) }
     end
 
     context 'when a diver' do

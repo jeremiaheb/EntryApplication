@@ -33,7 +33,7 @@ class Ability
     if current_diver.role == 'admin'
       can :manage, :all
     elsif current_diver.role == 'manager'
-      can :manage, [Sample, BenthicCover, CoralDemographic, BoatLog, Dashboard]
+      can :manage, [Sample, BenthicCover, CoralDemographic, BoatLog]
     elsif current_diver.role == 'diver'
       can :create, [Sample, BenthicCover, CoralDemographic]
       can :read, [Sample, BenthicCover, CoralDemographic]

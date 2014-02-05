@@ -1,7 +1,7 @@
 class DashboardController < ApplicationController
  
   before_filter :authenticate_diver!
-  authorize_resource
+  before_filter :manager_or_admin?
  
  def show
   #binding.pry
@@ -35,4 +35,18 @@ class DashboardController < ApplicationController
   end
   @data_by_divers.sort_by { |diver, data| diver }
  end
+
+ protected
+
+  def manager_or_admin?
+    if current_diver.admin? || current_diver.manager?
+      true
+    else
+      flash[:error] = "You are not authorized to see this page"
+      redirect_to root_path
+      false
+    end
+  end
+
+
 end

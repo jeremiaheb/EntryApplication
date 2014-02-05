@@ -2,7 +2,7 @@
 
 $(function(){ 
 
-  if($('body.boat_logs.edit, body.boat_logs.new').length == 0) {
+  if(!onRailsPage('boat_logs', ['edit', 'new'])) {
     return;
   }
   

@@ -6,6 +6,9 @@
 
 $(function(){
  
+  if(!onRailsPage('benthic_covers', ['edit', 'new'])) {
+    return;
+  }
   
   $("#benthic_cover_sample_date").datepicker({
     format: 'yyyy-mm-dd',

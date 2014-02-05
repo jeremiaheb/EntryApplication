@@ -3,6 +3,11 @@
 
 $(function(){ 
   
+  if(!onRailsPage('coral_demographics', ['edit', 'new'])) {
+    return;
+  }
+
+
   $("#coral_demographic_sample_date").datepicker({
     format: 'yyyy-mm-dd',
     autoclose: true

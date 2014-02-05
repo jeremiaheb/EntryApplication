@@ -23,7 +23,10 @@ gem 'cancan'
 gem 'prawn', :git => 'git://github.com/prawnpdf/prawn.git'
 gem 'axlsx_rails'
 gem 'capistrano'
-gem 'rails_serve_static_assets'
+
+group :production do
+  gem 'rails_12factor'
+end
 
 group :test do
   gem 'rspec-rails', '~> 2.14'

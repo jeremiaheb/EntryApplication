@@ -1,4 +1,6 @@
 class Sample < ActiveRecord::Base
+  include CommonFields
+  
   belongs_to :sample_type
   belongs_to :habitat_type
   belongs_to :boatlog_manager
@@ -14,10 +16,11 @@ class Sample < ActiveRecord::Base
   accepts_nested_attributes_for :diver_samples, :allow_destroy => true
 
 
-
-  def myId
-    return self.diver_samples.primary.first.diver_id
+  #for use in CommonFields methods
+  def diver
+    diver_samples.primary.first.try(:diver)
   end
+
 
   #validates :sample_date,                 :presence => true 
   validates :sample_type_id,              :presence => true
@@ -43,12 +46,8 @@ class Sample < ActiveRecord::Base
   #validate :abiotic_percentage_equal_100
 
 
-  def field_id=(value)
-    write_attribute(:field_id, value.upcase)
-  end
- 
-  def msn
-    return [ self.sample_date.strftime('%Y%m%d'), self.sample_begin_time.strftime('%H%M'), self.diver_samples.primary[0].diver.diver_number ].join('')
+  def msn_prefix
+    "A"
   end
 
    private

@@ -1,4 +1,6 @@
 class BenthicCover < ActiveRecord::Base
+  include CommonFields
+
 
   has_many :point_intercepts, :dependent => :destroy
   has_many :cover_cats, :through => :point_intercepts
@@ -15,9 +17,6 @@ class BenthicCover < ActiveRecord::Base
   has_one     :rugosity_measure, :dependent => :destroy
   accepts_nested_attributes_for     :rugosity_measure, :allow_destroy => true
 
-  def myId
-    return self.diver_id
-  end
 
   validates :boatlog_manager_id,    :presence => true
   validates :diver_id,              :presence => true
@@ -31,12 +30,9 @@ class BenthicCover < ActiveRecord::Base
   validates :sample_description,    :length => { :maximum => 150 } 
 
 
-  def msn
-    return [ "X", self.sample_date.strftime('%Y%m%d'), self.sample_begin_time.strftime('%H%M'), self.diver.diver_number ].join('')
+  def msn_prefix
+    "X"
   end
 
-  def field_id=(value)
-    write_attribute(:field_id, value.upcase)
-  end
 
 end

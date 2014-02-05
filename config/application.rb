@@ -55,9 +55,5 @@ module EntryApplication
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     
-    # On heroku don't load the Rails environment before asset compilation as it
-    # hasn't been set up yet.
-    # See http://www.simonecarletti.com/blog/2012/02/heroku-and-rails-3-2-assetprecompile-error/
-    config.assets.initialize_on_precompile = false
   end
 end

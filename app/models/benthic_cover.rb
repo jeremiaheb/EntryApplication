@@ -1,6 +1,7 @@
 class BenthicCover < ActiveRecord::Base
   include CommonFields
 
+  attr_protected []
 
   has_many :point_intercepts, :dependent => :destroy
   has_many :cover_cats, :through => :point_intercepts

@@ -17,6 +17,10 @@
  *= require_tree .
 */
 
+#speciesSection {
+  display: none;
+}
+
 #homeSidebar p {
   display: inline;
   float: none;

@@ -1,6 +1,8 @@
 class Sample < ActiveRecord::Base
   include CommonFields
   
+  attr_protected []
+
   belongs_to :sample_type
   belongs_to :habitat_type
   belongs_to :boatlog_manager

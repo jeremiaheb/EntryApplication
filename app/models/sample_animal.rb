@@ -1,4 +1,6 @@
 class SampleAnimal < ActiveRecord::Base
+  attr_protected []
+
   belongs_to :animal
   belongs_to :sample
 

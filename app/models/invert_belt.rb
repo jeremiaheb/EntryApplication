@@ -1,4 +1,6 @@
 class InvertBelt < ActiveRecord::Base
+  attr_protected []
+
   belongs_to :benthic_cover
 
 

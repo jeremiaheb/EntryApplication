@@ -1,4 +1,6 @@
 class DiverSample < ActiveRecord::Base
+  attr_protected []
+
   belongs_to :diver
   belongs_to :sample
 

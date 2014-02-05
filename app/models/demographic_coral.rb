@@ -1,4 +1,5 @@
 class DemographicCoral < ActiveRecord::Base
+  attr_protected []
 
   belongs_to :coral_demographic
   belongs_to :coral

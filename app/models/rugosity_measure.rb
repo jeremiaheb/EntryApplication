@@ -1,4 +1,6 @@
 class RugosityMeasure < ActiveRecord::Base
+  attr_protected []
+
 belongs_to :benthic_cover
 
   validates :min_depth,               :presence => true

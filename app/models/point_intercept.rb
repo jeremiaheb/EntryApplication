@@ -1,5 +1,7 @@
 class PointIntercept < ActiveRecord::Base
   
+  attr_protected []
+
   belongs_to  :benthic_cover
   belongs_to  :cover_cat
 

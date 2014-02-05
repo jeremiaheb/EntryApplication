@@ -20,6 +20,7 @@
 //= require rails.validations
 //= require rails.validations.nested_form
 //= require select2
+//= require_tree ../../../vendor/assets/javascripts
 //= require_tree .
 //
 
@@ -246,12 +247,13 @@ $(function(){
     }
   });
 
-  $("#submitButton").click(function() {
-    $(".new_sample, .edit_sample").validate().cancelSubmit = true;
-    $(".formContainer :input").attr('disabled', false);
-    $(".new_sample, .edit_sample").validate().submit();
-      return false;
+  $("#submitButton").click(function(e) {
+    e.preventDefault();
+    $(this).attr('disabled',true);
 
+    $(".new_sample, .edit_sample").validate().cancelSubmit = true;
+    $(".formContainer :input").not(this).attr('disabled', false);
+    $(".new_sample, .edit_sample").submit();
   });
 
 
@@ -297,11 +299,15 @@ $(function(){
     $.validator.addMethod("doesNotHaveOverlap", function(value, element, params){
       var spp = {}
       var $index = $(element).parent().parent().index();
-      var $thisSpecies = $(element).parent().find('.sppCommon').select2("val");
-      var $thisNumber = $(element).parent().find('[id$="number_individuals"]').val();
-      var $thisMean = $(element).parent().find('[id$="average_length"]').val();
-      var $thisMin = $(element).parent().find('[id$="min_length"]').val();
-      var $thisMax = $(element).parent().find('[id$="max_length"]').val();
+
+      var container = $(element).closest('li')
+      var $thisSpecies = container.find('.sppCommon').select2("val");
+
+      //var $thisSpecies = $(element).parent().find('.sppCommon').select2("val");
+      var $thisNumber = container.find('[id$="number_individuals"]').val();
+      var $thisMean = container.find('[id$="average_length"]').val();
+      var $thisMin = container.find('[id$="min_length"]').val();
+      var $thisMax = container.find('[id$="max_length"]').val();
 
       var $thisRange
 
@@ -623,10 +629,13 @@ $(function(){
     //});
 
 
+
   speciesInformation = {}
-  $.each(animal_info, function(a){
-    speciesInformation[animal_info[a].id] = { "max_num": animal_info[a].max_number, "min_size": animal_info[a].min_size, "max_size": animal_info[a].max_size };
-  });
+  if ( typeof animal_info !== "undefined" ) {
+    $.each(animal_info, function(a){
+      speciesInformation[animal_info[a].id] = { "max_num": animal_info[a].max_number, "min_size": animal_info[a].min_size, "max_size": animal_info[a].max_size };
+    });
+  }
 
   function alertSpeciesSizes() {
     $('[id$="number_individuals"]').on('focusout', function(){

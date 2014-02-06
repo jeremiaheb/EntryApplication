@@ -15,4 +15,5 @@ describe SampleType do
       end
   end
 
+
 end

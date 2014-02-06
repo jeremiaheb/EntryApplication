@@ -1,4 +1,5 @@
 class CoverCat < ActiveRecord::Base
+  attr_protected []
   
   
   has_many :point_intercepts

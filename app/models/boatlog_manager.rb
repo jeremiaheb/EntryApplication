@@ -1,4 +1,5 @@
 class BoatlogManager < ActiveRecord::Base
+  attr_protected []
   has_many  :samples
   has_one   :diver
   has_many  :benthic_covers

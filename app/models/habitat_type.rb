@@ -1,4 +1,5 @@
 class HabitatType < ActiveRecord::Base
+  attr_protected []
   has_many :samples
   has_many :benthic_covers
 

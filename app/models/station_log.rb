@@ -1,5 +1,7 @@
 class StationLog < ActiveRecord::Base
   
+  attr_protected []
+
   belongs_to :boat_log
   has_many :rep_logs, :dependent => :destroy
   accepts_nested_attributes_for :rep_logs, :reject_if => lambda {  |a| a[:replicate].blank? }, :allow_destroy => true

@@ -1,5 +1,6 @@
-class BoatLog < ActiveRecord::Base
-    
+class BoatLog < ActiveRecord::Base  
+  attr_protected []
+  
   belongs_to :boatlog_manager
 
   has_many :station_logs, :dependent => :destroy

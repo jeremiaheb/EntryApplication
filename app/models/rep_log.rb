@@ -1,5 +1,7 @@
 class RepLog < ActiveRecord::Base
   
+  attr_protected []
+
   belongs_to  :station_log
   belongs_to  :diver
 

@@ -29,6 +29,7 @@ FactoryGirl.define do
   end
   
   factory :cover_cat do
+    code "SAND"
     name "sand"
   end
 

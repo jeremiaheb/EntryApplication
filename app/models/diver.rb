@@ -28,7 +28,7 @@ class Diver < ActiveRecord::Base
   
 
   def whole_name
-    [ self.firstname, self.lastname ].join("  ")
+    "#{firstname} #{lastname}"
   end
 
   def diver?

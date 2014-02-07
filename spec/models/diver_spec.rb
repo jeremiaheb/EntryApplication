@@ -63,6 +63,14 @@ describe Diver do
     end
   end
 
+  describe "#whole_name" do
+    let!(:diver) {FactoryGirl.create(:diver, :firstname => "Jeremiah", :lastname => "Blondeau")}
+
+    it "should have correct whole name" do 
+      expect(diver.whole_name).to eq("Jeremiah Blondeau")
+    end
+  end
+
 end
 
 

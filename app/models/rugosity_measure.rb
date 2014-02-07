@@ -14,4 +14,7 @@ belongs_to :benthic_cover
   validates :cnt_greater_than_200,    :presence => true
 
 
+  def category_sum
+    [cnt_less_than_20, cnt_20_less_than_50, cnt_50_less_than_100, cnt_100_less_than_150, cnt_150_less_than_200, cnt_greater_than_200].sum
+  end
 end

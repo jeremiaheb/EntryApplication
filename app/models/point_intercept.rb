@@ -8,7 +8,7 @@ class PointIntercept < ActiveRecord::Base
   validates   :cover_cat_id,    :presence => true
 
   def cover_total
-    return [self.hardbottom_num, self.softbottom_num, self.rubble_num].reject{|a| a.nil?}.sum
+    [hardbottom_num, softbottom_num, rubble_num].reject{|a| a.nil?}.sum
   end
 
 end

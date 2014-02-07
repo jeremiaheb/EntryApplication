@@ -14,10 +14,35 @@ FactoryGirl.define do
     sequence(:buddy)
     sample_date { Date.parse("2013-09-15") }
     sample_begin_time { Time.parse("2013-09-15T15:00:00Z") }
-    field_id "10011A"
+    field_id "10011a"
     habitat_type
     meters_completed 20
     sample_description "Here is my sample"
+  end
+
+  factory :point_intercept do
+    benthic_cover
+    cover_cat
+    hardbottom_num 25
+    softbottom_num 50
+    rubble_num nil
+  end
+  
+  factory :cover_cat do
+    name "sand"
+  end
+
+  factory :rugosity_measure do
+    benthic_cover
+    min_depth 50
+    max_depth 55
+    max_vert_height 2.5
+    cnt_less_than_20 4
+    cnt_20_less_than_50 5
+    cnt_50_less_than_100 8
+    cnt_100_less_than_150 4
+    cnt_150_less_than_200 2
+    cnt_greater_than_200 1
   end
 
   factory :coral do
@@ -37,9 +62,6 @@ FactoryGirl.define do
     demographic_corals            { build_list :demographic_coral, 1 }
   end
 
-  factory :cover_cat do
-    name "sand"
-  end
 
   factory :demographic_coral do
      max_diameter           { 1 }
@@ -106,7 +128,7 @@ FactoryGirl.define do
     dive_depth 45
     sample_depth 45
     fishing_gear "none"
-    field_id "10011A"
+    field_id "10011a"
     underwater_visibility 50
     sample_description "none"
     sand_percentage 25

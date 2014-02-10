@@ -98,13 +98,13 @@ FactoryGirl.define do
 
   factory :boat_log do
     boatlog_manager
-    primary_sample_unit "1001"
+    primary_sample_unit "1234"
     date Date.parse("2014-02-02")
   end
 
   factory :station_log do
     boat_log
-    stn_number "1"
+    stn_number "2"
     time Time.parse("2014-02-02T15:00:00Z")
     latitude "25.12345"
     longitude "-81.12345"
@@ -114,7 +114,7 @@ FactoryGirl.define do
   factory :rep_log do
     station_log
     diver
-    replicate "A"
+    replicate "j"
   end
 
   factory :sample do

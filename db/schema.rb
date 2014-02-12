@@ -9,22 +9,25 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140204192245) do
+ActiveRecord::Schema.define(version: 20140212155812) do
 
-  create_table "animals", :force => true do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "animals", force: true do |t|
     t.string   "species_code"
     t.string   "scientific_name"
     t.string   "common_name"
     t.integer  "max_size"
     t.integer  "min_size"
     t.integer  "max_number"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
-  create_table "benthic_covers", :force => true do |t|
+  create_table "benthic_covers", force: true do |t|
     t.integer  "diver_id"
     t.integer  "habitat_type_id"
     t.integer  "buddy"
@@ -33,30 +36,28 @@ ActiveRecord::Schema.define(:version => 20140204192245) do
     t.time     "sample_begin_time"
     t.integer  "meters_completed"
     t.text     "sample_description"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "boatlog_manager_id"
   end
 
-  create_table "boat_logs", :force => true do |t|
+  create_table "boat_logs", force: true do |t|
     t.string   "primary_sample_unit"
     t.date     "date"
     t.integer  "boatlog_manager_id"
-    t.float    "surface_temperature"
-    t.float    "surface_salinity"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
-  create_table "boatlog_managers", :force => true do |t|
+  create_table "boatlog_managers", force: true do |t|
     t.string   "agency"
     t.string   "firstname"
     t.string   "lastname"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "coral_demographics", :force => true do |t|
+  create_table "coral_demographics", force: true do |t|
     t.integer  "diver_id"
     t.integer  "habitat_type_id"
     t.integer  "buddy"
@@ -65,26 +66,26 @@ ActiveRecord::Schema.define(:version => 20140204192245) do
     t.time     "sample_begin_time"
     t.integer  "meters_completed"
     t.text     "sample_description"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "boatlog_manager_id"
   end
 
-  create_table "corals", :force => true do |t|
+  create_table "corals", force: true do |t|
     t.string   "code"
     t.string   "scientific_name"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
-  create_table "cover_cats", :force => true do |t|
+  create_table "cover_cats", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "code"
   end
 
-  create_table "demographic_corals", :force => true do |t|
+  create_table "demographic_corals", force: true do |t|
     t.integer "coral_demographic_id"
     t.integer "coral_id"
     t.float   "max_diameter"
@@ -95,24 +96,24 @@ ActiveRecord::Schema.define(:version => 20140204192245) do
     t.string  "bleach_condition"
   end
 
-  create_table "diver_samples", :force => true do |t|
+  create_table "diver_samples", force: true do |t|
     t.integer "sample_id"
     t.integer "diver_id"
     t.boolean "primary_diver"
   end
 
-  create_table "divers", :force => true do |t|
+  create_table "divers", force: true do |t|
     t.string   "diver_number"
     t.string   "diver_name"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.boolean  "active"
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
+    t.integer  "sign_in_count",          default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -124,23 +125,23 @@ ActiveRecord::Schema.define(:version => 20140204192245) do
     t.integer  "boatlog_manager_id"
   end
 
-  add_index "divers", ["boatlog_manager_id"], :name => "index_divers_on_boatlog_manager_id", :unique => true
+  add_index "divers", ["boatlog_manager_id"], name: "index_divers_on_boatlog_manager_id", unique: true, using: :btree
 
-  create_table "habitat_types", :force => true do |t|
+  create_table "habitat_types", force: true do |t|
     t.string   "habitat_name"
     t.string   "habitat_description"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
-  create_table "invert_belts", :force => true do |t|
+  create_table "invert_belts", force: true do |t|
     t.integer "benthic_cover_id"
     t.integer "lobster_num"
     t.integer "conch_num"
     t.integer "diadema_num"
   end
 
-  create_table "point_intercepts", :force => true do |t|
+  create_table "point_intercepts", force: true do |t|
     t.integer "benthic_cover_id"
     t.integer "cover_cat_id"
     t.integer "hardbottom_num"
@@ -148,7 +149,7 @@ ActiveRecord::Schema.define(:version => 20140204192245) do
     t.integer "rubble_num"
   end
 
-  create_table "presence_belts", :force => true do |t|
+  create_table "presence_belts", force: true do |t|
     t.integer "benthic_cover_id"
     t.integer "a_palmata"
     t.integer "a_cervicornis"
@@ -161,13 +162,13 @@ ActiveRecord::Schema.define(:version => 20140204192245) do
     t.integer "a_lamarcki"
   end
 
-  create_table "rep_logs", :force => true do |t|
+  create_table "rep_logs", force: true do |t|
     t.integer "station_log_id"
     t.string  "replicate"
     t.integer "diver_id"
   end
 
-  create_table "rugosity_measures", :force => true do |t|
+  create_table "rugosity_measures", force: true do |t|
     t.integer "benthic_cover_id"
     t.integer "min_depth"
     t.integer "max_depth"
@@ -180,7 +181,7 @@ ActiveRecord::Schema.define(:version => 20140204192245) do
     t.integer "cnt_greater_than_200"
   end
 
-  create_table "sample_animals", :force => true do |t|
+  create_table "sample_animals", force: true do |t|
     t.integer "sample_id"
     t.integer "animal_id"
     t.integer "number_individuals"
@@ -190,14 +191,14 @@ ActiveRecord::Schema.define(:version => 20140204192245) do
     t.integer "time_seen"
   end
 
-  create_table "sample_types", :force => true do |t|
+  create_table "sample_types", force: true do |t|
     t.string   "sample_type_name"
     t.string   "sample_type_description"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
-  create_table "samples", :force => true do |t|
+  create_table "samples", force: true do |t|
     t.integer  "sample_type_id"
     t.integer  "habitat_type_id"
     t.date     "sample_date"
@@ -214,14 +215,14 @@ ActiveRecord::Schema.define(:version => 20140204192245) do
     t.integer  "sand_percentage"
     t.integer  "hardbottom_percentage"
     t.integer  "rubble_percentage"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.float    "water_temp"
     t.string   "current"
     t.integer  "boatlog_manager_id"
   end
 
-  create_table "station_logs", :force => true do |t|
+  create_table "station_logs", force: true do |t|
     t.integer "boat_log_id"
     t.integer "stn_number"
     t.time    "time"

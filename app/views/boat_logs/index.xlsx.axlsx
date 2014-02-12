@@ -1,7 +1,7 @@
 
 wb = xlsx_package.workbook
 wb.add_worksheet(name: 'boatlog_initial') do |sheet|
-  sheet.add_row [ 'fieldid', 'date', 'time', 'DIVER_NR', 'lat', 'lon', 'SURFACE_TEMPERATURE', 'SURFACE_SALINITY', 'LOG_COMMENTS' ]
+  sheet.add_row [ 'fieldid', 'date', 'time', 'DIVER_NR', 'lat', 'lon', 'LOG_COMMENTS' ]
     @boat_logs.each do |boatlog|
       boatlog.station_logs.each do |station_log|
         station_log.rep_logs.each do |rep_log|
@@ -11,8 +11,6 @@ wb.add_worksheet(name: 'boatlog_initial') do |sheet|
                           rep_log.diver.diver_number,
                           station_log.latitude,
                           station_log.longitude,
-                          boatlog.surface_temperature,
-                          boatlog.surface_salinity,
                           station_log.comments ]
         end
       end

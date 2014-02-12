@@ -23,12 +23,21 @@ $(function(){
   function disable_fields_if_no_coral() {
     $(".coralSpecies").on('focusout', function(){
       $coralCat = $(this).find('span').text();
-      if ( $coralCat == "NO_Coral" ) {
-        $(this).parent().find(".coralSpeciesData").attr('disabled', true);
+      if ( $coralCat == "NOCORA" ) {
+        $(this).closest("li").find(".coralSpeciesData").attr('disabled', true);
       }
     });
   }
 
+  function disable_fields_if_no_coral_on_load() {
+    $(".coralSpecies").each(function(){
+      $coralCat = $(this).find('span').text();
+      if ( $coralCat == "NOCORA" ) {
+        $(this).closest("li").find(".coralSpeciesData").attr('disabled', true);
+      }
+    }); 
+  };
+  disable_fields_if_no_coral_on_load();
   disable_fields_if_no_coral();
   $(document).delegate(".add_nested_fields", "click", function(){ 
     disable_fields_if_no_coral();    

@@ -5,26 +5,33 @@ class SamplePdf < Prawn::Document
     samples.each do |sample|
       @sample = sample
       sample_head
-      abiotic_footprint
-      comments
-      species_data_36
-      if @sample.sample_animals.length > 36
-        species_data_72
-      end
+      #abiotic_footprint
+      #comments
+      #species_data_36
+      #if @sample.sample_animals.length > 36
+        #species_data_72
+      #end
       start_new_page
     end
   end
   
   def sample_head
     data =  [ [],
-            ["Diver","#{@sample.diver_samples.primary[0].diver.diver_name}","Date","#{@sample.sample_date}","Field Number","#{@sample.field_id}","Boatlog/Manger:", "#{@sample.boatlog_manager.agency_name}"],
-            ["Buddy","#{@sample.diver_samples.secondary[0].diver.diver_name}","Sample Start","#{@sample.sample_begin_time.strftime("%H:%M")}","Habitat","#{@sample.habitat_type.habitat_name}","Visibility","#{@sample.underwater_visibility}"],
-            ["Dive Start",@sample.dive_begin_time.strftime("%H:%M"),"Sample End","#{@sample.sample_end_time.strftime("%H:%M")}","Fish Gear","#{@sample.fishing_gear}","Water Temp","#{@sample.water_temp}"],
-            ["Dive End",@sample.dive_end_time.strftime("%H:%M"),"Max Depth","#{@sample.dive_depth}","Stn Depth","#{@sample.sample_depth}","Current","#{@sample.current}"]
+            ["Diver","#{@sample.diver.diver_name}", "Date", "#{@sample.sample.sample_date}"]
           ]
     table data, :cell_style => { :size => 8, :border_width => 0, :height => 17, :padding => 5 }
 
   end
+  #def sample_head
+    #data =  [ [],
+            #["Diver","#{@sample.diver_samples.primary[0].diver.diver_name}","Date","#{@sample.sample_date}","Field Number","#{@sample.field_id}","Boatlog/Manger:", "#{@sample.boatlog_manager.agency_name}"],
+            #["Buddy","#{@sample.diver_samples.secondary[0].diver.diver_name}","Sample Start","#{@sample.sample_begin_time.strftime("%H:%M")}","Habitat","#{@sample.habitat_type.habitat_name}","Visibility","#{@sample.underwater_visibility}"],
+            #["Dive Start",@sample.dive_begin_time.strftime("%H:%M"),"Sample End","#{@sample.sample_end_time.strftime("%H:%M")}","Fish Gear","#{@sample.fishing_gear}","Water Temp","#{@sample.water_temp}"],
+            #["Dive End",@sample.dive_end_time.strftime("%H:%M"),"Max Depth","#{@sample.dive_depth}","Stn Depth","#{@sample.sample_depth}","Current","#{@sample.current}"]
+          #]
+    #table data, :cell_style => { :size => 8, :border_width => 0, :height => 17, :padding => 5 }
+
+  #end
 
  def abiotic_footprint
    indent(0) do

@@ -71,6 +71,29 @@ describe Diver do
     end
   end
 
+  describe "#diver_proofing_samples" do
+    let!(:boatlog_manager) {FactoryGirl.create(:boatlog_manager)}
+    let!(:sample_animal) {FactoryGirl.create(:sample_animal, :sample => nil)}
+    let!(:diver) {FactoryGirl.create(:diver)}
+    let!(:samples) do
+      3.times.map do 
+        s = FactoryGirl.build(:sample, :boatlog_manager => boatlog_manager)
+        s.sample_animals << sample_animal
+        s.save
+        s
+      end
+    end
+    let!(:diver_samples) do
+     [ FactoryGirl.create(:diver_sample, :diver => diver, :primary_diver => true, :sample => samples[0]),
+       FactoryGirl.create(:diver_sample, :diver => diver, :primary_diver => false, :sample => samples[0]),
+       FactoryGirl.create(:diver_sample, :diver => diver, :primary_diver => true, :sample => samples[1]),
+       FactoryGirl.create(:diver_sample, :diver => diver, :primary_diver => false, :sample => samples[1]),
+       FactoryGirl.create(:diver_sample, :primary_diver => true, :sample => samples[2])]
+    end
+
+    it "should only have current divers samples" do
+      expect(diver.diver_proofing_samples.count).to eq(2)
+    end
+  end
+
 end
-
-

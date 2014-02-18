@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe SampleType do 
+describe Sample do 
 
 
   describe "diver common fields" do
@@ -14,6 +14,7 @@ describe SampleType do
     end
     let!(:diver_sample) {FactoryGirl.create(:diver_sample, :sample => sample, :diver => diver)}
     it "should return primary diver number" do
+      binding.pry
       expect(sample.diver.diver_number).to eq("0157")  
     end
     it "should have correct id" do 

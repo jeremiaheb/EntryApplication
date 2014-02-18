@@ -46,7 +46,7 @@ class Sample < ActiveRecord::Base
   validates :sample_description,          :length => { :maximum => 150 }                    
 
   #validate :abiotic_percentage_equal_100
-
+  
 
   def msn_prefix
     "A"

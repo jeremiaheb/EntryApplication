@@ -18,7 +18,9 @@ class SamplesController < ApplicationController
       @samples = current_diver.samples.merge(DiverSample.primary)
     end
 
-    @proofing_samples = current_diver.samples.merge(DiverSample.primary).order("sample_date") 
+    #@proofing_samples = current_diver.samples.merge(DiverSample.primary).order("sample_date") 
+    @proofing_samples = current_diver.diver_proofing_samples
+
 
     respond_to do |format|
       format.html # index.html.erb

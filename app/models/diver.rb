@@ -26,6 +26,9 @@ class Diver < ActiveRecord::Base
 
   scope       :active_divers,      lambda { where(:active => true) }
   
+  def diver_proofing_samples
+    diver_samples.primary.joins(:sample).order("sample_date")
+  end
 
   def whole_name
     "#{firstname} #{lastname}"

@@ -30,6 +30,10 @@ class Diver < ActiveRecord::Base
     diver_samples.primary.joins(:sample).order("sample_date")
   end
 
+  def diver_proofing_benthic_cover
+    benthic_covers.order("sample_date")
+  end
+
   def whole_name
     "#{firstname} #{lastname}"
   end

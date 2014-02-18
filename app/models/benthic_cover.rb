@@ -35,5 +35,4 @@ class BenthicCover < ActiveRecord::Base
     "X"
   end
 
-
 end

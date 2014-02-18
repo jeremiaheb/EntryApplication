@@ -96,4 +96,23 @@ describe Diver do
     end
   end
 
+  describe "#diver_proofing_benthic_cover" do
+    let!(:boatlog_manager) {FactoryGirl.create(:boatlog_manager)}
+    let!(:diver) {FactoryGirl.create(:diver)}
+    let!(:benthic_cover) do
+     [ FactoryGirl.create(:benthic_cover, :boatlog_manager => boatlog_manager, :diver => diver),
+       FactoryGirl.create(:benthic_cover, :boatlog_manager => boatlog_manager, :diver => diver),
+      FactoryGirl.create(:benthic_cover, :boatlog_manager => boatlog_manager)]
+    end
+    let!(:benthic_cover_2) do
+     [ FactoryGirl.create(:benthic_cover, :diver => diver),
+       FactoryGirl.create(:benthic_cover, :diver => diver),
+      FactoryGirl.create(:benthic_cover) ]
+    end
+    it "should return correct count of covers" do
+      expect(diver.diver_proofing_benthic_cover.count).to eq(4)
+    end
+  end
+
+
 end

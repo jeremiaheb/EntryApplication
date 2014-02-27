@@ -121,7 +121,12 @@ $(function(){
         set_time_seen_field_on_focus();
         enable_disable_animals_fields();
         alertSpeciesSizes();
-        $(".section_3 input:text:visible").eq(-5).focus();
+        //$(".section_3 input:text:visible").eq(-5).focus();
+        $(".section_3 input:text:visible").eq(-5);
+        $(".section_3 .sppCommon:visible").last().select2('open');
+        $('#animals').scrollTop($("#animals")[0].scrollHeight);
+
+
    });
 
 

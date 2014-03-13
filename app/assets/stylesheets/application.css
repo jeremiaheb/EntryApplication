@@ -404,3 +404,11 @@ input.timeSeen_3 {
     display: inline-block;
     *display: inline;
 }
+
+.carousel-caption {
+  height: 15px; 
+}
+
+.carousel-caption p {
+  font-size: 15px;
+}

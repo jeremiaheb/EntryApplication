@@ -12,7 +12,7 @@
     <div class="control-group">
       <label class="control-label diver_type_label">Diver</label>
       <div class="controls">
-        <%= f.collection_select :diver_id, Diver.order(:diver_number).all, :id, :diver_name, { :include_blank => "" }%>
+        <%= f.collection_select :diver_id, Diver.order(:diver_name).all, :id, :diver_name, { :include_blank => "" }%>
         <%= f.link_to_remove "Remove Replicate", {:tabindex => "-1"}  %>
       </div>
     </div>

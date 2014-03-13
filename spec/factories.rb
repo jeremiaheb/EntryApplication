@@ -29,8 +29,9 @@ FactoryGirl.define do
   end
   
   factory :cover_cat do
-    code "SAND"
-    name "sand"
+    code "POF SPE."
+    name "Porifera spp"
+    common "Sponges other"
   end
 
   factory :rugosity_measure do

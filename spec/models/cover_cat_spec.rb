@@ -3,7 +3,7 @@ require "spec_helper"
 describe CoverCat do
 
   describe "validations" do
-    let(:cover_cat) { FactoryGirl.create(:cover_cat, :code => "ACRPALM", :name => "Acropora palmata") }
+    let(:cover_cat) { FactoryGirl.create(:cover_cat, :code => "RHO CRUS", :name => "Rhodophyta cru. spp", :common => "CCA Crustose Coralline Algae") }
     it "has valid factory" do
       cover_cat.should be_valid
     end
@@ -13,7 +13,7 @@ describe CoverCat do
     end
 
     it "should have correct cover_code_name" do
-      expect(cover_cat.cover_code_name).to eq("ACRPALM __ Acropora palmata")
+      expect(cover_cat.cover_code_name).to eq("RHO CRUS __ CCA Crustose Coralline Algae")
     end
   end
   

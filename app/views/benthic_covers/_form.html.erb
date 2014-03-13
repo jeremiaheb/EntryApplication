@@ -93,6 +93,14 @@
     </div>
 
     <div class=span3>
+      <fieldset>
+        <legend> Rugosity Measurement </legend>
+        <div>
+          <%= f.fields_for :rugosity_measure do |builder| %>
+            <%= render 'rugosity_measure_fields', f: builder %>
+          <% end %>
+        </div>
+      </fieldset>
       <%= f.fields_for :invert_belt do |builder| %>
         <%= render 'invert_belt_fields', f: builder %>
       <% end %>
@@ -102,24 +110,6 @@
       <% end %>
     </div>
   </div>
-
-
-  <div class="row">
-    <div class="span9 rugosityMeasure">
-      <fieldset>
-        <legend> Rugosity Measurement </legend>
-        <div>
-          <%= f.fields_for :rugosity_measure do |builder| %>
-            <%= render 'rugosity_measure_fields', f: builder %>
-          <% end %>
-        </div>
-      </fieldset>
-    </div>
-  </div>
-
-
-
-
 </div>
 
   <div class="actions">

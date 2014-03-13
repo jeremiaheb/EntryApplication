@@ -6,6 +6,7 @@ $(function(){
     return;
   }
   
+  //$("#boat_log_date").datepicker("setDate", new Date());
   $("#boat_log_date").datepicker({
     format: 'yyyy-mm-dd',
     autoclose: true

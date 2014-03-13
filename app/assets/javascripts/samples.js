@@ -202,7 +202,7 @@ $(function(){
     });
        
     if ( $('#animals').find('input:visible.error').length > 0 ) {
-      $('.validateIcon').prepend('<img src="/assets/cross.png"/>');
+      $('.validateIcon').prepend('<img src="/assets/cross.png" />');
     } else { 
       $('.validateIcon').prepend('<img src="/assets/check.png" />'); 
       $('#submitButton').attr('disabled', false);
@@ -228,7 +228,10 @@ $(function(){
       }
     });
     
-    $("#sample_sample_date").datepicker({format: 'yyyy-mm-dd'});
+    $("#sample_sample_date").datepicker({
+      format: 'yyyy-mm-dd',
+      autoclose: true
+    });
     $("#sample_dive_begin_time").timeEntry({ show24Hours: true });
     $("#sample_dive_end_time").timeEntry({ show24Hours: true });
     $("#sample_sample_begin_time").timeEntry({ show24Hours: true });

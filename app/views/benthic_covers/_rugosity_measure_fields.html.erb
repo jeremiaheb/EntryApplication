@@ -1,21 +1,21 @@
 <div class="span3">
   <fieldset>
     <div class="control-group">
-      <label class="control-label">Min Depth</label>
+      <label class="control-label">Min Depth(ft)</label>
       <div class="controls">
         <%= f.text_field :min_depth %>
       </div>
     </div>
 
     <div class="control-group">
-      <label class="control-label">Max Depth</label>
+      <label class="control-label">Max Depth(ft)</label>
       <div class="controls">
         <%= f.text_field :max_depth %>
       </div>
     </div>
 
     <div class="control-group">
-      <label class="control-label">Max Vert. Height</label>
+      <label class="control-label">Max Vert. Height(m)</label>
       <div class="controls">
         <%= f.text_field :max_vert_height %>
       </div>
@@ -27,21 +27,21 @@
 <div class="span3">
   <fieldset>
     <div class="control-group">
-      <label class="control-label"> &lt0.2m </label>
+      <label class="control-label"> 0 - 19cm </label>
       <div class="controls">
         <%= f.text_field :cnt_less_than_20%>
       </div>
     </div>
 
     <div class="control-group">
-      <label class="control-label">0.2 - &lt0.5m</label>
+      <label class="control-label"> 20 - 49cm </label>
       <div class="controls">
         <%= f.text_field :cnt_20_less_than_50 %>
       </div>
     </div>
 
     <div class="control-group">
-      <label class="control-label">0.5 - &lt1.0m</label>
+      <label class="control-label"> 50 - 99cm </label>
       <div class="controls">
         <%= f.text_field :cnt_50_less_than_100 %>
       </div>
@@ -53,21 +53,21 @@
 <div class="span2">
   <fieldset>
     <div class="control-group">
-      <label class="control-label"> 1.0 - &lt1.5m </label>
+      <label class="control-label"> 100 - 149cm </label>
       <div class="controls">
         <%= f.text_field :cnt_100_less_than_150%>
       </div>
     </div>
 
     <div class="control-group">
-      <label class="control-label">1.5 - &lt2.0m</label>
+      <label class="control-label"> 150 - 199cm </label>
       <div class="controls">
         <%= f.text_field :cnt_150_less_than_200 %>
       </div>
     </div>
 
     <div class="control-group">
-      <label class="control-label"> &gt2.0m </label>
+      <label class="control-label"> &ge; 200cm </label>
       <div class="controls">
         <%= f.text_field :cnt_greater_than_200 %>
       </div>

@@ -3,14 +3,14 @@
         <div class="control-group">
           <label class="control-label">Diver</label>
           <div class="controls">
-            <%= object.collection_select :diver_id, Diver.order(:diver_name).all, :id, :diver_name, { :selected => current_diver.id, :include_blank => "" }%><br />
+            <%= object.collection_select :diver_id, Diver.active_divers.order(:diver_name).all, :id, :diver_name, { :selected => current_diver.id, :include_blank => "" }%><br />
           </div>
         </div>
 <% else %>
         <div class="control-group">
           <label class="control-label">Diver</label>
           <div class="controls">
-            <%= object.collection_select :diver_id, Diver.order(:diver_name).all, :id, :diver_name, { :include_blank => "" }%><br />
+            <%= object.collection_select :diver_id, Diver.active_divers.order(:diver_name).all, :id, :diver_name, { :include_blank => "" }%><br />
           </div>
         </div>
 <% end %>

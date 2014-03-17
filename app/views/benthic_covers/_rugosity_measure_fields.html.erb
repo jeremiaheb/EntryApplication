@@ -23,26 +23,26 @@
   </fieldset>
 </div>
 
-<div class="span3">
+<div class="span3 rugosityCategories">
   <fieldset>
     <div class="control-group">
       <label class="control-label"> 0 - 19cm </label>
       <div class="controls">
-        <%= f.text_field :cnt_less_than_20%>
+        <%= f.text_field :cnt_less_than_20, { class: 'RugosityCat' } %>
       </div>
     </div>
 
     <div class="control-group">
       <label class="control-label"> 20 - 49cm </label>
       <div class="controls">
-        <%= f.text_field :cnt_20_less_than_50 %>
+        <%= f.text_field :cnt_20_less_than_50, { class: 'RugosityCat' } %>
       </div>
     </div>
 
     <div class="control-group">
       <label class="control-label"> 50 - 99cm </label>
       <div class="controls">
-        <%= f.text_field :cnt_50_less_than_100 %>
+        <%= f.text_field :cnt_50_less_than_100, { class: 'RugosityCat' } %>
       </div>
     </div>
 
@@ -52,22 +52,30 @@
     <div class="control-group">
       <label class="control-label"> 100 - 149cm </label>
       <div class="controls">
-        <%= f.text_field :cnt_100_less_than_150%>
+        <%= f.text_field :cnt_100_less_than_150, { class: 'RugosityCat' }%>
       </div>
     </div>
 
     <div class="control-group">
       <label class="control-label"> 150 - 199cm </label>
       <div class="controls">
-        <%= f.text_field :cnt_150_less_than_200 %>
+        <%= f.text_field :cnt_150_less_than_200, { class: 'RugosityCat' } %>
       </div>
     </div>
 
     <div class="control-group">
       <label class="control-label"> &ge; 200cm </label>
       <div class="controls">
-        <%= f.text_field :cnt_greater_than_200 %>
+        <%= f.text_field :cnt_greater_than_200, { class: 'RugosityCat' } %>
       </div>
     </div>
+
+    <div class="control-group">
+      <label class="control-label"> total </label>
+      <div class="controls">
+        <%= text_field_tag "RugosityTotalDisplay", "0", :disabled => true %>
+      </div>
+    </div>
+
   </fieldset>
 </div>

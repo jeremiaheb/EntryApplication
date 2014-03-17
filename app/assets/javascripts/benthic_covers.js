@@ -24,6 +24,21 @@ $(function(){
   $(document).on('nested:fieldAdded', function(event){
     event.field.find(".coverCategory").select2();
   });
+
+
+    function getRugosityTotals() {
+      var $rugosityTotals = 0;
+        $(".rugosityCategories").find(".RugosityCat").each(function(){
+          $rugosityTotals += parseInt($(this).val());
+        });
+        console.log($rugosityTotals);
+      $("#RugosityTotalDisplay").val($rugosityTotals);
+    };
+
+    getRugosityTotals();
+    $('.RugosityCat').change(function(){
+      getRugosityTotals();
+    });
   
     function getCoverTotals() {
       var $coverTotals = 0;

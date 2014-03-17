@@ -8,6 +8,9 @@ $(function(){
   }
 
 
+  if ( $('body').hasClass('new') ) {
+    $("#coral_demographic_sample_date").datepicker("setDate", new Date());
+  };
   $("#coral_demographic_sample_date").datepicker({
     format: 'yyyy-mm-dd',
     autoclose: true

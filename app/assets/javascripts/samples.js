@@ -227,7 +227,11 @@ $(function(){
         $(".add_nested_fields").trigger("click");
       }
     });
-    
+   
+    if ( $('body').hasClass('new') ) {
+      $("#sample_sample_date").datepicker("setDate", new Date());
+    };
+
     $("#sample_sample_date").datepicker({
       format: 'yyyy-mm-dd',
       autoclose: true

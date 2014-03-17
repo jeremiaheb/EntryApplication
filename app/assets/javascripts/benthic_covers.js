@@ -10,13 +10,14 @@ $(function(){
     return;
   }
   
-  if ( $('body').hasClass('new') ) {
-    $("#benthic_cover_sample_date").datepicker("setDate", new Date());
-  };
   $("#benthic_cover_sample_date").datepicker({
     format: 'yyyy-mm-dd',
     autoclose: true
   });
+
+  if ( $('body').hasClass('new') ) {
+    $("#benthic_cover_sample_date").datepicker("setDate", new Date());
+  };
 
   $("#benthic_cover_sample_begin_time").timeEntry({ show24Hours: true });
 

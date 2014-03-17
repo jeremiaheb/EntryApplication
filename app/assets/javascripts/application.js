@@ -57,6 +57,8 @@ $(function(){
         "sPaginationType": "bootstrap"
     } );
 
-
+$(document).ready(function(){
+    $('form').attr('autocomplete', 'off');
+});
 
 });

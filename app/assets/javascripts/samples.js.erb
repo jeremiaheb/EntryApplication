@@ -202,9 +202,9 @@ $(function(){
     });
        
     if ( $('#animals').find('input:visible.error').length > 0 ) {
-      $('.validateIcon').prepend('<img src="/assets/cross.png" />');
+      $('.validateIcon').prepend('<img src= <%= asset_path('cross.png') %> />');
     } else { 
-      $('.validateIcon').prepend('<img src="/assets/check.png" />'); 
+      $('.validateIcon').prepend('<img src= <%= asset_path('check.png') %> />'); 
       $('#submitButton').attr('disabled', false);
     }
   });

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140313140254) do
+ActiveRecord::Schema.define(version: 20140324114121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -216,11 +216,42 @@ ActiveRecord::Schema.define(version: 20140313140254) do
     t.integer  "sand_percentage"
     t.integer  "hardbottom_percentage"
     t.integer  "rubble_percentage"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.float    "water_temp"
     t.string   "current"
     t.integer  "boatlog_manager_id"
+    t.integer  "substrate_max_depth"
+    t.integer  "substrate_min_depth"
+    t.float    "hard_verticle_relief"
+    t.float    "soft_verticle_relief"
+    t.integer  "hard_relief_cat_0"
+    t.integer  "hard_relief_cat_1"
+    t.integer  "hard_relief_cat_2"
+    t.integer  "hard_relief_cat_3"
+    t.integer  "hard_relief_cat_4"
+    t.integer  "soft_relief_cat_0"
+    t.integer  "soft_relief_cat_1"
+    t.integer  "soft_relief_cat_2"
+    t.integer  "soft_relief_cat_3"
+    t.integer  "soft_relief_cat_4"
+    t.integer  "sand_bare"
+    t.integer  "sand_macro_algae"
+    t.integer  "sand_seagrass"
+    t.integer  "sand_sponge"
+    t.string   "sand_pcov_other1_lab"
+    t.string   "sand_pcov_other2_lab"
+    t.integer  "sand_pcov_other1"
+    t.integer  "sand_pcov_other2"
+    t.integer  "hardbottom_algal_turf"
+    t.integer  "hardbottom_macro_algae"
+    t.integer  "hardbottom_live_coral"
+    t.integer  "hardbottom_octocoral"
+    t.integer  "hardbottom_sponge"
+    t.string   "hard_pcov_other1_lab"
+    t.string   "hard_pcov_other2_lab"
+    t.integer  "hard_pcov_other1"
+    t.integer  "hard_pcov_other2"
   end
 
   create_table "station_logs", force: true do |t|

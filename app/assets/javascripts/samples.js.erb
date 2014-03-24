@@ -50,6 +50,7 @@ $(function(){
 
     var should_display_species = new Array();
     var all_totals_equal_hundred = new Boolean();
+    var errorCount = $('#substrateSection :input.error').length;
 
     if ( $("#sample_sand_percentage").val() > 0 && $("#sample_hardbottom_percentage").val() > 0 && $("#hard_relief_total").val() == 100 && $("#soft_relief_total").val() == 100 && $("#biotic_percentage_hardbottom_total").val() == 100 && $("#biotic_percentage_sand_total").val() == 100 &&  $("#abiotic_percentage_total").val() == 100 ){
       all_totals_equal_hundred = true;
@@ -70,7 +71,7 @@ $(function(){
     };
     });
 
-    if ( should_display_species.length == 0 && all_totals_equal_hundred == true)
+    if ( should_display_species.length == 0 && all_totals_equal_hundred == true && errorCount == 0)
     { 
       $(".changeSection option[value='speciesSection']").removeAttr("disabled");
       $('#gotoSpecies').attr('disabled', false);
@@ -147,10 +148,12 @@ $(function(){
 
   $('#sample_hard_verticle_relief').on('focusout', function(){
     disable_hard_surface_relief_coverage();
+    show_or_hide_species();
   });  
 
   $('#sample_soft_verticle_relief').on('focusout', function(){
     disable_soft_surface_relief_coverage();
+    show_or_hide_species();
   });  
 
   function disable_biotic_perc_sand(){
@@ -204,7 +207,7 @@ $(function(){
       total += parseFloat( this );
     });
 
-    // If total is greater than 100 then flag it by add a red background.
+    // If total is gr)ater than 100 then flag it by add a red background.
     if ( total != 100 )
     {
       $( '#' + id_to_display_total).removeClass('one_hundred_ok_flag');
@@ -227,8 +230,9 @@ $(function(){
   calculate_totals( 'hard_relief', 'hard_relief_total' );
 
   // Calculate total for 'surface_hard' on change
-  $('#sample_hard_verticle_relief').change(function(){
+  $('#sample_hard_verticle_relief').on('focusout', function(){
     calculate_totals( 'hard_relief', 'hard_relief_total' );
+    $('.hard_relief').trigger('focusout');
   });
   $('.hard_relief').focusout(function(){
     calculate_totals( 'hard_relief', 'hard_relief_total' );
@@ -238,8 +242,9 @@ $(function(){
   calculate_totals('soft_relief', 'soft_relief_total' );
 
   // Calculate total for 'surface_soft' on change
-  $('#sample_soft_verticle_relief').change(function(){
+  $('#sample_soft_verticle_relief').on('focusout', function(){
     calculate_totals( 'soft_relief', 'soft_relief_total' );
+    $('.soft_relief').trigger('focusout');
   });
   $('.soft_relief').focusout(function(){
     calculate_totals( 'soft_relief', 'soft_relief_total' );

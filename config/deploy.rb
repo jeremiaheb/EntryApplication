@@ -1,6 +1,6 @@
 require 'bundler/capistrano'
 load 'deploy/assets'
-set :application, "entryApplication"
+set :application, "EntryApplication"
 set :repository,  "https://github.com/jeremiaheb/EntryApplication.git"
 
 set :scm, :git

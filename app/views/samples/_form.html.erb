@@ -5,6 +5,7 @@
 
 <select class="changeSection" tabindex="1">
   <option value="sampleSection">Sample Section</option>
+  <option value="substrateSection">Substrate Section</option>
   <option value="speciesSection">Species Section</option>
 </select>
 <div class='formContainer'>
@@ -108,7 +109,7 @@
             <%= f.text_field :water_temp, { :class => 'tab_1', :tabindex => "1", :autocomplete => :off } %>
           </div>
         </div>
-
+     
         <div class="control-group">
           <label class="control-label">Current</label>
           <div class="controls">
@@ -130,10 +131,72 @@
           </div>
         </div>
 
-      <%= render "abiotic_footprint", :object => f %>
     </div>
   </div>
-    <button type="button" class="btn gotoButton" id="gotoSpecies" disabled>Go To Species</button>
+    <button type="button" class="btn gotoButton" id="gotoSubstrate" disabled>Go To Substrate</button>
+</div>
+
+<div id="substrateSection" class="sectionDiv">
+  <div class='section_2'>
+    <div id='section_2_part_1'>
+      
+      <fieldset id="slope">
+        <legend> Substrate Slope </legend>
+        <em>
+        <div class="control-group">
+          <label class="control-label">Max Substrate Depth (ft)</label>
+          <div class="controls">
+            <%= f.text_field :substrate_max_depth, {:class => "tab_2", :tabindex => "1", :autocomplete => :off } %>
+          </div>
+        </div>
+          
+        <div class="control-group">
+          <label class="control-label">Min Substrate Depth (ft)</label>
+          <div class="controls">
+            <%= f.text_field :substrate_min_depth, {:class => "tab_2", :tabindex => "1", :autocomplete => :off } %>
+          </div>
+        </div>
+      </em>
+      </fieldset>
+      
+     
+      <fieldset id="vertRelief">
+        <legend> Max Verticle Relief </legend>
+        <em>
+        <div class="control-group">
+          <label class="control-label">Hard Substrate (m)</label>
+          <div class="controls">
+            <%= f.text_field :hard_verticle_relief, {:class => "tab_2", :tabindex => "1", :autocomplete => :off } %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Soft Substrate (m)</label>
+          <div class="controls">
+            <%= f.text_field :soft_verticle_relief, {:class => "tab_2", :tabindex => "1", :autocomplete => :off } %>
+          </div>
+        </div>
+      </em>
+      </fieldset>
+      
+      <%= render "surface_relief_coverage", :object => f %>
+    
+    </div>
+
+    <div id='section_2_part_2'>
+      <%= render "abiotic_footprint", :object => f %>
+    </div>
+
+    <div id='section_2_part_3'>
+      <%= render "biotic_cover_sand", :object => f %>
+    </div>
+
+    <div id='section_2_part_4'>
+      <%= render "biotic_cover_hardbottom", :object => f %>
+    </div>
+
+  </div>
+    <button type="button" class="btn gotoButton" id="gotoSpecies" disabled tabindex="13">Go To Species</button>
 </div>
 
 <div id="speciesSection" class="sectionDiv">
@@ -175,5 +238,5 @@
 <% end %>
 </div>
 <script>
-  var animal_info = <%= raw Animal.all.to_json %>;
+  var animal_info = <%= raw Animal.all.to_json %>
 </script>

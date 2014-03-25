@@ -22,7 +22,7 @@ gem 'devise'
 gem 'cancan'
 gem 'prawn', :git => 'git://github.com/prawnpdf/prawn.git'
 gem 'axlsx_rails'
-gem 'capistrano'
+gem 'capistrano', '=2.15.4'
 
 group :production do
   gem 'rails_12factor'

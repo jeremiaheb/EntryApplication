@@ -23,6 +23,7 @@ gem 'cancan'
 gem 'prawn', :git => 'git://github.com/prawnpdf/prawn.git'
 gem 'axlsx_rails'
 gem 'capistrano', '=2.15.4'
+gem "net-ssh", "~> 2.7.0"
 
 group :production do
   gem 'rails_12factor'

@@ -55,5 +55,11 @@ module EntryApplication
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     
+    #This sets relative root to my.domain.com/subURI for production only so that
+    #assets are served from correct path
+    if Rails.env.production?
+    config.action_controller.relative_url_root = "/RVC_Data_Entry"
+    end
+
   end
 end

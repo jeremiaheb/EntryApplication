@@ -18,5 +18,4 @@ class ApplicationController < ActionController::Base
       #results
     #end
   #end
-
 end

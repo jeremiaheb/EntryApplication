@@ -11,11 +11,12 @@ class ApplicationController < ActionController::Base
     redirect_to root_url
   end
 
-  if Rails.env.production?  
-    def url_for(options = nil)
-      results = super(options)
-      results.insert(0, "/RVC_Data_Entry") unless results.match /^\/RVC_Data_Entry/
-      results
-    end
-  end
+  #if Rails.env.production?  
+    #def url_for(options = nil)
+      #results = super(options)
+      #results.insert(0, "/RVC_Data_Entry") unless results.match /^\/RVC_Data_Entry/
+      #results
+    #end
+  #end
+
 end

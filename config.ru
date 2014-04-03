@@ -1,6 +1,4 @@
 # This file is used by Rack-based servers to start the application.
 
 require ::File.expand_path('../config/environment',  __FILE__)
-map ENV['RAILS_RELATIVE_URL_ROOT'] || "/RVC_Data_Entry" do
-  run EntryApplication::Application
-end
+run EntryApplication::Application

@@ -69,7 +69,7 @@ class AnimalsController < ApplicationController
 
     respond_to do |format|
       if @animal.update_attributes(params[:animal])
-        format.html { redirect_to action: 'index', notice: 'Animal was successfully updated.' }
+        format.html { redirect_to animal_path(@animal), notice: 'Animal was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

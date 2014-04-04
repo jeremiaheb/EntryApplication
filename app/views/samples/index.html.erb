@@ -13,7 +13,7 @@
        </thead>
        <tbody>
       <% @samples.each do |sample| %>
-        <tr data-link=" <%= sample_path(sample.id) %> ">
+        <tr data-link=" <%= sample_path(sample) %> ">
           <td><%= sample.diver_samples.primary.first.diver.diver_name %></td>
           <td class='fieldid_check'><%= sample.field_id %></td>
           <td><%= sample.sample_date %></td>

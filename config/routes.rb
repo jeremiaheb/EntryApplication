@@ -1,4 +1,5 @@
 EntryApplication::Application.routes.draw do
+namespace "RVC_Data_Entry" do
   get "dashboard/show"
 
   resources :boat_logs
@@ -42,6 +43,7 @@ EntryApplication::Application.routes.draw do
 
   get 'samples/:id/proofing_template' => 'samples#proofing_template'
 
+end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

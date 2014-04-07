@@ -1,5 +1,4 @@
 EntryApplication::Application.routes.draw do
-scope "RVC_Data_Entry" do
   get "dashboard/show"
 
   resources :boat_logs
@@ -42,7 +41,6 @@ scope "RVC_Data_Entry" do
   resources :animals
 
   get 'samples/:id/proofing_template' => 'samples#proofing_template'
-end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -27,3 +27,5 @@
 #end
 
 
+EntryApplication::Application.config.relative_url_root = '/RVC_Data_Entry'
+

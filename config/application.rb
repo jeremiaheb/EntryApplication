@@ -57,9 +57,9 @@ module EntryApplication
     
     #This sets relative root to my.domain.com/subURI for production only so that
     #assets are served from correct path
-    #if Rails.env.production?
-    #config.action_controller.relative_url_root = "/RVC_Data_Entry"
-    #end
+    if Rails.env.production?
+    config.action_controller.relative_url_root = "/RVC_Data_Entry"
+    end
 
   end
 end

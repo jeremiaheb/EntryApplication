@@ -19,5 +19,10 @@ class ApplicationController < ActionController::Base
       #results
     #end
   #end
+  
+  #def default_url_options
+    #{ script_name: '/sefsc.noaa.gov' }
+    #binding.pry
+  #end
 
 end

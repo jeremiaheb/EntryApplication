@@ -62,7 +62,6 @@
         <h6>My coral demographic samples</h6>
       </div>
     </div>
-
     <% if diver_signed_in? && current_diver.role == "admin" %>
       <%= render "admin" %>
     <% elsif diver_signed_in? && current_diver.role == 'manager' %>

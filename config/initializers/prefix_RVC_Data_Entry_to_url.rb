@@ -18,3 +18,10 @@ ActionView::RoutingUrlFor.module_eval do
   end
 end
 
+#ActionView::RoutingUrlFor.module_eval do
+    #def url_for(options = nil)
+      #results = super(options)
+      #results.insert(0, "/RVC_Data_Entry") unless results.match /^\/RVC_Data_Entry/
+      #results
+    #end
+#end

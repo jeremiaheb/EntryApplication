@@ -285,10 +285,13 @@ $(function(){
         var $radioTimeSeenVal = $('.time_seen_button[class*="active"]').val();
 
         $('input#' + $thisID + '_time_seen').attr('value', $radioTimeSeenVal );
+        $('input#' + $thisID + '_time_seen').trigger('change');
         $('input#' + $thisID + '_number_individuals').attr('class', 'timeSeen_' + $radioTimeSeenVal);
         $('input#' + $thisID + '_average_length').attr('class', 'timeSeen_' + $radioTimeSeenVal);
         $('input#' + $thisID + '_min_length').attr('class', 'timeSeen_' + $radioTimeSeenVal);
         $('input#' + $thisID + '_max_length').attr('class', 'timeSeen_' + $radioTimeSeenVal);
+
+
       });  
   };
 
@@ -835,6 +838,7 @@ $(function(){
       $('.validateIcon').empty();
       $('#submitButton').attr('disabled', true);
     });
+
 
     $('#animals').change(function(){
         $('input.error').each(function(){

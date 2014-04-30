@@ -46,6 +46,7 @@ describe BoatlogManager do
     it "should have correct agency_name" do
       expect(boatlog_manager.agency_name).to eq("FWC/Johnson")
     end
+  end 
 
   describe 'divers_responsible_for' do
     let!(:boatlog_manager) { FactoryGirl.create(:boatlog_manager) }
@@ -137,12 +138,9 @@ describe BoatlogManager do
        FactoryGirl.create(:diver_sample, :diver => diver, :primary_diver => false, :sample => samples[1]),
        FactoryGirl.create(:diver_sample, :primary_diver => true, :sample => samples[2])]
     end
-
     it "should return correct count of primary diver samples" do
       expect(boatlog_manager.samples_count_for_diver(diver)).to eq(2)
     end
-  end
-
   end
 
 end

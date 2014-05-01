@@ -15,6 +15,7 @@
  *= require dataTables/jquery.dataTables.bootstrap
  *= require select2
  *= require_tree .
+ *= require blueimp-gallery-all
 */
 
 #substrateSection, #speciesSection {

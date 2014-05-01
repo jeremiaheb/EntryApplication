@@ -22,6 +22,7 @@
 //= require select2
 //= require_tree ../../../vendor/assets/javascripts
 //= require_tree .
+//= require blueimp-gallery-all
 //
 
 // Set up our EA namespace for our functions

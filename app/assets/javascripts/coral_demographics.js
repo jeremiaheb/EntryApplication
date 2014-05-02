@@ -160,6 +160,11 @@ $(function(){
           required: true
         });
       });
+      $('[name*="disease"]').each(function(){
+        $(this).rules('add', {
+          required: true
+        });
+      });
 
     };
 

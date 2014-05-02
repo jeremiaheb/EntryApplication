@@ -44,7 +44,8 @@ wb.add_worksheet(name: "DemoCorals") do |demo_sheet|
                       'HEIGHT',
                       'OLD_MORT',
                       'RECENT_MORT',
-                      'BLEACH_CONDITION' ]
+                      'BLEACH_CONDITION',
+                      'DISEASE' ]
   @coral_demographics.each do |c_demo|
     c_demo.demographic_corals.each do |d_coral|
       demo_sheet.add_row [ d_coral.coral_demographic.msn,         
@@ -54,7 +55,8 @@ wb.add_worksheet(name: "DemoCorals") do |demo_sheet|
                           d_coral.height,     
                           d_coral.old_mortality,     
                           d_coral.recent_mortality,     
-                          d_coral.bleach_condition ],
+                          d_coral.bleach_condition,
+                          d_coral.disease ],
                           :types => [ :string ]
     end
   end

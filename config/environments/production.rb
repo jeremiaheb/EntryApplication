@@ -1,7 +1,7 @@
 EntryApplication::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
-  config.action_mailer.default_url_options = { :host => '199.242.233.57:8014' }
+  config.action_mailer.default_url_options = { :host => 'www.sefsc.noaa.gov' }
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.perform_deliveries = true
     config.action_mailer.raise_delivery_errors = true

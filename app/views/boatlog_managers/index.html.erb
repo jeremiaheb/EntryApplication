@@ -15,7 +15,7 @@
     <td><%= boatlog_manager.agency %></td>
     <td><%= boatlog_manager.firstname %></td>
     <td><%= boatlog_manager.lastname %></td>
-    <td><%= link_to 'Destroy', boatlog_manager, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Destroy', boatlog_manager, data: { confirm: 'Are you sure?' }, method: :delete %></td>
   </tr>
 <% end %>
 </tbody>

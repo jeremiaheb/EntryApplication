@@ -26,6 +26,6 @@
 </div>
 <div class="showActions" >
  <%= button_to('Edit Boatlog', edit_boat_log_path(@boat_log), :method => "get", :class => 'btn btn-large btn-primary showAction') %>
- <%= button_to("Delete Boatlog", @boat_log, confirm: 'Are you sure?', method: :delete, :class => 'btn btn-large btn-primary showAction') %>
+ <%= button_to("Delete Boatlog", @boat_log, data: { confirm: 'Are you sure?' }, method: :delete, :class => 'btn btn-large btn-primary showAction') %>
  <%= button_to('Boatlog List', boat_logs_path, :method => "get", :class => 'btn btn-large btn-primary showAction') %>
 </div>

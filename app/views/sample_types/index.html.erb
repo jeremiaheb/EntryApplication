@@ -13,7 +13,7 @@
     <td><%= sample_type.sample_type_description %></td>
     <td><%= link_to 'Show', sample_type %></td>
     <td><%= link_to 'Edit', edit_sample_type_path(sample_type) %></td>
-    <td><%= link_to 'Destroy', sample_type, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Destroy', sample_type, data: { confirm: 'Are you sure?' }, method: :delete %></td>
   </tr>
 <% end %>
 </table>

@@ -16,7 +16,7 @@
           <td><%= animal.scientific_name %> </td>
           <td><%= animal.common_name %> </td>
           <td><%= link_to 'Edit', edit_animal_path(animal) %></td>
-          <td><%= link_to 'Destroy', animal, confirm: 'Are you sure?', method: :delete %></td>
+          <td><%= link_to 'Destroy', animal, data: { confirm: 'Are you sure?' }, method: :delete %></td>
         </tr>
       <% end %>
       </tbody>

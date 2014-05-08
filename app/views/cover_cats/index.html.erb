@@ -16,7 +16,7 @@
           <td><%= cover_cat.code %> </td>
           <td><%= cover_cat.name %> </td>
           <td><%= link_to 'Edit', edit_cover_cat_path(cover_cat) %></td>
-          <td><%= link_to 'Destroy', cover_cat, confirm: 'Are you sure?', method: :delete %></td>
+          <td><%= link_to 'Destroy', cover_cat, data: { confirm: 'Are you sure?' }, method: :delete %></td>
         </tr>
       <% end %>
       </tbody>

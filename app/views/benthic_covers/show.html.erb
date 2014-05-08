@@ -42,6 +42,6 @@
 
 <div class="showActions" >
  <%= button_to('Edit LPI', edit_benthic_cover_path(@benthic_cover), :method => "get", :class => 'btn btn-large btn-primary showAction') %>
- <%= button_to("Delete LPI", @benthic_cover, confirm: 'Are you sure?', method: :delete, :class => 'btn btn-large btn-primary showAction') %>
+ <%= button_to("Delete LPI", @benthic_cover, data: { confirm: 'Are you sure?' }, method: :delete, :class => 'btn btn-large btn-primary showAction') %>
  <%= button_to('LPI List', benthic_covers_path, :method => "get", :class => 'btn btn-large btn-primary showAction') %>
 </div>

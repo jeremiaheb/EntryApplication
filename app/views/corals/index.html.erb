@@ -16,7 +16,7 @@
           <td><%= coral.code %> </td>
           <td><%= coral.scientific_name %> </td>
           <td><%= link_to 'Edit', edit_coral_path(coral) %></td>
-          <td><%= link_to 'Destroy', coral, confirm: 'Are you sure?', method: :delete %></td>
+          <td><%= link_to 'Destroy', coral, data: { confirm: 'Are you sure?' }, method: :delete %></td>
         </tr>
       <% end %>
       </tbody>

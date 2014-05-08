@@ -19,7 +19,7 @@
           <td><%= diver.diver_name %></td>
           <td><%= diver.active %></td>
           <td><%= link_to 'Edit', edit_diver_path(diver) %></td>
-          <td><%= link_to 'Destroy', diver, confirm: 'Are you sure?', method: :delete %></td>
+          <td><%= link_to 'Destroy', diver, data: { confirm: 'Are you sure?' }, method: :delete %></td>
         </tr>
       <% end %>
       </tbody>

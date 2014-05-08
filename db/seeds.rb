@@ -37,14 +37,14 @@ puts "Seeding database with data"
   #end
 #end
 
-#Animal.delete_all
-#Animal.connection.execute( 'ALTER SEQUENCE animals_id_seq RESTART WITH 1' )
-#open("#{Rails.root}/db/SupportData/RVC_Species_List.csv") do |animals|
-  #animals.read.each_line do |animal|
-    #SppCode, ScientificName, CommonName, MaxSize, MinSize, MaxNumber = animal.chomp.split(",")
-    #Animal.create( :species_code => SppCode, :scientific_name => ScientificName, :common_name => CommonName, :max_size => MaxSize, :min_size => MinSize, :max_number => MaxNumber )
-  #end
-#end
+Animal.delete_all
+Animal.connection.execute( 'ALTER SEQUENCE animals_id_seq RESTART WITH 1' )
+open("#{Rails.root}/db/SupportData/RVC_Species_List.csv") do |animals|
+  animals.read.each_line do |animal|
+    SppCode, ScientificName, CommonName, MaxSize, MinSize, MaxNumber = animal.chomp.split(",")
+    Animal.create( :species_code => SppCode, :scientific_name => ScientificName, :common_name => CommonName, :max_size => MaxSize, :min_size => MinSize, :max_number => MaxNumber )
+  end
+end
 
 #Coral.delete_all
 #Coral.connection.execute( 'ALTER SEQUENCE corals_id_seq RESTART WITH 1' )

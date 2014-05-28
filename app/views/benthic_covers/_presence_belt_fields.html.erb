@@ -1,6 +1,13 @@
 
 <fieldset>
   <legend> Presence/Absence </legend>
+  
+        <div class="control-group">
+          <label class="control-label">A.cervicornis</label>
+          <div class="controls">
+            <%= f.select( :a_cervicornis,{ "Absent" => 0, "Present" => 1, "Did Not Look" => 3 } , {:include_blank => ""} ) %>
+          </div>
+        </div>
 
         <div class="control-group">
           <label class="control-label">A.palmata</label>
@@ -8,11 +15,11 @@
             <%= f.select( :a_palmata,{ "Absent" => 0, "Present" => 1, "Did Not Look" => 3 } , {:include_blank => ""} ) %>
           </div>
         </div>
-
+        
         <div class="control-group">
-          <label class="control-label">A.cervicornis</label>
+          <label class="control-label">A.lamarcki</label>
           <div class="controls">
-            <%= f.select( :a_cervicornis,{ "Absent" => 0, "Present" => 1, "Did Not Look" => 3 } , {:include_blank => ""} ) %>
+            <%= f.select( :a_lamarcki,{ "Absent" => 0, "Present" => 1, "Did Not Look" => 3 } , {:include_blank => ""} ) %>
           </div>
         </div>
 
@@ -24,16 +31,9 @@
         </div>
 
         <div class="control-group">
-          <label class="control-label">M.ferox</label>
+          <label class="control-label">D.stokesii</label>
           <div class="controls">
-            <%= f.select( :m_ferox,{ "Absent" => 0, "Present" => 1, "Did Not Look" => 3 } , {:include_blank => ""} ) %>
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label class="control-label">A.lamarcki</label>
-          <div class="controls">
-            <%= f.select( :a_lamarcki,{ "Absent" => 0, "Present" => 1, "Did Not Look" => 3 } , {:include_blank => ""} ) %>
+            <%= f.select( :d_stokesii,{ "Absent" => 0, "Present" => 1, "Did Not Look" => 3 } , {:include_blank => ""} ) %>
           </div>
         </div>
 
@@ -45,6 +45,13 @@
         </div>
 
         <div class="control-group">
+          <label class="control-label"> M.faveolata </label>
+          <div class="controls">
+            <%= f.select( :m_faveolata,{ "Absent" => 0, "Present" => 1, "Did Not Look" => 3 } , {:include_blank => ""} ) %>
+          </div>
+        </div>
+    
+        <div class="control-group">
           <label class="control-label">M.franksi</label>
           <div class="controls">
             <%= f.select( :m_franksi,{ "Absent" => 0, "Present" => 1, "Did Not Look" => 3 } , {:include_blank => ""} ) %>
@@ -52,18 +59,11 @@
         </div>
 
         <div class="control-group">
-          <label class="control-label"> M.faveolata </label>
+          <label class="control-label">M.ferox</label>
           <div class="controls">
-            <%= f.select( :m_faveolata,{ "Absent" => 0, "Present" => 1, "Did Not Look" => 3 } , {:include_blank => ""} ) %>
+            <%= f.select( :m_ferox,{ "Absent" => 0, "Present" => 1, "Did Not Look" => 3 } , {:include_blank => ""} ) %>
           </div>
         </div>
 
-        <div class="control-group">
-          <label class="control-label">D.stokesii</label>
-          <div class="controls">
-            <%= f.select( :d_stokesii,{ "Absent" => 0, "Present" => 1, "Did Not Look" => 3 } , {:include_blank => ""} ) %>
-          </div>
-        </div>
-    
   
 </fieldset>

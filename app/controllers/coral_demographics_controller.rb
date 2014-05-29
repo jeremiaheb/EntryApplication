@@ -14,6 +14,7 @@ class CoralDemographicsController < ApplicationController
       @coral_demographics = current_diver.coral_demographics
     end
 
+    @proofing_coral_demographics = current_diver.diver_proofing_coral_demo
 
     respond_to do |format|
       format.html # index.html.erb
@@ -21,7 +22,7 @@ class CoralDemographicsController < ApplicationController
       format.xlsx
       format.pdf do 
 
-        pdf = CoralDemographicPdf.new(@coral_demographics)
+        pdf = CoralDemographicPdf.new(@proofing_coral_demographics)
         send_data pdf.render, filename: "#{current_diver.lastname}_CoralDemographicsReport.pdf",
                               type: "application/pdf"
       

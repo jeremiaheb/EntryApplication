@@ -34,6 +34,10 @@ class Diver < ActiveRecord::Base
     benthic_covers.order("sample_date")
   end
 
+  def diver_proofing_coral_demo
+    coral_demographics.order("sample_date")
+  end
+
   def whole_name
     "#{firstname} #{lastname}"
   end

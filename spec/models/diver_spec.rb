@@ -114,5 +114,22 @@ describe Diver do
     end
   end
 
+  describe "#diver_proofing_coral_demo" do
+    let!(:boatlog_manager) {FactoryGirl.create(:boatlog_manager)}
+    let!(:diver) {FactoryGirl.create(:diver)}
+    let!(:coral_demographic) do
+     [ FactoryGirl.create(:coral_demographic, :boatlog_manager => boatlog_manager, :diver => diver),
+       FactoryGirl.create(:coral_demographic, :boatlog_manager => boatlog_manager),
+      FactoryGirl.create(:coral_demographic, :boatlog_manager => boatlog_manager)]
+    end
+    let!(:coral_demographic_2) do
+     [ FactoryGirl.create(:coral_demographic, :diver => diver),
+       FactoryGirl.create(:coral_demographic, :diver => diver),
+      FactoryGirl.create(:coral_demographic) ]
+    end
+    it "should return correct count of covers" do
+      expect(diver.diver_proofing_coral_demo.count).to eq(3)
+    end
+  end
 
 end

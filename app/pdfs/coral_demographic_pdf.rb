@@ -10,7 +10,7 @@ class CoralDemographicPdf < Prawn::Document
   end
   
   def sample_head
-    data =  [ ["Boatlog/Manger:", "#{@coral_demographic.boatlog_manager.agency_name}", "Diver", "#{@coral_demographic.diver.diver_name}"]
+    data =  [ ["Diver", "#{@coral_demographic.diver.diver_name}", "Boatlog/Manger:", "#{@coral_demographic.boatlog_manager.agency_name}" ]
           ]
     table data, :cell_style => { :size => 8, :border_width => 0, :height => 17, :padding => 5 }
 

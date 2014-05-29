@@ -72,6 +72,7 @@ FactoryGirl.define do
      old_mortality          { 1 }
      recent_mortality       { 1 }
      bleach_condition       { 1 }
+     disease                { 1 }
   end
 
   factory :diver do

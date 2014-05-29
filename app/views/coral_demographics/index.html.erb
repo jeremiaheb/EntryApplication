@@ -26,4 +26,12 @@
   <div id="newSampleButton"> 
     <%= button_to('New Demo', new_coral_demographic_path, :method => "get", :class => 'btn btn-large btn-primary wrap')  %>   
   </div>
+  <div id="downloadSampleButton"> 
+    <%= button_to('Download Proofing Report (.pdf)', coral_demographics_path(format: "pdf"), :method => "get", :class => 'btn btn-small btn-primary')  %>   
+  </div>
+<% if !current_diver.diver? %>
+  <div id="downloadXLSXButton"> 
+    <%= button_to('Download Samples (.xlsx)', coral_demographics_path(format: "xlsx"), :method => "get", :class => 'btn btn-small btn-primary')  %>   
+  </div>
+<% end %>
 </div>

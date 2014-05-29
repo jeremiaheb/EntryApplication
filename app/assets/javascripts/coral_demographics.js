@@ -28,7 +28,7 @@ $(function(){
   function disable_fields_if_no_coral() {
     $(".coralSpecies").on('focusout', function(){
       $coralCat = $(this).find('span').text();
-      if ( $coralCat == "NOCORA" ) {
+      if ( $coralCat == "NO CORA" ) {
         $(this).closest("li").find(".coralSpeciesData").attr('disabled', true);
       }
     });
@@ -37,7 +37,7 @@ $(function(){
   function disable_fields_if_no_coral_on_load() {
     $(".coralSpecies").each(function(){
       $coralCat = $(this).find('span').text();
-      if ( $coralCat == "NOCORA" ) {
+      if ( $coralCat == "NO CORA" ) {
         $(this).closest("li").find(".coralSpeciesData").attr('disabled', true);
       }
     }); 

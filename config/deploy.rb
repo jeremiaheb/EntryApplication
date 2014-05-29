@@ -11,9 +11,9 @@ set :user, 'jeremiaheb'
 set :branch, :master
 set :rails_env, :production
 set :deploy_to, "/var/www/apps/#{application}"
-role :web, "199.242.231.80"                          # Your HTTP server, Apache/etc
-role :app, "199.242.231.80"                          # This may be the same as your `Web` server
-role :db,  "199.242.231.80", :primary => true # This is where Rails migrations will run
+role :web, "199.242.233.57"                          # Your HTTP server, Apache/etc
+role :app, "199.242.233.57"                          # This may be the same as your `Web` server
+role :db,  "199.242.233.57", :primary => true # This is where Rails migrations will run
 
 
 default_run_options[:pty] = true

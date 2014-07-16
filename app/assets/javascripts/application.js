@@ -58,8 +58,19 @@ $(function(){
         "sPaginationType": "bootstrap"
     } );
 
-$(document).ready(function(){
-    $('form').attr('autocomplete', 'off');
-});
+    $(document).ready(function(){
+      $('form').attr('autocomplete', 'off');
+
+      $('select').keypress(function(event) 
+        { return cancelBackspace(event) });
+      $('select').keydown(function(event) 
+        { return cancelBackspace(event) });
+    });
+
+    function cancelBackspace(event) {
+      if (event.keyCode == 8) {
+        return false;
+      }
+    }
 
 });

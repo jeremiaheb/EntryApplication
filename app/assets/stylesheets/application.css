@@ -411,14 +411,24 @@ input.timeSeen_3 {
 
 #downloadSampleButton {
   position: absolute;
+  width: 200px;
   left: 5px;
   top: 100px;
+  color: white !important;
+}
+
+#downloadSampleButton2 {
+  position: absolute;
+  width: 200px;
+  left: 5px;
+  top: 150px;
+  color: white !important;
 }
 
 #downloadXLSXButton {
   position: absolute;
   left: 5px;
-  top: 175px;
+  top: 250px;
 }
 .ActionBar {
   margin-right: 15px;

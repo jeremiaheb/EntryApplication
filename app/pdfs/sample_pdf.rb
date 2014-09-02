@@ -2,7 +2,7 @@ class SamplePdf < Prawn::Document
   
   def initialize(samples, output)
       super(margin: 2)
-      @output = output
+      @output_type = output
     samples.each do |sample|
       @sample = sample
       sample_head
@@ -22,9 +22,7 @@ class SamplePdf < Prawn::Document
     end
   end
 
-  def output_type
-    @output.to_str
-  end
+
 
   def sample_head
     data =  [ [],
@@ -157,16 +155,20 @@ class SamplePdf < Prawn::Document
  def spp_1_27
   [["", "Period", "Species", "N/Avg-Min-Max"]] + 
   @sample.sample.sample_animals[0..26].map.with_index do |spp, index|
-    [index + 1 , spp.time_seen, spp.animal.send(output_type), "%s / %s - %s - %s" % [spp.number_individuals, spp.try(:average_length), spp.try(:min_length), spp.try(:max_length)]]
+    report_line(index + 1, spp)
   end
  end
 
  def spp_28_54
   [["", "Period", "Species", "N/Avg-Min-Max"]] + 
   @sample.sample.sample_animals[27..@sample.sample.sample_animals.length].map.with_index do |spp, index|
-    [index + 28 , spp.time_seen, spp.animal.send(output_type), "%s / %s - %s - %s" % [spp.number_individuals, spp.try(:average_length), spp.try(:min_length), spp.try(:max_length)] ]
+    report_line(index + 28, spp)
   end 
  end
+
+ def report_line(index, spp)
+    [index , spp.time_seen, spp.animal.report_name(@output_type), "%s / %s - %s - %s" % [spp.number_individuals, spp.try(:average_length), spp.try(:min_length), spp.try(:max_length)] ]
+end
 
 
 end

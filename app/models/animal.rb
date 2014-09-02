@@ -17,5 +17,14 @@ class Animal < ActiveRecord::Base
     "#{species_code} __ #{common_name}"
   end
 
+  # Name to use when generating report
+  def report_name(name_type)
+    case name_type
+    when "common_name"
+      common_name
+    else
+      species_code
+    end
+  end
 
 end

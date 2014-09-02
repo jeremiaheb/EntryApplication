@@ -28,8 +28,13 @@
   </div>
   
   <div id="downloadSampleButton"> 
-    <%= button_to('Download Proofing Report (.pdf)', samples_path(format: "pdf", :type => "common_name"), :method => "get", :class => 'btn btn-small btn-primary')  %>   
+    <%= link_to('Download Proofing Report (Species Code)', samples_path(format: "pdf", fishtype: "species_code"), :method => "get", :class => 'btn btn-small btn-primary')  %>   
   </div>
+
+  <div id="downloadSampleButton2"> 
+    <%= link_to('Download Proofing Report (Common Name)', samples_path(format: "pdf", fishtype: "common_name"), :method => "get", :class => 'btn btn-small btn-primary')  %>   
+  </div>
+
 <% if !current_diver.diver? %>
   <div id="downloadXLSXButton"> 
     <%= button_to('Download Samples (.xlsx)', samples_path(format: "xlsx"), :method => "get", :class => 'btn btn-small btn-primary')  %>   

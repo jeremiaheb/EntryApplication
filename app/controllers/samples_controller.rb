@@ -20,15 +20,15 @@ class SamplesController < ApplicationController
 
     #@proofing_samples = current_diver.samples.merge(DiverSample.primary).order("sample_date") 
     @proofing_samples = current_diver.diver_proofing_samples
-
-
+    @output_type = params[:type]
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @samples }
       format.xlsx
-      format.pdf do 
+      format.pdf do
 
-        pdf = SamplePdf.new(@proofing_samples)
+        pdf = SamplePdf.new(@proofing_samples, @output_type)
         send_data pdf.render, filename: "#{current_diver.lastname}_ProofingReport.pdf",
                               type: "application/pdf"
       

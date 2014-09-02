@@ -1,7 +1,8 @@
 class SamplePdf < Prawn::Document
   
-  def initialize(samples)
+  def initialize(samples, output)
       super(margin: 2)
+      @output = output
     samples.each do |sample|
       @sample = sample
       sample_head
@@ -20,7 +21,11 @@ class SamplePdf < Prawn::Document
       start_new_page
     end
   end
-  
+
+  def output_type
+    @output.to_str
+  end
+
   def sample_head
     data =  [ [],
             ["Diver","#{@sample.diver.diver_name}","Date","#{@sample.sample.sample_date}","Field Number","#{@sample.sample.field_id}","Boatlog/Manger:", "#{@sample.sample.boatlog_manager.agency_name}"],
@@ -152,14 +157,14 @@ class SamplePdf < Prawn::Document
  def spp_1_27
   [["", "Period", "Species", "N/Avg-Min-Max"]] + 
   @sample.sample.sample_animals[0..26].map.with_index do |spp, index|
-    [index + 1 , spp.time_seen, spp.animal.species_code, "%s / %s - %s - %s" % [spp.number_individuals, spp.try(:average_length), spp.try(:min_length), spp.try(:max_length)]]
+    [index + 1 , spp.time_seen, spp.animal.send(output_type), "%s / %s - %s - %s" % [spp.number_individuals, spp.try(:average_length), spp.try(:min_length), spp.try(:max_length)]]
   end
  end
 
  def spp_28_54
   [["", "Period", "Species", "N/Avg-Min-Max"]] + 
   @sample.sample.sample_animals[27..@sample.sample.sample_animals.length].map.with_index do |spp, index|
-    [index + 28 , spp.time_seen, spp.animal.species_code, "%s / %s - %s - %s" % [spp.number_individuals, spp.try(:average_length), spp.try(:min_length), spp.try(:max_length)] ]
+    [index + 28 , spp.time_seen, spp.animal.send(output_type), "%s / %s - %s - %s" % [spp.number_individuals, spp.try(:average_length), spp.try(:min_length), spp.try(:max_length)] ]
   end 
  end
 

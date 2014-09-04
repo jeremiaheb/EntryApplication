@@ -34,7 +34,10 @@ class DashboardController < ApplicationController
     end
   end
   @data_by_divers.sort_by { |diver, data| diver }
+
  end
+ 
+
 
  protected
 

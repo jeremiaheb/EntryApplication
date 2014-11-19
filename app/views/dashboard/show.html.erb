@@ -69,7 +69,7 @@
       <% m = @boat_logs.first.boatlog_manager %>
       <% diverMissing = m.missing_samples_from_diver %>
       <% boatlogMissing = m.missing_samples_from_boatlog %>
-      <table class="table table-striped table-bordered table-condensed">
+      <table class="display table table-striped table-bordered table-condensed">
         <h6>These are in the boatlog but do not have a matching diver sample </h6>
         <thead>
           <tr>
@@ -89,7 +89,7 @@
       </table>
     </div>
     <div class="span5">
-      <table class="table table-striped table-bordered table-condensed">
+      <table class="display table table-striped table-bordered table-condensed">
         <h6>Diver has entered these but do not have matching Boatlog entry </h6>
         <thead>
           <tr>

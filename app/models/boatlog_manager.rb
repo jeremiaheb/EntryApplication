@@ -52,7 +52,26 @@ class BoatlogManager < ActiveRecord::Base
     boatlog_replicates_for_diver(diver).count
   end
 
+  def boatlog_diver_list
+    boat_logs.map(&:boatlog_divers).flatten(1)
+  end
   
+  def samples_diver_entered
+    divers_list = []
+    divers_responsible_for.map{ |d| samples_for_diver(d) }.flatten(1).each do |rep|
+
+      divers_list << [rep.sample_date, rep.field_id, rep.diver.diver_name ]
+    end
+    divers_list.sort_by { |e| e[0] }
+  end
+  
+  def missing_samples_from_diver
+    boatlog_diver_list - samples_diver_entered
+  end
+
+  def missing_samples_from_boatlog
+    samples_diver_entered - boatlog_diver_list
+  end
 
 end
 

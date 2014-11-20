@@ -32,10 +32,7 @@
     </div>  
   </div>
   <div class="row">
-    <div class="span2">
-      
-    </div>
-    <div class="span5">
+    <div class="span4">
       <table class="table table-striped table-bordered table-condensed">
         <thead>
           <tr>
@@ -58,14 +55,11 @@
         </tbody>
       </table>
     </div>
-    <div class="span2">
-      
-    </div>
-  </div>
 
-  <input type="button" class="btn btn-primary" data-toggle="collapse" data-target=".missingRecords" value="Toggle Button">
-  <div class="row missingRecords collapse out">
-    <div class="span5">
+
+  <input type="button" class="btn btn-primary" data-toggle="collapse" data-target=".missingRecords" value="Crosscheck Boatlog vs. Samples">
+  <div class="span8 missingRecords collapse out">
+    <div class="span3">
       <% m = @boat_logs.first.boatlog_manager %>
       <% diverMissing = m.missing_samples_from_diver %>
       <% boatlogMissing = m.missing_samples_from_boatlog %>
@@ -88,7 +82,7 @@
         </tbody>
       </table>
     </div>
-    <div class="span5">
+    <div class="span3">
       <table class="display table table-striped table-bordered table-condensed">
         <h6>Diver has entered these but do not have matching Boatlog entry </h6>
         <thead>
@@ -108,6 +102,6 @@
         </tbody>
       </table>
     </div>
-  
+  </div>
   </div>
 </div>

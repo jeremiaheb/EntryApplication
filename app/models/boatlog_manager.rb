@@ -62,6 +62,14 @@ class BoatlogManager < ActiveRecord::Base
 
       divers_list << [rep.sample_date, rep.field_id, rep.diver.diver_name ]
     end
+    divers_responsible_for.map{ |d| benthic_covers_for_diver(d) }.flatten(1).each do |rep|
+
+      divers_list << [rep.sample_date, rep.field_id, rep.diver.diver_name ]
+    end
+    divers_responsible_for.map{ |d| coral_demographics_for_diver(d) }.flatten(1).each do |rep|
+
+      divers_list << [rep.sample_date, rep.field_id, rep.diver.diver_name ]
+    end
     divers_list.sort_by { |e| e[0] }
   end
   

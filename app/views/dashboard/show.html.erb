@@ -63,7 +63,7 @@
       <% m = @boat_logs.first.boatlog_manager %>
       <% diverMissing = m.missing_samples_from_diver %>
       <% boatlogMissing = m.missing_samples_from_boatlog %>
-      <table class="display table table-striped table-bordered table-condensed">
+      <table class="display table table-bordered table-condensed">
         <h6>These are in the boatlog but do not have a matching diver sample </h6>
         <thead>
           <tr>
@@ -73,17 +73,17 @@
           </tr>
         <tbody>
         <% diverMissing.each do |missing| %>
-          <tr>
+          <tr data-link=" <%= boat_log_path(BoatLog.find_by_primary_sample_unit(missing[1][0..3])) %> ">
             <td> <%= missing[2] %></td>
             <td> <%= missing[0] %></td>
             <td> <%= missing[1] %></td>
-            </tr>
+          </tr>
           <% end %>
         </tbody>
       </table>
     </div>
     <div class="span3">
-      <table class="display table table-striped table-bordered table-condensed">
+      <table class="display table table-bordered table-condensed">
         <h6>Diver has entered these but do not have matching Boatlog entry </h6>
         <thead>
           <tr>
@@ -93,11 +93,11 @@
           </tr>
         <tbody>
         <% boatlogMissing.each do |missing| %>
-          <tr>
+          <tr data-link=" <%= sample_path(Sample.find_by_field_id(missing[1])) %> ">
             <td> <%= missing[2] %></td>
             <td> <%= missing[0] %></td>
             <td> <%= missing[1] %></td>
-            </tr>
+          </tr>
           <% end %>
         </tbody>
       </table>

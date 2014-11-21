@@ -81,5 +81,6 @@ class BoatlogManager < ActiveRecord::Base
     samples_diver_entered - boatlog_diver_list
   end
 
+
 end
 

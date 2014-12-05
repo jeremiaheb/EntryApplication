@@ -1,0 +1,10 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "DiverList") do |diverSheet|
+  diverSheet.add_row ['DIVER_NUM',
+                      'DIVER_NAME' ]
+  @divers.each do |diver|
+    diverSheet.add_row [diver.diver_number,         
+                        diver.diver_name ],
+                        :types => [ :string ]
+  end
+end

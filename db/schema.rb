@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(version: 20140502114108) do
     t.integer  "max_size"
     t.integer  "min_size"
     t.integer  "max_number"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "benthic_covers", force: true do |t|
@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(version: 20140502114108) do
     t.time     "sample_begin_time"
     t.integer  "meters_completed"
     t.text     "sample_description"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "boatlog_manager_id"
   end
 
@@ -45,16 +45,16 @@ ActiveRecord::Schema.define(version: 20140502114108) do
     t.string   "primary_sample_unit"
     t.date     "date"
     t.integer  "boatlog_manager_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "boatlog_managers", force: true do |t|
     t.string   "agency"
     t.string   "firstname"
     t.string   "lastname"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "coral_demographics", force: true do |t|
@@ -66,22 +66,22 @@ ActiveRecord::Schema.define(version: 20140502114108) do
     t.time     "sample_begin_time"
     t.integer  "meters_completed"
     t.text     "sample_description"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "boatlog_manager_id"
   end
 
   create_table "corals", force: true do |t|
     t.string   "code"
     t.string   "scientific_name"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "cover_cats", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "code"
     t.string   "common"
   end
@@ -107,8 +107,8 @@ ActiveRecord::Schema.define(version: 20140502114108) do
   create_table "divers", force: true do |t|
     t.string   "diver_number"
     t.string   "diver_name"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "active"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -132,8 +132,8 @@ ActiveRecord::Schema.define(version: 20140502114108) do
   create_table "habitat_types", force: true do |t|
     t.string   "habitat_name"
     t.string   "habitat_description"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "invert_belts", force: true do |t|
@@ -196,8 +196,8 @@ ActiveRecord::Schema.define(version: 20140502114108) do
   create_table "sample_types", force: true do |t|
     t.string   "sample_type_name"
     t.string   "sample_type_description"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "samples", force: true do |t|
@@ -217,8 +217,8 @@ ActiveRecord::Schema.define(version: 20140502114108) do
     t.integer  "sand_percentage"
     t.integer  "hardbottom_percentage"
     t.integer  "rubble_percentage"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.float    "water_temp"
     t.string   "current"
     t.integer  "boatlog_manager_id"

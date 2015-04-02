@@ -27,40 +27,40 @@ puts "Seeding database with data"
   #end
 #end
 
-Diver.delete_all
-Diver.connection.execute( 'ALTER SEQUENCE divers_id_seq RESTART WITH 1' )
-open("#{Rails.root}/db/SupportData/DeviseDivers.csv") do |divers|
-  divers.read.each_line do|diver|
-    DiverNumber, DiverName, UserName, Email, Password, Active, Role = diver.chomp.split(",")
-    Diver.create( :diver_number => DiverNumber, :diver_name => DiverName, :username => UserName, :email => Email, :password => Password, :active => Active, :role => Role )
-    puts "successfully created #{DiverName}"
-  end
-end
+#Diver.delete_all
+#Diver.connection.execute( 'ALTER SEQUENCE divers_id_seq RESTART WITH 1' )
+#open("#{Rails.root}/db/SupportData/DeviseDivers.csv") do |divers|
+  #divers.read.each_line do|diver|
+    #DiverNumber, DiverName, UserName, Email, Password, Active, Role = diver.chomp.split(",")
+    #Diver.create( :diver_number => DiverNumber, :diver_name => DiverName, :username => UserName, :email => Email, :password => Password, :active => Active, :role => Role )
+    #puts "successfully created #{DiverName}"
+  #end
+#end
 
-Animal.delete_all
-Animal.connection.execute( 'ALTER SEQUENCE animals_id_seq RESTART WITH 1' )
-open("#{Rails.root}/db/SupportData/RVC_Species_List.csv") do |animals|
-  animals.read.each_line do |animal|
-    SppCode, ScientificName, CommonName, MaxSize, MinSize, MaxNumber = animal.chomp.split(",")
-    Animal.create( :species_code => SppCode, :scientific_name => ScientificName, :common_name => CommonName, :max_size => MaxSize, :min_size => MinSize, :max_number => MaxNumber )
-  end
-end
+#Animal.delete_all
+#Animal.connection.execute( 'ALTER SEQUENCE animals_id_seq RESTART WITH 1' )
+#open("#{Rails.root}/db/SupportData/RVC_Species_List.csv") do |animals|
+  #animals.read.each_line do |animal|
+    #SppCode, ScientificName, CommonName, MaxSize, MinSize, MaxNumber = animal.chomp.split(",")
+    #Animal.create( :species_code => SppCode, :scientific_name => ScientificName, :common_name => CommonName, :max_size => MaxSize, :min_size => MinSize, :max_number => MaxNumber )
+  #end
+#end
 
-Coral.delete_all
-Coral.connection.execute( 'ALTER SEQUENCE corals_id_seq RESTART WITH 1' )
-open("#{Rails.root}/db/SupportData/CoralSpecies.csv") do |corals|
-  corals.read.each_line do |coral|
-    Code, ScientificName, CommonName, Category = coral.chomp.split(",")
-    Coral.create( :scientific_name => ScientificName, :code => Code)
-  end
-end
+#Coral.delete_all
+#Coral.connection.execute( 'ALTER SEQUENCE corals_id_seq RESTART WITH 1' )
+#open("#{Rails.root}/db/SupportData/CoralSpecies.csv") do |corals|
+  #corals.read.each_line do |coral|
+    #Code, ScientificName, CommonName, Category = coral.chomp.split(",")
+    #Coral.create( :scientific_name => ScientificName, :code => Code)
+  #end
+#end
 
 
-CoverCat.delete_all
-CoverCat.connection.execute( 'ALTER SEQUENCE cover_cats_id_seq RESTART WITH 1' )
-open("#{Rails.root}/db/SupportData/LPISpeciesListRevised.csv") do |corals|
-  corals.read.each_line do |coral|
-    Code, ScientificName, CommonName = coral.chomp.split(",")
-    CoverCat.create( :name => ScientificName, :code => Code, :common => CommonName)
-  end
-end
+#CoverCat.delete_all
+#CoverCat.connection.execute( 'ALTER SEQUENCE cover_cats_id_seq RESTART WITH 1' )
+#open("#{Rails.root}/db/SupportData/LPISpeciesListRevised.csv") do |corals|
+  #corals.read.each_line do |coral|
+    #Code, ScientificName, CommonName = coral.chomp.split(",")
+    #CoverCat.create( :name => ScientificName, :code => Code, :common => CommonName)
+  #end
+#end

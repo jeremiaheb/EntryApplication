@@ -14,11 +14,11 @@ describe BoatLog do
 
     it "Should give all divers in boatlog" do
       #binding.pry
-      expect(boat_log.boatlog_divers).to eq([ [rep_log_1.field_id, rep_log_1.diver.diver_name],
-                                              [rep_log_2.field_id, rep_log_2.diver.diver_name],
-                                              [rep_log_3.field_id, rep_log_3.diver.diver_name],
-                                              [rep_log_4.field_id, rep_log_4.diver.diver_name],
-                                              [rep_log_5.field_id, rep_log_5.diver.diver_name] ])
+      expect(boat_log.boatlog_divers).to eq([ [rep_log_1.station_log.boat_log.date,rep_log_1.field_id, rep_log_1.diver.diver_name],
+                                              [rep_log_2.station_log.boat_log.date,rep_log_2.field_id, rep_log_2.diver.diver_name],
+                                              [rep_log_3.station_log.boat_log.date,rep_log_3.field_id, rep_log_3.diver.diver_name],
+                                              [rep_log_4.station_log.boat_log.date,rep_log_4.field_id, rep_log_4.diver.diver_name],
+                                              [rep_log_5.station_log.boat_log.date,rep_log_5.field_id, rep_log_5.diver.diver_name] ])
     end
   end
   

@@ -72,9 +72,5 @@ $(function(){
         return false;
       }
     }
-    $(document).delegate(".remove_nested_fields", "click", function(){ 
-      $(this).closest(".fields").remove();
-      
-    });
 
 });

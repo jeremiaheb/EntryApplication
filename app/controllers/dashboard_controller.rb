@@ -5,24 +5,23 @@ class DashboardController < ApplicationController
  
  def show
   #binding.pry
-  boatlog_managers = []
   if current_diver.admin?
     @boat_logs = BoatLog.all
     @dashSamples = Sample.all
     @dashBenthicCovers = BenthicCover.all
     @dashCoralDemographics = CoralDemographic.all
-    boatlog_managers = BoatlogManager.all
+    @boatlog_managers = BoatlogManager.all
   else
     @boat_logs = current_diver.boatlog_manager.boat_logs
     @dashSamples = current_diver.boatlog_manager.samples
     @dashBenthicCovers = current_diver.boatlog_manager.benthic_covers
     @dashCoralDemographics = current_diver.boatlog_manager.coral_demographics
-    boatlog_managers = [current_diver.boatlog_manager]
+    @boatlog_managers = [current_diver.boatlog_manager]
   end
 
   @data_by_divers = {}
 
-  boatlog_managers.each do |boatlog_manager|
+  @boatlog_managers.each do |boatlog_manager|
     boatlog_manager.divers_responsible_for.each do |diver|
       if !@data_by_divers.has_key?(diver)
         @data_by_divers[diver] = {

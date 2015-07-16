@@ -12,7 +12,11 @@ wb.add_worksheet(name: 'boatlog_initial') do |sheet|
                           rep_log.diver.diver_name,
                           station_log.latitude,
                           station_log.longitude,
-                          station_log.comments ]
+                          station_log.comments ],
+                          :types => [nil,
+                                     nil,
+                                     nil,
+                                     :string]
         end
       end
     end

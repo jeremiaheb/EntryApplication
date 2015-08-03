@@ -37,6 +37,6 @@ EntryApplication::Application.configure do
 
   config.eager_load = false
 
-  config.relative_url_root = "/rvc"
+  config.relative_url_root = "/rvc_data_entry"
 
 end

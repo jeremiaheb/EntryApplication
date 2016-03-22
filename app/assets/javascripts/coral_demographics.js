@@ -75,6 +75,15 @@ $(function(){
       },"FieldID is wrong format"
     );
 
+    $.validator.addMethod("lessThan", function(value, element, params) {
+    
+        return parseFloat(value) <= parseFloat($(element).parent().find('[id$="max_diameter"]').val());;
+ 
+    },
+    "must be less than or equal to max diameter"
+  );
+
+
     $(".new_coral_demographic, .edit_coral_demographic").validate({
 
       errorElement: "span",
@@ -128,19 +137,23 @@ $(function(){
       $('[name*="max_diameter"]').each(function(){
         $(this).rules('add', {
           required: true,
-          number: true
+          number: true,
+          min: 1
         });
       });
       $('[name*="perpendicular_diameter"]').each(function(){
         $(this).rules('add', {
           required: true,
-          number: true
+          number: true,
+          min: 1,
+          lessThan: true
         });
       });
       $('[name*="height"]').each(function(){
         $(this).rules('add', {
           required: true,
-          number: true
+          number: true,
+          min: 1
         });
       });
       $('[name*="old_mortality"]').each(function(){

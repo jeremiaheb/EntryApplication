@@ -64,3 +64,12 @@ puts "Seeding database with data"
     #CoverCat.create( :name => ScientificName, :code => Code, :common => CommonName)
   #end
 #end
+
+
+open("#{Rails.root}/db/SupportData/BioGeoDivers.csv") do |divers|
+  divers.read.each_line do|diver|
+    DiverNumber, DiverName, UserName, Email, Password, Active, Role = diver.chomp.split(",")
+    Diver.create( :diver_number => DiverNumber, :diver_name => DiverName, :username => UserName, :email => Email, :password => Password, :active => Active, :role => Role )
+    puts "successfully created #{DiverName}"
+  end
+end

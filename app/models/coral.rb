@@ -8,4 +8,9 @@ class Coral < ActiveRecord::Base
   validates :code,                :presence => true
   validates :scientific_name,     :presence => true
 
+  def coral_code_name
+    [self.code, self.scientific_name].join(" __ ")
+  end
+  
+
 end

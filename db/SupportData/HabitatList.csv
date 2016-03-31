@@ -1,7 +1,12 @@
-Sand,Sand only
-Contiguous reef Spur-Groove, Contiguous reef with distinct spur-groove formation
-Contiguous reef Other, Contiguous reef with no distinct formation
-Isolated reef structure(s),E.g  patch reefs  rocky outcrops pinnacle
-Reef Rubble,Mostly unconsolidated or consolidated reef fragments
-Sand-Seagrass-HB matrix,Mostly softbottom non-reef habitat
-Artificial reef,E.g. wrecks etc.
+Sand,Sand only,Atlantic
+Contiguous reef Spur-Groove, Contiguous reef with distinct spur-groove formation,Atlantic
+Contiguous reef Other, Contiguous reef with no distinct formation,Atlantic
+Isolated reef structure(s),E.g  patch reefs  rocky outcrops pinnacle,Atlantic
+Reef Rubble,Mostly unconsolidated or consolidated reef fragments,Atlantic
+Sand-Seagrass-HB matrix,Mostly softbottom non-reef habitat,Atlantic
+Artificial reef,E.g. wrecks etc.,Atlantic
+Bedrock,Bedrock,Caribbean
+Aggregate Reef,Aggregate Reef,Caribbean
+Pavement,Pavement,Caribbean
+Patch Reef,Patch Reef,Caribbean
+Scattered coral/rock in sand,Scattered coral/rock in sand,Caribbean

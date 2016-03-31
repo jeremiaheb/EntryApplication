@@ -18,24 +18,24 @@ puts "Seeding database with data"
   #end
 #end
 
-#HabitatType.delete_all
-#HabitatType.connection.execute( 'ALTER SEQUENCE habitat_types_id_seq RESTART WITH 1' )
-#open("#{Rails.root}/db/SupportData/HabitatList.csv") do |habitatTypes|
-  #habitatTypes.read.each_line do|habitatType|
-    #HabName, HabDesc, HabReg = habitatType.chomp.split(",")
-    #HabitatType.create( :habitat_name => HabName, :habitat_description => HabDesc, :region => HabReg )
-  #end
-#end
-
-Diver.delete_all
-Diver.connection.execute( 'ALTER SEQUENCE divers_id_seq RESTART WITH 1' )
-open("#{Rails.root}/db/SupportData/UpdatedDiverList2016.csv") do |divers|
-  divers.read.each_line do|diver|
-    DiverNumber, DiverName, UserName, Email, Password, Active, Role = diver.chomp.split(",")
-    Diver.create( :diver_number => DiverNumber, :diver_name => DiverName, :username => UserName, :email => Email, :password => Password, :active => Active, :role => Role )
-    puts "successfully created #{DiverName}"
+HabitatType.delete_all
+HabitatType.connection.execute( 'ALTER SEQUENCE habitat_types_id_seq RESTART WITH 1' )
+open("#{Rails.root}/db/SupportData/HabitatList.csv") do |habitatTypes|
+  habitatTypes.read.each_line do|habitatType|
+    HabName, HabDesc, HabReg = habitatType.chomp.split(",")
+    HabitatType.create( :habitat_name => HabName, :habitat_description => HabDesc, :region => HabReg )
   end
 end
+
+#Diver.delete_all
+#Diver.connection.execute( 'ALTER SEQUENCE divers_id_seq RESTART WITH 1' )
+#open("#{Rails.root}/db/SupportData/UpdatedDiverList2016.csv") do |divers|
+  #divers.read.each_line do|diver|
+    #DiverNumber, DiverName, UserName, Email, Password, Active, Role = diver.chomp.split(",")
+    #Diver.create( :diver_number => DiverNumber, :diver_name => DiverName, :username => UserName, :email => Email, :password => Password, :active => Active, :role => Role )
+    #puts "successfully created #{DiverName}"
+  #end
+#end
 
 #Animal.delete_all
 #Animal.connection.execute( 'ALTER SEQUENCE animals_id_seq RESTART WITH 1' )

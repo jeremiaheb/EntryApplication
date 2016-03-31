@@ -4,6 +4,7 @@
   <tr>
     <th>Habitat Name</th>
     <th>Habitat Description</th>
+    <th>Region</th>
     <th></th>
   </tr>
 
@@ -11,6 +12,7 @@
   <tr>
     <td><%= habitat_type.habitat_name %></td>
     <td><%= habitat_type.habitat_description %></td>
+    <td><%= habitat_type.region %></td>
     <td><%= link_to 'Show', habitat_type %></td>
     <td><%= link_to 'Edit', edit_habitat_type_path(habitat_type) %></td>
     <td><%= link_to 'Destroy', habitat_type, data: { confirm: 'Are you sure?' }, method: :delete %></td>

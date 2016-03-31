@@ -50,7 +50,7 @@
         <div class="control-group">
           <label class="control-label">Habitat Type</label>
           <div class="controls">
-            <%= f.collection_select :habitat_type_id, HabitatType.all, :id, :habitat_name, { :include_blank => "" } %><br />
+            <%= f.collection_select :habitat_type_id, HabitatType.atlantic_habitats, :id, :habitat_name, { :include_blank => "" } %><br />
           </div>
         </div>
 

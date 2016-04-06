@@ -18,14 +18,14 @@ puts "Seeding database with data"
   #end
 #end
 
-HabitatType.delete_all
-HabitatType.connection.execute( 'ALTER SEQUENCE habitat_types_id_seq RESTART WITH 1' )
-open("#{Rails.root}/db/SupportData/HabitatList.csv") do |habitatTypes|
-  habitatTypes.read.each_line do|habitatType|
-    HabName, HabDesc, HabReg = habitatType.chomp.split(",")
-    HabitatType.create( :habitat_name => HabName, :habitat_description => HabDesc, :region => HabReg )
-  end
-end
+#HabitatType.delete_all
+#HabitatType.connection.execute( 'ALTER SEQUENCE habitat_types_id_seq RESTART WITH 1' )
+#open("#{Rails.root}/db/SupportData/HabitatList.csv") do |habitatTypes|
+  #habitatTypes.read.each_line do|habitatType|
+    #HabName, HabDesc, HabReg = habitatType.chomp.split(",")
+    #HabitatType.create( :habitat_name => HabName, :habitat_description => HabDesc, :region => HabReg )
+  #end
+#end
 
 #Diver.delete_all
 #Diver.connection.execute( 'ALTER SEQUENCE divers_id_seq RESTART WITH 1' )
@@ -37,33 +37,33 @@ end
   #end
 #end
 
-#Animal.delete_all
-#Animal.connection.execute( 'ALTER SEQUENCE animals_id_seq RESTART WITH 1' )
-#open("#{Rails.root}/db/SupportData/RVC_Species_List.csv") do |animals|
-  #animals.read.each_line do |animal|
-    #SppCode, ScientificName, CommonName, MaxSize, MinSize, MaxNumber = animal.chomp.split(",")
-    #Animal.create( :species_code => SppCode, :scientific_name => ScientificName, :common_name => CommonName, :max_size => MaxSize, :min_size => MinSize, :max_number => MaxNumber )
-  #end
-#end
+Animal.delete_all
+Animal.connection.execute( 'ALTER SEQUENCE animals_id_seq RESTART WITH 1' )
+open("#{Rails.root}/db/SupportData/FishSpecies_April2016.csv") do |animals|
+  animals.read.each_line do |animal|
+    SppCode, ScientificName, CommonName, MinSize, MaxSize, MaxNumber = animal.chomp.split(",")
+    Animal.create( :species_code => SppCode, :scientific_name => ScientificName, :common_name => CommonName, :min_size => MinSize, :max_size => MaxSize, :max_number => MaxNumber )
+  end
+end
 
-#Coral.delete_all
-#Coral.connection.execute( 'ALTER SEQUENCE corals_id_seq RESTART WITH 1' )
-#open("#{Rails.root}/db/SupportData/CoralSpecies.csv") do |corals|
-  #corals.read.each_line do |coral|
-    #Code, ScientificName, CommonName, Category = coral.chomp.split(",")
-    #Coral.create( :scientific_name => ScientificName, :code => Code)
-  #end
-#end
+Coral.delete_all
+Coral.connection.execute( 'ALTER SEQUENCE corals_id_seq RESTART WITH 1' )
+open("#{Rails.root}/db/SupportData/CoralSpecies_April2016.csv") do |corals|
+  corals.read.each_line do |coral|
+    Code, ScientificName, CommonName, Category = coral.chomp.split(",")
+    Coral.create( :scientific_name => ScientificName, :code => Code)
+  end
+end
 
 
-#CoverCat.delete_all
-#CoverCat.connection.execute( 'ALTER SEQUENCE cover_cats_id_seq RESTART WITH 1' )
-#open("#{Rails.root}/db/SupportData/LPISpeciesListRevised.csv") do |corals|
-  #corals.read.each_line do |coral|
-    #Code, ScientificName, CommonName = coral.chomp.split(",")
-    #CoverCat.create( :name => ScientificName, :code => Code, :common => CommonName)
-  #end
-#end
+CoverCat.delete_all
+CoverCat.connection.execute( 'ALTER SEQUENCE cover_cats_id_seq RESTART WITH 1' )
+open("#{Rails.root}/db/SupportData/LPISpeciesList_April2016.csv") do |corals|
+  corals.read.each_line do |coral|
+    Code, ScientificName, CommonName = coral.chomp.split(",")
+    CoverCat.create( :name => ScientificName, :code => Code, :common => CommonName)
+  end
+end
 
 
 #open("#{Rails.root}/db/SupportData/BioGeoDivers.csv") do |divers|

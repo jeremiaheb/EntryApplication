@@ -174,9 +174,6 @@ $(function(){
                 'benthic_cover[presence_belt_attributes][m_ferox]': {
                         required: true
                       },
-                'benthic_cover[presence_belt_attributes][a_lamarcki]': {
-                        required: true
-                      },
                 'benthic_cover[presence_belt_attributes][m_annularis]': {
                         required: true
                       },
@@ -184,9 +181,6 @@ $(function(){
                         required: true
                       },
                 'benthic_cover[presence_belt_attributes][m_faveolata]': {
-                        required: true
-                      },
-                'benthic_cover[presence_belt_attributes][d_stokesii]': {
                         required: true
                       },
                 'benthic_cover[rugosity_measure_attributes][min_depth]': {

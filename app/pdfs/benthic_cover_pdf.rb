@@ -84,9 +84,7 @@ class BenthicCoverPdf < Prawn::Document
       data = [ [ {content: "ESA Corals", align: :center, colspan: 2}],
         [ {content: "A. cervicornis:", border_right_width: 0}, {content: "#{@benthic_cover.presence_belt.a_cervicornis}", border_left_width: 0} ],
         [ {content: "A. palmata:", border_right_width: 0}, {content: "#{@benthic_cover.presence_belt.a_palmata}", border_left_width: 0} ],
-        [ {content: "A. lamarki:", border_right_width: 0}, {content: "#{@benthic_cover.presence_belt.a_lamarcki}", border_left_width: 0} ],
         [ {content: "D. cylindrus:", border_right_width: 0}, {content: "#{@benthic_cover.presence_belt.d_cylindrus}", border_left_width: 0} ],
-        [ {content: "D. stokesi:", border_right_width: 0}, {content: "#{@benthic_cover.presence_belt.d_stokesii}", border_left_width: 0} ],
         [ {content: "O. annularis:", border_right_width: 0}, {content: "#{@benthic_cover.presence_belt.m_annularis}", border_left_width: 0} ],
         [ {content: "O.faveolata:", border_right_width: 0}, {content: "#{@benthic_cover.presence_belt.m_faveolata}", border_left_width: 0} ],
         [ {content: "O. franksi:", border_right_width: 0}, {content: "#{@benthic_cover.presence_belt.m_franksi}", border_left_width: 0} ],
@@ -101,14 +99,14 @@ class BenthicCoverPdf < Prawn::Document
   end
   
   def notes
-    move_up 170
+    move_up 136
     indent(410) do  
       data = [
               [ {content: "#{@benthic_cover.sample_description}"} ]
             ]
 
       table data,
-        :cell_style => { :size => 8, :height => 170, :padding => 2  },
+        :cell_style => { :size => 8, :height => 145, :padding => 2  },
         :column_widths => { 0 => 100}
 
     end

@@ -21,7 +21,9 @@ FAV FRAG,Favia fragum,Golfball Coral,HARD CORALS
 HEL CUCU,Helioceris cucullata,Sunray Lettuce Coral,HARD CORALS
 ISO RIGI,Isophyllastrea rigida,Rough Star Coral,HARD CORALS
 ISO SINU,Isophyllia sinuosa,Sinuous Cactus Coral,HARD CORALS
+ISO SPE.,Isophyllia species,Isophyllia species,HARD CORALS
 MAD AURE,Madracis auretenra,Yellow Pencil Coral,HARD CORALS
+MAD CARM,Madracis carmabi,Stubby Star Coral,HARD CORALS
 MAD DECA,Madracis decactis,Ten-Ray Star Coral,HARD CORALS
 MAD FORM,Madracis formosa,Eigth-Ray Finger Coral,HARD CORALS
 MAD PHAR,Madracis pharensis,Star Coral,HARD CORALS
@@ -43,11 +45,14 @@ MYC SPE.,Mycetophyllia spp,Mycetophyllia spp,HARD CORALS
 OCU DIFF,Oculina diffusa,Diffuse Ivory Bush Coral,HARD CORALS
 OCU ROBU,Oculina robusta,Robust Ivory Tree Coral,HARD CORALS
 OCU VALE,Oculina valenciennesi,Ivory Tree Coral,HARD CORALS
+OCU SPE.,Oculina species, Tree coral species,HARD CORALS
 ORB ANCX,Orbicella annularis Complex,Boulder Star Coral Complex,HARD CORALS
 ORB ANNU,Orbicellal annularis,Boulder Star Coral,HARD CORALS
 ORB FAVE,Orbicella faveolata,Mountainous Star Coral,HARD CORALS
 ORB FRAN,Orbicella franksi,Boulder Star Coral,HARD CORALS
 ORB SPE.,Montastraea,Star Coral,HARD CORALS
+OTH CORA,Other Coral Species,Other Coral Species,HARD CORALS
+PHY AMER,Phyllangia americana,Hidden Cup Coral,HARD CORALS
 POR ASTR,Porites astreoides,Mustard Hill Coral,HARD CORALS
 POR BRAN,Porites branneri,Blue Crust Coral,HARD CORALS
 POR COLO,Porites colonensis,Honeycomb Plate Coral,HARD CORALS
@@ -55,8 +60,9 @@ POR DIVA,Porites divaricata ,Porites divaricata,HARD CORALS
 POR FURC,Porites furcata,Porites furcata,HARD CORALS
 POR PORI,Porites porites,Finger Coral,HARD CORALS
 POR SPE.,Porites spp,Porites spp,HARD CORALS
-PSU CLIV,Psuedodiploria clivosa,Knobby Brain Coral,HARD CORALS
-PSU STRI,Psuedodiploria strigosa,Symmetrical Brain Coral,HARD CORALS
+PSE CLIV,Psuedodiploria clivosa,Knobby Brain Coral,HARD CORALS
+PSE SPE.,Pseudodiploria species, brain coral species,HARD CORALS
+PSE STRI,Psuedodiploria strigosa,Symmetrical Brain Coral,HARD CORALS
 SCL SPE.,Scleractinia spp,Unknown Coral,HARD CORALS
 SCO CUBE,Scolymia cubensis,Artichoke Coral,HARD CORALS
 SCO LACE,Scolymia lacera,Atlantic Mushroom Coral,HARD CORALS

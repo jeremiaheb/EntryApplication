@@ -45,9 +45,15 @@
   <input type="button" class="btn btn-primary" data-toggle="collapse" data-target=".missingRecords" value="Crosscheck Boatlog vs. Samples">
   <div class="span8 missingRecords collapse out">
     <div class="span3">
-      <% m = @boatlog_managers.first %>
-      <% diverMissing = m.missing_samples_from_diver %>
-      <% boatlogMissing = m.missing_samples_from_boatlog %>
+      <% diverMissing = Array.new %>
+      <% boatlogMissing = Array.new %>
+      <% @boatlog_managers.each do |m| %>
+        <% a = m.missing_samples_from_diver %>
+        <% diverMissing += a %>
+        <% b = m.missing_samples_from_boatlog %> 
+        <% boatlogMissing += b %>
+      <% end %>
+
       <table class="display table table-bordered table-condensed">
         <h6>These are in the boatlog but do not have a matching diver sample </h6>
         <thead>

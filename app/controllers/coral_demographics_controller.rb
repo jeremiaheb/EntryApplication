@@ -6,6 +6,9 @@ class CoralDemographicsController < ApplicationController
   # GET /coral_demographics
   # GET /coral_demographics.json
   def index
+    def proof_by_diver(d)
+      Diver.find(d).diver_proofing_coral_demo
+    end
     if current_diver.role == 'admin'
       @coral_demographics = CoralDemographic.all
     elsif current_diver.role == 'manager'
@@ -22,7 +25,7 @@ class CoralDemographicsController < ApplicationController
       format.xlsx
       format.pdf do 
 
-        pdf = CoralDemographicPdf.new(@proofing_coral_demographics)
+        pdf = CoralDemographicPdf.new(proof_by_diver(params[:diver_id]||= current_diver))
         send_data pdf.render, filename: "#{current_diver.lastname}_CoralDemographicsReport.pdf",
                               type: "application/pdf"
       

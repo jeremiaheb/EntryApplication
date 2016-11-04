@@ -40,4 +40,18 @@
     <%= button_to('Download Samples (.xlsx)', samples_path(format: "xlsx"), :method => "get", :class => 'btn btn-small btn-primary')  %>   
   </div>
 <% end %>
+<% if current_diver.manager? %>
+  <div id="diverProofingReports" class="btn-group">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        DiverProofingReports      
+    </button>
+      <ul class="dropdown-menu" role="menu">
+        <% current_diver.boatlog_manager.divers_responsible_for.each do |diver| %>
+          <li> <%= link_to(diver.diver_name, samples_path(format: "pdf", diver_id: diver.id, fishtype: "common_name"), :method => "get") %> </li>
+        <% end %>
+      </ul>
+  </div>
+<% end %>
+  
+
 </div>

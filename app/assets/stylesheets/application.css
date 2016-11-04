@@ -430,6 +430,11 @@ input.timeSeen_3 {
   left: 5px;
   top: 250px;
 }
+#diverProofingReports {
+  position: absolute;
+  left: 5px;
+  top: 280px;
+}
 .ActionBar {
   margin-right: 15px;
 }

@@ -17,7 +17,7 @@ class BoatlogManager < ActiveRecord::Base
     sample_divers = samples.joins(:diver_samples).where('diver_samples.primary_diver = ?', true).map { |sample| sample.diver_samples.first.diver }
     lpi_divers = benthic_covers.map { |benthic_cover| benthic_cover.diver }
     demo_divers = coral_demographics.map { |coral_demographic| coral_demographic.diver }
-    (boatlog_replicate_divers + sample_divers + lpi_divers + demo_divers).uniq
+    (boatlog_replicate_divers + sample_divers + lpi_divers + demo_divers).uniq.sort_by(&:diver_name)
   end
 
   def benthic_covers_for_diver(diver, for_admin = false)

@@ -345,6 +345,21 @@ input.timeSeen_3 {
   width: 200px;
 }
 
+.select2-offscreen {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 0;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 0;
+}
+
+.select2-results {
+  background: white;
+}
+
 .show {
   margin-right: 10px;
 }

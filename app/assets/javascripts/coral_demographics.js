@@ -42,6 +42,7 @@ $(function(){
       }
     }); 
   };
+
   disable_fields_if_no_coral_on_load();
   disable_fields_if_no_coral();
   $(document).delegate(".add_nested_fields", "click", function(){ 
@@ -50,7 +51,8 @@ $(function(){
 
     //puts focus on the select_2 drop down after adding cover pressed
      $(document).delegate(".add_nested_fields", "click", function(){ 
-        $(".demo_corals input:text:visible").eq(-6).focus();
+        $(".demo_corals input:text:visible").eq(-7).focus();
+        $(".demo_corals").scrollTop(1E10);
    });
 
     //supress submitting form on pressing enter key, enter key adds new coral
@@ -122,6 +124,11 @@ $(function(){
                         required: true,
                         digits: true
                       },
+                'coral_demographic[percent_hardbottom]': {
+                        required: true,
+                        digits: true,
+                        range: [1,100]
+                      },
                 'coral_demographic[sample_description]': {
                         maxlength: 150
                       }
@@ -134,6 +141,13 @@ $(function(){
     });
 
     function validate_fields() {
+      $('[name*="meter_mark"]').each(function(){
+        $(this).rules('add', {
+          required: true,
+          number: true,
+          min: 0
+        });
+      });
       $('[name*="max_diameter"]').each(function(){
         $(this).rules('add', {
           required: true,

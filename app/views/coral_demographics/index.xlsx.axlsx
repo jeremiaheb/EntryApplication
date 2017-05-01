@@ -12,6 +12,7 @@ wb.add_worksheet(name: "CoralDemoSample") do |sampSheet|
                       'divbegm',
                       'fieldid',
                       'meters_completed',
+                      'percent_hardbottom',
                       'SAMPLE_DESCR'
                       ]
   @coral_demographics.each do |c_demo|
@@ -27,6 +28,7 @@ wb.add_worksheet(name: "CoralDemoSample") do |sampSheet|
                         c_demo.sample_begin_time.strftime('%M'),  
                         c_demo.field_id,                        
                         c_demo.meters_completed,                        
+                        c_demo.percent_hardbottom,                        
                         c_demo.sample_description ],
                         :types => [ :string,
                                     :string,
@@ -38,6 +40,7 @@ end
 
 wb.add_worksheet(name: "DemoCorals") do |demo_sheet|
   demo_sheet.add_row ['MASTER_SAMPLE_CD',
+                      'meter_mark',
                       'CORAL_CD',
                       'MAX_DIAMETER',
                       'PERP_DIAMETER',
@@ -49,6 +52,7 @@ wb.add_worksheet(name: "DemoCorals") do |demo_sheet|
   @coral_demographics.each do |c_demo|
     c_demo.demographic_corals.each do |d_coral|
       demo_sheet.add_row [ d_coral.coral_demographic.msn,         
+                          d_coral.meter_mark,
                           d_coral.coral.code,
                           d_coral.max_diameter, 
                           d_coral.perpendicular_diameter,     

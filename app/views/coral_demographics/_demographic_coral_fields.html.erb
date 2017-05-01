@@ -1,7 +1,8 @@
 
   <li>
-  <%= f.collection_select :coral_id, Coral.order(:id).all, :id, :coral_code_name, {:include_blank => ""}, { :class => "coralSpecies" } %>
-  <%= f.text_field :max_diameter, { :class => "coralSpeciesData" } %>
+    <%= f.text_field :meter_mark, { :class => "coralSpeciesData", :id => "meter_mark" } %>
+    <%= f.collection_select :coral_id, Coral.order(:id).all, :id, :coral_code_name, {:include_blank => ""}, { :class => "coralSpecies" } %>
+    <%= f.text_field :max_diameter, { :class => "coralSpeciesData" } %>
     <%= f.text_field :perpendicular_diameter, { :class => "coralSpeciesData" } %>
     <%= f.text_field :height, { :class => "coralSpeciesData" } %>
     <%= f.text_field :old_mortality, { :class => "coralSpeciesData" } %>

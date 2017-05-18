@@ -62,10 +62,12 @@ FactoryGirl.define do
     sequence(:sample_date)        { |n| Time.current }
     habitat_type
     demographic_corals            { build_list :demographic_coral, 1 }
+    sequence(:percent_hardbottom)
   end
 
 
   factory :demographic_coral do
+     sequence(:meter_mark)
      max_diameter           { 1 }
      perpendicular_diameter { 1 }
      height                 { 1 }

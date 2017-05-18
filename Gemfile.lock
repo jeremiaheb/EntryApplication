@@ -274,3 +274,9 @@ DEPENDENCIES
   thin
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
+
+RUBY VERSION
+   ruby 1.9.3p551
+
+BUNDLED WITH
+   1.14.6

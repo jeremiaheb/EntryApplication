@@ -4,7 +4,7 @@ class AnimalsController < ApplicationController
   #
 
   before_action :authenticate_diver!
-  load_and_authorize_resource
+  #load_and_authorize_resource
 
   def index
     @animals = Animal.all

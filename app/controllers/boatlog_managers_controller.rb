@@ -1,7 +1,7 @@
 class BoatlogManagersController < ApplicationController
   
   before_action :authenticate_diver!
-  load_and_authorize_resource
+  #load_and_authorize_resource
 
   # GET /boatlog_managers
   # GET /boatlog_managers.json

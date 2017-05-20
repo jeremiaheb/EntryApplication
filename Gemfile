@@ -29,6 +29,7 @@ gem 'capistrano'
 gem "net-ssh"
 gem 'figaro'
 gem "blueimp-gallery"
+gem 'jquery-validation-rails'
 
 group :production do
   gem 'rails_12factor'

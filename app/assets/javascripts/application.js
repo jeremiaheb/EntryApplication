@@ -13,15 +13,15 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
+//= require dataTables/jquery.dataTables
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require select2
 //= require jquery.validate
 //= require twitter/bootstrap
 //= require jquery-ui/datepicker
-//= require dataTables/jquery.dataTables
 //= require jquery_nested_form
 //= require_tree ../../../vendor/assets/javascripts
 //= require_tree .
-//= require blueimp-gallery-all
 //
 
 // Set up our EA namespace for our functions
@@ -54,7 +54,7 @@ $(function(){
     $('.display').dataTable( {
         //"sDom": "<'row'<'span7'lf>r>t<'row'<'span7'ip>>",
         "sDom": '<"top"ifp<"clear">>rt<"bottom"<"clear">>',
-        "sPaginationType": "bootstrap"
+        "pagingType": "full"
     } );
 
     $(document).ready(function(){

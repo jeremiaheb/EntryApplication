@@ -1,7 +1,7 @@
 class SampleTypesController < ApplicationController
   
   before_action :authenticate_diver!
-  load_and_authorize_resource
+  #load_and_authorize_resource
   
   # GET /sample_types
   # GET /sample_types.json

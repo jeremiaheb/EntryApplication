@@ -1,7 +1,7 @@
 class BenthicCoversController < ApplicationController
 
   before_action :authenticate_diver!
-  load_and_authorize_resource
+  #load_and_authorize_resource
 
   # GET /benthic_covers
   # GET /benthic_covers.json

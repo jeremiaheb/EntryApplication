@@ -67,7 +67,7 @@ class BenthicCoversController < ApplicationController
   # POST /benthic_covers
   # POST /benthic_covers.json
   def create
-    @benthic_cover = BenthicCover.new(params[:benthic_cover])
+    @benthic_cover = BenthicCover.new(benthic_params)
 
     respond_to do |format|
       if @benthic_cover.save
@@ -86,7 +86,7 @@ class BenthicCoversController < ApplicationController
     @benthic_cover = BenthicCover.find(params[:id])
 
     respond_to do |format|
-      if @benthic_cover.update_attributes(params[:benthic_cover])
+      if @benthic_cover.update_attributes(benthic_params)
         format.html { redirect_to benthic_covers_path, notice: 'Benthic cover was successfully updated.' }
         format.json { head :no_content }
       else
@@ -107,4 +107,15 @@ class BenthicCoversController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def benthic_params
+
+    params.require(:benthic_cover).permit(:boatlog_manager_id, :diver_id, :buddy, :field_id, :sample_date, :sample_begin_time, :habitat_type_id, :meters_completed, :sample_description,
+                                         point_intercepts_attributes: [:cover_cat_id, :hardbottom_num, :softbottom_num, :rubble_num],
+                                         rugosity_measure_attributes: [:min_depth, :max_depth, :max_vert_height, :cnt_less_than_20, :cnt_20_less_than_50, :cnt_50_less_than_100, :cnt_100_less_than_150, :cnt_150_less_than_200, :cnt_greater_than_200],
+                                         invert_belt_attributes: [:lobster_num, :conch_num, :diadema_num],
+                                         presence_belt_attributes: [:a_cervicornis, :a_palmata, :d_cylindrus, :m_annularis, :m_faveolata, :m_franksi, :m_ferox])
+  
+  end
+
 end

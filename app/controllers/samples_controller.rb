@@ -1,6 +1,6 @@
 class SamplesController < ApplicationController
 
-  before_filter :authenticate_diver!
+  before_action :authenticate_diver!
   load_and_authorize_resource
 
   def current_ability

@@ -1,6 +1,6 @@
 class BenthicCoversController < ApplicationController
 
-  before_filter :authenticate_diver!
+  before_action :authenticate_diver!
   load_and_authorize_resource
 
   # GET /benthic_covers

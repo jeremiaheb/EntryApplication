@@ -9,10 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require jquery.ui.datepicker
- *= require jquery.ui.core
- *= require jquery.ui.theme
- *= require dataTables/jquery.dataTables.bootstrap
+ *= require jquery-ui
  *= require select2
  *= require_tree .
  *= require blueimp-gallery-all

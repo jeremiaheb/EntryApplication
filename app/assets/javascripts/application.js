@@ -13,13 +13,14 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
+//= require select2
+//= require jquery.validate
 //= require twitter/bootstrap
 //= require jquery-ui/datepicker
 //= require dataTables/jquery.dataTables
 //= require jquery_nested_form
 //= require rails.validations
 //= require rails.validations.nested_form
-//= require select2
 //= require_tree ../../../vendor/assets/javascripts
 //= require_tree .
 //= require blueimp-gallery-all

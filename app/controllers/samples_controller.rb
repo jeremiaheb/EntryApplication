@@ -11,7 +11,7 @@ class SamplesController < ApplicationController
   # GET /samples.json
   def index
     def proof_by_diver(d)
-      Diver.find(d).diver_proofing_samples
+      Diver.find(d.id).diver_proofing_samples
     end
     if current_diver.role == 'admin'
       @samples = Sample.all

@@ -1,7 +1,7 @@
 class HabitatTypesController < ApplicationController
  
   before_action :authenticate_diver!
-  #load_and_authorize_resource
+  load_and_authorize_resource
   
   # GET /habitat_types
   # GET /habitat_types.json

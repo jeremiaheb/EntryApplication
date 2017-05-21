@@ -1,7 +1,7 @@
 class CoralDemographicsController < ApplicationController
 
   before_action :authenticate_diver!
-  #load_and_authorize_resource
+  load_and_authorize_resource
 
   # GET /coral_demographics
   # GET /coral_demographics.json

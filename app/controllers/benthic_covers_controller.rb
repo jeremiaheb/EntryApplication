@@ -7,7 +7,7 @@ class BenthicCoversController < ApplicationController
   # GET /benthic_covers.json
   def index
     def proof_by_diver(d)
-      Diver.find(d).diver_proofing_benthic_cover
+      Diver.find(d.id).diver_proofing_benthic_cover
     end
     if current_diver.role == 'admin'
       @benthic_covers = BenthicCover.all

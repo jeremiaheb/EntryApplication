@@ -40,12 +40,12 @@ end
 group :test do
   gem 'rspec-rails', '3.5.1'
   #gem 'coco'
-  gem 'factory_girl_rails'
 end
 group :development, :test do
   gem 'ruby-prof'
   gem 'rails-erd'
   gem 'pry-rails'
   gem 'pry-remote'
+  gem 'factory_girl_rails'
   #gem 'quiet_assets'
 end

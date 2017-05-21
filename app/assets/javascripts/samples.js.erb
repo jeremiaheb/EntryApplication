@@ -279,6 +279,10 @@ $(function(){
   });
 
 
+  $(".time_seen_button").click(function(){
+    $(this).addClass('active').siblings().removeClass('active');
+  });
+
   function set_time_seen_field_on_focus(){
       $('.sppCommon').on('open', function(){
         var $thisID = $(this).attr('id').slice(0, -10);

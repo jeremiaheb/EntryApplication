@@ -25,6 +25,7 @@ gem 'nested_form'
 gem 'devise'
 gem 'cancan'
 gem 'prawn', :git => 'git://github.com/prawnpdf/prawn.git'
+gem 'prawn-table'
 gem 'axlsx_rails'
 gem 'capistrano'
 gem "net-ssh"

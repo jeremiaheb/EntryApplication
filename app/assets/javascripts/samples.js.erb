@@ -698,11 +698,13 @@ $(function(){
                       },
                 'sample[substrate_max_depth]': {
                         required: true,
-                        digits: true
+                        digits: true,
+                        minlength: 2
                       },
                 'sample[substrate_min_depth]': {
                         required: true,
                         digits: true,
+                        minlength: 2,
                         lessThanEqualTo: '#sample_substrate_max_depth'
                       },
                 'sample[hard_verticle_relief]': {

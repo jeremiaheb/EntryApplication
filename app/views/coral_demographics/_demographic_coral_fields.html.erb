@@ -8,6 +8,6 @@
     <%= f.text_field :old_mortality, { :class => "coralSpeciesData" } %>
     <%= f.text_field :recent_mortality, { :class => "coralSpeciesData" } %>
     <%= f.select( :bleach_condition, { "None" => "N", "Partial" => "P", "Total" => "T" } , {:include_blank => ""}, { :class => "coralSpeciesData" } ) %>
-    <%= f.select( :disease, { "Absent" => "absent", "Present" => "present" } , {:include_blank => ""}, { :class => "coralSpeciesData" } ) %>
+    <%= f.select( :disease, { "Absent" => "absent", "Present" => "present", "Fast" => "fast", "Slow" => "slow" } , {:include_blank => ""}, { :class => "coralSpeciesData" } ) %>
     <%= f.link_to_remove "Remove Coral", {:tabindex => "-1"}  %>
   </li>

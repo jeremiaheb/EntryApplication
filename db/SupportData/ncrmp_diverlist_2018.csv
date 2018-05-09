@@ -389,6 +389,10 @@ DIVER_NUM,DIVER_NAME,username,email,password,active,role
 0393,VIEHMAN_SHAY,viehman_shay,shay@viehman.com,viehman_shay,TRUE,diver
 0394,JOHNSON_MEAGHAN,johnson_meaghan,meaghan@johnson.com,johnson_meaghan,TRUE,diver
 0395,BOECK_JUSTIN,boeck_justin,justin@boeck.com,boeck_justin,TRUE,diver
+0396,ZENONE_AUBREE,zenone_aubree,aubree@zenon.com,zenone_aubree,TRUE,diver
+0397,ELDREDGE_LAURA,eldredge_laura,laura@eldgredge.com,eldredge_laura,TRUE,diver
+0398,SHATTERS_ALLIE,shatters_allie,allie@shatters.com,shatters_allie,TRUE,diver
+0399,WEDELICH_SHELBY,wedelich_shelby,shelby@wedelich.com,wedelich_shelby,TRUE,diver
 0995,DAVIS_TYREE,davis_tyree,tyree@davis.com,davis_tyree,TRUE,diver
 0996,IRMA_RESPONSE,irma_response,irma@response.com,irma_response,FALSE,manager
 0997,biogeo_admin,biogeo_admin,bio@geo.com,biogeo_admin,FALSE,admin

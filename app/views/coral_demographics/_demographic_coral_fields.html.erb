@@ -7,7 +7,7 @@
     <%= f.text_field :height, { :class => "coralSpeciesData" } %>
     <%= f.text_field :old_mortality, { :class => "coralSpeciesData" } %>
     <%= f.text_field :recent_mortality, { :class => "coralSpeciesData" } %>
-    <%= f.select( :bleach_condition, { "None" => "N", "Partial" => "P", "Total" => "T", "Discolored/Paling" => "D" } , {:include_blank => ""}, { :class => "coralSpeciesData" } ) %>
+    <%= f.select( :bleach_condition, { "None" => "N", "Partial Bleaching" => "PB", "Total" => "T", "Paling" => "P" } , {:include_blank => ""}, { :class => "coralSpeciesData" } ) %>
     <%= f.select( :disease, { "Absent" => "absent", "Present" => "present", "Fast" => "fast", "Slow" => "slow" } , {:include_blank => ""}, { :class => "coralSpeciesData" } ) %>
     <%= f.link_to_remove "Remove Coral", {:tabindex => "-1"}  %>
   </li>

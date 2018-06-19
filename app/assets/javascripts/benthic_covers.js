@@ -19,7 +19,7 @@ $(function(){
     $("#benthic_cover_sample_date").datepicker("setDate", new Date());
   };
 
-  $("#benthic_cover_sample_begin_time").timeEntry({ show24Hours: true });
+  $("#benthic_cover_sample_begin_time").timeEntry({ show24Hours: true, minTime: "07:00", maxTime: "19:00" });
 
   $(".coverCats").find(".coverCategory").select2(); 
   $(document).on('nested:fieldAdded', function(event){

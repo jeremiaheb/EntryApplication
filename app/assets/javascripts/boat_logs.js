@@ -15,8 +15,8 @@ $(function(){
     $("#boat_log_date").datepicker("setDate", new Date());
   };
 
-  $("#boat_log_station_logs_attributes_0_time").timeEntry({ show24Hours: true });
-  $("#boat_log_station_logs_attributes_1_time").timeEntry({ show24Hours: true });
+  $("#boat_log_station_logs_attributes_0_time").timeEntry({ show24Hours: true, minTime: "07:00", maxTime: "19:00" });
+  $("#boat_log_station_logs_attributes_1_time").timeEntry({ show24Hours: true, minTime: "07:00", maxTime: "19:00" });
 
     Number.prototype.toRad = function() {
       return this * Math.PI / 180;
@@ -159,16 +159,16 @@ $(function(){
     });
 
 
-  function alert24HourClock() {
-    $(".boatlog_time").on("focusout", function(){
-      var $time = $(this).val();
-      var b = ($time.split(":")[0]) + ($time.split(":")[1]);
-      var $time2 = parseInt(b, 10);
-      if ( $time2 >= "700" && $time2 <= "1900" ){
+  //function alert24HourClock() {
+    //$(".boatlog_time").on("focusout", function(){
+      //var $time = $(this).val();
+      //var b = ($time.split(":")[0]) + ($time.split(":")[1]);
+      //var $time2 = parseInt(b, 10);
+      //if ( $time2 >= "700" && $time2 <= "1900" ){
       
-      } else { alert("why are you diving in the dark?"); }
-    });
-  };
+      //} else { alert("why are you diving in the dark?"); }
+    //});
+  //};
 
-  alert24HourClock();
+  //alert24HourClock();
 });

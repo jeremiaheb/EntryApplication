@@ -72,7 +72,7 @@ GEM
     bootstrap-datepicker-rails (1.6.4.1)
       railties (>= 3.0)
     builder (3.2.3)
-    cancancan (1.17.0)
+    cancancan (2.2.0)
     capistrano (3.8.1)
       airbrussh (>= 1.0.0)
       i18n
@@ -288,7 +288,7 @@ DEPENDENCIES
   axlsx_rails
   blueimp-gallery
   bootstrap-datepicker-rails
-  cancancan (~> 1.10)
+  cancancan (~> 2.0)
   capistrano (~> 3.7, >= 3.7.1)
   capistrano-passenger (~> 0.2.0)
   capistrano-rails (~> 1.2)
@@ -329,4 +329,4 @@ RUBY VERSION
    ruby 2.4.0p0
 
 BUNDLED WITH
-   1.14.6
+   1.15.0

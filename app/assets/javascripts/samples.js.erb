@@ -376,6 +376,8 @@ $(function(){
 
   $("#validateAnimals").click(function(){
     $('.validateIcon').empty();
+
+    $('#animals div.fields:hidden').remove();
     
     $('#animals').find('input:enabled').each(function(){
       $('.new_sample, .edit_sample').validate().element(this);
@@ -417,10 +419,10 @@ $(function(){
       $("#sample_sample_date").datepicker("setDate", new Date());
     };
 
-    $("#sample_dive_begin_time").timeEntry({ show24Hours: true });
-    $("#sample_dive_end_time").timeEntry({ show24Hours: true });
-    $("#sample_sample_begin_time").timeEntry({ show24Hours: true });
-    $("#sample_sample_end_time").timeEntry({ show24Hours: true });
+    $("#sample_dive_begin_time").timeEntry({ show24Hours: true, minTime: "07:00", maxTime: "19:00" });
+  $("#sample_dive_end_time").timeEntry({ show24Hours: true, minTime: "07:00", maxTime: "19:00" });
+    $("#sample_sample_begin_time").timeEntry({ show24Hours: true, minTime: "07:00", maxTime: "19:00" });
+    $("#sample_sample_end_time").timeEntry({ show24Hours: true, minTime: "07:00", maxTime: "19:00" });
 
 
 
@@ -905,18 +907,18 @@ $(function(){
   alertSpeciesSizes();
 
 
-  function alert24HourClock() {
-    $("#sample_dive_begin_time, #sample_dive_end_time, #sample_sample_begin_time, #sample_sample_end_time, .boatlog_time").on("focusout", function(){
-      var $time = $(this).val();
-      var b = ($time.split(":")[0]) + ($time.split(":")[1]);
-      var $time2 = parseInt(b, 10);
-      if ( $time2 >= "700" && $time2 <= "1900" ){
+  <%#function alert24HourClock() {%>
+    <%#$("#sample_dive_begin_time, #sample_dive_end_time, #sample_sample_begin_time, #sample_sample_end_time, .boatlog_time").on("focusout", function(){%>
+      <%#var $time = $(this).val();%>
+      <%#var b = ($time.split(":")[0]) + ($time.split(":")[1]);%>
+      <%#var $time2 = parseInt(b, 10);%>
+      <%#if ( $time2 >= "700" && $time2 <= "1900" ){%>
       
-      } else { alert("why are you diving in the dark?"); }
-    });
-  };
+      <%#} else { alert("why are you diving in the dark?"); }%>
+    <%#});%>
+  <%#};%>
 
-  alert24HourClock();
+  <%#alert24HourClock();%>
   $('#submitButton').attr('disabled', true);
 
 });

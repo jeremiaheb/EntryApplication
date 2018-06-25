@@ -15,8 +15,8 @@ $(function(){
     $("#boat_log_date").datepicker("setDate", new Date());
   };
 
-  $("#boat_log_station_logs_attributes_0_time").timeEntry({ show24Hours: true });
-  $("#boat_log_station_logs_attributes_1_time").timeEntry({ show24Hours: true });
+  $("#boat_log_station_logs_attributes_0_time").timeEntry({ show24Hours: true, minTime: "07:00", maxTime: "19:00" });
+  $("#boat_log_station_logs_attributes_1_time").timeEntry({ show24Hours: true, minTime: "07:00", maxTime: "19:00" });
 
     Number.prototype.toRad = function() {
       return this * Math.PI / 180;

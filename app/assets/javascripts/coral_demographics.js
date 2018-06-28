@@ -18,7 +18,7 @@ $(function(){
     $("#coral_demographic_sample_date").datepicker("setDate", new Date());
   };
 
-  $("#coral_demographic_sample_begin_time").timeEntry({ show24Hours: true, minTime: "07:00", maxTime: "19:00" });
+  $("#coral_demographic_sample_begin_time").timeEntry({ show24Hours: true, minTime: "06:00", maxTime: "20:00" });
 
   $(".demo_corals").find(".coralSpecies").select2(); 
   $(document).on('nested:fieldAdded', function(event){

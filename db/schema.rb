@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170501212007) do
+ActiveRecord::Schema.define(version: 20190408150944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -178,12 +178,21 @@ ActiveRecord::Schema.define(version: 20170501212007) do
     t.integer "min_depth"
     t.integer "max_depth"
     t.float   "max_vert_height"
-    t.integer "cnt_less_than_20"
-    t.integer "cnt_20_less_than_50"
-    t.integer "cnt_50_less_than_100"
-    t.integer "cnt_100_less_than_150"
-    t.integer "cnt_150_less_than_200"
-    t.integer "cnt_greater_than_200"
+    t.integer "meter_mark_1"
+    t.integer "meter_mark_2"
+    t.integer "meter_mark_3"
+    t.integer "meter_mark_4"
+    t.integer "meter_mark_5"
+    t.integer "meter_mark_6"
+    t.integer "meter_mark_7"
+    t.integer "meter_mark_8"
+    t.integer "meter_mark_9"
+    t.integer "meter_mark_10"
+    t.integer "meter_mark_11"
+    t.integer "meter_mark_12"
+    t.integer "meter_mark_13"
+    t.integer "meter_mark_14"
+    t.integer "meter_mark_15"
   end
 
   create_table "sample_animals", force: true do |t|

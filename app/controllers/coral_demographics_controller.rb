@@ -1,13 +1,13 @@
 class CoralDemographicsController < ApplicationController
 
-  before_filter :authenticate_diver!
+  before_action :authenticate_diver!
   load_and_authorize_resource
 
   # GET /coral_demographics
   # GET /coral_demographics.json
   def index
     def proof_by_diver(d)
-      Diver.find(d).diver_proofing_coral_demo
+      Diver.find(d.id).diver_proofing_coral_demo
     end
     if current_diver.role == 'admin'
       @coral_demographics = CoralDemographic.all

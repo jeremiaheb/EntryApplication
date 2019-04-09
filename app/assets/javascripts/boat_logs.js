@@ -159,16 +159,16 @@ $(function(){
     });
 
 
-  function alert24HourClock() {
-    $(".boatlog_time").on("focusout", function(){
-      var $time = $(this).val();
-      var b = ($time.split(":")[0]) + ($time.split(":")[1]);
-      var $time2 = parseInt(b, 10);
-      if ( $time2 >= "700" && $time2 <= "1900" ){
+  //function alert24HourClock() {
+    //$(".boatlog_time").on("focusout", function(){
+      //var $time = $(this).val();
+      //var b = ($time.split(":")[0]) + ($time.split(":")[1]);
+      //var $time2 = parseInt(b, 10);
+      //if ( $time2 >= "700" && $time2 <= "1900" ){
       
-      } else { alert("why are you diving in the dark?"); }
-    });
-  };
+      //} else { alert("why are you diving in the dark?"); }
+    //});
+  //};
 
-  alert24HourClock();
+  //alert24HourClock();
 });

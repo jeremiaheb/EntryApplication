@@ -1,7 +1,7 @@
 class DashboardController < ApplicationController
  
-  before_filter :authenticate_diver!
-  before_filter :manager_or_admin?
+  before_action :authenticate_diver!
+  before_action :manager_or_admin?
  
  def show
   #binding.pry

@@ -1,4 +1,8 @@
 class CoverCatsController < ApplicationController
+
+  before_action :authenticate_diver!
+  load_and_authorize_resource
+
   # GET /cover_cats
   # GET /cover_cats.json
   def index

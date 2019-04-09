@@ -1,4 +1,8 @@
 class CoralsController < ApplicationController
+
+  before_action :authenticate_diver!
+  load_and_authorize_resource
+
   # GET /corals
   # GET /corals.json
   def index

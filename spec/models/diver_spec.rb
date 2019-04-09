@@ -38,7 +38,7 @@ describe Diver do
 
     context '#admin?' do
       it 'returns true' do
-        expect(user.admin?).to be_true
+        expect(user.admin?).to be true
       end
     end
   end
@@ -48,7 +48,7 @@ describe Diver do
 
     context '#manager?' do
       it 'returns true' do
-        expect(user.manager?).to be_true
+        expect(user.manager?).to be true
       end
     end
   end
@@ -58,7 +58,7 @@ describe Diver do
 
     context '#diver?' do
       it 'returns true' do
-        expect(user.diver?).to be_true
+        expect(user.diver?).to be true
       end
     end
   end

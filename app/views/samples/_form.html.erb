@@ -47,28 +47,28 @@
         <div class="control-group">
           <label class="control-label">Dive Begin Time</label>
           <div class="controls">
-            <%= f.text_field :dive_begin_time, { :class => 'tab_1 timimg', :tabindex => "1" } %>
+            <%= f.text_field :dive_begin_time, {value: @sample.try(:dive_begin_time).try(:strftime, "%H:%M"), :class => 'tab_1 timimg', :tabindex => "1" } %>
           </div>
         </div>
 
         <div class="control-group">
           <label class="control-label">Dive End Time</label>
           <div class="controls">
-            <%= f.text_field :dive_end_time, { :class => 'tab_1 timimg', :tabindex => "1" } %>
+            <%= f.text_field :dive_end_time, {value: @sample.try(:dive_end_time).try(:strftime, "%H:%M"), :class => 'tab_1 timimg', :tabindex => "1" } %>
           </div>
         </div>
 
         <div class="control-group">
           <label class="control-label">Sample Begin Time</label>
           <div class="controls">
-            <%= f.text_field :sample_begin_time, { :class => 'tab_1 timimg', :tabindex => "1" } %>
+            <%= f.text_field :sample_begin_time, {value: @sample.try(:sample_begin_time).try(:strftime, "%H:%M"), :class => 'tab_1 timimg', :tabindex => "1" } %>
           </div>
         </div>
       
         <div class="control-group">
           <label class="control-label">Sample End Time</label>
           <div class="controls">
-            <%= f.text_field :sample_end_time, { :class => 'tab_1 timing', :tabindex => "1" } %>
+            <%= f.text_field :sample_end_time, {value: @sample.try(:sample_end_time).try(:strftime, "%H:%M"), :class => 'tab_1 timimg', :tabindex => "1" } %>
           </div>
         </div>
       </div>
@@ -202,7 +202,7 @@
 <div id="speciesSection" class="sectionDiv">
   <div class='section_3'>
 
-      <div class="btn-group" data-toggle="buttons-radio">
+      <div class="btn-group">
         <button class='btn btn-primary time_seen_button active' type='button' id='timeSeen1' Value='1' >First 5 Minutes </button>
         <button class='btn btn-primary time_seen_button' type='button' id='timeSeen2' Value='2'>5 to 10 Minutes </button>
         <button class='btn btn-primary time_seen_button' type='button' id='timeSeen3' Value='3'>After 10 Minutes </button>

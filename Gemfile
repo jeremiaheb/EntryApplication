@@ -1,45 +1,55 @@
 source 'https://rubygems.org'
 
-ruby '1.9.3'
-gem 'rails', '4.0.2'
+ruby "2.4.0"
+gem 'rails', '5.1.1'
 
 gem 'pg'
 gem 'thin'
-gem 'protected_attributes'
-gem 'sass-rails'
-gem 'coffee-rails'
-gem 'therubyracer', '>=0.11.4'
-gem 'uglifier',     '>= 1.0.3'
+gem 'protected_attributes_continued'
+gem 'json'
+gem 'multi_json'
 
-gem 'jquery-ui-rails'
+gem 'sass-rails', '5.0.6'
+gem 'coffee-rails'
+gem 'therubyracer'
+gem 'uglifier'
+gem 'sprockets', '3.6.3'
+gem 'jquery-ui-rails', '~>5.0'
 gem 'jquery-rails'
-gem 'jquery-datatables-rails', :git => 'git://github.com/rweng/jquery-datatables-rails.git'
+gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 gem 'twitter-bootstrap-rails'
 gem 'less-rails-bootstrap'
-gem 'select2-rails'
+gem 'bootstrap-datepicker-rails'
+gem 'select2-rails', '3.2.1'
 gem 'nested_form'
 gem 'devise'
-gem 'cancan'
+gem 'cancancan', '~>2.0'
 gem 'prawn', :git => 'git://github.com/prawnpdf/prawn.git'
+gem 'prawn-table'
 gem 'axlsx_rails'
-gem 'capistrano', '=2.15.4'
-gem "net-ssh", "~> 2.7.0"
+gem "net-ssh"
 gem 'figaro'
 gem "blueimp-gallery"
+gem 'jquery-validation-rails'
+
+gem 'capistrano', '~> 3.7', '>= 3.7.1'
+gem 'capistrano-rails', '~> 1.2'
+gem 'capistrano-passenger', '~> 0.2.0'
+gem 'capistrano-rbenv', '~> 2.1'
 
 group :production do
   gem 'rails_12factor'
 end
 
 group :test do
-  gem 'rspec-rails', '~> 2.14'
+  gem 'rspec-rails', '3.5.1'
   #gem 'coco'
-  gem 'factory_girl_rails'
 end
 group :development, :test do
   gem 'ruby-prof'
   gem 'rails-erd'
   gem 'pry-rails'
   gem 'pry-remote'
-  gem 'quiet_assets'
+  gem 'factory_girl_rails'
+  #gem 'quiet_assets'
 end

@@ -5,7 +5,7 @@ belongs_to :benthic_cover
 
   validates :min_depth,               :presence => true
   validates :max_depth,               :presence => true
-  validates :max_vert_height,         :presence => true
+  validates :rug_meters_completed,    :presence => true
   validates :meter_mark_1,            :presence => true
   validates :meter_mark_2,            :presence => true
   validates :meter_mark_3,            :presence => true
@@ -15,12 +15,12 @@ belongs_to :benthic_cover
   validates :meter_mark_7,            :presence => true
   validates :meter_mark_8,            :presence => true
   validates :meter_mark_9,            :presence => true
-  validates :meter_mark_10,            :presence => true
-  validates :meter_mark_11,            :presence => true
-  validates :meter_mark_12,            :presence => true
-  validates :meter_mark_13,            :presence => true
-  validates :meter_mark_14,            :presence => true
-  validates :meter_mark_15,            :presence => true
+  validates :meter_mark_10,           :presence => true
+  validates :meter_mark_11,           :presence => true
+  validates :meter_mark_12,           :presence => true
+  validates :meter_mark_13,           :presence => true
+  validates :meter_mark_14,           :presence => true
+  validates :meter_mark_15,           :presence => true
 
 
   def category_sum

@@ -442,7 +442,7 @@ $(function(){
     });
 
     $.validator.addMethod("lessThanEqualTo", function(value, element, params){
-      return value <= $(params).val();
+      return Number(value) <= Number($(params).val());
     });
     
 // Check that a species record does not have overlapping sizes with another

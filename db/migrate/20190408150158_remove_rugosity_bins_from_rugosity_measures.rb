@@ -1,4 +1,4 @@
-class RemoveRugosityBinsFromRugosityMeasures < ActiveRecord::Migration
+class RemoveRugosityBinsFromRugosityMeasures < ActiveRecord::Migration[5.1]
   def change
     remove_column :rugosity_measures, :cnt_less_than_20,      :integer
     remove_column :rugosity_measures, :cnt_20_less_than_50,   :integer

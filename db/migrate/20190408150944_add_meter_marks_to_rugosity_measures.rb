@@ -1,4 +1,4 @@
-class AddMeterMarksToRugosityMeasures < ActiveRecord::Migration
+class AddMeterMarksToRugosityMeasures < ActiveRecord::Migration[5.1]
   def change
     add_column :rugosity_measures, :meter_mark_1,   :integer
     add_column :rugosity_measures, :meter_mark_2,   :integer

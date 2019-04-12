@@ -86,6 +86,15 @@ $(function(){
   );
 
 
+    $.validator.addMethod("notGreaterThan100", function(value, element, params) {
+    
+        return Number(value) + Number($(element).parent().find('[id$="old_mortality"]').val()) <= 100 ;;
+ 
+    },
+    "Old Mortality and Recent Mortality connot be greater than 100"
+  );
+
+
     $(".new_coral_demographic, .edit_coral_demographic").validate({
 
       errorElement: "span",
@@ -179,7 +188,8 @@ $(function(){
       $('[name*="recent_mortality"]').each(function(){
         $(this).rules('add', {
           required: true,
-          number: true
+          number: true,
+          notGreaterThan100: true
         });
       });
       $('[name*="bleach_condition"]').each(function(){

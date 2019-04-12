@@ -7,10 +7,12 @@ class BenthicCoverPdf < Prawn::Document
       sample_head
       blank5
       depth_and_rugosity
-      topography
+      topography1
+      topography2
       benthic_fauna
       esa_corals
       notes
+      blank6
       species_data_27
       start_new_page
     end
@@ -36,7 +38,7 @@ class BenthicCoverPdf < Prawn::Document
    data = [ [ {content: "Depth and Rugosity", align: :center, colspan: 2}],
             [ {content: "Min Depth:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.min_depth}", border_left_width: 0} ],
             [ {content: "Max Depth:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.max_depth}", border_left_width: 0} ],
-            [ {content: "Max vert. height:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.max_vert_height}", border_left_width: 0} ]
+            [ {content: "Rug comp.:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.rug_meters_completed}", border_left_width: 0} ]
           ]
 
    table data,
@@ -44,16 +46,18 @@ class BenthicCoverPdf < Prawn::Document
      :column_widths => { 0 => 50, 1 => 50 }
   end
   
-  def topography
+  def topography1
     move_up 68
     indent(105) do  
       data = [ [ {content: "Topography", align: :center, colspan: 2}],
-        [ {content: "0-19:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.cnt_less_than_20}", border_left_width: 0} ],
-        [ {content: "20-49:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.cnt_20_less_than_50}", border_left_width: 0} ],
-        [ {content: "50-99:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.cnt_50_less_than_100}", border_left_width: 0} ],
-        [ {content: "100-149:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.cnt_100_less_than_150}", border_left_width: 0} ],
-        [ {content: "150-199:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.cnt_150_less_than_200}", border_left_width: 0} ],
-        [ {content: ">200:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.cnt_greater_than_200}", border_left_width: 0} ]
+        [ {content: "meter_1:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.meter_mark_1}", border_left_width: 0} ],
+        [ {content: "meter_2:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.meter_mark_2}", border_left_width: 0} ],
+        [ {content: "meter_3:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.meter_mark_3}", border_left_width: 0} ],
+        [ {content: "meter_4:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.meter_mark_4}", border_left_width: 0} ],
+        [ {content: "meter_5:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.meter_mark_5}", border_left_width: 0} ],
+        [ {content: "meter_6:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.meter_mark_6}", border_left_width: 0} ],
+        [ {content: "meter_7:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.meter_mark_7}", border_left_width: 0} ],
+        [ {content: "meter_8:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.meter_mark_8}", border_left_width: 0} ]
       ]
 
       table data,
@@ -62,10 +66,30 @@ class BenthicCoverPdf < Prawn::Document
 
     end
   end
+  
+  def topography2
+    move_up 153
+    indent(179) do  
+      data = [ [ {content: "Topography", align: :center, colspan: 2}],
+        [ {content: "meter_9:",  border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.meter_mark_9}",  border_left_width: 0} ],
+        [ {content: "meter_10:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.meter_mark_10}", border_left_width: 0} ],
+        [ {content: "meter_11:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.meter_mark_11}", border_left_width: 0} ],
+        [ {content: "meter_12:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.meter_mark_12}", border_left_width: 0} ],
+        [ {content: "meter_13:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.meter_mark_12}", border_left_width: 0} ],
+        [ {content: "meter_14:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.meter_mark_14}", border_left_width: 0} ],
+        [ {content: "meter_15:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.meter_mark_15}", border_left_width: 0} ]
+      ]
+
+      table data,
+        :cell_style => { :size => 8, :height => 17, :padding => 2  },
+        :column_widths => { 0 => 40, 1 => 40 }
+
+    end
+  end
 
   def benthic_fauna
-    move_up 119
-    indent(180) do  
+    move_up 136
+    indent(262) do  
       data = [ [ {content: "Benthic Fauna", align: :center, colspan: 2}],
         [ {content: "P. argus:", border_right_width: 0}, {content: "#{@benthic_cover.invert_belt.lobster_num}", border_left_width: 0} ],
         [ {content: "S. gigas:", border_right_width: 0}, {content: "#{@benthic_cover.invert_belt.conch_num}", border_left_width: 0} ],
@@ -80,7 +104,7 @@ class BenthicCoverPdf < Prawn::Document
 
   def esa_corals
     move_up 68
-    indent(285) do  
+    indent(365) do  
       data = [ [ {content: "ESA Corals", align: :center, colspan: 2}],
         [ {content: "A. cervicornis:", border_right_width: 0}, {content: "#{@benthic_cover.presence_belt.a_cervicornis}", border_left_width: 0} ],
         [ {content: "A. palmata:", border_right_width: 0}, {content: "#{@benthic_cover.presence_belt.a_palmata}", border_left_width: 0} ],
@@ -100,7 +124,7 @@ class BenthicCoverPdf < Prawn::Document
   
   def notes
     move_up 136
-    indent(410) do  
+    indent(490) do  
       data = [
               [ {content: "#{@benthic_cover.sample_description}"} ]
             ]
@@ -111,6 +135,13 @@ class BenthicCoverPdf < Prawn::Document
 
     end
   end
+
+ def blank6
+    data = [[""]]
+    table data,
+      :cell_style => {:height => 15, :border_width => 0},
+      :column_widths => { 0 => 100 }
+ end
 
  def species_data_27
    table spp_1_27, 

@@ -5,16 +5,26 @@ belongs_to :benthic_cover
 
   validates :min_depth,               :presence => true
   validates :max_depth,               :presence => true
-  validates :max_vert_height,         :presence => true
-  validates :cnt_less_than_20,        :presence => true
-  validates :cnt_20_less_than_50,     :presence => true
-  validates :cnt_50_less_than_100,    :presence => true
-  validates :cnt_100_less_than_150,   :presence => true
-  validates :cnt_150_less_than_200,   :presence => true
-  validates :cnt_greater_than_200,    :presence => true
+  validates :rug_meters_completed,    :presence => true
+  validates :meter_mark_1,            :presence => true, :if => "rug_meters_completed >= 1"
+  validates :meter_mark_2,            :presence => true, :if => "rug_meters_completed >= 2" 
+  validates :meter_mark_3,            :presence => true, :if => "rug_meters_completed >= 3" 
+  validates :meter_mark_4,            :presence => true, :if => "rug_meters_completed >= 4"
+  validates :meter_mark_5,            :presence => true, :if => "rug_meters_completed >= 5"
+  validates :meter_mark_6,            :presence => true, :if => "rug_meters_completed >= 6"
+  validates :meter_mark_7,            :presence => true, :if => "rug_meters_completed >= 7"
+  validates :meter_mark_8,            :presence => true, :if => "rug_meters_completed >= 8"
+  validates :meter_mark_9,            :presence => true, :if => "rug_meters_completed >= 9"
+  validates :meter_mark_10,           :presence => true, :if => "rug_meters_completed >= 10"
+  validates :meter_mark_11,           :presence => true, :if => "rug_meters_completed >= 11"
+  validates :meter_mark_12,           :presence => true, :if => "rug_meters_completed >= 12"
+  validates :meter_mark_13,           :presence => true, :if => "rug_meters_completed >= 13"
+  validates :meter_mark_14,           :presence => true, :if => "rug_meters_completed >= 14"
+  validates :meter_mark_15,           :presence => true, :if => "rug_meters_completed >= 15"
 
 
   def category_sum
-    [cnt_less_than_20, cnt_20_less_than_50, cnt_50_less_than_100, cnt_100_less_than_150, cnt_150_less_than_200, cnt_greater_than_200].sum
+    [meter_mark_1, meter_mark_2].sum
   end
+
 end

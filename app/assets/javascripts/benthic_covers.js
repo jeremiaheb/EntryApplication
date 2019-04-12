@@ -4,6 +4,8 @@
 //#
 //#
 
+
+
 $(function(){
  
   if(!EA.onRailsPage('benthic_covers', ['edit', 'new'])) {
@@ -27,12 +29,30 @@ $(function(){
   });
 
 
+    function disable_rugosity_meter_marks (){
+      
+      var $rugIndexGreater = $('#benthic_cover_rugosity_measure_attributes_rug_meters_completed').val() - 1;
+      var $rugIndexLess = $('#benthic_cover_rugosity_measure_attributes_rug_meters_completed').val();
+
+
+      $(".RugosityCat:lt(" + $rugIndexLess + ")").attr("disabled", false);
+      $(".RugosityCat:gt(" + $rugIndexGreater + ")").val("").attr("disabled", true);
+
+    };
+  
+    disable_rugosity_meter_marks();
+
+  $('#benthic_cover_rugosity_measure_attributes_rug_meters_completed').on('focusout', function(){
+    disable_rugosity_meter_marks();
+  });  
+    
+
+
     function getRugosityTotals() {
       var $rugosityTotals = 0;
         $(".rugosityCategories").find(".RugosityCat").each(function(){
           $rugosityTotals += parseInt($(this).val());
         });
-        console.log($rugosityTotals);
       $("#RugosityTotalDisplay").val($rugosityTotals);
     };
 
@@ -81,6 +101,26 @@ $(function(){
         $(".add_nested_fields").trigger("click");
       }
     });
+  
+  
+  $("#lpiSubmit").click(function(e) {
+    e.preventDefault();
+
+    
+    $(".new_benthic_cover, .edit_benthic_cover").validate().cancelSubmit = true;
+    
+    $('.benthic_covers').find('input:enabled').each(function(){
+      $('.new_benthic_cover, .edit_benthic_cover').validate().element(this);
+    });
+
+    var $errors = $(".benthic_covers").find('input:visible.error').length + $(".benthic_covers").find('select:visible.error').length;
+
+    if ($errors == 0 ) {
+      $(".formContainer :input").not(this).attr('disabled', false);
+      $(".new_benthic_cover, .edit_benthic_cover").submit();
+    }
+
+  });
 
 
       $.validator.addMethod("fieldID",function(value,element){
@@ -145,7 +185,8 @@ $(function(){
                       },
                 'benthic_cover[meters_completed]': {
                         required: true,
-                        digits: true
+                        digits: true,
+                        max: 15
                       },
                 'benthic_cover[sample_description]': {
                         maxlength: 150
@@ -191,31 +232,68 @@ $(function(){
                         required: true,
                         digits: true
                       },
-                'benthic_cover[rugosity_measure_attributes][max_vert_height]': {
+                'benthic_cover[rugosity_measure_attributes][rug_meters_completed]': {
                         required: true,
-                        number: true
+                        digits: true,
+                        max: 15
                       },
-                'benthic_cover[rugosity_measure_attributes][cnt_less_than_20]': {
-                        required: true,
-                        digits: true
-                      },
-                'benthic_cover[rugosity_measure_attributes][cnt_20_less_than_50]': {
+                'benthic_cover[rugosity_measure_attributes][meter_mark_1]': {
                         required: true,
                         digits: true
                       },
-                'benthic_cover[rugosity_measure_attributes][cnt_50_less_than_100]': {
+                'benthic_cover[rugosity_measure_attributes][meter_mark_2]': {
                         required: true,
                         digits: true
                       },
-                'benthic_cover[rugosity_measure_attributes][cnt_100_less_than_150]': {
+                'benthic_cover[rugosity_measure_attributes][meter_mark_3]': {
                         required: true,
                         digits: true
                       },
-                'benthic_cover[rugosity_measure_attributes][cnt_150_less_than_200]': {
+                'benthic_cover[rugosity_measure_attributes][meter_mark_4]': {
                         required: true,
                         digits: true
                       },
-                'benthic_cover[rugosity_measure_attributes][cnt_greater_than_200]': {
+                'benthic_cover[rugosity_measure_attributes][meter_mark_5]': {
+                        required: true,
+                        digits: true
+                      },
+                'benthic_cover[rugosity_measure_attributes][meter_mark_6]': {
+                        required: true,
+                        digits: true
+                      },
+                'benthic_cover[rugosity_measure_attributes][meter_mark_7]': {
+                        required: true,
+                        digits: true
+                      },
+                'benthic_cover[rugosity_measure_attributes][meter_mark_8]': {
+                        required: true,
+                        digits: true
+                      },
+                'benthic_cover[rugosity_measure_attributes][meter_mark_9]': {
+                        required: true,
+                        digits: true
+                      },
+                'benthic_cover[rugosity_measure_attributes][meter_mark_10]': {
+                        required: true,
+                        digits: true
+                      },
+                'benthic_cover[rugosity_measure_attributes][meter_mark_11]': {
+                        required: true,
+                        digits: true
+                      },
+                'benthic_cover[rugosity_measure_attributes][meter_mark_12]': {
+                        required: true,
+                        digits: true
+                      },
+                'benthic_cover[rugosity_measure_attributes][meter_mark_13]': {
+                        required: true,
+                        digits: true
+                      },
+                'benthic_cover[rugosity_measure_attributes][meter_mark_14]': {
+                        required: true,
+                        digits: true
+                      },
+                'benthic_cover[rugosity_measure_attributes][meter_mark_15]': {
                         required: true,
                         digits: true
                       },

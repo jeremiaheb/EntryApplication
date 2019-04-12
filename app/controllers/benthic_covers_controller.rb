@@ -7,7 +7,7 @@ class BenthicCoversController < ApplicationController
   # GET /benthic_covers.json
   def index
     def proof_by_diver(d)
-      Diver.find(d.id).diver_proofing_benthic_cover
+      Diver.find(d).diver_proofing_benthic_cover
     end
     if current_diver.role == 'admin'
       @benthic_covers = BenthicCover.all
@@ -112,7 +112,10 @@ class BenthicCoversController < ApplicationController
 
     params.require(:benthic_cover).permit(:id, '_destroy', :boatlog_manager_id, :diver_id, :buddy, :field_id, :sample_date, :sample_begin_time, :habitat_type_id, :meters_completed, :sample_description,
                                          point_intercepts_attributes: [:id, '_destroy', :cover_cat_id, :hardbottom_num, :softbottom_num, :rubble_num],
-                                         rugosity_measure_attributes: [:id, '_destroy', :min_depth, :max_depth, :max_vert_height, :cnt_less_than_20, :cnt_20_less_than_50, :cnt_50_less_than_100, :cnt_100_less_than_150, :cnt_150_less_than_200, :cnt_greater_than_200],
+                                         rugosity_measure_attributes: [:id, '_destroy', :min_depth, :max_depth, :rug_meters_completed, :meter_mark_1,
+                                                                      :meter_mark_2, :meter_mark_3, :meter_mark_4, :meter_mark_5, :meter_mark_6,
+                                                                      :meter_mark_7, :meter_mark_8, :meter_mark_9, :meter_mark_10, :meter_mark_11,
+                                                                      :meter_mark_12, :meter_mark_13, :meter_mark_14, :meter_mark_15],
                                          invert_belt_attributes: [:id, '_destroy', :lobster_num, :conch_num, :diadema_num],
                                          presence_belt_attributes: [:id, '_destroy', :a_cervicornis, :a_palmata, :d_cylindrus, :m_annularis, :m_faveolata, :m_franksi, :m_ferox])
   

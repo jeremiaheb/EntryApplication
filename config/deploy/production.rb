@@ -11,6 +11,8 @@ set :stage, :production
 server '146.226.109.213', user: 'jeremiaheb', roles: %w{web app}
 
 
+set :default_env, {  "PASSENGER_INSTANCE_REGISTRY_DIR" => "/var/run/passenger-instreg"  }
+
 # role-based syntax
 # ==================
 

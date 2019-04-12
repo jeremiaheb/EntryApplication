@@ -75,7 +75,7 @@ class BenthicCoverPdf < Prawn::Document
         [ {content: "meter_10:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.meter_mark_10}", border_left_width: 0} ],
         [ {content: "meter_11:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.meter_mark_11}", border_left_width: 0} ],
         [ {content: "meter_12:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.meter_mark_12}", border_left_width: 0} ],
-        [ {content: "meter_13:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.meter_mark_12}", border_left_width: 0} ],
+        [ {content: "meter_13:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.meter_mark_13}", border_left_width: 0} ],
         [ {content: "meter_14:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.meter_mark_14}", border_left_width: 0} ],
         [ {content: "meter_15:", border_right_width: 0}, {content: "#{@benthic_cover.rugosity_measure.meter_mark_15}", border_left_width: 0} ]
       ]

@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -16,137 +15,136 @@ ActiveRecord::Schema.define(version: 20190410133952) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "animals", force: true do |t|
-    t.string   "species_code"
-    t.string   "scientific_name"
-    t.string   "common_name"
-    t.integer  "max_size"
-    t.integer  "min_size"
-    t.integer  "max_number"
+  create_table "animals", id: :serial, force: :cascade do |t|
+    t.string "species_code", limit: 255
+    t.string "scientific_name", limit: 255
+    t.string "common_name", limit: 255
+    t.integer "max_size"
+    t.integer "min_size"
+    t.integer "max_number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "benthic_covers", force: true do |t|
-    t.integer  "diver_id"
-    t.integer  "habitat_type_id"
-    t.integer  "buddy"
-    t.string   "field_id"
-    t.date     "sample_date"
-    t.time     "sample_begin_time"
-    t.integer  "meters_completed"
-    t.text     "sample_description"
+  create_table "benthic_covers", id: :serial, force: :cascade do |t|
+    t.integer "diver_id"
+    t.integer "habitat_type_id"
+    t.integer "buddy"
+    t.string "field_id", limit: 255
+    t.date "sample_date"
+    t.time "sample_begin_time"
+    t.integer "meters_completed"
+    t.text "sample_description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "boatlog_manager_id"
+    t.integer "boatlog_manager_id"
   end
 
-  create_table "boat_logs", force: true do |t|
-    t.string   "primary_sample_unit"
-    t.date     "date"
-    t.integer  "boatlog_manager_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "boatlog_managers", force: true do |t|
-    t.string   "agency"
-    t.string   "firstname"
-    t.string   "lastname"
+  create_table "boat_logs", id: :serial, force: :cascade do |t|
+    t.string "primary_sample_unit", limit: 255
+    t.date "date"
+    t.integer "boatlog_manager_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "coral_demographics", force: true do |t|
-    t.integer  "diver_id"
-    t.integer  "habitat_type_id"
-    t.integer  "buddy"
-    t.string   "field_id"
-    t.date     "sample_date"
-    t.time     "sample_begin_time"
-    t.integer  "meters_completed"
-    t.text     "sample_description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "boatlog_manager_id"
-    t.integer  "percent_hardbottom"
-  end
-
-  create_table "corals", force: true do |t|
-    t.string   "code"
-    t.string   "scientific_name"
+  create_table "boatlog_managers", id: :serial, force: :cascade do |t|
+    t.string "agency", limit: 255
+    t.string "firstname", limit: 255
+    t.string "lastname", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "cover_cats", force: true do |t|
-    t.string   "name"
+  create_table "coral_demographics", id: :serial, force: :cascade do |t|
+    t.integer "diver_id"
+    t.integer "habitat_type_id"
+    t.integer "buddy"
+    t.string "field_id", limit: 255
+    t.date "sample_date"
+    t.time "sample_begin_time"
+    t.integer "meters_completed"
+    t.text "sample_description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "code"
-    t.string   "common"
+    t.integer "boatlog_manager_id"
+    t.integer "percent_hardbottom"
   end
 
-  create_table "demographic_corals", force: true do |t|
+  create_table "corals", id: :serial, force: :cascade do |t|
+    t.string "code", limit: 255
+    t.string "scientific_name", limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "cover_cats", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string "code", limit: 255
+    t.string "common", limit: 255
+  end
+
+  create_table "demographic_corals", id: :serial, force: :cascade do |t|
     t.integer "coral_demographic_id"
     t.integer "coral_id"
-    t.float   "max_diameter"
-    t.float   "perpendicular_diameter"
-    t.float   "height"
-    t.float   "old_mortality"
-    t.float   "recent_mortality"
-    t.string  "bleach_condition"
-    t.string  "disease"
+    t.float "max_diameter"
+    t.float "perpendicular_diameter"
+    t.float "height"
+    t.float "old_mortality"
+    t.float "recent_mortality"
+    t.string "bleach_condition", limit: 255
+    t.string "disease", limit: 255
     t.integer "meter_mark"
   end
 
-  create_table "diver_samples", force: true do |t|
+  create_table "diver_samples", id: :serial, force: :cascade do |t|
     t.integer "sample_id"
     t.integer "diver_id"
     t.boolean "primary_diver"
   end
 
-  create_table "divers", force: true do |t|
-    t.string   "diver_number"
-    t.string   "diver_name"
+  create_table "divers", id: :serial, force: :cascade do |t|
+    t.string "diver_number", limit: 255
+    t.string "diver_name", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "active"
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+    t.boolean "active"
+    t.string "email", limit: 255, default: "", null: false
+    t.string "encrypted_password", limit: 255, default: "", null: false
+    t.string "reset_password_token", limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0
+    t.integer "sign_in_count", default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "username"
-    t.string   "firstname"
-    t.string   "lastname"
-    t.string   "role"
-    t.integer  "boatlog_manager_id"
+    t.string "current_sign_in_ip", limit: 255
+    t.string "last_sign_in_ip", limit: 255
+    t.string "username", limit: 255
+    t.string "firstname", limit: 255
+    t.string "lastname", limit: 255
+    t.string "role", limit: 255
+    t.integer "boatlog_manager_id"
+    t.index ["boatlog_manager_id"], name: "index_divers_on_boatlog_manager_id", unique: true
   end
 
-  add_index "divers", ["boatlog_manager_id"], name: "index_divers_on_boatlog_manager_id", unique: true, using: :btree
-
-  create_table "habitat_types", force: true do |t|
-    t.string   "habitat_name"
-    t.string   "habitat_description"
+  create_table "habitat_types", id: :serial, force: :cascade do |t|
+    t.string "habitat_name", limit: 255
+    t.string "habitat_description", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "region"
+    t.string "region", limit: 255
   end
 
-  create_table "invert_belts", force: true do |t|
+  create_table "invert_belts", id: :serial, force: :cascade do |t|
     t.integer "benthic_cover_id"
     t.integer "lobster_num"
     t.integer "conch_num"
     t.integer "diadema_num"
   end
 
-  create_table "point_intercepts", force: true do |t|
+  create_table "point_intercepts", id: :serial, force: :cascade do |t|
     t.integer "benthic_cover_id"
     t.integer "cover_cat_id"
     t.integer "hardbottom_num"
@@ -154,7 +152,7 @@ ActiveRecord::Schema.define(version: 20190410133952) do
     t.integer "rubble_num"
   end
 
-  create_table "presence_belts", force: true do |t|
+  create_table "presence_belts", id: :serial, force: :cascade do |t|
     t.integer "benthic_cover_id"
     t.integer "a_palmata"
     t.integer "a_cervicornis"
@@ -167,13 +165,13 @@ ActiveRecord::Schema.define(version: 20190410133952) do
     t.integer "a_lamarcki"
   end
 
-  create_table "rep_logs", force: true do |t|
+  create_table "rep_logs", id: :serial, force: :cascade do |t|
     t.integer "station_log_id"
-    t.string  "replicate"
+    t.string "replicate", limit: 255
     t.integer "diver_id"
   end
 
-  create_table "rugosity_measures", force: true do |t|
+  create_table "rugosity_measures", id: :serial, force: :cascade do |t|
     t.integer "benthic_cover_id"
     t.integer "min_depth"
     t.integer "max_depth"
@@ -195,7 +193,7 @@ ActiveRecord::Schema.define(version: 20190410133952) do
     t.integer "meter_mark_15"
   end
 
-  create_table "sample_animals", force: true do |t|
+  create_table "sample_animals", id: :serial, force: :cascade do |t|
     t.integer "sample_id"
     t.integer "animal_id"
     t.integer "number_individuals"
@@ -205,75 +203,75 @@ ActiveRecord::Schema.define(version: 20190410133952) do
     t.integer "time_seen"
   end
 
-  create_table "sample_types", force: true do |t|
-    t.string   "sample_type_name"
-    t.string   "sample_type_description"
+  create_table "sample_types", id: :serial, force: :cascade do |t|
+    t.string "sample_type_name", limit: 255
+    t.string "sample_type_description", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "samples", force: true do |t|
-    t.integer  "sample_type_id"
-    t.integer  "habitat_type_id"
-    t.date     "sample_date"
-    t.time     "dive_begin_time"
-    t.time     "dive_end_time"
-    t.time     "sample_begin_time"
-    t.time     "sample_end_time"
-    t.integer  "dive_depth"
-    t.integer  "sample_depth"
-    t.text     "fishing_gear"
-    t.string   "field_id"
-    t.integer  "underwater_visibility"
-    t.text     "sample_description"
-    t.integer  "sand_percentage"
-    t.integer  "hardbottom_percentage"
-    t.integer  "rubble_percentage"
+  create_table "samples", id: :serial, force: :cascade do |t|
+    t.integer "sample_type_id"
+    t.integer "habitat_type_id"
+    t.date "sample_date"
+    t.time "dive_begin_time"
+    t.time "dive_end_time"
+    t.time "sample_begin_time"
+    t.time "sample_end_time"
+    t.integer "dive_depth"
+    t.integer "sample_depth"
+    t.text "fishing_gear"
+    t.string "field_id", limit: 255
+    t.integer "underwater_visibility"
+    t.text "sample_description"
+    t.integer "sand_percentage"
+    t.integer "hardbottom_percentage"
+    t.integer "rubble_percentage"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "water_temp"
-    t.string   "current"
-    t.integer  "boatlog_manager_id"
-    t.integer  "substrate_max_depth"
-    t.integer  "substrate_min_depth"
-    t.float    "hard_verticle_relief"
-    t.float    "soft_verticle_relief"
-    t.integer  "hard_relief_cat_0"
-    t.integer  "hard_relief_cat_1"
-    t.integer  "hard_relief_cat_2"
-    t.integer  "hard_relief_cat_3"
-    t.integer  "hard_relief_cat_4"
-    t.integer  "soft_relief_cat_0"
-    t.integer  "soft_relief_cat_1"
-    t.integer  "soft_relief_cat_2"
-    t.integer  "soft_relief_cat_3"
-    t.integer  "soft_relief_cat_4"
-    t.integer  "sand_bare"
-    t.integer  "sand_macro_algae"
-    t.integer  "sand_seagrass"
-    t.integer  "sand_sponge"
-    t.string   "sand_pcov_other1_lab"
-    t.string   "sand_pcov_other2_lab"
-    t.integer  "sand_pcov_other1"
-    t.integer  "sand_pcov_other2"
-    t.integer  "hardbottom_algal_turf"
-    t.integer  "hardbottom_macro_algae"
-    t.integer  "hardbottom_live_coral"
-    t.integer  "hardbottom_octocoral"
-    t.integer  "hardbottom_sponge"
-    t.string   "hard_pcov_other1_lab"
-    t.string   "hard_pcov_other2_lab"
-    t.integer  "hard_pcov_other1"
-    t.integer  "hard_pcov_other2"
+    t.float "water_temp"
+    t.string "current", limit: 255
+    t.integer "boatlog_manager_id"
+    t.integer "substrate_max_depth"
+    t.integer "substrate_min_depth"
+    t.float "hard_verticle_relief"
+    t.float "soft_verticle_relief"
+    t.integer "hard_relief_cat_0"
+    t.integer "hard_relief_cat_1"
+    t.integer "hard_relief_cat_2"
+    t.integer "hard_relief_cat_3"
+    t.integer "hard_relief_cat_4"
+    t.integer "soft_relief_cat_0"
+    t.integer "soft_relief_cat_1"
+    t.integer "soft_relief_cat_2"
+    t.integer "soft_relief_cat_3"
+    t.integer "soft_relief_cat_4"
+    t.integer "sand_bare"
+    t.integer "sand_macro_algae"
+    t.integer "sand_seagrass"
+    t.integer "sand_sponge"
+    t.string "sand_pcov_other1_lab", limit: 255
+    t.string "sand_pcov_other2_lab", limit: 255
+    t.integer "sand_pcov_other1"
+    t.integer "sand_pcov_other2"
+    t.integer "hardbottom_algal_turf"
+    t.integer "hardbottom_macro_algae"
+    t.integer "hardbottom_live_coral"
+    t.integer "hardbottom_octocoral"
+    t.integer "hardbottom_sponge"
+    t.string "hard_pcov_other1_lab", limit: 255
+    t.string "hard_pcov_other2_lab", limit: 255
+    t.integer "hard_pcov_other1"
+    t.integer "hard_pcov_other2"
   end
 
-  create_table "station_logs", force: true do |t|
+  create_table "station_logs", id: :serial, force: :cascade do |t|
     t.integer "boat_log_id"
     t.integer "stn_number"
-    t.time    "time"
-    t.text    "comments"
-    t.float   "latitude"
-    t.float   "longitude"
+    t.time "time"
+    t.text "comments"
+    t.float "latitude"
+    t.float "longitude"
   end
 
 end

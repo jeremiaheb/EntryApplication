@@ -27,7 +27,7 @@
     <%= button_to('New LPI', new_benthic_cover_path, :method => "get", :class => 'btn btn-large btn-primary wrap')  %>   
   </div>
   <div id="downloadSampleButton"> 
-    <%= button_to('Download Proofing Report (.pdf)', benthic_covers_path(format: "pdf"), :method => "get", :class => 'btn btn-small btn-primary')  %>   
+    <%= button_to('Download Proofing Report (.pdf)', benthic_covers_path(format: "pdf", diver_id: current_diver.id), :method => "get", :class => 'btn btn-small btn-primary')  %>   
   </div>
 <% if !current_diver.diver? %>
   <div id="downloadXLSXButton"> 

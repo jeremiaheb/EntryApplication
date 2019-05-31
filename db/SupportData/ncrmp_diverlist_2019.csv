@@ -442,6 +442,6 @@ DIVER_NUM,DIVER_NAME,username,email,password,active,role
 447,WATTS_ALISON,watts_alison,alison@watts.com,watts_alison,TRUE,diver
 995,DAVIS_TYREE,davis_tyree,tyree@davis.com,davis_tyree,TRUE,
 996,IRMA_RESPONSE,irma_response,irma@response.com,irma_response,FALSE,
-997,biogeo_admin,biogeo_admin,bio@geo.com,biogeo_admin,FALSE,
-9998,RSMAS_ADMIN,rsmas_admin,need_new@something.com,rsmas_admin,FALSE,
-9999,SEFSC_ADMIN,sefsc_admin,jeremiah.blondeau@noaa.gov,sefsc_admin,FALSE,
+997,biogeo_admin,biogeo_admin,bio@geo.com,biogeo_admin,FALSE,admin
+9998,RSMAS_ADMIN,rsmas_admin,need_new@something.com,rsmas_admin,FALSE,admin
+9999,SEFSC_ADMIN,sefsc_admin,jeremiah.blondeau@noaa.gov,sefsc_admin,FALSE,admin

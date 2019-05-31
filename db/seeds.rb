@@ -37,30 +37,30 @@ open("#{Rails.root}/db/SupportData/ncrmp_diverlist_2019.csv") do |divers|
   end
 end
 
-Animal.delete_all
-Animal.connection.execute( 'ALTER SEQUENCE animals_id_seq RESTART WITH 1' )
-open("#{Rails.root}/db/SupportData/Fish_SpeciesList_2019.csv") do |animals|
-  animals.read.each_line do |animal|
-    SppCode, ScientificName, CommonName, MinSize, MaxSize, MaxNumber = animal.chomp.split(",")
-    Animal.create( :species_code => SppCode, :scientific_name => ScientificName, :common_name => CommonName, :min_size => MinSize, :max_size => MaxSize, :max_number => MaxNumber )
-  end
-end
+#Animal.delete_all
+#Animal.connection.execute( 'ALTER SEQUENCE animals_id_seq RESTART WITH 1' )
+#open("#{Rails.root}/db/SupportData/Fish_SpeciesList_2019.csv") do |animals|
+  #animals.read.each_line do |animal|
+    #SppCode, ScientificName, CommonName, MinSize, MaxSize, MaxNumber = animal.chomp.split(",")
+    #Animal.create( :species_code => SppCode, :scientific_name => ScientificName, :common_name => CommonName, :min_size => MinSize, :max_size => MaxSize, :max_number => MaxNumber )
+  #end
+#end
 
-Coral.delete_all
-Coral.connection.execute( 'ALTER SEQUENCE corals_id_seq RESTART WITH 1' )
-open("#{Rails.root}/db/SupportData/CoralSpecies_April2019.csv") do |corals|
-  corals.read.each_line do |coral|
-    Code, ScientificName, CommonName, Category = coral.chomp.split(",")
-    Coral.create( :scientific_name => ScientificName, :code => Code)
-  end
-end
+#Coral.delete_all
+#Coral.connection.execute( 'ALTER SEQUENCE corals_id_seq RESTART WITH 1' )
+#open("#{Rails.root}/db/SupportData/CoralSpecies_April2019.csv") do |corals|
+  #corals.read.each_line do |coral|
+    #Code, ScientificName, CommonName, Category = coral.chomp.split(",")
+    #Coral.create( :scientific_name => ScientificName, :code => Code)
+  #end
+#end
 
 
-CoverCat.delete_all
-CoverCat.connection.execute( 'ALTER SEQUENCE cover_cats_id_seq RESTART WITH 1' )
-open("#{Rails.root}/db/SupportData/LPISpeciesList_April2019.csv") do |corals|
-  corals.read.each_line do |coral|
-    Code, ScientificName, CommonName = coral.chomp.split(",")
-    CoverCat.create( :name => ScientificName, :code => Code, :common => CommonName)
-  end
-end
+#CoverCat.delete_all
+#CoverCat.connection.execute( 'ALTER SEQUENCE cover_cats_id_seq RESTART WITH 1' )
+#open("#{Rails.root}/db/SupportData/LPISpeciesList_April2019.csv") do |corals|
+  #corals.read.each_line do |coral|
+    #Code, ScientificName, CommonName = coral.chomp.split(",")
+    #CoverCat.create( :name => ScientificName, :code => Code, :common => CommonName)
+  #end
+#end

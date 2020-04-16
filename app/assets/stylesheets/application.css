@@ -498,9 +498,13 @@ input.timeSeen_3 {
 }
 
 .dataTables_filter, .dataTables_paginate {
-    vertical-align: top;
+    vertical-align: bottom;
     display: inline-block;
     *display: inline;
+}
+
+.pagination {
+    
 }
 
 .carousel-caption {

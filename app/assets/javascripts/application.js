@@ -52,13 +52,17 @@ $(function(){
       }
     );
     
-    $('.display').dataTable( {
+
+    $(document).ready(function(){
+
+    $('.display').DataTable( {
         //"sDom": "<'row'<'span7'lf>r>t<'row'<'span7'ip>>",
         "sDom": '<"top"ifp<"clear">>rt<"bottom"<"clear">>',
         "pagingType": "full"
     } );
 
-    $(document).ready(function(){
+
+
       $('form').attr('autocomplete', 'off');
 
       $('select').keypress(function(event) 

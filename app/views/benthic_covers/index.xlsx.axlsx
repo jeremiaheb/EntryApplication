@@ -13,7 +13,7 @@ wb.add_worksheet(name: "BenthicCoverSample") do |sampSheet|
                       'fieldid',
                       'meters_completed',
                       'LOBSTER_NUM',
-                      'CONCH NUM',
+                      'CONCH_NUM',
                       'DIADEMA_NUM',
                       'A_PALMATA',
                       'A_CERVICORNIS',

@@ -56,11 +56,11 @@ open("#{Rails.root}/db/SupportData/CoralSpecies_April2019.csv") do |corals|
 end
 
 
-#CoverCat.delete_all
-#CoverCat.connection.execute( 'ALTER SEQUENCE cover_cats_id_seq RESTART WITH 1' )
-#open("#{Rails.root}/db/SupportData/LPISpeciesList_April2019.csv") do |corals|
-  #corals.read.each_line do |coral|
-    #Code, ScientificName, CommonName = coral.chomp.split(",")
-    #CoverCat.create( :name => ScientificName, :code => Code, :common => CommonName)
-  #end
-#end
+CoverCat.delete_all
+CoverCat.connection.execute( 'ALTER SEQUENCE cover_cats_id_seq RESTART WITH 1' )
+open("#{Rails.root}/db/SupportData/LPISpeciesList_April2019.csv") do |corals|
+  corals.read.each_line do |coral|
+    Code, ScientificName, CommonName = coral.chomp.split(",")
+    CoverCat.create( :name => ScientificName, :code => Code, :common => CommonName)
+  end
+end

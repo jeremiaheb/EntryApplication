@@ -29,7 +29,7 @@ puts "Seeding database with data"
 
 Diver.delete_all
 Diver.connection.execute( 'ALTER SEQUENCE divers_id_seq RESTART WITH 1' )
-open("#{Rails.root}/db/SupportData/NCRMP_2020_DiverList.csv") do |divers|
+open("#{Rails.root}/db/SupportData/NCRMP_2020_Divers.csv") do |divers|
   divers.read.each_line do|diver|
     DiverNumber, DiverName, UserName, Email, Password, Active, Role = diver.chomp.split(",")
     Diver.create( :diver_number => DiverNumber, :diver_name => DiverName, :username => UserName, :email => Email, :password => Password, :active => Active, :role => Role )
@@ -46,21 +46,21 @@ end
   #end
 #end
 
-Coral.delete_all
-Coral.connection.execute( 'ALTER SEQUENCE corals_id_seq RESTART WITH 1' )
-open("#{Rails.root}/db/SupportData/CoralSpecies_April2019.csv") do |corals|
-  corals.read.each_line do |coral|
-    Code, ScientificName, CommonName, Category = coral.chomp.split(",")
-    Coral.create( :scientific_name => ScientificName, :code => Code)
-  end
-end
+#Coral.delete_all
+#Coral.connection.execute( 'ALTER SEQUENCE corals_id_seq RESTART WITH 1' )
+#open("#{Rails.root}/db/SupportData/CoralSpecies_April2019.csv") do |corals|
+  #corals.read.each_line do |coral|
+    #Code, ScientificName, CommonName, Category = coral.chomp.split(",")
+    #Coral.create( :scientific_name => ScientificName, :code => Code)
+  #end
+#end
 
 
-CoverCat.delete_all
-CoverCat.connection.execute( 'ALTER SEQUENCE cover_cats_id_seq RESTART WITH 1' )
-open("#{Rails.root}/db/SupportData/LPISpeciesList_April2019.csv") do |corals|
-  corals.read.each_line do |coral|
-    Code, ScientificName, CommonName = coral.chomp.split(",")
-    CoverCat.create( :name => ScientificName, :code => Code, :common => CommonName)
-  end
-end
+#CoverCat.delete_all
+#CoverCat.connection.execute( 'ALTER SEQUENCE cover_cats_id_seq RESTART WITH 1' )
+#open("#{Rails.root}/db/SupportData/LPISpeciesList_April2019.csv") do |corals|
+  #corals.read.each_line do |coral|
+    #Code, ScientificName, CommonName = coral.chomp.split(",")
+    #CoverCat.create( :name => ScientificName, :code => Code, :common => CommonName)
+  #end
+#end

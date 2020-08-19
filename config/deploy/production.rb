@@ -8,7 +8,7 @@
 # server "db.example.com", user: "deploy", roles: %w{db}
 
 set :stage, :production
-server '199.242.232.43', user: 'jeremiaheb', roles: %w{web app}
+server '199.242.232.49', user: 'jeremiaheb', roles: %w{web app}
 
 
 set :default_env, {  "PASSENGER_INSTANCE_REGISTRY_DIR" => "/var/run/passenger-instreg"  }

@@ -34,10 +34,8 @@ class BoatLogsController < ApplicationController
   # GET /boat_logs/new.json
   def new
     @boat_log = BoatLog.new
-    2.times do
       station = @boat_log.station_logs.build
       2.times { station.rep_logs.build }
-    end
 
     respond_to do |format|
       format.html # new.html.erb

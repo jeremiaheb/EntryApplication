@@ -30,14 +30,18 @@ $(function(){
 
 
     function disable_rugosity_meter_marks (){
-      
-      var $rugIndexGreater = $('#benthic_cover_rugosity_measure_attributes_rug_meters_completed').val() - 1;
       var $rugIndexLess = $('#benthic_cover_rugosity_measure_attributes_rug_meters_completed').val();
+        
+        $('.RugosityCat').each(function(index, el){
+            
+            var value = index + 1;
 
-
-      $(".RugosityCat:lt(" + $rugIndexLess + ")").attr("disabled", false);
-      $(".RugosityCat:gt(" + $rugIndexGreater + ")").val("").attr("disabled", true);
-
+	          if (value > parseInt($rugIndexLess)) { 
+              $(el).val("").removeClass("error").attr("disabled", true);
+              $(el).siblings("span").remove();
+            } else  { $(el).attr("disabled", false); }
+           }
+        );
     };
   
     disable_rugosity_meter_marks();

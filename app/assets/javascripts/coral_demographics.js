@@ -153,21 +153,21 @@ $(function(){
       $('[name*="meter_mark"]').each(function(){
         $(this).rules('add', {
           required: true,
-          number: true,
+          digits: true,
           min: 0
         });
       });
       $('[name*="max_diameter"]').each(function(){
         $(this).rules('add', {
           required: true,
-          number: true,
+          digits: true,
           min: 1
         });
       });
       $('[name*="perpendicular_diameter"]').each(function(){
         $(this).rules('add', {
           required: true,
-          number: true,
+          digits: true,
           min: 1,
           lessThan: true
         });
@@ -175,20 +175,20 @@ $(function(){
       $('[name*="height"]').each(function(){
         $(this).rules('add', {
           required: true,
-          number: true,
+          digits: true,
           min: 1
         });
       });
       $('[name*="old_mortality"]').each(function(){
         $(this).rules('add', {
           required: true,
-          number: true
+          digits: true
         });
       });
       $('[name*="recent_mortality"]').each(function(){
         $(this).rules('add', {
           required: true,
-          number: true,
+          digits: true,
           notGreaterThan100: true
         });
       });

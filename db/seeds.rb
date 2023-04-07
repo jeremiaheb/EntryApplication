@@ -29,7 +29,7 @@ puts "Seeding database with data"
 
 Diver.delete_all
 #Diver.connection.execute( 'ALTER SEQUENCE divers_id_seq RESTART WITH 1' )
-open("#{Rails.root}/db/SupportData/NCRMP_2022_Divers.csv") do |divers|
+open("#{Rails.root}/db/SupportData/NCRMP_Divers.csv") do |divers|
   divers.read.each_line do|diver|
     DiverNumber, DiverName, UserName, Email, Password, Active, Role = diver.chomp.split(",")
     Diver.create( :diver_number => DiverNumber, :diver_name => DiverName, :username => UserName, :email => Email, :password => Password, :active => Active, :role => Role )

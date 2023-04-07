@@ -310,18 +310,18 @@ $(function(){
     function validate_fields() {
       $('[name*="hardbottom_num"]').each(function(){
         $(this).rules('add', {
-          number: true,
+          digits: true,
           isOnlyCat: true
         });
       });
       $('[name*="softbottom_num"]').each(function(){
         $(this).rules('add', {
-          number: true
+          digits: true
         });
       });
       $('[name*="rubble_num"]').each(function(){
         $(this).rules('add', {
-          number: true
+          digits: true
         });
       });
 

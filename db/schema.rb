@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190410133952) do
+ActiveRecord::Schema.define(version: 20230407143317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,11 +89,11 @@ ActiveRecord::Schema.define(version: 20190410133952) do
   create_table "demographic_corals", id: :serial, force: :cascade do |t|
     t.integer "coral_demographic_id"
     t.integer "coral_id"
-    t.float "max_diameter"
-    t.float "perpendicular_diameter"
-    t.float "height"
-    t.float "old_mortality"
-    t.float "recent_mortality"
+    t.integer "max_diameter"
+    t.integer "perpendicular_diameter"
+    t.integer "height"
+    t.integer "old_mortality"
+    t.integer "recent_mortality"
     t.string "bleach_condition", limit: 255
     t.string "disease", limit: 255
     t.integer "meter_mark"

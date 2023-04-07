@@ -809,21 +809,21 @@ $(function(){
       $('[name*="number_individuals"]').each(function(){
         $(this).rules('add', {
           required: true,
-          number: true,
+          digits: true,
           isNotInPreviousTimePeriod: true
         });
       });
       $('[name*="average_length"]').each(function(){
         $(this).rules('add', {
           requiredIfEnabled: true,
-          number: true,
+          digits: true,
           doesNotHaveOverlap: true
         });
       });
       $('[name*="min_length"]').each(function(){
         $(this).rules('add', {
           requiredIfEnabled: true,
-          number: true,
+          digits: true,
           lessThan: true,
           doesNotHaveOverlap: true
         });
@@ -831,7 +831,7 @@ $(function(){
       $('[name*="max_length"]').each(function(){
         $(this).rules('add', {
           requiredIfEnabled: true,
-          number: true,
+          digits: true,
           greaterThanEqualToAvg: true,
           greaterThanEqualToMin: true,
           doesNotHaveOverlap: true

@@ -6,7 +6,7 @@ describe PointIntercept do
     let(:point_intercept) { FactoryGirl.create(:point_intercept) }
     
     it "has valid factory" do
-      point_intercept.should be_valid
+      expect(point_intercept).to be_valid
     end
 
     it "should have correct cover_total" do

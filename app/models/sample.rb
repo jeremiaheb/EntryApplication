@@ -52,10 +52,10 @@ class Sample < ActiveRecord::Base
   validates :soft_verticle_relief,         :presence => true, :numericality => true
 
   validates :hard_relief_cat_0,           :presence => true, :numericality => { :only_integer => true, :greater_than => 0 }
-  validates :hard_relief_cat_1,           :presence => true, :if => "hard_verticle_relief > 0.2", :numericality => { :only_integer => true, :greater_than => 0 }
-  validates :hard_relief_cat_2,           :presence => true, :if => "hard_verticle_relief > 0.5", :numericality => { :only_integer => true, :greater_than => 0 }
-  validates :hard_relief_cat_3,           :presence => true, :if => "hard_verticle_relief > 1.0", :numericality => { :only_integer => true, :greater_than => 0 }
-  validates :hard_relief_cat_4,           :presence => true, :if => "hard_verticle_relief > 1.5", :numericality => { :only_integer => true, :greater_than => 0 }
+  validates :hard_relief_cat_1,           :presence => true, if: -> {hard_verticle_relief > 0.2}, :numericality => { :only_integer => true, :greater_than => 0 }
+  validates :hard_relief_cat_2,           :presence => true, if: -> {hard_verticle_relief > 0.5}, :numericality => { :only_integer => true, :greater_than => 0 }
+  validates :hard_relief_cat_3,           :presence => true, if: -> {hard_verticle_relief > 1.0}, :numericality => { :only_integer => true, :greater_than => 0 }
+  validates :hard_relief_cat_4,           :presence => true, if: -> {hard_verticle_relief > 1.5}, :numericality => { :only_integer => true, :greater_than => 0 }
 
   validate :hard_relief_cats_equal_100
   validate :soft_relief_cats_equal_100

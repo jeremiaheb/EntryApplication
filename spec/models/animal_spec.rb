@@ -4,12 +4,12 @@ describe Animal do
   describe 'validations' do
     let(:animal) { FactoryGirl.create(:animal) }
       it "should have valid factory" do
-        animal.should be_valid
+        expect(animal).to be_valid
       end
         
       [ :species_code, :scientific_name, :common_name, :max_size, :min_size, :max_number].each do |attribute|
         it "is invalid without #{attribute}" do
-          FactoryGirl.build(:animal, attribute => nil).should_not be_valid
+          expect(FactoryGirl.build(:animal, attribute => nil)).not_to be_valid
         end
       end
   end

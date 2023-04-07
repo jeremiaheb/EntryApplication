@@ -5,12 +5,12 @@ describe BoatlogManager do
   describe 'validations' do
     let(:boatlog_manager) { FactoryGirl.create(:boatlog_manager) }
       it "should have valid factory" do
-        boatlog_manager.should be_valid
+        expect(boatlog_manager).to be_valid
       end
         
       [:agency, :firstname, :lastname].each do |attribute|
         it "is invalid without #{attribute}" do
-          FactoryGirl.build(:boatlog_manager, attribute => nil).should_not be_valid
+          expect(FactoryGirl.build(:boatlog_manager, attribute => nil)).not_to be_valid
         end
       end
   end

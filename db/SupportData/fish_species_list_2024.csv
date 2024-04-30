@@ -1,0 +1,482 @@
+SPP_CD,sci_name,common_name,min_size,max_size,max_num
+ABL HIAN,Ablennes hians,flat needlefish,20,70,50
+ABU SAXA,Abudefduf saxatilis,sergeant major,2,18,100
+ABU TAUR,Abudefduf taurus,night sergeant,2,18,100
+ACA ASPE,Acanthemblemaria aspera,roughhead blenny,1,4,20
+ACA BAHI,Acanthurus bahianus,ocean surgeon,2,38,50
+ACA CHAP,Acanthemblemaria chaplini,papillose blenny,1,5,20
+ACA CHIR,Acanthurus chirurgus,doctorfish,2,36,50
+ACA COER,Acanthurus coeruleus,blue tang,2,38,50
+ACA MARI,Acanthemblemaria maria,secretary blenny,1,5,5
+ACA POLY,Acanthostracion polygonia,honeycomb cowfish,5,46,5
+ACA QUAD,Acanthostracion quadricornis,scrawled cowfish,5,46,5
+ACA SOLA,Acanthocybium solandri,wahoo,50,210,3
+ACA SPE.,Acanthurus sp.,surgeonfish species,2,38,50
+ACA SPIN,Acanthemblemaria spinosa,spinyhead blenny,1,5,5
+ACE DEND,Acentronura dendritica,pipehorse,1,8,5
+ACN SPE.,Acanthemblemaria species,tube blenny Acanthemblemaria,1,5,5
+AET NARI,Aetobatus narinari,spotted eagle ray,50,244,10
+AHL EGMO,Ahlia egmontis,key worm eel,20,38,2
+ALB VULP,Albula vulpes,bonefish,10,50,2
+ALE CILI,Alectis ciliaris,African pompano,10,110,5
+ALP AFER,Alphestes afer,mutton hamlet,10,30,10
+ALU MONO,Aluterus monoceros,unicorn filefish,1,60,5
+ALU SCHO,Aluterus schoepfii,orange filefish,10,51,5
+ALU SCRI,Aluterus scriptus,scrawled filefish,30,91,5
+ALU SPE.,Aluterus sp.,filefish species,1,60,5
+AMB PINO,Amblycirrhitus pinos,redspotted hawkfish,2,10,5
+ANC LYOL,Anchoa lyolepis,dusky anchovy,1,9,1000
+ANI SURI,Anisotremus surinamensis,black margate,15,60,5
+ANI VIRG,Anisotremus virginicus,porkfish,3,36,30
+ANT OCEL,Antennarius ocellatus,ocellated frogfish,1,38,5
+APO AURO,Apogon aurolineatus,bridle cardinalfish,1,7,5
+APO BINO,Apogon binotatus,barred cardinalfish,1,12,5
+APO LACH,Apogon lachneri,whitestar cardinalfish,1,12,5
+APO MACU,Apogon maculatus,flamefish,1,12,5
+APO PHEN,Apogon phenax,mimic cardinalfish,1,12,5
+APO PSEU,Apogon pseudomaculatus,twospot cardinalfish,1,12,5
+APO QUAD,Apogon quadrisquamatus,sawcheek cardinalfish,1,7,5
+APO TOWN,Apogon townsendi,belted cardinalfish,1,7,5
+ARC PROB,Archosargus probatocephalus,sheepshead,5,91,10
+ARC RHOM,Archosargus rhomboidalis,sea bream,5,33,10
+ARI BALE,Ariosoma balearicum,bandtooth conger,10,30,10
+AST GUTT,Astroscopus guttatus,northern stargazer,1,50,20
+AST PUNC,Astrapogon puncticulatus,blackfin cardinalfish,1,12,5
+AST SPE.,Astrapogon sp.,cardinalfish species,1,12,5
+AST STEL,Astrapogon stellatus,conchfish,1,8,5
+AST Y-GR,Astroscopus y-graecum,southern stargazer,1,44,20
+ATH STIP,Atherinomorus stipes,hardhead silverside,1,10,1000
+AUL MACU,Aulostomus maculatus,Atlantic trumpetfish,15,91,5
+BAL CAPR,Balistes capriscus,gray triggerfish,15,30,10
+BAL SPE.,Balistes sp.,triggerfish species,5,60,50
+BAL VETU,Balistes vetula,queen triggerfish,15,61,10
+BAT SOPO,Bathygobious soporator,frillfin goby,1,5,5
+BEL SPE.,needlefish species,needlefish species,5,61,25
+BLE SPE.,blenny species,blenny species,1,10,50
+BOD PULC,Bodianus pulchellus,spotfin hogfish,3,23,25
+BOD RUFU,Bodianus rufus,Spanish hogfish,3,60,5
+BOL BOQU,Bollmannia boqueronensis,white-eye goby,1,5,5
+BOT LUNA,Bothus lunatus,peacock flounder,10,45,5
+BOT OCEL,Bothus ocellatus,eyed flounder,10,15,5
+BOT SPE.,Bothus species,lefteye flounders,10,45,5
+BRO BARB,Brotula barbata,Atlantic bearded brotula,10,70,1
+CAL BAJO,Calamus bajonado,jolthead porgy,5,60,10
+CAL CALA,Calamus calamus,saucereye porgy,3,41,10
+CAL LEUC,Calamus leucosteus,whitebone porgy,5,46,10
+CAL NODO,Calamus nodosus,knobbed porgy,5,50,10
+CAL PENA,Calamus pennatula,pluma porgy ,5,50,10
+CAL PENN,Calamus penna,sheepshead porgy,5,46,10
+CAL PROR,Calamus proridens,littlehead porgy,5,46,10
+CAL SPE.,porgy species,porgy species,5,30,10
+CAN JAME,Canthigaster jamestyleri,goldface toby,2,12,5
+CAN MACR,Cantherhines macrocerus,whitespotted filefish,10,46,5
+CAN PULL,Cantherhines pullus,orangespotted filefish,10,22,5
+CAN ROST,Canthigaster rostrata,sharpnose puffer,2,11,15
+CAN SPE.,Canthigaster species,puffers,2,12,15
+CAN SUFF,Canthidermis sufflamen,ocean triggerfish,20,61,20
+CAR BART,Caranx bartholomaei,yellow jack,20,100,10
+CAR CRYS,Caranx crysos,blue runner,5,50,100
+CAR FALC,Carcharhinus falciformis,silky shark,100,350,3
+CAR HIPP,Caranx hippos,crevalle jack,25,150,100
+CAR LATU,Caranx latus,horse-eye jack,25,75,100
+CAR LEUC,Carcharhinus leucas,bull shark,100,350,3
+CAR LIMB,Carcharhinus limbatus,blacktip shark,100,250,3
+CAR LUGU,Caranx lugubris,black jack,25,100,100
+CAR OBSC,Carcharhinus obscurus,dusky shark,100,420,3
+CAR PERE,Carcharhinus perezii,reef shark,100,300,3
+CAR PLUM,Carcharhinus plumbeus,sandbar shark,100,240,3
+CAR RUBE,Caranx ruber,bar jack,5,60,100
+CAR SPE.,Caranx sp.,jack species,1,100,100
+CEN ARGI,Centropyge argi,cherubfish,1,8,10
+CEN AURA,Centropyge aurantonotus,flameback angelfish,1,8,10
+CEN OCYU,Centropristis ocyurus,bank sea bass,5,35,10
+CEN STRI,Centropristis striata,black sea bass,5,60,10
+CEN UNDE,Centropomus undecimalis,common snook,30,120,5
+CEP CRUE,Cephalopholis cruentata,graysby,8,30,5
+CEP FULV,Cephalopholis fulva,coney,10,41,5
+CHA CAPI,Chaetodon capistratus,foureye butterflyfish,2,15,10
+CHA FABE,Chaetodipterus faber,Atlantic spadefish,20,91,30
+CHA LIMB,Chaenopsis limbaughi,yellowface pikeblenny,1,9,20
+CHA OCEL,Chaetodon ocellatus,spotfin butterflyfish,2,20,10
+CHA OCLL,Chaenopsis ocellata,bluethroat pikeblenny,2,12,5
+CHA SEDE,Chaetodon sedentarius,reef butterflyfish,3,15,10
+CHA SPE.,Chaenopsis species,pikeblenny species,2,12,5
+CHA STRI,Chaetodon striatus,banded butterflyfish,2,15,10
+CHI ANTE,Chilomycterus antennatus,bridled burrfish,5,23,10
+CHI ATIN,Chilomycterus atinga,spotted burrfish,5,36,10
+CHI SCHO,Chilomycterus schoepfii,striped burrfish,5,25,10
+CHL CHRY,Chloroscombus chrysurus,Atlantic bumper,5,30,100
+CHR ATHE,Chriodorus atherinoides,hardhead halfbeak,5,25,5
+CHR CYAN,Chromis cyanea,blue chromis,2,13,75
+CHR ENCH,Chromis enchrysura,yellowtail reeffish,1,10,25
+CHR INSO,Chromis insolata,sunshinefish,1,10,20
+CHR MULT,Chromis multilineata,brown chromis,2,17,75
+CHR SCOT,Chromis scotti,purple reeffish,2,10,50
+CLE PARR,Clepticus parrae,creole wrasse,2,30,100
+CON TRIP,Conger triporiceps,manytooth conger,10,30,10
+COR DICR,Coryphopterus dicrus,colon goby,1,5,5
+COR EIDO,Coryphopterus eidolon,pallid goby,1,5,5
+COR GLAU,Coryphopterus glaucofraenum,bridled goby,2,8,100
+COR LIPE,Coryphopterus lipernes,peppermint goby,1,3,5
+COR PERS,Coryphopterus personatus,masked goby,1,4,500
+COR PUNC,Coryphopterus punctipectophorus,spotted goby,1,5,5
+COR SPE.,Coryphopterus sp.,goby species,1,5,50
+COR TORT,Coryphopterus tortugae,patch-reef goby,1,5,5
+COR VENE,Coryphopterus venezuelae,sand-canyon goby,1,5,5
+COS ELUC,Cosmocampus elucens,shortfin pipefish,1,12,5
+CRY ROSE,Cryptotomus roseus,bluelip parrotfish,3,13,20
+CTE SAEP,Ctenogobius saepepallens,dash goby,1,5,5
+CTE STIG,Ctenogobius stigmaticus,marked goby,1,5,5
+DAC VOLI,Dactylopterus volitans,flying gurnard,5,46,5
+DAS AMER,Dasyatis americana,southern stingray,30,180,5
+DEC MACA,Decapterus macarellus,mackerel scad,5,30,100
+DEC PUNC,Decapterus punctatus,round scad,5,23,100
+DEC SPE.,Decapterus sp.,scad species,5,30,100
+DER INER,Dermatolepis inermis,marbled grouper,50,91,2
+DIO HOLO,Diodon holocanthus,balloonfish,5,50,10
+DIO HYST,Diodon hystrix,porcupinefish,5,91,10
+DIO SPE.,puffer species,puffer species,5,50,10
+DIP ARGE,Diplodus argenteus,silver porgy,5,30,10
+DIP BIVI,Diplectrum bivittatum,dwarf sand perch,3,25,5
+DIP FORM,Diplectrum formosum,sand perch,3,30,5
+DIP HOLB,Diplodus holbrookii,spottail pinfish,5,46,10
+DOR MEGA,Doratonotus megalepis,dwarf wrasse,3,8,25
+ECH CATE,Echidna catenata,chain moray,20,60,3
+ECH NAUC,Echeneis naucrates,sharksucker,10,90,2
+ECH NEUC,Echeneis neucratoides,whitefin sharksucker,20,75,5
+ELA BIPI,Elagatis bipinnulata,rainbow runner,30,110,100
+ELA CHAN,Elacatinus chancei,shortstripe goby,1,5,5
+ELA EVEL,Elacatinus evelynae,sharknose goby,1,5,5
+ELA HORS,Elacatinus horsti,yellowline goby,1,5,5
+ELA LOUI,Elacatinus louisae,spotlight goby,1,5,5
+ELA MACR,Elacatinus macrodon,tiger goby,1,5,5
+ELA MULT,Elacatinus multifasciatus,greenbanded goby,1,5,5
+ELA OCEA,Elacatinus oceanops,neon goby,1,5,20
+ELA PROC,Elacatinus prochilos,broadstripe goby,1,5,5
+ELA RAND,Elacatinus randalli,yellownose goby,1,5,5
+ELA SAUC,Elacatinus saucrum,leopard goby,1,5,5
+ELA SPE.,shark species,shark species,100,250,3
+ELA XANT,Elacatinus xanthiprora,yellowprow goby,1,4,5
+ELO SAUR,Elops saurus,ladyfish,50,91,10
+EMB BAHA,Emblemariopsis bahamensis,blackhead blenny,1,3,20
+EMB DIAP,Emblemariopsis diaphana,glass blenny,1,4,5
+EMB PAND,Emblemaria pandionis,sailfin blenny,1,7,20
+EMB SPE.,Emblemaria species,tube blenny Emblemaria,1,5,5
+EMM ATLA,Emmelichthyops atlanticus,bonnetmouth,2,25,100
+EMP SPE.,Emblemariopsis species,tube blenny Emblemariopsis,1,5,5
+ENC CARY,Enchelycore carychroa,chestnut moray,5,33,5
+ENC NIGR,Enchelycore nigricans,viper moray,20,80,5
+ENG SPE.,Engraulidae species,anchovy species,2,30,1000
+ENN ALTI,Enneanectes altivelis,lofty triplefin,1,5,5
+ENN BOEH,Enneanectes boehlkei,roughhead triplefin,1,4,10
+ENN SPE.,Enneanectes species,triplefin species,1,5,10
+ENT NIGR,Entomacrodus nigricans,pearl blenny,1,5,5
+EPI ADSC,Epinephelus adscensionis,rock hind,20,60,5
+EPI DRUM,Epinephelus drummondhayi,speckled hind,20,60,6
+EPI FLAV,Epinephelus flavolimbatus,yellowedge grouper,30,75,2
+EPI GUTT,Epinephelus guttatus,red hind,20,60,5
+EPI ITAJ,Epinephelus itajara,goliath grouper,75,244,5
+EPI MORI,Epinephelus morio,red grouper,30,91,5
+EPI NIVE,Epinephelus niveatus,Snowy grouper,10,100,1
+EPI STRI,Epinephelus striatus,Nassau grouper,30,122,2
+EQU LANC,Equetus lanceolatus,jackknife-fish,3,23,10
+EQU PUNC,Equetus punctatus,spotted drum,3,28,10
+EUC ARGE,Eucinostomus argenteus,spotfin mojarra,5,20,50
+EUC GULA,Eucinostomus gula,silver jenny,5,18,50
+EUC JONE,Eucinostomus jonesii,slender mojarra,5,20,10
+EUC LEFR,Eucinostomus lefroyi,mottled mojarra,5,23,10
+EUC MELA,Eucinostomus melanopterus,flagfin mojarra,2,25,10
+EUT ALLE,Euthynnus alletteratus,little tunny,25,100,5
+FIS TABA,Fistularia tabacaria,bluespotted cornetfish,30,180,5
+GAL CUVI,Galeocerdo cuvier,tiger shark,100,732,1
+GER CINE,Gerres cinereus,yellowfin mojarra,5,41,50
+GER SPE.,Gerres sp.,mojarra species,5,20,50
+GIN CIRR,Ginglymostoma cirratum,nurse shark,30,425,3
+GNA THOM,Gnatholepis thompsoni,goldspot goby,1,8,5
+GOB DILE,Gobiosoma dilepis,orangeside goby,1,5,5
+GOB GROS,Gobiosoma grosvenori,rockcut goby,1,5,5
+GOB SPE.,goby species,goby species,1,5,5
+GRA LORE,Gramma loreto,fairy basslet,1,8,20
+GYM FUNE,Gymnothorax funebris,green moray,20,244,5
+GYM MILI,Gymnothorax miliaris,goldentail moray,20,60,5
+GYM MORI,Gymnothorax moringa,spotted moray,20,122,5
+GYM NIGR,Gymnothorax nigromarginatus,blackedge moray,20,122,5
+GYM SAXI,Gymnothorax saxicola,honeycomb moray,20,60,5
+GYM SPE.,Gymnothorax species,moray eel Gymnothorax,20,120,5
+GYM VICI,Gymnothorax vicinus,purplemouth moray,20,122,5
+HAE ALBU,Haemulon album,margate,25,69,10
+HAE AURO,Haemulon aurolineatum,tomtate,3,25,250
+HAE CARB,Haemulon carbonarium,caesar grunt,3,38,30
+HAE CHRY,Haemulon chrysargyreum,smallmouth grunt,3,25,50
+HAE FLAV,Haemulon flavolineatum,French grunt,3,30,100
+HAE MACR,Haemulon macrostomum,Spanish grunt,3,43,10
+HAE MELA,Haemulon melanurum,cottonwick,3,33,50
+HAE PARR,Haemulon parra,sailors choice,3,43,25
+HAE PLUM,Haemulon plumierii,white grunt,3,46,100
+HAE SCIU,Haemulon sciurus,bluestriped grunt,3,46,100
+HAE SPE.,Haemulon sp.,grunt species,3,40,250
+HAE STRI,Haemulon striatum,striped grunt,5,28,100
+HAL BIVI,Halichoeres bivittatus,slippery dick,2,23,50
+HAL BURE,Halichoeres burekae,mardi gras wrasse,2,20,25
+HAL CAUD,Halichoeres caudalis,painted wrasse,3,21,25
+HAL CYAN,Halichoeres cyanocephalus,yellowcheek wrasse,3,25,25
+HAL GARN,Halichoeres garnoti,yellowhead wrasse,2,20,25
+HAL MACU,Halichoeres maculipinna,clown wrasse,2,17,25
+HAL PICT,Halichoeres pictus,rainbow wrasse,3,18,25
+HAL POEY,Halichoeres poeyi,blackear wrasse,2,20,10
+HAL RADI,Halichoeres radiatus,puddingwife,3,46,5
+HAL SPE.,Halichoeres species,wrasse species,2,40,50
+HAR HUME,Harengula humeralis,redear sardine,1,18,1000
+HAR JAGU,Harengula jaguana,scaled sardine,1,18,1000
+HEM BRAS,Hemiramphus brasiliensis,ballyhoo,5,40,1000
+HEM SIMU,Hemiemblemaria simula,wrasse blenny,1,10,20
+HET CRUE,Heteropriacanthus cruentatus,glasseye snapper,5,34,50
+HET LONG,Heteroconger longissimus,brown garden eel,5,50,100
+HIP EREC,Hippocampus erectus,lined seahorse,5,15,1
+HIP REID,Hippocampus reidi,longsnout seahorse,5,15,1
+HIP SPE.,Hippocampus species,seahorse/pipefish species,1,8,2
+HOA SPE.,Holacanthus species,angelfish Holacanthus,3,45,10
+HOL ADSC,Holocentrus adscensionis,squirrelfish,5,41,10
+HOL BERM,Holacanthus bermudensis,blue angelfish,3,46,10
+HOL CILI,Holacanthus ciliaris,queen angelfish,4,46,10
+HOL RUFU,Holocentrus rufus,longspine squirrelfish,5,32,10
+HOL SPE.,squirrelfish species,squirrelfish species,5,20,10
+HOL TOWN,Holocanthus sp.,townsend angelfish,3,46,10
+HOL TRIC,Holacanthus tricolor,rock beauty,3,30,10
+HYP ABER,Hypoplectrus aberrans,yellowbelly hamlet,3,13,5
+HYP BERM,Hypleurochilus bermudensis,barred blenny,1,10,5
+HYP CHLO,Hypoplectrus chlorurus,yellowtail hamlet,3,13,5
+HYP GEMM,Hypoplectrus gemma,blue hamlet,3,13,5
+HYP GUMM,Hypoplectrus gummigutta,golden hamlet,3,12,5
+HYP GUTT,Hypoplectrus guttavarius,shy hamlet,3,13,5
+HYP HARR,Hypoatherina harringtonensis,reef silverside,1,10,1000
+HYP HYBR,Hypoplectrus hybrid,hybrid hamlet,3,13,5
+HYP INDI,Hypoplectrus indigo,indigo hamlet,3,14,5
+HYP NIGR,Hypoplectrus nigricans,black hamlet,3,15,5
+HYP PUEL,Hypoplectrus puella,barred hamlet,3,15,5
+HYP SPE.,Hypoplectrus sp.,hamlet species,3,13,5
+HYP TANN,Hypoplectrus tann,tan hamlet,3,13,5
+HYP UNIC,Hypoplectrus unicolor,butter hamlet,3,13,10
+INE VITT,Inermia vittata,boga,5,23,100
+IST PLAT,Istiophorus platypterus,sailfish,100,250,1
+JEN SPE.,Jenkinsia sp.,herring species,1,10,1000
+KYP CINE,Kyphosus cinerascens,Topsail chub,75,10,25
+KYP SECT,Kyphosus sectatrix,Bermuda chub,15,76,50
+KYP VAIG,Kyphosus vaigiensis,Brassy chub,10,75,25
+LAB BUCC,Labrisomus bucciferus,puffcheek blenny,1,6,10
+LAB FILA,Labrisomus filamentosus,quillfin blenny,1,6,10
+LAB GOBI,Labrisomus gobio,palehead blenny,1,6,10
+LAB KALI,Labrisomus kalisherae,downy blenny,1,6,10
+LAB NIGR,Labrisomus nigricinctus,spotcheek blenny,1,6,10
+LAB NUCH,Labrisomus nuchipinnis,hairy blenny,1,23,10
+LAB SPE.,Labrisomid sp.,labrisomid blenny species,1,6,10
+LAC BICA,Lactophrys bicaudalis,spotted trunkfish,5,41,5
+LAC MAXI,Lachnolaimus maximus,hogfish,10,91,10
+LAC SPE.,Lactophrys species,trunkfish species,2,50,5
+LAC TRIG,Lactophrys trigonus,trunkfish,5,48,5
+LAC TRIQ,Lactophrys triqueter,smooth trunkfish,10,30,5
+LAG RHOM,Lagodon rhomboides,pinfish,5,35,10
+LIO EUKR,Liopropoma eukrines,wrasse basslet,1,13,10
+LIO MOWB,Liopropoma mowbrayi,cave basslet,1,13,10
+LIO RUBE,Liopropoma rubre,peppermint basslet,1,9,10
+LON MICR,Lonchopisthus micrognathus,swordtail jawfish,2,10,10
+LOP CYPR,Lophogobius cyprinoides,crested goby,1,5,5
+LUT ANAL,Lutjanus analis,mutton snapper,30,76,5
+LUT APOD,Lutjanus apodus,schoolmaster,10,60,30
+LUT BUCC,Lutjanus buccanella,blackfin snapper,5,76,20
+LUT CAMP,Lutjanus campechanus,red snapper,40,91,5
+LUT CYAN,Lutjanus cyanopterus,cubera snapper,50,152,5
+LUT GRIS,Lutjanus griseus,gray snapper,10,60,100
+LUT JOCU,Lutjanus jocu,dog snapper,30,91,3
+LUT MAHO,Lutjanus mahogoni,mahogany snapper,15,38,15
+LUT SPE.,snapper species,snapper species,5,75,100
+LUT SYNA,Lutjanus synagris,lane snapper,10,38,50
+LYT SPIL,Lythrypnus spilus,Bluegold goby,1,4,5
+MAL AURO,Malacoctenus aurolineatus,goldline blenny,1,6,10
+MAL BOEH,Malacoctenus boehlkei,diamond blenny,1,6,10
+MAL GILL,Malacoctenus gilli,dusky blenny,1,8,10
+MAL MACR,Malacoctenus macropus,rosy blenny,1,6,10
+MAL PLUM,Malacanthus plumieri,sand tilefish,10,60,5
+MAL TRIA,Malacoctenus triangulatus,saddled blenny,1,6,10
+MAL VERS,Malacoctenus versicolor,barfin blenny,1,6,10
+MAN BIRO,Manta birostris,giant manta,100,670,5
+MEG ATLA,Megalops atlanticus,tarpon,50,240,10
+MEL NIGE,Melichthys niger,black durgon,5,41,50
+MEN SPE.,Menidia sp.,silverside species,3,15,500
+MIC CARR,Microgobius carri,Seminole goby,1,13,50
+MIC CHRY,Microspathodon chrysurus,yellowtail damselfish,2,19,10
+MIC MICR,Microgobius microlepis,banner goby,1,5,5
+MIC SIGN,Microgobius signatus,dashback goby,1,5,5
+MIC SPE.,Microgobius species,goby Microgobius,1,5,5
+MON CILI,Monacanthus ciliatus,fringed filefish,1,20,5
+MON TUCK,Monacanthus tuckeri,slender filefish,1,9,5
+MUG CEPH,Mugil cephalus,striped mullet,20,75,100
+MUL MART,Mulloidichthys martinicus,yellow goatfish,3,40,50
+MUR RETI,Muraena retifera,reticulate moray,20,60,5
+MYC ACUT,Mycteroperca acutirostris,western comb grouper,10,75,1
+MYC BONA,Mycteroperca bonaci,black grouper,30,122,5
+MYC INTE,Mycteroperca interstitialis,yellowmouth grouper,30,76,5
+MYC MICR,Mycteroperca microlepis,gag,30,91,5
+MYC PHEN,Mycteroperca phenax,scamp,20,60,10
+MYC TIGR,Mycteroperca tigris,tiger grouper,30,107,5
+MYC VENE,Mycteroperca venenosa,yellowfin grouper,30,91,5
+MYR BREV,Myrichthys breviceps,sharptail eel,50,107,2
+MYR JACO,Myripristis jacobus,blackbar soldierfish,5,22,10
+MYR OCEL,Myrichthys ocellatus,goldspotted eel,50,107,2
+MYR SPE.,Myrichthys species,snake eel Myrichthys,40,100,2
+NAR BANC,Narcine bancroftii,lesser electric ray,10,50,1
+NEG BREV,Negaprion brevirostris,lemon shark,50,250,1
+NEO CYAN,Neopomacentrus cyanomos,Regal demoiselle,1,10,25
+NEO MARI,Neoniphon marianus,longjaw squirrelfish,5,18,10
+NES LONG,Nes longus,orangespotted goby,1,10,5
+NIC USTA,Nicholsina usta,emerald parrotfish,2,30,15
+NO FISH,no observed fishes,no observed fishes,1,100,100
+OCY CHRY,Ocyurus chrysurus,yellowtail snapper,4,76,100
+ODO DENT,Odontoscion dentex,reef croaker,5,30,10
+OGC NASU,Ogcocephalus nasutus,shortnose batfish,10,38,10
+OGC SPE.,Ogcocephalus sp.,batfish species,10,38,10
+OLI SAUR,Oligoplites saurus,leatherjack,10,35,50
+OPH MACC,Ophioblennius macclurei,redlip blenny,1,13,5
+OPH OPHI,Ophichthus ophis,spotted snake eel,20,100,5
+OPH SPE.,Ophichthidae species,snake eel species,20,100,5
+OPI AURI,Opistognathus aurifrons,yellowhead jawfish,3,10,15
+OPI MACR,Opistognathus macrognathus,banded jawfish,3,20,15
+OPI MAXI,Opistognathus maxillosus,mottled jawfish,2,18,15
+OPI SPE.,Opistognathus sp.,jawfish species,3,20,15
+OPI WHIT,Opistognathus whitehursti,dusky jawfish,3,10,15
+OPS TAU_,Opsanus tau,oyster toadfish,5,38,5
+ORT CHRY,Orthopristis chrysoptera,pigfish,10,45,10
+Other1,Other1,new species 1,1,100,1000
+Other2,Other2,new species 2,1,100,1000
+Other3,Other3,new species 3,1,100,1000
+OXY STIG,Oxyurichthys stigmalophius,spotfin goby,1,16,5
+PAG PAGR,Pagrus pagrus,red porgy,5,91,10
+PAR ACUM,Pareques acuminatus,high-hat,3,23,10
+PAR ALBI,Paralichthys albigutta,Gulf flounder,10,38,5
+PAR BAIR,Paradiplogrammus bairdi,lancer dragonet,1,12,10
+PAR FURC,Paranthias furcifer,Atlantic creolefish,5,27,50
+PAR INCI,Parasphyraenops incisus,splitfin bass,1,4,5
+PAR MARM,Parablennius marmoreus,seaweed blenny,1,9,5
+PAR MARN,Paraclinus marmoratus,marbled blenny,1,5,5
+PAR NIGR,Paraclinus nigripinnis,blackfin blenny,1,5,5
+PAR UMBR,Pareques umbrosus,cubbyu,3,25,10
+PEM SCHO,Pempheris schomburgkii,glassy sweeper,3,15,100
+PEP TRIA,Peprilus triacanthus ,American butterfish,10,30,100
+PHA XENU,Phaeoptyx xenus,sponge cardinalfish,2,10,5
+PLA ARGA,Platybelone argalus argalus,keeltail needlefish,10,43,15
+PLA ORBI,Platax orbicularis,orbicular batfish,10,60,5
+POM ARCU,Pomacanthus arcuatus,gray angelfish,3,60,10
+POM PARU,Pomacanthus paru,French angelfish,3,50,10
+POM SPE.,Pomacanthus species,angelfish Pomacanthus ,3,45,10
+PRI AQUI,Pristipomoides aquilonaris,wenchman,5,30,100
+PRI AREN,Priacanthus arenatus,bigeye,5,30,50
+PRI HIPO,Priolepis hipoliti,rusty goby,1,4,5
+PRI OPHR,Prionotus ophryas,bandtail searobin,5,20,1
+PRI PECT,Pristis pectinata,smalltooth sawfish,100,500,1
+PRI RUBI,Prionotus rubio,blackwing searobin,5,30,2
+PRO ACUL,Prognathodes aculeatus,longsnout butterflyfish,2,9,10
+PRO AYA_,Prognathodes aya,bank butterflyfish,2,15,10
+PSE MACU,Pseudupeneus maculatus,spotted goatfish,5,28,10
+PTE CALL,Ptereleotris calliura,blue dartfish,1,13,20
+PTE HELE,Ptereleotris helenae,hovering dartfish,1,13,20
+PTE VOLI,Pterois volitans,red lionfish,2,40,10
+RAC CANA,Rachycentron canadum,cobia,30,150,1
+REM REMO,Remora remora,remora,20,78,5
+RHI BONA,Rhinoptera bonasus,cownose ray,20,213,2
+RHI LENT,Rhinobatos lentiginosus,Atlantic guitarfish,20,76,2
+RHI TERR,Rhizoprionodon terraenovae,Atlantic sharpnose,50,110,1
+RHO AURO,Rhomboplites aurorubens,vermilion snapper,5,76,100
+RIS RUBE,Risor ruber,tusked goby,1,5,5
+RYP BIST,Rypticus bistrispinus,freckled soapfish,5,15,2
+RYP MACU,Rypticus maculatus,whitespotted soapfish,10,33,2
+RYP SAPO,Rypticus saponaceus,greater soapfish,10,33,2
+SAR AURI,Sardinella aurita,Spanish sardine,1,25,1000
+SAR BULL,Sargocentron bullisi,deepwater squirrelfish,5,13,5
+SAR CORU,Sargocentron coruscum,reef squirrelfish,5,14,10
+SAR SARD,Sarda sarda,Atlantic bonito,30,75,30
+SAR VEXI,Sargocentron vexillarium,dusky squirrelfish,5,18,10
+SCA COEL,Scarus coelestinus,midnight parrotfish,15,91,25
+SCA COER,Scarus coeruleus,blue parrotfish,15,122,25
+SCA CRIS,Scartella cristata,molly miller,1,10,5
+SCA GUAC,Scarus guacamaia,rainbow parrotfish,25,168,25
+SCA ISER,Scarus iseri,striped parrotfish,2,25,50
+SCA SPE.,Scarus sp.,parrotfish species,2,50,50
+SCA TAEN,Scarus taeniopterus,princess parrotfish,5,33,20
+SCA VETU,Scarus vetula,queen parrotfish,10,60,10
+SCH BETA,Schultzea beta,school bass,1,8,250
+SCI SPE.,drum species,drum species,10,30,5
+SCO CARI,Scorpaenodes caribbaeus,reef scorpionfish,5,10,10
+SCO CAVA,Scomberomorus cavalla,king mackerel,25,170,5
+SCO MACU,Scomberomorus maculatus,Spanish mackerel,25,83,5
+SCO PLUM,Scorpaena plumieri,spotted scorpionfish,5,30,10
+SCO REGA,Scomberomorus regalis,cero,25,86,5
+SCR SPE.,Scorpaena species,scorpionfish species,5,30,10
+SEL CRUM,Selar crumenophthalmus,bigeye scad,20,60,100
+SEL VOME,Selene vomer,lookdown,5,30,5
+SER ANNU,Serranus annularis,orangeback bass,3,6,5
+SER BALD,Serranus baldwini,lantern bass,3,6,5
+SER DUME,Seriola dumerili,greater amberjack,30,150,10
+SER FLAV,Serranus flaviventris,twinspot bass,3,10,10
+SER PHOE,Serranus phoebe,tattler,3,10,5
+SER PUMI,Serraniculus pumilio,pygmy sea bass,2,10,5
+SER RIVO,Seriola rivoliana,almaco jack,20,80,10
+SER SPE.,Serranus species,Seabass species,20,80,10
+SER SUBL,Serranus subligarius,belted sandfish,1,10,5
+SER TABA,Serranus tabacarius,tobaccofish,5,18,5
+SER TIGR,Serranus tigrinus,harlequin bass,3,10,10
+SER TORT,Serranus tortugarum,chalk bass,1,9,10
+SER ZONA,Seriola zonata,banded rudderfish,20,75,15
+SPA ATOM,Sparisoma atomarium,greenblotch parrotfish,2,11,20
+SPA AURO,Sparisoma aurofrenatum,redband parrotfish,2,28,25
+SPA CHRY,Sparisoma chrysopterum,redtail parrotfish,10,46,20
+SPA RADI,Sparisoma radians,bucktooth parrotfish,2,19,15
+SPA RUBR,Sparisoma rubripinne,yellowtail parrotfish,10,46,10
+SPA SPE.,Sparisoma sp.,parrotfish species,2,30,50
+SPA VIRI,Sparisoma viride,stoplight parrotfish,2,60,25
+SPH BARR,Sphyraena barracuda,great barracuda,30,200,20
+SPH GUAC,Sphyraena guachancho,guaguanche,10,60,20
+SPH LEWI,Sphyrna lewini,scalloped hammerhead,100,420,2
+SPH MOKA,Sphyrna mokarran,great hammerhead,100,610,2
+SPH NEPH,Sphoeroides nephelus,southern puffer,5,30,5
+SPH PICU,Sphyraena picudilla,southern sennet,10,46,20
+SPH SPEN,Sphoeroides spengleri,bandtail puffer,2,18,10
+SPH TEST,Sphoeroides testudineus,checkered puffer,2,30,10
+SPH TIBU,Sphyrna tiburo,bonnethead,30,150,5
+SRR SPE.,grouper-sea bass species,grouper-sea bass species,5,100,5
+STE ADUS,Stegastes adustus,dusky damselfish,2,15,10
+STE DIEN,Stegastes diencaeus,longfin damselfish,2,13,10
+STE HISP,Stephanolepis hispidus,planehead filefish,1,25,5
+STE LEUC,Stegastes leucostictus,beaugregory,2,10,10
+STE PART,Stegastes partitus,bicolor damselfish,2,10,50
+STE PLAN,Stegastes planifrons,threespot damselfish,2,13,10
+STE SETI,Stephanolepis setifer,pygmy filefish,2,8,5
+STE SPE.,damselfish species,damselfish species,2,13,10
+STE VARI,Stegastes variabilis,cocoa damselfish,2,13,15
+STR NOTA,Strongylura notata,redfin needlefish,5,61,5
+STR SPE.,Stromateidae species,butterfish species,1,30,30
+STR TIMU,Strongylura timucu,timucu,5,61,5
+STY LATE,Stygnobrotula latebricola,black brotula,2,8,5
+SYA MICR,Syacium micrurum,channel flounder,10,45,2
+SYA SPE.,Syacium species,sand flounder species,10,45,5
+SYG SPE.,Syngnathus sp.,pipefish species,2,8,5
+SYN DAWS,Syngnathus dawsoni,dashback goby,1,5,10
+SYN FOET,Synodus foetens,inshore lizardfish,5,45,10
+SYN INTE,Synodus intermedius,sand diver,5,45,10
+SYN SAUR,Synodus saurus,bluestriped lizardfish,2,25,2
+SYN SCOV,Syngnathus scovelli,gulf pipefish,5,15,2
+SYN SYNO,Synodus synodus,red lizardfish,5,25,2
+THA BIFA,Thalassoma bifasciatum,bluehead,2,15,100
+TRA FALC,Trachinotus falcatus,permit,30,114,50
+TRA GOOD,Trachinotus goodei,palometa,20,50,25
+TRA LATH,Trachurus lathami,rough scad,10,40,200
+TRI SPE.,Triglidae species,sea robin species,10,30,5
+TYL CROC,Tylosurus crocodilus,houndfish,30,150,5
+UMB CORO,Umbrina coroides,sand drum,5,30,5
+UNK SPE.,unknown species,unknown species,1,100,1000
+UPE PARV,Upeneus parvus,dwarf goatfish,5,20,5
+URO JAMA,Urobatis jamaicensis,yellow stingray,10,35,3
+XAN RING,Xanthichthys ringens,sargassum triggerfish,2,8,5
+XYR MART,Xyrichtys martinicensis,rosy razorfish,3,15,25
+XYR NOVA,Xyrichtys novacula,pearly razorfish,3,38,25
+XYR SPE.,razorfish species,razorfish species,3,15,25
+XYR SPLE,Xyrichtys splendens,green razorfish,3,14,25

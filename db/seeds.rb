@@ -29,7 +29,7 @@ puts "Seeding database with data"
 
 Diver.delete_all
 #Diver.connection.execute( 'ALTER SEQUENCE divers_id_seq RESTART WITH 1' )
-open("#{Rails.root}/db/SupportData/NCRMP_Divers.csv") do |divers|
+open("#{Rails.root}/db/SupportData/ncrmp_diverlist_2024.csv") do |divers|
   divers.read.each_line do|diver|
     DiverNumber, DiverName, UserName, Email, Password, Active, Role = diver.chomp.split(",")
     Diver.create( :diver_number => DiverNumber, :diver_name => DiverName, :username => UserName, :email => Email, :password => Password, :active => Active, :role => Role )
@@ -37,14 +37,14 @@ open("#{Rails.root}/db/SupportData/NCRMP_Divers.csv") do |divers|
   end
 end
 
-#Animal.delete_all
-##Animal.connection.execute( 'ALTER SEQUENCE animals_id_seq RESTART WITH 1' )
-#open("#{Rails.root}/db/SupportData/Fish_SpeciesList_2019.csv") do |animals|
-  #animals.read.each_line do |animal|
-    #SppCode, ScientificName, CommonName, MinSize, MaxSize, MaxNumber = animal.chomp.split(",")
-    #Animal.create( :species_code => SppCode, :scientific_name => ScientificName, :common_name => CommonName, :min_size => MinSize, :max_size => MaxSize, :max_number => MaxNumber )
-  #end
-#end
+Animal.delete_all
+#Animal.connection.execute( 'ALTER SEQUENCE animals_id_seq RESTART WITH 1' )
+open("{Rails.root}/db/SupportData/fish_species_list_2024.csv") do |animals|
+  animals.read.each_line do |animal|
+    SppCode, ScientificName, CommonName, MinSize, MaxSize, MaxNumber = animal.chomp.split(",")
+    Animal.create( :species_code => SppCode, :scientific_name => ScientificName, :common_name => CommonName, :min_size => MinSize, :max_size => MaxSize, :max_number => MaxNumber )
+  end
+end
 
 #Coral.delete_all
 ##Coral.connection.execute( 'ALTER SEQUENCE corals_id_seq RESTART WITH 1' )

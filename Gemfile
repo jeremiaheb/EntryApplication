@@ -17,7 +17,11 @@ gem 'multi_json'
 
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'mini_racer'
+# therubyracer required because of https://github.com/cowboyd/less.rb/issues/11
+# mini_racer will not work
+#
+# TODO: Remove if we remove/replace less
+gem 'therubyracer'
 gem 'coffee-rails'
 gem 'jbuilder', '~> 2.5'
 

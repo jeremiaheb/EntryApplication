@@ -21,7 +21,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'mini_racer'
 gem 'coffee-rails'
 gem 'jbuilder', '~> 2.5'
-gem 'sprockets', '3.6.3'
 
 gem 'jquery-ui-rails', '~> 5.0'
 gem 'jquery-rails'

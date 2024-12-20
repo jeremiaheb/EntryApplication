@@ -5,8 +5,7 @@ gem 'rails', '~> 5.2.8', '>= 5.2.8.1'
 
 gem 'pg'
 
- # TODO: Consider replacing with puma
-gem 'thin'
+gem 'puma', '~> 3.11'
 
 # TODO: Replace with strong_parameters. This gem is no longer maintained and
 # will no longer work after Rails 6.1

@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/prawnpdf/prawn.git
+  remote: https://github.com/prawnpdf/prawn.git
   revision: dc088578d12c1e44fb866176259dedda49c6c591
   specs:
     prawn (2.2.2)
@@ -7,7 +7,7 @@ GIT
       ttfunk (~> 1.5)
 
 GIT
-  remote: git://github.com/rweng/jquery-datatables-rails.git
+  remote: https://github.com/rweng/jquery-datatables-rails.git
   revision: d486b31b192a2924b1913e080ad23460e6b96d31
   specs:
     jquery-datatables-rails (3.4.0)

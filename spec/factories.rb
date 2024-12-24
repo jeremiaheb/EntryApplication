@@ -89,9 +89,11 @@ FactoryGirl.define do
 
   factory :diver do
     sequence(:diver_number) { |n| "diver#{n}" }
-    sequence(:diver_name)   { |n| "Random Diver#{n}" }
-    sequence(:email)        { |n| "diver#{n}@example.com" }
-    sequence(:password)     { |n| "password#{n}" }
+    sequence(:diver_name) { |n| "Random Diver#{n}" }
+    sequence(:username) { |n| "diver#{n}" }
+    sequence(:email) { |n| "diver#{n}@example.com" }
+    sequence(:password) { |n| "password#{n}" }
+    role { "diver" }
   end
 
   factory :habitat_type do

@@ -94,6 +94,7 @@ FactoryGirl.define do
     sequence(:email) { |n| "diver#{n}@example.com" }
     sequence(:password) { |n| "password#{n}" }
     role { "diver" }
+    active { true }
   end
 
   factory :habitat_type do

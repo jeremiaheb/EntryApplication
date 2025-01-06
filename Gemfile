@@ -11,10 +11,6 @@ gem 'puma', '~> 4.1'
 # will no longer work after Rails 6.1
 gem 'protected_attributes_continued'
 
-# TODO: Evaluate whether these gems are needed anymore.
-gem 'json'
-gem 'multi_json'
-
 gem 'sass-rails', '~> 5.0'
 gem 'coffee-rails'
 gem 'jbuilder', '~> 2.7'

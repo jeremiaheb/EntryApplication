@@ -30,7 +30,7 @@ gem 'nested_form'
 gem "blueimp-gallery"
 
 gem 'devise', '~> 4.4', '>= 4.4.3'
-gem 'cancancan', '~> 2.0'
+gem 'cancancan', '~> 3.0'
 
 gem 'prawn', :git => 'https://github.com/prawnpdf/prawn.git'
 gem 'prawn-table'

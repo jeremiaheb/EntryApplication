@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
 ruby '2.7.8'
-gem 'rails', '~> 6.0.6', '>= 6.0.6.1'
+gem 'rails', '~> 6.1.7', '>= 6.1.7.10'
 
 gem 'pg', '~> 1.4', '>= 1.4.6'
 
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 5.0'
 
 # TODO: Replace with strong_parameters. This gem is no longer maintained and
 # will no longer work after Rails 6.1
@@ -21,7 +21,6 @@ gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-
 gem 'jquery-validation-rails'
 gem 'bootstrap-sass', '~> 2.3', '>= 2.3.2.2'
 gem 'bootstrap-datepicker-rails'
-gem 'select2-rails', '3.2.1'
 gem 'nested_form'
 gem "blueimp-gallery"
 
@@ -39,7 +38,7 @@ gem 'capistrano-passenger', '~> 0.2.0'
 gem 'capistrano-rbenv', '~> 2.1'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
   gem 'factory_girl_rails'
@@ -50,18 +49,20 @@ end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
-  gem 'listen', '~> 3.2'
+  gem 'web-console', '>= 4.1.0'
+  # Display performance information such as SQL time and flame graphs for each request in your browser.
+  # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
+  gem 'rack-mini-profiler', '~> 2.0'
+  gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 group :test do
   gem 'rspec-rails', '3.5.1'
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
+  gem 'capybara', '>= 3.26'
+  gem 'selenium-webdriver', '>= 4.0.0.rc1'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end

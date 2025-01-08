@@ -18,7 +18,7 @@
 //= require bootstrap-datepicker
 //= require select2
 //= require jquery.validate
-//= require twitter/bootstrap
+//= require bootstrap
 //= require jquery-ui/datepicker
 //= require jquery_nested_form
 //= require_tree ../../../vendor/assets/javascripts
@@ -37,7 +37,6 @@ EA.onRailsPage = function(railsController, railsActions) {
 }
 
 $(function(){
-
     $('tr[data-link]').click(function(){
       window.location = this.dataset.link
     });

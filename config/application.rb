@@ -1,11 +1,10 @@
-require File.expand_path('../boot', __FILE__)
-require 'csv'
-require 'rails/all'
+require_relative "boot"
 
-if defined?(Bundler)
-  Bundler.require(:default, Rails.env)
+require "rails/all"
 
-end
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
+Bundler.require(*Rails.groups)
 
 module EntryApplication
   class Application < Rails::Application
@@ -56,12 +55,5 @@ module EntryApplication
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-    
-    #This sets relative root to my.domain.com/subURI for production only so that
-    #assets are served from correct path
-    #if Rails.env.production?
-    #config.action_controller.relative_url_root = "/RVC_Data_Entry"
-    #end
-
   end
 end

@@ -45,6 +45,9 @@ group :development, :test do
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+
+  # TODO: Upgrade to faker 3.x after upgrade to Ruby 3 is complete
+  gem 'faker', '~> 3.4', '>= 3.4.2'
 end
 
 group :development do
@@ -59,7 +62,6 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails', '6.1.5'
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver', '>= 4.0.0.rc1'

@@ -53,12 +53,8 @@ group :production do
 end
 
 group :test do
-  gem 'rspec-rails', '3.5.1'
-
-  # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
-  # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
 end
 
@@ -69,4 +65,7 @@ group :development, :test do
   gem 'pry-remote'
   gem 'factory_girl_rails'
   #gem 'quiet_assets'
+
+  # TODO: Upgrade to faker 3.x after upgrade to Ruby 3 is complete
+  gem 'faker', '~> 2.22'
 end

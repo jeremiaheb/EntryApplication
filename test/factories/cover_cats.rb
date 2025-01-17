@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :cover_cat do
-    code "POF SPE."
-    name "Porifera spp"
-    common "Sponges other"
+    name { Faker::Creature::Animal.name }
+    code { name[0..2] }
+    common "Fake Other"
   end
 end

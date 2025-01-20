@@ -59,8 +59,9 @@
     </div>
     <div class="span4">
       <div class="img_box">
-       <a href=<%= url_for coral_demographics_path %> >
-           <img <%= image_tag "FormButton.jpg" %>
+        <%= link_to coral_demographics_path, class: "coral-demographics-link" do %>
+          <%= image_tag "FormButton.jpg" %>
+        <%- end %>
        </a>
       </div>
       <div class="text">

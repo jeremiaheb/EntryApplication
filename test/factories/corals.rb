@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :coral do
-    code "ACR PALM"
-    scientific_name "Acropora palmata"
+    scientific_name { Faker::Creature::Animal.name }
+    code { scientific_name[0..2].upcase }
   end
 end

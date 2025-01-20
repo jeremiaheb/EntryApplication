@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.7.8'
+ruby '3.0.7'
 gem 'rails', '~> 6.1.7', '>= 6.1.7.10'
 
 gem 'pg', '~> 1.4', '>= 1.4.6'
@@ -27,8 +27,8 @@ gem "blueimp-gallery"
 gem 'devise', '~> 4.4', '>= 4.4.3'
 gem 'cancancan', '~> 3.0'
 
-gem 'prawn', :git => 'https://github.com/prawnpdf/prawn.git'
-gem 'prawn-table'
+gem 'prawn', '~> 2.5'
+gem 'prawn-table', '~> 0.2', '>= 0.2.2'
 gem 'axlsx_rails'
 
 gem 'net-ssh'

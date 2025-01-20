@@ -1,7 +1,4 @@
 class StationLog < ActiveRecord::Base
-  
-  attr_protected []
-
   belongs_to :boat_log
   has_many :rep_logs, :dependent => :destroy
   accepts_nested_attributes_for :rep_logs, :reject_if => lambda {  |a| a[:replicate].blank? }, :allow_destroy => true
@@ -14,5 +11,4 @@ class StationLog < ActiveRecord::Base
   def psu
     return self.boat_log.primary_sample_unit
   end
-
 end

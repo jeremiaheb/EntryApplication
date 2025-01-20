@@ -44,7 +44,7 @@ class BoatlogManagersController < ApplicationController
   # POST /boatlog_managers
   # POST /boatlog_managers.json
   def create
-    @boatlog_manager = BoatlogManager.new(params[:boatlog_manager])
+    @boatlog_manager = BoatlogManager.new(boatlog_manager_params)
 
     respond_to do |format|
       if @boatlog_manager.save
@@ -63,7 +63,7 @@ class BoatlogManagersController < ApplicationController
     @boatlog_manager = BoatlogManager.find(params[:id])
 
     respond_to do |format|
-      if @boatlog_manager.update_attributes(params[:boatlog_manager])
+      if @boatlog_manager.update_attributes(boatlog_manager_params)k
         format.html { redirect_to @boatlog_manager, notice: 'Boatlog manager was successfully updated.' }
         format.json { head :no_content }
       else
@@ -83,5 +83,15 @@ class BoatlogManagersController < ApplicationController
       format.html { redirect_to boatlog_managers_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def boatlog_manager_params
+    # TODO: Allowing all keys is intentional to reduce risk of a Rails upgrade.
+    # Prior to Rails 7, the application used `attr_protected []` at the model
+    # level. Mass attribute protection will be introduced gradually separate
+    # from the Rails upgrade itself.
+    params.require(:boatlog_manager).permit!
   end
 end

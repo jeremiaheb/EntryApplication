@@ -1,8 +1,6 @@
 class BenthicCover < ActiveRecord::Base
   include CommonFields
 
-  #attr_protected []
-
   has_many :point_intercepts, :dependent => :destroy
   has_many :cover_cats, :through => :point_intercepts
   accepts_nested_attributes_for :point_intercepts, :allow_destroy => true
@@ -34,5 +32,4 @@ class BenthicCover < ActiveRecord::Base
   def msn_prefix
     "X"
   end
-
 end

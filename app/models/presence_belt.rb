@@ -1,6 +1,4 @@
 class PresenceBelt < ActiveRecord::Base
-  attr_protected []
-
   belongs_to :benthic_cover
  
   validates :a_palmata,         :presence => true
@@ -10,5 +8,4 @@ class PresenceBelt < ActiveRecord::Base
   validates :m_annularis,       :presence => true
   validates :m_franksi,         :presence => true
   validates :m_faveolata,       :presence => true
-
 end

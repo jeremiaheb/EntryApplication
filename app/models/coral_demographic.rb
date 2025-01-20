@@ -1,7 +1,4 @@
 class CoralDemographic < ActiveRecord::Base
-
-  attr_protected []
-
   include CommonFields
 
   has_many :demographic_corals, :dependent => :destroy
@@ -28,5 +25,4 @@ class CoralDemographic < ActiveRecord::Base
   def msn_prefix
     "Y"
   end
-
 end

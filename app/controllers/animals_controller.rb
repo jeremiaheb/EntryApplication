@@ -50,7 +50,7 @@ class AnimalsController < ApplicationController
   # POST /animals
   # POST /animals.json
   def create
-    @animal = Animal.new(params[:animal])
+    @animal = Animal.new(animal_params)
 
     respond_to do |format|
       if @animal.save
@@ -69,7 +69,7 @@ class AnimalsController < ApplicationController
     @animal = Animal.find(params[:id])
 
     respond_to do |format|
-      if @animal.update_attributes(params[:animal])
+      if @animal.update_attributes(animal_params)
         format.html { redirect_to animal_url(@animal), notice: 'Animal was successfully updated.' }
         format.json { head :no_content }
       else
@@ -91,4 +91,13 @@ class AnimalsController < ApplicationController
     end
   end
 
+  private
+
+  def animal_params
+    # TODO: Allowing all keys is intentional to reduce risk of a Rails upgrade.
+    # Prior to Rails 7, the application used `attr_protected []` at the model
+    # level. Mass attribute protection will be introduced gradually separate
+    # from the Rails upgrade itself.
+    params.require(:animal).permit!
+  end
 end

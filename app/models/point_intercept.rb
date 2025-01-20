@@ -1,7 +1,4 @@
 class PointIntercept < ActiveRecord::Base
-  
-  attr_protected []
-
   belongs_to  :benthic_cover
   belongs_to  :cover_cat
 
@@ -11,5 +8,4 @@ class PointIntercept < ActiveRecord::Base
   def cover_total
     [hardbottom_num, softbottom_num, rubble_num].reject{|a| a.nil?}.sum
   end
-
 end

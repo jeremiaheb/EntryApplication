@@ -46,9 +46,7 @@ class DiversController < ApplicationController
   # POST /divers
   # POST /divers.json
   def create
-    role = params[:diver].delete(:role)
-    @diver = Diver.new(params[:diver])
-    @diver.role = role if current_diver.admin?
+    @diver = Diver.new(diver_params)
 
     respond_to do |format|
       if @diver.save
@@ -65,11 +63,9 @@ class DiversController < ApplicationController
   # PUT /divers/1.json
   def update
     @diver = Diver.find(params[:id])
-    role = params[:diver].delete(:role)
-    @diver.role = role if current_diver.admin?
 
     respond_to do |format|
-      if @diver.update_attributes(params[:diver])
+      if @diver.update_attributes(diver_params)
         format.html { redirect_to @diver, notice: 'Diver was successfully updated.' }
         format.json { head :no_content }
       else
@@ -89,5 +85,19 @@ class DiversController < ApplicationController
       format.html { redirect_to divers_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def diver_params
+    # TODO: TEST THIS
+    allowed_keys = [
+      :email, :password, :password_confirmation, :username, :firstname,
+      :lastname, :current_password, :boatlog_manager_id
+    ]
+
+    allowed_keys << :role if current_diver.admin?
+
+    params.require(:diver).permit(*allowed_keys)
   end
 end

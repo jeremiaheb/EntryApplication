@@ -7,10 +7,6 @@ gem 'pg', '~> 1.4', '>= 1.4.6'
 
 gem 'puma', '~> 5.0'
 
-# TODO: Replace with strong_parameters. This gem is no longer maintained and
-# will no longer work after Rails 6.1
-gem 'protected_attributes_continued'
-
 gem 'sass-rails', '~> 5.0'
 gem 'coffee-rails'
 gem 'jbuilder', '~> 2.7'

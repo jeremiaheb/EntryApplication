@@ -62,7 +62,7 @@ class CoralsController < ApplicationController
     @coral = Coral.find(params[:id])
 
     respond_to do |format|
-      if @coral.update_attributes(coral_params)
+      if @coral.update(coral_params)
         format.html { redirect_to @coral, notice: 'Coral was successfully updated.' }
         format.json { head :no_content }
       else

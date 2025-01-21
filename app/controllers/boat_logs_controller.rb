@@ -70,7 +70,7 @@ class BoatLogsController < ApplicationController
     @boat_log = BoatLog.find(params[:id])
 
     respond_to do |format|
-      if @boat_log.update_attributes(boat_log_params)
+      if @boat_log.update(boat_log_params)
         format.html { redirect_to @boat_log, notice: 'Boat log was successfully updated.' }
         format.json { head :no_content }
       else

@@ -97,7 +97,7 @@ class SamplesController < ApplicationController
     @sample = Sample.find(params[:id])
 
     respond_to do |format|
-      if @sample.update_attributes(sample_params)
+      if @sample.update(sample_params)
         format.html { redirect_to samples_path, notice: 'Sample was successfully updated.' }
         format.json { head :no_content }
       else

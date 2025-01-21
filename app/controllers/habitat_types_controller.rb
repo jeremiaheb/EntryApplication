@@ -62,7 +62,7 @@ class HabitatTypesController < ApplicationController
     @habitat_type = HabitatType.find(params[:id])
 
     respond_to do |format|
-      if @habitat_type.update_attributes(habitat_type_params)
+      if @habitat_type.update(habitat_type_params)
         format.html { redirect_to @habitat_type, notice: 'Habitat type was successfully updated.' }
         format.json { head :no_content }
       else

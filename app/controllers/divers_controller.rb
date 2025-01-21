@@ -63,7 +63,7 @@ class DiversController < ApplicationController
     @diver = Diver.find(params[:id])
 
     respond_to do |format|
-      if @diver.update_attributes(diver_params)
+      if @diver.update(diver_params)
         format.html { redirect_to @diver, notice: 'Diver was successfully updated.' }
         format.json { head :no_content }
       else

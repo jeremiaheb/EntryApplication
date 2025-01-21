@@ -62,7 +62,7 @@ class BoatlogManagersController < ApplicationController
     @boatlog_manager = BoatlogManager.find(params[:id])
 
     respond_to do |format|
-      if @boatlog_manager.update_attributes(boatlog_manager_params)k
+      if @boatlog_manager.update(boatlog_manager_params)
         format.html { redirect_to @boatlog_manager, notice: 'Boatlog manager was successfully updated.' }
         format.json { head :no_content }
       else

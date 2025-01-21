@@ -62,7 +62,7 @@ class CoverCatsController < ApplicationController
     @cover_cat = CoverCat.find(params[:id])
 
     respond_to do |format|
-      if @cover_cat.update_attributes(cover_cat_params)
+      if @cover_cat.update(cover_cat_params)
         format.html { redirect_to @cover_cat, notice: 'Cover cat was successfully updated.' }
         format.json { head :no_content }
       else

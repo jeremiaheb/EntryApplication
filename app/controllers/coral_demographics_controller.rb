@@ -87,7 +87,7 @@ class CoralDemographicsController < ApplicationController
     @coral_demographic = CoralDemographic.find(params[:id])
 
     respond_to do |format|
-      if @coral_demographic.update_attributes(coral_demographic_params)
+      if @coral_demographic.update(coral_demographic_params)
         format.html { redirect_to coral_demographics_path, notice: 'Coral demographic was successfully updated.' }
         format.json { head :no_content }
       else

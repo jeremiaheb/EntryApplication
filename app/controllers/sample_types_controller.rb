@@ -62,7 +62,7 @@ class SampleTypesController < ApplicationController
     @sample_type = SampleType.find(params[:id])
 
     respond_to do |format|
-      if @sample_type.update_attributes(sample_type_params)
+      if @sample_type.update(sample_type_params)
         format.html { redirect_to @sample_type, notice: 'Sample type was successfully updated.' }
         format.json { head :no_content }
       else

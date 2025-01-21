@@ -89,7 +89,7 @@ class BenthicCoversController < ApplicationController
     @benthic_cover = BenthicCover.find(params[:id])
 
     respond_to do |format|
-      if @benthic_cover.update_attributes!(benthic_cover_params)
+      if @benthic_cover.update(benthic_cover_params)
         format.html { redirect_to benthic_covers_path, notice: 'Benthic cover was successfully updated.' }
         format.json { head :no_content }
       else

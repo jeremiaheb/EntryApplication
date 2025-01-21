@@ -66,7 +66,7 @@ class AnimalsController < ApplicationController
     @animal = Animal.find(params[:id])
 
     respond_to do |format|
-      if @animal.update_attributes(animal_params)
+      if @animal.update(animal_params)
         format.html { redirect_to animal_url(@animal), notice: 'Animal was successfully updated.' }
         format.json { head :no_content }
       else

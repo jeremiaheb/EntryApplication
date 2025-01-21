@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_01_08_184923) do
-
+ActiveRecord::Schema[7.0].define(version: 2025_01_21_210428) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,8 +21,8 @@ ActiveRecord::Schema.define(version: 2025_01_08_184923) do
     t.integer "max_size"
     t.integer "min_size"
     t.integer "max_number"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
   end
 
   create_table "benthic_covers", id: :serial, force: :cascade do |t|
@@ -35,8 +34,8 @@ ActiveRecord::Schema.define(version: 2025_01_08_184923) do
     t.time "sample_begin_time"
     t.integer "meters_completed"
     t.text "sample_description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.integer "boatlog_manager_id"
   end
 
@@ -44,16 +43,16 @@ ActiveRecord::Schema.define(version: 2025_01_08_184923) do
     t.string "primary_sample_unit", limit: 255
     t.date "date"
     t.integer "boatlog_manager_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
   end
 
   create_table "boatlog_managers", id: :serial, force: :cascade do |t|
     t.string "agency", limit: 255
     t.string "firstname", limit: 255
     t.string "lastname", limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
   end
 
   create_table "coral_demographics", id: :serial, force: :cascade do |t|
@@ -65,8 +64,8 @@ ActiveRecord::Schema.define(version: 2025_01_08_184923) do
     t.time "sample_begin_time"
     t.integer "meters_completed"
     t.text "sample_description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.integer "boatlog_manager_id"
     t.integer "percent_hardbottom"
   end
@@ -74,14 +73,14 @@ ActiveRecord::Schema.define(version: 2025_01_08_184923) do
   create_table "corals", id: :serial, force: :cascade do |t|
     t.string "code", limit: 255
     t.string "scientific_name", limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
   end
 
   create_table "cover_cats", id: :serial, force: :cascade do |t|
     t.string "name", limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.string "code", limit: 255
     t.string "common", limit: 255
   end
@@ -108,17 +107,17 @@ ActiveRecord::Schema.define(version: 2025_01_08_184923) do
   create_table "divers", id: :serial, force: :cascade do |t|
     t.string "diver_number", limit: 255
     t.string "diver_name", limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.boolean "active"
     t.string "email", limit: 255, default: "", null: false
     t.string "encrypted_password", limit: 255, default: "", null: false
     t.string "reset_password_token", limit: 255
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
     t.integer "sign_in_count", default: 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.string "current_sign_in_ip", limit: 255
     t.string "last_sign_in_ip", limit: 255
     t.string "username", limit: 255
@@ -132,8 +131,8 @@ ActiveRecord::Schema.define(version: 2025_01_08_184923) do
   create_table "habitat_types", id: :serial, force: :cascade do |t|
     t.string "habitat_name", limit: 255
     t.string "habitat_description", limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.string "region", limit: 255
   end
 
@@ -206,8 +205,8 @@ ActiveRecord::Schema.define(version: 2025_01_08_184923) do
   create_table "sample_types", id: :serial, force: :cascade do |t|
     t.string "sample_type_name", limit: 255
     t.string "sample_type_description", limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
   end
 
   create_table "samples", id: :serial, force: :cascade do |t|
@@ -227,8 +226,8 @@ ActiveRecord::Schema.define(version: 2025_01_08_184923) do
     t.integer "sand_percentage"
     t.integer "hardbottom_percentage"
     t.integer "rubble_percentage"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.float "water_temp"
     t.string "current", limit: 255
     t.integer "boatlog_manager_id"

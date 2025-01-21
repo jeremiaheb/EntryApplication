@@ -8,9 +8,6 @@ class Diver < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  # Setup accessible (or protected) attributes for your model
-  attr_protected []
-  #attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :firstname, :lastname, :diver_name, :diver_number, :active, :boatlog_manager_id
   belongs_to  :boatlog_manager
   has_many    :diver_samples
   has_many    :samples, :through => :diver_samples, :dependent => :destroy

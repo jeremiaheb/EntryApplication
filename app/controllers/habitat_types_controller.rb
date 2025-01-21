@@ -1,5 +1,4 @@
 class HabitatTypesController < ApplicationController
- 
   before_action :authenticate_diver!
   load_and_authorize_resource
   
@@ -44,7 +43,7 @@ class HabitatTypesController < ApplicationController
   # POST /habitat_types
   # POST /habitat_types.json
   def create
-    @habitat_type = HabitatType.new(params[:habitat_type])
+    @habitat_type = HabitatType.new(habitat_type_params)
 
     respond_to do |format|
       if @habitat_type.save
@@ -63,7 +62,7 @@ class HabitatTypesController < ApplicationController
     @habitat_type = HabitatType.find(params[:id])
 
     respond_to do |format|
-      if @habitat_type.update_attributes(params[:habitat_type])
+      if @habitat_type.update(habitat_type_params)
         format.html { redirect_to @habitat_type, notice: 'Habitat type was successfully updated.' }
         format.json { head :no_content }
       else
@@ -83,5 +82,15 @@ class HabitatTypesController < ApplicationController
       format.html { redirect_to habitat_types_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def habitat_type_params
+    # TODO: Allowing all keys is intentional to reduce risk of a Rails upgrade.
+    # Prior to Rails 7, the application used `attr_protected []` at the model
+    # level. Mass attribute protection will be introduced gradually separate
+    # from the Rails upgrade itself.
+    params.require(:habitat_type).permit!
   end
 end

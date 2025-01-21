@@ -1,8 +1,7 @@
 class SampleTypesController < ApplicationController
-  
   before_action :authenticate_diver!
   load_and_authorize_resource
-  
+
   # GET /sample_types
   # GET /sample_types.json
   def index
@@ -44,7 +43,7 @@ class SampleTypesController < ApplicationController
   # POST /sample_types
   # POST /sample_types.json
   def create
-    @sample_type = SampleType.new(params[:sample_type])
+    @sample_type = SampleType.new(sample_type_params)
 
     respond_to do |format|
       if @sample_type.save
@@ -63,7 +62,7 @@ class SampleTypesController < ApplicationController
     @sample_type = SampleType.find(params[:id])
 
     respond_to do |format|
-      if @sample_type.update_attributes(params[:sample_type])
+      if @sample_type.update(sample_type_params)
         format.html { redirect_to @sample_type, notice: 'Sample type was successfully updated.' }
         format.json { head :no_content }
       else
@@ -83,5 +82,15 @@ class SampleTypesController < ApplicationController
       format.html { redirect_to sample_types_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def sample_type_params
+    # TODO: Allowing all keys is intentional to reduce risk of a Rails upgrade.
+    # Prior to Rails 7, the application used `attr_protected []` at the model
+    # level. Mass attribute protection will be introduced gradually separate
+    # from the Rails upgrade itself.
+    params.require(:sample_type).permit!
   end
 end

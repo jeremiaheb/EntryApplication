@@ -1,5 +1,4 @@
 class CoverCatsController < ApplicationController
-
   before_action :authenticate_diver!
   load_and_authorize_resource
 
@@ -44,7 +43,7 @@ class CoverCatsController < ApplicationController
   # POST /cover_cats
   # POST /cover_cats.json
   def create
-    @cover_cat = CoverCat.new(params[:cover_cat])
+    @cover_cat = CoverCat.new(cover_cat_params)
 
     respond_to do |format|
       if @cover_cat.save
@@ -63,7 +62,7 @@ class CoverCatsController < ApplicationController
     @cover_cat = CoverCat.find(params[:id])
 
     respond_to do |format|
-      if @cover_cat.update_attributes(params[:cover_cat])
+      if @cover_cat.update(cover_cat_params)
         format.html { redirect_to @cover_cat, notice: 'Cover cat was successfully updated.' }
         format.json { head :no_content }
       else
@@ -83,5 +82,15 @@ class CoverCatsController < ApplicationController
       format.html { redirect_to cover_cats_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def cover_cat_params
+    # TODO: Allowing all keys is intentional to reduce risk of a Rails upgrade.
+    # Prior to Rails 7, the application used `attr_protected []` at the model
+    # level. Mass attribute protection will be introduced gradually separate
+    # from the Rails upgrade itself.
+    params.require(:cover_cat).permit!
   end
 end

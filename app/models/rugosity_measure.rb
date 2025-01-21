@@ -1,7 +1,5 @@
 class RugosityMeasure < ActiveRecord::Base
-  attr_protected []
-
-belongs_to :benthic_cover
+  belongs_to :benthic_cover
 
   validates :min_depth,               :presence => true
   validates :max_depth,               :presence => true
@@ -22,10 +20,8 @@ belongs_to :benthic_cover
   validates :meter_mark_14,           :presence => true,  if: -> { rug_meters_completed >= 14 }
   validates :meter_mark_15,           :presence => true,  if: -> { rug_meters_completed >= 15 }
 
-
   def category_sum
     [meter_mark_1, meter_mark_2, meter_mark_3, meter_mark_4, meter_mark_5, meter_mark_6, meter_mark_7, meter_mark_8, meter_mark_9, meter_mark_10,
     meter_mark_11, meter_mark_12, meter_mark_13, meter_mark_14, meter_mark_15].sum
   end
-
 end

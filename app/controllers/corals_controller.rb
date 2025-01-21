@@ -1,5 +1,4 @@
 class CoralsController < ApplicationController
-
   before_action :authenticate_diver!
   load_and_authorize_resource
 
@@ -44,7 +43,7 @@ class CoralsController < ApplicationController
   # POST /corals
   # POST /corals.json
   def create
-    @coral = Coral.new(params[:coral])
+    @coral = Coral.new(coral_params)
 
     respond_to do |format|
       if @coral.save
@@ -63,7 +62,7 @@ class CoralsController < ApplicationController
     @coral = Coral.find(params[:id])
 
     respond_to do |format|
-      if @coral.update_attributes(params[:coral])
+      if @coral.update(coral_params)
         format.html { redirect_to @coral, notice: 'Coral was successfully updated.' }
         format.json { head :no_content }
       else
@@ -83,5 +82,15 @@ class CoralsController < ApplicationController
       format.html { redirect_to corals_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def coral_params
+    # TODO: Allowing all keys is intentional to reduce risk of a Rails upgrade.
+    # Prior to Rails 7, the application used `attr_protected []` at the model
+    # level. Mass attribute protection will be introduced gradually separate
+    # from the Rails upgrade itself.
+    params.require(:coral).permit!
   end
 end

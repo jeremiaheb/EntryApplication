@@ -1,7 +1,4 @@
 class CoverCat < ActiveRecord::Base
-  attr_protected []
-  
-  
   has_many :point_intercepts
   has_many :benthic_covers, :through => :point_intercepts
   accepts_nested_attributes_for :point_intercepts
@@ -11,5 +8,4 @@ class CoverCat < ActiveRecord::Base
   def cover_code_name
     [self.code, self.common].join(" __ ")
   end
-
 end

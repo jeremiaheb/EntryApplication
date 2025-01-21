@@ -88,10 +88,9 @@ class DiversController < ApplicationController
   private
 
   def diver_params
-    # TODO: TEST THIS
     allowed_keys = [
-      :email, :password, :password_confirmation, :username, :firstname,
-      :lastname, :current_password, :boatlog_manager_id
+      :active, :diver_number, :diver_name, :username, :password, :password_confirmation, :firstname,
+      :lastname, :email, :current_password, :boatlog_manager_id
     ]
 
     allowed_keys << :role if current_diver.admin?

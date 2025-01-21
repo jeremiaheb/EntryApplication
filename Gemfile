@@ -25,7 +25,7 @@ gem 'cancancan', '~> 3.0'
 
 gem 'prawn', '~> 2.5'
 gem 'prawn-table', '~> 0.2', '>= 0.2.2'
-gem 'axlsx_rails'
+gem 'caxlsx_rails', '0.6.4'
 
 gem 'net-ssh'
 gem 'capistrano', '~> 3.7', '>= 3.7.1'

@@ -1,8 +1,7 @@
 class BoatLogsController < ApplicationController
-  
   before_action :authenticate_diver!
   load_and_authorize_resource
-  
+
   # GET /boat_logs
   # GET /boat_logs.json
   def index
@@ -34,8 +33,9 @@ class BoatLogsController < ApplicationController
   # GET /boat_logs/new.json
   def new
     @boat_log = BoatLog.new
-      station = @boat_log.station_logs.build
-      2.times { station.rep_logs.build }
+
+    station = @boat_log.station_logs.build
+    2.times { station.rep_logs.build }
 
     respond_to do |format|
       format.html # new.html.erb

@@ -1,14 +1,11 @@
 class AnimalsController < ApplicationController
-  # GET /animals
-  # GET /animals.json
-  #
-
   before_action :authenticate_diver!
   load_and_authorize_resource
 
+  # GET /animals
+  # GET /animals.json
   def index
     @animals = Animal.all
-
 
     respond_to do |format|
       format.html # index.html.erb

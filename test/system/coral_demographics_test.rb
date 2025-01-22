@@ -55,8 +55,6 @@ class CoralDemographicsTest < ApplicationSystemTestCase
     find("body").click
     find("input[type=submit]").click
 
-    take_screenshot
-
     assert_selector(".alert", text: "Coral demographic was successfully created")
 
     assert_equal 1, CoralDemographic.count

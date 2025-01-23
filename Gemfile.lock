@@ -170,7 +170,8 @@ GEM
       railties (>= 3.0.0)
     faker (3.4.2)
       i18n (>= 1.8.11, < 2)
-    ffi (1.17.1)
+    ffi (1.17.1-arm64-darwin)
+    ffi (1.17.1-x86_64-linux-gnu)
     globalid (1.2.1)
       activesupport (>= 6.1)
     htmlentities (4.3.4)
@@ -393,7 +394,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-   ruby 3.0.7p220
+   ruby 3.2.6p234
 
 BUNDLED WITH
    2.5.23

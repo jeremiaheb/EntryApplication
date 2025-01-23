@@ -11,7 +11,6 @@ gem "puma", ">= 5.0"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 gem 'sass-rails', '~> 5.0'
-gem 'coffee-rails'
 gem 'jbuilder'
 
 gem 'jquery-ui-rails', '~> 5.0'

@@ -1,11 +1,14 @@
 source "https://rubygems.org"
 
-ruby "3.0.7"
-gem "rails", "~> 7.0.8", ">= 7.0.8.7"
+ruby "3.2.6"
+gem "rails", "~> 7.1.5", ">= 7.1.5.1"
 
 gem 'pg', '~> 1.5', '>= 1.5.9'
 
-gem 'puma', '~> 5.0'
+gem "puma", ">= 5.0"
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 gem 'sass-rails', '~> 5.0'
 gem 'coffee-rails'
@@ -40,7 +43,7 @@ group :development, :test do
   gem 'factory_girl_rails'
 
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem "debug", platforms: %i[ mri windows ]
 
   # TODO: Upgrade to faker 3.x after upgrade to Ruby 3 is complete
   gem 'faker', '~> 3.4', '>= 3.4.2'
@@ -58,7 +61,7 @@ group :development do
 end
 
 group :test do
-  # Adds support for Capybara system testing and selenium driver
+  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
   gem 'selenium-webdriver'
 end
@@ -66,6 +69,3 @@ end
 group :production do
   gem 'rails_12factor'
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

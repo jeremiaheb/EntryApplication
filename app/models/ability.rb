@@ -35,6 +35,7 @@ class Ability
     elsif current_diver.role == 'manager'
       can :manage, [Sample, BenthicCover, CoralDemographic, BoatLog]
     elsif current_diver.role == 'diver'
+      can :draft, [Sample, BenthicCover, CoralDemographic]
       can :create, [Sample, BenthicCover, CoralDemographic]
       can :read, [Sample, BenthicCover, CoralDemographic]
       can :destroy, [Sample, BenthicCover, CoralDemographic]
@@ -48,6 +49,5 @@ class Ability
         coral_demographic.try(:myId) == current_diver.id
       end
     end
-
   end
 end

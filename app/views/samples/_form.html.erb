@@ -1,5 +1,5 @@
 <div class="form-horizontal">
-<%= nested_form_for @sample, :validate => false do |f| %>
+  <%= nested_form_for @sample, data: {"drafts-url": draft_samples_url, "draft-restored": @draft.present?, "draft-focused-dom-id": @draft&.focused_dom_id }, :validate => false do |f| %>
 
   <%= render "shared/error_messages", :target => @sample%>
 
@@ -26,9 +26,22 @@
             <%= f.text_field :sample_date, { :class => 'tab_1', :tabindex => "1" } %>
           </div>
         </div>
-        
-      <%= render "diver_selection", :object => f %>
 
+        <%= f.fields_for :diver_samples, diver_samples_primary_first(@sample.diver_samples) do |diver_samples_fields| %>
+          <div class="control-group">
+            <label class="control-label">
+              <%- if diver_samples_fields.object.primary_diver? %>
+                Diver
+              <%- else %>
+                Buddy
+              <%- end %>
+            </label>
+            <div class="controls">
+              <%= diver_samples_fields.hidden_field :primary_diver %>
+              <%= diver_samples_fields.collection_select :diver_id, Diver.active_divers.order(:diver_name), :id, :diver_name, { include_blank: true }, { class: "tab_1", tabindex: "1" } %>
+            </div>
+          </div>
+        <%- end %>
 
         <div class="control-group">
           <label class="control-label">Sample Type</label>

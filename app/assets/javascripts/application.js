@@ -21,9 +21,16 @@
 //= require bootstrap
 //= require jquery-ui/datepicker
 //= require jquery_nested_form
+//= require underscore-umd
 //= require_tree ../../../vendor/assets/javascripts
-//= require_tree .
 //
+//= require ./benthic_covers
+//= require ./boat_logs
+//= require ./coral_demographics
+//= require ./samples
+//= require ./static_pages
+//= require ./drafts
+//= require_self
 
 // Set up our EA namespace for our functions
 var EA = {};

@@ -8,4 +8,12 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     # in production
     Rails.configuration.action_dispatch.show_exceptions = true
   end
+
+  private
+
+  def login_as_diver(diver)
+    find("input#diver_username").fill_in(with: diver.username)
+    find("input#diver_password").fill_in(with: diver.password)
+    find("input[type=submit]").click
+  end
 end

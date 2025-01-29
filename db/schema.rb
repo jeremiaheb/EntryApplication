@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_01_21_210428) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_05_190547) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -126,6 +126,18 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_21_210428) do
     t.string "role", limit: 255
     t.integer "boatlog_manager_id"
     t.index ["boatlog_manager_id"], name: "index_divers_on_boatlog_manager_id", unique: true
+  end
+
+  create_table "drafts", force: :cascade do |t|
+    t.bigint "diver_id"
+    t.string "model_klass", null: false
+    t.integer "model_id"
+    t.json "model_attributes", default: "{}", null: false
+    t.string "focused_dom_id"
+    t.float "sequence", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["diver_id", "model_klass", "model_id", "sequence"], name: "idx_on_diver_id_model_klass_model_id_sequence_3f81240dbe", unique: true, order: { sequence: :desc }
   end
 
   create_table "habitat_types", id: :serial, force: :cascade do |t|
@@ -262,6 +274,15 @@ ActiveRecord::Schema[7.0].define(version: 2025_01_21_210428) do
     t.string "hard_pcov_other2_lab", limit: 255
     t.integer "hard_pcov_other1"
     t.integer "hard_pcov_other2"
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.string "session_id", null: false
+    t.text "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
+    t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
   create_table "station_logs", id: :serial, force: :cascade do |t|

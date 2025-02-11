@@ -30,17 +30,18 @@ class BenthicCoversTest < ApplicationSystemTestCase
     find("input#benthic_cover_meters_completed").fill_in(with: "10")
     find("textarea#benthic_cover_sample_description").fill_in(with: "Hello World")
 
-    all("select[id$='cover_cat_id']").first.select(cover_cat1.cover_code_name)
+    select2_choose(all("select[id$='cover_cat_id']", visible: nil).first, option: cover_cat1.cover_code_name)
     all("input[id$='hardbottom_num']").first.fill_in(with: "15")
     all("input[id$='softbottom_num']").first.fill_in(with: "25")
     all("input[id$='rubble_num']").first.fill_in(with: "5")
 
     find("a.add_nested_fields[data-association=point_intercepts]").click # Add Cover
-    all("select[id$='cover_cat_id']").last.select(cover_cat2.cover_code_name)
+    select2_choose(all("select[id$='cover_cat_id']", visible: nil).last, option: cover_cat2.cover_code_name)
     all("input[id$='hardbottom_num']").last.fill_in(with: "30")
     all("input[id$='softbottom_num']").last.fill_in(with: "14")
     all("input[id$='rubble_num']").last.fill_in(with: "11")
-    #assert_css ".coverTotal", text: "Total Points 100"
+    find("body").click # blur for calculation
+    assert_css ".coverTotal", text: "Total Points 100"
 
     find("input#benthic_cover_rugosity_measure_attributes_min_depth").fill_in(with: "5")
     find("input#benthic_cover_rugosity_measure_attributes_max_depth").fill_in(with: "5")
@@ -61,7 +62,7 @@ class BenthicCoversTest < ApplicationSystemTestCase
     find("input#benthic_cover_rugosity_measure_attributes_meter_mark_14").fill_in(with: "14")
     find("input#benthic_cover_rugosity_measure_attributes_meter_mark_15").fill_in(with: "15")
     find("body").click # trigger validation
-    #assert_equal "100", find("input#RugosityTotalDisplay").value
+    assert_equal "120", find("input#RugosityTotalDisplay").value
 
     find("input#benthic_cover_invert_belt_attributes_lobster_num").fill_in(with: "1")
     find("input#benthic_cover_invert_belt_attributes_conch_num").fill_in(with: "2")
@@ -86,5 +87,6 @@ class BenthicCoversTest < ApplicationSystemTestCase
     assert_equal 2, benthic_cover.point_intercepts.count
     assert_equal 45, benthic_cover.point_intercepts[0].cover_total
     assert_equal 55, benthic_cover.point_intercepts[1].cover_total
+    assert_equal 120, benthic_cover.rugosity_measure.category_sum
   end
 end

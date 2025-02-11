@@ -19,6 +19,6 @@ class BoatLogTest < ActiveSupport::TestCase
       [boat_log.date, rep_logs1[2].field_id, rep_logs1[2].diver.diver_name],
       [boat_log.date, rep_logs2[0].field_id, rep_logs2[0].diver.diver_name],
       [boat_log.date, rep_logs2[1].field_id, rep_logs2[1].diver.diver_name],
-    ].sort, boat_log.boatlog_divers
+    ].sort, boat_log.boatlog_divers.sort
   end
 end

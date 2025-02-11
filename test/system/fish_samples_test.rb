@@ -107,23 +107,26 @@ class FishSamplesTest < ApplicationSystemTestCase
     assert_equal "100", find("input#biotic_percentage_hardbottom_total").value
     find("button#gotoSpecies").click
     # Samples, Species Section
-    all("select[id$='animal_id']").first.select(animal1.spp_code_common)
+    select2_choose(all("select[id$='animal_id']", visible: nil).first, option: animal1.spp_code_common)
     all("input[id$='number_individuals']").first.fill_in(with: "3")
     all("input[id$='average_length']").first.fill_in(with: "20")
     all("input[id$='min_length']").first.fill_in(with: "15")
     all("input[id$='max_length']").first.fill_in(with: "35")
     # Second species, from nested form
     find("a.add_nested_fields[data-association=sample_animals]").click # "Add New Species"
-    all("select[id$='animal_id']").last.select(animal2.spp_code_common)
+    select2_choose(all("select[id$='animal_id']", visible: nil).last, option: animal2.spp_code_common)
     all("input[id$='number_individuals']").last.fill_in(with: "2")
     all("input[id$='min_length']").last.fill_in(with: "10")
     all("input[id$='max_length']").last.fill_in(with: "12")
-    # find("button#validateAnimals").click
+    find("button#validateAnimals").click
     find("input[type=submit]").click
 
     assert_selector(".alert", text: "Sample was successfully created")
 
     assert_equal 1, Sample.count
+
+    sample = Sample.first
+    assert_equal [animal1, animal2].sort, sample.animals.sort
   end
 
   private

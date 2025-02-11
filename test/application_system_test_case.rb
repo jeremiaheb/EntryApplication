@@ -16,4 +16,15 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     find("input#diver_password").fill_in(with: diver.password)
     find("input[type=submit]").click
   end
+
+  def select2_choose(select_element, option:)
+    # Close any open select2 that happens to be open for other reasons
+    all(".select2-dropdown-open a", wait: false)&.each(&:click)
+
+    select_element.sibling(".select2-container").find("a").click
+
+    within(".select2-drop") do
+      find(".select2-result", text: option).click
+    end
+  end
 end

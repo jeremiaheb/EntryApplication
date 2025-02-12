@@ -1,7 +1,11 @@
 require "test_helper"
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
-  driven_by :selenium, using: :chrome, screen_size: [1400, 1400]
+  driven_by :selenium, using: :chrome, screen_size: [1400, 1400] do |capabilities|
+    capabilities.add_argument("headless")
+    capabilities.add_argument("disable-gpu")
+    capabilities.add_argument("no-sandbox")
+  end
 
   setup do
     # Render error pages instead of raising on routing errors, like would happen

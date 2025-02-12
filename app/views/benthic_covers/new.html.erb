@@ -1,5 +1,7 @@
 <h1>New benthic_cover</h1>
 
+<%= render partial: "draft_present_alert", locals: { discard_draft_url: draft_benthic_covers_url } %>
+
 <%= render 'form' %>
 
 <%= link_to 'Benthic Sample List', benthic_covers_path %>

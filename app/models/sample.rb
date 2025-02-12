@@ -21,7 +21,6 @@ class Sample < ActiveRecord::Base
     diver_samples.primary.first.try(:diver)
   end
 
-
   #validates :sample_date,                 :presence => true 
   validates :sample_type_id,              :presence => true
   validates :habitat_type_id,             :presence => true

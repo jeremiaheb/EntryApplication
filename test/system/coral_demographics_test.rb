@@ -32,7 +32,7 @@ class CoralDemographicsTest < ApplicationSystemTestCase
     find("textarea#coral_demographic_sample_description").fill_in(with: "Hello World")
 
     all("input#meter_mark").first.fill_in(with: "1")
-    all("select[id$='coral_id']").first.select(coral1.coral_code_name)
+    select2_choose(all("select[id$='coral_id']", visible: nil).first, option: coral1.coral_code_name)
     all("input[id$='max_diameter']").first.fill_in(with: "4")
     all("input[id$='perpendicular_diameter']").first.fill_in(with: "3")
     all("input[id$='height']").first.fill_in(with: "20")
@@ -43,7 +43,7 @@ class CoralDemographicsTest < ApplicationSystemTestCase
 
     find("a.add_nested_fields[data-association=demographic_corals]").click # "Add Coral"
     all("input#meter_mark").last.fill_in(with: "2")
-    all("select[id$='coral_id']").last.select(coral2.coral_code_name)
+    select2_choose(all("select[id$='coral_id']", visible: nil).last, option: coral2.coral_code_name)
     all("input[id$='max_diameter']").last.fill_in(with: "6")
     all("input[id$='perpendicular_diameter']").last.fill_in(with: "5")
     all("input[id$='height']").last.fill_in(with: "25")

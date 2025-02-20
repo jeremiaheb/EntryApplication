@@ -136,7 +136,7 @@ class CoralDemographicsController < ApplicationController
     draft = Draft.new(
       diver_id: current_diver.id,
       model_klass: CoralDemographic,
-      model_id: coral_demographic_params[:id],
+      model_id: params[:id],
       model_attributes: coral_demographic_params,
       sequence: params[:sequence],
       focused_dom_id: params[:focused_dom_id],

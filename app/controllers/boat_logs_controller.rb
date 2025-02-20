@@ -119,7 +119,7 @@ class BoatLogsController < ApplicationController
     draft = Draft.new(
       diver_id: current_diver.id,
       model_klass: BoatLog,
-      model_id: boat_log_params[:id],
+      model_id: params[:id],
       model_attributes: boat_log_params,
       sequence: params[:sequence],
       focused_dom_id: params[:focused_dom_id],

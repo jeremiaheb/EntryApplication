@@ -1,5 +1,7 @@
 <h1>Editing boat_log</h1>
 
+<%= render partial: "draft_present_alert", locals: { discard_draft_url: draft_boat_logs_url } %>
+
 <%= render 'form' %>
 
 <%= link_to 'Show', @boat_log %> |

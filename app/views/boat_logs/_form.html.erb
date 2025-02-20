@@ -1,5 +1,5 @@
 <div class="form-horizontal">
-<%= nested_form_for @boat_log do |f| %>
+<%= nested_form_for @boat_log, data: { "drafts-url": draft_boat_logs_url, "draft-restored": @draft.present?, "draft-focused-dom-id": @draft&.focused_dom_id } do |f| %>
   <%= render "shared/error_messages", :target => @boat_log%>
 
     <div class="formContainer">

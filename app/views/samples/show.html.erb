@@ -69,7 +69,7 @@
 </div>
 <br />
 <div class="showActions" >
- <%= button_to('Edit Fish Sample', edit_sample_path(@sample), :method => "get", :class => 'btn btn-large btn-primary showAction') %>
+ <%= button_to('Edit Fish Sample', edit_sample_path(@sample), :method => "get", :class => 'edit-button btn btn-large btn-primary showAction') %>
  <%= button_to("Delete Fish Sample", @sample, data: { confirm: 'Are you sure?' }, method: :delete, :class => 'btn btn-large btn-primary showAction') %>
  <%= button_to('Fish Sample List', samples_path, :method => "get", :class => 'btn btn-large btn-primary showAction') %>
 </div>

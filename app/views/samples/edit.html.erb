@@ -1,5 +1,5 @@
 <h1>Editing sample <%= @sample.field_id %></h1>
 
-<%= render partial: "draft_present_alert", locals: { discard_draft_url: draft_samples_url } %>
+<%= render partial: "draft_present_alert", locals: { discard_draft_url: draft_samples_url(id: @sample.id) } %>
 
 <%= render 'form' %>

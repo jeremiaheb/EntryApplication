@@ -143,7 +143,7 @@ class SamplesController < ApplicationController
     draft = Draft.new(
       diver_id: current_diver.id,
       model_klass: Sample,
-      model_id: sample_params[:id],
+      model_id: params[:id],
       model_attributes: sample_params,
       sequence: params[:sequence],
       focused_dom_id: params[:focused_dom_id],

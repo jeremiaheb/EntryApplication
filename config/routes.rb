@@ -1,7 +1,9 @@
 EntryApplication::Application.routes.draw do
   get "dashboard/show"
 
-  resources :boat_logs
+  resources :boat_logs do
+    put :draft, on: :collection
+  end
 
   resources :corals
   

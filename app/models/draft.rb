@@ -2,7 +2,7 @@ class Draft < ActiveRecord::Base
   belongs_to :diver
   validates :diver_id, presence: true
 
-  validates :model_klass, presence: true, inclusion: [::Sample.to_s, ::BenthicCover.to_s, ::CoralDemographic.to_s]
+  validates :model_klass, presence: true, inclusion: [::Sample.to_s, ::BenthicCover.to_s, ::CoralDemographic.to_s, ::BoatLog.to_s]
 
   validates :sequence, presence: true, uniqueness: { scope: [:diver_id, :model_klass, :model_id] }
 

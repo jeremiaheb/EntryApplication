@@ -7,13 +7,12 @@ class FishSamplesTest < ApplicationSystemTestCase
     buddy = FactoryGirl.create(:diver)
     sample_type = FactoryGirl.create(:sample_type)
     habitat_type = FactoryGirl.create(:habitat_type, region: "Caribbean")
+    draft_count_before = Draft.count
 
     visit root_url
     find(".samples-link").click
     login_as_diver(diver)
     find("#newSampleButton").click
-
-    draft_count_before = Draft.count
 
     # Samples, Sample Section
     fill_in_sample_section(
@@ -25,6 +24,7 @@ class FishSamplesTest < ApplicationSystemTestCase
     )
     find("button#gotoSubstrate").click
 
+    # Wait up to 5 seconds for draft to be saved
     page.document.synchronize(5.seconds) do
       raise Capybara::ElementNotFound if Draft.count <= draft_count_before
     end
@@ -42,6 +42,42 @@ class FishSamplesTest < ApplicationSystemTestCase
     assert_css "select#sample_habitat_type_id", text: habitat_type.habitat_name
     assert_css "input#sample_dive_begin_time[value='10:00']"
     assert_css "input#sample_dive_end_time[value='10:30']"
+  end
+
+  test "automatically saving drafts (editing an existing sample)" do
+    boatlog_manager = FactoryGirl.create(:boatlog_manager)
+    diver = FactoryGirl.create(:diver)
+    buddy = FactoryGirl.create(:diver)
+    sample_type = FactoryGirl.create(:sample_type)
+    habitat_type = FactoryGirl.create(:habitat_type, region: "Caribbean")
+    sample_animal = FactoryGirl.create(:sample_animal, sample: nil)
+    sample = FactoryGirl.create(:sample, sample_animals: [sample_animal])
+    diver_primary = FactoryGirl.create(:diver_sample, sample: sample, diver: diver, primary_diver: true)
+    diver_buddy = FactoryGirl.create(:diver_sample, sample: sample, diver: buddy, primary_diver: false)
+    draft_count_before = Draft.count
+
+    visit root_url
+    find(".samples-link").click
+    login_as_diver(diver)
+    find("[data-id='#{sample.id}']").click
+    find(".edit-button").click
+
+    # Edit some field
+    find("textarea#sample_sample_description").fill_in(with: "I edited this field before saving")
+    find("body").click
+
+    # Wait up to 5 seconds for draft to be saved
+    page.document.synchronize(5.seconds) do
+      raise Capybara::ElementNotFound if Draft.count <= draft_count_before
+    end
+
+    refresh
+
+    # Assert that warning is shown
+    assert_selector ".draft-present-alert", text: /Data was restored/
+
+    # Assert that field values were restored
+    assert_css "textarea#sample_sample_description", text: "I edited this field before saving"
   end
 
   test "new fish sample" do

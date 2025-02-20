@@ -32,10 +32,15 @@ class BoatLogsController < ApplicationController
   # GET /boat_logs/new
   # GET /boat_logs/new.json
   def new
-    @boat_log = BoatLog.new
-
-    station = @boat_log.station_logs.build
-    2.times { station.rep_logs.build }
+    @draft = Draft.latest_for(diver_id: current_diver.id, model_klass: BoatLog, model_id: nil)
+    if @draft
+      @boat_log = BoatLog.new(@draft.model_attributes)
+    else
+      @boat_log = BoatLog.new.tap do |bl|
+        station = bl.station_logs.build
+        2.times { station.rep_logs.build }
+      end
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -45,7 +50,12 @@ class BoatLogsController < ApplicationController
 
   # GET /boat_logs/1/edit
   def edit
-    @boat_log = BoatLog.find(params[:id])
+    @draft = Draft.latest_for(diver_id: current_diver.id, model_klass: BoatLog, model_id: params[:id])
+    if @draft
+      @boat_log = BoatLog.new(@draft.model_attributes.merge(id: params[:id]))
+    else
+      @boat_log = BoatLog.find(params[:id])
+    end
   end
 
   # POST /boat_logs
@@ -55,6 +65,8 @@ class BoatLogsController < ApplicationController
 
     respond_to do |format|
       if @boat_log.save
+        Draft.destroy_for(diver_id: current_diver.id, model_klass: BoatLog, model_id: nil)
+
         format.html { redirect_to @boat_log, notice: 'Boat log was successfully created.' }
         format.json { render json: @boat_log, status: :created, location: @boat_log }
       else
@@ -71,6 +83,8 @@ class BoatLogsController < ApplicationController
 
     respond_to do |format|
       if @boat_log.update(boat_log_params)
+        Draft.destroy_for(diver_id: current_diver.id, model_klass: BoatLog, model_id: @boat_log.id)
+
         format.html { redirect_to @boat_log, notice: 'Boat log was successfully updated.' }
         format.json { head :no_content }
       else
@@ -89,6 +103,31 @@ class BoatLogsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to boat_logs_url }
       format.json { head :no_content }
+    end
+  end
+
+  # PUT /draft
+  def draft
+    # Handle intentional delete of draft data
+    unless params[:boat_log].present?
+      Draft.destroy_for(diver_id: current_diver.id, model_klass: BoatLog, model_id: params[:id])
+
+      head :ok
+      return
+    end
+
+    draft = Draft.new(
+      diver_id: current_diver.id,
+      model_klass: BoatLog,
+      model_id: params[:id],
+      model_attributes: boat_log_params,
+      sequence: params[:sequence],
+      focused_dom_id: params[:focused_dom_id],
+    )
+    if draft.save
+      render json: {}, status: :created
+    else
+      render json: draft.errors, status: :unprocessable_entity
     end
   end
 

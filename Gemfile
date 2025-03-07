@@ -29,12 +29,6 @@ gem 'prawn', '~> 2.5'
 gem 'prawn-table', '~> 0.2', '>= 0.2.2'
 gem 'caxlsx_rails', '0.6.4'
 
-gem 'net-ssh'
-gem 'capistrano', '~> 3.7', '>= 3.7.1'
-gem 'capistrano-rails', '~> 1.2'
-gem 'capistrano-passenger', '~> 0.2.0'
-gem 'capistrano-rbenv', '~> 2.1'
-
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
@@ -49,6 +43,12 @@ group :development, :test do
 end
 
 group :development do
+  gem 'capistrano', '~> 3.19', '>= 3.19.2', require: false
+  gem 'capistrano-rails', '~> 1.7', require: false
+  gem 'capistrano-rbenv', '~> 2.2', require: false
+  gem 'ed25519', '>= 1.2', '< 2.0'
+  gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
+
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 

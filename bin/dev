@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+#
+additional_default_options = []
+if ENV["USER"] == "vagrant"
+  # within vagrant, bind to all interfaces so port can be forwarded back to the
+  # host
+  additional_default_options << "-b"
+  additional_default_options << "0.0.0.0"
+end
+
+exec "./bin/rails", "server", *additional_default_options, *ARGV

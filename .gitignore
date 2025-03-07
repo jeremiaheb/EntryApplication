@@ -33,3 +33,12 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore vagrant runtime files
+/.vagrant
+
+# Locally bundled gems
+/vendor/bundle
+
+# Packer output
+/server/output

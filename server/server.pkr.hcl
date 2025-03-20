@@ -50,7 +50,7 @@ build {
   # Cleanup before finalization
   provisioner "shell" {
     inline = [
-      "sudo env DEBIAN_FRONTEND=noninteractive apt-get auto-remove -y --purge",
+      "sudo env DEBIAN_FRONTEND=noninteractive apt-get autopurge -y",
       "sudo env DEBIAN_FRONTEND=noninteractive apt-get dist-clean -y",
     ]
   }

@@ -8,13 +8,14 @@
 
 A [Vagrant](https://www.vagrantup.com) box is provided for local development. It runs the same Ansible provisioning as the production virtual machine, plus some additional commands that make it useful for development.
 
-First, [install Vagrant](https://developer.hashicorp.com/vagrant/install?product_intent=vagrant). Then from a terminal, run:
+First, [install Vagrant](https://developer.hashicorp.com/vagrant/install?product_intent=vagrant). Then from within a terminal, run:
 
 ``` bash
 vagrant up
 ```
 
-The first run will take some time because it starts with a basic Ubuntu Linux machine and builds all the required dependencies on top. Once this is finished, future runs will not take as long.
+> [!NOTE]
+> This command will take a while the first time it runs. Go for coffee or otherwise do something else for a while! It will not take nearly as long once it is setup for the first time.
 
 To get a shell on the machine, run:
 
@@ -22,7 +23,7 @@ To get a shell on the machine, run:
 vagrant ssh
 ```
 
-To start the Rails server, run:
+To start the Rails server, within a `vagrant ssh` session run:
 
 ``` bash
 bin/dev
@@ -36,12 +37,24 @@ To start a Rails console, within a new `vagrant ssh` session run:
 bin/rails console
 ```
 
-All typical `rake`, `rails`, etc commands can be run this way.
+All typical `rake`, `rails`, `bundle`, etc commands can run this way.
 
 For example, to run the test suite:
 
 ``` bash
 bin/rails test
+```
+
+To power off the machine without destroying it, within a terminal run:
+
+``` bash
+vagrant halt
+```
+
+To power it back up again, run:
+
+``` bash
+vagrant up
 ```
 
 ### Local

@@ -39,7 +39,7 @@ build {
   provisioner "shell" {
     inline = [
       "sudo env DEBIAN_FRONTEND=noninteractive apt-get update",
-      "sudo env DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes ansible",
+      "sudo env DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes at ansible",
       "sudo env DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade --assume-yes",
     ]
   }
@@ -62,12 +62,7 @@ build {
   # no longer work after this user is deleted
   provisioner "shell" {
     inline = [
-      # This may partially fail because the vagrant user is still connected, but
-      # it is good enough.
-      "sudo deluser --debug --remove-all-files --remove-home vagrant || true",
-      # Just in case something partially fails with the above command, Vagrant's
-      # main files are deleted here as a defense in depth. With these
-      # directories gone, Vagrant will not be usable (as intended).
+      "sudo userdel --force --remove vagrant",
       "sudo rm -rf /vagrant /home/vagrant"
     ]
   }

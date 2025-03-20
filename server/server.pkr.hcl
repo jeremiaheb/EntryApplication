@@ -29,6 +29,7 @@ source "vagrant" "ubuntu_24_04" {
   output_dir = "./server/output"
   add_force = true
   insert_key = true
+  teardown_method = "halt"
 }
 
 build {

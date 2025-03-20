@@ -38,8 +38,8 @@ build {
   provisioner "shell" {
     inline = [
       "sudo env DEBIAN_FRONTEND=noninteractive apt-get update",
-      "sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y ansible",
-      "sudo env DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y",
+      "sudo env DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes ansible",
+      "sudo env DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade --assume-yes",
     ]
   }
 
@@ -50,8 +50,8 @@ build {
   # Cleanup before finalization
   provisioner "shell" {
     inline = [
-      "sudo env DEBIAN_FRONTEND=noninteractive apt-get autopurge -y",
-      "sudo env DEBIAN_FRONTEND=noninteractive apt-get dist-clean -y",
+      "sudo env DEBIAN_FRONTEND=noninteractive apt-get autopurge --assume-yes",
+      "sudo env DEBIAN_FRONTEND=noninteractive apt-get dist-clean --assume-yes",
     ]
   }
 

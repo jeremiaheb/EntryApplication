@@ -12,6 +12,13 @@
           - zlib1g-dev
       become: true
 
+    - name: install desktop environment
+      ansible.builtin.package:
+        name:
+          - slim
+          - ubuntu-desktop
+      become: true
+
     - name: install required libraries for ansible
       ansible.builtin.package:
         name:
@@ -159,25 +166,25 @@
         enabled: true
       become: true
 
-# This block of tasks gets run only for the local development VM (within
-# Vagrant).
-#
-# Put things here that are appropriate only for development, but not for the
-# production VM.
-- name: provision vagrant (development) setup
-  hosts: 'default'
-  tasks:
+    # --------------------------
+    # The following tasks are conditional on `development_build` being defined,
+    # meaning this playbook is running in Vagrant for local development. The
+    # tasks are skipped because they are meaningless for the production virtual
+    # machine, which is not used with Vagrant.
+    # --------------------------
     - name: install rbenv
       ansible.builtin.git:
         repo: "https://github.com/rbenv/rbenv"
         dest: "{{ ansible_user_dir }}/.rbenv"
         version: "10e96bfc473c7459a447fbbda12164745a72fd37" # v1.3.2
+      when: development_build is defined
 
     - name: install ruby-build
       ansible.builtin.git:
         repo: "https://github.com/rbenv/ruby-build"
         dest: "{{ ansible_user_dir }}/.rbenv/plugins/ruby-build"
         version: "88dd8dbfefeb0439ed0dec938bbe4409f1fc8613" # v20250318
+      when: development_build is defined
 
     - name: add rbenv init to ~/.bashrc
       ansible.builtin.blockinfile:
@@ -185,13 +192,16 @@
         marker: "# {mark} ANSIBLE MANAGED RBENV INIT"
         block: |
           eval "$(~/.rbenv/bin/rbenv init - --no-rehash bash)"
+      when: development_build is defined
 
     - name: install ruby 3.2.6
       ansible.builtin.command:
         cmd: "{{ ansible_user_dir }}/.rbenv/bin/rbenv install 3.2.6"
         creates: "{{ ansible_user_dir }}/.rbenv/versions/3.2.6"
+      when: development_build is defined
 
     - name: setup EntryApplication
       ansible.builtin.shell:
         cmd: "bash -i -l -c bin/setup"
         chdir: "/vagrant"
+      when: development_build is defined

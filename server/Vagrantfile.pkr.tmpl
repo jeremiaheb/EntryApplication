@@ -1,0 +1,27 @@
+# Originally from https://github.com/hashicorp/packer-plugin-vagrant/blob/053b1ca97eed3361186ae65940bb56fa978e4eec/builder/vagrant/step_create_vagrantfile.go#L39-L54
+Vagrant.configure("2") do |config|
+  config.vm.define "source", autostart: false do |source|
+	source.vm.box = "{{.SourceBox}}"
+	config.ssh.insert_key = {{.InsertKey}}
+
+    # ADDED: Longer boot timeout
+    config.vm.boot_timeout = 10 * 60 # seconds
+
+    # ADDED: Resource customization
+    config.vm.disk :disk, size: "50GB", primary: true
+    config.vm.provider "virtualbox" do |v|
+      v.memory = 2048
+      v.cpus = 2
+    end
+  end
+  config.vm.define "output" do |output|
+	output.vm.box = "{{.BoxName}}"
+	output.vm.box_url = "file://package.box"
+	config.ssh.insert_key = {{.InsertKey}}
+  end
+  {{ if ne .SyncedFolder "" -}}
+  		config.vm.synced_folder "{{.SyncedFolder}}", "/vagrant"
+  {{- else -}}
+  		config.vm.synced_folder ".", "/vagrant", disabled: true
+  {{- end}}
+end

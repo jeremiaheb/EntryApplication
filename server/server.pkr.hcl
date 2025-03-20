@@ -62,8 +62,9 @@ build {
   # no longer work after this user is deleted
   provisioner "shell" {
     inline = [
+      "sudo rm -rf /vagrant",
+      # This must be the last command. All commands after this one will fail.
       "sudo userdel --force --remove vagrant",
-      "sudo rm -rf /vagrant /home/vagrant"
     ]
   }
 

@@ -47,7 +47,18 @@ build {
     playbook_file = "./server/playbook.yml"
   }
 
+  # Cleanup before finalization
+  provisioner "shell" {
+    inline = [
+      "sudo env DEBIAN_FRONTEND=noninteractive apt-get auto-remove -y --purge",
+      "sudo env DEBIAN_FRONTEND=noninteractive apt-get dist-clean -y",
+    ]
+  }
+
   # Delete traces of Vagrant because Vagrant is not used in production
+  #
+  # NOTE: This must be the last provisioner because automated connectivity will
+  # no longer work after this user is deleted
   provisioner "shell" {
     inline = [
       # This may partially fail because the vagrant user is still connected, but

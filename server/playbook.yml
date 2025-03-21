@@ -218,6 +218,13 @@
         enabled: true
       become: true
 
+    - name: enable ssh server
+      ansible.builtin.service:
+        name: ssh
+        enabled: true
+        state: started
+      become: true
+
     # --------------------------
     # The following tasks are conditional on `development_build` being defined,
     # meaning this playbook is running in Vagrant for local development. The

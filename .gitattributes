@@ -9,4 +9,4 @@ config/credentials/*.yml.enc diff=rails_credentials
 config/credentials.yml.enc diff=rails_credentials
 
 # Anything with a shebang needs newlines preserved, even in Windows
-bin/* text eof=lf
+bin/* text eol=lf

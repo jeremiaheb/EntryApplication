@@ -55,7 +55,7 @@ build {
       "sudo env DEBIAN_FRONTEND=noninteractive apt-get dist-clean --assume-yes",
 
       # Force SSH host key regeneration on next boot
-      "sudo rm -f /etc/ssh/ssh_host_*_key*",
+      "sudo rm -f /etc/ssh/ssh_host_*",
     ]
   }
 

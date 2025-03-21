@@ -25,6 +25,29 @@
         replace: "127.0.1.1 entryapplication"
       become: true
 
+    - name: create systemd service to regenerate openssh host keys
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/reconfigure-openssh-server.service
+        content: |
+          [Unit]
+          Description=Regenerate SSH host keys if missing
+          ConditionPathExists=!/etc/ssh/ssh_host_rsa_key
+
+          [Service]
+          Type=oneshot
+          ExecStart=/usr/sbin/dpkg-reconfigure openssh-server
+          RemainAfterExit=true
+
+          [Install]
+          WantedBy=multi-user.target
+      become: true
+
+    - name: enable systemd service for reconfigure-openssh-server
+      ansible.builtin.service:
+        name: reconfigure-openssh-server
+        enabled: true
+      become: true
+
     - name: install required packages
       ansible.builtin.package:
         name:

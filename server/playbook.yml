@@ -33,6 +33,7 @@
         name: alindeman
         create_home: true
         password: '!' # disable password
+        shell: /bin/bash
         groups:
           - users
           - sudo
@@ -49,6 +50,7 @@
         name: jeremiaheb
         create_home: true
         password: "$6$fFfXVu1e4x8eDD/c$OC6TS/4ZCdSZs0QSdG6F/rIYZ0sE3nXoUZnAFhcv4fbsircL/3ET/R.qJU/F0Ayl9O.Z94cD3vNVwmDWUZYfE1"
+        shell: /bin/bash
         groups:
           - users
           - sudo
@@ -126,10 +128,11 @@
     - name: create user entryapplication
       ansible.builtin.user:
         name: entryapplication
-        create_home: true
         home: /var/www/apps/EntryApplication
+        create_home: true
         # TODO: Temporary. Replace with SSH keys for all deployers.
         password: '$6$OZl.q7ZgYzZIolON$HFXN04yl8qCRuq4KlE0DYRTCKnlEU6oK5krI70baHCDDceJDafoSTgP3elqGViCunFqf2gqC.syi/j/ZXZrP1/'
+        shell: /bin/bash
       become: true
 
     - name: install ssh key for entryapplication

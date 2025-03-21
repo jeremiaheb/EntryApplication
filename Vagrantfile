@@ -9,9 +9,6 @@ Vagrant.configure("2") do |config|
   # Forward 3000 from guest to 3000 on host
   config.vm.network "forwarded_port", guest: 3000, host: 3000, host_ip: "127.0.0.1"
 
-  # Host-only networking can be more convenient in some cases
-  config.vm.network "private_network", ip: "192.168.56.10"
-
   # Share this folder as /vagrant within the VM
   config.vm.synced_folder ".", "/vagrant"
 

@@ -38,4 +38,9 @@ Vagrant.configure("2") do |config|
       "development_build" => "true",
     }
   end
+
+  config.vm.provision "shell" do |shell|
+    shell.name = "Rebooting into graphical environment"
+    shell.reboot = true
+  end
 end

@@ -1,6 +1,17 @@
 - name: provision server
   hosts: '*'
   tasks:
+    # We occasionally see timeouts of this service when using virtualized
+    # network interfaces. It does not always happen, but when it does, it makes
+    # the boot take a very long time.
+    #
+    # At some point in the future it may be good to remove this and see if the
+    # problem still exists.
+    - name: disable waiting for network on boot
+      ansible.builtin.service:
+        name: systemd-networkd-wait-online
+        enabled: false
+
     - name: install required packages
       ansible.builtin.package:
         name:

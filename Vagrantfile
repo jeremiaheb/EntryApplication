@@ -36,6 +36,7 @@ Vagrant.configure("2") do |config|
     ansible.playbook = "server/playbook.yml"
     ansible.extra_vars = {
       "development_build" => "true",
+      "skip_desktop" => ENV["SKIP_DESKTOP"]
     }
   end
 

@@ -30,6 +30,7 @@
           - slim
           - ubuntu-desktop
       become: true
+      when: skip_desktop is undefined
 
     - name: install required libraries for ansible
       ansible.builtin.package:

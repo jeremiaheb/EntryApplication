@@ -53,6 +53,9 @@ build {
     inline = [
       "sudo env DEBIAN_FRONTEND=noninteractive apt-get autopurge --assume-yes",
       "sudo env DEBIAN_FRONTEND=noninteractive apt-get dist-clean --assume-yes",
+
+      # Force SSH host key regeneration on next boot
+      "sudo rm -f /etc/ssh/ssh_host_*_key*",
     ]
   }
 
@@ -62,7 +65,7 @@ build {
   # no longer work after this user is deleted
   provisioner "shell" {
     inline = [
-      "sudo rm -rf /vagrant",
+      "sudo rm -rf /vagrant /etc/cloud/cloud.cfg.d/99-installer.cfg",
       # This must be the last command. All commands after this one will fail.
       "sudo userdel --force --remove vagrant",
     ]

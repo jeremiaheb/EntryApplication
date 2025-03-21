@@ -13,6 +13,18 @@
         enabled: false
       become: true
 
+    - name: set hostname
+      ansible.builtin.hostname:
+        name: entryapplication
+      become: true
+
+    - name: replace hostname in /etc/hosts
+      ansible.builtin.replace:
+        path: /etc/hosts
+        regexp: "^127.0.1.1 .*$"
+        replace: "127.0.1.1 entryapplication"
+      become: true
+
     - name: install required packages
       ansible.builtin.package:
         name:

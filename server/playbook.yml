@@ -11,6 +11,7 @@
       ansible.builtin.service:
         name: systemd-networkd-wait-online
         enabled: false
+      become: true
 
     - name: install required packages
       ansible.builtin.package:

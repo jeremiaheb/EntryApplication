@@ -34,7 +34,7 @@ Vagrant.configure("2") do |config|
     ansible.extra_vars = {
       "development_build" => "true",
       "skip_desktop" => ENV["SKIP_DESKTOP"]
-    }
+    }.compact
   end
 
   config.vm.provision "shell" do |shell|

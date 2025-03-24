@@ -14,7 +14,7 @@ set :rbenv_type, :user
 namespace :deploy do
   namespace :check do
     before :linked_files, :upload_encryption_keys do
-      on roles(:app) do
+      on roles(:web) do
         unless test("test -f #{shared_path}/config/master.key")
           upload! "config/master.key", "#{shared_path}/config/master.key"
         end

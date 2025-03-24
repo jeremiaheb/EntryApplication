@@ -217,6 +217,15 @@
       become: true
       become_user: entryapplication
 
+    - name: add rbenv init to ~/.bashrc
+      ansible.builtin.blockinfile:
+        path: "/var/www/apps/EntryApplication/.bashrc"
+        marker: "# {mark} ANSIBLE MANAGED RBENV INIT"
+        block: |
+          eval "$(~/.rbenv/bin/rbenv init - --no-rehash bash)"
+      become: true
+      become_user: entryapplication
+
     - name: install ruby 3.2.6
       ansible.builtin.command:
         cmd: "/var/www/apps/EntryApplication/.rbenv/bin/rbenv install 3.2.6"
@@ -297,8 +306,9 @@
           fi
       when: development_build is defined
 
-    - name: copy rubies from entryapplication to save compliation time
+    - name: copy rubies from entryapplication to save compilation time
       ansible.builtin.copy:
+        remote_src: true
         src: /var/www/apps/EntryApplication/.rbenv/versions
         dest: "{{ ansible_user_dir }}/.rbenv/versions"
         owner: vagrant

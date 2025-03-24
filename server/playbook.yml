@@ -246,7 +246,7 @@
           Group=entryapplication
           WorkingDirectory=/var/www/apps/EntryApplication/current
           Environment=RAILS_ENV=production
-          ExecStart=bundle exec bin/rails server
+          ExecStart=/var/www/apps/EntryApplication/current/bin/rails server
           ExecReload=/bin/kill -USR1 $MAINPID
           RestartSec=1
           Restart=on-failure

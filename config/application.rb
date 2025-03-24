@@ -51,5 +51,8 @@ module EntryApplication
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Allow web-console within Vagrant (10.0.2.0/24 network)
+    config.web_console.permissions = "10.0.2.0/24"
   end
 end

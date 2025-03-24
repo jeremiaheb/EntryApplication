@@ -37,8 +37,10 @@ Vagrant.configure("2") do |config|
     }.compact
   end
 
-  config.vm.provision "shell" do |shell|
-    shell.name = "Rebooting into graphical environment"
-    shell.reboot = true
+  unless ENV.fetch("SKIP_REBOOT")
+    config.vm.provision "shell" do |shell|
+      shell.name = "Rebooting into graphical environment"
+      shell.reboot = true
+    end
   end
 end

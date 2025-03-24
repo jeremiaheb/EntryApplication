@@ -1,6 +1,13 @@
 - name: provision server
   hosts: '*'
   tasks:
+    - name: enable ssh server
+      ansible.builtin.service:
+        name: ssh
+        enabled: true
+        state: started
+      become: true
+
     # We occasionally see timeouts of this service when using virtualized
     # network interfaces. It does not always happen, but when it does, it makes
     # the boot take a very long time.
@@ -317,11 +324,15 @@
         enabled: true
       become: true
 
-    - name: enable ssh server
-      ansible.builtin.service:
-        name: ssh
-        enabled: true
-        state: started
+    - name: allow entryapplication to manage its systemd service
+      ansible.builtin.copy:
+        dest: /etc/sudoers.d/entryapplication
+        content: |
+          entryapplication ALL=(ALL) NOPASSWD: /usr/bin/systemctl reload entryapplication
+          entryapplication ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart entryapplication
+        owner: root
+        group: root
+        mode: "0440"
       become: true
 
     # --------------------------

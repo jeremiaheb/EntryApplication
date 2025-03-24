@@ -25,4 +25,19 @@ namespace :deploy do
       end
     end
   end
+
+  desc "Restart the application via its systemd service"
+  task :restart do
+    on roles(:web), in: :sequence do
+      execute "sudo", "systemctl", "restart", "entryapplication"
+    end
+  end
+
+  desc "Reload (code reload only) the application via its systemd service"
+  task :reload do
+    on roles(:web), in: :sequence do
+      execute "sudo", "systemctl", "reload", "entryapplication"
+    end
+  end
+  after "deploy:finishing", "deploy:reload"
 end

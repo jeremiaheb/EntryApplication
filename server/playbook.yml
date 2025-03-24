@@ -314,6 +314,6 @@
 
     - name: setup EntryApplication
       ansible.builtin.shell:
-        cmd: "bundle check || bash -i -l -c bin/setup"
+        cmd: "bundle check || bash -lic bin/setup"
         chdir: "/vagrant"
       when: development_build is defined

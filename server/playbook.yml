@@ -247,6 +247,12 @@
         shell: /bin/bash
       become: true
 
+    - name: make entryapplication directory world readable
+      ansible.builtin.file:
+        path: /var/www/apps/EntryApplication
+        mode: "0755"
+      become: true
+
     - name: add /vagrant as a safe git directory for local deployments
       ansible.builtin.copy:
         dest: /var/www/apps/EntryApplication/.gitconfig

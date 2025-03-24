@@ -201,6 +201,29 @@
         key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDP4nFAKeLb/7w6lL5MLrkYv/rLoyAl8Wycq1b+lOR7cknqrnWM1PJ+0Qkx8Je+tw/vIKY8CFzBoi4mZ/eOm0dAr5FjNXNCfZf10PWVgsizpOVnYOJTUMHhgO81cASL0pGNxeNr7lHB8FRB3mIcTT6639nrQuwKmYh1YNjHoMErIS1VkkYi6SuYJldWR1LYOJ3PzGoA4GLrck0VHbOJERs1u/ORimw7N0j5mrVKnJQ+72guuWPsbiLl4zwt/RUnxxQi9ou8fisE7qwLmoulCLw11m9Z7xUo86aBmuYfJQ7WBd8lQWczhKorpjEgrwvYcClPAUctjw14rraJGgxc/w2PcGAeH+Kby7WmdACKtZhI5BaNGMX/i0gZj4qlF4tyRJx2DRsTPL3wA2qranNPw5dqtR5VAxJleHx4R3WCXomhQ2BuqCrb5c65wZGaLpOedLeuMDHkdYdTj67OPJvvQzAQ3zQFbGEJX670pw9DU/6rm4GF4pzE93Qzjo9L8SOsBi4w7lQugmbndUF/q7WP8RxiTNL33xgloq6/Tt3Aclu9Z6yDd0UfcmUHezqCIEd6KNon0Q8v55EVWkPlrliZLpONZPHWniRT965D1A3uw5MkWMzYGx26jAS0/RNAfdfS0uwb8zMnBwSdrfETVk2KgycKBxl3r36KytLLMRpl6/VwIQ=="
       become: true
 
+    - name: install rbenv
+      ansible.builtin.git:
+        repo: "https://github.com/rbenv/rbenv"
+        dest: "/var/www/apps/EntryApplication/.rbenv"
+        version: "10e96bfc473c7459a447fbbda12164745a72fd37" # v1.3.2
+      become: true
+      become_user: entryapplication
+
+    - name: install ruby-build
+      ansible.builtin.git:
+        repo: "https://github.com/rbenv/ruby-build"
+        dest: "/var/www/apps/EntryApplication/.rbenv/plugins/ruby-build"
+        version: "88dd8dbfefeb0439ed0dec938bbe4409f1fc8613" # v20250318
+      become: true
+      become_user: entryapplication
+
+    - name: install ruby 3.2.6
+      ansible.builtin.command:
+        cmd: "/var/www/apps/EntryApplication/.rbenv/bin/rbenv install 3.2.6"
+        creates: "/var/www/apps/EntryApplication/.rbenv/versions/3.2.6"
+      become: true
+      become_user: entryapplication
+
     - name: create systemd service for entryapplication
       ansible.builtin.copy:
         dest: /etc/systemd/system/entryapplication.service
@@ -264,11 +287,24 @@
           eval "$(~/.rbenv/bin/rbenv init - --no-rehash bash)"
       when: development_build is defined
 
-    - name: install ruby 3.2.6
-      ansible.builtin.command:
-        cmd: "{{ ansible_user_dir }}/.rbenv/bin/rbenv install 3.2.6"
-        creates: "{{ ansible_user_dir }}/.rbenv/versions/3.2.6"
+    - name: add automatic cd to /vagrant in ~/.bashrc
+      ansible.builtin.blockinfile:
+        path: "{{ ansible_user_dir }}/.bashrc"
+        marker: "# {mark} ANSIBLE MANAGED CD INIT"
+        block: |
+          if [ "${PWD-}" = "/home/vagrant" ]; then
+            cd /vagrant
+          fi
       when: development_build is defined
+
+    - name: copy rubies from entryapplication to save compliation time
+      ansible.builtin.copy:
+        src: /var/www/apps/EntryApplication/.rbenv/versions
+        dest: "{{ ansible_user_dir }}/.rbenv/versions"
+        owner: vagrant
+        group: vagrant
+        force: true
+      become: true
 
     - name: setup EntryApplication
       ansible.builtin.shell:

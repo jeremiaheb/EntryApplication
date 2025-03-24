@@ -31,8 +31,12 @@ end
 # terminating a worker in development environments.
 worker_timeout 3600 if ENV.fetch("RAILS_ENV", "development") == "development"
 
-# Specifies the `port` that Puma will listen on to receive requests; default is 3000.
-port ENV.fetch("PORT") { 3000 }
+# Bind address
+default_bind = "tcp://127.0.0.1:3000"
+if rails_env == "production"
+  default_bind = File.realpath(File.dirname(__FILE__, "..", "tmp", "sockets", "puma.sock"))
+end
+bind ENV.fetch("BIND_ADDRESS", "tcp://127.0.0.1:3000")
 
 # Specifies the `environment` that Puma will run in.
 environment rails_env

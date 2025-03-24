@@ -5,8 +5,10 @@ db/schema.rb linguist-generated
 
 # Mark any vendored files as having been vendored.
 vendor/* linguist-vendored
-config/credentials/*.yml.enc diff=rails_credentials
-config/credentials.yml.enc diff=rails_credentials
 
 # Anything with a shebang needs newlines preserved, even in Windows
 bin/* text eol=lf
+
+# Encrypted files are not text
+config/credentials/*.yml.enc -text
+config/credentials.yml.enc -text

@@ -32,11 +32,7 @@ end
 worker_timeout 3600 if ENV.fetch("RAILS_ENV", "development") == "development"
 
 # Bind address
-default_bind = "tcp://127.0.0.1:3000"
-if rails_env == "production"
-  default_bind = "unix://./tmp/sockets/puma.sock"
-end
-bind ENV.fetch("BIND_ADDRESS", default_bind)
+bind ENV.fetch("BIND_ADDRESS", "tcp://127.0.0.1:3000")
 
 # Specifies the `environment` that Puma will run in.
 environment rails_env

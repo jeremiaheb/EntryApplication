@@ -65,7 +65,7 @@ build {
   # no longer work after this user is deleted
   provisioner "shell" {
     inline = [
-      "sudo rm -rf /vagrant /etc/cloud/cloud.cfg.d/99-installer.cfg",
+      "sudo rm -rf /vagrant /etc/sudoers.d/*vagrant* /etc/cloud/cloud.cfg.d/99-installer.cfg",
       # This must be the last command. All commands after this one will fail.
       "sudo userdel --force --remove vagrant",
     ]

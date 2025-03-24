@@ -156,6 +156,62 @@
       become: true
       become_user: postgres
 
+    - name: install nginx server
+      ansible.builtin.package:
+        name: nginx
+      become: true
+
+    - name: disable default nginx site
+      ansible.builtin.file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+      become: true
+
+    - name: create entryapplication nginx site
+      ansible.builtin.copy:
+        dest: /etc/nginx/sites-available/entryapplication
+        content: |
+          upstream rails {
+            server unix:/var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock fail_timeout=0;
+          }
+
+          server {
+            listen 80 default_server;
+            listen [::]:80 default_server;
+
+            client_max_body_size 1G;
+
+            location ~ ^/(rvc_data_entry|caribbean_data_entry) {
+              root /var/www/apps/EntryApplication/current/public;
+              try_files $uri $uri/index.html @app;
+              gzip_static on;
+            }
+
+            location @app {
+              # Standard reverse proxy stuff
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header X-Forwarded-Proto $scheme;
+              proxy_set_header Host $http_host;
+              proxy_pass http://rails;
+              proxy_redirect default;
+            }
+          }
+      become: true
+
+    - name: enable entryapplication nginx site
+      ansible.builtin.file:
+        path: /etc/nginx/sites-enabled/entryapplication
+        src: /etc/nginx/sites-available/entryapplication
+        state: link
+      become: true
+
+    - name: enable nginx service
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: true
+      become: true
+
     - name: create /var/www directory
       ansible.builtin.file:
         path: /var/www

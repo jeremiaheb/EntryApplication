@@ -10,3 +10,19 @@ set :linked_files, %w[config/master.key config/credentials/production.key]
 set :ssh_options, forward_agent: true
 
 set :rbenv_type, :user
+
+namespace :deploy do
+  namespace :check do
+    before :linked_files, :upload_encryption_keys do
+      on roles(:app) do
+        unless test("test -f #{shared_path}/config/master.key")
+          upload! "config/master.key", "#{shared_path}/config/master.key"
+        end
+
+        unless test("test -f #{shared_path}/config/credentials/production.key")
+          upload! "config/credentials/production.key", "#{shared_path}/config/credentials/production.key"
+        end
+      end
+    end
+  end
+end

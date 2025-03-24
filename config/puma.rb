@@ -34,7 +34,7 @@ worker_timeout 3600 if ENV.fetch("RAILS_ENV", "development") == "development"
 # Bind address
 default_bind = "tcp://127.0.0.1:3000"
 if rails_env == "production"
-  default_bind = "unix://" + File.realpath(File.join(__dir__, "..", "tmp", "sockets", "puma.sock"))
+  default_bind = "unix://./tmp/pids/puma.sock"
 end
 bind ENV.fetch("BIND_ADDRESS", default_bind)
 

@@ -306,15 +306,11 @@
           fi
       when: development_build is defined
 
-    - name: copy rubies from entryapplication to save compilation time
-      ansible.builtin.copy:
-        remote_src: true
-        src: /var/www/apps/EntryApplication/.rbenv/versions
-        dest: "{{ ansible_user_dir }}/.rbenv/versions"
-        owner: vagrant
-        group: vagrant
-        force: true
-      become: true
+    - name: install ruby 3.2.6
+      ansible.builtin.command:
+        cmd: "{{ ansible_user_dir }}/bin/rbenv install 3.2.6"
+        creates: "{{ ansible_user_dir }}/.rbenv/versions/3.2.6"
+      when: development_build is defined
 
     - name: setup EntryApplication
       ansible.builtin.shell:

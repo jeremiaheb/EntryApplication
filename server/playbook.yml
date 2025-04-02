@@ -173,6 +173,8 @@
         path: /etc/nginx/sites-enabled/default
         state: absent
       become: true
+      notify:
+        - reload nginx
 
     - name: delete default nginx index page
       ansible.builtin.file:
@@ -211,6 +213,8 @@
             }
           }
       become: true
+      notify:
+        - reload nginx
 
     - name: enable entryapplication nginx site
       ansible.builtin.file:
@@ -218,6 +222,8 @@
         src: /etc/nginx/sites-available/entryapplication
         state: link
       become: true
+      notify:
+        - reload nginx
 
     - name: enable nginx service
       ansible.builtin.service:
@@ -408,3 +414,10 @@
         cmd: "bundle check || bash -lic bin/setup"
         chdir: "/vagrant"
       when: development_build is defined
+
+  handlers:
+    - name: reload nginx
+      ansible.builtin.service:
+        name: nginx
+        state: reloaded
+      become: true

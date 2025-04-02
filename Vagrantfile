@@ -38,11 +38,4 @@ Vagrant.configure("2") do |config|
       "skip_desktop" => ENV["SKIP_DESKTOP"]
     }.compact
   end
-
-  unless ENV.fetch("SKIP_REBOOT", false)
-    config.vm.provision "shell" do |shell|
-      shell.name = "Rebooting into graphical environment"
-      shell.reboot = true
-    end
-  end
 end

@@ -36,7 +36,13 @@ namespace :deploy do
   desc "Reload (code reload only) the application via its systemd service"
   task :reload do
     on roles(:web), in: :sequence do
-      execute "sudo", "systemctl", "reload", "entryapplication"
+      execute <<-EOS
+        if systemctl is-active entryapplication >/dev/null 2>&1; then
+          sudo systemctl reload entryapplication
+        else
+          sudo systemctl start entryapplication
+        fi
+      EOS
     end
   end
   after "deploy:finishing", "deploy:reload"

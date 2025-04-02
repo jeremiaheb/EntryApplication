@@ -350,6 +350,8 @@
       ansible.builtin.copy:
         dest: /etc/sudoers.d/entryapplication
         content: |
+          entryapplication ALL=(ALL) NOPASSWD: /usr/bin/systemctl start entryapplication
+          entryapplication ALL=(ALL) NOPASSWD: /usr/bin/systemctl stop entryapplication
           entryapplication ALL=(ALL) NOPASSWD: /usr/bin/systemctl reload entryapplication
           entryapplication ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart entryapplication
         owner: root

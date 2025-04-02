@@ -36,13 +36,9 @@ namespace :deploy do
   desc "Reload (code reload only) the application via its systemd service"
   task :reload do
     on roles(:web), in: :sequence do
-      execute <<-EOS
-        if systemctl is-active entryapplication >/dev/null 2>&1; then
-          sudo systemctl reload entryapplication
-        else
-          sudo systemctl start entryapplication
-        fi
-      EOS
+      # Must be on a single line; otherwise capistrano/sshkit will add
+      # semicolons at the end of every newline 🤦🏻
+      execute "systemctl is-active entryapplication >/dev/null 2>&1 && sudo systemctl reload entryapplication || sudo systemctl start entryapplication"
     end
   end
   after "deploy:finishing", "deploy:reload"

@@ -188,7 +188,7 @@
       ansible.builtin.copy:
         dest: /etc/nginx/sites-available/entryapplication
         content: |
-          upstream rails {
+          upstream puma {
             server unix:/var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock fail_timeout=0;
           }
 
@@ -200,19 +200,17 @@
 
             client_max_body_size 1G;
 
-            rewrite ^/(.*_data_entry)$ /$1/ redirect;
-            location ~ /(rvc|caribbean|ncrmp)_data_entry/ {
-              root /var/www/apps/EntryApplication/current/public;
-              try_files $uri $uri/index.html @app;
+            location /ncrmp_data_entry {
+              alias /var/www/apps/EntryApplication/current/public;
+              try_files $uri @puma;
               gzip_static on;
-            }
 
-            location @app {
-              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-              proxy_set_header X-Forwarded-Proto $scheme;
-              proxy_set_header X-Real-IP $remote_addr;
               proxy_set_header Host $http_host;
-              proxy_pass http://rails;
+              proxy_set_header X-Forwarded-Proto $scheme;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header SCRIPT_NAME /ncrmp_data_entry;
+              proxy_pass http://puma/;
             }
           }
       become: true

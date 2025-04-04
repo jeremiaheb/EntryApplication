@@ -181,6 +181,8 @@
         path: /var/www/html/index.nginx-debian.html
         state: absent
       become: true
+      notify:
+        - reload nginx
 
     - name: create entryapplication nginx site
       ansible.builtin.copy:

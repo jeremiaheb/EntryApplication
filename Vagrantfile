@@ -6,10 +6,10 @@ Vagrant.configure("2") do |config|
   # https://portal.cloud.hashicorp.com/vagrant/discover?query=bento%2Fubuntu-
   config.vm.box = ENV.fetch("VAGRANT_BOX", "bento/ubuntu-24.04")
 
-  # Forward 3000 from guest to 3000 on host
+  # Forward 3000 from guest to 3000 on host (puma)
   config.vm.network "forwarded_port", guest: 3000, host: 3000, host_ip: "127.0.0.1"
-  # Forward 80 from guest to 8080 on host
-  config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
+  # Forward 8000 from guest to 8000 on host (nginx)
+  config.vm.network "forwarded_port", guest: 8000, host: 8000, host_ip: "127.0.0.1"
 
   # Share this folder as /vagrant within the VM
   config.vm.synced_folder ".", "/vagrant"

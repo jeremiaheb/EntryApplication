@@ -64,6 +64,7 @@
           - libffi-dev
           - libpq-dev
           - libyaml-dev
+          - sendmail
           - zlib1g-dev
       become: true
 

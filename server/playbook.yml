@@ -163,77 +163,68 @@
       become: true
       become_user: postgres
 
-    - name: install nginx server
+    - name: install apache2 server
       ansible.builtin.package:
-        name: nginx
+        name: apache2
       become: true
 
-    - name: disable default nginx site
+    - name: disable default apache2 index page
       ansible.builtin.file:
-        path: /etc/nginx/sites-enabled/default
+        path: "/var/www/html/index.html"
         state: absent
       become: true
-      notify:
-        - reload nginx
 
-    - name: delete default nginx index page
-      ansible.builtin.file:
-        path: /var/www/html/index.nginx-debian.html
-        state: absent
+    - name: disable serve-cgi-bin apache2 conf
+      ansible.builtin.command:
+        cmd: "a2disconf serve-cgi-bin"
+        removes: "/etc/apache2/conf-enabled/serve-cgi-bin.conf"
       become: true
-      notify:
-        - reload nginx
+      notify: reload apache2
 
-    - name: create entryapplication nginx site
+    - name: disable default apache2 site
+      ansible.builtin.command:
+        cmd: "a2dissite 000-default"
+        removes: "/etc/apache2/sites-enabled/000-default.conf"
+      become: true
+      notify: reload apache2
+
+    - name: enable proxy_http apache2 module
+      ansible.builtin.command:
+        cmd: "a2enmod proxy_http"
+        creates: "/etc/apache2/mods-enabled/proxy_http.load"
+      become: true
+      notify: restart apache2
+
+    - name: create entryapplication apache2 site
       ansible.builtin.copy:
-        dest: /etc/nginx/sites-available/entryapplication
+        dest: "/etc/apache2/sites-available/entryapplication.conf"
         content: |
-          upstream puma {
-            server unix:/var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock fail_timeout=0;
-          }
+          Listen 8000
+          <VirtualHost *:80 *:8000>
+            # Static assets
+            <Directory "/var/www/apps/EntryApplication/current/public/assets">
+              Options FollowSymLinks
+              AllowOverride None
+              Require all granted
+            </Directory>
+            Alias "/ncrmp_data_entry/assets" "/var/www/apps/EntryApplication/current/public/assets"
+            ProxyPass "/ncrmp_data_entry/assets" "!"
 
-          server {
-            listen 80 default_server;
-            listen 8000 default_server;
-            listen [::]:80 default_server;
-            listen [::]:8000 default_server;
+            ProxyPass "/ncrmp_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/"
+            ProxyPassReverse "/ncrmp_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/"
 
-            client_max_body_size 1G;
-
-            location /ncrmp_data_entry {
-              alias /var/www/apps/EntryApplication/current/public;
-              try_files $uri @puma;
-              gzip_static on;
-            }
-
-            location @puma {
-              proxy_set_header Host $http_host;
-              proxy_set_header X-Forwarded-Proto $scheme;
-              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-              proxy_set_header X-Real-IP $remote_addr;
-              proxy_set_header SCRIPT_NAME /ncrmp_data_entry;
-              proxy_pass http://puma/;
-            }
-          }
+            ErrorLog "${APACHE_LOG_DIR}/error.log"
+            CustomLog "${APACHE_LOG_DIR}/access.log" combined
+          </VirtualHost>
       become: true
-      notify:
-        - reload nginx
+      notify: reload apache2
 
-    - name: enable entryapplication nginx site
-      ansible.builtin.file:
-        path: /etc/nginx/sites-enabled/entryapplication
-        src: /etc/nginx/sites-available/entryapplication
-        state: link
+    - name: enable entryapplication apache2 site
+      ansible.builtin.command:
+        cmd: "a2ensite entryapplication"
+        creates: "/etc/apache2/sites-enabled/entryapplication.conf"
       become: true
-      notify:
-        - reload nginx
-
-    - name: enable nginx service
-      ansible.builtin.service:
-        name: nginx
-        state: started
-        enabled: true
-      become: true
+      notify: reload apache2
 
     - name: create /var/www directory
       ansible.builtin.file:
@@ -339,7 +330,7 @@
           User=entryapplication
           Group=entryapplication
           WorkingDirectory=/var/www/apps/EntryApplication/current
-          Environment=RAILS_ENV=production BIND_ADDRESS=unix://./tmp/sockets/puma.sock
+          Environment=RAILS_ENV=production RAILS_RELATIVE_URL_ROOT=/ncrmp_data_entry BIND_ADDRESS=unix://./tmp/sockets/puma.sock
           ExecStart=/var/www/apps/EntryApplication/.rbenv/bin/rbenv exec bundle exec bin/rails server
           ExecReload=/bin/kill -USR1 $MAINPID
           RestartSec=1
@@ -348,6 +339,7 @@
           [Install]
           WantedBy=multi-user.target
       become: true
+      notify: restart entryapplication
 
     - name: enable systemd service for entryapplication
       ansible.builtin.service:
@@ -419,8 +411,20 @@
       when: development_build is defined
 
   handlers:
-    - name: reload nginx
+    - name: reload apache2
       ansible.builtin.service:
-        name: nginx
+        name: apache2
         state: reloaded
+      become: true
+
+    - name: restart apache2
+      ansible.builtin.service:
+        name: apache2
+        state: restarted
+      become: true
+
+    - name: restart entryapplication
+      ansible.builtin.service:
+        name: entryapplication
+        state: restarted
       become: true

@@ -331,7 +331,7 @@
           User=entryapplication
           Group=entryapplication
           WorkingDirectory=/var/www/apps/EntryApplication/current
-          Environment=RAILS_ENV=production RAILS_RELATIVE_URL_ROOT=/ncrmp_data_entry BIND_ADDRESS=unix://./tmp/sockets/puma.sock
+          Environment=RAILS_ENV=production BIND_ADDRESS=unix://./tmp/sockets/puma.sock
           ExecStart=/var/www/apps/EntryApplication/.rbenv/bin/rbenv exec bundle exec bin/rails server
           ExecReload=/bin/kill -USR1 $MAINPID
           RestartSec=1

@@ -3,8 +3,9 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  # Support being mounted at a subdirectory (e.g., "/ncrmp_data_entry")
-  config.assets.prefix = "#{ENV["RAILS_RELATIVE_URL_ROOT"]}/assets"
+  # In production, the application is mounted at a subdirectory
+  config.relative_url_root = "/ncrmp_data_entry"
+  config.assets.prefix = "/ncrmp_data_entry/assets"
 
   # Code is not reloaded between requests.
   config.enable_reloading = false

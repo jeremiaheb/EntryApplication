@@ -36,4 +36,7 @@ EntryApplication::Application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost:3000' } 
 
   config.eager_load = false
+
+  # Allow web-console within Vagrant (10.0.2.0/24 network)
+  config.web_console.permissions = "10.0.2.0/24"
 end

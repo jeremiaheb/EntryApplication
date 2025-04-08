@@ -33,3 +33,16 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+/config/credentials/development.key
+/config/credentials/production.key
+/config/credentials/test.key
+/config/credentials/*.key
+
+# Ignore vagrant runtime files
+/.vagrant
+
+# Locally bundled gems
+/vendor/bundle
+
+# Packer output
+/server/output

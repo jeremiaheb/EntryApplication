@@ -378,7 +378,7 @@
       ansible.builtin.git:
         repo: "https://github.com/rbenv/ruby-build"
         dest: "{{ ansible_user_dir }}/.rbenv/plugins/ruby-build"
-        version: "88dd8dbfefeb0439ed0dec938bbe4409f1fc8613" # v20250318
+        version: "2334633d60b78124fc99dedb32728605f44a4e56" # v20250326
       when: development_build is defined
 
     - name: add rbenv init to ~/.bashrc

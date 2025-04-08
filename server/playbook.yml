@@ -203,16 +203,16 @@
           Listen 8000
           <VirtualHost *:80 *:8000>
             # Static assets
-            <Directory "/var/www/apps/EntryApplication/current/public/assets">
+            <Directory "/var/www/apps/EntryApplication/current/public">
               Options FollowSymLinks
               AllowOverride None
               Require all granted
             </Directory>
-            Alias "/ncrmp_data_entry/assets" "/var/www/apps/EntryApplication/current/public/assets"
+            Alias "/ncrmp_data_entry/assets" "/var/www/apps/EntryApplication/current/public/ncrmp_data_entry/assets"
             ProxyPass "/ncrmp_data_entry/assets" "!"
 
-            ProxyPass "/ncrmp_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/"
-            ProxyPassReverse "/ncrmp_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/"
+            ProxyPass "/ncrmp_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/ncrmp_data_entry"
+            ProxyPassReverse "/ncrmp_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/ncrmp_data_entry"
 
             ErrorLog "${APACHE_LOG_DIR}/error.log"
             CustomLog "${APACHE_LOG_DIR}/access.log" combined

@@ -6,6 +6,7 @@ set :branch, ENV["BRANCH"] if ENV["BRANCH"]
 set :deploy_to, "/var/www/apps/EntryApplication"
 set :linked_dirs, %w[log tmp/pids tmp/cache tmp/sockets vendor/bundle]
 set :linked_files, %w[config/master.key config/credentials/production.key]
+set :assets_prefix, "/ncrmp_data_entry"
 
 set :ssh_options, forward_agent: true
 

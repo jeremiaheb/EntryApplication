@@ -5,7 +5,7 @@ Rails.application.configure do
 
   # In production, the application is mounted at a subdirectory
   config.relative_url_root = "/ncrmp_data_entry"
-  config.assets.prefix = "/ncrmp_data_entry/assets"
+  config.assets.prefix = "ncrmp_data_entry/assets"
 
   # Code is not reloaded between requests.
   config.enable_reloading = false

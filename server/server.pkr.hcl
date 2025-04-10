@@ -52,7 +52,7 @@ build {
   provisioner "shell" {
     inline = [
       "sudo env DEBIAN_FRONTEND=noninteractive apt-get autopurge --assume-yes",
-      "sudo env DEBIAN_FRONTEND=noninteractive apt-get dist-clean --assume-yes",
+      "sudo env DEBIAN_FRONTEND=noninteractive apt-get clean --assume-yes",
 
       # Force SSH host key regeneration on next boot
       "sudo rm -f /etc/ssh/ssh_host_*",

@@ -21,9 +21,9 @@ packer {
 #
 # However, this build is not meant to provide a Vagrant box, so we attempt to
 # remove all traces of Vagrant as a build step later.
-source "vagrant" "ubuntu_24_04" {
+source "vagrant" "ubuntu_22_04" {
   communicator = "ssh"
-  source_path = "bento/ubuntu-24.04"
+  source_path = "bento/ubuntu-22.04"
   provider = "virtualbox"
   template = "./server/Vagrantfile.pkr.tmpl"
   output_dir = "./server/output"
@@ -33,7 +33,7 @@ source "vagrant" "ubuntu_24_04" {
 }
 
 build {
-  sources = ["source.vagrant.ubuntu_24_04"]
+  sources = ["source.vagrant.ubuntu_22_04"]
 
   # Install ansible and update all packages to the latest
   provisioner "shell" {
@@ -52,7 +52,7 @@ build {
   provisioner "shell" {
     inline = [
       "sudo env DEBIAN_FRONTEND=noninteractive apt-get autopurge --assume-yes",
-      "sudo env DEBIAN_FRONTEND=noninteractive apt-get dist-clean --assume-yes",
+      "sudo env DEBIAN_FRONTEND=noninteractive apt-get clean --assume-yes",
 
       # Force SSH host key regeneration on next boot
       "sudo rm -f /etc/ssh/ssh_host_*",

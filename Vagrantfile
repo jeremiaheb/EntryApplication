@@ -4,7 +4,7 @@
 # you're doing.
 Vagrant.configure("2") do |config|
   # https://portal.cloud.hashicorp.com/vagrant/discover?query=bento%2Fubuntu-
-  config.vm.box = ENV.fetch("VAGRANT_BOX", "bento/ubuntu-24.04")
+  config.vm.box = ENV.fetch("VAGRANT_BOX", "bento/ubuntu-22.04")
 
   # Forward 3000 from guest to 3000 on host (puma)
   config.vm.network "forwarded_port", guest: 3000, host: 3000, host_ip: "127.0.0.1"

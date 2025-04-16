@@ -1,6 +1,46 @@
 - name: provision server
   hosts: '*'
   tasks:
+    - name: remove cloud-init ssh configuration
+      ansible.builtin.file:
+        path: "/etc/ssh/sshd_config.d/50-cloud-init.conf"
+        state: absent
+      become: true
+    
+    - name: remove cloud-init profile configuration
+      ansible.builtin.file:
+        path: "/etc/profile.d/Z99-cloudinit-warnings.sh"
+        state: absent
+      become: true
+
+    - name: remove cloud-init netplan configuration
+      ansible.builtin.file:
+        path: "/etc/netplan/50-cloud-init.yaml"
+        state: absent
+      become: true
+
+    - name: disable cloud-init network configuration
+      ansible.builtin.copy:
+        path: "/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg"
+        content: |
+          network:
+            config: disabled
+      become: true
+
+    - name: disable cloud-init
+      ansible.builtin.service:
+        name: cloud-init
+        enabled: false
+        state: stopped
+      become: true
+
+    - name: disable cloud-init-local
+      ansible.builtin.service:
+        name: cloud-init-local
+        enabled: false
+        state: stopped
+      become: true
+
     - name: enable ssh server
       ansible.builtin.service:
         name: ssh

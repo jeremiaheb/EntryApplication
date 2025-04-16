@@ -67,7 +67,7 @@ build {
     inline = [
       "sudo rm -rf /vagrant /etc/sudoers.d/*vagrant* /etc/cloud/cloud.cfg.d/99-installer.cfg",
       # This must be the last command. All commands after this one will fail.
-      "sudo userdel --force --remove vagrant",
+      "sudo userdel --force --remove vagrant || true",
     ]
   }
 

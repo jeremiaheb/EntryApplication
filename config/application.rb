@@ -53,11 +53,13 @@ module EntryApplication
     config.assets.version = '1.0'
 
     # Default URL options
-    config.action_mailer.default_url_options = {
-      host: Rails.application.credentials.fetch(:default_url_host, nil),
-    }
-    config.action_controller.default_url_options = {
-      host: Rails.application.credentials.fetch(:default_url_host, nil),
-    }
+    default_url_host = Rails.application.credentials.fetch(:default_url_host, nil)
+    if default_url_host
+      config.action_mailer.default_url_options ||= {}
+      config.action_mailer.default_url_options[:host] = default_url_host
+
+      config.action_controller.default_url_options ||= {}
+      config.action_controller.default_url_options[:host] = default_url_host
+    end
   end
 end

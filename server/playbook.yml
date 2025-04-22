@@ -236,6 +236,13 @@
       become: true
       notify: restart apache2
 
+    - name: enable headers apache2 module
+      ansible.builtin.command:
+        cmd: "a2enmod headers"
+        creates: "/etc/apache2/mods-enabled/headers.load"
+      become: true
+      notify: restart apache2
+
     - name: create entryapplication apache2 site
       ansible.builtin.copy:
         dest: "/etc/apache2/sites-available/entryapplication.conf"
@@ -253,6 +260,11 @@
 
             ProxyPass "/ncrmp_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/ncrmp_data_entry"
             ProxyPassReverse "/ncrmp_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/ncrmp_data_entry"
+
+            # Assume TLS-terminating proxy when host is noaa.gov
+            <If "%{HTTP_HOST} =~ /\.noaa\.gov$/">
+              RequestHeader set X-Forwarded-Proto "https"
+            </If>
 
             ErrorLog "${APACHE_LOG_DIR}/error.log"
             CustomLog "${APACHE_LOG_DIR}/access.log" combined

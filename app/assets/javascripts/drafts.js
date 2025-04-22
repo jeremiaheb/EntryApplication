@@ -26,7 +26,6 @@ $(function() {
     let params = $form.serializeArray();
     params.push({ name: "sequence", value: (new Date()).getTime() });
     params.push({ name: "focused_dom_id", value: $(document.activeElement).attr("id") });
-    params.push({ name: "_method", value: "PUT" });
 
     currentDraftRequest = $.ajax({
       type: "POST",

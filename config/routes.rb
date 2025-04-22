@@ -2,7 +2,7 @@ EntryApplication::Application.routes.draw do
   get "dashboard/show"
 
   resources :boat_logs do
-    put :draft, on: :collection
+    post :draft, on: :collection
   end
 
   resources :corals
@@ -10,11 +10,11 @@ EntryApplication::Application.routes.draw do
   resources :cover_cats
 
   resources :coral_demographics do
-    put :draft, on: :collection
+    post :draft, on: :collection
   end
 
   resources :benthic_covers do
-    put :draft, on: :collection
+    post :draft, on: :collection
   end
 
   resources :boatlog_managers
@@ -44,7 +44,7 @@ EntryApplication::Application.routes.draw do
   resources :sample_types
 
   resources :samples do
-    put :draft, on: :collection
+    post :draft, on: :collection
   end
 
   resources :animals

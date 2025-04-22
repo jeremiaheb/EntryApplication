@@ -52,8 +52,11 @@ module EntryApplication
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    # Action Mailer default URL options
+    # Default URL options
     config.action_mailer.default_url_options = {
+      host: Rails.application.credentials.fetch(:default_url_host, nil),
+    }
+    config.action_controller.default_url_options = {
       host: Rails.application.credentials.fetch(:default_url_host, nil),
     }
   end

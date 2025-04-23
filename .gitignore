@@ -46,3 +46,6 @@
 
 # Packer output
 /server/output
+
+# VSCode local settings
+/.vscode

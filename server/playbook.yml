@@ -1,0 +1,483 @@
+- name: provision server
+  hosts: '*'
+  tasks:
+    - name: remove cloud-init ssh configuration
+      ansible.builtin.file:
+        path: "/etc/ssh/sshd_config.d/50-cloud-init.conf"
+        state: absent
+      become: true
+    
+    - name: remove cloud-init profile configuration
+      ansible.builtin.file:
+        path: "/etc/profile.d/Z99-cloudinit-warnings.sh"
+        state: absent
+      become: true
+
+    - name: remove cloud-init netplan configuration
+      ansible.builtin.file:
+        path: "/etc/netplan/50-cloud-init.yaml"
+        state: absent
+      become: true
+
+    - name: disable cloud-init network configuration
+      ansible.builtin.copy:
+        dest: "/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg"
+        content: |
+          network:
+            config: disabled
+      become: true
+
+    - name: disable cloud-init
+      ansible.builtin.service:
+        name: cloud-init
+        enabled: false
+        state: stopped
+      become: true
+
+    - name: disable cloud-init-local
+      ansible.builtin.service:
+        name: cloud-init-local
+        enabled: false
+        state: stopped
+      become: true
+
+    - name: enable ssh server
+      ansible.builtin.service:
+        name: ssh
+        enabled: true
+        state: started
+      become: true
+
+    # We occasionally see timeouts of this service when using virtualized
+    # network interfaces. It does not always happen, but when it does, it makes
+    # the boot take a very long time.
+    #
+    # At some point in the future it may be good to remove this and see if the
+    # problem still exists.
+    - name: disable waiting for network on boot
+      ansible.builtin.service:
+        name: systemd-networkd-wait-online
+        enabled: false
+      become: true
+
+    - name: set hostname
+      ansible.builtin.hostname:
+        name: entryapplication
+      become: true
+
+    - name: replace hostname in /etc/hosts
+      ansible.builtin.replace:
+        path: /etc/hosts
+        regexp: "^127.0.1.1 .*$"
+        replace: "127.0.1.1 entryapplication"
+      become: true
+
+    - name: create systemd service to regenerate openssh host keys
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/reconfigure-openssh-server.service
+        content: |
+          [Unit]
+          Description=Regenerate SSH host keys if missing
+          ConditionPathExists=!/etc/ssh/ssh_host_rsa_key
+          Before=ssh.service
+
+          [Service]
+          Type=oneshot
+          ExecStart=/usr/sbin/dpkg-reconfigure openssh-server
+          RemainAfterExit=true
+
+          [Install]
+          WantedBy=multi-user.target
+      become: true
+
+    - name: enable systemd service for reconfigure-openssh-server
+      ansible.builtin.service:
+        name: reconfigure-openssh-server
+        enabled: true
+      become: true
+
+    - name: install required packages
+      ansible.builtin.package:
+        name:
+          - build-essential
+          - libedit-dev
+          - libffi-dev
+          - libpq-dev
+          - libyaml-dev
+          - sendmail
+          - zlib1g-dev
+      become: true
+
+    - name: install desktop environment
+      ansible.builtin.package:
+        name:
+          - slim
+          - ubuntu-desktop
+      become: true
+      when: skip_desktop is undefined
+
+    - name: install required libraries for ansible
+      ansible.builtin.package:
+        name:
+          # Required for https://docs.ansible.com/ansible-core/2.17/playbook_guide/playbooks_privilege_escalation.html#risks-of-becoming-an-unprivileged-user
+          - acl
+          # Required for community.postgresql
+          - python3-psycopg2
+      become: true
+
+    - name: create user alindeman
+      ansible.builtin.user:
+        name: alindeman
+        create_home: true
+        password: '!' # disable password
+        shell: /bin/bash
+        groups:
+          - users
+          - sudo
+      become: true
+
+    - name: install ssh key for alindeman
+      ansible.posix.authorized_key:
+        user: alindeman
+        key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDP4nFAKeLb/7w6lL5MLrkYv/rLoyAl8Wycq1b+lOR7cknqrnWM1PJ+0Qkx8Je+tw/vIKY8CFzBoi4mZ/eOm0dAr5FjNXNCfZf10PWVgsizpOVnYOJTUMHhgO81cASL0pGNxeNr7lHB8FRB3mIcTT6639nrQuwKmYh1YNjHoMErIS1VkkYi6SuYJldWR1LYOJ3PzGoA4GLrck0VHbOJERs1u/ORimw7N0j5mrVKnJQ+72guuWPsbiLl4zwt/RUnxxQi9ou8fisE7qwLmoulCLw11m9Z7xUo86aBmuYfJQ7WBd8lQWczhKorpjEgrwvYcClPAUctjw14rraJGgxc/w2PcGAeH+Kby7WmdACKtZhI5BaNGMX/i0gZj4qlF4tyRJx2DRsTPL3wA2qranNPw5dqtR5VAxJleHx4R3WCXomhQ2BuqCrb5c65wZGaLpOedLeuMDHkdYdTj67OPJvvQzAQ3zQFbGEJX670pw9DU/6rm4GF4pzE93Qzjo9L8SOsBi4w7lQugmbndUF/q7WP8RxiTNL33xgloq6/Tt3Aclu9Z6yDd0UfcmUHezqCIEd6KNon0Q8v55EVWkPlrliZLpONZPHWniRT965D1A3uw5MkWMzYGx26jAS0/RNAfdfS0uwb8zMnBwSdrfETVk2KgycKBxl3r36KytLLMRpl6/VwIQ=="
+      become: true
+
+    - name: create user jeremiaheb
+      ansible.builtin.user:
+        name: jeremiaheb
+        create_home: true
+        password: "$6$fFfXVu1e4x8eDD/c$OC6TS/4ZCdSZs0QSdG6F/rIYZ0sE3nXoUZnAFhcv4fbsircL/3ET/R.qJU/F0Ayl9O.Z94cD3vNVwmDWUZYfE1"
+        shell: /bin/bash
+        groups:
+          - users
+          - sudo
+      become: true
+
+    - name: install postgresql server
+      ansible.builtin.package:
+        name:
+          - postgresql
+          - postgresql-contrib
+      become: true
+
+    - name: create entryapplication_development database user
+      community.postgresql.postgresql_user:
+        name: entryapplication_development
+        password: entryapplication_development
+      become: true
+      become_user: postgres
+
+    - name: create entryapplication_development database
+      community.postgresql.postgresql_db:
+        name: entryapplication_development
+        owner: entryapplication_development
+      become: true
+      become_user: postgres
+
+    - name: create entryapplication_test database user
+      community.postgresql.postgresql_user:
+        name: entryapplication_test
+        password: entryapplication_test
+        # Required to create temporary datdabases for test parallelization
+        role_attr_flags: "CREATEDB"
+      become: true
+      become_user: postgres
+
+    - name: create entryapplication_test database
+      community.postgresql.postgresql_db:
+        name: entryapplication_test
+        owner: entryapplication_test
+      become: true
+      become_user: postgres
+
+    - name: create entryapplication_production database user
+      community.postgresql.postgresql_user:
+        name: entryapplication_production
+        password: entryapplication_production
+      become: true
+      become_user: postgres
+
+    - name: create entryapplication_production database
+      community.postgresql.postgresql_db:
+        name: entryapplication_production
+        owner: entryapplication_production
+      become: true
+      become_user: postgres
+
+    - name: install apache2 server
+      ansible.builtin.package:
+        name: apache2
+      become: true
+
+    - name: disable default apache2 index page
+      ansible.builtin.file:
+        path: "/var/www/html/index.html"
+        state: absent
+      become: true
+
+    - name: disable serve-cgi-bin apache2 conf
+      ansible.builtin.command:
+        cmd: "a2disconf serve-cgi-bin"
+        removes: "/etc/apache2/conf-enabled/serve-cgi-bin.conf"
+      become: true
+      notify: reload apache2
+
+    - name: disable default apache2 site
+      ansible.builtin.command:
+        cmd: "a2dissite 000-default"
+        removes: "/etc/apache2/sites-enabled/000-default.conf"
+      become: true
+      notify: reload apache2
+
+    - name: enable proxy_http apache2 module
+      ansible.builtin.command:
+        cmd: "a2enmod proxy_http"
+        creates: "/etc/apache2/mods-enabled/proxy_http.load"
+      become: true
+      notify: restart apache2
+
+    - name: enable headers apache2 module
+      ansible.builtin.command:
+        cmd: "a2enmod headers"
+        creates: "/etc/apache2/mods-enabled/headers.load"
+      become: true
+      notify: restart apache2
+
+    - name: create entryapplication apache2 site
+      ansible.builtin.copy:
+        dest: "/etc/apache2/sites-available/entryapplication.conf"
+        content: |
+          Listen 8000
+          <VirtualHost *:80 *:8000>
+            # Static assets
+            <Directory "/var/www/apps/EntryApplication/current/public">
+              Options FollowSymLinks
+              AllowOverride None
+              Require all granted
+            </Directory>
+            Alias "/ncrmp_data_entry/assets" "/var/www/apps/EntryApplication/current/public/ncrmp_data_entry/assets"
+            ProxyPass "/ncrmp_data_entry/assets" "!"
+
+            ProxyPass "/ncrmp_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/ncrmp_data_entry"
+            ProxyPassReverse "/ncrmp_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/ncrmp_data_entry"
+
+            # Assume TLS-terminating proxy when host is noaa.gov
+            <If "%{HTTP_HOST} =~ /\.noaa\.gov$/">
+              RequestHeader set X-Forwarded-Proto "https"
+            </If>
+
+            ErrorLog "${APACHE_LOG_DIR}/error.log"
+            CustomLog "${APACHE_LOG_DIR}/access.log" combined
+          </VirtualHost>
+      become: true
+      notify: reload apache2
+
+    - name: enable entryapplication apache2 site
+      ansible.builtin.command:
+        cmd: "a2ensite entryapplication"
+        creates: "/etc/apache2/sites-enabled/entryapplication.conf"
+      become: true
+      notify: reload apache2
+
+    - name: create /var/www directory
+      ansible.builtin.file:
+        path: /var/www
+        owner: root
+        group: root
+        mode: "0755"
+        state: directory
+      become: true
+
+    - name: create /var/www/apps directory
+      ansible.builtin.file:
+        path: /var/www/apps
+        owner: root
+        group: root
+        mode: "0755"
+        state: directory
+      become: true
+
+    - name: create user entryapplication
+      ansible.builtin.user:
+        name: entryapplication
+        home: /var/www/apps/EntryApplication
+        create_home: true
+        # TODO: Temporary. Replace with SSH keys for all deployers.
+        password: '$6$OZl.q7ZgYzZIolON$HFXN04yl8qCRuq4KlE0DYRTCKnlEU6oK5krI70baHCDDceJDafoSTgP3elqGViCunFqf2gqC.syi/j/ZXZrP1/'
+        shell: /bin/bash
+      become: true
+
+    - name: make entryapplication directory world readable
+      ansible.builtin.file:
+        path: /var/www/apps/EntryApplication
+        mode: "0755"
+      become: true
+
+    - name: add /vagrant as a safe git directory for local deployments
+      ansible.builtin.copy:
+        dest: /var/www/apps/EntryApplication/.gitconfig
+        content: |
+          [safe]
+          directory = /vagrant/.git
+        owner: entryapplication
+        group: entryapplication
+        mode: "0644"
+      become: true
+
+    - name: install ssh key for entryapplication
+      ansible.posix.authorized_key:
+        user: entryapplication
+        key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDP4nFAKeLb/7w6lL5MLrkYv/rLoyAl8Wycq1b+lOR7cknqrnWM1PJ+0Qkx8Je+tw/vIKY8CFzBoi4mZ/eOm0dAr5FjNXNCfZf10PWVgsizpOVnYOJTUMHhgO81cASL0pGNxeNr7lHB8FRB3mIcTT6639nrQuwKmYh1YNjHoMErIS1VkkYi6SuYJldWR1LYOJ3PzGoA4GLrck0VHbOJERs1u/ORimw7N0j5mrVKnJQ+72guuWPsbiLl4zwt/RUnxxQi9ou8fisE7qwLmoulCLw11m9Z7xUo86aBmuYfJQ7WBd8lQWczhKorpjEgrwvYcClPAUctjw14rraJGgxc/w2PcGAeH+Kby7WmdACKtZhI5BaNGMX/i0gZj4qlF4tyRJx2DRsTPL3wA2qranNPw5dqtR5VAxJleHx4R3WCXomhQ2BuqCrb5c65wZGaLpOedLeuMDHkdYdTj67OPJvvQzAQ3zQFbGEJX670pw9DU/6rm4GF4pzE93Qzjo9L8SOsBi4w7lQugmbndUF/q7WP8RxiTNL33xgloq6/Tt3Aclu9Z6yDd0UfcmUHezqCIEd6KNon0Q8v55EVWkPlrliZLpONZPHWniRT965D1A3uw5MkWMzYGx26jAS0/RNAfdfS0uwb8zMnBwSdrfETVk2KgycKBxl3r36KytLLMRpl6/VwIQ=="
+      become: true
+
+    - name: install rbenv
+      ansible.builtin.git:
+        repo: "https://github.com/rbenv/rbenv"
+        dest: "/var/www/apps/EntryApplication/.rbenv"
+        version: "10e96bfc473c7459a447fbbda12164745a72fd37" # v1.3.2
+      become: true
+      become_user: entryapplication
+
+    - name: install ruby-build
+      ansible.builtin.git:
+        repo: "https://github.com/rbenv/ruby-build"
+        dest: "/var/www/apps/EntryApplication/.rbenv/plugins/ruby-build"
+        version: "2334633d60b78124fc99dedb32728605f44a4e56" # v20250326
+      become: true
+      become_user: entryapplication
+
+    - name: add rbenv init to ~/.bashrc
+      ansible.builtin.blockinfile:
+        path: "/var/www/apps/EntryApplication/.bashrc"
+        marker: "# {mark} ANSIBLE MANAGED RBENV INIT"
+        block: |
+          eval "$(~/.rbenv/bin/rbenv init - --no-rehash bash)"
+      become: true
+      become_user: entryapplication
+
+    - name: add convenient environment variables to ~/.bashrc
+      ansible.builtin.blockinfile:
+        path: "/var/www/apps/EntryApplication/.bashrc"
+        marker: "# {mark} ANSIBLE MANAGED ENV INIT"
+        block: |
+          export RAILS_ENV="production"
+      become: true
+      become_user: entryapplication
+
+    - name: install ruby 3.2.8
+      ansible.builtin.command:
+        cmd: "/var/www/apps/EntryApplication/.rbenv/bin/rbenv install 3.2.8"
+        creates: "/var/www/apps/EntryApplication/.rbenv/versions/3.2.8"
+      become: true
+      become_user: entryapplication
+
+    - name: create systemd service for entryapplication
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/entryapplication.service
+        content: |
+          [Unit]
+          Description=EntryApplication
+          After=network.target
+
+          [Service]
+          User=entryapplication
+          Group=entryapplication
+          WorkingDirectory=/var/www/apps/EntryApplication/current
+          Environment=RAILS_ENV=production BIND_ADDRESS=unix://./tmp/sockets/puma.sock
+          ExecStart=/var/www/apps/EntryApplication/.rbenv/bin/rbenv exec bundle exec bin/rails server
+          ExecReload=/bin/kill -USR1 $MAINPID
+          RestartSec=1
+          Restart=on-failure
+
+          [Install]
+          WantedBy=multi-user.target
+      become: true
+      notify: restart entryapplication
+
+    - name: enable systemd service for entryapplication
+      ansible.builtin.service:
+        name: entryapplication
+        enabled: true
+      become: true
+
+    - name: allow entryapplication to manage its systemd service
+      ansible.builtin.copy:
+        dest: /etc/sudoers.d/entryapplication
+        content: |
+          entryapplication ALL=(ALL) NOPASSWD: /usr/bin/systemctl start entryapplication
+          entryapplication ALL=(ALL) NOPASSWD: /usr/bin/systemctl stop entryapplication
+          entryapplication ALL=(ALL) NOPASSWD: /usr/bin/systemctl reload entryapplication
+          entryapplication ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart entryapplication
+        owner: root
+        group: root
+        mode: "0440"
+      become: true
+
+    # --------------------------
+    # The following tasks are conditional on `development_build` being defined,
+    # meaning this playbook is running in Vagrant for local development. The
+    # tasks are skipped because they are meaningless for the production virtual
+    # machine, which is not used with Vagrant.
+    # --------------------------
+    - name: install rbenv
+      ansible.builtin.git:
+        repo: "https://github.com/rbenv/rbenv"
+        dest: "{{ ansible_user_dir }}/.rbenv"
+        version: "10e96bfc473c7459a447fbbda12164745a72fd37" # v1.3.2
+      when: development_build is defined
+
+    - name: install ruby-build
+      ansible.builtin.git:
+        repo: "https://github.com/rbenv/ruby-build"
+        dest: "{{ ansible_user_dir }}/.rbenv/plugins/ruby-build"
+        version: "2334633d60b78124fc99dedb32728605f44a4e56" # v20250326
+      when: development_build is defined
+
+    - name: add rbenv init to ~/.bashrc
+      ansible.builtin.blockinfile:
+        path: "{{ ansible_user_dir }}/.bashrc"
+        marker: "# {mark} ANSIBLE MANAGED RBENV INIT"
+        block: |
+          eval "$(~/.rbenv/bin/rbenv init - --no-rehash bash)"
+      when: development_build is defined
+
+    - name: add automatic cd to /vagrant in ~/.bashrc
+      ansible.builtin.blockinfile:
+        path: "{{ ansible_user_dir }}/.bashrc"
+        marker: "# {mark} ANSIBLE MANAGED CD INIT"
+        block: |
+          if [ "${PWD-}" = "/home/vagrant" ]; then
+            cd /vagrant
+          fi
+      when: development_build is defined
+
+    - name: install ruby 3.2.8
+      ansible.builtin.command:
+        cmd: "{{ ansible_user_dir }}/.rbenv/bin/rbenv install 3.2.8"
+        creates: "{{ ansible_user_dir }}/.rbenv/versions/3.2.8"
+      when: development_build is defined
+
+    - name: setup EntryApplication
+      ansible.builtin.shell:
+        cmd: "bundle check || bash -lic bin/setup"
+        chdir: "/vagrant"
+      when: development_build is defined
+
+  handlers:
+    - name: reload apache2
+      ansible.builtin.service:
+        name: apache2
+        state: reloaded
+      become: true
+
+    - name: restart apache2
+      ansible.builtin.service:
+        name: apache2
+        state: restarted
+      become: true
+
+    - name: restart entryapplication
+      ansible.builtin.service:
+        name: entryapplication
+        state: restarted
+      become: true

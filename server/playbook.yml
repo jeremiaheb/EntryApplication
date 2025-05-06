@@ -364,10 +364,10 @@
       become: true
       become_user: entryapplication
 
-    - name: install ruby 3.2.8
+    - name: install ruby 2.5.9
       ansible.builtin.command:
-        cmd: "/var/www/apps/EntryApplication/.rbenv/bin/rbenv install 3.2.8"
-        creates: "/var/www/apps/EntryApplication/.rbenv/versions/3.2.8"
+        cmd: "/var/www/apps/EntryApplication/.rbenv/bin/rbenv install 2.5.9"
+        creates: "/var/www/apps/EntryApplication/.rbenv/versions/2.5.9"
       become: true
       become_user: entryapplication
 
@@ -451,16 +451,10 @@
           fi
       when: development_build is defined
 
-    - name: install ruby 3.2.8
+    - name: install ruby 2.5.9
       ansible.builtin.command:
-        cmd: "{{ ansible_user_dir }}/.rbenv/bin/rbenv install 3.2.8"
-        creates: "{{ ansible_user_dir }}/.rbenv/versions/3.2.8"
-      when: development_build is defined
-
-    - name: setup EntryApplication
-      ansible.builtin.shell:
-        cmd: "bundle check || bash -lic bin/setup"
-        chdir: "/vagrant"
+        cmd: "{{ ansible_user_dir }}/.rbenv/bin/rbenv install 2.5.9"
+        creates: "{{ ansible_user_dir }}/.rbenv/versions/2.5.9"
       when: development_build is defined
 
   handlers:

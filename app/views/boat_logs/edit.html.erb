@@ -1,6 +1,6 @@
 <h1>Editing boat_log</h1>
 
-<%= render partial: "draft_present_alert", locals: { discard_draft_url: draft_boat_logs_url(id: @boat_log.id) } %>
+<%= render partial: "draft_present_alert", locals: { discard_draft_url: draft_boat_logs_path(id: @boat_log.id) } %>
 
 <%= render 'form' %>
 

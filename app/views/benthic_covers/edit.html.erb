@@ -1,5 +1,5 @@
 <h1>Editing Benthic Cover Sample <%=  @benthic_cover.field_id %></h1>
 
-<%= render partial: "draft_present_alert", locals: { discard_draft_url: draft_benthic_covers_url(id: @benthic_cover.id) } %>
+<%= render partial: "draft_present_alert", locals: { discard_draft_url: draft_benthic_covers_path(id: @benthic_cover.id) } %>
 
 <%= render 'form' %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20230407143317) do
+ActiveRecord::Schema.define(version: 20250205190547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -127,6 +127,18 @@ ActiveRecord::Schema.define(version: 20230407143317) do
     t.string "role", limit: 255
     t.integer "boatlog_manager_id"
     t.index ["boatlog_manager_id"], name: "index_divers_on_boatlog_manager_id", unique: true
+  end
+
+  create_table "drafts", force: :cascade do |t|
+    t.bigint "diver_id"
+    t.string "model_klass", null: false
+    t.integer "model_id"
+    t.json "model_attributes", default: "{}", null: false
+    t.string "focused_dom_id"
+    t.float "sequence", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["diver_id", "model_klass", "model_id", "sequence"], name: "idx_on_diver_id_model_klass_model_id_sequence_3f81240dbe", unique: true, order: { sequence: :desc }
   end
 
   create_table "habitat_types", id: :serial, force: :cascade do |t|

@@ -51,9 +51,14 @@ class CoralDemographicsController < ApplicationController
   # GET /coral_demographics/new
   # GET /coral_demographics/new.json
   def new
-    @coral_demographic = CoralDemographic.new
-
-    @coral_demographic.demographic_corals.build
+    @draft = Draft.latest_for(diver_id: current_diver.id, model_klass: CoralDemographic, model_id: nil)
+    if @draft
+      @coral_demographic = CoralDemographic.new(@draft.model_attributes)
+    else
+      @coral_demographic = CoralDemographic.new.tap do |c|
+        c.demographic_corals.build
+      end
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -63,7 +68,12 @@ class CoralDemographicsController < ApplicationController
 
   # GET /coral_demographics/1/edit
   def edit
-    @coral_demographic = CoralDemographic.find(params[:id])
+    @draft = Draft.latest_for(diver_id: current_diver.id, model_klass: CoralDemographic, model_id: params[:id])
+    if @draft
+      @coral_demographic = CoralDemographic.new(@draft.model_attributes.merge(id: params[:id]))
+    else
+      @coral_demographic = CoralDemographic.find(params[:id])
+    end
   end
 
   # POST /coral_demographics
@@ -73,6 +83,8 @@ class CoralDemographicsController < ApplicationController
 
     respond_to do |format|
       if @coral_demographic.save
+        Draft.destroy_for(diver_id: current_diver.id, model_klass: CoralDemographic, model_id: nil)
+
         format.html { redirect_to coral_demographics_path, notice: 'Coral demographic was successfully created.' }
         format.json { render json: @coral_demographic, status: :created, location: @coral_demographic }
       else
@@ -89,6 +101,8 @@ class CoralDemographicsController < ApplicationController
 
     respond_to do |format|
       if @coral_demographic.update_attributes(params[:coral_demographic])
+        Draft.destroy_for(diver_id: current_diver.id, model_klass: CoralDemographic, model_id: @coral_demographic.id)
+
         format.html { redirect_to coral_demographics_path, notice: 'Coral demographic was successfully updated.' }
         format.json { head :no_content }
       else
@@ -107,6 +121,31 @@ class CoralDemographicsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to coral_demographics_url }
       format.json { head :no_content }
+    end
+  end
+
+  # PUT /draft
+  def draft
+    # Handle intentional delete of draft data
+    unless params[:coral_demographic].present?
+      Draft.destroy_for(diver_id: current_diver.id, model_klass: CoralDemographic, model_id: params[:id])
+
+      head :ok
+      return
+    end
+
+    draft = Draft.new(
+      diver_id: current_diver.id,
+      model_klass: CoralDemographic,
+      model_id: params[:id],
+      model_attributes: params[:coral_demographic],
+      sequence: params[:sequence],
+      focused_dom_id: params[:focused_dom_id],
+    )
+    if draft.save
+      render json: {}, status: :created
+    else
+      render json: draft.errors, status: :unprocessable_entity
     end
   end
 end

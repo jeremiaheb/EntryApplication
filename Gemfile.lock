@@ -159,6 +159,9 @@ GEM
     nokogiri (1.7.2)
       mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
+    passenger (6.0.2)
+      rack
+      rake (>= 0.8.1)
     pdf-core (0.7.0)
     pg (0.20.0)
     prawn-table (0.2.2)
@@ -306,6 +309,7 @@ DEPENDENCIES
   multi_json
   nested_form
   net-ssh
+  passenger (= 6.0.2)
   pg
   prawn!
   prawn-table

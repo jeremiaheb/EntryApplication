@@ -58,11 +58,14 @@ class SamplesController < ApplicationController
   # GET /samples/new
   # GET /samples/new.json
   def new
-    @sample = Sample.new
-
-    2.times { @sample.diver_samples.build }
-    @sample.sample_animals.build
-
+    @draft = Draft.latest_for(diver_id: current_diver.id, model_klass: Sample, model_id: nil)
+    if @draft
+      @sample = Sample.new(@draft.model_attributes)
+    else
+      @sample = Sample.new.tap do |s|
+        s.sample_animals.build
+      end
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -72,8 +75,12 @@ class SamplesController < ApplicationController
 
   # GET /samples/1/edit
   def edit
-    @sample = Sample.find(params[:id])
-
+    @draft = Draft.latest_for(diver_id: current_diver.id, model_klass: Sample, model_id: params[:id])
+    if @draft
+      @sample = Sample.new(@draft.model_attributes.merge(id: params[:id]))
+    else
+      @sample = Sample.find(params[:id])
+    end
   end
     
   # POST /samples
@@ -83,6 +90,8 @@ class SamplesController < ApplicationController
 
     respond_to do |format|
       if @sample.save
+        Draft.destroy_for(diver_id: current_diver.id, model_klass: Sample, model_id: nil)
+
         format.html { redirect_to samples_path, notice: 'Sample was successfully created.' }
         format.json { render json: @sample, status: :created, location: @sample }
       else
@@ -99,6 +108,8 @@ class SamplesController < ApplicationController
 
     respond_to do |format|
       if @sample.update_attributes(params[:sample])
+        Draft.destroy_for(diver_id: current_diver.id, model_klass: Sample, model_id: @sample.id)
+
         format.html { redirect_to samples_path, notice: 'Sample was successfully updated.' }
         format.json { head :no_content }
       else
@@ -117,6 +128,31 @@ class SamplesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to samples_url }
       format.json { head :no_content }
+    end
+  end
+
+  # PUT /draft
+  def draft
+    # Handle intentional delete of draft data
+    unless params[:sample].present?
+      Draft.destroy_for(diver_id: current_diver.id, model_klass: Sample, model_id: params[:id])
+
+      head :ok
+      return
+    end
+
+    draft = Draft.new(
+      diver_id: current_diver.id,
+      model_klass: Sample,
+      model_id: params[:id],
+      model_attributes: params[:sample],
+      sequence: params[:sequence],
+      focused_dom_id: params[:focused_dom_id],
+    )
+    if draft.save
+      render json: {}, status: :created
+    else
+      render json: draft.errors, status: :unprocessable_entity
     end
   end
 

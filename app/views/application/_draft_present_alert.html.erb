@@ -1,0 +1,7 @@
+<%- if @draft.present? %>
+    <div class="alert draft-present-alert">
+        Data was restored from an incomplete draft.
+
+        If you want, you can <%= link_to "discard the draft and start over", discard_draft_url, class: "discard-draft-link", method: :post, remote: true, data: { confirm: "Are you sure you want to discard this draft and start over?" } %>.
+  </div>
+<%- end %>

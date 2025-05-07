@@ -50,12 +50,17 @@ class BenthicCoversController < ApplicationController
   # GET /benthic_covers/new
   # GET /benthic_covers/new.json
   def new
-    @benthic_cover = BenthicCover.new
-
-    @benthic_cover.build_invert_belt
-    @benthic_cover.build_presence_belt
-    @benthic_cover.point_intercepts.build
-    @benthic_cover.build_rugosity_measure
+    @draft = Draft.latest_for(diver_id: current_diver.id, model_klass: BenthicCover, model_id: nil)
+    if @draft
+      @benthic_cover = BenthicCover.new(@draft.model_attributes)
+    else
+      @benthic_cover = BenthicCover.new.tap do |b|
+        b.build_invert_belt
+        b.build_presence_belt
+        b.point_intercepts.build
+        b.build_rugosity_measure
+      end
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -65,7 +70,12 @@ class BenthicCoversController < ApplicationController
 
   # GET /benthic_covers/1/edit
   def edit
-    @benthic_cover = BenthicCover.find(params[:id])
+    @draft = Draft.latest_for(diver_id: current_diver.id, model_klass: BenthicCover, model_id: params[:id])
+    if @draft
+      @benthic_cover = BenthicCover.new(@draft.model_attributes.merge(id: params[:id]))
+    else
+      @benthic_cover = BenthicCover.find(params[:id])
+    end
   end
 
   # POST /benthic_covers
@@ -75,6 +85,8 @@ class BenthicCoversController < ApplicationController
 
     respond_to do |format|
       if @benthic_cover.save
+        Draft.destroy_for(diver_id: current_diver.id, model_klass: BenthicCover, model_id: nil)
+
         format.html { redirect_to benthic_covers_path, notice: 'Benthic cover was successfully created.' }
         format.json { render json: @benthic_cover, status: :created, location: @benthic_cover }
       else
@@ -90,7 +102,9 @@ class BenthicCoversController < ApplicationController
     @benthic_cover = BenthicCover.find(params[:id])
 
     respond_to do |format|
-      if @benthic_cover.update_attributes!(benthic_cover_params)
+      if @benthic_cover.update_attributes(benthic_cover_params)
+        Draft.destroy_for(diver_id: current_diver.id, model_klass: BenthicCover, model_id: @benthic_cover.id)
+
         format.html { redirect_to benthic_covers_path, notice: 'Benthic cover was successfully updated.' }
         format.json { head :no_content }
       else
@@ -111,6 +125,33 @@ class BenthicCoversController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # PUT /draft
+  def draft
+    # Handle intentional delete of draft data
+    unless params[:benthic_cover].present?
+      Draft.destroy_for(diver_id: current_diver.id, model_klass: BenthicCover, model_id: params[:id])
+
+      head :ok
+      return
+    end
+
+    draft = Draft.new(
+      diver_id: current_diver.id,
+      model_klass: BenthicCover,
+      model_id: params[:id],
+      model_attributes: benthic_cover_params,
+      sequence: params[:sequence],
+      focused_dom_id: params[:focused_dom_id],
+    )
+    if draft.save
+      render json: {}, status: :created
+    else
+      render json: draft.errors, status: :unprocessable_entity
+    end
+  end
+
+  private
 
   def benthic_cover_params
 

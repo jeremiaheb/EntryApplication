@@ -1,5 +1,5 @@
 <div class="form-horizontal">
-  <%= nested_form_for @sample, data: {"drafts-url": draft_samples_url(id: @sample.id), "draft-restored": @draft.present?, "draft-focused-dom-id": @draft&.focused_dom_id }, :validate => false do |f| %>
+  <%= nested_form_for @sample, data: {"drafts-url": draft_samples_path(id: @sample.id), "draft-restored": @draft.present?, "draft-focused-dom-id": @draft&.focused_dom_id }, :validate => false do |f| %>
 
   <%= render "shared/error_messages", :target => @sample%>
 

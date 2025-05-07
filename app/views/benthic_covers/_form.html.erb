@@ -1,5 +1,5 @@
 <div class="form-horizontal">
-<%= nested_form_for @benthic_cover, data: { "drafts-url": draft_benthic_covers_url(id: @benthic_cover.id), "draft-restored": @draft.present?, "draft-focused-dom-id": @draft&.focused_dom_id } do |f| %>
+<%= nested_form_for @benthic_cover, data: { "drafts-url": draft_benthic_covers_path(id: @benthic_cover.id), "draft-restored": @draft.present?, "draft-focused-dom-id": @draft&.focused_dom_id } do |f| %>
   <%= render "shared/error_messages", :target => @benthic_cover %>
 
 

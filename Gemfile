@@ -39,6 +39,7 @@ gem 'capistrano-rbenv', '~> 2.1'
 
 group :production do
   gem 'rails_12factor'
+  gem 'passenger', '6.0.2'
 end
 
 group :test do

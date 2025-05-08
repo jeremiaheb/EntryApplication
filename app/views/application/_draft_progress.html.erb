@@ -1,0 +1,10 @@
+<div id="draft-progress" class="draft-progress pull-right">
+  <div class="progress">
+    <div class="bar bar-warning draft-saved" style="<%- unless @draft.present? %>display: none; <%- end %>width:100%">Draft Saved</div>
+    <div class="bar bar-danger draft-pending" style="display: none; width:100%">Unsaved...</div>
+    <div class="bar bar-info draft-saving" style="display: none; width:100%">Saving Draft</div>
+    <%- if object.persisted? %>
+      <div class="bar bar-success saved" style="width:100%">Saved</div>
+    <%- end %>
+  </div>
+</div>

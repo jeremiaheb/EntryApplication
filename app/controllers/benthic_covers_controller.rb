@@ -72,9 +72,7 @@ class BenthicCoversController < ApplicationController
   def edit
     @draft = Draft.latest_for(diver_id: current_diver.id, model_klass: BenthicCover, model_id: params[:id])
     if @draft
-      @benthic_cover = BenthicCover.new(@draft.model_attributes.merge(id: params[:id]))
-    else
-      @benthic_cover = BenthicCover.find(params[:id])
+      @benthic_cover.assign_attributes(@draft.model_attributes)
     end
   end
 

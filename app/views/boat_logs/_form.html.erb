@@ -1,3 +1,11 @@
+<div class="row-fluid">
+  <div class="span6">
+  </div>
+  <div class="span6">
+    <%= render "draft_progress", object: @boat_log %>
+  </div>
+</div>
+
 <div class="form-horizontal">
 <%= nested_form_for @boat_log, data: { "drafts-url": draft_boat_logs_path(id: @boat_log.id), "draft-restored": @draft.present?, "draft-focused-dom-id": @draft&.focused_dom_id } do |f| %>
   <%= render "shared/error_messages", :target => @boat_log%>

@@ -52,9 +52,7 @@ class BoatLogsController < ApplicationController
   def edit
     @draft = Draft.latest_for(diver_id: current_diver.id, model_klass: BoatLog, model_id: params[:id])
     if @draft
-      @boat_log = BoatLog.new(@draft.model_attributes.merge(id: params[:id]))
-    else
-      @boat_log = BoatLog.find(params[:id])
+      @boat_log.assign_attributes(@draft.model_attributes)
     end
   end
 

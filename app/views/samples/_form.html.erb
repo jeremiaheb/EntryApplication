@@ -1,13 +1,20 @@
+<div class="row-fluid">
+  <div class="span6">
+    <select class="changeSection" tabindex="1">
+      <option value="sampleSection">Sample Section</option>
+      <option value="substrateSection">Substrate Section</option>
+      <option value="speciesSection">Species Section</option>
+    </select>
+  </div>
+  <div class="span6">
+    <%= render "draft_progress", object: @sample %>
+  </div>
+</div>
+
 <div class="form-horizontal">
   <%= nested_form_for @sample, data: {"drafts-url": draft_samples_path(id: @sample.id), "draft-restored": @draft.present?, "draft-focused-dom-id": @draft&.focused_dom_id }, :validate => false do |f| %>
-
   <%= render "shared/error_messages", :target => @sample%>
 
-<select class="changeSection" tabindex="1">
-  <option value="sampleSection">Sample Section</option>
-  <option value="substrateSection">Substrate Section</option>
-  <option value="speciesSection">Species Section</option>
-</select>
 <div class='formContainer'>
   <div id="sampleSection" class="sectionDiv">
     <div class='section_1'>

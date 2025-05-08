@@ -28,6 +28,8 @@ $(function() {
     params.push({ name: "focused_dom_id", value: $(document.activeElement).attr("id") });
     params.push({ name: "_method", value: "post" });
 
+    $form.trigger("draft:beforeSend");
+
     currentDraftRequest = $.ajax({
       type: "POST",
       url: draftsURL,
@@ -45,26 +47,66 @@ $(function() {
         }
 
         $form.trigger("draft:error", [jqXHR, textStatus, errorThrown]);
-
-        // Retry. Rely on throttle to coalesce multiple calls into one retry.
-        saveDraftThrottled(e);
       },
     });
   }, 3000, { leading: false });
 
-  // Save drafts for forms where data-drafts-url is present as an attribute.
   const $formsWithDraftsURLs = $("form[data-drafts-url]");
-  $formsWithDraftsURLs.on("blur change", ":input", saveDraftThrottled)
 
-  // Trigger validation and cursor restoration for draft-enabled forms
+  // Save drafts for forms where data-drafts-url is present as an attribute.
+  const handleChange = function(e) {
+    let $target = $(e.target);
+    let $form = $target.closest("form");
+
+    $form.trigger("draft:pending");
+
+    return saveDraftThrottled(e);
+  };
+  $formsWithDraftsURLs.on("input", ":input", handleChange);
+  // timeentry only fires 'change' for some reason
+  $formsWithDraftsURLs.on("change", "input.is-timeEntry", handleChange);
+  // select2 only fires 'change' events on the <select>
+  $formsWithDraftsURLs.on("change", "select", handleChange);
+
   $formsWithDraftsURLs.each(function() {
     const $form = $(this);
+
+    // Trigger validation and cursor restoration for draft-enabled forms
     if ($form.data("draft-restored")) {
       $form.validate().form(); // trigger validation
     }
     if ($form.data("draft-focused-dom-id")) {
       $("#" + $form.data("draft-focused-dom-id")).focus();
     }
+
+    // Once a draft is pending, periodically save it in the background
+    // regardless of change events in case there were errors saving the previous
+    // draft.
+    $form.on("draft:pending", _.once(function(e) {
+      setInterval(function() { saveDraftThrottled(e); }, 30 * 1000); // NOTE: delay must be longer than the throttle interval
+    }));
+
+    // Visualize draft saving progress
+    $form.on("draft:pending", function(e) {
+      $(".draft-progress .progress").removeClass("progress-striped active");
+      $(".draft-progress .bar").hide();
+      $(".draft-progress .bar.draft-pending").show();
+    });
+    $form.on("draft:beforeSend", function(e) {
+      $(".draft-progress .progress").addClass("progress-striped active");
+      $(".draft-progress .bar").hide();
+      $(".draft-progress .bar.draft-saving").show();
+    });
+    $form.on("draft:success", function(e) {
+      $(".draft-progress .progress").removeClass("progress-striped active");
+      $(".draft-progress .bar").hide();
+      $(".draft-progress .bar.draft-saved").show();
+    });
+    $form.on("draft:error", function(e) {
+      $(".draft-progress .progress").removeClass("progress-striped active");
+      $(".draft-progress .bar").hide();
+      $(".draft-progress .bar.draft-pending").show();
+    });
   });
 
   // After the draft is discarded, reload the page to empty out all fields and

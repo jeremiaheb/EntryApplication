@@ -76,9 +76,7 @@ class SamplesController < ApplicationController
   def edit
     @draft = Draft.latest_for(diver_id: current_diver.id, model_klass: Sample, model_id: params[:id])
     if @draft
-      @sample = Sample.new(@draft.model_attributes.merge(id: params[:id]))
-    else
-      @sample = Sample.find(params[:id])
+      @sample.assign_attributes(@draft.model_attributes)
     end
   end
     

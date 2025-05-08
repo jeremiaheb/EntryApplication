@@ -69,9 +69,7 @@ class CoralDemographicsController < ApplicationController
   def edit
     @draft = Draft.latest_for(diver_id: current_diver.id, model_klass: CoralDemographic, model_id: params[:id])
     if @draft
-      @coral_demographic = CoralDemographic.new(@draft.model_attributes.merge(id: params[:id]))
-    else
-      @coral_demographic = CoralDemographic.find(params[:id])
+      @coral_demographic.assign_attributes(@draft.model_attributes)
     end
   end
 

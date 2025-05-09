@@ -22,12 +22,17 @@
           </div>
         </div>
 
-        <%= render 'diver_selection', :object => f %>
+        <div class="control-group">
+          <label class="control-label">Diver</label>
+          <div class="controls">
+            <%= f.collection_select :diver_id, Diver.active_divers.order(:diver_name), :id, :diver_name, :include_blank => true %><br />
+          </div>
+        </div>
          
         <div class="control-group">
           <label class="control-label">Buddy</label>
           <div class="controls">
-            <%= f.collection_select :buddy, Diver.all.order(:diver_name), :id, :diver_name, { :include_blank => "" }%><br />
+            <%= f.collection_select :buddy, Diver.all.order(:diver_name), :id, :diver_name, :include_blank => true %><br />
           </div>
         </div>
 

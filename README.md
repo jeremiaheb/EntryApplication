@@ -26,8 +26,9 @@ vagrant ssh
 To start the Rails server, within a `vagrant ssh` session run:
 
 ``` bash
-cd /vagrant
-bin/dev
+bin/setup # one-time setup of database and dependencies
+
+bin/dev # blocks and runs a server
 ```
 
 Once `bin/dev` is running, the application will be available at <http://localhost:3000>

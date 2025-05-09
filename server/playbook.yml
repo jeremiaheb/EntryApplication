@@ -457,12 +457,6 @@
         creates: "{{ ansible_user_dir }}/.rbenv/versions/3.2.8"
       when: development_build is defined
 
-    - name: setup EntryApplication
-      ansible.builtin.shell:
-        cmd: "bundle check || bash -lic bin/setup"
-        chdir: "/vagrant"
-      when: development_build is defined
-
   handlers:
     - name: reload apache2
       ansible.builtin.service:

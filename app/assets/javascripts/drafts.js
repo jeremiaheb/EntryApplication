@@ -71,9 +71,17 @@ $(function() {
   $formsWithDraftsURLs.each(function() {
     const $form = $(this);
 
+    // warnBeforeUnload will cause the browser to pop up a dialog warning the
+    // user before they navigate away.
+    const warnBeforeUnload = function(e) {
+      e.preventDefault();
+      e.returnValue = true;
+    };
+
     // Trigger validation and cursor restoration for draft-enabled forms
     if ($form.data("draft-restored")) {
       $form.validate().form(); // trigger validation
+      window.addEventListener("beforeunload", warnBeforeUnload);
     }
     if ($form.data("draft-focused-dom-id")) {
       $("#" + $form.data("draft-focused-dom-id")).focus();
@@ -83,8 +91,17 @@ $(function() {
     // regardless of change events in case there were errors saving the previous
     // draft.
     $form.on("draft:pending", _.once(function(e) {
+      window.addEventListener("beforeunload", warnBeforeUnload);
       setInterval(function() { saveDraftThrottled(e); }, 30 * 1000); // NOTE: delay must be longer than the throttle interval
     }));
+
+    // Do not warn if draft is about to be saved or discarded.
+    $form.on("submit", function(e) {
+      window.removeEventListener("beforeunload", warnBeforeUnload);
+    });
+    $("a.discard-draft-link").on("ajax:success", function(e) {
+      window.removeEventListener("beforeunload", warnBeforeUnload);
+    });
 
     // Visualize draft saving progress
     $form.on("draft:pending", function(e) {
@@ -111,7 +128,7 @@ $(function() {
 
   // After the draft is discarded, reload the page to empty out all fields and
   // start from scratch cleanly.
-  $("a.discard-draft-link").on("ajax:complete", function(e) {
+  $("a.discard-draft-link").on("ajax:success", function(e) {
     location.reload(true);
   });
 });

@@ -23,9 +23,12 @@
   <div class="row">
     <div class="span4">
       <div class="control-group">
-        <label class="control-label"> Latitude</label>
+        <label class="control-label">Latitude</label>
         <div class="controls">
-          <%= f.text_field :latitude, { :class => "coords" } %>
+          <div class="input-append">
+            <%= f.text_field :latitude_in_northern_degrees, inputmode: "numeric", pattern: "\\d*(\\.\\d*)?", class: "coords coords-positive" %>
+            <span class="add-on">&deg;N</span>
+          </div>
         </div>
       </div>
     </div>
@@ -33,7 +36,10 @@
       <div class="control-group">
         <label class="control-label"> Longitude </label>
         <div class="controls">
-          <%= f.text_field :longitude, { :class => "coords" } %>
+          <div class="input-append">
+            <%= f.text_field :longitude_in_western_degrees, inputmode: "numeric", pattern: "\\d*(\\.\\d*)?", class: "coords coords-positive" %>
+            <span class="add-on">&deg;W</span>
+          </div>
         </div>
       </div>
     </div>

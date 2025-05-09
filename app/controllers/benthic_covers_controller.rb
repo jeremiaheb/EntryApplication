@@ -54,6 +54,7 @@ class BenthicCoversController < ApplicationController
       @benthic_cover = BenthicCover.new(@draft.model_attributes)
     else
       @benthic_cover = BenthicCover.new.tap do |b|
+        b.diver_id ||= current_diver.id
         b.build_invert_belt
         b.build_presence_belt
         b.point_intercepts.build

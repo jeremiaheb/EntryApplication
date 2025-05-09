@@ -6,7 +6,7 @@ class BoatLog < ActiveRecord::Base
   has_many :station_logs, :dependent => :destroy
   has_many :rep_logs, :through => :station_logs
   has_many :divers, :through => :rep_logs
-  accepts_nested_attributes_for :station_logs, :reject_if => lambda {  |a| a[:stn_number].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :station_logs, :allow_destroy => true
 
 
   validates :boatlog_manager_id,     :presence => true

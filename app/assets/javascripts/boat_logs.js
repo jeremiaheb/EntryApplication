@@ -24,10 +24,17 @@ $(function(){
 
 
     function getStationDistance() {
-      var lat2 = parseFloat($('#boat_log_station_logs_attributes_1_latitude').val()); 
-      var lon2 = parseFloat($('#boat_log_station_logs_attributes_1_longitude').val()); 
-      var lat1 = parseFloat($('#boat_log_station_logs_attributes_0_latitude').val());
-      var lon1 = parseFloat($('#boat_log_station_logs_attributes_0_longitude').val());
+      const latitude_fields = $("input.coords[name*='latitude_in_northern_degrees']");
+      const longitude_fields = $("input.coords[name*='longitude_in_western_degrees']");
+
+      if (latitude_fields.length < 2 || longitude_fields.length < 2) {
+        return;
+      }
+
+      var lat2 = parseFloat(latitude_fields.get(1).value);
+      var lon2 = -parseFloat(longitude_fields.get(1).value);
+      var lat1 = parseFloat(latitude_fields.get(0).value);
+      var lon1 = -parseFloat(longitude_fields.get(0).value);
       
       var R = 6371000; // m 
       //has a problem with the .toRad() method below.
@@ -44,11 +51,47 @@ $(function(){
       $('.distanceBetweenStations').text(d.toFixed(0))
     };
 
-    getStationDistance();
-    $('.coords').change(function(){
-      getStationDistance();
+    $("form").on("keypress", "input.coords-positive", function(e) {
+      // Disallow non-digit, non-decimal key presses
+      if (!e.key.match(/[\d\.]+/)) {
+        e.preventDefault();
+      }
+    });
+    $("form").on("paste", "input.coords", function(e) {
+      const $this = $(this);
+      // Attempt to automatically parse commonly pasted lat,lng formats into the
+      // appropriate fields automatically
+
+      const data = e.originalEvent.clipboardData.getData("text/plain");
+      if (!data) {
+        return;
+      }
+
+      // Split on comma and/or space
+      const parts = data.split(/[,\s]+/);
+      if (parts.length != 2) {
+        return;
+      }
+
+      // Do not allow the paste to proceed as usual. We are taking over and
+      // doing some parsing.
+      e.preventDefault();
+
+      // Remove non-digit, non-decimal characters
+      const latitude = parts[0].replace(/[^\d\.]+/g, "");
+      const longitude = parts[1].replace(/[^\d\.]+/g, "");
+
+      const $closestLatitudeField = $this.closest("div.row").find("input[name*='latitude']");
+      const $closestLongitudeField = $this.closest("div.row").find("input[name*='longitude']");
+
+      $closestLatitudeField.val(latitude);
+      $closestLongitudeField.val(longitude).trigger("focus").trigger("change");
     });
 
+    getStationDistance();
+    $("form").on("change", "input.coords", function(){
+      getStationDistance();
+    });
 
   function setDiverTypeLabelOnLoad() {
     $(".diver_type_label").each(function(){

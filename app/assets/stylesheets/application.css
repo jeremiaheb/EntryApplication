@@ -259,6 +259,10 @@ div.section_1,div.section_2, p.flipSection_1 {
   width: 50px;
 }
 
+.formContainer input.coords {
+  width: 70px;
+}
+
 .formContainer h3 {
   text-align: left;
 }

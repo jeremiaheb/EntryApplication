@@ -28,11 +28,11 @@ class CoralDemographicsController < ApplicationController
       format.json { render json: @coral_demographics }
       format.xlsx
       format.pdf do 
-
         pdf = CoralDemographicPdf.new(proof_by_diver(params[:diver_id]||= current_diver))
+
+        expires_now
         send_data pdf.render, filename: "#{current_diver.lastname}_CoralDemographicsReport.pdf",
                               type: "application/pdf"
-      
       end
     end
   end

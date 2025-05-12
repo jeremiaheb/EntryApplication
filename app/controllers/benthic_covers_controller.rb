@@ -26,11 +26,11 @@ class BenthicCoversController < ApplicationController
       format.json { render json: @benthic_covers }
       format.xlsx
       format.pdf do 
-
         pdf = BenthicCoverPdf.new(proof_by_diver(params[:diver_id]||= current_diver))
+
+        expires_now
         send_data pdf.render, filename: "#{current_diver.lastname}_BenthicCoverReport.pdf",
                               type: "application/pdf"
-      
       end
     end
   end

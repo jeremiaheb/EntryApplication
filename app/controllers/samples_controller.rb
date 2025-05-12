@@ -28,11 +28,12 @@ class SamplesController < ApplicationController
       format.json { render json: @samples }
       format.xlsx
       format.pdf do
-
         pdf = SamplePdf.new(proof_by_diver(params[:diver_id]||= current_diver), params[:fishtype].to_s)
+                              Rails.logger.info response.method(:cache_control).source_location
+
+        expires_now 
         send_data pdf.render, filename: "#{current_diver.lastname}_ProofingReport.pdf",
                               type: "application/pdf"
-      
       end
     end
   end
@@ -47,6 +48,8 @@ class SamplesController < ApplicationController
       format.json { render json: @sample }
       format.pdf do
         pdf = SamplePdf.new(@sample)
+
+        expires_now
         send_data pdf.render, filename: "sample_#{@sample.field_id}.pdf",
                               type: "application/pdf",
                               disposition: "inline"
@@ -162,6 +165,8 @@ class SamplesController < ApplicationController
       format.json { render json: @sample }
       format.pdf do
         pdf = SamplePdf.new(@sample)
+
+        expires_now
         send_data pdf.render, filename: "sample_#{@sample.field_id}.pdf",
                               type: "application/pdf",
                               disposition: "inline"

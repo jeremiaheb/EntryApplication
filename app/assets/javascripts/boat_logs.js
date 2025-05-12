@@ -58,18 +58,24 @@ $(function(){
       }
     });
     $("form").on("paste", "input.coords", function(e) {
-      const $this = $(this);
       // Attempt to automatically parse commonly pasted lat,lng formats into the
-      // appropriate fields automatically
+      // appropriate fields automatically.
+      const $this = $(this);
 
       const data = e.originalEvent.clipboardData.getData("text/plain");
       if (!data) {
         return;
       }
 
-      // Split on comma and/or space
-      const parts = data.split(/[,\s]+/);
-      if (parts.length != 2) {
+      // https://rubular.com/r/4mnJE01XI7Zrjy
+      //
+      // Formats supported:
+      // * 25.123,-85.123
+      // * 25.123 -85.123
+      // * 25.123N 85.123W
+      // * N17.74722 W64.70563
+      const parts = data.match(/^\s*[NS]?([-0-9\.]+)[NS]?[\s,]+[EW]?([-0-9\.]+)[EW]?$/)
+      if (!parts) {
         return;
       }
 
@@ -77,15 +83,14 @@ $(function(){
       // doing some parsing.
       e.preventDefault();
 
-      // Remove non-digit, non-decimal characters
-      const latitude = parts[0].replace(/[^\d\.]+/g, "");
-      const longitude = parts[1].replace(/[^\d\.]+/g, "");
+      const latitude = parts[1].replace(/[^0-9\.]+/g, "");
+      const longitude = parts[2].replace(/[^0-9\.]+/g, "");
 
       const $closestLatitudeField = $this.closest("div.row").find("input[name*='latitude']");
       const $closestLongitudeField = $this.closest("div.row").find("input[name*='longitude']");
 
       $closestLatitudeField.val(latitude);
-      $closestLongitudeField.val(longitude).trigger("focus").trigger("change");
+      $closestLongitudeField.val(longitude).trigger("focus").trigger("change").trigger("input");
     });
 
     getStationDistance();

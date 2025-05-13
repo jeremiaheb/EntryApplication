@@ -20,8 +20,8 @@
           <td><%= sample.sample_date %></td>
           <td><%= sample.sample_begin_time.strftime("%H:%M") %></td>
           <td>
-            <%= link_to "View", sample %>
-            <%= link_to "Edit", edit_sample_path(sample) %>
+            <%= link_to "View", sample, class: "view-link" %>
+            <%= link_to "Edit", edit_sample_path(sample), class: "edit-link" %>
           </td>
         </tr>
       <% end %>

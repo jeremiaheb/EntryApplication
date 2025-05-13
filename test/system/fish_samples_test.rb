@@ -59,7 +59,7 @@ class FishSamplesTest < ApplicationSystemTestCase
     visit root_url
     find(".samples-link").click
     login_as_diver(diver)
-    find("[data-id='#{sample.id}']").click
+    find("[data-id='#{sample.id}'] .view-link").click
     find(".edit-button").click
 
     # Edit some field

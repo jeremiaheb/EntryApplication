@@ -11,11 +11,14 @@
   </thead>
   <tbody>
 <% @boatlog_managers.each do |boatlog_manager| %>
-  <tr data-link=" <%= edit_boatlog_manager_path(boatlog_manager.id) %> ">
+  <tr>
     <td><%= boatlog_manager.agency %></td>
     <td><%= boatlog_manager.firstname %></td>
     <td><%= boatlog_manager.lastname %></td>
-    <td><%= link_to 'Destroy', boatlog_manager, data: { confirm: 'Are you sure?' }, method: :delete %></td>
+    <td>
+      <%= link_to 'Edit', edit_boatlog_manager_path(boatlog_manager) %>
+      <%= link_to 'Destroy', boatlog_manager, data: { confirm: 'Are you sure?' }, method: :delete %>
+    </td>
   </tr>
 <% end %>
 </tbody>

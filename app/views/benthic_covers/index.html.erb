@@ -9,15 +9,20 @@
            <th>field ID</th>
            <th>Date</th>
            <th>Sample Start Time</th>
+           <th></th>
          </tr>
        </thead>
        <tbody>
       <% @benthic_covers.each do |benthic_cover| %>
-        <tr data-link=" <%= benthic_cover_path(benthic_cover.id) %> ">
+        <tr>
           <td><%= benthic_cover.diver.diver_name %></td>
           <td class='fieldid_check'><%= benthic_cover.field_id %></td>
           <td><%= benthic_cover.sample_date %></td>
           <td><%= benthic_cover.sample_begin_time.strftime("%H:%M") %></td>
+          <td>
+            <%= link_to "View", benthic_cover %>
+            <%= link_to "Edit", edit_benthic_cover_path(benthic_cover) %>
+          </td>
         </tr>
       <% end %>
       </tbody>

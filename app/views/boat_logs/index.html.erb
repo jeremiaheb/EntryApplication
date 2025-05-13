@@ -9,15 +9,20 @@
            <th>Date</th>
            <th>Time</th>
            <th>Comments</th>
+           <th></th>
          </tr>
        </thead>
        <tbody>
       <% @boat_logs.each do |log| %>
-        <tr data-link=" <%= boat_log_path(log.id) %> ">
+        <tr>
           <td><%= log.primary_sample_unit %></td>
           <td class='fieldid_check'><%= log.date %></td>
           <td><%= log.station_logs.first.time.strftime("%H:%M") %></td>
           <td><%= log.station_logs.first.comments %></td>
+          <td>
+            <%= link_to "View", log %>
+            <%= link_to "Edit", edit_boat_log_path(log) %>
+          </td>
         </tr>
       <% end %>
       </tbody>

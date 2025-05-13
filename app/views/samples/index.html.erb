@@ -9,15 +9,20 @@
            <th>field ID</th>
            <th>Date</th>
            <th>Sample Start Time</th>
+           <th></th>
          </tr>
        </thead>
        <tbody>
       <% @samples.each do |sample| %>
-        <tr data-link=" <%= sample_path(sample) %> " data-id="<%= sample.id %>">
+        <tr data-id="<%= sample.id %>">
           <td><%= sample.diver_samples.primary.first.diver.diver_name %></td>
           <td class='fieldid_check'><%= sample.field_id %></td>
           <td><%= sample.sample_date %></td>
           <td><%= sample.sample_begin_time.strftime("%H:%M") %></td>
+          <td>
+            <%= link_to "View", sample %>
+            <%= link_to "Edit", edit_sample_path(sample) %>
+          </td>
         </tr>
       <% end %>
       </tbody>

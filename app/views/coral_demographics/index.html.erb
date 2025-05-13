@@ -9,15 +9,20 @@
            <th>field ID</th>
            <th>Date</th>
            <th>Sample Start Time</th>
+           <th></th>
          </tr>
        </thead>
        <tbody>
       <% @coral_demographics.each do |coral_demographic| %>
-        <tr data-link=" <%= coral_demographic_path(coral_demographic.id) %> ">
+        <tr>
           <td><%= coral_demographic.diver.diver_name %></td>
           <td class='fieldid_check'><%= coral_demographic.field_id %></td>
           <td><%= coral_demographic.sample_date %></td>
           <td><%= coral_demographic.sample_begin_time.strftime("%H:%M") %></td>
+          <td>
+            <%= link_to "View", coral_demographic %>
+            <%= link_to "Edit", edit_coral_demographic_path(coral_demographic) %>
+          </td>
         </tr>
       <% end %>
       </tbody>

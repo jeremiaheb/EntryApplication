@@ -62,14 +62,24 @@
 
     - name: set hostname
       ansible.builtin.hostname:
-        name: entryapplication
+        name: entryapplication.nmfs.noaa.gov
       become: true
 
     - name: replace hostname in /etc/hosts
       ansible.builtin.replace:
         path: /etc/hosts
         regexp: "^127.0.1.1 .*$"
-        replace: "127.0.1.1 entryapplication"
+        replace: "127.0.1.1 entryapplication entryapplication.nmfs.noaa.gov"
+      become: true
+
+    # IPv6 is not currently available in production. Make sure it does not
+    # accidentally get enabled.
+    - name: disable ipv6
+      ansible.posix.sysctl:
+        name: net.ipv6.conf.all.disable_ipv6
+        value: "1"
+        sysctl_file: "/etc/sysctl.d/99-disable-ipv6.conf"
+        reload: true
       become: true
 
     - name: create systemd service to regenerate openssh host keys

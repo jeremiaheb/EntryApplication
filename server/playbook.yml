@@ -72,6 +72,16 @@
         replace: "127.0.1.1 entryapplication"
       become: true
 
+    # IPv6 is not currently available in production. Make sure it does not
+    # accidentally get enabled.
+    - name: disable ipv6
+      ansible.posix.sysctl:
+        name: net.ipv6.conf.all.disable_ipv6
+        value: "1"
+        sysctl_file: "/etc/sysctl.d/99-disable-ipv6.conf"
+        reload: true
+      become: true
+
     - name: create systemd service to regenerate openssh host keys
       ansible.builtin.copy:
         dest: /etc/systemd/system/reconfigure-openssh-server.service

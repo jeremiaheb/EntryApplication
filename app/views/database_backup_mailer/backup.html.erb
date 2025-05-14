@@ -1,0 +1,6 @@
+<p>
+  Attached is a database backup from <%= @hostname %> generated on <%= @now.strftime("%Y-%m-%d %H:%M:%S%z") %>.
+</p>
+<p>
+  To restore it, copy it to a server as <code>db.dump</code> and run <code>sudo -u postgres pg_restore -d DB_NAME db.dump</code>.
+</p>

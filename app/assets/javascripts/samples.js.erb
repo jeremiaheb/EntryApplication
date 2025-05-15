@@ -380,8 +380,6 @@ $(function(){
   $("#validateAnimals").click(function(){
     $('.validateIcon').empty();
 
-    $('#animals div.fields:hidden').remove();
-    
     $('#animals').find('input:enabled').each(function(){
       $('.new_sample, .edit_sample').validate().element(this);
     });

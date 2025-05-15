@@ -1,0 +1,11 @@
+<p>
+  The database backup from <%= @hostname %> FAILED at <%= @now.strftime("%Y-%m-%d %H:%M:%S%z") %>.
+</p>
+<p>
+  The output from stderr is below.
+</p>
+<p>
+  <pre>
+    <%= @stderr_s %>
+  </pre>
+</p>

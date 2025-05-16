@@ -77,6 +77,8 @@ $(function() {
   $formsWithDraftsURLs.on("change", "input.is-timeEntry", handleChange);
   // select2 only fires 'change' events on the <select>
   $formsWithDraftsURLs.on("change", "select", handleChange);
+  // Events fired by nested_form.js
+  $formsWithDraftsURLs.on("nested:fieldAdded, nested:fieldRemoved", handleChange);
 
   $formsWithDraftsURLs.each(function() {
     const $form = $(this);

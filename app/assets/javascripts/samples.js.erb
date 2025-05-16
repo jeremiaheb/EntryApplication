@@ -380,8 +380,6 @@ $(function(){
   $("#validateAnimals").click(function(){
     $('.validateIcon').empty();
 
-    $('#animals div.fields:hidden').remove();
-    
     $('#animals').find('input:enabled').each(function(){
       $('.new_sample, .edit_sample').validate().element(this);
     });
@@ -511,46 +509,22 @@ $(function(){
     }, "record overlaps with other record"
     );
 
+    $.validator.addMethod("isNotInPreviousTimePeriod", function(value, element, params) {
+      const $element = $(element);
 
+      const $thisSppID = $element.parent().find(".sppCommon").select2("val");
+      const $thisTimePeriod = $element.parent().find("[id$=time_seen]").val();
 
-    $.validator.addMethod("isNotInPreviousTimePeriod",function(value, element, params) {
+      const sameSpeciesInEarlierTimeSeens = $(".sppCommon.select2-container:visible").filter(function() {
+        const $this = $(this);
+        const sppID = $this.select2("val");
+        const timeSeen = $this.parent().find("[id$=time_seen]").val();
 
-      var time_1_spp
-      var time_2_spp
-      var $thisSpecies = $(element).parent().find('.sppCommon').select2("val");
-      var $this_spp_time_period = $(element).parent().find("[id$=time_seen]").val();
-
-
-    function setSppInTimeSeenArrays() {
-      var timeSeen_1_Array = new Array();
-      var timeSeen_2_Array = new Array();
-      $(".select2-container").each(function(){
-        if ( $(this).is(":visible") ) {
-          var $sppId = $(this).select2('val');
-          var $timePeriod = $(this).parent().find('[id$="time_seen"]').val();
-          if ($timePeriod == 1 && !_.contains(timeSeen_1_Array, $sppId)) {
-            timeSeen_1_Array.push($sppId);
-          } else if ( $timePeriod == 2 && !_.contains(timeSeen_2_Array, $sppId) ) {
-            timeSeen_2_Array.push($sppId);
-          }
-        }
+        return (sppID === $thisSppID && timeSeen < $thisTimePeriod);
       });
 
-      time_1_spp = timeSeen_1_Array  
-      time_2_spp = timeSeen_2_Array  
-    };
-
-    if ( $this_spp_time_period == 1 ) { return true; }
-    else if ( $this_spp_time_period == 2 ) {
-      setSppInTimeSeenArrays();
-      return !_.contains(time_1_spp, $thisSpecies); }
-    else if ( $this_spp_time_period == 3 ){
-      setSppInTimeSeenArrays();
-      var previousTimeBool = [!_.contains(time_1_spp, $thisSpecies), !_.contains(time_2_spp, $thisSpecies)];
-      return !_.contains(previousTimeBool, false); }
-    }, "This species is in previous time period" 
-    );
-
+      return sameSpeciesInEarlierTimeSeens.length === 0;
+    }, "This species is in previous time period");
 
     $.validator.addMethod(
     "lessThan",

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_05_190547) do
+ActiveRecord::Schema[7.1].define(version: 2025_05_16_182921) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -240,7 +240,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_05_190547) do
     t.integer "rubble_percentage"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
-    t.float "water_temp"
+    t.integer "water_temp"
     t.string "current", limit: 255
     t.integer "boatlog_manager_id"
     t.integer "substrate_max_depth"

@@ -125,7 +125,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_16_182921) do
     t.string "lastname", limit: 255
     t.string "role", limit: 255
     t.integer "boatlog_manager_id"
+    t.string "provider"
+    t.string "uid"
     t.index ["boatlog_manager_id"], name: "index_divers_on_boatlog_manager_id", unique: true
+    t.index ["provider", "uid"], name: "index_divers_on_provider_and_uid", unique: true
   end
 
   create_table "drafts", force: :cascade do |t|

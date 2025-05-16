@@ -20,7 +20,11 @@ EntryApplication::Application.routes.draw do
   resources :boatlog_managers
 
   #devise_for :divers
-  devise_for :divers, :skip => [:registrations]
+  devise_for :divers,
+    skip: [:registrations],
+    controllers: {
+      omniauth_callbacks: "divers/omniauth_callbacks",
+    }
   devise_scope :diver do
     get "signup",                       :to => "accounts#new"
     get "signin",                       :to => "devise/sessions#new"

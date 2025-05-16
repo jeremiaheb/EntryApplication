@@ -272,6 +272,12 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+  config.omniauth :login_dot_gov,
+    name: :login_dot_gov,
+    client_id: 'urn:gov:gsa:openidconnect.profiles:sp:sso:noaa:ncrmp_data_entry',
+    idp_base_url: 'https://idp.int.identitysandbox.gov/',
+    private_key: OpenSSL::PKey::RSA.new(File.read(Rails.root.join("private.pem"))),
+    redirect_uri: 'http://localhost:3000/divers/auth/login_dot_gov/callback'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

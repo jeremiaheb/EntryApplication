@@ -1,5 +1,4 @@
 
-
 <div class="form-horizontal">
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 
@@ -36,5 +35,10 @@
 
 <% end %>
 
+</div>
 
+<div>
+  <%= link_to diver_login_dot_gov_omniauth_authorize_path, data: { method: "post" }, class: "btn btn-primary" do %>
+    Login with <%= image_tag "login_dot_gov_logo.svg" %>
+  <% end %>
 </div>

@@ -5,8 +5,9 @@ class Diver < ActiveRecord::Base
   ROLES   = [ADMIN, MANAGER, DIVER]
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :omniauthable, :registerable, :recoverable,
+    :rememberable, :trackable, :validatable,
+    omniauth_providers: [:login_dot_gov]
 
   belongs_to  :boatlog_manager
   has_many    :diver_samples
@@ -23,6 +24,15 @@ class Diver < ActiveRecord::Base
 
   scope       :active_divers,      lambda { where(:active => true) }
   
+  def self.from_omniauth!(auth)
+    find_by!(email: auth.info.email).tap do |d|
+      d.provider = auth.provider
+      d.uid = auth.uid
+      d.password = Devise.friendly_token[0, 20] unless d.encrypted_password?
+      d.save!
+    end
+  end
+
   def diver_proofing_samples
     diver_samples.primary.joins(:sample).order("sample_date")
   end

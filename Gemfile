@@ -23,6 +23,9 @@ gem 'nested_form'
 gem "blueimp-gallery"
 
 gem 'devise', '~> 4.4', '>= 4.4.3'
+gem 'omniauth', '~> 2.1', '>= 2.1.3'
+gem 'omniauth_login_dot_gov', git: 'https://github.com/18f/omniauth_login_dot_gov.git', branch: 'main'
+gem 'omniauth-rails_csrf_protection', '~> 1.0', '>= 1.0.2'
 gem 'cancancan', '~> 3.0'
 
 gem 'prawn', '~> 2.5'

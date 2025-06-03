@@ -74,7 +74,7 @@ $(function(){
       // * 25.123 -85.123
       // * 25.123N 85.123W
       // * N17.74722 W64.70563
-      const parts = data.match(/^\s*[NS]?([-0-9\.]+)[NS]?[\s,]+[EW]?([-0-9\.]+)[EW]?$/)
+      const parts = data.match(/^\s*[NS]?([-0-9\.]+)[NS]?[\s,]+[EW]?([-0-9\.]+)[EW]?\s*$/)
       if (!parts) {
         return;
       }

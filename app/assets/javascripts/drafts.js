@@ -12,15 +12,25 @@ $(function() {
   const saveDraftThrottled = _.throttle(function(e) {
     let $target = $(e.target);
     let $form = $target.closest("form");
-    let draftsURL = $form.data("drafts-url");
 
+    let draftsURL = $form.data("drafts-url");
     if (!draftsURL) {
       return;
     }
 
+    // Cancel any in flight requests.
     if (currentDraftRequest) {
       currentDraftRequest.abort();
       currentDraftRequest = null;
+    }
+
+    // While the form is submitting, drafts are suppressed. Otherwise, a draft
+    // request could arrive after the request that saved the record. In that
+    // case, a pending draft for a fully saved record could occur, possibly
+    // leading to users duplicating records.`
+    let suppressDrafts = $form.data("drafts-suppress");
+    if (suppressDrafts) {
+      return;
     }
 
     let params = $form.serializeArray();
@@ -90,10 +100,20 @@ $(function() {
     // Once a draft is pending, periodically save it in the background
     // regardless of change events in case there were errors saving the previous
     // draft.
+    let saveDraftInterval = undefined;
     $form.on("draft:pending", _.once(function(e) {
       window.addEventListener("beforeunload", warnBeforeUnload);
-      setInterval(function() { saveDraftThrottled(e); }, 30 * 1000); // NOTE: delay must be longer than the throttle interval
+      saveDraftInterval = setInterval(function() { saveDraftThrottled(e); }, 30 * 1000); // NOTE: delay must be longer than the throttle interval
     }));
+
+    // Suppress drafts while the form is submitting.
+    $form.on("submit", function() {
+      if (saveDraftInterval) {
+        clearInterval(saveDraftInterval);
+      }
+
+      $form.data("drafts-suppress", true);
+    })
 
     // Do not warn if draft is about to be saved or discarded.
     $form.on("submit", function(e) {

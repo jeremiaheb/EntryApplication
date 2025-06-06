@@ -128,14 +128,6 @@
           - zlib1g-dev
       become: true
 
-    - name: install desktop environment
-      ansible.builtin.package:
-        name:
-          - slim
-          - ubuntu-desktop
-      become: true
-      when: skip_desktop is undefined
-
     - name: install required libraries for ansible
       ansible.builtin.package:
         name:
@@ -439,6 +431,14 @@
     # tasks are skipped because they are meaningless for the production virtual
     # machine, which is not used with Vagrant.
     # --------------------------
+    - name: install desktop environment
+      ansible.builtin.package:
+        name:
+          - slim
+          - ubuntu-desktop
+      become: true
+      when: development_build is defined and skip_desktop is undefined
+
     - name: install rbenv
       ansible.builtin.git:
         repo: "https://github.com/rbenv/rbenv"

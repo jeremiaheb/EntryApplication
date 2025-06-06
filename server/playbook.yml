@@ -22,14 +22,14 @@
 
     - name: set hostname
       ansible.builtin.hostname:
-        name: entryapplication.nmfs.noaa.gov
+        name: sefsc-ncrmp-web.nmfs.noaa.gov
       become: true
 
     - name: replace hostname in /etc/hosts
       ansible.builtin.replace:
         path: /etc/hosts
         regexp: "^127.0.1.1 .*$"
-        replace: "127.0.1.1 entryapplication entryapplication.nmfs.noaa.gov"
+        replace: "127.0.1.1 sefsc-ncrmp-web sefsc-ncrmp-web.nmfs.noaa.gov"
       become: true
 
     # IPv6 is not currently available in production. Make sure it does not

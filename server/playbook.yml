@@ -106,6 +106,14 @@
         enabled: true
       become: true
 
+    - name: allow ssh-rsa key authentication
+      ansible.builtin.copy:
+        dest: /etc/ssh/sshd_config.d/80-ssh-rsa-pubkey-settings.conf
+        content: |
+          PubkeyAcceptedAlgorithms +ssh-rsa
+      become: true
+      notify: restart sshd
+
     - name: install required packages
       ansible.builtin.package:
         name:
@@ -483,5 +491,11 @@
     - name: restart entryapplication
       ansible.builtin.service:
         name: entryapplication
+        state: restarted
+      become: true
+
+    - name: restart sshd
+      ansible.builtin.service:
+        name: sshd
         state: restarted
       become: true

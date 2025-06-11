@@ -214,6 +214,33 @@
       become: true
       become_user: postgres
 
+    - name: create jeremiaheb database user
+      community.postgresql.postgresql_user:
+        name: jeremiaheb
+        password: noaaRails
+      become: true
+      become_user: postgres
+
+    - name: give all privileges on entryapplication_production database to jeremiaheb
+      community.postgresql.postgresql_privs:
+        login_db: entryapplication_production
+        privs: ALL
+        type: database
+        objs: entryapplication_production
+        role: jeremiaheb
+      become: true
+      become_user: postgres
+
+    - name: give all privileges on entryapplication_production tables to jeremiaheb
+      community.postgresql.postgresql_privs:
+        login_db: entryapplication_production
+        privs: ALL
+        type: schema
+        objs: public
+        role: jeremiaheb
+      become: true
+      become_user: postgres
+
     - name: install apache2 server
       ansible.builtin.package:
         name: apache2

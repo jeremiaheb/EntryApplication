@@ -38,4 +38,7 @@ Vagrant.configure("2") do |config|
       "skip_desktop" => ENV["SKIP_DESKTOP"]
     }.compact
   end
+
+  # SSH options
+  config.ssh.forward_agent = true
 end

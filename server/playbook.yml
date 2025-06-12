@@ -321,7 +321,19 @@
       ansible.builtin.file:
         path: /var/www/apps/EntryApplication
         mode: "0755"
+        state: "directory"
       become: true
+
+    - name: make entryapplication socket directory world readable
+      ansible.builtin.file:
+        path: "{{ item }}"
+        mode: "0755"
+        state: "directory"
+      become: true
+      with_items:
+        - "/var/www/apps/EntryApplication/shared"
+        - "/var/www/apps/EntryApplication/shared/tmp"
+        - "/var/www/apps/EntryApplication/shared/tmp/sockets"
 
     - name: add /vagrant as a safe git directory for local deployments
       ansible.builtin.copy:

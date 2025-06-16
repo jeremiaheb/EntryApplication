@@ -32,11 +32,11 @@
     <%= button_to('New Demo', new_coral_demographic_path, :method => "get", :class => 'btn btn-large btn-primary wrap')  %>   
   </div>
   <div id="downloadSampleButton"> 
-    <%= button_to('Download Proofing Report (.pdf)', coral_demographics_path(format: "pdf", diver_id: current_diver.id), :method => "get", :class => 'btn btn-small btn-primary')  %>   
+    <%= link_to('Download Proofing Report (.pdf)', coral_demographics_path(format: "pdf", diver_id: current_diver.id), :class => 'btn btn-small btn-primary')  %>   
   </div>
 <% if !current_diver.diver? %>
   <div id="downloadXLSXButton"> 
-    <%= button_to('Download Samples (.xlsx)', coral_demographics_path(format: "xlsx"), :method => "get", :class => 'btn btn-small btn-primary')  %>   
+    <%= link_to('Download Samples (.xlsx)', coral_demographics_path(format: "xlsx"), :class => 'btn btn-small btn-primary')  %>   
   </div>
 <% end %>
 
@@ -47,7 +47,7 @@
     </button>
       <ul class="dropdown-menu" role="menu">
         <% current_diver.boatlog_manager.divers_responsible_for.each do |diver| %>
-          <li> <%= link_to(diver.diver_name, coral_demographics_path(format: "pdf", diver_id: diver.id), :method => "get") %> </li>
+          <li> <%= link_to(diver.diver_name, coral_demographics_path(format: "pdf", diver_id: diver.id)) %> </li>
         <% end %>
       </ul>
   </div>

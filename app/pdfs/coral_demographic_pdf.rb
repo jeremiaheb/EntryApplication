@@ -51,7 +51,7 @@ class CoralDemographicPdf < Prawn::Document
  def spp_1_30
   [[ "M", "Species", "MD      PD      MH", "OM%", "RM%", "Blch", "Dis"]] + 
   @coral_demographic.demographic_corals[0..29].map.with_index do |spp, index|
-    [spp.meter_mark, spp.coral.code , "%s  -  %s  -  %s" % [spp.try(:max_diameter), spp.try(:perpendicular_diameter), spp.try(:height)], spp.old_mortality, spp.recent_mortality, spp.bleach_condition, spp.disease]
+    [spp.meter_mark, spp.coral.try(:code) , "%s  -  %s  -  %s" % [spp.try(:max_diameter), spp.try(:perpendicular_diameter), spp.try(:height)], spp.old_mortality, spp.recent_mortality, spp.bleach_condition, spp.disease]
   end
  end
 
@@ -67,7 +67,7 @@ class CoralDemographicPdf < Prawn::Document
  def spp_31_60
   [[ "M", "Species", "MD      PD      MH", "OM%", "RM%", "Blch", "Dis"]] + 
     @coral_demographic.demographic_corals[30..59].map.with_index do |spp, index|
-    [spp.meter_mark, spp.coral.code , "%s  -  %s  -  %s" % [spp.try(:max_diameter), spp.try(:perpendicular_diameter), spp.try(:height)], spp.old_mortality, spp.recent_mortality, spp.bleach_condition, spp.disease]
+    [spp.meter_mark, spp.coral.try(:code) , "%s  -  %s  -  %s" % [spp.try(:max_diameter), spp.try(:perpendicular_diameter), spp.try(:height)], spp.old_mortality, spp.recent_mortality, spp.bleach_condition, spp.disease]
   end
  end
  
@@ -80,7 +80,7 @@ class CoralDemographicPdf < Prawn::Document
  def spp_61_90
   [[ "M", "Species", "MD      PD      MH", "OM%", "RM%", "Blch", "Dis"]] + 
   @coral_demographic.demographic_corals[60..89].map.with_index do |spp, index|
-    [spp.meter_mark, spp.coral.code , "%s  -  %s  -  %s" % [spp.try(:max_diameter), spp.try(:perpendicular_diameter), spp.try(:height)], spp.old_mortality, spp.recent_mortality, spp.bleach_condition, spp.disease]
+    [spp.meter_mark, spp.coral.try(:code) , "%s  -  %s  -  %s" % [spp.try(:max_diameter), spp.try(:perpendicular_diameter), spp.try(:height)], spp.old_mortality, spp.recent_mortality, spp.bleach_condition, spp.disease]
   end
  end
 
@@ -96,7 +96,7 @@ class CoralDemographicPdf < Prawn::Document
  def spp_91_120
   [[ "M", "Species", "MD      PD      MH", "OM%", "RM%", "Blch", "Dis"]] + 
   @coral_demographic.demographic_corals[90..119].map.with_index do |spp, index|
-    [spp.meter_mark, spp.coral.code , "%s  -  %s  -  %s" % [spp.try(:max_diameter), spp.try(:perpendicular_diameter), spp.try(:height)], spp.old_mortality, spp.recent_mortality, spp.bleach_condition, spp.disease]
+    [spp.meter_mark, spp.coral.try(:code) , "%s  -  %s  -  %s" % [spp.try(:max_diameter), spp.try(:perpendicular_diameter), spp.try(:height)], spp.old_mortality, spp.recent_mortality, spp.bleach_condition, spp.disease]
   end
  end
 end

@@ -10,9 +10,6 @@ class SamplesController < ApplicationController
   # GET /samples
   # GET /samples.json
   def index
-    def proof_by_diver(d)
-      Diver.find(d).diver_proofing_samples
-    end
     if current_diver.role == 'admin'
       @samples = Sample.all
     elsif current_diver.role == 'manager'
@@ -21,20 +18,17 @@ class SamplesController < ApplicationController
       @samples = current_diver.samples.merge(DiverSample.primary)
     end
     
-     #@proofing_samples = current_diver.samples.merge(DiverSample.primary).order("sample_date") 
-      @proofing_samples = current_diver.diver_proofing_samples
-    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @samples }
       format.xlsx
       format.pdf do
-        pdf = SamplePdf.new(proof_by_diver(params[:diver_id]||= current_diver), params[:fishtype].to_s)
-                              Rails.logger.info response.method(:cache_control).source_location
+        diver = Diver.find(params[:diver_id].presence || current_diver.id)
+        pdf = SamplePdf.new(diver.diver_proofing_samples, params[:fishtype].to_s)
 
         expires_now 
-        send_data pdf.render, filename: "#{current_diver.lastname}_ProofingReport.pdf",
-                              type: "application/pdf"
+        send_data pdf.render, filename: "#{diver.diver_name}_ProofingReport.pdf",
+          type: "application/pdf"
       end
     end
   end

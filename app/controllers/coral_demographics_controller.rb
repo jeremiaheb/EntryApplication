@@ -6,13 +6,6 @@ class CoralDemographicsController < ApplicationController
   # GET /coral_demographics
   # GET /coral_demographics.json
   def index
-    def proof_by_diver(d)
-      if d.is_a?(String) == true
-        Diver.find(d).diver_proofing_coral_demo
-      else 
-        Diver.find(d.id).diver_proofing_coral_demo
-      end
-    end
     if current_diver.role == 'admin'
       @coral_demographics = CoralDemographic.all
     elsif current_diver.role == 'manager'
@@ -21,18 +14,17 @@ class CoralDemographicsController < ApplicationController
       @coral_demographics = current_diver.coral_demographics
     end
 
-    @proofing_coral_demographics = current_diver.diver_proofing_coral_demo
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @coral_demographics }
       format.xlsx
       format.pdf do 
-        pdf = CoralDemographicPdf.new(proof_by_diver(params[:diver_id]||= current_diver))
+        diver = Diver.find(params[:diver_id].presence || current_diver.id)
+        pdf = CoralDemographicPdf.new(diver.diver_proofing_coral_demo)
 
         expires_now
-        send_data pdf.render, filename: "#{current_diver.lastname}_CoralDemographicsReport.pdf",
-                              type: "application/pdf"
+        send_data pdf.render, filename: "#{diver.diver_name}_CoralDemographicsReport.pdf",
+          type: "application/pdf"
       end
     end
   end

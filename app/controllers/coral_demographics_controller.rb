@@ -17,12 +17,17 @@ class CoralDemographicsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @coral_demographics }
-      format.xlsx
+      format.xlsx do
+        # Prevent caching
+        no_store
+      end
       format.pdf do 
+        # Prevent caching
+        no_store
+
         diver = Diver.find(params[:diver_id].presence || current_diver.id)
         pdf = CoralDemographicPdf.new(diver.diver_proofing_coral_demo)
 
-        expires_now
         send_data pdf.render, filename: "#{diver.diver_name}_CoralDemographicsReport.pdf",
           type: "application/pdf"
       end

@@ -26,5 +26,5 @@
 
   <%= button_to('New Species', new_animal_path, :method => "get", :class => 'btn btn-large btn-primary wrap')  %>   
 <% if !current_diver.diver? %>
-    <%= button_to('Download Current Species List', animals_path(format: "xlsx"), :method => "get", :class => 'btn btn-small btn-primary')  %>   
+    <%= button_to('Download Current Species List', animals_path(format: "xlsx", nocache: SecureRandom.alphanumeric), :method => "get", :class => 'btn btn-small btn-primary')  %>   
 <% end %>

@@ -13,7 +13,10 @@ class AnimalsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @animals }
-      format.xlsx
+      format.xlsx do
+        # Prevent caching
+        no_store
+      end
     end
   end
 

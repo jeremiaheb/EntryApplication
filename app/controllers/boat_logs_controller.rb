@@ -15,7 +15,10 @@ class BoatLogsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @boat_logs }
-      format.xlsx
+      format.xlsx do
+        # Prevent caching
+        no_store
+      end
     end
   end
 

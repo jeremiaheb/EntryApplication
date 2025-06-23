@@ -17,12 +17,17 @@ class BenthicCoversController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @benthic_covers }
-      format.xlsx
+      format.xlsx do
+        # Prevent caching
+        no_store
+      end
       format.pdf do 
+        # Prevent caching
+        no_store
+
         diver = Diver.find(params[:diver_id].presence || current_diver.id)
         pdf = BenthicCoverPdf.new(diver.diver_proofing_benthic_cover)
 
-        expires_now
         send_data pdf.render, filename: "#{diver.diver_name}_BenthicCoverReport.pdf",
           type: "application/pdf"
       end

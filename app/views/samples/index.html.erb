@@ -33,16 +33,16 @@
   </div>
   
   <div id="downloadSampleButton"> 
-    <%= link_to('Download Proofing Report (Species Code)', samples_path(format: "pdf", diver_id: current_diver.id, fishtype: "species_code"), :class => 'btn btn-small btn-primary')  %>   
+    <%= link_to('Download Proofing Report (Species Code)', samples_path(format: "pdf", nocache: SecureRandom.alphanumeric, diver_id: current_diver.id, fishtype: "species_code"), :class => 'btn btn-small btn-primary')  %>   
   </div>
 
   <div id="downloadSampleButton2"> 
-    <%= link_to('Download Proofing Report (Common Name)', samples_path(format: "pdf", diver_id: current_diver.id, fishtype: "common_name"), :class => 'btn btn-small btn-primary')  %>   
+    <%= link_to('Download Proofing Report (Common Name)', samples_path(format: "pdf", nocache: SecureRandom.alphanumeric, diver_id: current_diver.id, fishtype: "common_name"), :class => 'btn btn-small btn-primary')  %>   
   </div>
 
 <% if !current_diver.diver? %>
   <div id="downloadXLSXButton"> 
-    <%= link_to('Download Samples (.xlsx)', samples_path(format: "xlsx"), :class => 'btn btn-small btn-primary')  %>   
+    <%= link_to('Download Samples (.xlsx)', samples_path(format: "xlsx", nocache: SecureRandom.alphanumeric), :class => 'btn btn-small btn-primary')  %>   
   </div>
 <% end %>
 <% if current_diver.manager? %>
@@ -52,7 +52,7 @@
     </button>
       <ul class="dropdown-menu" role="menu">
         <% current_diver.boatlog_manager.divers_responsible_for.each do |diver| %>
-          <li> <%= link_to(diver.diver_name, samples_path(format: "pdf", diver_id: diver.id, fishtype: "common_name")) %> </li>
+          <li> <%= link_to(diver.diver_name, samples_path(format: "pdf", nocache: SecureRandom.alphanumeric, diver_id: diver.id, fishtype: "common_name")) %> </li>
         <% end %>
       </ul>
   </div>

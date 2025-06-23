@@ -20,12 +20,17 @@ class SamplesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @samples }
-      format.xlsx
+      format.xlsx do
+        # Prevent caching
+        no_store
+      end
       format.pdf do
+        # Prevent caching
+        no_store
+
         diver = Diver.find(params[:diver_id].presence || current_diver.id)
         pdf = SamplePdf.new(diver.diver_proofing_samples, params[:fishtype].to_s)
 
-        expires_now 
         send_data pdf.render, filename: "#{diver.diver_name}_ProofingReport.pdf",
           type: "application/pdf"
       end
@@ -41,9 +46,10 @@ class SamplesController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @sample }
       format.pdf do
-        pdf = SamplePdf.new(@sample)
+        # Prevent caching
+        no_store
 
-        expires_now
+        pdf = SamplePdf.new(@sample)
         send_data pdf.render, filename: "sample_#{@sample.field_id}.pdf",
                               type: "application/pdf",
                               disposition: "inline"
@@ -158,9 +164,10 @@ class SamplesController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @sample }
       format.pdf do
-        pdf = SamplePdf.new(@sample)
+        # Prevent caching
+        no_store
 
-        expires_now
+        pdf = SamplePdf.new(@sample)
         send_data pdf.render, filename: "sample_#{@sample.field_id}.pdf",
                               type: "application/pdf",
                               disposition: "inline"

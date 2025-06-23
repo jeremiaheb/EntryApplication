@@ -53,7 +53,7 @@ wb.add_worksheet(name: "DemoCorals") do |demo_sheet|
     c_demo.demographic_corals.each do |d_coral|
       demo_sheet.add_row [ d_coral.coral_demographic.msn,         
                           d_coral.meter_mark,
-                          d_coral.coral.code,
+                          d_coral.coral.try(:code),
                           d_coral.max_diameter, 
                           d_coral.perpendicular_diameter,     
                           d_coral.height,     

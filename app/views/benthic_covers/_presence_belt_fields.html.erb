@@ -5,49 +5,49 @@
         <div class="control-group">
           <label class="control-label">A.cervicornis</label>
           <div class="controls">
-            <%= f.select( :a_cervicornis,{ "Absent" => 0, "Present_Transect" => 1, "Present_Site" => 2, "Did Not Look" => 3 } , {:include_blank => ""} ) %>
+            <%= f.select( :a_cervicornis, PresenceBelt::ENUM_VALUES.keys, {:include_blank => ""} ) %>
           </div>
         </div>
 
         <div class="control-group">
           <label class="control-label">A.palmata</label>
           <div class="controls">
-            <%= f.select( :a_palmata,{ "Absent" => 0, "Present_Transect" => 1, "Present_Site" => 2, "Did Not Look" => 3 } , {:include_blank => ""} ) %>
+            <%= f.select( :a_palmata, PresenceBelt::ENUM_VALUES.keys, {:include_blank => ""} ) %>
           </div>
         </div>
         
         <div class="control-group">
           <label class="control-label">D.cylindrus</label>
           <div class="controls">
-            <%= f.select( :d_cylindrus,{ "Absent" => 0, "Present_Transect" => 1, "Present_Site" => 2, "Did Not Look" => 3 } , {:include_blank => ""} ) %>
+            <%= f.select( :d_cylindrus, PresenceBelt::ENUM_VALUES.keys, {:include_blank => ""} ) %>
           </div>
         </div>
 
         <div class="control-group">
           <label class="control-label">O.annularis</label>
           <div class="controls">
-            <%= f.select( :m_annularis,{ "Absent" => 0, "Present_Transect" => 1, "Present_Site" => 2, "Did Not Look" => 3 } , {:include_blank => ""} ) %>
+            <%= f.select( :m_annularis, PresenceBelt::ENUM_VALUES.keys, {:include_blank => ""} ) %>
           </div>
         </div>
 
         <div class="control-group">
           <label class="control-label"> O.faveolata </label>
           <div class="controls">
-            <%= f.select( :m_faveolata,{ "Absent" => 0, "Present_Transect" => 1, "Present_Site" => 2, "Did Not Look" => 3 } , {:include_blank => ""} ) %>
+            <%= f.select( :m_faveolata, PresenceBelt::ENUM_VALUES.keys, {:include_blank => ""} ) %>
           </div>
         </div>
     
         <div class="control-group">
           <label class="control-label">O.franksi</label>
           <div class="controls">
-            <%= f.select( :m_franksi,{ "Absent" => 0, "Present_Transect" => 1, "Present_Site" => 2, "Did Not Look" => 3 } , {:include_blank => ""} ) %>
+            <%= f.select( :m_franksi, PresenceBelt::ENUM_VALUES.keys, {:include_blank => ""} ) %>
           </div>
         </div>
 
         <div class="control-group">
           <label class="control-label">M.ferox</label>
           <div class="controls">
-            <%= f.select( :m_ferox,{ "Absent" => 0, "Present_Transect" => 1, "Present_Site" => 2, "Did Not Look" => 3 } , {:include_blank => ""} ) %>
+            <%= f.select( :m_ferox, PresenceBelt::ENUM_VALUES.keys, {:include_blank => ""} ) %>
           </div>
         </div>
 

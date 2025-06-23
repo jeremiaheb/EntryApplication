@@ -117,7 +117,7 @@ class BenthicCoverPdf < Prawn::Document
 
       table data,
         :cell_style => { :size => 8, :height => 17, :padding => 2  },
-        :column_widths => { 0 => 60, 1 => 60 }
+        :column_widths => { 0 => 54, 1 => 66 }
 
     end
   end

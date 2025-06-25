@@ -49,3 +49,4 @@
 
 # VSCode local settings
 /.vscode
+/.Rproj*

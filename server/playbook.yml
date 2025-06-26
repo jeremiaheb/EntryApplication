@@ -48,18 +48,6 @@
         state: started
       become: true
 
-    # We occasionally see timeouts of this service when using virtualized
-    # network interfaces. It does not always happen, but when it does, it makes
-    # the boot take a very long time.
-    #
-    # At some point in the future it may be good to remove this and see if the
-    # problem still exists.
-    - name: disable waiting for network on boot
-      ansible.builtin.service:
-        name: systemd-networkd-wait-online
-        enabled: false
-      become: true
-
     - name: set hostname
       ansible.builtin.hostname:
         name: entryapplication.nmfs.noaa.gov
@@ -358,7 +346,19 @@
       ansible.builtin.file:
         path: /var/www/apps/EntryApplication
         mode: "0755"
+        state: "directory"
       become: true
+
+    - name: make entryapplication socket directory world readable
+      ansible.builtin.file:
+        path: "{{ item }}"
+        mode: "0755"
+        state: "directory"
+      become: true
+      with_items:
+        - "/var/www/apps/EntryApplication/shared"
+        - "/var/www/apps/EntryApplication/shared/tmp"
+        - "/var/www/apps/EntryApplication/shared/tmp/sockets"
 
     - name: add /vagrant as a safe git directory for local deployments
       ansible.builtin.copy:
@@ -370,18 +370,23 @@
         group: entryapplication
         mode: "0644"
       become: true
+      become_user: entryapplication
 
-    - name: install alindeman-NOAA deploy keys for entryapplication
+    - name: install deploy keys for entryapplication
       ansible.posix.authorized_key:
         user: entryapplication
-        key: "https://github.com/alindeman-NOAA.keys"
+        key: "https://github.com/{{ item }}.keys"
       become: true
+      with_items:
+        # GitHub usernames
+        - "alindeman-NOAA"
+        - "jeremiaheb"
 
     - name: install rbenv
       ansible.builtin.git:
         repo: "https://github.com/rbenv/rbenv"
         dest: "/var/www/apps/EntryApplication/.rbenv"
-        version: "10e96bfc473c7459a447fbbda12164745a72fd37" # v1.3.2
+        version: "v1.3.2"
       become: true
       become_user: entryapplication
 
@@ -389,7 +394,7 @@
       ansible.builtin.git:
         repo: "https://github.com/rbenv/ruby-build"
         dest: "/var/www/apps/EntryApplication/.rbenv/plugins/ruby-build"
-        version: "2334633d60b78124fc99dedb32728605f44a4e56" # v20250326
+        version: "v20250610"
       become: true
       become_user: entryapplication
 
@@ -418,6 +423,30 @@
       become: true
       become_user: entryapplication
 
+    - name: create systemd socket for entryapplication
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/entryapplication.socket
+        content: |
+          [Unit]
+          Description=EntryApplication
+
+          [Socket]
+          ListenStream=/var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock
+          SocketUser=entryapplication
+          SocketGroup=entryapplication
+          ReusePort=true
+          Backlog=1024
+
+          [Install]
+          WantedBy=sockets.target
+      become: true
+
+    - name: enable systemd socket for entryapplication
+      ansible.builtin.service:
+        name: entryapplication.socket
+        enabled: true
+      become: true
+
     - name: create systemd service for entryapplication
       ansible.builtin.copy:
         dest: /etc/systemd/system/entryapplication.service
@@ -425,14 +454,14 @@
           [Unit]
           Description=EntryApplication
           After=network.target
+          Requires=entryapplication.socket
 
           [Service]
           User=entryapplication
           Group=entryapplication
           WorkingDirectory=/var/www/apps/EntryApplication/current
-          Environment=RAILS_ENV=production BIND_ADDRESS=unix://./tmp/sockets/puma.sock
-          ExecStart=/var/www/apps/EntryApplication/.rbenv/bin/rbenv exec bundle exec bin/rails server
-          ExecReload=/bin/kill -USR1 $MAINPID
+          Environment=RAILS_ENV=production
+          ExecStart=/var/www/apps/EntryApplication/.rbenv/bin/rbenv exec bundle exec puma -C /var/www/apps/EntryApplication/current/config/puma.rb --bind-to-activated-sockets=only
           RestartSec=1
           Restart=on-failure
 
@@ -443,7 +472,7 @@
 
     - name: enable systemd service for entryapplication
       ansible.builtin.service:
-        name: entryapplication
+        name: entryapplication.service
         enabled: true
       become: true
 
@@ -451,10 +480,14 @@
       ansible.builtin.copy:
         dest: /etc/sudoers.d/entryapplication
         content: |
-          entryapplication ALL=(ALL) NOPASSWD: /usr/bin/systemctl start entryapplication
-          entryapplication ALL=(ALL) NOPASSWD: /usr/bin/systemctl stop entryapplication
-          entryapplication ALL=(ALL) NOPASSWD: /usr/bin/systemctl reload entryapplication
-          entryapplication ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart entryapplication
+          entryapplication ALL=(ALL) NOPASSWD: /usr/bin/systemctl start entryapplication.service
+          entryapplication ALL=(ALL) NOPASSWD: /bin/systemctl start entryapplication.service
+          entryapplication ALL=(ALL) NOPASSWD: /usr/bin/systemctl stop entryapplication.service
+          entryapplication ALL=(ALL) NOPASSWD: /bin/systemctl stop entryapplication.service
+          entryapplication ALL=(ALL) NOPASSWD: /usr/bin/systemctl reload entryapplication.service
+          entryapplication ALL=(ALL) NOPASSWD: /bin/systemctl reload entryapplication.service
+          entryapplication ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart entryapplication.service
+          entryapplication ALL=(ALL) NOPASSWD: /bin/systemctl restart entryapplication.service
         owner: root
         group: root
         mode: "0440"
@@ -466,26 +499,32 @@
     # tasks are skipped because they are meaningless for the production virtual
     # machine, which is not used with Vagrant.
     # --------------------------
-    - name: install desktop environment
-      ansible.builtin.package:
-        name:
-          - slim
-          - ubuntu-desktop
+
+    # We occasionally see timeouts of this service when using virtualized
+    # network interfaces. It does not always happen, but when it does, it makes
+    # the boot take a very long time.
+    #
+    # At some point in the future it may be good to remove this and see if the
+    # problem still exists.
+    - name: disable waiting for network on boot
+      ansible.builtin.service:
+        name: systemd-networkd-wait-online
+        enabled: false
       become: true
-      when: development_build is defined and skip_desktop is undefined
+      when: development_build is defined
 
     - name: install rbenv
       ansible.builtin.git:
         repo: "https://github.com/rbenv/rbenv"
         dest: "{{ ansible_user_dir }}/.rbenv"
-        version: "10e96bfc473c7459a447fbbda12164745a72fd37" # v1.3.2
+        version: "v1.3.2"
       when: development_build is defined
 
     - name: install ruby-build
       ansible.builtin.git:
         repo: "https://github.com/rbenv/ruby-build"
         dest: "{{ ansible_user_dir }}/.rbenv/plugins/ruby-build"
-        version: "2334633d60b78124fc99dedb32728605f44a4e56" # v20250326
+        version: "v20250610"
       when: development_build is defined
 
     - name: add rbenv init to ~/.bashrc
@@ -496,6 +535,12 @@
           eval "$(~/.rbenv/bin/rbenv init - --no-rehash bash)"
       when: development_build is defined
 
+    - name: install ruby 2.5.9
+      ansible.builtin.command:
+        cmd: "{{ ansible_user_dir }}/.rbenv/bin/rbenv install 2.5.9"
+        creates: "{{ ansible_user_dir }}/.rbenv/versions/2.5.9"
+      when: development_build is defined
+
     - name: add automatic cd to /vagrant in ~/.bashrc
       ansible.builtin.blockinfile:
         path: "{{ ansible_user_dir }}/.bashrc"
@@ -504,12 +549,6 @@
           if [ "${PWD-}" = "/home/vagrant" ]; then
             cd /vagrant
           fi
-      when: development_build is defined
-
-    - name: install ruby 2.5.9
-      ansible.builtin.command:
-        cmd: "{{ ansible_user_dir }}/.rbenv/bin/rbenv install 2.5.9"
-        creates: "{{ ansible_user_dir }}/.rbenv/versions/2.5.9"
       when: development_build is defined
 
   handlers:

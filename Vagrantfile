@@ -34,11 +34,9 @@ Vagrant.configure("2") do |config|
   config.vm.provision "ansible_local" do |ansible|
     ansible.playbook = "server/playbook.yml"
     ansible.extra_vars = {
-      "development_build" => "true",
-      "skip_desktop" => ENV["SKIP_DESKTOP"]
+      "development_build" => "true"
     }.compact
   end
 
-  # SSH options
   config.ssh.forward_agent = true
 end

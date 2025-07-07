@@ -213,7 +213,8 @@ GEM
       pry (~> 0.9)
       slop (~> 3.0)
     public_suffix (4.0.7)
-    puma (3.12.6)
+    puma (6.6.0)
+      nio4r (~> 2.0)
     racc (1.8.1)
     rack (2.2.17)
     rack-test (2.2.0)
@@ -361,7 +362,7 @@ DEPENDENCIES
   protected_attributes_continued
   pry-rails
   pry-remote
-  puma (~> 3.11)
+  puma (>= 5.0)
   rails (~> 5.2.8, >= 5.2.8.1)
   rails-erd
   rails_12factor

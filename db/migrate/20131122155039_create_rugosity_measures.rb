@@ -1,4 +1,4 @@
-class CreateRugosityMeasures < ActiveRecord::Migration
+class CreateRugosityMeasures < ActiveRecord::Migration[5.1]
   def change
     create_table :rugosity_measures do |t|
       t.integer :benthic_cover_id

@@ -1,4 +1,4 @@
-class CreateStationLogs < ActiveRecord::Migration
+class CreateStationLogs < ActiveRecord::Migration[5.1]
   def change
     create_table :station_logs do |t|
       t.integer :boat_log_id

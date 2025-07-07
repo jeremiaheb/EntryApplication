@@ -1,4 +1,4 @@
-class CreateDivers < ActiveRecord::Migration
+class CreateDivers < ActiveRecord::Migration[5.1]
   def change
     create_table :divers do |t|
       t.string    :diver_number

@@ -1,4 +1,4 @@
-class DropUnusedColumns < ActiveRecord::Migration
+class DropUnusedColumns < ActiveRecord::Migration[5.1]
   def up
 
     remove_column   :demographic_corals,  :created_at

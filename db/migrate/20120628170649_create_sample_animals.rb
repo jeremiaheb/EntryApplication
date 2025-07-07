@@ -1,4 +1,4 @@
-class CreateSampleAnimals < ActiveRecord::Migration
+class CreateSampleAnimals < ActiveRecord::Migration[5.1]
   def change
     create_table :sample_animals do |t|
       t.integer :sample_id

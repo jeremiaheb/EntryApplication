@@ -1,4 +1,4 @@
-class EditStationLogsCoordinateFields < ActiveRecord::Migration
+class EditStationLogsCoordinateFields < ActiveRecord::Migration[5.1]
   def up
     remove_column :station_logs, :flag_coordiates
     remove_column :station_logs, :boat_coordiantes

@@ -1,4 +1,4 @@
-class CreateCorals < ActiveRecord::Migration
+class CreateCorals < ActiveRecord::Migration[5.1]
   def change
     create_table :corals do |t|
       t.string :code

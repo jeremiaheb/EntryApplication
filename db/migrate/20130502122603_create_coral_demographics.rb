@@ -1,4 +1,4 @@
-class CreateCoralDemographics < ActiveRecord::Migration
+class CreateCoralDemographics < ActiveRecord::Migration[5.1]
   def change
     create_table :coral_demographics do |t|
       t.integer :diver_id

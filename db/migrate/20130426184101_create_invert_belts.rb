@@ -1,4 +1,4 @@
-class CreateInvertBelts < ActiveRecord::Migration
+class CreateInvertBelts < ActiveRecord::Migration[5.1]
   def change
     create_table :invert_belts do |t|
       t.integer :benthic_cover_id

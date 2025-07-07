@@ -5,7 +5,7 @@ gem 'rails', '~> 5.2.8', '>= 5.2.8.1'
 
 gem 'pg'
 
-gem 'puma', '~> 3.11'
+gem 'puma', '>= 5.0'
 
 # TODO: Replace with strong_parameters. This gem is no longer maintained and
 # will no longer work after Rails 6.1
@@ -16,12 +16,6 @@ gem 'json'
 gem 'multi_json'
 
 gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
-# therubyracer required because of https://github.com/cowboyd/less.rb/issues/11
-# mini_racer will not work
-#
-# TODO: Remove if we remove/replace less
-gem 'therubyracer'
 gem 'coffee-rails'
 gem 'jbuilder', '~> 2.5'
 
@@ -30,8 +24,7 @@ gem 'jquery-rails'
 gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-rails.git'
 gem 'jquery-validation-rails'
 
-gem 'twitter-bootstrap-rails'
-gem 'less-rails-bootstrap'
+gem 'twitter-bootstrap-rails', '2.2.8'
 gem 'bootstrap-datepicker-rails'
 
 gem 'select2-rails', '3.2.1'
@@ -48,10 +41,9 @@ gem 'net-ssh'
 gem 'figaro'
 gem "blueimp-gallery"
 
-gem 'capistrano', '~> 3.7', '>= 3.7.1'
-gem 'capistrano-rails', '~> 1.2'
-gem 'capistrano-passenger', '~> 0.2.0'
-gem 'capistrano-rbenv', '~> 2.1'
+gem 'capistrano'
+gem 'capistrano-rails'
+gem 'capistrano-rbenv'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -69,6 +61,7 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
 end
+
 group :development, :test do
   gem 'ruby-prof'
   gem 'rails-erd'

@@ -1,4 +1,4 @@
-class RemoveFieldsFromLocations < ActiveRecord::Migration
+class RemoveFieldsFromLocations < ActiveRecord::Migration[5.1]
   def change
     remove_column :samples, :substrate_max_depth   
     remove_column :samples, :substrate_min_depth   

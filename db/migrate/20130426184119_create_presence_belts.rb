@@ -1,4 +1,4 @@
-class CreatePresenceBelts < ActiveRecord::Migration
+class CreatePresenceBelts < ActiveRecord::Migration[5.1]
   def change
     create_table :presence_belts do |t|
       t.integer :benthic_cover_id

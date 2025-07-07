@@ -1,4 +1,4 @@
-class RemoveFieldsFromRepLog < ActiveRecord::Migration
+class RemoveFieldsFromRepLog < ActiveRecord::Migration[5.1]
   def up
     remove_column :rep_logs, :created_at
         remove_column :rep_logs, :updated_at

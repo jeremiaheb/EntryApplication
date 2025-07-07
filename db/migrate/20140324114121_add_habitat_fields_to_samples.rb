@@ -1,4 +1,4 @@
-class AddHabitatFieldsToSamples < ActiveRecord::Migration
+class AddHabitatFieldsToSamples < ActiveRecord::Migration[5.1]
   def change
     add_column :samples, :substrate_max_depth,    :integer   
     add_column :samples, :substrate_min_depth,    :integer   

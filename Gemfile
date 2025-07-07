@@ -5,7 +5,8 @@ gem 'rails', '~> 5.2.8', '>= 5.2.8.1'
 
 gem 'pg'
 
-gem 'puma', '>= 5.0'
+# < 6 until Ruby 2.7. Bump capybara alongside that too.
+gem 'puma', '>= 5.0', '< 6'
 
 # TODO: Replace with strong_parameters. This gem is no longer maintained and
 # will no longer work after Rails 6.1

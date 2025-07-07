@@ -2,9 +2,9 @@ require "test_helper"
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   driven_by :selenium, using: :chrome, screen_size: [1400, 1400] do |capabilities|
+    capabilities.add_argument("no-sandbox")
     capabilities.add_argument("headless")
     capabilities.add_argument("disable-gpu")
-    capabilities.add_argument("no-sandbox")
   end
 
   setup do

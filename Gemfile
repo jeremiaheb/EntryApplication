@@ -36,8 +36,6 @@ gem 'prawn', :git => 'https://github.com/prawnpdf/prawn.git'
 gem 'prawn-table'
 gem 'axlsx_rails'
 
-gem 'net-ssh'
-gem 'figaro'
 gem "blueimp-gallery"
 
 gem 'capistrano'
@@ -47,22 +45,14 @@ gem 'capistrano-rbenv'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
-group :production do
-  gem 'rails_12factor'
-end
-
 group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
 end
 
 group :development, :test do
-  gem 'ruby-prof'
-  gem 'rails-erd'
-  gem 'pry-rails'
-  gem 'pry-remote'
   gem 'factory_girl_rails'
-  #gem 'quiet_assets'
+  gem 'pry'
 
   # TODO: Upgrade to faker 3.x after upgrade to Ruby 3 is complete
   gem 'faker', '~> 2.22'

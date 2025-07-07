@@ -1,11 +1,19 @@
-#!/usr/bin/env ruby
-#
-additional_default_options = []
-if ENV["USER"] == "vagrant"
-  # within vagrant, bind to all interfaces so port can be forwarded back to the
-  # host
-  additional_default_options << "-b"
-  additional_default_options << "0.0.0.0"
-end
+#!/usr/bin/env sh
+set -x
 
-exec "./bin/rails", "server", *additional_default_options, *ARGV
+if gem list --no-installed --exact --silent foreman; then
+  echo "Installing foreman..."
+  gem install foreman
+fi
+
+# Default to port 3000 if not specified
+export PORT="${PORT:-3000}"
+
+# Default to binding 0.0.0.0 if not specified and within Vagrant
+if [ "${USER:-}" = "vagrant" ]; then
+  export BINDING="${BINDING:-0.0.0.0}"
+else
+  export BINDING="${BINDING:-127.0.0.1}"
+fi
+
+exec bin/rails server -b "$BINDING" "$@"

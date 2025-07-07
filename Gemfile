@@ -17,7 +17,6 @@ gem 'json'
 gem 'multi_json'
 
 gem 'sass-rails', '~> 5.0'
-gem 'jbuilder', '~> 2.5'
 
 gem 'jquery-ui-rails', '~> 5.0'
 gem 'jquery-rails'

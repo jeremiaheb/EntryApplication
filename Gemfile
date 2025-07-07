@@ -16,7 +16,6 @@ gem 'json'
 gem 'multi_json'
 
 gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails'
 gem 'jbuilder', '~> 2.5'
 

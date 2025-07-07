@@ -39,9 +39,9 @@
   <div class="row home">
     <div class="span4">
       <div class="img_box">
-        <a href= <%= url_for samples_path %>>
-          <img <%= image_tag 'FormButton.jpg' %>
-        </a>
+        <%= link_to samples_path, class: "samples-link" do %>
+          <%= image_tag 'FormButton.jpg' %>
+        <%- end  %>
       </div>
       <div class="text">
         <h6>Fish Samples</h6>
@@ -49,9 +49,9 @@
     </div>
     <div class="span4">
       <div class="img_box">
-       <a href=<%= url_for benthic_covers_path %>>
-           <img <%= image_tag 'FormButton.jpg' %>
-       </a>
+        <%= link_to benthic_covers_path, class: "benthic-covers-link" do %>
+          <%= image_tag "FormButton.jpg" %>
+        <%- end %>
       </div>
       <div class="text">
         <h6>Benthic Assessment Samples</h6>
@@ -59,8 +59,9 @@
     </div>
     <div class="span4">
       <div class="img_box">
-       <a href=<%= url_for coral_demographics_path %> >
-           <img <%= image_tag "FormButton.jpg" %>
+        <%= link_to coral_demographics_path, class: "coral-demographics-link" do %>
+          <%= image_tag "FormButton.jpg" %>
+        <%- end %>
        </a>
       </div>
       <div class="text">

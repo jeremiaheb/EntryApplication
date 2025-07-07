@@ -560,6 +560,47 @@
     # tasks are skipped because they are meaningless for the production virtual
     # machine, which is not used with Vagrant.
     # --------------------------
+    - name: install required packages for development
+      ansible.builtin.package:
+        name:
+          - xdg-utils # for chrome/chromedriver
+      become: true
+      when: development_build is defined
+
+    # See https://googlechromelabs.github.io/chrome-for-testing/ for latest versions
+    - name: download chrome binary
+      ansible.builtin.get_url:
+        url: "https://storage.googleapis.com/chrome-for-testing-public/138.0.7204.92/linux64/chrome-linux64.zip"
+        dest: "{{ ansible_user_dir }}/chrome-linux64.zip"
+      when: development_build is defined
+
+    - name: unzip chrome binary
+      ansible.builtin.unarchive:
+        src: "{{ ansible_user_dir }}/chrome-linux64.zip"
+        dest: "{{ ansible_user_dir }}"
+        remote_src: true
+      when: development_build is defined
+
+    - name: download chromedriver binary
+      ansible.builtin.get_url:
+        url: "https://storage.googleapis.com/chrome-for-testing-public/138.0.7204.92/linux64/chromedriver-linux64.zip"
+        dest: "{{ ansible_user_dir }}/chromedriver-linux64.zip"
+      when: development_build is defined
+
+    - name: unzip chromedriver binary
+      ansible.builtin.unarchive:
+        src: "{{ ansible_user_dir }}/chromedriver-linux64.zip"
+        dest: "{{ ansible_user_dir }}"
+        remote_src: true
+      when: development_build is defined
+
+    - name: add chrome and chromedriver to PATH
+      ansible.builtin.blockinfile:
+        path: "{{ ansible_user_dir }}/.bashrc"
+        marker: "# {mark} ANSIBLE MANAGED CHROMEDRIVER INIT"
+        block: |
+          export PATH="$PATH:$HOME/chrome-linux64:$HOME/chromedriver-linux64"
+      when: development_build is defined
 
     # We occasionally see timeouts of this service when using virtualized
     # network interfaces. It does not always happen, but when it does, it makes

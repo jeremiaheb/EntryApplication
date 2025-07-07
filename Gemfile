@@ -5,7 +5,8 @@ gem 'rails', '~> 5.2.8', '>= 5.2.8.1'
 
 gem 'pg'
 
-gem 'puma', '>= 5.0'
+# < 6 until Ruby 2.7. Bump capybara alongside that too.
+gem 'puma', '>= 5.0', '< 6'
 
 # TODO: Replace with strong_parameters. This gem is no longer maintained and
 # will no longer work after Rails 6.1
@@ -53,13 +54,8 @@ group :production do
 end
 
 group :test do
-  gem 'rspec-rails', '3.5.1'
-
-  # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
-  # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
 end
 
 group :development, :test do
@@ -69,4 +65,7 @@ group :development, :test do
   gem 'pry-remote'
   gem 'factory_girl_rails'
   #gem 'quiet_assets'
+
+  # TODO: Upgrade to faker 3.x after upgrade to Ruby 3 is complete
+  gem 'faker', '~> 2.22'
 end

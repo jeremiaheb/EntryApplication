@@ -24,6 +24,8 @@ class BoatlogManager < ActiveRecord::Base
     (for_admin ? BenthicCover : benthic_covers).where(:diver_id => diver.id)
   end
 
+  # TODO: Remove this method and propagate the .count down to the caller. It is
+  # a trivial call, and one fewer API to expose and test.
   def benthic_covers_count_for_diver(diver)
     benthic_covers_for_diver(diver).count
   end
@@ -32,6 +34,8 @@ class BoatlogManager < ActiveRecord::Base
     coral_demographics.where(:diver_id => diver.id)
   end
 
+  # TODO: Remove this method and propagate the .count down to the caller. It is
+  # a trivial call, and one fewer API to expose and test.
   def coral_demographics_count_for_diver(diver)
     coral_demographics_for_diver(diver).count
   end
@@ -40,6 +44,8 @@ class BoatlogManager < ActiveRecord::Base
     samples.joins(:diver_samples).where('diver_samples.primary_diver = ?', true).where('diver_samples.diver_id = ?', diver.id)
   end
 
+  # TODO: Remove this method and propagate the .count down to the caller. It is
+  # a trivial call, and one fewer API to expose and test.
   def samples_count_for_diver(diver)
     samples_for_diver(diver).count
   end
@@ -48,6 +54,8 @@ class BoatlogManager < ActiveRecord::Base
     boat_logs.joins(:rep_logs).where("rep_logs.diver_id = ?", diver.id)    
   end
 
+  # TODO: Remove this method and propagate the .count down to the caller. It is
+  # a trivial call, and one fewer API to expose and test.
   def boatlog_replicates_count_for_diver(diver)
     boatlog_replicates_for_diver(diver).count
   end

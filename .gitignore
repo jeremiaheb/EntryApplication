@@ -44,6 +44,9 @@
 # Locally bundled gems
 /vendor/bundle
 
+# Locally bundled node modules
+/node_modules
+
 # Packer output
 /server/output
 

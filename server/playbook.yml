@@ -521,7 +521,7 @@
           User=entryapplication
           Group=entryapplication
           WorkingDirectory=/var/www/apps/EntryApplication/current
-          Environment=RAILS_ENV=production
+          Environment=RAILS_ENV=production RAILS_LOG_TO_STDOUT=true
           ExecStart=/var/www/apps/EntryApplication/.rbenv/bin/rbenv exec bundle exec puma -C /var/www/apps/EntryApplication/current/config/puma.rb --bind-to-activated-sockets=only
           RestartSec=1
           Restart=on-failure

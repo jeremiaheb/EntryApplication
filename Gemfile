@@ -17,11 +17,6 @@ gem 'multi_json'
 
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-# therubyracer required because of https://github.com/cowboyd/less.rb/issues/11
-# mini_racer will not work
-#
-# TODO: Remove if we remove/replace less
-gem 'therubyracer'
 gem 'coffee-rails'
 gem 'jbuilder', '~> 2.5'
 
@@ -30,8 +25,7 @@ gem 'jquery-rails'
 gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-rails.git'
 gem 'jquery-validation-rails'
 
-gem 'twitter-bootstrap-rails'
-gem 'less-rails-bootstrap'
+gem 'twitter-bootstrap-rails', '2.2.8'
 gem 'bootstrap-datepicker-rails'
 
 gem 'select2-rails', '3.2.1'

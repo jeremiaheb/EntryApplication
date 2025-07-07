@@ -357,6 +357,8 @@
       ansible.builtin.file:
         path: /var/www/apps/EntryApplication
         mode: "0755"
+        owner: "entryapplication"
+        group: "entryapplication"
         state: "directory"
       become: true
 
@@ -364,6 +366,8 @@
       ansible.builtin.file:
         path: "{{ item }}"
         mode: "0755"
+        owner: "entryapplication"
+        group: "entryapplication"
         state: "directory"
       become: true
       with_items:

@@ -1,4 +1,4 @@
-class CreateBenthicCovers < ActiveRecord::Migration
+class CreateBenthicCovers < ActiveRecord::Migration[5.1]
   def change
     create_table :benthic_covers do |t|
       t.integer :diver_id

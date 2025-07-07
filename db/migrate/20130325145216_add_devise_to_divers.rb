@@ -1,4 +1,4 @@
-class AddDeviseToDivers < ActiveRecord::Migration
+class AddDeviseToDivers < ActiveRecord::Migration[5.1]
   def self.up
     change_table(:divers) do |t|
       ## Database authenticatable

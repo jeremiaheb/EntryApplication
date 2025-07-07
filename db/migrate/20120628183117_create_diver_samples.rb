@@ -1,4 +1,4 @@
-class CreateDiverSamples < ActiveRecord::Migration
+class CreateDiverSamples < ActiveRecord::Migration[5.1]
   def change
     create_table :diver_samples do |t|
       t.integer   :sample_id

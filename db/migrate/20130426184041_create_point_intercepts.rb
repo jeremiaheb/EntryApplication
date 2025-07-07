@@ -1,4 +1,4 @@
-class CreatePointIntercepts < ActiveRecord::Migration
+class CreatePointIntercepts < ActiveRecord::Migration[5.1]
   def change
     create_table :point_intercepts do |t|
       t.integer :bethic_cover_id

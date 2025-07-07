@@ -1,4 +1,4 @@
-class AddDetailsToDivers < ActiveRecord::Migration
+class AddDetailsToDivers < ActiveRecord::Migration[5.1]
   def change
     add_column :divers, :username, :string
 

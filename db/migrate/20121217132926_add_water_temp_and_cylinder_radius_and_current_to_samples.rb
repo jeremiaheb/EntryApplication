@@ -1,4 +1,4 @@
-class AddWaterTempAndCylinderRadiusAndCurrentToSamples < ActiveRecord::Migration
+class AddWaterTempAndCylinderRadiusAndCurrentToSamples < ActiveRecord::Migration[5.1]
   def change
     add_column :samples, :water_temp, :float
 

@@ -1,4 +1,4 @@
-class CreateBoatLogs < ActiveRecord::Migration
+class CreateBoatLogs < ActiveRecord::Migration[5.1]
   def change
     create_table :boat_logs do |t|
       t.string :primary_sample_unit

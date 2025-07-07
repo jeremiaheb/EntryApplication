@@ -1,4 +1,4 @@
-class RemoveFieldsFromStationLog < ActiveRecord::Migration
+class RemoveFieldsFromStationLog < ActiveRecord::Migration[5.1]
   def up
     remove_column :station_logs, :created_at
         remove_column :station_logs, :updated_at

@@ -1,4 +1,4 @@
-class CreateSamples < ActiveRecord::Migration
+class CreateSamples < ActiveRecord::Migration[5.1]
   def change
     create_table :samples do |t|
       t.integer :sample_type_id

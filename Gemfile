@@ -68,6 +68,7 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
 end
+
 group :development, :test do
   gem 'ruby-prof'
   gem 'rails-erd'

@@ -49,8 +49,6 @@ GEM
     arel (9.0.0)
     base64 (0.3.0)
     bcrypt (3.1.20)
-    blueimp-gallery (2.11.0.1)
-      railties (>= 3.1.0)
     bootsnap (1.13.0)
       msgpack (~> 1.2)
     bootstrap-datepicker-rails (1.6.4.1)
@@ -267,7 +265,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  blueimp-gallery
   bootsnap (>= 1.1.0)
   bootstrap-datepicker-rails (= 1.6.4.1)
   cancancan (~> 2.0)

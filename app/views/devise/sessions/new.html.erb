@@ -1,40 +1,34 @@
+<h2>Log in</h2>
 
-
-<div class="form-horizontal">
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-
-
-  <fieldset>
-    <div id="legend">
-      <legend class="">Login</legend>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form-horizontal" }) do |f| %>
+  <div class="control-group">
+    <%= f.label :username, class: "control-label" %>
+    <div class="controls">
+      <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
     </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :password, class: "control-label" %>
+    <div class="controls">
+      <%= f.password_field :password, autocomplete: "current-password" %>
+    </div>
+  </div>
+
+  <% if devise_mapping.rememberable? %>
     <div class="control-group">
-      <!-- Username -->
-      <label class="control-label"  for="username">Username</label>
+      <%= f.label :remember_me, class: "control-label" %>
       <div class="controls">
-        <%= f.text_field :username %>
+        <%= f.check_box :remember_me, checked: true %>
       </div>
     </div>
- 
-    <div class="control-group">
-      <!-- Password-->
-      <label class="control-label" for="password">Password</label>
-      <div class="controls">
-        <%= f.text_field :password, { :type => 'Password' } %>
-      </div>
-    </div>
- 
- 
-    <div class="control-group">
-      <!-- Button -->
-      <div class="controls">
-        <%= f.submit "Sign in" %>
-        <%= render "links" %>
-      </div>
-    </div>
-  </fieldset>
+  <% end %>
 
+  <div class="control-group">
+    <div class="controls">
+      <%= f.submit "Log in" %>
+    </div>
+  </div>
 <% end %>
 
-
-</div>
+<%= render "devise/shared/links" %>

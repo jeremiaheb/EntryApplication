@@ -3,10 +3,8 @@ class Diver < ActiveRecord::Base
   MANAGER = 'manager'
   DIVER   = 'diver'
   ROLES   = [ADMIN, MANAGER, DIVER]
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+
+  devise :database_authenticatable, :recoverable, :registerable, :rememberable, :trackable, :validatable
 
   belongs_to  :boatlog_manager
   has_many    :diver_samples

@@ -10,22 +10,22 @@ gem 'puma', '>= 5.0', '< 6'
 
 gem 'sass-rails', '~> 5.0'
 
-gem 'jquery-ui-rails', '~> 5.0'
-gem 'jquery-rails'
-gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-rails.git'
-gem 'jquery-validation-rails'
+gem 'jquery-ui-rails', '5.0.5'
+gem 'jquery-rails', '4.3.1'
+gem 'jquery-datatables-rails', '3.4.0'
+gem 'jquery-validation-rails', '1.16.0'
 
 gem 'twitter-bootstrap-rails', '2.2.8'
-gem 'bootstrap-datepicker-rails'
+gem 'bootstrap-datepicker-rails', '1.6.4.1'
 
 gem 'select2-rails', '3.2.1'
-gem 'nested_form'
+gem 'nested_form', '0.3.2'
 
 gem 'devise', '~> 4.4', '>= 4.4.3'
 gem 'cancancan', '~> 2.0'
 
-gem 'prawn', :git => 'https://github.com/prawnpdf/prawn.git'
-gem 'prawn-table'
+gem 'prawn', '~> 2.2', '>= 2.2.2'
+gem 'prawn-table', '~> 0.2', '>= 0.2.2'
 gem 'caxlsx_rails'
 
 gem "blueimp-gallery"

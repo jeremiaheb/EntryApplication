@@ -26,7 +26,7 @@ gem 'cancancan', '~> 2.0'
 
 gem 'prawn', :git => 'https://github.com/prawnpdf/prawn.git'
 gem 'prawn-table'
-gem 'axlsx_rails'
+gem 'caxlsx_rails'
 
 gem "blueimp-gallery"
 

@@ -576,6 +576,8 @@
       ansible.builtin.package:
         name:
           - xdg-utils # for chrome/chromedriver
+          - libgbm1 # for chrome/chromedriver
+          - libasound2 # chrome chrome/chromedriver
       become: true
       when: development_build is defined
 

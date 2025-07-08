@@ -14,7 +14,7 @@ chdir APP_ROOT do
   # Add necessary setup steps to this file.
 
   puts '== Installing dependencies =='
-  system! 'gem install bundler:1.15.0 --conservative'
+  system! 'gem install bundler:2.3.27 --conservative'
   system('bundle check') || system!('bundle install')
 
   # Install JavaScript dependencies if using Yarn

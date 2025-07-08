@@ -14,7 +14,6 @@
  *= require_tree .
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require bootstrap-datepicker3
- *= require blueimp-gallery-all
 */
 
 #substrateSection, #speciesSection {

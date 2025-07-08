@@ -28,7 +28,6 @@
 //= require ./boat_logs
 //= require ./coral_demographics
 //= require ./samples
-//= require ./static_pages
 //= require ./drafts
 //= require_self
 

@@ -5,6 +5,4 @@ class StaticPagesController < ApplicationController
   def help
   end
 
-  def diver_gallery
-  end
 end

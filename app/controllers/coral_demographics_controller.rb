@@ -1,5 +1,4 @@
 class CoralDemographicsController < ApplicationController
-
   before_action :authenticate_diver!
   load_and_authorize_resource
 
@@ -75,7 +74,7 @@ class CoralDemographicsController < ApplicationController
   # POST /coral_demographics
   # POST /coral_demographics.json
   def create
-    @coral_demographic = CoralDemographic.new(params[:coral_demographic])
+    @coral_demographic = CoralDemographic.new(coral_demographic_params)
 
     respond_to do |format|
       if @coral_demographic.save
@@ -96,7 +95,7 @@ class CoralDemographicsController < ApplicationController
     @coral_demographic = CoralDemographic.find(params[:id])
 
     respond_to do |format|
-      if @coral_demographic.update_attributes(params[:coral_demographic])
+      if @coral_demographic.update(coral_demographic_params)
         Draft.destroy_for(diver_id: current_diver.id, model_klass: CoralDemographic, model_id: @coral_demographic.id)
 
         format.html { redirect_to coral_demographics_path, notice: 'Coral demographic was successfully updated.' }
@@ -134,7 +133,7 @@ class CoralDemographicsController < ApplicationController
       diver_id: current_diver.id,
       model_klass: CoralDemographic,
       model_id: params[:id],
-      model_attributes: params[:coral_demographic],
+      model_attributes: coral_demographic_params,
       sequence: params[:sequence],
       focused_dom_id: params[:focused_dom_id],
     )
@@ -143,5 +142,15 @@ class CoralDemographicsController < ApplicationController
     else
       render json: draft.errors, status: :unprocessable_entity
     end
+  end
+
+  private
+
+  def coral_demographic_params
+    # TODO: Allowing all keys is intentional to reduce risk of a Rails upgrade.
+    # Prior to Rails 7, the application used `attr_protected []` at the model
+    # level. Mass attribute protection will be introduced gradually separate
+    # from the Rails upgrade itself.
+    params.require(:coral_demographic).permit!
   end
 end

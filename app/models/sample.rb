@@ -1,7 +1,5 @@
 class Sample < ActiveRecord::Base
   include CommonFields
-  
-  attr_protected []
 
   belongs_to :sample_type
   belongs_to :habitat_type
@@ -158,5 +156,4 @@ class Sample < ActiveRecord::Base
         errors.add( :base, "Hardbottom biotic percentages do not add to 100" )
       end
   end
-
 end

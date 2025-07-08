@@ -1,5 +1,4 @@
 class BoatlogManager < ActiveRecord::Base
-  attr_protected []
   has_many  :samples
   has_one   :diver
   has_many  :benthic_covers
@@ -88,7 +87,4 @@ class BoatlogManager < ActiveRecord::Base
   def missing_samples_from_boatlog
     samples_diver_entered - boatlog_diver_list
   end
-
-
 end
-

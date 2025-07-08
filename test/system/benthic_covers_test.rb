@@ -2,12 +2,12 @@ require "application_system_test_case"
 
 class BenthicCoversTest < ApplicationSystemTestCase
   test "new benthic cover" do
-    boatlog_manager = FactoryGirl.create(:boatlog_manager)
-    diver = FactoryGirl.create(:diver)
-    buddy = FactoryGirl.create(:diver)
-    habitat_type = FactoryGirl.create(:habitat_type, region: "Caribbean")
-    cover_cat1 = FactoryGirl.create(:cover_cat)
-    cover_cat2 = FactoryGirl.create(:cover_cat)
+    boatlog_manager = FactoryBot.create(:boatlog_manager)
+    diver = FactoryBot.create(:diver)
+    buddy = FactoryBot.create(:diver)
+    habitat_type = FactoryBot.create(:habitat_type, region: "Caribbean")
+    cover_cat1 = FactoryBot.create(:cover_cat)
+    cover_cat2 = FactoryBot.create(:cover_cat)
 
     visit root_url
     find(".benthic-covers-link").click

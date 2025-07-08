@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :diver do
     sequence(:diver_number) { |n| "diver#{n}" }
     sequence(:diver_name) { |n| "Random Diver#{n}" }

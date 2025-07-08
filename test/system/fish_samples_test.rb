@@ -2,11 +2,11 @@ require "application_system_test_case"
 
 class FishSamplesTest < ApplicationSystemTestCase
   test "automatically saving drafts" do
-    boatlog_manager = FactoryGirl.create(:boatlog_manager)
-    diver = FactoryGirl.create(:diver)
-    buddy = FactoryGirl.create(:diver)
-    sample_type = FactoryGirl.create(:sample_type)
-    habitat_type = FactoryGirl.create(:habitat_type, region: "Caribbean")
+    boatlog_manager = FactoryBot.create(:boatlog_manager)
+    diver = FactoryBot.create(:diver)
+    buddy = FactoryBot.create(:diver)
+    sample_type = FactoryBot.create(:sample_type)
+    habitat_type = FactoryBot.create(:habitat_type, region: "Caribbean")
     draft_count_before = Draft.count
 
     visit root_url
@@ -45,15 +45,15 @@ class FishSamplesTest < ApplicationSystemTestCase
   end
 
   test "automatically saving drafts (editing an existing sample)" do
-    boatlog_manager = FactoryGirl.create(:boatlog_manager)
-    diver = FactoryGirl.create(:diver)
-    buddy = FactoryGirl.create(:diver)
-    sample_type = FactoryGirl.create(:sample_type)
-    habitat_type = FactoryGirl.create(:habitat_type, region: "Caribbean")
-    sample_animal = FactoryGirl.create(:sample_animal, sample: nil, time_seen: 1)
-    sample = FactoryGirl.create(:sample, sample_type: sample_type, habitat_type: habitat_type, sample_animals: [sample_animal])
-    diver_primary = FactoryGirl.create(:diver_sample, sample: sample, diver: diver, primary_diver: true)
-    diver_buddy = FactoryGirl.create(:diver_sample, sample: sample, diver: buddy, primary_diver: false)
+    boatlog_manager = FactoryBot.create(:boatlog_manager)
+    diver = FactoryBot.create(:diver)
+    buddy = FactoryBot.create(:diver)
+    sample_type = FactoryBot.create(:sample_type)
+    habitat_type = FactoryBot.create(:habitat_type, region: "Caribbean")
+    sample_animal = FactoryBot.create(:sample_animal, sample: nil, time_seen: 1)
+    sample = FactoryBot.create(:sample, sample_type: sample_type, habitat_type: habitat_type, sample_animals: [sample_animal])
+    diver_primary = FactoryBot.create(:diver_sample, sample: sample, diver: diver, primary_diver: true)
+    diver_buddy = FactoryBot.create(:diver_sample, sample: sample, diver: buddy, primary_diver: false)
     draft_count_before = Draft.count
 
     visit root_url
@@ -81,13 +81,13 @@ class FishSamplesTest < ApplicationSystemTestCase
   end
 
   test "new fish sample" do
-    boatlog_manager = FactoryGirl.create(:boatlog_manager)
-    diver = FactoryGirl.create(:diver)
-    buddy = FactoryGirl.create(:diver)
-    sample_type = FactoryGirl.create(:sample_type)
-    habitat_type = FactoryGirl.create(:habitat_type, region: "Caribbean")
-    animal1 = FactoryGirl.create(:animal, common_name: "Fish 1")
-    animal2 = FactoryGirl.create(:animal, common_name: "Fish 2")
+    boatlog_manager = FactoryBot.create(:boatlog_manager)
+    diver = FactoryBot.create(:diver)
+    buddy = FactoryBot.create(:diver)
+    sample_type = FactoryBot.create(:sample_type)
+    habitat_type = FactoryBot.create(:habitat_type, region: "Caribbean")
+    animal1 = FactoryBot.create(:animal, common_name: "Fish 1")
+    animal2 = FactoryBot.create(:animal, common_name: "Fish 2")
 
     visit root_url
     find(".samples-link").click
@@ -130,13 +130,13 @@ class FishSamplesTest < ApplicationSystemTestCase
   end
 
   test "new fish sample (adding/removing species to simulate correcting mistakes while inputting)" do
-    boatlog_manager = FactoryGirl.create(:boatlog_manager)
-    diver = FactoryGirl.create(:diver)
-    buddy = FactoryGirl.create(:diver)
-    sample_type = FactoryGirl.create(:sample_type)
-    habitat_type = FactoryGirl.create(:habitat_type, region: "Caribbean")
-    animal1 = FactoryGirl.create(:animal, common_name: "Fish 1")
-    animal2 = FactoryGirl.create(:animal, common_name: "Fish 2")
+    boatlog_manager = FactoryBot.create(:boatlog_manager)
+    diver = FactoryBot.create(:diver)
+    buddy = FactoryBot.create(:diver)
+    sample_type = FactoryBot.create(:sample_type)
+    habitat_type = FactoryBot.create(:habitat_type, region: "Caribbean")
+    animal1 = FactoryBot.create(:animal, common_name: "Fish 1")
+    animal2 = FactoryBot.create(:animal, common_name: "Fish 2")
 
     visit root_url
     find(".samples-link").click
@@ -203,18 +203,18 @@ class FishSamplesTest < ApplicationSystemTestCase
   end
 
   test "editing existing fish sample (adding/removing species to simulate correcting mistakes while inputting)" do
-    boatlog_manager = FactoryGirl.create(:boatlog_manager)
-    diver = FactoryGirl.create(:diver)
-    buddy = FactoryGirl.create(:diver)
-    sample_type = FactoryGirl.create(:sample_type)
-    habitat_type = FactoryGirl.create(:habitat_type, region: "Caribbean")
-    animal1 = FactoryGirl.create(:animal, common_name: "Fish 1")
-    sample_animal1 = FactoryGirl.create(:sample_animal, sample: nil, animal: animal1, time_seen: 1)
-    animal2 = FactoryGirl.create(:animal, common_name: "Fish 2")
-    sample_animal2 = FactoryGirl.create(:sample_animal, sample: nil, animal: animal2, time_seen: 1)
-    sample = FactoryGirl.create(:sample, sample_type: sample_type, habitat_type: habitat_type, sample_animals: [sample_animal1, sample_animal2])
-    diver_primary = FactoryGirl.create(:diver_sample, sample: sample, diver: diver, primary_diver: true)
-    diver_buddy = FactoryGirl.create(:diver_sample, sample: sample, diver: buddy, primary_diver: false)
+    boatlog_manager = FactoryBot.create(:boatlog_manager)
+    diver = FactoryBot.create(:diver)
+    buddy = FactoryBot.create(:diver)
+    sample_type = FactoryBot.create(:sample_type)
+    habitat_type = FactoryBot.create(:habitat_type, region: "Caribbean")
+    animal1 = FactoryBot.create(:animal, common_name: "Fish 1")
+    sample_animal1 = FactoryBot.create(:sample_animal, sample: nil, animal: animal1, time_seen: 1)
+    animal2 = FactoryBot.create(:animal, common_name: "Fish 2")
+    sample_animal2 = FactoryBot.create(:sample_animal, sample: nil, animal: animal2, time_seen: 1)
+    sample = FactoryBot.create(:sample, sample_type: sample_type, habitat_type: habitat_type, sample_animals: [sample_animal1, sample_animal2])
+    diver_primary = FactoryBot.create(:diver_sample, sample: sample, diver: diver, primary_diver: true)
+    diver_buddy = FactoryBot.create(:diver_sample, sample: sample, diver: buddy, primary_diver: false)
 
     visit root_url
     find(".samples-link").click

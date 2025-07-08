@@ -1,10 +1,8 @@
 class DashboardController < ApplicationController
- 
   before_action :authenticate_diver!
   before_action :manager_or_admin?
  
  def show
-  #binding.pry
   if current_diver.admin?
     @boat_logs = BoatLog.all
     @dashSamples = Sample.all
@@ -50,11 +48,9 @@ class DashboardController < ApplicationController
       coral_demographic_path(coral_demographic)
     end
   end
-
  end
- 
- helper_method :send_to_path
 
+ helper_method :send_to_path
 
  protected
 
@@ -67,6 +63,4 @@ class DashboardController < ApplicationController
       false
     end
   end
-
-
 end

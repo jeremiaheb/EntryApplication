@@ -1,5 +1,4 @@
 class SamplesController < ApplicationController
-
   before_action :authenticate_diver!
   load_and_authorize_resource
 
@@ -88,7 +87,7 @@ class SamplesController < ApplicationController
   # POST /samples
   # POST /samples.json
   def create
-    @sample = Sample.new(params[:sample])
+    @sample = Sample.new(sample_params)
 
     respond_to do |format|
       if @sample.save
@@ -109,7 +108,7 @@ class SamplesController < ApplicationController
     @sample = Sample.find(params[:id])
 
     respond_to do |format|
-      if @sample.update_attributes(params[:sample])
+      if @sample.update(sample_params)
         Draft.destroy_for(diver_id: current_diver.id, model_klass: Sample, model_id: @sample.id)
 
         format.html { redirect_to samples_path, notice: 'Sample was successfully updated.' }
@@ -147,7 +146,7 @@ class SamplesController < ApplicationController
       diver_id: current_diver.id,
       model_klass: Sample,
       model_id: params[:id],
-      model_attributes: params[:sample],
+      model_attributes: sample_params,
       sequence: params[:sequence],
       focused_dom_id: params[:focused_dom_id],
     )
@@ -159,7 +158,6 @@ class SamplesController < ApplicationController
   end
 
   def proofing_template
-
     @sample = Sample.find(params[:id])
 
     respond_to do |format|
@@ -175,5 +173,15 @@ class SamplesController < ApplicationController
                               disposition: "inline"
       end
     end
+  end
+
+  private
+
+  def sample_params
+    # TODO: Allowing all keys is intentional to reduce risk of a Rails upgrade.
+    # Prior to Rails 7, the application used `attr_protected []` at the model
+    # level. Mass attribute protection will be introduced gradually separate
+    # from the Rails upgrade itself.
+    params.require(:sample).permit!
   end
 end

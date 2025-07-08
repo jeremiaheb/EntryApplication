@@ -1,6 +1,4 @@
 class BoatLog < ActiveRecord::Base  
-  attr_protected []
-  
   belongs_to :boatlog_manager
 
   has_many :station_logs, :dependent => :destroy
@@ -21,6 +19,4 @@ class BoatLog < ActiveRecord::Base
     end
     boatlog_divers_list.sort_by { |e| e[0] }
   end
-
-
 end

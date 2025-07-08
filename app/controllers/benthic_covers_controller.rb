@@ -1,5 +1,4 @@
 class BenthicCoversController < ApplicationController
-
   before_action :authenticate_diver!
   load_and_authorize_resource
 
@@ -99,7 +98,7 @@ class BenthicCoversController < ApplicationController
     @benthic_cover = BenthicCover.find(params[:id])
 
     respond_to do |format|
-      if @benthic_cover.update_attributes(benthic_cover_params)
+      if @benthic_cover.update(benthic_cover_params)
         Draft.destroy_for(diver_id: current_diver.id, model_klass: BenthicCover, model_id: @benthic_cover.id)
 
         format.html { redirect_to benthic_covers_path, notice: 'Benthic cover was successfully updated.' }

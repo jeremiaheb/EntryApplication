@@ -8,10 +8,6 @@ gem 'pg'
 # < 6 until Ruby 2.7. Bump capybara alongside that too.
 gem 'puma', '>= 5.0', '< 6'
 
-# TODO: Replace with strong_parameters. This gem is no longer maintained and
-# will no longer work after Rails 6.1
-gem 'protected_attributes_continued'
-
 gem 'sass-rails', '~> 5.0'
 
 gem 'jquery-ui-rails', '~> 5.0'

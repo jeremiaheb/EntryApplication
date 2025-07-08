@@ -12,10 +12,6 @@ gem 'puma', '>= 5.0', '< 6'
 # will no longer work after Rails 6.1
 gem 'protected_attributes_continued'
 
-# TODO: Evaluate whether these gems are needed anymore.
-gem 'json'
-gem 'multi_json'
-
 gem 'sass-rails', '~> 5.0'
 
 gem 'jquery-ui-rails', '~> 5.0'

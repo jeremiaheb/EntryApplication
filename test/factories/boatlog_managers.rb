@@ -1,7 +1,7 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :boatlog_manager do
-    agency "NOAA"
-    firstname "Jeremiah"
-    lastname "Blondeau"
+    agency { "NOAA" }
+    firstname { "Jeremiah" }
+    lastname { "Blondeau" }
   end
 end

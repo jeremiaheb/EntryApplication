@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :demographic_coral do
      sequence(:meter_mark)
      max_diameter           { 1 }

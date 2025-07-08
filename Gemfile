@@ -47,7 +47,8 @@ group :test do
 end
 
 group :development, :test do
-  gem 'factory_girl_rails'
+  # TODO: Upgrade after upgrade to Ruby 3 is complete
+  gem 'factory_bot_rails', '~> 5.2', '< 6'
   gem 'pry'
 
   # TODO: Upgrade to faker 3.x after upgrade to Ruby 3 is complete

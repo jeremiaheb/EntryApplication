@@ -2,12 +2,12 @@ require "application_system_test_case"
 
 class CoralDemographicsTest < ApplicationSystemTestCase
   test "new coral demographic" do
-    boatlog_manager = FactoryGirl.create(:boatlog_manager)
-    diver = FactoryGirl.create(:diver)
-    buddy = FactoryGirl.create(:diver)
-    habitat_type = FactoryGirl.create(:habitat_type, region: "Caribbean")
-    coral1 = FactoryGirl.create(:coral)
-    coral2 = FactoryGirl.create(:coral)
+    boatlog_manager = FactoryBot.create(:boatlog_manager)
+    diver = FactoryBot.create(:diver)
+    buddy = FactoryBot.create(:diver)
+    habitat_type = FactoryBot.create(:habitat_type, region: "Caribbean")
+    coral1 = FactoryBot.create(:coral)
+    coral2 = FactoryBot.create(:coral)
 
     visit root_url
     find(".coral-demographics-link").click

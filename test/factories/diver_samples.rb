@@ -1,7 +1,7 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :diver_sample do
     diver
     sample
-    primary_diver true
+    primary_diver { true }
   end
 end

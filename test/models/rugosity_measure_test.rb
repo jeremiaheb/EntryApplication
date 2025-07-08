@@ -2,12 +2,12 @@ require "test_helper"
 
 class RugosityMeasureTest < ActiveSupport::TestCase
   test "factory creates a valid instance" do
-    rugosity_measure = FactoryGirl.create(:rugosity_measure)
+    rugosity_measure = FactoryBot.create(:rugosity_measure)
     assert rugosity_measure.valid?
   end
 
   test "#category_sum is the sum of all meter marks" do
-    rugosity_measure = FactoryGirl.create(
+    rugosity_measure = FactoryBot.create(
       :rugosity_measure,
       rug_meters_completed: 15,
       meter_mark_1: 1,

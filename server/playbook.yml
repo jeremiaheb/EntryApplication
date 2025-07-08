@@ -132,6 +132,7 @@
           - libpq-dev
           - libyaml-dev
           - sendmail
+          - unzip
           - zlib1g-dev
       become: true
 

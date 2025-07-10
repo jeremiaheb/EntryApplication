@@ -19,4 +19,24 @@ namespace :import do
       end
     end
   end
+
+  # rake import:cover_cats FILE=db/SupportData/LPISpecies_July2025.csv
+  desc "Import cover cats from a CSV"
+  task :cover_cats => :environment do
+    file = ENV.fetch("FILE", Rails.root.join("db/SupportData/LPISpecies_July2025.csv"))
+    CSV.foreach(file, headers: true) do |row|
+      cover_cat = CoverCat.find_or_initialize_by(code: row["Code"])
+
+      cover_cat.name = row["ScientificName"]
+      cover_cat.common = row["CommonName"]
+      cover_cat.proofing_code = row["Proofing Code"]
+      cover_cat.rank = row["Rank"]
+
+      if cover_cat.save
+        STDOUT.puts "Imported cover cat '#{cover_cat.code}'"
+      else
+        STDERR.puts "Saving cover cat '#{cover_cat.code}' failed: #{cover_cat.errors.full_messages.join(", ")}"
+      end
+    end
+  end
 end

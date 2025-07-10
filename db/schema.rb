@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20250516182921) do
+ActiveRecord::Schema.define(version: 2025_07_10_141824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,18 +72,23 @@ ActiveRecord::Schema.define(version: 20250516182921) do
   end
 
   create_table "corals", id: :serial, force: :cascade do |t|
-    t.string "code", limit: 255
-    t.string "scientific_name", limit: 255
+    t.string "code", limit: 255, null: false
+    t.string "scientific_name", limit: 255, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string "common_name"
+    t.string "short_code"
+    t.integer "rank", default: 2147483647, null: false
   end
 
   create_table "cover_cats", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 255
+    t.string "name", limit: 255, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "code", limit: 255
+    t.string "code", limit: 255, null: false
     t.string "common", limit: 255
+    t.string "proofing_code"
+    t.integer "rank", default: 2147483647, null: false
   end
 
   create_table "demographic_corals", id: :serial, force: :cascade do |t|

@@ -1,0 +1,76 @@
+Code,ScientificName,CommonName,Short Code,Rank
+ACR CERV,Acropora cervicornis,Staghorn Coral,ACER,26
+ACR PALM,Acropora palmata,Elkhorn Coral,APAL,33
+ACR PROL,Acropora prolifera,Fused Staghorn,APRO,62
+AGA AGAR,Agaricia agaricites,Lettuce Coral,AAGA,3
+AGA FRAG,Agaricia fragilis,Fragile saucer coral,AFRA,23
+AGA GRAH,Agaricia grahamae,Graham's Sheet Coral,AGRA,31
+AGA HUMI,Agaricia humilis,Agaricia humilis,AHUM,17
+AGA LAMA,Agaricia lamarcki,Lamarck's Sheet Coral,ALAM,19
+AGA SPE.,Agaricia spp,Agaricia spp,AGSP,14
+AGA TENU,Agaricia tenuifolia,Thin Leaf Lettuce Coral,ATEN,41
+CAR SPE.,Caryophyllia n. spp,Button Cup Coral,CASP,66
+CLA ABRU,Cladocora abruscula,Tube Coral,CABR,64
+COL NATA,Colpophyllia natans,Boulder Brain Coral,CNAT,15
+COL SPE.,Colpophyllia spp,Brain Coral,COSP,68
+DEN CYLI,Dendrogyra cylindrus,Pillar Coral,DCYL,43
+DIC STOK,Dichocoenia stokesii,Elliptical Star Coral,DSTO,16
+DIP LABY,Diploria labyrinthiformis,Grooved Brain Coral,DLAB,21
+DIP SPE.,Diploria spp,Diploria  spp,DISP,58
+EUS FAST,Eusmilia fastigiata,Smooth Flower Coral,EFAS,22
+FAV FRAG,Favia fragum,Golfball Coral,FFRA,34
+HEL CUCU,Helioceris cucullata,Sunray Lettuce Coral,HCUC,27
+ISO RIGI,Isophyllastrea rigida,Rough Star Coral,IRIG,49
+ISO SINU,Isophyllia sinuosa,Sinuous Cactus Coral,ISIN,52
+ISO SPE.,Isophyllia species,Isophyllia species,ISSP,70
+MAD AURE,Madracis auretenra,Yellow Pencil Coral,MAUR,28
+MAD CARM,Madracis carmabi,Stubby Star Coral,MCAR,71
+MAD DECA,Madracis decactis,Ten-Ray Star Coral,MDEC,10
+MAD FORM,Madracis formosa,Eigth-Ray Finger Coral,MFOR,42
+MAD PHAR,Madracis pharensis,Star Coral,MPHA,56
+MAD SENA,Madracis senaria,Six-Ray Star Coral,MSEN,50
+MAD SPE.,Madracis spp,Madracis spp,MASP,45
+MAN AREO,Manicina areolata,Rose Coral,MARE,35
+MEA DANA,Meandrina danae,Butterprint Maze Coral,MDAN,46
+MEA MEAN,Meandrina meandrites,Maze Coral,MMEA,13
+MEA SPE.,Meandrina spp,Meandrina spp,MESP,72
+MEA JACK,Meandrina jacksoni,Jackson Maze Coral,MJACK,44
+MON CAVE,Montastraea cavernosa,Great Star Coral,MCAV,5
+MUS ANGU,Mussa angulosa,Spiny Flower Coral,MANG,40
+MYC ALIC,Mycetophyllia aliciae,Knobby Cactus Coral,MALI,32
+MYC DANA,Mycetophyllia danaana,Lowridge Cactus Coral,MYDA,48
+MYC FERO,Mycetophyllia ferox,Rough Cactus Coral,MFER,47
+MYC LAMA,Mycetophyllia lamarckiana,Ridged Cactus Coral,MLAM,51
+MYC REES,Mycetophyllia reesi,Ridgeless Cactus Coral,MREE,67
+MYC SPE.,Mycetophyllia spp,Mycetophyllia spp,MYCET,54
+OCU DIFF,Oculina diffusa,Diffuse Ivory Bush Coral,ODIF,38
+OCU ROBU,Oculina robusta,Robust Ivory Tree Coral,OROB,73
+OCU VALE,Oculina valenciennesi,Ivory Tree Coral,OVAL,74
+OCU SPE.,Oculina species, Tree coral species,OCSP,69
+ORB ANCX,Orbicella Complex,Boulder Star Coral Complex,OX,29
+ORB ANNU,Orbicellal annularis,Boulder Star Coral,OANN,12
+ORB FAVE,Orbicella faveolata,Mountainous Star Coral,OFAV,8
+ORB FRAN,Orbicella franksi,Boulder Star Coral,OFRA,6
+OTH CORA,Other Coral Species,Other Coral Species,OTHER,60
+PHY AMER,Phyllangia americana,Hidden Cup Coral,PAME,75
+POR ASTR,Porites astreoides,Mustard Hill Coral,PAST,1
+POR BRAN,Porites branneri,Blue Crust Coral,PBRA,55
+POR COLO,Porites colonensis,Honeycomb Plate Coral,PCOL,53
+POR DIVA,Porites divaricata ,Porites divaricata,PDIV,18
+POR FURC,Porites furcata,Porites furcata,PFUR,20
+POR PORI,Porites porites,Finger Coral,PPOR,7
+POR SPE.,Porites spp,Porites spp,POSP,30
+PSE CLIV,Psuedodiploria clivosa,Knobby Brain Coral,PCLI,24
+PSE SPE.,Pseudodiploria species,Brain coral species,PSSP,65
+PSE STRI,Psuedodiploria strigosa,Symmetrical Brain Coral,PSTR,9
+SCL SPE.,Scleractinia spp,Unknown Coral,UNK,61
+SCO CUBE,Scolymia cubensis,Artichoke Coral,SCUB,37
+SCO LACE,Scolymia lacera,Atlantic Mushroom Coral,SLAC,59
+SCO SPE.,Scolymia spp,Scolymia spp,SCOL,39
+SID RADI,Siderastrea radians,Lesser Starlet Coral,SRAD,11
+SID SIDE,Siderastrea siderea,Massive Starlet Coral,SSID,2
+SID SPE.,Siderastrea spp,Starlett Coral,SISP,57
+SOL BOUR,Solenastrea bournoni,Smooth Star Coral,SBOU,25
+SOL SPE.,Solenastrea spp,Solenastrea spp,SOSP,63
+STE INTE,Stephanocoenia intercepta,Blushing Star Coral,SINT,4
+TUB COCC,Tubastraea coccinea,Orange Cup Coral,TCOC,36

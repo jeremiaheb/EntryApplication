@@ -23,6 +23,48 @@ namespace :db do
     end
   end
 
+  desc "Restore the database from a dump file"
+  task :restore => :environment do
+    connection_config =  Rails.application.config.database_configuration[Rails.env]
+
+    file = ENV.fetch("FILE", nil)
+    unless file
+      STDERR.puts "Please specify the database dump file to restore from"
+      STDERR.puts
+      STDERR.puts "Example: rake db:restore FILE=backup_CaribbeanDataEntry_2025-07-10.dump"
+      exit 1
+    end
+
+    puts "You are about to delete all data in the '#{connection_config["database"]}' database and replace it with the data in '#{file}'."
+    puts
+    print "Do you want to continue? (y/n): "
+    exit unless STDIN.gets.chomp.downcase == "y"
+
+
+    stdout_s, stderr_s, status = Open3.capture3(
+      { "PGPASSWORD" => connection_config["password"] },
+      "pg_restore", 
+      "--clean",
+      "--no-owner",
+      "--no-privileges",
+      "--host=#{connection_config["host"]}",
+      "--username=#{connection_config["username"]}",
+      "--dbname=#{connection_config["database"]}",
+      "--role=#{connection_config["username"]}",
+      file,
+    )
+
+    if status.success?
+      puts "Database restored successfully"
+    else
+      STDERR.puts "Database restore FAILED. The standard error output was:"
+      STDERR.puts
+      STDERR.puts stderr_s
+      exit 1
+    end
+  end
+
+
   desc "Clear database tables and restart id for each at 1"
   task :clear_tables => :environment do
     

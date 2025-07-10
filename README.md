@@ -6,36 +6,40 @@
 
 ### Vagrant
 
-A [Vagrant](https://www.vagrantup.com) box is provided for local development. It runs the same Ansible provisioning as the production virtual machine, plus some additional commands that make it useful for development.
+A [Vagrant](https://www.vagrantup.com) virtual machine (VM) is provided for local development. It runs the same Ansible provisioning as the production virtual machine, plus some additional commands that make it useful for development.
 
 First, [install Vagrant](https://developer.hashicorp.com/vagrant/install?product_intent=vagrant). Then from within a terminal, run:
 
-``` bash
+```bash
 vagrant up
 ```
 
 > [!NOTE]
 > This command will take a while the first time it runs. Go for coffee or otherwise do something else for a while! It will not take nearly as long once it is setup for the first time.
 
-To get a shell on the machine, run:
+If anything fails to provision on the first run, it might be a temporary issue (e.g., Internet failure). You can safely run this command as many times as it takes to complete successfully:
 
-``` bash
+```bash
+vagrant provision
+```
+
+Once `vagrant up` or `vagrant provision` completes, you can get a shell on the VM with:
+
+```bash
 vagrant ssh
 ```
 
-To start the Rails server, within a `vagrant ssh` session run:
+To start the Rails server, within a `vagrant ssh` session, run:
 
-``` bash
-cd /vagrant
+```bash
 bin/dev
 ```
 
 Once `bin/dev` is running, the application will be available at <http://localhost:3000>
 
-To start a Rails console, within a new `vagrant ssh` session run:
+To start a Rails console, within a new `vagrant ssh` session, run:
 
-``` bash
-cd /vagrant
+```bash
 bin/rails console
 ```
 
@@ -43,36 +47,60 @@ All typical `rake`, `rails`, `bundle`, etc commands can run this way.
 
 For example, to run the test suite:
 
-``` bash
-cd /vagrant
+```bash
 bin/rails test
 ```
 
 To power off the machine without destroying it, within a terminal run:
 
-``` bash
+```bash
 vagrant halt
 ```
 
 To power it back up again, run:
 
-``` bash
-vagrant up
+```bash
+vagrant up --provision
 ```
 
-### Local
+### Testing
 
-If you prefer to setup Ruby on Rails applications fully locally, you can do so by installing Ruby and PostgreSQL locally.
+See [Rails Guides: Testing Rails Applications](https://guides.rubyonrails.org/testing.html).
 
-``` bash
-# Install dependencies
-bin/setup
+To run the test suite, connect to the Vagrant VM (`vagrant ssh`) and run:
 
-# Run server
-bin/dev
+```bash
+bin/rails test
 ```
 
-Once `bin/dev` is running, the application will be available at <http://localhost:3000>
+To run the system tests (`tests/system`) which use a headless Chrome web browser to mimic real user interactions, run:
+
+```bash
+bin/rails test:system
+```
+
+### Data
+
+To develop with a more realistic data set, you can import data or restore data from a production backup, or some combination of both.
+
+#### Production Backup
+
+Download a database backup from a recent email. It will be in the form `backup_*.dump`.
+
+Copy the `.dump` file to the project directory, connect to the Vagrant VM (`vagrant ssh`) and run:
+
+```bash
+# Replace FILE= with the actual filename
+bin/rake db:restore FILE=backup_CaribbeanDataEntry_2025-07-10.dump
+```
+
+#### Import/Seed
+
+To import species lists from the seed files in [db/SupportData](./db/SupportData/), connect to the Vagrant VM (`vagrant ssh`) and run:
+
+```bash
+bin/rake import:all
+```
 
 ## Production Setup
 

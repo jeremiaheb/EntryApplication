@@ -6,7 +6,7 @@
   <div class="control-group">
     <%= f.label :username, class: "control-label" %>
     <div class="controls">
-      <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
+      <%= f.text_field :username, autofocus: true, autocomplete: "username", required: true %>
     </div>
   </div>
 
@@ -27,7 +27,7 @@
   <div class="control-group">
     <%= f.label :email, class: "control-label" %>
     <div class="controls">
-      <%= f.email_field :email, autocomplete: "email" %>
+      <%= f.email_field :email, autocomplete: "email", required: true %>
     </div>
   </div>
 
@@ -47,13 +47,14 @@
     <%= f.label :password_confirmation, class: "control-label" %>
     <div class="controls">
       <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      <small>(leave blank if you don't want to change it)</small>
     </div>
   </div>
 
   <div class="control-group">
     <%= f.label :current_password, class: "control-label" %>
     <div class="controls">
-      <%= f.password_field :current_password, autocomplete: "current-password" %>
+      <%= f.password_field :current_password, autocomplete: "current-password", required: true %>
       <small>(we need your current password to confirm your changes)</small>
     </div>
   </div>

@@ -6,7 +6,7 @@
 
 ### Vagrant
 
-A [Vagrant](https://www.vagrantup.com) box is provided for local development. It runs the same Ansible provisioning as the production virtual machine, plus some additional commands that make it useful for development.
+A [Vagrant](https://www.vagrantup.com) virtual machine (VM) is provided for local development. It runs the same Ansible provisioning as the production virtual machine, plus some additional commands that make it useful for development.
 
 First, [install Vagrant](https://developer.hashicorp.com/vagrant/install?product_intent=vagrant). Then from within a terminal, run:
 
@@ -17,25 +17,29 @@ vagrant up
 > [!NOTE]
 > This command will take a while the first time it runs. Go for coffee or otherwise do something else for a while! It will not take nearly as long once it is setup for the first time.
 
-To get a shell on the machine, run:
+If anything fails to provision on the first run, it might be a temporary issue (e.g., Internet failure). You can safely run this command as many times as it takes to complete successfully:
+
+```bash
+vagrant provision
+```
+
+Once `vagrant up` or `vagrant provision` completes, you can get a shell on the VM with:
 
 ```bash
 vagrant ssh
 ```
 
-To start the Rails server, within a `vagrant ssh` session run:
+To start the Rails server, within a `vagrant ssh` session, run:
 
 ```bash
-cd /vagrant
 bin/dev
 ```
 
 Once `bin/dev` is running, the application will be available at <http://localhost:3000>
 
-To start a Rails console, within a new `vagrant ssh` session run:
+To start a Rails console, within a new `vagrant ssh` session, run:
 
 ```bash
-cd /vagrant
 bin/rails console
 ```
 
@@ -44,7 +48,6 @@ All typical `rake`, `rails`, `bundle`, etc commands can run this way.
 For example, to run the test suite:
 
 ```bash
-cd /vagrant
 bin/rails test
 ```
 
@@ -57,7 +60,7 @@ vagrant halt
 To power it back up again, run:
 
 ```bash
-vagrant up
+vagrant up --provision
 ```
 
 ### Testing

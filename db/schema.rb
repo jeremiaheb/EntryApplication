@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20250516182921) do
+ActiveRecord::Schema.define(version: 2025_07_10_135644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,8 @@ ActiveRecord::Schema.define(version: 20250516182921) do
     t.string "scientific_name", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string "short_code"
+    t.integer "rank", default: 2147483647, null: false
   end
 
   create_table "cover_cats", id: :serial, force: :cascade do |t|

@@ -88,7 +88,7 @@ Copy the `.dump` file to the project directory, connect to the Vagrant VM (`vagr
 
 ```bash
 # Replace FILE= with the actual filename
-bin/rake db:import FILE=backup_CaribbeanDataEntry_2025-07-10.dump
+bin/rake db:restore FILE=backup_CaribbeanDataEntry_2025-07-10.dump
 ```
 
 #### Import/Seed

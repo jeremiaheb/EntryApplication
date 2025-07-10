@@ -25,6 +25,8 @@ namespace :db do
 
   desc "Restore the database from a dump file"
   task :restore => :environment do
+    connection_config =  Rails.application.config.database_configuration[Rails.env]
+
     file = ENV.fetch("FILE", nil)
     unless file
       STDERR.puts "Please specify the database dump file to restore from"
@@ -33,15 +35,22 @@ namespace :db do
       exit 1
     end
 
-    connection_config =  Rails.application.config.database_configuration[Rails.env]
+    puts "You are about to delete all data in the '#{connection_config["database"]}' database and replace it with the data in '#{file}'."
+    puts
+    print "Do you want to continue? (y/n): "
+    exit unless STDIN.gets.chomp.downcase == "y"
+
 
     stdout_s, stderr_s, status = Open3.capture3(
       { "PGPASSWORD" => connection_config["password"] },
       "pg_restore", 
-      "--encoding=#{connection_config["encoding"]}",
+      "--clean",
+      "--no-owner",
+      "--no-privileges",
       "--host=#{connection_config["host"]}",
       "--username=#{connection_config["username"]}",
       "--dbname=#{connection_config["database"]}",
+      "--role=#{connection_config["username"]}",
       file,
     )
 

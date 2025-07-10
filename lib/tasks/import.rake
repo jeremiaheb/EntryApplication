@@ -1,8 +1,8 @@
 require "csv"
 
 namespace :import do
-  # rake import:coral FILE=db/SupportData/CoralSpecies_July2025.csv
-  task :coral => :environment do
+  # rake import:corals FILE=db/SupportData/CoralSpecies_July2025.csv
+  task :corals => :environment do
     file = ENV.fetch("FILE", Rails.root.join("db/SupportData/CoralSpecies_July2025.csv"))
     CSV.foreach(file, headers: true) do |row|
       coral = Coral.find_or_initialize_by(code: row["Code"])

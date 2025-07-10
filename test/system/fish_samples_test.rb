@@ -129,7 +129,7 @@ class FishSamplesTest < ApplicationSystemTestCase
     assert_equal [animal1, animal2].sort, sample.animals.sort
   end
 
-  test "new fish sample (adding/removing species to simulate correcting mistakes while inputting)" do
+  test "new fish sample (adding and removing species to simulate correcting mistakes while inputting)" do
     boatlog_manager = FactoryBot.create(:boatlog_manager)
     diver = FactoryBot.create(:diver)
     buddy = FactoryBot.create(:diver)
@@ -202,7 +202,7 @@ class FishSamplesTest < ApplicationSystemTestCase
     assert_equal 2, sample_animal_2.time_seen
   end
 
-  test "editing existing fish sample (adding/removing species to simulate correcting mistakes while inputting)" do
+  test "editing existing fish sample (adding and removing species to simulate correcting mistakes while inputting)" do
     boatlog_manager = FactoryBot.create(:boatlog_manager)
     diver = FactoryBot.create(:diver)
     buddy = FactoryBot.create(:diver)

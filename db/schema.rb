@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2025_07_10_135644) do
     t.string "scientific_name", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string "common_name"
     t.string "short_code"
     t.integer "rank", default: 2147483647, null: false
   end

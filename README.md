@@ -10,7 +10,7 @@ A [Vagrant](https://www.vagrantup.com) box is provided for local development. It
 
 First, [install Vagrant](https://developer.hashicorp.com/vagrant/install?product_intent=vagrant). Then from within a terminal, run:
 
-``` bash
+```bash
 vagrant up
 ```
 
@@ -19,13 +19,13 @@ vagrant up
 
 To get a shell on the machine, run:
 
-``` bash
+```bash
 vagrant ssh
 ```
 
 To start the Rails server, within a `vagrant ssh` session run:
 
-``` bash
+```bash
 cd /vagrant
 bin/dev
 ```
@@ -34,7 +34,7 @@ Once `bin/dev` is running, the application will be available at <http://localhos
 
 To start a Rails console, within a new `vagrant ssh` session run:
 
-``` bash
+```bash
 cd /vagrant
 bin/rails console
 ```
@@ -43,36 +43,61 @@ All typical `rake`, `rails`, `bundle`, etc commands can run this way.
 
 For example, to run the test suite:
 
-``` bash
+```bash
 cd /vagrant
 bin/rails test
 ```
 
 To power off the machine without destroying it, within a terminal run:
 
-``` bash
+```bash
 vagrant halt
 ```
 
 To power it back up again, run:
 
-``` bash
+```bash
 vagrant up
 ```
 
-### Local
+### Testing
 
-If you prefer to setup Ruby on Rails applications fully locally, you can do so by installing Ruby and PostgreSQL locally.
+See [Rails Guides: Testing Rails Applications](https://guides.rubyonrails.org/testing.html).
 
-``` bash
-# Install dependencies
-bin/setup
+To run the test suite, connect to the Vagrant VM (`vagrant ssh`) and run:
 
-# Run server
-bin/dev
+```bash
+bin/rails test
 ```
 
-Once `bin/dev` is running, the application will be available at <http://localhost:3000>
+To run the system tests (`tests/system`) which use a headless Chrome web browser to mimic real user interactions, run:
+
+```bash
+bin/rails test:system
+```
+
+### Data
+
+To develop with a more realistic data set, you can import data or restore data from a production backup, or some combination of both.
+
+#### Production Backup
+
+Download a database backup from a recent email. It will be in the form `backup_*.dump`.
+
+Copy the `.dump` file to the project directory, connect to the Vagrant VM (`vagrant ssh`) and run:
+
+```bash
+# Replace FILE= with the actual filename
+bin/rake db:import FILE=backup_CaribbeanDataEntry_2025-07-10.dump
+```
+
+#### Import/Seed
+
+To import species lists from the seed files in [db/SupportData](./db/SupportData/), connect to the Vagrant VM (`vagrant ssh`) and run:
+
+```bash
+bin/rake import:all
+```
 
 ## Production Setup
 

@@ -21,7 +21,7 @@ set :deploy_to, "/var/www/apps/EntryApplication"
 # set :pty, true
 
 # Default value for :linked_files is []
-# append :linked_files, "config/master.key"
+append :linked_files, "config/master.key"
 
 # Default value for linked_dirs is []
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "storage", ".bundle", "node_modules", "public/data"
@@ -47,9 +47,9 @@ namespace :deploy do
   namespace :check do
     before :linked_files, :upload_encryption_keys do
       on roles(:web) do
-        # unless test("test -f #{shared_path}/config/master.key")
-        #   upload! "config/master.key", "#{shared_path}/config/master.key"
-        # end
+        unless test("test -f #{shared_path}/config/master.key")
+          upload! "config/master.key", "#{shared_path}/config/master.key"
+        end
       end
     end
   end

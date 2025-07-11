@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :cover_cat do
-    name { Faker::Creature::Animal.name }
+    sequence(:name) { |n| "#{Faker::Creature::Animal.name}-#{n}" }
     code { name[0..4].upcase }
     common { name.upcase }
     proofing_code { name }

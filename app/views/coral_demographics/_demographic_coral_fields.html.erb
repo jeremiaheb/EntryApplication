@@ -1,7 +1,7 @@
 
   <li>
     <%= f.text_field :meter_mark, { :class => "coralSpeciesData", :id => "meter_mark" } %>
-    <%= f.select :coral_id, Coral.order(:rank, :code).map { |c| [c.coral_code_name, c.id, { data: { rank: c.rank }}] }, { include_blank: true }, class: "coralSpecies" %>
+    <%= f.select :coral_id, Coral.order(:rank, :code).map { |c| [c.display_name, c.id, { data: { rank: c.rank }}] }, { include_blank: true }, class: "coralSpecies" %>
     <%= f.text_field :max_diameter, { :class => "coralSpeciesData" } %>
     <%= f.text_field :perpendicular_diameter, { :class => "coralSpeciesData" } %>
     <%= f.text_field :height, { :class => "coralSpeciesData" } %>

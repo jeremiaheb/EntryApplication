@@ -3,9 +3,11 @@ class CoverCat < ActiveRecord::Base
   has_many :benthic_covers, :through => :point_intercepts
   accepts_nested_attributes_for :point_intercepts
 
-  validates :name,   :presence => true
+  validates :name, presence: true
+  validates :code, presence: true
+  validates :proofing_code, presence: true
 
-  def cover_code_name
-    [self.code, self.common].join(" __ ")
+  def display_name
+    [self.code, self.proofing_code].join(" __ ")
   end
 end

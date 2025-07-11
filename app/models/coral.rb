@@ -3,10 +3,11 @@ class Coral < ActiveRecord::Base
   has_many :coral_demographics, :through => :demographic_corals
   accepts_nested_attributes_for :demographic_corals, :allow_destroy => true
 
-  validates :code,                :presence => true
-  validates :scientific_name,     :presence => true
+  validates :short_code, presence: true
+  validates :code, presence: true
+  validates :scientific_name, presence: true
 
-  def coral_code_name
-    [self.code, self.scientific_name].join(" __ ")
+  def display_name
+    [self.short_code, self.code, self.scientific_name].join(" __ ")
   end
 end

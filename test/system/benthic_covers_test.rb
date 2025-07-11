@@ -30,13 +30,13 @@ class BenthicCoversTest < ApplicationSystemTestCase
     find("input#benthic_cover_meters_completed").fill_in(with: "10")
     find("textarea#benthic_cover_sample_description").fill_in(with: "Hello World")
 
-    select2_choose(all("select[id$='cover_cat_id']", visible: nil).first, option: cover_cat1.cover_code_name)
+    select2_choose(all("select[id$='cover_cat_id']", visible: nil).first, option: cover_cat1.display_name)
     all("input[id$='hardbottom_num']").first.fill_in(with: "15")
     all("input[id$='softbottom_num']").first.fill_in(with: "25")
     all("input[id$='rubble_num']").first.fill_in(with: "5")
 
     find("a.add_nested_fields[data-association=point_intercepts]").click # Add Cover
-    select2_choose(all("select[id$='cover_cat_id']", visible: nil).last, option: cover_cat2.cover_code_name)
+    select2_choose(all("select[id$='cover_cat_id']", visible: nil).last, option: cover_cat2.display_name)
     all("input[id$='hardbottom_num']").last.fill_in(with: "30")
     all("input[id$='softbottom_num']").last.fill_in(with: "14")
     all("input[id$='rubble_num']").last.fill_in(with: "11")

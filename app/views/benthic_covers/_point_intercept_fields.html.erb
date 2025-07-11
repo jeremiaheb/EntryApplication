@@ -1,6 +1,6 @@
 
     <li>
-    <%= f.select :cover_cat_id, CoverCat.order(:rank, :code).map { |cc| [cc.cover_code_name, cc.id, { data: { rank: cc.rank }}] }, { include_blank: true }, class: "coverCategory" %>
+    <%= f.select :cover_cat_id, CoverCat.order(:rank, :code).map { |cc| [cc.display_name, cc.id, { data: { rank: cc.rank }}] }, { include_blank: true }, class: "coverCategory" %>
     <%= f.text_field :hardbottom_num, { :class => "coverPoints" } %>
       <%= f.text_field :softbottom_num, { :class => "coverPoints" } %>
       <%= f.text_field :rubble_num, { :class => "coverPoints" } %>

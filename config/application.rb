@@ -1,6 +1,6 @@
+require "sassc-embedded"
 require_relative "boot"
 
-require "sassc-embedded"
 require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems

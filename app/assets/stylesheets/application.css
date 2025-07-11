@@ -15,6 +15,9 @@
  *= require jquery.timeentry
  *= require datatables.net-dt/css/dataTables.dataTables
  *
+ *= stub application-uswds
+ *= stub _uswds-theme
+ *= stub _uswds-theme-custom-styles
  *= require_tree .
 */
 

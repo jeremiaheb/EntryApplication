@@ -12,8 +12,8 @@ class CoverCatTest < ActiveSupport::TestCase
     assert_not_nil cover_cat.errors[:name]
   end
 
-  test "#cover_code_name joins code and common" do
-    cover_cat = FactoryBot.create(:cover_cat, code: "RHO CRUS", name: "Rhodophyta cru. spp", common: "CCA Crustose Coralline Algae")
-    assert_equal "RHO CRUS __ CCA Crustose Coralline Algae", cover_cat.cover_code_name
+  test "#display_name joins code and proofing name" do
+    cover_cat = FactoryBot.create(:cover_cat, code: "RHO CRUS", proofing_code: "CCA Crustose Coralline Algae")
+    assert_equal "RHO CRUS __ CCA Crustose Coralline Algae", cover_cat.display_name
   end
 end

@@ -13,8 +13,8 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
-//= require dataTables/jquery.dataTables
-//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+//= require datatables.net/js/dataTables
+//= require datatables.net-dt/js/dataTables.dataTables
 //= require bootstrap-datepicker
 //= require select2
 //= require jquery.validate

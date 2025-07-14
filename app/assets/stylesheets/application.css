@@ -500,16 +500,6 @@ input.timeSeen_3 {
   text-justify: distribute-all-lines;
 }
 
-.dataTables_filter, .dataTables_paginate {
-    vertical-align: bottom;
-    display: inline-block;
-    *display: inline;
-}
-
-.pagination {
-    
-}
-
 .carousel-caption {
   height: 15px; 
 }

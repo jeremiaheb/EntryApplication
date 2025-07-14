@@ -320,7 +320,7 @@ DEPENDENCIES
   twitter-bootstrap-rails (= 2.2.8)
 
 RUBY VERSION
-   ruby 2.6.10p210
+   ruby 2.7.8p225
 
 BUNDLED WITH
    2.3.27

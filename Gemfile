@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.5.9'
+ruby '2.6.10'
 gem 'rails', '~> 6.0', '>= 6.0.6.1'
 
 # TODO: Remove after upgrading to Rails 7

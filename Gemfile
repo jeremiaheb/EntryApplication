@@ -1,7 +1,11 @@
 source 'https://rubygems.org'
 
-ruby '2.5.9'
-gem 'rails', '~> 5.2.8', '>= 5.2.8.1'
+ruby '2.6.10'
+gem 'rails', '~> 6.0', '>= 6.0.6.1'
+
+# TODO: Remove after upgrading to Rails 7
+# See https://github.com/rails/rails/issues/54263
+gem 'concurrent-ruby', '< 1.3.5'
 
 gem 'pg'
 
@@ -20,7 +24,8 @@ gem 'select2-rails', '3.2.1'
 gem 'nested_form', '0.3.2'
 
 gem 'devise', '~> 4.9', '>= 4.9.4'
-gem 'cancancan', '~> 2.0'
+# TODO: Remove < 3.6 restriction after upgrade to Ruby >= 2.7
+gem 'cancancan', '~> 3.0', '< 3.6'
 
 gem 'prawn', '~> 2.2', '>= 2.2.2'
 gem 'prawn-table', '~> 0.2', '>= 0.2.2'
@@ -32,6 +37,10 @@ gem 'capistrano-rbenv'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+
+group :development do
+  gem 'listen', '~> 3.2'
+end
 
 group :test do
   gem 'capybara', '>= 2.15'

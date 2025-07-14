@@ -2,23 +2,23 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `rails
+# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_07_11_160534) do
+ActiveRecord::Schema.define(version: 2025_07_14_170906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "animals", id: :serial, force: :cascade do |t|
-    t.string "species_code", limit: 255
-    t.string "scientific_name", limit: 255
-    t.string "common_name", limit: 255
+  create_table "animals", force: :cascade do |t|
+    t.string "species_code"
+    t.string "scientific_name"
+    t.string "common_name"
     t.integer "max_size"
     t.integer "min_size"
     t.integer "max_number"
@@ -26,11 +26,11 @@ ActiveRecord::Schema.define(version: 2025_07_11_160534) do
     t.datetime "updated_at"
   end
 
-  create_table "benthic_covers", id: :serial, force: :cascade do |t|
+  create_table "benthic_covers", force: :cascade do |t|
     t.integer "diver_id"
     t.integer "habitat_type_id"
     t.integer "buddy"
-    t.string "field_id", limit: 255
+    t.string "field_id"
     t.date "sample_date"
     t.time "sample_begin_time"
     t.integer "meters_completed"
@@ -40,27 +40,27 @@ ActiveRecord::Schema.define(version: 2025_07_11_160534) do
     t.integer "boatlog_manager_id"
   end
 
-  create_table "boat_logs", id: :serial, force: :cascade do |t|
-    t.string "primary_sample_unit", limit: 255
+  create_table "boat_logs", force: :cascade do |t|
+    t.string "primary_sample_unit"
     t.date "date"
     t.integer "boatlog_manager_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "boatlog_managers", id: :serial, force: :cascade do |t|
-    t.string "agency", limit: 255
-    t.string "firstname", limit: 255
-    t.string "lastname", limit: 255
+  create_table "boatlog_managers", force: :cascade do |t|
+    t.string "agency"
+    t.string "firstname"
+    t.string "lastname"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "coral_demographics", id: :serial, force: :cascade do |t|
+  create_table "coral_demographics", force: :cascade do |t|
     t.integer "diver_id"
     t.integer "habitat_type_id"
     t.integer "buddy"
-    t.string "field_id", limit: 255
+    t.string "field_id"
     t.date "sample_date"
     t.time "sample_begin_time"
     t.integer "meters_completed"
@@ -71,9 +71,9 @@ ActiveRecord::Schema.define(version: 2025_07_11_160534) do
     t.integer "percent_hardbottom"
   end
 
-  create_table "corals", id: :serial, force: :cascade do |t|
-    t.string "code", limit: 255, null: false
-    t.string "scientific_name", limit: 255, null: false
+  create_table "corals", force: :cascade do |t|
+    t.string "code", null: false
+    t.string "scientific_name", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "common_name"
@@ -81,17 +81,17 @@ ActiveRecord::Schema.define(version: 2025_07_11_160534) do
     t.integer "rank", default: 2147483647, null: false
   end
 
-  create_table "cover_cats", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 255, null: false
+  create_table "cover_cats", force: :cascade do |t|
+    t.string "name", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "code", limit: 255, null: false
-    t.string "common", limit: 255
+    t.string "code", null: false
+    t.string "common"
     t.string "proofing_code", null: false
     t.integer "rank", default: 2147483647, null: false
   end
 
-  create_table "demographic_corals", id: :serial, force: :cascade do |t|
+  create_table "demographic_corals", force: :cascade do |t|
     t.integer "coral_demographic_id"
     t.integer "coral_id"
     t.integer "max_diameter"
@@ -99,37 +99,37 @@ ActiveRecord::Schema.define(version: 2025_07_11_160534) do
     t.integer "height"
     t.integer "old_mortality"
     t.integer "recent_mortality"
-    t.string "bleach_condition", limit: 255
-    t.string "disease", limit: 255
+    t.string "bleach_condition"
+    t.string "disease"
     t.integer "meter_mark"
   end
 
-  create_table "diver_samples", id: :serial, force: :cascade do |t|
+  create_table "diver_samples", force: :cascade do |t|
     t.integer "sample_id"
     t.integer "diver_id"
     t.boolean "primary_diver"
   end
 
-  create_table "divers", id: :serial, force: :cascade do |t|
-    t.string "diver_number", limit: 255
-    t.string "diver_name", limit: 255
+  create_table "divers", force: :cascade do |t|
+    t.string "diver_number"
+    t.string "diver_name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean "active"
-    t.string "email", limit: 255, default: "", null: false
-    t.string "encrypted_password", limit: 255, default: "", null: false
-    t.string "reset_password_token", limit: 255
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.integer "sign_in_count", default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip", limit: 255
-    t.string "last_sign_in_ip", limit: 255
-    t.string "username", limit: 255
-    t.string "firstname", limit: 255
-    t.string "lastname", limit: 255
-    t.string "role", limit: 255
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.string "username"
+    t.string "firstname"
+    t.string "lastname"
+    t.string "role"
     t.integer "boatlog_manager_id"
     t.index ["boatlog_manager_id"], name: "index_divers_on_boatlog_manager_id", unique: true
   end
@@ -146,22 +146,22 @@ ActiveRecord::Schema.define(version: 2025_07_11_160534) do
     t.index ["diver_id", "model_klass", "model_id", "sequence"], name: "idx_on_diver_id_model_klass_model_id_sequence_3f81240dbe", unique: true, order: { sequence: :desc }
   end
 
-  create_table "habitat_types", id: :serial, force: :cascade do |t|
-    t.string "habitat_name", limit: 255
-    t.string "habitat_description", limit: 255
+  create_table "habitat_types", force: :cascade do |t|
+    t.string "habitat_name"
+    t.string "habitat_description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "region", limit: 255
+    t.string "region"
   end
 
-  create_table "invert_belts", id: :serial, force: :cascade do |t|
+  create_table "invert_belts", force: :cascade do |t|
     t.integer "benthic_cover_id"
     t.integer "lobster_num"
     t.integer "conch_num"
     t.integer "diadema_num"
   end
 
-  create_table "point_intercepts", id: :serial, force: :cascade do |t|
+  create_table "point_intercepts", force: :cascade do |t|
     t.integer "benthic_cover_id"
     t.integer "cover_cat_id"
     t.integer "hardbottom_num"
@@ -169,7 +169,7 @@ ActiveRecord::Schema.define(version: 2025_07_11_160534) do
     t.integer "rubble_num"
   end
 
-  create_table "presence_belts", id: :serial, force: :cascade do |t|
+  create_table "presence_belts", force: :cascade do |t|
     t.integer "benthic_cover_id"
     t.integer "a_palmata"
     t.integer "a_cervicornis"
@@ -182,13 +182,13 @@ ActiveRecord::Schema.define(version: 2025_07_11_160534) do
     t.integer "a_lamarcki"
   end
 
-  create_table "rep_logs", id: :serial, force: :cascade do |t|
+  create_table "rep_logs", force: :cascade do |t|
     t.integer "station_log_id"
-    t.string "replicate", limit: 255
+    t.string "replicate"
     t.integer "diver_id"
   end
 
-  create_table "rugosity_measures", id: :serial, force: :cascade do |t|
+  create_table "rugosity_measures", force: :cascade do |t|
     t.integer "benthic_cover_id"
     t.integer "min_depth"
     t.integer "max_depth"
@@ -210,7 +210,7 @@ ActiveRecord::Schema.define(version: 2025_07_11_160534) do
     t.integer "meter_mark_15"
   end
 
-  create_table "sample_animals", id: :serial, force: :cascade do |t|
+  create_table "sample_animals", force: :cascade do |t|
     t.integer "sample_id"
     t.integer "animal_id"
     t.integer "number_individuals"
@@ -220,14 +220,14 @@ ActiveRecord::Schema.define(version: 2025_07_11_160534) do
     t.integer "time_seen"
   end
 
-  create_table "sample_types", id: :serial, force: :cascade do |t|
-    t.string "sample_type_name", limit: 255
-    t.string "sample_type_description", limit: 255
+  create_table "sample_types", force: :cascade do |t|
+    t.string "sample_type_name"
+    t.string "sample_type_description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "samples", id: :serial, force: :cascade do |t|
+  create_table "samples", force: :cascade do |t|
     t.integer "sample_type_id"
     t.integer "habitat_type_id"
     t.date "sample_date"
@@ -238,7 +238,7 @@ ActiveRecord::Schema.define(version: 2025_07_11_160534) do
     t.integer "dive_depth"
     t.integer "sample_depth"
     t.text "fishing_gear"
-    t.string "field_id", limit: 255
+    t.string "field_id"
     t.integer "underwater_visibility"
     t.text "sample_description"
     t.integer "sand_percentage"
@@ -247,7 +247,7 @@ ActiveRecord::Schema.define(version: 2025_07_11_160534) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "water_temp"
-    t.string "current", limit: 255
+    t.string "current"
     t.integer "boatlog_manager_id"
     t.integer "substrate_max_depth"
     t.integer "substrate_min_depth"
@@ -267,8 +267,8 @@ ActiveRecord::Schema.define(version: 2025_07_11_160534) do
     t.integer "sand_macro_algae"
     t.integer "sand_seagrass"
     t.integer "sand_sponge"
-    t.string "sand_pcov_other1_lab", limit: 255
-    t.string "sand_pcov_other2_lab", limit: 255
+    t.string "sand_pcov_other1_lab"
+    t.string "sand_pcov_other2_lab"
     t.integer "sand_pcov_other1"
     t.integer "sand_pcov_other2"
     t.integer "hardbottom_algal_turf"
@@ -276,13 +276,13 @@ ActiveRecord::Schema.define(version: 2025_07_11_160534) do
     t.integer "hardbottom_live_coral"
     t.integer "hardbottom_octocoral"
     t.integer "hardbottom_sponge"
-    t.string "hard_pcov_other1_lab", limit: 255
-    t.string "hard_pcov_other2_lab", limit: 255
+    t.string "hard_pcov_other1_lab"
+    t.string "hard_pcov_other2_lab"
     t.integer "hard_pcov_other1"
     t.integer "hard_pcov_other2"
   end
 
-  create_table "station_logs", id: :serial, force: :cascade do |t|
+  create_table "station_logs", force: :cascade do |t|
     t.integer "boat_log_id"
     t.integer "stn_number"
     t.time "time"

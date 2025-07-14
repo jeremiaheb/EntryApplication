@@ -61,11 +61,15 @@ $(function(){
 
     $(document).ready(function(){
 
-    $('.display').DataTable( {
-        //"sDom": "<'row'<'span7'lf>r>t<'row'<'span7'ip>>",
-        "sDom": '<"top"ifp<"clear">>rt<"bottom"<"clear">>',
-        "pagingType": "full"
-    } );
+    $('.display').DataTable({
+      "layout": {
+        "topStart": "search",
+        "topEnd": ["info", "paging"],
+        "bottomStart": null,
+        "bottomEnd": ["info", "paging"],
+      },
+      "pagingType": "full"
+    });
 
 
 

@@ -24,7 +24,8 @@ gem 'select2-rails', '3.2.1'
 gem 'nested_form', '0.3.2'
 
 gem 'devise', '~> 4.9', '>= 4.9.4'
-gem 'cancancan', '~> 2.0'
+# TODO: Remove < 3.6 restriction after upgrade to Ruby >= 2.7
+gem 'cancancan', '~> 3.0', '< 3.6'
 
 gem 'prawn', '~> 2.2', '>= 2.2.2'
 gem 'prawn-table', '~> 0.2', '>= 0.2.2'

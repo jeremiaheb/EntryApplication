@@ -67,7 +67,7 @@ GEM
     bootstrap-datepicker-rails (1.6.4.1)
       railties (>= 3.0)
     builder (3.3.0)
-    cancancan (2.3.0)
+    cancancan (3.5.0)
     capistrano (3.19.2)
       airbrussh (>= 1.0.0)
       i18n
@@ -292,7 +292,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.1.0)
   bootstrap-datepicker-rails (= 1.6.4.1)
-  cancancan (~> 2.0)
+  cancancan (~> 3.0, < 3.6)
   capistrano
   capistrano-rails
   capistrano-rbenv

@@ -12,7 +12,8 @@ gem 'pg'
 # < 6 until Ruby 2.7. Bump capybara alongside that too.
 gem 'puma', '>= 5.0', '< 6'
 
-gem 'sass-rails', '~> 5.0'
+# TODO: Update after upgrade to Ruby >= 3.1
+gem 'dartsass-sprockets', '~> 3.0'
 
 gem 'jquery-ui-rails', '5.0.5'
 gem 'jquery-rails', '4.3.1'

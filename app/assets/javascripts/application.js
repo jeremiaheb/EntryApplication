@@ -13,8 +13,8 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
-//= require dataTables/jquery.dataTables
-//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+//= require datatables.net/js/dataTables
+//= require datatables.net-dt/js/dataTables.dataTables
 //= require bootstrap-datepicker
 //= require select2
 //= require jquery.validate
@@ -61,11 +61,15 @@ $(function(){
 
     $(document).ready(function(){
 
-    $('.display').DataTable( {
-        //"sDom": "<'row'<'span7'lf>r>t<'row'<'span7'ip>>",
-        "sDom": '<"top"ifp<"clear">>rt<"bottom"<"clear">>',
-        "pagingType": "full"
-    } );
+    $('.display').DataTable({
+      "layout": {
+        "topStart": "search",
+        "topEnd": ["info", "paging"],
+        "bottomStart": null,
+        "bottomEnd": ["info", "paging"],
+      },
+      "pagingType": "full"
+    });
 
 
 

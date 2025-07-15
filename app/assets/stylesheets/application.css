@@ -12,7 +12,7 @@
  *= require jquery-ui
  *= require select2
  *= require_tree .
- *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+ *= require datatables.net-dt/css/dataTables.dataTables
  *= require bootstrap-datepicker3
 */
 
@@ -498,16 +498,6 @@ input.timeSeen_3 {
   text-align: justify;
   -ms-text-justify: distribute-all-lines;
   text-justify: distribute-all-lines;
-}
-
-.dataTables_filter, .dataTables_paginate {
-    vertical-align: bottom;
-    display: inline-block;
-    *display: inline;
-}
-
-.pagination {
-    
 }
 
 .carousel-caption {

@@ -7,6 +7,7 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.paths << Emoji.images_path
 # Add Yarn node_modules folder to the asset load path.
 Rails.application.config.assets.paths << Rails.root.join('node_modules')
+Rails.application.config.assets.paths << Rails.root.join('vendor', 'bootstrap')
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'jquery.timeentry.package-2.0.1')
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'select2-3.2.0')
 

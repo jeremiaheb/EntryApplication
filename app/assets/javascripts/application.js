@@ -16,7 +16,7 @@
 //= require datatables.net-dt/js/dataTables.dataTables
 //= require select2
 //= require jquery-validation/dist/jquery.validate
-//= require twitter/bootstrap
+//= require js/bootstrap
 //= require jquery_nested_form
 //= require underscore/underscore-umd
 //= require jquery.plugin

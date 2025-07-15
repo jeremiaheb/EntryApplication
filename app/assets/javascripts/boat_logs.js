@@ -7,13 +7,8 @@ $(function(){
   }
   
   $("#boat_log_date").datepicker({
-    format: 'yyyy-mm-dd',
-    autoclose: true
+    dateFormat: 'yy-mm-dd',
   });
-
-  if ( $('body').hasClass('new') ) {
-    $("#boat_log_date").datepicker("setDate", new Date());
-  };
 
   $("#boat_log_station_logs_attributes_0_time").timeEntry({ show24Hours: true, minTime: "06:00", maxTime: "20:00" });
   $("#boat_log_station_logs_attributes_1_time").timeEntry({ show24Hours: true, minTime: "06:00", maxTime: "20:00" });

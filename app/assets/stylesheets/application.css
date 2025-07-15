@@ -9,11 +9,10 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require jquery-ui
+ *= require jquery-ui/dist/themes/base/jquery-ui
  *= require select2
  *= require_tree .
  *= require datatables.net-dt/css/dataTables.dataTables
- *= require bootstrap-datepicker3
 */
 
 #substrateSection, #speciesSection {

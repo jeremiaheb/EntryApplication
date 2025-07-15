@@ -15,11 +15,8 @@ gem 'puma', '>= 5.0', '< 6'
 # TODO: Update after upgrade to Ruby >= 3.1
 gem 'dartsass-sprockets', '~> 3.0'
 
-gem 'jquery-ui-rails', '5.0.5'
-gem 'jquery-rails', '4.3.1'
 gem 'jquery-validation-rails', '1.16.0'
 gem 'twitter-bootstrap-rails', '2.2.8'
-gem 'bootstrap-datepicker-rails', '1.6.4.1'
 gem 'select2-rails', '3.2.1'
 gem 'nested_form', '0.3.2'
 

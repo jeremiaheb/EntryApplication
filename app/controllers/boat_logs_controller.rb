@@ -40,6 +40,7 @@ class BoatLogsController < ApplicationController
       @boat_log = BoatLog.new(@draft.model_attributes)
     else
       @boat_log = BoatLog.new.tap do |bl|
+        bl.date ||= Date.current
         station = bl.station_logs.build
         2.times { station.rep_logs.build }
       end

@@ -10,13 +10,8 @@ $(function(){
 
 
   $("#coral_demographic_sample_date").datepicker({
-    format: 'yyyy-mm-dd',
-    autoclose: true
+    dateFormat: 'yy-mm-dd',
   });
-
-  if ( $('body').hasClass('new') ) {
-    $("#coral_demographic_sample_date").datepicker("setDate", new Date());
-  };
 
   $("#coral_demographic_sample_begin_time").timeEntry({ show24Hours: true, minTime: "06:00", maxTime: "20:00" });
 

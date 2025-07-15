@@ -29,7 +29,7 @@
       </table>
   </div>
   <div id="newSampleButton"> 
-    <%= button_to('New Boat Log', new_boat_log_path, :method => "get", :class => 'btn btn-large btn-primary')  %>   
+    <%= button_to('New Boat Log', new_boat_log_path, :method => "get", :class => 'btn btn-large btn-primary new-boat-log-button')  %>   
     
     <% if diver_signed_in? && (current_diver.role == "admin" || current_diver.role == "manager") %>
         <%= button_to('Download Boatlogs (.xlsx)', boat_logs_path(format: "xlsx", nocache: SecureRandom.alphanumeric), :method => "get", :class => 'btn btn-small btn-primary')  %>   

@@ -115,7 +115,6 @@ GEM
       responders
       warden (~> 1.2.3)
     erubi (1.13.1)
-    execjs (2.10.0)
     factory_bot (5.2.0)
       activesupport (>= 4.2.0)
     factory_bot_rails (5.2.0)
@@ -248,11 +247,6 @@ GEM
     tilt (2.0.7)
     timeout (0.4.3)
     ttfunk (1.7.0)
-    twitter-bootstrap-rails (2.2.8)
-      actionpack (>= 3.1)
-      execjs
-      rails (>= 3.1)
-      railties (>= 3.1)
     tzinfo (1.2.11)
       thread_safe (~> 0.1)
     warden (1.2.9)
@@ -290,7 +284,6 @@ DEPENDENCIES
   puma (>= 5.0, < 6)
   rails (~> 6.0, >= 6.0.6.1)
   selenium-webdriver
-  twitter-bootstrap-rails (= 2.2.8)
 
 RUBY VERSION
    ruby 2.7.8p225

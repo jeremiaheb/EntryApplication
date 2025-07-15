@@ -230,8 +230,6 @@ GEM
     sass-embedded (1.63.6)
       google-protobuf (~> 3.23)
       rake (>= 13.0.0)
-    select2-rails (3.2.1)
-      thor (~> 0.14)
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
@@ -297,7 +295,6 @@ DEPENDENCIES
   pry
   puma (>= 5.0, < 6)
   rails (~> 6.0, >= 6.0.6.1)
-  select2-rails (= 3.2.1)
   selenium-webdriver
   twitter-bootstrap-rails (= 2.2.8)
 

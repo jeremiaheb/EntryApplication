@@ -16,7 +16,6 @@ gem 'puma', '>= 5.0', '< 6'
 gem 'dartsass-sprockets', '~> 3.0'
 
 gem 'twitter-bootstrap-rails', '2.2.8'
-gem 'select2-rails', '3.2.1'
 gem 'nested_form', '0.3.2'
 
 gem 'devise', '~> 4.9', '>= 4.9.4'

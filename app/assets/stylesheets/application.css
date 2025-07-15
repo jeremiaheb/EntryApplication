@@ -10,7 +10,7 @@
  *
  *= require_self
  *= require jquery-ui/dist/themes/base/jquery-ui
- *= require select2
+ *= require select2/select2
  *= require_tree .
  *= require datatables.net-dt/css/dataTables.dataTables
 */

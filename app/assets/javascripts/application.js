@@ -15,7 +15,7 @@
 //= require jquery-ujs/src/rails
 //= require datatables.net/js/dataTables
 //= require datatables.net-dt/js/dataTables.dataTables
-//= require select2
+//= require select2/select2
 //= require jquery-validation/dist/jquery.validate
 //= require twitter/bootstrap
 //= require jquery_nested_form

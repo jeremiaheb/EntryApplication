@@ -1,5 +1,8 @@
 # EntryApplication
 
+[![Build Status](https://github.com/jeremiaheb/EntryApplication/actions/workflows/ci.yml/badge.svg)](https://github.com/jeremiaheb/EntryApplication/actions/workflows/ci.yml)
+[![Dependabot enabled](https://img.shields.io/badge/dependabot-enabled-025e8c?logo=Dependabot)](https://github.com/jeremiaheb/EntryApplication/security/dependabot)
+
 **EntryApplication** is a Ruby on Rails application for collecting fish, benthic and coral demographic samples.
 
 ## Development Setup

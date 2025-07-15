@@ -19,7 +19,7 @@
 //= require jquery-validation/dist/jquery.validate
 //= require twitter/bootstrap
 //= require jquery_nested_form
-//= require underscore-umd
+//= require underscore/underscore-umd
 //= require_tree ../../../vendor/assets/javascripts
 //
 //= require ./benthic_covers

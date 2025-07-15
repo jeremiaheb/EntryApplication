@@ -1,27 +1,24 @@
-
 <div class="container">          
   <div class="row home">
- 
     <div class="span1">
-     <div class="img_box">
-       <a href=<%= url_for boat_logs_path %>>
-           <img <%= image_tag 'FormButton.jpg' %>
-       </a>
+      <div class="img_box">
+        <%= link_to boat_logs_path, class: "boat-logs-link" do %>
+          <%= image_tag 'FormButton.jpg' %>
+        <%- end %>
       </div>
       <div class="text">
         <h6>Boatlogs</h6>
       </div>
     </div>
     <div class="span1">
-     <div class="img_box">
-       <a href=<%= url_for 'dashboard/show' %>>
-           <img <%= image_tag 'FormButton.jpg' %>
-       </a>
+      <div class="img_box">
+        <%= link_to dashboard_show_path, class: "dashboard-link" do %>
+          <%= image_tag 'FormButton.jpg' %>
+        <%- end %>
       </div>
       <div class="text">
         <h6>Manager Dashboard</h6>
       </div>
     </div>
-
   </div>
 </div>

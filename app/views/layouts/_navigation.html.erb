@@ -2,14 +2,14 @@
 <ul class="nav">
   <% if diver_signed_in? %>
     <li style="font-weight:900;font-size:12px" >
-    <%= link_to "Logged in as #{current_diver.username}", edit_diver_registration_path, :tabindex => "-1" %>
+    <%= link_to "Logged in as #{current_diver.username}", edit_diver_registration_path, :tabindex => "-1", class: "profile-link" %>
     </li>
     <li>
-    <%= link_to 'Logout', destroy_diver_session_path, :method=>'delete', :tabindex => "-1" %>
+    <%= link_to 'Logout', destroy_diver_session_path, :method=>'delete', :tabindex => "-1", class: "logout-link" %>
     </li>
   <% else %>
     <li>
-    <%= link_to 'Login', new_diver_session_path %>
+    <%= link_to 'Login', new_diver_session_path, class: "login-link" %>
     </li>
   <% end %>
 

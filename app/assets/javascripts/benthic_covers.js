@@ -13,7 +13,9 @@ $(function(){
   }
   
   $("#benthic_cover_sample_date").datepicker({
-    dateFormat: 'yy-mm-dd',
+    format: 'yyyy-mm-dd',
+    orientation: "bottom",
+    autoclose: true
   });
 
   $("#benthic_cover_sample_begin_time").timeEntry({ show24Hours: true, minTime: "06:00", maxTime: "20:00" }); 

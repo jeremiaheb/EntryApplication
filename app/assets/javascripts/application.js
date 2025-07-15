@@ -11,7 +11,6 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery/dist/jquery
-//= require jquery-ui/dist/jquery-ui
 //= require jquery-ujs/src/rails
 //= require datatables.net/js/dataTables
 //= require datatables.net-dt/js/dataTables.dataTables
@@ -22,6 +21,7 @@
 //= require underscore/underscore-umd
 //= require jquery.plugin
 //= require jquery.timeentry
+//= require bootstrap-datepicker/dist/js/bootstrap-datepicker
 //
 //= require ./benthic_covers
 //= require ./boat_logs

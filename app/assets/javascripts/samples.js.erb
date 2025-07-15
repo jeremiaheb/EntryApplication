@@ -412,7 +412,9 @@ $(function(){
     });
 
     $("#sample_sample_date").datepicker({
-      dateFormat: 'yy-mm-dd',
+      format: 'yyyy-mm-dd',
+      orientation: "bottom",
+      autoclose: true
     });
    
     $("#sample_dive_begin_time").timeEntry({ show24Hours: true, minTime: "06:00", maxTime: "20:00" });

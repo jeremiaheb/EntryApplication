@@ -7,7 +7,9 @@ $(function(){
   }
   
   $("#boat_log_date").datepicker({
-    dateFormat: 'yy-mm-dd',
+    format: 'yyyy-mm-dd',
+    orientation: "bottom",
+    autoclose: true
   });
 
   $("#boat_log_station_logs_attributes_0_time").timeEntry({ show24Hours: true, minTime: "06:00", maxTime: "20:00" });

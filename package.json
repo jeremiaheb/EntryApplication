@@ -4,7 +4,7 @@
     "datatables.net-dt": "^2.3.2",
     "jquery": "^3.7.1",
     "jquery-ujs": "^1.2.3",
-    "jquery-validation": "1.16.0",
+    "jquery-validation": "1.20.0",
     "underscore": "1.13.7"
   }
 }

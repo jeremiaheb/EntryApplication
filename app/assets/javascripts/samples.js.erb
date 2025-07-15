@@ -413,13 +413,10 @@ $(function(){
 
     $("#sample_sample_date").datepicker({
       format: 'yyyy-mm-dd',
+      orientation: "bottom",
       autoclose: true
     });
    
-    if ( $('body').hasClass('new') ) {
-      $("#sample_sample_date").datepicker("setDate", new Date());
-    };
-
     $("#sample_dive_begin_time").timeEntry({ show24Hours: true, minTime: "06:00", maxTime: "20:00" });
   $("#sample_dive_end_time").timeEntry({ show24Hours: true, minTime: "06:00", maxTime: "20:00" });
     $("#sample_sample_begin_time").timeEntry({ show24Hours: true, minTime: "06:00", maxTime: "20:00" });

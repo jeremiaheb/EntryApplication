@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+bootstrap-datepicker@1.6.4:
+  version "1.6.4"
+  resolved "https://registry.yarnpkg.com/bootstrap-datepicker/-/bootstrap-datepicker-1.6.4.tgz#889ebeced8eaa2ff15ec1f273e4b07531cc43da0"
+  integrity sha512-dPEUbP2JlWGHJWJEWfBIyFFR+iMgERj/bZR1oHqlaCRke2oILljMMFrlMZrgdpZigj5Ly9TdZzCNuYz4hRJ+7A==
+  dependencies:
+    jquery ">=1.7.1"
+
 datatables.net-dt@^2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/datatables.net-dt/-/datatables.net-dt-2.3.2.tgz#bb34e814b41cfe3c20751bfc32410b0cc2497aa8"
@@ -17,7 +24,24 @@ datatables.net@2.3.2:
   dependencies:
     jquery ">=1.7"
 
-jquery@>=1.7:
+jquery-ujs@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/jquery-ujs/-/jquery-ujs-1.2.3.tgz#dcac6026ab7268e5ee41faf9d31c997cd4ddd603"
+  integrity sha512-59wvfx5vcCTHMeQT1/OwFiAj+UffLIwjRIoXdpO7Z7BCFGepzq9T9oLVeoItjTqjoXfUrHJvV7QU6pUR+UzOoA==
+
+jquery-validation@1.16.0:
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/jquery-validation/-/jquery-validation-1.16.0.tgz#b6e5277ebbd67c1fabab213eb4454eea8a3095ca"
+  integrity sha512-Pv60SCOTI6apHXZdjjs8Tztv9D47ylI3ejTHdOQetdoXdjJ0tXRFLnuYGd3G+xGPMR60MMVIgVy4xC60cGP77A==
+  dependencies:
+    jquery "^1.7 || ^2.0 || ^3.1"
+
+jquery@>=1.7, jquery@>=1.7.1, "jquery@^1.7 || ^2.0 || ^3.1", jquery@^3.7.1:
   version "3.7.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.7.1.tgz#083ef98927c9a6a74d05a6af02806566d16274de"
   integrity sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg==
+
+underscore@1.13.7:
+  version "1.13.7"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.13.7.tgz#970e33963af9a7dda228f17ebe8399e5fbe63a10"
+  integrity sha512-GMXzWtsc57XAtguZgaQViUOzs0KTkk8ojr3/xAxXLITqf/3EMwxC0inyETfDFjH/Krbhuep0HNbbjI9i/q3F3g==

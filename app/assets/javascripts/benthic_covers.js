@@ -14,12 +14,9 @@ $(function(){
   
   $("#benthic_cover_sample_date").datepicker({
     format: 'yyyy-mm-dd',
+    orientation: "bottom",
     autoclose: true
   });
-
-  if ( $('body').hasClass('new') ) {
-    $("#benthic_cover_sample_date").datepicker("setDate", new Date());
-  };
 
   $("#benthic_cover_sample_begin_time").timeEntry({ show24Hours: true, minTime: "06:00", maxTime: "20:00" }); 
 

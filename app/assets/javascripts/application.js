@@ -10,19 +10,18 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
-//= require jquery-ui
-//= require jquery_ujs
+//= require jquery/dist/jquery
+//= require jquery-ujs/src/rails
 //= require datatables.net/js/dataTables
 //= require datatables.net-dt/js/dataTables.dataTables
-//= require bootstrap-datepicker
 //= require select2
-//= require jquery.validate
+//= require jquery-validation/dist/jquery.validate
 //= require twitter/bootstrap
-//= require jquery-ui/datepicker
 //= require jquery_nested_form
-//= require underscore-umd
-//= require_tree ../../../vendor/assets/javascripts
+//= require underscore/underscore-umd
+//= require jquery.plugin
+//= require jquery.timeentry
+//= require bootstrap-datepicker/dist/js/bootstrap-datepicker
 //
 //= require ./benthic_covers
 //= require ./boat_logs

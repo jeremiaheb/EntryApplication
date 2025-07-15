@@ -65,6 +65,7 @@ class SamplesController < ApplicationController
       @sample = Sample.new(@draft.model_attributes)
     else
       @sample = Sample.new.tap do |s|
+        s.sample_date ||= Date.current
         s.sample_type ||= SampleType.default
         s.sample_animals.build
       end

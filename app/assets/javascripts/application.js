@@ -20,7 +20,8 @@
 //= require twitter/bootstrap
 //= require jquery_nested_form
 //= require underscore/underscore-umd
-//= require_tree ../../../vendor/assets/javascripts
+//= require jquery.plugin
+//= require jquery.timeentry
 //
 //= require ./benthic_covers
 //= require ./boat_logs

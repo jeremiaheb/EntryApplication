@@ -2,25 +2,16 @@ class CoralsController < ApplicationController
   before_action :authenticate_diver!
   load_and_authorize_resource
 
+  layout "application-uswds"
+
   # GET /corals
   # GET /corals.json
   def index
-    @corals = Coral.all
+    @corals = Coral.order(:code, :rank)
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @corals }
-    end
-  end
-
-  # GET /corals/1
-  # GET /corals/1.json
-  def show
-    @coral = Coral.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @coral }
     end
   end
 

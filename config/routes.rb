@@ -5,7 +5,7 @@ EntryApplication::Application.routes.draw do
     post :draft, on: :collection
   end
 
-  resources :corals
+  resources :corals, except: [:show]
   
   resources :cover_cats
 

@@ -3,7 +3,7 @@
 
   <ul class="usa-button-group margin-bottom-1">
     <li class="usa-button-group__item">
-      <%= link_to "New Coral", new_coral_path, class: "usa-button" %>
+      <%= link_to "New Coral", new_coral_path, class: "new-coral-button usa-button" %>
     </li>
   </ul>
 
@@ -25,7 +25,7 @@
           <td><%= coral.short_code %></td>
           <td><%= coral.rank %></td>
           <td>
-            <ul class="usa-button-group">
+            <ul class="usa-button-group float-right">
               <li class="usa-button-group__item">
                 <%= link_to "Edit", edit_coral_path(coral), class: "usa-button usa-button--outline" %>
               </li>

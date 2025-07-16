@@ -83,9 +83,9 @@
 
     <div class="span1">
       <div class="img_box">
-       <a href=<%= url_for corals_path %>>
-           <img <%= image_tag 'FormButton.jpg' %>
-       </a>
+        <%= link_to corals_path, class: "corals-link" do %>
+          <%= image_tag "FormButton.jpg" %>
+        <% end %>
       </div>
       <div class="text">
         <h6>Coral List</h6>

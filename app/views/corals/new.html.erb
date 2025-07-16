@@ -1,6 +1,6 @@
 <div class="grid-row">
   <div class="grid-col-12">
-    <h2>New Coral</h2>
+    <%= render "shared/nav_breadcrumbs", object: [["Corals", corals_path], ["New Coral", ""]] %>
     <%= render 'form' %>
   </div>
 </div>

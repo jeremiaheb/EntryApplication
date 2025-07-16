@@ -15,11 +15,15 @@
 
   <body>
     <div class="usa-overlay"></div>
-    <header class="usa-header usa-header--basic">
+    <header class="usa-header usa-header--basic bg-primary-lighter">
       <div class="usa-nav-container">
         <div class="usa-navbar">
-          <div class="usa-logo">
-            <em class="usa-logo__text"><%= link_to "Home 2025", root_path %></em>
+          <div class="usa-logo margin-y-2">
+            <em class="usa-logo__text">
+              <%= link_to root_path, class: "text-base-lightest" do %>
+                <span>Home 2025</span>
+              <%- end %>
+            </em>
           </div>
           <button type="button" class="usa-menu-btn">Menu</button>
         </div>

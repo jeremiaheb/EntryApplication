@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby '2.7.8'
-gem 'rails', '~> 6.0', '>= 6.0.6.1'
+gem 'rails', '~> 6.1', '>= 6.1.7.10'
 
 # TODO: Remove after upgrading to Rails 7
 # See https://github.com/rails/rails/issues/54263
@@ -9,8 +9,7 @@ gem 'concurrent-ruby', '< 1.3.5'
 
 gem 'pg'
 
-# < 6 until Ruby 2.7. Bump capybara alongside that too.
-gem 'puma', '>= 5.0', '< 6'
+gem 'puma', '~> 6.6'
 
 # TODO: Update after upgrade to Ruby >= 3.1
 gem 'dartsass-sprockets', '~> 3.0'
@@ -29,15 +28,15 @@ gem 'capistrano-rails'
 gem 'capistrano-rbenv'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development do
-  gem 'listen', '~> 3.2'
+  gem 'listen', '~> 3.3'
 end
 
 group :test do
-  gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
+  gem 'capybara', '>= 3.26'
+  gem 'selenium-webdriver', '>= 4.0.0.rc1'
 end
 
 group :development, :test do

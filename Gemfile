@@ -1,27 +1,26 @@
 source 'https://rubygems.org'
 
-ruby '2.7.8'
 gem 'rails', '~> 6.1', '>= 6.1.7.10'
 
 # TODO: Remove after upgrading to Rails 7
 # See https://github.com/rails/rails/issues/54263
 gem 'concurrent-ruby', '< 1.3.5'
 
-gem 'pg'
+gem 'pg', '~> 1.5', '>= 1.5.9'
 
 gem 'puma', '~> 6.6'
 
-# TODO: Update after upgrade to Ruby >= 3.1
-gem 'dartsass-sprockets', '~> 3.0'
+gem 'dartsass-sprockets', '~> 3.2', '>= 3.2.1'
+gem 'sassc-embedded'
 
 gem 'nested_form', '0.3.2'
 
 gem 'devise', '~> 4.9', '>= 4.9.4'
-gem 'cancancan', '~> 3.0'
+gem 'cancancan', '~> 3.6', '>= 3.6.1'
 
-gem 'prawn', '~> 2.2', '>= 2.2.2'
-gem 'prawn-table', '~> 0.2', '>= 0.2.2'
-gem 'caxlsx_rails'
+gem 'prawn', '~> 2.5'
+gem 'prawn-table', '~> 0.2.2'
+gem 'caxlsx_rails', '~> 0.6.4'
 
 gem 'capistrano'
 gem 'capistrano-rails'
@@ -40,10 +39,7 @@ group :test do
 end
 
 group :development, :test do
-  # TODO: Upgrade after upgrade to Ruby 3 is complete
-  gem 'factory_bot_rails', '~> 5.2', '< 6'
+  gem 'factory_bot_rails', '~> 6.5'
+  gem 'faker', '~> 3.5', '>= 3.5.2'
   gem 'pry'
-
-  # TODO: Upgrade to faker 3.x after upgrade to Ruby 3 is complete
-  gem 'faker', '~> 2.22'
 end

@@ -386,7 +386,7 @@
       ansible.builtin.git:
         repo: "https://github.com/rbenv/ruby-build"
         dest: "/var/www/apps/EntryApplication/.rbenv/plugins/ruby-build"
-        version: "v20250610"
+        version: "v20250716"
       become: true
       become_user: entryapplication
 
@@ -408,10 +408,10 @@
       become: true
       become_user: entryapplication
 
-    - name: install ruby 2.7.8
+    - name: install ruby 3.1.7
       ansible.builtin.command:
-        cmd: "/var/www/apps/EntryApplication/.rbenv/bin/rbenv install 2.7.8"
-        creates: "/var/www/apps/EntryApplication/.rbenv/versions/2.7.8"
+        cmd: "/var/www/apps/EntryApplication/.rbenv/bin/rbenv install 3.1.7"
+        creates: "/var/www/apps/EntryApplication/.rbenv/versions/3.1.7"
       become: true
       become_user: entryapplication
 
@@ -605,7 +605,7 @@
       ansible.builtin.git:
         repo: "https://github.com/rbenv/ruby-build"
         dest: "{{ ansible_user_dir }}/.rbenv/plugins/ruby-build"
-        version: "v20250610"
+        version: "v20250716"
       when: development_build is defined
 
     - name: add rbenv init to ~/.bashrc
@@ -616,10 +616,10 @@
           eval "$(~/.rbenv/bin/rbenv init - --no-rehash bash)"
       when: development_build is defined
 
-    - name: install ruby 2.7.8
+    - name: install ruby 3.1.7
       ansible.builtin.command:
-        cmd: "{{ ansible_user_dir }}/.rbenv/bin/rbenv install 2.7.8"
-        creates: "{{ ansible_user_dir }}/.rbenv/versions/2.7.8"
+        cmd: "{{ ansible_user_dir }}/.rbenv/bin/rbenv install 3.1.7"
+        creates: "{{ ansible_user_dir }}/.rbenv/versions/3.1.7"
       when: development_build is defined
 
     - name: install nvm

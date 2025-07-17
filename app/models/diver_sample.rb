@@ -6,5 +6,5 @@ class DiverSample < ActiveRecord::Base
   scope :secondary, lambda { where(primary_diver: false) }
 
   validates :primary_diver, inclusion: [true, false]
-  validates :diver_id, :presence => true
+  validates :diver_id, presence: true
 end

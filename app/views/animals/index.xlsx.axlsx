@@ -1,17 +1,17 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "SpeciesList") do |sppSheet|
-  sppSheet.add_row [ 'SPP_CD',
-                     'sci_name',
-                     'common_name',
-                     'min_size',
-                     'max_size',
-                     'max_num' ]
+  sppSheet.add_row ["SPP_CD",
+                     "sci_name",
+                     "common_name",
+                     "min_size",
+                     "max_size",
+                     "max_num",]
   @animals.each do |animal|
     sppSheet.add_row [animal.species_code,
                       animal.scientific_name,
                       animal.common_name,
                       animal.min_size,
                       animal.max_size,
-                      animal.max_number ]
+                      animal.max_number,]
   end
 end

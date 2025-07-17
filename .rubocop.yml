@@ -2,6 +2,8 @@
 inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 
 # Overwrite or add rules to create your own house style
+Layout/SpaceInsideArrayLiteralBrackets:
+  EnforcedStyle: no_space
 Style/TrailingCommaInArguments:
   EnforcedStyleForMultiline: consistent_comma
 Style/TrailingCommaInArrayLiteral:

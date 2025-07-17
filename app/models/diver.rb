@@ -1,26 +1,26 @@
 class Diver < ActiveRecord::Base
-  ADMIN   = 'admin'
-  MANAGER = 'manager'
-  DIVER   = 'diver'
+  ADMIN   = "admin"
+  MANAGER = "manager"
+  DIVER   = "diver"
   ROLES   = [ADMIN, MANAGER, DIVER]
 
   devise :database_authenticatable, :recoverable, :registerable, :rememberable, :trackable, :validatable
 
   belongs_to  :boatlog_manager
   has_many    :diver_samples
-  has_many    :samples, :through => :diver_samples, :dependent => :destroy
+  has_many    :samples, through: :diver_samples, dependent: :destroy
 
   has_many    :benthic_covers
   has_many    :coral_demographics
 
   has_many    :rep_logs
-  
-  validates   :diver_number, :presence => true
-  validates   :diver_name, :presence => true
-  validates   :boatlog_manager_id, :uniqueness => true, :allow_nil => true
 
-  scope       :active_divers,      lambda { where(:active => true) }
-  
+  validates   :diver_number, presence: true
+  validates   :diver_name, presence: true
+  validates   :boatlog_manager_id, uniqueness: true, allow_nil: true
+
+  scope       :active_divers,      lambda { where(active: true) }
+
   def diver_proofing_samples
     diver_samples.primary.joins(:sample).order("sample_date")
   end

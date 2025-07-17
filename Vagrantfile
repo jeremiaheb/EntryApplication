@@ -34,14 +34,14 @@ Vagrant.configure("2") do |config|
   config.vm.provision "ansible_local" do |ansible|
     ansible.playbook = "server/playbook.yml"
     ansible.extra_vars = {
-      "development_build" => "true"
+      "development_build" => "true",
     }.compact
   end
 
   # Mounting /vagrant/node_modules
   config.trigger.after [:up, :reload] do |t|
     t.info = "Mounting /vagrant/node_modules"
-    t.run_remote = {inline: "sudo mount /vagrant/node_modules"}
+    t.run_remote = { inline: "sudo mount /vagrant/node_modules" }
   end
 
   config.ssh.forward_agent = true

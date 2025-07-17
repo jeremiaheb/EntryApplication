@@ -1,20 +1,20 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "DiverList") do |diverSheet|
-  diverSheet.add_row ['DIVER_NUM',
-                      'DIVER_NAME',
-                      'username',
-                      'email',
-                      'password',
-                      'active',
-                      'role']
+  diverSheet.add_row ["DIVER_NUM",
+                      "DIVER_NAME",
+                      "username",
+                      "email",
+                      "password",
+                      "active",
+                      "role",]
   @divers.each do |diver|
-    diverSheet.add_row [diver.diver_number,         
+    diverSheet.add_row [diver.diver_number,
                         diver.diver_name,
                         diver.username,
                         diver.email,
                         diver.password,
                         diver.active,
-                        diver.role],
-                        :types => [ :string ]
+                        diver.role,],
+                        types: [:string]
   end
 end

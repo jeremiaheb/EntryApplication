@@ -6,7 +6,7 @@ EntryApplication::Application.routes.draw do
   end
 
   resources :corals, except: [:show]
-  
+
   resources :cover_cats
 
   resources :coral_demographics do
@@ -19,14 +19,14 @@ EntryApplication::Application.routes.draw do
 
   resources :boatlog_managers
 
-  #devise_for :divers
-  devise_for :divers, :skip => [:registrations]
+  # devise_for :divers
+  devise_for :divers, skip: [:registrations]
   devise_scope :diver do
-    get "signin",                       :to => "devise/sessions#new"
-    get "signout",                      :to => "devise/sessions#destroy"
-    get "cancel_diver_registration",    :to => "devise/registrations#cancel"
-    put "diver_registration",           :to => "devise/registrations#update"
-    get "edit_diver_registration",      :to => "devise/registrations#edit"
+    get "signin",                       to: "devise/sessions#new"
+    get "signout",                      to: "devise/sessions#destroy"
+    get "cancel_diver_registration",    to: "devise/registrations#cancel"
+    put "diver_registration",           to: "devise/registrations#update"
+    get "edit_diver_registration",      to: "devise/registrations#edit"
   end
 
   get "static_pages/home"
@@ -46,7 +46,7 @@ EntryApplication::Application.routes.draw do
 
   resources :animals
 
-  get 'samples/:id/proofing_template' => 'samples#proofing_template'
+  get "samples/:id/proofing_template" => "samples#proofing_template"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -96,7 +96,7 @@ EntryApplication::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'static_pages#home'
+  root to: "static_pages#home"
 
   # See how all your routes lay out with "rake routes"
 

@@ -5,7 +5,6 @@ class EditStationLogsCoordinateFields < ActiveRecord::Migration[5.1]
 
     add_column :station_logs, :latitude, :decimal
     add_column :station_logs, :longitude, :decimal
-
   end
 
   def down

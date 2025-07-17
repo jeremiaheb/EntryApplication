@@ -1,24 +1,23 @@
 
 wb = xlsx_package.workbook
-wb.add_worksheet(name: 'boatlog_initial') do |sheet|
-  sheet.add_row [ 'fieldid', 'date', 'time', 'DIVER_NR', 'DIVER_NAME', 'lat', 'lon', 'LOG_COMMENTS' ]
+wb.add_worksheet(name: "boatlog_initial") do |sheet|
+  sheet.add_row ["fieldid", "date", "time", "DIVER_NR", "DIVER_NAME", "lat", "lon", "LOG_COMMENTS"]
     @boat_logs.each do |boatlog|
       boatlog.station_logs.each do |station_log|
         station_log.rep_logs.each do |rep_log|
-          sheet.add_row [ rep_log.field_id,
+          sheet.add_row [rep_log.field_id,
                           boatlog.date,
-                          station_log.time.strftime('%H:%M'),
+                          station_log.time.strftime("%H:%M"),
                           rep_log.diver.diver_number,
                           rep_log.diver.diver_name,
                           station_log.latitude,
                           station_log.longitude,
-                          station_log.comments ],
-                          :types => [nil,
+                          station_log.comments,],
+                          types: [nil,
                                      nil,
                                      nil,
-                                     :string]
+                                     :string,]
         end
       end
     end
 end
-

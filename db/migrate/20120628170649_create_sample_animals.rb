@@ -8,7 +8,6 @@ class CreateSampleAnimals < ActiveRecord::Migration[5.1]
       t.integer :min_length
       t.integer :max_length
       t.integer :time_seen
-
     end
   end
 end

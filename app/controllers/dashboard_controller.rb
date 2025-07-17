@@ -1,7 +1,7 @@
 class DashboardController < ApplicationController
   before_action :authenticate_diver!
   before_action :manager_or_admin?
- 
+
  def show
   if current_diver.admin?
     @boat_logs = BoatLog.all
@@ -26,7 +26,7 @@ class DashboardController < ApplicationController
           "boat"   => 0,
           "sample" => 0,
           "lpi"    => 0,
-          "demo"   => 0
+          "demo"   => 0,
         }
       end
 

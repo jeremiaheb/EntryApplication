@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 6.1', '>= 6.1.7.10'
+gem 'rails', '7.0.8.7'
 
 # TODO: Remove after upgrading to Rails 7
 # See https://github.com/rails/rails/issues/54263

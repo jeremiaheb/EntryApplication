@@ -2,9 +2,8 @@
   Attached is a database backup from <%= @hostname %> generated on <%= @now.strftime("%Y-%m-%d %H:%M:%S%z") %>.
 </p>
 <p>
-  To restore it, copy it to a server as <code>db.dump</code> and run:
+  To restore it, copy it to a server and run:
 </p>
 <p>
-  <pre><code>sudo -u postgres createdb --owner=DB_NAME DB_NAME # replace DB_NAME with a real database name
-sudo -u postgres pg_restore --role=DB_NAME --dbname=DB_NAME db.dump</code></pre>
+  <pre><code>bin/rake db:restore FILE=<%= @filename %></code></pre>
 </p>

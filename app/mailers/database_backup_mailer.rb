@@ -4,8 +4,9 @@ class DatabaseBackupMailer < ApplicationMailer
   def backup
     @now = Time.zone.now
     @hostname = Socket.gethostname
+    @filename = "backup_#{@hostname.split(/\./).first}_#{@now.strftime("%Y-%m-%d")}.dump"
 
-    attachments["backup_#{@hostname.split(/\./).first}_#{@now.strftime("%Y-%m-%d")}.dump"] = {
+    attachments[@filename] = {
       mime_type: "application/octet-stream",
       content: params[:content],
     }

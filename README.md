@@ -32,7 +32,7 @@ Once `vagrant up` or `vagrant provision` completes, you can get a shell on the V
 vagrant ssh
 ```
 
-To setup the application, with a `vagrant ssh` session, run:
+To setup the application, within a `vagrant ssh` session, run:
 
 ```bash
 bin/setup

@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "@uswds/uswds": "^3.13.0",
-    "bootstrap-datepicker": "1.6.4",
+    "bootstrap-datepicker": "1.10.0",
     "datatables.net-dt": "^2.3.2",
     "jquery": "^3.7.1",
     "jquery-ujs": "^1.2.3",

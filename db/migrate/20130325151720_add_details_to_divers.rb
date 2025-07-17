@@ -5,6 +5,5 @@ class AddDetailsToDivers < ActiveRecord::Migration[5.1]
     add_column :divers, :firstname, :string
 
     add_column :divers, :lastname, :string
-
   end
 end

@@ -47,7 +47,7 @@ class SampleTypesController < ApplicationController
 
     respond_to do |format|
       if @sample_type.save
-        format.html { redirect_to @sample_type, notice: 'Sample type was successfully created.' }
+        format.html { redirect_to @sample_type, notice: "Sample type was successfully created." }
         format.json { render json: @sample_type, status: :created, location: @sample_type }
       else
         format.html { render action: "new" }
@@ -63,7 +63,7 @@ class SampleTypesController < ApplicationController
 
     respond_to do |format|
       if @sample_type.update(sample_type_params)
-        format.html { redirect_to @sample_type, notice: 'Sample type was successfully updated.' }
+        format.html { redirect_to @sample_type, notice: "Sample type was successfully updated." }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

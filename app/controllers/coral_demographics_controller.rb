@@ -5,10 +5,10 @@ class CoralDemographicsController < ApplicationController
   # GET /coral_demographics
   # GET /coral_demographics.json
   def index
-    if current_diver.role == 'admin'
+    if current_diver.role == "admin"
       @coral_demographics = CoralDemographic.all
-    elsif current_diver.role == 'manager'
-      @coral_demographics = CoralDemographic.where( "diver_id=? OR boatlog_manager_id=?", current_diver, current_diver.boatlog_manager_id )
+    elsif current_diver.role == "manager"
+      @coral_demographics = CoralDemographic.where("diver_id=? OR boatlog_manager_id=?", current_diver, current_diver.boatlog_manager_id)
     else
       @coral_demographics = current_diver.coral_demographics
     end
@@ -20,7 +20,7 @@ class CoralDemographicsController < ApplicationController
         # Prevent caching
         no_store
       end
-      format.pdf do 
+      format.pdf do
         # Prevent caching
         no_store
 
@@ -81,7 +81,7 @@ class CoralDemographicsController < ApplicationController
       if @coral_demographic.save
         Draft.destroy_for(diver_id: current_diver.id, model_klass: CoralDemographic, model_id: nil)
 
-        format.html { redirect_to coral_demographics_path, notice: 'Coral demographic was successfully created.' }
+        format.html { redirect_to coral_demographics_path, notice: "Coral demographic was successfully created." }
         format.json { render json: @coral_demographic, status: :created, location: @coral_demographic }
       else
         format.html { render action: "new" }
@@ -99,7 +99,7 @@ class CoralDemographicsController < ApplicationController
       if @coral_demographic.update(coral_demographic_params)
         Draft.destroy_for(diver_id: current_diver.id, model_klass: CoralDemographic, model_id: @coral_demographic.id)
 
-        format.html { redirect_to coral_demographics_path, notice: 'Coral demographic was successfully updated.' }
+        format.html { redirect_to coral_demographics_path, notice: "Coral demographic was successfully updated." }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

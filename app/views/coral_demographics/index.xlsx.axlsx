@@ -1,68 +1,66 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "CoralDemoSample") do |sampSheet|
-  sampSheet.add_row [ 'MASTER_SAMPLE_CD',
-                      'DIVER_NR',
-                      'BUDDY_NR',
-                      'divhab',
-                      'habname',
-                      'YEAR',
-                      'MONTH',
-                      'DAY',
-                      'divbegh',
-                      'divbegm',
-                      'fieldid',
-                      'meters_completed',
-                      'percent_hardbottom',
-                      'SAMPLE_DESCR'
-                      ]
+  sampSheet.add_row ["MASTER_SAMPLE_CD",
+                      "DIVER_NR",
+                      "BUDDY_NR",
+                      "divhab",
+                      "habname",
+                      "YEAR",
+                      "MONTH",
+                      "DAY",
+                      "divbegh",
+                      "divbegm",
+                      "fieldid",
+                      "meters_completed",
+                      "percent_hardbottom",
+                      "SAMPLE_DESCR",
+]
   @coral_demographics.each do |c_demo|
-    sampSheet.add_row [ c_demo.msn,
+    sampSheet.add_row [c_demo.msn,
                         c_demo.diver.diver_number,
                         Diver.find(c_demo.buddy).diver_number,
                         c_demo.habitat_type.id,
                         c_demo.habitat_type.habitat_name,
-                        c_demo.sample_date.strftime('%Y'),       
-                        c_demo.sample_date.strftime('%m'),      
-                        c_demo.sample_date.strftime('%d'),      
-                        c_demo.sample_begin_time.strftime('%H'),  
-                        c_demo.sample_begin_time.strftime('%M'),  
-                        c_demo.field_id,                        
-                        c_demo.meters_completed,                        
-                        c_demo.percent_hardbottom,                        
-                        c_demo.sample_description ],
-                        :types => [ :string,
+                        c_demo.sample_date.strftime("%Y"),
+                        c_demo.sample_date.strftime("%m"),
+                        c_demo.sample_date.strftime("%d"),
+                        c_demo.sample_begin_time.strftime("%H"),
+                        c_demo.sample_begin_time.strftime("%M"),
+                        c_demo.field_id,
+                        c_demo.meters_completed,
+                        c_demo.percent_hardbottom,
+                        c_demo.sample_description,],
+                        types: [:string,
                                     :string,
-                                    :string] 
-                          
+                                    :string,]
   end
 end
 
 
 wb.add_worksheet(name: "DemoCorals") do |demo_sheet|
-  demo_sheet.add_row ['MASTER_SAMPLE_CD',
-                      'meter_mark',
-                      'CORAL_CD',
-                      'MAX_DIAMETER',
-                      'PERP_DIAMETER',
-                      'HEIGHT',
-                      'OLD_MORT',
-                      'RECENT_MORT',
-                      'BLEACH_CONDITION',
-                      'DISEASE' ]
+  demo_sheet.add_row ["MASTER_SAMPLE_CD",
+                      "meter_mark",
+                      "CORAL_CD",
+                      "MAX_DIAMETER",
+                      "PERP_DIAMETER",
+                      "HEIGHT",
+                      "OLD_MORT",
+                      "RECENT_MORT",
+                      "BLEACH_CONDITION",
+                      "DISEASE",]
   @coral_demographics.each do |c_demo|
     c_demo.demographic_corals.each do |d_coral|
-      demo_sheet.add_row [ d_coral.coral_demographic.msn,         
+      demo_sheet.add_row [d_coral.coral_demographic.msn,
                           d_coral.meter_mark,
                           d_coral.coral.try(:code),
-                          d_coral.max_diameter, 
-                          d_coral.perpendicular_diameter,     
-                          d_coral.height,     
-                          d_coral.old_mortality,     
-                          d_coral.recent_mortality,     
+                          d_coral.max_diameter,
+                          d_coral.perpendicular_diameter,
+                          d_coral.height,
+                          d_coral.old_mortality,
+                          d_coral.recent_mortality,
                           d_coral.bleach_condition,
-                          d_coral.disease ],
-                          :types => [ :string ]
+                          d_coral.disease,],
+                          types: [:string]
     end
   end
-end  
-
+end

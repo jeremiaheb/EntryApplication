@@ -5,10 +5,10 @@ class BoatLogsController < ApplicationController
   # GET /boat_logs
   # GET /boat_logs.json
   def index
-    if current_diver.role == 'admin'
+    if current_diver.role == "admin"
       @boat_logs = BoatLog.all
-    elsif current_diver.role == 'manager'
-      @boat_logs = BoatLog.where( "boatlog_manager_id=?", current_diver.boatlog_manager_id )
+    elsif current_diver.role == "manager"
+      @boat_logs = BoatLog.where("boatlog_manager_id=?", current_diver.boatlog_manager_id)
     end
 
     respond_to do |format|
@@ -69,7 +69,7 @@ class BoatLogsController < ApplicationController
       if @boat_log.save
         Draft.destroy_for(diver_id: current_diver.id, model_klass: BoatLog, model_id: nil)
 
-        format.html { redirect_to @boat_log, notice: 'Boat log was successfully created.' }
+        format.html { redirect_to @boat_log, notice: "Boat log was successfully created." }
         format.json { render json: @boat_log, status: :created, location: @boat_log }
       else
         format.html { render action: "new" }
@@ -87,7 +87,7 @@ class BoatLogsController < ApplicationController
       if @boat_log.update(boat_log_params)
         Draft.destroy_for(diver_id: current_diver.id, model_klass: BoatLog, model_id: @boat_log.id)
 
-        format.html { redirect_to @boat_log, notice: 'Boat log was successfully updated.' }
+        format.html { redirect_to @boat_log, notice: "Boat log was successfully updated." }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

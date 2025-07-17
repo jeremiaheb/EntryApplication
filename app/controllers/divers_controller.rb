@@ -51,7 +51,7 @@ class DiversController < ApplicationController
 
     respond_to do |format|
       if @diver.save
-        format.html { redirect_to @diver, notice: 'Diver was successfully created.' }
+        format.html { redirect_to @diver, notice: "Diver was successfully created." }
         format.json { render json: @diver, status: :created, location: @diver }
       else
         format.html { render action: "new" }
@@ -67,7 +67,7 @@ class DiversController < ApplicationController
 
     respond_to do |format|
       if @diver.update(diver_params)
-        format.html { redirect_to @diver, notice: 'Diver was successfully updated.' }
+        format.html { redirect_to @diver, notice: "Diver was successfully updated." }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -93,7 +93,7 @@ class DiversController < ApplicationController
   def diver_params
     allowed_keys = [
       :active, :diver_number, :diver_name, :username, :password, :password_confirmation, :firstname,
-      :lastname, :email, :current_password, :boatlog_manager_id
+      :lastname, :email, :current_password, :boatlog_manager_id,
     ]
 
     allowed_keys << :role if current_diver.admin?

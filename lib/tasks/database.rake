@@ -2,12 +2,12 @@ require "open3"
 
 namespace :db do
   desc "Backup the database and email it to recipients"
-  task :backup => :environment do
+  task backup: :environment do
     connection_config =  Rails.application.config.database_configuration[Rails.env]
 
     stdout_s, stderr_s, status = Open3.capture3(
       { "PGPASSWORD" => connection_config["password"] },
-      "pg_dump", 
+      "pg_dump",
       "--encoding=#{connection_config["encoding"]}",
       "--host=#{connection_config["host"]}",
       "--username=#{connection_config["username"]}",
@@ -24,7 +24,7 @@ namespace :db do
   end
 
   desc "Restore the database from a dump file"
-  task :restore => :environment do
+  task restore: :environment do
     connection_config =  Rails.application.config.database_configuration[Rails.env]
 
     file = ENV.fetch("FILE", nil)
@@ -43,7 +43,7 @@ namespace :db do
 
     stdout_s, stderr_s, status = Open3.capture3(
       { "PGPASSWORD" => connection_config["password"] },
-      "pg_restore", 
+      "pg_restore",
       "--clean",
       "--no-owner",
       "--no-privileges",
@@ -66,8 +66,7 @@ namespace :db do
 
 
   desc "Clear database tables and restart id for each at 1"
-  task :clear_tables => :environment do
-    
+  task clear_tables: :environment do
     tablelist = ["samples", "benthic_covers", "coral_demographics", "boat_logs", "sample_animals", "diver_samples", "point_intercepts", "rugosity_measures", "invert_belts", "presence_belts", "demographic_corals", "rep_logs", "station_logs"]
     auto_val = 1
 
@@ -84,6 +83,5 @@ namespace :db do
       puts "Resetting auto increment for #{table} to #{auto_val}"
       ActiveRecord::Base.connection.execute("ALTER SEQUENCE #{table}_id_seq RESTART WITH #{auto_val}")
     end
-    
   end
 end

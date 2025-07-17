@@ -56,7 +56,7 @@ class BoatlogManagerTest < ActiveSupport::TestCase
     other_benthic_covers = [
       FactoryBot.create(:benthic_cover, boatlog_manager: boatlog_manager),
       FactoryBot.create(:benthic_cover, diver: diver),
-      FactoryBot.create(:benthic_cover)
+      FactoryBot.create(:benthic_cover),
     ]
 
     assert_equal benthic_covers_for_diver.sort, boatlog_manager.benthic_covers_for_diver(diver)
@@ -69,7 +69,7 @@ class BoatlogManagerTest < ActiveSupport::TestCase
     other_coral_demographics = [
       FactoryBot.create(:coral_demographic, boatlog_manager: boatlog_manager),
       FactoryBot.create(:coral_demographic, diver: diver),
-      FactoryBot.create(:coral_demographic)
+      FactoryBot.create(:coral_demographic),
     ]
 
     assert_equal coral_demographics_for_diver.sort, boatlog_manager.coral_demographics_for_diver(diver)

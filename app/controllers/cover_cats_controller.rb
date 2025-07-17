@@ -47,7 +47,7 @@ class CoverCatsController < ApplicationController
 
     respond_to do |format|
       if @cover_cat.save
-        format.html { redirect_to @cover_cat, notice: 'Cover cat was successfully created.' }
+        format.html { redirect_to @cover_cat, notice: "Cover cat was successfully created." }
         format.json { render json: @cover_cat, status: :created, location: @cover_cat }
       else
         format.html { render action: "new" }
@@ -63,7 +63,7 @@ class CoverCatsController < ApplicationController
 
     respond_to do |format|
       if @cover_cat.update(cover_cat_params)
-        format.html { redirect_to @cover_cat, notice: 'Cover cat was successfully updated.' }
+        format.html { redirect_to @cover_cat, notice: "Cover cat was successfully updated." }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

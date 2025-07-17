@@ -1,7 +1,7 @@
 class HabitatTypesController < ApplicationController
   before_action :authenticate_diver!
   load_and_authorize_resource
-  
+
   # GET /habitat_types
   # GET /habitat_types.json
   def index
@@ -47,7 +47,7 @@ class HabitatTypesController < ApplicationController
 
     respond_to do |format|
       if @habitat_type.save
-        format.html { redirect_to @habitat_type, notice: 'Habitat type was successfully created.' }
+        format.html { redirect_to @habitat_type, notice: "Habitat type was successfully created." }
         format.json { render json: @habitat_type, status: :created, location: @habitat_type }
       else
         format.html { render action: "new" }
@@ -63,7 +63,7 @@ class HabitatTypesController < ApplicationController
 
     respond_to do |format|
       if @habitat_type.update(habitat_type_params)
-        format.html { redirect_to @habitat_type, notice: 'Habitat type was successfully updated.' }
+        format.html { redirect_to @habitat_type, notice: "Habitat type was successfully updated." }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -11,7 +11,6 @@ class CreateRugosityMeasures < ActiveRecord::Migration[5.1]
       t.integer :cnt_100_less_than_150
       t.integer :cnt_150_less_than_200
       t.integer :cnt_greater_than_200
-
     end
   end
 end

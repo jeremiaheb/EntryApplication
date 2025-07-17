@@ -9,14 +9,14 @@ class SamplesController < ApplicationController
   # GET /samples
   # GET /samples.json
   def index
-    if current_diver.role == 'admin'
+    if current_diver.role == "admin"
       @samples = Sample.all
-    elsif current_diver.role == 'manager'
-      @samples = Sample.joins(:diver_samples).where( "diver_samples.diver_id=? AND diver_samples.primary_diver=? OR boatlog_manager_id=?", current_diver, true, current_diver.boatlog_manager_id ).uniq
+    elsif current_diver.role == "manager"
+      @samples = Sample.joins(:diver_samples).where("diver_samples.diver_id=? AND diver_samples.primary_diver=? OR boatlog_manager_id=?", current_diver, true, current_diver.boatlog_manager_id).uniq
     else
       @samples = current_diver.samples.merge(DiverSample.primary)
     end
-    
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @samples }
@@ -84,7 +84,7 @@ class SamplesController < ApplicationController
       @sample.assign_attributes(@draft.model_attributes)
     end
   end
-    
+
   # POST /samples
   # POST /samples.json
   def create
@@ -94,7 +94,7 @@ class SamplesController < ApplicationController
       if @sample.save
         Draft.destroy_for(diver_id: current_diver.id, model_klass: Sample, model_id: nil)
 
-        format.html { redirect_to samples_path, notice: 'Sample was successfully created.' }
+        format.html { redirect_to samples_path, notice: "Sample was successfully created." }
         format.json { render json: @sample, status: :created, location: @sample }
       else
         format.html { render action: "new" }
@@ -112,7 +112,7 @@ class SamplesController < ApplicationController
       if @sample.update(sample_params)
         Draft.destroy_for(diver_id: current_diver.id, model_klass: Sample, model_id: @sample.id)
 
-        format.html { redirect_to samples_path, notice: 'Sample was successfully updated.' }
+        format.html { redirect_to samples_path, notice: "Sample was successfully updated." }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

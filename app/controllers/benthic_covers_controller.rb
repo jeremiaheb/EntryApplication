@@ -5,10 +5,10 @@ class BenthicCoversController < ApplicationController
   # GET /benthic_covers
   # GET /benthic_covers.json
   def index
-    if current_diver.role == 'admin'
+    if current_diver.role == "admin"
       @benthic_covers = BenthicCover.all
-    elsif current_diver.role == 'manager'
-      @benthic_covers = BenthicCover.where( "diver_id=? OR boatlog_manager_id=?", current_diver, current_diver.boatlog_manager_id )
+    elsif current_diver.role == "manager"
+      @benthic_covers = BenthicCover.where("diver_id=? OR boatlog_manager_id=?", current_diver, current_diver.boatlog_manager_id)
     else
       @benthic_covers = current_diver.benthic_covers
     end
@@ -20,7 +20,7 @@ class BenthicCoversController < ApplicationController
         # Prevent caching
         no_store
       end
-      format.pdf do 
+      format.pdf do
         # Prevent caching
         no_store
 
@@ -84,7 +84,7 @@ class BenthicCoversController < ApplicationController
       if @benthic_cover.save
         Draft.destroy_for(diver_id: current_diver.id, model_klass: BenthicCover, model_id: nil)
 
-        format.html { redirect_to benthic_covers_path, notice: 'Benthic cover was successfully created.' }
+        format.html { redirect_to benthic_covers_path, notice: "Benthic cover was successfully created." }
         format.json { render json: @benthic_cover, status: :created, location: @benthic_cover }
       else
         format.html { render action: "new" }
@@ -102,7 +102,7 @@ class BenthicCoversController < ApplicationController
       if @benthic_cover.update(benthic_cover_params)
         Draft.destroy_for(diver_id: current_diver.id, model_klass: BenthicCover, model_id: @benthic_cover.id)
 
-        format.html { redirect_to benthic_covers_path, notice: 'Benthic cover was successfully updated.' }
+        format.html { redirect_to benthic_covers_path, notice: "Benthic cover was successfully updated." }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -151,16 +151,13 @@ class BenthicCoversController < ApplicationController
   private
 
   def benthic_cover_params
-
-    params.require(:benthic_cover).permit(:id, '_destroy', :boatlog_manager_id, :diver_id, :buddy, :field_id, :sample_date, :sample_begin_time, :habitat_type_id, :meters_completed, :sample_description,
-                                         point_intercepts_attributes: [:id, '_destroy', :cover_cat_id, :hardbottom_num, :softbottom_num, :rubble_num],
-                                         rugosity_measure_attributes: [:id, '_destroy', :min_depth, :max_depth, :rug_meters_completed, :meter_mark_1,
+    params.require(:benthic_cover).permit(:id, "_destroy", :boatlog_manager_id, :diver_id, :buddy, :field_id, :sample_date, :sample_begin_time, :habitat_type_id, :meters_completed, :sample_description,
+                                         point_intercepts_attributes: [:id, "_destroy", :cover_cat_id, :hardbottom_num, :softbottom_num, :rubble_num],
+                                         rugosity_measure_attributes: [:id, "_destroy", :min_depth, :max_depth, :rug_meters_completed, :meter_mark_1,
                                                                       :meter_mark_2, :meter_mark_3, :meter_mark_4, :meter_mark_5, :meter_mark_6,
                                                                       :meter_mark_7, :meter_mark_8, :meter_mark_9, :meter_mark_10, :meter_mark_11,
-                                                                      :meter_mark_12, :meter_mark_13, :meter_mark_14, :meter_mark_15],
-                                         invert_belt_attributes: [:id, '_destroy', :lobster_num, :conch_num, :diadema_num],
-                                         presence_belt_attributes: [:id, '_destroy', :a_cervicornis, :a_palmata, :d_cylindrus, :m_annularis, :m_faveolata, :m_franksi, :m_ferox])
-  
+                                                                      :meter_mark_12, :meter_mark_13, :meter_mark_14, :meter_mark_15,],
+                                         invert_belt_attributes: [:id, "_destroy", :lobster_num, :conch_num, :diadema_num],
+                                         presence_belt_attributes: [:id, "_destroy", :a_cervicornis, :a_palmata, :d_cylindrus, :m_annularis, :m_faveolata, :m_franksi, :m_ferox])
   end
-
 end

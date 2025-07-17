@@ -408,10 +408,10 @@
       become: true
       become_user: entryapplication
 
-    - name: install ruby 3.1.7
+    - name: install ruby 3.2.8
       ansible.builtin.command:
-        cmd: "/var/www/apps/EntryApplication/.rbenv/bin/rbenv install 3.1.7"
-        creates: "/var/www/apps/EntryApplication/.rbenv/versions/3.1.7"
+        cmd: "/var/www/apps/EntryApplication/.rbenv/bin/rbenv install 3.2.8"
+        creates: "/var/www/apps/EntryApplication/.rbenv/versions/3.2.8"
       become: true
       become_user: entryapplication
 
@@ -616,10 +616,10 @@
           eval "$(~/.rbenv/bin/rbenv init - --no-rehash bash)"
       when: development_build is defined
 
-    - name: install ruby 3.1.7
+    - name: install ruby 3.2.8
       ansible.builtin.command:
-        cmd: "{{ ansible_user_dir }}/.rbenv/bin/rbenv install 3.1.7"
-        creates: "{{ ansible_user_dir }}/.rbenv/versions/3.1.7"
+        cmd: "{{ ansible_user_dir }}/.rbenv/bin/rbenv install 3.2.8"
+        creates: "{{ ansible_user_dir }}/.rbenv/versions/3.2.8"
       when: development_build is defined
 
     - name: install nvm

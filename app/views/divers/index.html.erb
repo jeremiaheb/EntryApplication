@@ -1,33 +1,49 @@
-<div class="appContainer">
-  <div class="diverListContainer">
-    <h1>Listing divers</h1>
-    
-      <table id="diversList", class="display table table-striped table-condensed ">
-        <thead>
+<div class="grid-row">
+  <div class="grid-col-12">
+    <%= render "shared/nav_breadcrumbs", object: [["Divers", ""]] %>
+
+    <ul class="usa-button-group margin-bottom-1">
+      <li class="usa-button-group__item">
+        <%= link_to "New Diver", new_diver_path, class: "new-diver-button usa-button" %>
+      </li>
+      <li class="usa-button-group__item">
+        <%= link_to divers_path(format: "xlsx", nocache: SecureRandom.alphanumeric), class: "usa-button usa-button--accent-cool" do %>
+          <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+            <%= tag.use href: image_path("sprite.svg#file_download") %>
+          </svg> 
+          Download Current Diver List
+        <%- end %>
+      </li>
+    </ul>
+
+    <table class="width-full display">
+      <thead>
         <tr>
-          <th>Diver Number</th>
-          <th>Diver Name</th>
-          <th>Active Diver?</th>
-          <th>edit</th>
-          <th>destroy</th>
+          <th scope="col">Diver Number</th>
+          <th scope="col">Diver Name</th>
+          <th scope="col">Active Diver?</th>
+          <th scole="col"></th>
         </tr>
       </thead>
       <tbody>
-      <% @divers.each do |diver| %>
-        <tr>
-          <td><%= diver.diver_number %></td>
-          <td><%= diver.diver_name %></td>
-          <td><%= diver.active %></td>
-          <td><%= link_to 'Edit', edit_diver_path(diver) %></td>
-          <td><%= link_to 'Destroy', diver, data: { confirm: 'Are you sure?' }, method: :delete %></td>
-        </tr>
-      <% end %>
+        <%- @divers.each do |diver| %>
+          <tr>
+            <td><%= diver.diver_number %></td>
+            <td><%= diver.diver_name %></td>
+            <td><%= diver.active %></td>
+            <td>
+              <ul class="usa-button-group float-right">
+                <li class="usa-button-group__item">
+                  <%= link_to "Edit", edit_diver_path(diver), class: "usa-button usa-button--outline" %>
+                </li>
+                <li class="usa-button-group__item">
+                  <%= link_to "Delete", diver, data: { confirm: "Are you sure?" }, method: "delete", class: "usa-button usa-button--secondary" %>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        <%- end %>
       </tbody>
-      </table>
+    </table>
   </div>
 </div>
-
-    <%= button_to('New Diver', new_diver_path, :method => "get", :class => 'btn btn-large btn-primary wrap')  %>   
-<% if !current_diver.diver? %>
-    <%= button_to('Download Current Diver List', divers_path(format: "xlsx", nocache: SecureRandom.alphanumeric), :method => "get", :class => 'btn btn-small btn-primary')  %>   
-<% end %>

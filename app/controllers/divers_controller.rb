@@ -2,10 +2,12 @@ class DiversController < ApplicationController
   before_action :authenticate_diver!
   load_and_authorize_resource
 
+  layout "application-uswds"
+
   # GET /divers
   # GET /divers.json
   def index
-    @divers = Diver.order(:diver_number).all
+    @divers = Diver.order(:diver_number)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,17 +16,6 @@ class DiversController < ApplicationController
         # Prevent caching
         no_store
       end
-    end
-  end
-
-  # GET /divers/1
-  # GET /divers/1.json
-  def show
-    @diver = Diver.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @diver }
     end
   end
 
@@ -51,7 +42,7 @@ class DiversController < ApplicationController
 
     respond_to do |format|
       if @diver.save
-        format.html { redirect_to @diver, notice: "Diver was successfully created." }
+        format.html { redirect_to divers_url, notice: "Diver was successfully created." }
         format.json { render json: @diver, status: :created, location: @diver }
       else
         format.html { render action: "new" }
@@ -67,7 +58,7 @@ class DiversController < ApplicationController
 
     respond_to do |format|
       if @diver.update(diver_params)
-        format.html { redirect_to @diver, notice: "Diver was successfully updated." }
+        format.html { redirect_to divers_url, notice: "Diver was successfully updated." }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -83,7 +74,7 @@ class DiversController < ApplicationController
     @diver.destroy
 
     respond_to do |format|
-      format.html { redirect_to divers_url }
+      format.html { redirect_to divers_url, notice: "Diver was successfully deleted." }
       format.json { head :no_content }
     end
   end

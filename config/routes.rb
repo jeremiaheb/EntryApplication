@@ -34,7 +34,7 @@ EntryApplication::Application.routes.draw do
   get "static_pages/help"
 
 
-  resources :divers
+  resources :divers, except: [:show]
 
   resources :habitat_types
 

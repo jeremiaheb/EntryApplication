@@ -72,14 +72,14 @@
       <div class="grid-row">
         <div class="grid-col-12">
           <% if flash[:alert].present? %>
-            <div class="usa-alert usa-alert--error usa-alert--slim">
+            <div class="usa-alert usa-alert--error usa-alert--slim margin-top-1">
               <div class="usa-alert__body">
                 <p class="usa-alert__text"><%= flash[:error] %></p>
               </div>
             </div>
           <% end %>
           <% if flash[:notice].present? %>
-            <div class="usa-alert usa-alert--info usa-alert--slim">
+            <div class="usa-alert usa-alert--info usa-alert--slim margin-top-1">
               <div class="usa-alert__body">
                 <p class="usa-alert__text"><%= flash[:notice] %></p>
               </div>

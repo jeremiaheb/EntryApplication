@@ -70,7 +70,7 @@ class CoralsController < ApplicationController
     @coral.destroy
 
     respond_to do |format|
-      format.html { redirect_to corals_url }
+      format.html { redirect_to corals_url, notice: "Coral was successfully deleted." }
       format.json { head :no_content }
     end
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_07_17_132451) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_17_171610) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -128,7 +128,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_07_17_132451) do
     t.string "username"
     t.string "firstname"
     t.string "lastname"
-    t.string "role"
+    t.string "role", default: "diver", null: false
     t.integer "boatlog_manager_id"
     t.index ["boatlog_manager_id"], name: "index_divers_on_boatlog_manager_id", unique: true
   end

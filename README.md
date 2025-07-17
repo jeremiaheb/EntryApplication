@@ -32,7 +32,13 @@ Once `vagrant up` or `vagrant provision` completes, you can get a shell on the V
 vagrant ssh
 ```
 
-To start the Rails server, within a `vagrant ssh` session, run:
+To setup the application, within a `vagrant ssh` session, run:
+
+```bash
+bin/setup
+```
+
+Once `bin/setup` completes, start the server by running:
 
 ```bash
 bin/dev
@@ -104,6 +110,39 @@ To import species lists from the seed files in [db/SupportData](./db/SupportData
 ```bash
 bin/rake import:all
 ```
+
+## Deployment
+
+[Capistrano](https://capistranorb.com/) is used to deploy the code to servers over SSH.
+
+[Create an SSH key](https://cloud.google.com/compute/docs/connect/create-ssh-keys#windows-10-or-later) if you have not already done so.
+
+Next, add the key to an agent running locally. Open a terminal (Git Bash on Windows) and run:
+
+```bash
+eval $(ssh-agent); ssh-add
+```
+
+Within this same terminal, login to the virtual machine:
+
+```bash
+vagrant ssh
+```
+
+Verify the key is available within the virtual machine:
+
+```bash
+# long, random public key should print
+ssh-add -L
+```
+
+With the key available to be used by Capistrano, run:
+
+```
+bin/cap production deploy
+```
+
+You will be prompted for a branch name, which defaults to the current branch. If that is what you want to deploy, simply hit &lt;enter&gt;.
 
 ## Production Setup
 

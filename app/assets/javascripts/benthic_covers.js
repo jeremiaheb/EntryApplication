@@ -15,10 +15,9 @@ $(function () {
     autoclose: true,
   });
 
-  $("#benthic_cover_sample_begin_time").timeEntry({
-    show24Hours: true,
-    minTime: "06:00",
-    maxTime: "20:00",
+  $("#benthic_cover_sample_begin_time").timepicker({
+    timeFormat: "HH:mm",
+    dropdown: false,
   });
 
   $(".coverCats").find(".coverCategory").select2();
@@ -188,6 +187,7 @@ $(function () {
       },
       "benthic_cover[sample_begin_time]": {
         required: true,
+        pattern: /^(06|07|08|09|10|11|12|13|14|15|16|17|18|19|20):([0-9]{2})$/,
       },
       "benthic_cover[habitat_type_id]": {
         required: true,
@@ -307,7 +307,11 @@ $(function () {
         digits: true,
       },
     },
-    messages: {},
+    messages: {
+      "benthic_cover[sample_begin_time]": {
+        pattern: "Time must be between 06:00 and 20:00",
+      },
+    },
   });
 
   function validate_fields() {

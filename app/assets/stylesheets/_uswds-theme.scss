@@ -7,6 +7,7 @@ in the form $setting: value,
 ----------------------------------------
 */
 
+// Refer to https://designsystem.digital.gov/documentation/settings/
 @use "uswds-core" with (
   $theme-font-path: "@uswds/uswds/dist/fonts",
   $theme-footer-max-width: "desktop-lg",

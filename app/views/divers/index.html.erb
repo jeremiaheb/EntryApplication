@@ -4,7 +4,12 @@
 
     <ul class="usa-button-group margin-bottom-1">
       <li class="usa-button-group__item">
-        <%= link_to "New Diver", new_diver_path, class: "new-diver-button usa-button" %>
+        <%= link_to new_diver_path, class: "new-diver-button usa-button" do %>
+          <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+            <%= tag.use href: image_path("sprite.svg#add") %>
+          </svg>
+          New Diver
+        <%- end %>
       </li>
       <li class="usa-button-group__item">
         <%= link_to divers_path(format: "xlsx", nocache: SecureRandom.alphanumeric), class: "usa-button usa-button--accent-cool" do %>

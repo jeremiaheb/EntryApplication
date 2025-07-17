@@ -74,7 +74,7 @@ class DiversController < ApplicationController
     @diver.destroy
 
     respond_to do |format|
-      format.html { redirect_to divers_url }
+      format.html { redirect_to divers_url, notice: "Diver was successfully deleted." }
       format.json { head :no_content }
     end
   end

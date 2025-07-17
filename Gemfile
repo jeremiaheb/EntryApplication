@@ -42,4 +42,7 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 6.5'
   gem 'faker', '~> 3.5', '>= 3.5.2'
   gem 'pry'
+
+  # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
+  gem "rubocop-rails-omakase", require: false
 end

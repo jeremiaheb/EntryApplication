@@ -1,0 +1,12 @@
+  <% if target.errors.any? %>
+    <div class="usa-alert usa-alert--error" id="error_explanation">
+      <div class="usa-alert__body">
+        <h4 class="usa-alert__heading"><%= pluralize(target.errors.count, "error") %> prohibited this record from being saved</h4>
+        <ul class="usa-list">
+          <% target.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>

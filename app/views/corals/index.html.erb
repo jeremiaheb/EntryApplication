@@ -1,27 +1,43 @@
-<div class="appContainer">
-  <div class="animalsListContainer">
-    <h2>Corals List</h2>
-      <table id="animalsList" class="display table table-striped table-condensed">
-        <thead>
+<div class="grid-row">
+  <div class="grid-col-12">
+    <%= render "shared/nav_breadcrumbs", object: [["Corals", ""]] %>
+
+    <ul class="usa-button-group margin-bottom-1">
+      <li class="usa-button-group__item">
+        <%= link_to "New Coral", new_coral_path, class: "new-coral-button usa-button" %>
+      </li>
+    </ul>
+
+    <table class="width-full display">
+      <thead>
         <tr>
-          <th> Code </th>
-          <th> Scientific Name </th>
-          <th> Edit </th>
-          <th> Delete </th>
+          <th scope="col">Code</th>
+          <th scope="col">Scientific Name</th>
+          <th scope="col">Short Code</th>
+          <th scope="col">Rank</th>
+          <th scole="col"></th>
         </tr>
       </thead>
       <tbody>
-      <% @corals.each do |coral| %>
-        <tr>
-          <td><%= coral.code %> </td>
-          <td><%= coral.scientific_name %> </td>
-          <td><%= link_to 'Edit', edit_coral_path(coral) %></td>
-          <td><%= link_to 'Destroy', coral, data: { confirm: 'Are you sure?' }, method: :delete %></td>
-        </tr>
-      <% end %>
+        <%- @corals.each do |coral| %>
+          <tr>
+            <td><%= coral.code %></td>
+            <td><%= coral.scientific_name %></td>
+            <td><%= coral.short_code %></td>
+            <td><%= coral.rank %></td>
+            <td>
+              <ul class="usa-button-group float-right">
+                <li class="usa-button-group__item">
+                  <%= link_to "Edit", edit_coral_path(coral), class: "usa-button usa-button--outline" %>
+                </li>
+                <li class="usa-button-group__item">
+                  <%= link_to "Delete", coral, data: { confirm: "Are you sure?" }, method: "delete", class: "usa-button usa-button--secondary" %>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        <%- end %>
       </tbody>
-      </table>
+    </table>
   </div>
 </div>
-
-    <%= button_to('New Coral', new_coral_path, :method => "get", :class => 'btn btn-large btn-primary wrap')  %>   

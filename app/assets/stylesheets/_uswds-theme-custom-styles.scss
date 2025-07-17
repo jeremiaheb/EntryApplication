@@ -1,0 +1,42 @@
+/*
+* * * * * ==============================
+* * * * * ==============================
+* * * * * ==============================
+* * * * * ==============================
+========================================
+========================================
+========================================
+----------------------------------------
+USWDS THEME CUSTOM STYLES
+----------------------------------------
+!! Copy this file to your project's
+   sass root. Don't edit the version
+   in node_modules.
+----------------------------------------
+Custom project SASS goes here.
+
+i.e.
+@include u-padding-right('05');
+----------------------------------------
+*/
+
+@use "uswds-core" as *;
+
+.usa-section {
+   // Override large Y padding that seems to be hard-coded in USWDS
+   @include at-media("tablet") {
+      @include u-padding-y($theme-site-margins-width);
+   }
+}
+
+.field_with_errors .usa-input {
+   // Copied from styles for .usa-input--error
+   @include u-border($theme-input-state-border-width, "error-dark");
+   padding-top: calc(#{units(1)} - #{units($theme-input-state-border-width)});
+   padding-bottom: calc(#{units(1)} - #{units($theme-input-state-border-width)});
+}
+
+// Conflicting styles between USWDS and DataTables
+[type="search"] {
+   float: initial;
+}

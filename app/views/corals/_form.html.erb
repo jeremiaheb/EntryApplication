@@ -1,25 +1,23 @@
-<%= form_for(@coral) do |f| %>
-  <% if @coral.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@coral.errors.count, "error") %> prohibited this coral from being saved:</h2>
+  <%= form_for @coral, html: { class: "usa-form maxw-full bg-base-lightest" } do |f| %>
+    <%= render "shared/uswds_error_messages", target: @coral %>
 
-      <ul>
-      <% @coral.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+    <fieldset class="usa-fieldset padding-1">
+      <%= f.label :code, class: "usa-label" %>
+      <%= f.text_field :code, class: "usa-input" %>
+
+      <%= f.label :scientific_name, class: "usa-label" %>
+      <%= f.text_field :scientific_name, class: "usa-input" %>
+
+      <%= f.label :common_name, class: "usa-label" %>
+      <%= f.text_field :common_name, class: "usa-input" %>
+
+      <%= f.label :short_code, class: "usa-label" %>
+      <%= f.text_field :short_code, class: "usa-input" %>
+
+      <%= f.label :rank, class: "usa-label" %>
+      <%= f.number_field :rank, class: "usa-input", min: "1" %>
+
+      <%= f.submit class: "usa-button" %>
+      <%= link_to "Cancel", corals_path, class: "usa-button usa-button--outline" %>
+    </fieldset>
   <% end %>
-
-  <div class="field">
-    <%= f.label :code %><br />
-    <%= f.text_field :code %>
-  </div>
-  <div class="field">
-    <%= f.label :scientific_name %><br />
-    <%= f.text_field :scientific_name %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>

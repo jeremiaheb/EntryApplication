@@ -58,7 +58,7 @@ class DashboardController < ApplicationController
     if current_diver.admin? || current_diver.manager?
       true
     else
-      flash[:error] = "You are not authorized to see this page"
+      flash[:alert] = "You are not authorized to see this page"
       redirect_to root_path
       false
     end

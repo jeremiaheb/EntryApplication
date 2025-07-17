@@ -1,6 +1,6 @@
-<h1>Editing coral</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @coral %> |
-<%= link_to 'Back', corals_path %>
+<div class="grid-row">
+  <div class="grid-col-12">
+    <%= render "shared/nav_breadcrumbs", object: [["Corals", corals_path], ["Edit Coral", ""]] %>
+    <%= render 'form' %>
+  </div>
+</div>

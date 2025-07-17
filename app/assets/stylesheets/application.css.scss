@@ -15,7 +15,19 @@
  *= require jquery.timeentry
  *= require datatables.net-dt/css/dataTables.dataTables
  *
- *= require_tree .
+ *= require ./bootstrap_and_overrides
+ *= require ./animals
+ *= require ./benthic_covers
+ *= require ./boat_logs
+ *= require ./coral_demographics
+ *= require ./corals
+ *= require ./dashboard
+ *= require ./divers
+ *= require ./drafts
+ *= require ./habitat_types
+ *= require ./sample_types
+ *= require ./samples
+ *= require ./scaffolds
 */
 
 #substrateSection, #speciesSection {

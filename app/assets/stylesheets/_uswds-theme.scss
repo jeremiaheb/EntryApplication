@@ -1,0 +1,22 @@
+/*
+----------------------------------------
+USWDS with settings overrides
+----------------------------------------
+Uncomment the following lines and add a list of changed settings
+in the form $setting: value,
+----------------------------------------
+*/
+
+// Refer to https://designsystem.digital.gov/documentation/settings/
+@use "uswds-core" with (
+  $theme-font-path: "@uswds/uswds/dist/fonts",
+  $theme-footer-max-width: "desktop-lg",
+  $theme-grid-container-max-width: "desktop-lg",
+  $theme-header-max-width: "desktop-lg",
+  $theme-identifier-max-width: "desktop-lg",
+  $theme-image-path: "@uswds/uswds/dist/img",
+  $theme-in-page-nav-main-content-max-width: "desktop-lg",
+  $theme-show-notifications: false,
+  $theme-site-margins-breakpoint: "desktop-lg",
+  $theme-site-margins-width: 2,
+);

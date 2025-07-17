@@ -2,25 +2,16 @@ class CoralsController < ApplicationController
   before_action :authenticate_diver!
   load_and_authorize_resource
 
+  layout "application-uswds"
+
   # GET /corals
   # GET /corals.json
   def index
-    @corals = Coral.all
+    @corals = Coral.order(:code, :rank)
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @corals }
-    end
-  end
-
-  # GET /corals/1
-  # GET /corals/1.json
-  def show
-    @coral = Coral.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @coral }
     end
   end
 
@@ -47,7 +38,7 @@ class CoralsController < ApplicationController
 
     respond_to do |format|
       if @coral.save
-        format.html { redirect_to @coral, notice: 'Coral was successfully created.' }
+        format.html { redirect_to corals_url, notice: 'Coral was successfully created.' }
         format.json { render json: @coral, status: :created, location: @coral }
       else
         format.html { render action: "new" }
@@ -63,7 +54,7 @@ class CoralsController < ApplicationController
 
     respond_to do |format|
       if @coral.update(coral_params)
-        format.html { redirect_to @coral, notice: 'Coral was successfully updated.' }
+        format.html { redirect_to corals_url, notice: 'Coral was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -19,12 +19,15 @@ $.validator.addMethod(
 $.validator.addMethod("before", function (value, element, params) {
   return value < $(params).val();
 });
+$.validator.addMethod("after", function (value, element, params) {
+  return value > $(params).val();
+});
 
 $.validator.addMethod("lessThanEqualTo", function (value, element, params) {
   return Number(value) <= Number($(params).val());
 });
 $.validator.addMethod("greaterThan", function (value, element, params) {
-  return value > $(params).val();
+  return Number(value) > Number($(params).val());
 });
 $.validator.addMethod("greaterThanEqualTo", function (value, element, params) {
   return Number(value) >= Number($(params).val());

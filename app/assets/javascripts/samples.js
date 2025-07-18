@@ -735,16 +735,16 @@ $(function () {
       },
       "sample[dive_end_time]": {
         required: true,
-        greaterThan: "#sample_dive_begin_time",
+        after: "#sample_dive_begin_time",
       },
       "sample[sample_begin_time]": {
         required: true,
-        greaterThan: "#sample_dive_begin_time",
+        after: "#sample_dive_begin_time",
         before: "#sample_dive_end_time",
       },
       "sample[sample_end_time]": {
         required: true,
-        greaterThan: "#sample_sample_begin_time",
+        after: "#sample_sample_begin_time",
         before: "#sample_dive_end_time",
       },
       "sample[field_id]": {
@@ -857,14 +857,14 @@ $(function () {
     },
     messages: {
       "sample[dive_end_time]": {
-        greaterThan: "Dive end cannot be before dive begin",
+        after: "Dive end cannot be before dive begin",
       },
       "sample[sample_begin_time]": {
-        greaterThan: "Sample begin cannot be before dive begin",
+        after: "Sample begin cannot be before dive begin",
         before: "Sample begin time cannot be after dive end time",
       },
       "sample[sample_end_time]": {
-        greaterThan: "Sample end time cannot be before begin time",
+        after: "Sample end time cannot be before begin time",
         before: "Sample end time cannot be after dive end time",
       },
       "sample[substrate_min_depth]": {

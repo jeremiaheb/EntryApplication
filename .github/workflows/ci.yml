@@ -46,7 +46,7 @@ jobs:
         run: bin/rubocop -f github
 
       - name: Lint JS and CSS with Prettier
-        run: yarn prettier --check app/assets/javascripts/*.js app/assets/stylesheets/*.css app/assets/stylesheets/*.scss
+        run: bin/yarn prettier --check app/assets/**/*.{js,css,scss}
 
   test:
     runs-on: ubuntu-latest

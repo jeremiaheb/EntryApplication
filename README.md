@@ -88,6 +88,24 @@ To run the system tests (`tests/system`) which use a headless Chrome web browser
 bin/rails test:system
 ```
 
+### Code Formatting
+
+[Rubocop](https://github.com/rubocop/rubocop) and [Prettier](https://prettier.io/) are used to maintain a consistent code format.
+
+Most formatting errors can be automatically corrected by the tools themselves.
+
+To run Rubocop and autocorrect any Ruby issues, connect to the Vagrant VM (`vagrant ssh`) and run:
+
+```bash
+bin/rubocop --autocorrect
+```
+
+To run Prettier and autocorrect any JS or CSS issues, connect to the Vagrant VM (`vagrant ssh`) and run:
+
+```bash
+bin/yarn prettier --write app/assets/**/*.{js,css,scss}
+```
+
 ### Data
 
 To develop with a more realistic data set, you can import data or restore data from a production backup, or some combination of both.

@@ -2,7 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
 .demo_corals {
   position: relative;
   width: 100%;
@@ -10,12 +9,12 @@
   overflow: auto;
 }
 
-.demo_corals input  {
+.demo_corals input {
   width: 75px;
 }
 
 .date input {
-  width: 80px; 
+  width: 80px;
 }
 
 .lpiHeaders li {
@@ -34,37 +33,31 @@
 #coral {
   position: relative;
   left: 90px;
-
 }
 
 #max_diam {
   position: relative;
   left: 200px;
-
 }
 
 #perp_diam {
   position: relative;
   left: 260px;
-
 }
 
 #height {
   position: relative;
   left: 325px;
-
 }
 
 #old_mort {
   position: relative;
   left: 375px;
-
 }
 
 #recent_mort {
   position: relative;
   left: 435px;
-
 }
 
 #bleach_cond {

@@ -2,18 +2,15 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
 .part_1 {
   width: 50%;
 }
-
 
 .part_2 {
   width: 50%;
 }
 
 .lpiHeaders {
-
   position: relative;
   font-size: 12px;
   font-weight: bold;
@@ -29,7 +26,7 @@
   left: 178px;
 }
 
-#soft  {
+#soft {
   position: relative;
   left: 200px;
 }
@@ -46,9 +43,7 @@ fieldset {
 .coverTotal {
   width: 200px;
   float: right;
-
 }
-
 
 .cover_data {
   position: relative;
@@ -58,5 +53,5 @@ fieldset {
 }
 
 .date input {
-  width: 80px; 
+  width: 80px;
 }

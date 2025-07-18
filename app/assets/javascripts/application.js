@@ -32,58 +32,53 @@
 
 // Set up our EA namespace for our functions
 var EA = {};
-EA.onRailsPage = function(railsController, railsActions) {
-  var selector = _.map(railsActions, function(action) {
+EA.onRailsPage = function (railsController, railsActions) {
+  var selector = _.map(railsActions, function (action) {
     return "body." + railsController + "." + action;
-  }).join(', ');
-
+  }).join(", ");
 
   return $(selector).length > 0;
-}
+};
 
-$(function(){
+$(function () {
+  $("tr[data-link]").click(function () {
+    window.location = this.dataset.link;
+  });
 
-    $('tr[data-link]').click(function(){
-      window.location = this.dataset.link
-    });
+  $("tr[data-link]").hover(
+    function () {
+      $(this).css("background", "yellow");
+      $(this).css("cursor", "pointer");
+    },
+    function () {
+      $(this).css("background", "");
+    },
+  );
 
-    $('tr[data-link]').hover(
-      function(){
-        $(this).css("background", "yellow");
-        $(this).css("cursor", "pointer");
+  $(document).ready(function () {
+    $(".display").DataTable({
+      layout: {
+        topStart: "search",
+        topEnd: ["info", "paging"],
+        bottomStart: null,
+        bottomEnd: ["info", "paging"],
       },
-      function(){
-        $(this).css("background", "");
-      }
-    );
-    
-
-    $(document).ready(function(){
-
-    $('.display').DataTable({
-      "layout": {
-        "topStart": "search",
-        "topEnd": ["info", "paging"],
-        "bottomStart": null,
-        "bottomEnd": ["info", "paging"],
-      },
-      "pagingType": "full"
+      pagingType: "full",
     });
 
+    $("form").attr("autocomplete", "off");
 
-
-      $('form').attr('autocomplete', 'off');
-
-      $('select').keypress(function(event) 
-        { return cancelBackspace(event) });
-      $('select').keydown(function(event) 
-        { return cancelBackspace(event) });
+    $("select").keypress(function (event) {
+      return cancelBackspace(event);
     });
+    $("select").keydown(function (event) {
+      return cancelBackspace(event);
+    });
+  });
 
-    function cancelBackspace(event) {
-      if (event.keyCode == 8) {
-        return false;
-      }
+  function cancelBackspace(event) {
+    if (event.keyCode == 8) {
+      return false;
     }
-
+  }
 });

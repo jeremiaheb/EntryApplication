@@ -34,8 +34,19 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Lint code for consistent style
+      - name: Set up NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+
+      - name: Install NodeJS dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Lint Ruby with Rubocop
         run: bin/rubocop -f github
+
+      - name: Lint JS and CSS with Prettier
+        run: yarn prettier --check app/assets/javascripts/*.js app/assets/stylesheets/*.css app/assets/stylesheets/*.scss
 
   test:
     runs-on: ubuntu-latest

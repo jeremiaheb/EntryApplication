@@ -19,6 +19,9 @@ $.validator.addMethod("before", function (value, element, params) {
 $.validator.addMethod("lessThanEqualTo", function (value, element, params) {
   return Number(value) <= Number($(params).val());
 });
+$.validator.addMethod("greaterThanEqualTo", function (value, element, params) {
+  return Number(value) >= Number($(params).val());
+});
 
 $.validator.addMethod(
   "lettersonly",

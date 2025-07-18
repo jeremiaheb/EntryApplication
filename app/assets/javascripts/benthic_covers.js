@@ -250,6 +250,8 @@ $(function () {
       "benthic_cover[rugosity_measure_attributes][max_depth]": {
         required: true,
         digits: true,
+        greaterThanEqualTo:
+          "#benthic_cover_rugosity_measure_attributes_min_depth",
       },
       "benthic_cover[rugosity_measure_attributes][rug_meters_completed]": {
         required: true,
@@ -317,7 +319,11 @@ $(function () {
         digits: true,
       },
     },
-    messages: {},
+    messages: {
+      "benthic_cover[rugosity_measure_attributes][max_depth]": {
+        greaterThanEqualTo: "Must be greater than or equal to min depth",
+      },
+    },
   });
 
   function validate_fields() {

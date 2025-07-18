@@ -8,9 +8,13 @@ $.validator.addMethod(
   "FieldID is wrong format",
 );
 
-$.validator.addMethod("greaterThan", function (value, element, params) {
-  return value > $(params).val();
-});
+$.validator.addMethod(
+  "lettersonly",
+  function (value, element) {
+    return this.optional(element) || /[a-zA-Z]+$/.test(value);
+  },
+  "Only one letter",
+);
 
 $.validator.addMethod("before", function (value, element, params) {
   return value < $(params).val();
@@ -19,14 +23,9 @@ $.validator.addMethod("before", function (value, element, params) {
 $.validator.addMethod("lessThanEqualTo", function (value, element, params) {
   return Number(value) <= Number($(params).val());
 });
+$.validator.addMethod("greaterThan", function (value, element, params) {
+  return value > $(params).val();
+});
 $.validator.addMethod("greaterThanEqualTo", function (value, element, params) {
   return Number(value) >= Number($(params).val());
 });
-
-$.validator.addMethod(
-  "lettersonly",
-  function (value, element) {
-    return this.optional(element) || /[a-zA-Z]+$/.test(value);
-  },
-  "Only one letter",
-);

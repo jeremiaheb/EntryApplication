@@ -67,26 +67,28 @@ $(function () {
     getRugosityTotals();
   });
 
-  function getCoverTotals() {
-    var $coverTotals = 0;
-
+  function getCoverTotal() {
+    var coverTotal = 0;
     $(".coverCats")
       .find(".coverPoints:visible")
       .each(function () {
         if ($(this).val() != "") {
-          $coverTotals += parseFloat($(this).val());
+          coverTotal += parseFloat($(this).val());
         }
       });
-    $(".coverTotal").text(" Total Points " + $coverTotals);
+    return coverTotal;
   }
 
-  getCoverTotals();
-  $(".coverCats").change(function () {
-    getCoverTotals();
-  });
+  function updateCoverTotalText() {
+    $(".coverTotal").text(" Total Points " + getCoverTotal());
+  }
 
+  updateCoverTotalText();
+  $(".coverCats").change(function () {
+    updateCoverTotalText();
+  });
   $(document).delegate(".remove_nested_fields", "click", function () {
-    getCoverTotals();
+    updateCoverTotalText();
   });
 
   //puts focus on the select_2 drop down after adding cover pressed
@@ -126,6 +128,16 @@ $(function () {
       $(".benthic_covers").find("select:visible.error").length;
 
     if ($errors == 0) {
+      var coverTotal = getCoverTotal();
+      if (
+        coverTotal !== 100 &&
+        !confirm(
+          `You are submitting ${coverTotal} points. Please confirm you want to proceed.`,
+        )
+      ) {
+        return;
+      }
+
       $(".formContainer :input").not(this).attr("disabled", false);
       $(".new_benthic_cover, .edit_benthic_cover").submit();
     }

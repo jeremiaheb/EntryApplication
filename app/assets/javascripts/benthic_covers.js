@@ -21,6 +21,12 @@ $(function () {
     maxTime: "20:00",
   });
 
+  $("#benthic_cover_meters_completed").on("focusout", function (e) {
+    if ($(this).val() != "15") {
+      alert("Caution: Full survey (15) not entered");
+    }
+  });
+
   $(".coverCats").find(".coverCategory").select2();
   $(document).on("nested:fieldAdded", function (event) {
     event.field.find(".coverCategory").select2();

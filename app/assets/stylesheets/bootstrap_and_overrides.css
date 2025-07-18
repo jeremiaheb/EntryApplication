@@ -3,40 +3,45 @@
   =require css/bootstrap-responsive
   */
 
-body {padding-top: 60px;  }
+body {
+  padding-top: 60px;
+}
 
-select { width: auto; }
+select {
+  width: auto;
+}
 
 .form-horizontal .control-label {
   float: left;
-    width: 150;
+  width: 150;
   padding-top: 5px;
-    text-align: center;
-  }
+  text-align: center;
+}
 
-  .form-horizontal .control-group {
-    margin-bottom: 0px;
-    *zoom: 1;
-  }
+.form-horizontal .control-group {
+  margin-bottom: 0px;
+  *zoom: 1;
+}
 
-  legend {
-    display: inline;
-    text-align: center;
-    width: 100%;
-    padding-bottom: 1px;
-    margin-bottom: 0;
-    font-size: 15px;
-    line-height: 10px;
-    color: #333333;
-    border: 1px;
-    border-bottom: 1px solid #e5e5e5;
-  }
+legend {
+  display: inline;
+  text-align: center;
+  width: 100%;
+  padding-bottom: 1px;
+  margin-bottom: 0;
+  font-size: 15px;
+  line-height: 10px;
+  color: #333333;
+  border: 1px;
+  border-bottom: 1px solid #e5e5e5;
+}
 
-  fieldset {
-    padding: 5;
-    margin: 5;
-    /*border: 1px solid black;*/
-    
-  }
+fieldset {
+  padding: 5;
+  margin: 5;
+  /*border: 1px solid black;*/
+}
 
-  label { cursor: default; }
+label {
+  cursor: default;
+}

@@ -797,12 +797,12 @@ $(function () {
       "sample[substrate_max_depth]": {
         required: true,
         digits: true,
-        minlength: 2,
+        min: 1,
       },
       "sample[substrate_min_depth]": {
         required: true,
         digits: true,
-        minlength: 2,
+        min: 1,
         lessThanEqualTo: "#sample_substrate_max_depth",
       },
       "sample[hard_verticle_relief]": {

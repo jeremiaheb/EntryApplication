@@ -450,7 +450,7 @@ $(function () {
   enable_disable_animals_fields();
 
   $("#validateAnimals").click(function () {
-    $(".validateIcon").empty();
+    $(".validateCross, .validateCheck").hide();
 
     $("#animals")
       .find("input:enabled")
@@ -459,9 +459,9 @@ $(function () {
       });
 
     if ($("#animals").find("input:visible.error").length > 0) {
-      $(".validateIcon").prepend('<img src= <%= asset_path("cross.png") %> />');
+      $(".validateCross").show();
     } else {
-      $(".validateIcon").prepend('<img src= <%= asset_path("check.png") %> />');
+      $(".validateCheck").show();
       $("#submitButton").attr("disabled", false);
     }
   });
@@ -934,7 +934,7 @@ $(function () {
   validate_fields();
   $(document).delegate(".add_nested_fields", "click", function () {
     validate_fields();
-    $(".validateIcon").empty();
+    $(".validateCross, .validateCheck").hide();
     $("#submitButton").attr("disabled", true);
   });
 
@@ -942,7 +942,7 @@ $(function () {
     $("input.error").each(function () {
       $("form").validate().element(this);
     });
-    $(".validateIcon").empty();
+    $(".validateCross, .validateCheck").hide();
     $("#submitButton").attr("disabled", true);
   });
 

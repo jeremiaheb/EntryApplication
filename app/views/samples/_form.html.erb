@@ -246,7 +246,10 @@
  
 
   <div class="actions">
-    <button type="button" class="btn" id="validateAnimals">Validate Species</button><span class="validateIcon"></span>
+    <button type="button" class="btn" id="validateAnimals">Validate Species</button>
+    <span class="validateCross" style="display: none;"><%= image_tag "cross.png" %></span>
+    <span class="validateCheck" style="display: none;"><%= image_tag "check.png" %></span>
+
     <%= f.submit "Submit Sample", :id => "submitButton" %>
   </div>
 

@@ -67,14 +67,6 @@ $(function () {
   });
 
   $.validator.addMethod(
-    "fieldID",
-    function (value, element) {
-      return this.optional(element) || /^\d{5}[a-zA-Z]$/i.test(value);
-    },
-    "FieldID is wrong format",
-  );
-
-  $.validator.addMethod(
     "lessThan",
     function (value, element, params) {
       return (

@@ -509,26 +509,6 @@ $(function () {
     maxTime: "20:00",
   });
 
-  $.validator.addMethod(
-    "fieldID",
-    function (value, element) {
-      return this.optional(element) || /^\d{5}[a-zA-Z]$/i.test(value);
-    },
-    "FieldID is wrong format",
-  );
-
-  $.validator.addMethod("greaterThan", function (value, element, params) {
-    return value > $(params).val();
-  });
-
-  $.validator.addMethod("before", function (value, element, params) {
-    return value < $(params).val();
-  });
-
-  $.validator.addMethod("lessThanEqualTo", function (value, element, params) {
-    return Number(value) <= Number($(params).val());
-  });
-
   // Check that a species record does not have overlapping sizes with another
   // record of the same species
 

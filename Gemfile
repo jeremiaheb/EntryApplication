@@ -36,6 +36,9 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  # Find and fix N+1 queries more easily [https://github.com/flyerhzm/bullet]
+  gem "bullet"
 end
 
 group :development do

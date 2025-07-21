@@ -3,9 +3,6 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  config.assets.prefix = "/caribbean_data_entry/assets"
-  config.relative_url_root = "/caribbean_data_entry"
-
   # Code is not reloaded between requests.
   config.enable_reloading = false
 

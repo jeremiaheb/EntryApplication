@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+autocorrect=""
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+  --autocorrect|-a)
+    autocorrect="1"
+    ;;
+  *)
+    echo "Unknown option: $1" >&2
+    exit 1
+    ;;
+  esac
+
+  shift
+done
+
+if [ -n "$autocorrect" ]; then
+  rubocop_args=(--autocorrect)
+  prettier_args=(--write)
+else
+  rubocop_args=()
+  prettier_args=(--check)
+fi
+
+set -x
+bin/rubocop "${rubocop_args[@]}"
+bin/yarn prettier "${prettier_args[@]}" "app/assets/**/*.{js,css,scss}"

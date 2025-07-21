@@ -42,11 +42,8 @@ jobs:
       - name: Install NodeJS dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Lint Ruby with Rubocop
-        run: bin/rubocop -f github
-
-      - name: Lint JS and CSS with Prettier
-        run: bin/yarn prettier --check app/assets/**/*.{js,css,scss}
+      - name: Lint
+        run: bin/lint
 
   test:
     runs-on: ubuntu-latest

@@ -3,12 +3,6 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  # Send email using sendmail
-  config.action_mailer.default_url_options = { host: "entryapplication.example" }
-  config.action_mailer.delivery_method = :sendmail
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = true
-
   config.assets.prefix = "/caribbean_data_entry/assets"
   config.relative_url_root = "/caribbean_data_entry"
 

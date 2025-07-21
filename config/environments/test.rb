@@ -8,12 +8,6 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  # N+1 query logging via Bullet
-  config.after_initialize do
-    Bullet.enable        = true
-    Bullet.bullet_logger = true
-  end
-
   # While tests run files are not watched, reloading is not necessary.
   config.enable_reloading = false
 

@@ -29,8 +29,19 @@ i.e.
   }
 }
 
+.usa-form--dense {
+  .usa-label {
+    margin-top: units(1);
+  }
+
+  .usa-button {
+    margin-top: units(1);
+  }
+}
+
 .field_with_errors .usa-input,
-.field_with_errors .usa-select {
+.field_with_errors .usa-select,
+.field_with_errors .usa-textarea {
   // Copied from styles for .usa-input--error
   @include u-border($theme-input-state-border-width, "error-dark");
   padding-top: calc(#{units(1)} - #{units($theme-input-state-border-width)});

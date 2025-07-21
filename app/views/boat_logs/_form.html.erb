@@ -6,57 +6,99 @@
   </div>
 </div>
 
-<div class="form-horizontal">
-<%= nested_form_for @boat_log, data: { "drafts-url": draft_boat_logs_path(id: @boat_log.id), "draft-restored": @draft.present?, "draft-focused-dom-id": @draft&.focused_dom_id } do |f| %>
-  <%= render "shared/error_messages", :target => @boat_log%>
+<%= nested_form_for @boat_log, html: { class: "usa-form usa-form--dense maxw-full bg-base-lightest" }, data: { "drafts-url": draft_boat_logs_path(id: @boat_log.id), "draft-restored": @draft.present?, "draft-focused-dom-id": @draft&.focused_dom_id } do |f| %>
+  <%= render "shared/uswds_error_messages", target: @boat_log %>
 
-    <div class="formContainer">
-      <div class="row">
-        
-        <div class="span3">
-          <div class="control-group">
-             <label class="control-label">Boatlog/Manager</label>
-             <div class="controls">
-               <%= f.collection_select :boatlog_manager_id, BoatlogManager.all, :id, :agency_name, { :include_blank => "" } %><br />
-             </div>
-           </div>
-         </div>
-       </div>
-
-      <div class="row">  
-        
-        <div class="span3">
-           <div class="control-group date">
-             <label class="control-label">Sample Date</label>
-             <div class="controls">
-               <%= f.text_field :date %>
-             </div>
-           </div>
-        </div>
-        <div class="span3">
-           <div class="control-group">
-             <label class="control-label">PSU</label>
-             <div class="controls">
-               <%= f.text_field :primary_sample_unit %>
-             </div>
-           </div>
-        </div>
-        <div class="span3">
-          <div>Distance Between Stations <span class="distanceBetweenStations">  0 </span></div>
+  <fieldset class="usa-fieldset padding-1">
+    <div class="grid-container padding-0">
+      <div class="grid-row grid-gap-1">
+        <div class="grid-col-6">
+          <%= f.label :boatlog_manager_id, "Boatlog/Manager", class: "usa-label margin-top-0" %>
+          <%= f.collection_select :boatlog_manager_id, BoatlogManager.all, :id, :agency_name, { include_blank: true }, class: "usa-select usa-input--lg" %>
         </div>
       </div>
 
-      <%= f.fields_for :station_logs do |builder| %>
-        <%= render 'station_fields', f: builder %>
-      <% end %>
-      <%= f.link_to_add "Add Station", :station_logs %>
-      
+      <div class="grid-row grid-gap-1">
+        <div class="grid-col-3">
+          <%= f.label :date, "Sample Date", class: "usa-label" %>
+          <%= f.text_field :date, class: "usa-input usa-input--md" %>
+        </div>
+        <div class="grid-col-3">
+          <%= f.label :primary_sample_unit, "PSU", class: "usa-label" %>
+          <%= f.text_field :primary_sample_unit, class: "usa-input usa-input--md" %>
+        </div>
+      </div>
+    </div>
+  
+    <div id="station_logs">
+      <%= f.fields_for :station_logs, wrapper: false do |ff| %>
+        <div class="border margin-1 padding-1">
+          <div class="grid-row grid-gap-1">
+            <div class="grid-col-3">
+              <%= ff.label :stn_number, "Station", class: "usa-label" %>
+              <%= ff.text_field :stn_number, class: "usa-input usa-input--sm" %>
+            </div>
 
-</div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+            <div class="grid-col-3">
+              <%= ff.label :time, class: "usa-label" %>
+              <%= ff.text_field :time, value: ff.object&.time&.strftime("%H:%M"), class: "usa-input usa-input--sm boatlog_time" %>
+            </div>
+          </div>
 
-</div>
+          <div class="grid-row grid-gap-1">
+            <div class="grid-col-3">
+              <%= ff.label :latitude, "Latitude", class: "usa-label" %>
+              <div class="usa-input-group usa-input-group--md">
+                <%= ff.text_field :latitude_in_northern_degrees, inputmode: "numeric", pattern: "\\d*(\\.\\d*)?", class: "usa-input coords coords-positive" %>
+                <div class="usa-input-suffix" aria-hidden="true">&deg;N</div>
+              </div>
+            </div>
+            <div class="grid-col-3">
+              <%= ff.label :longitude, "Longitude", class: "usa-label" %>
+              <div class="usa-input-group usa-input-group--md">
+                <%= ff.text_field :longitude_in_western_degrees, inputmode: "numeric", pattern: "\\d*(\\.\\d*)?", class: "usa-input coords coords-positive" %>
+                <div class="usa-input-suffix" aria-hidden="true">&deg;W</div>
+              </div>
+            </div>
+          </div>
 
-<% end %>
+          <div class="grid-row grid-gap-1">
+            <div class="grid-col-3">
+              <%= ff.label :comments, "Station Comments", class: "usa-label" %>
+              <%= ff.text_area :comments, class: "usa-textarea height-10" %>
+            </div>
+          </div>
+
+          <div class="grid-row grid-gap-1">
+            <div class="grid-col-6">
+              <%= ff.link_to_remove class: "usa-button usa-button--secondary usa-button--sm", tabindex: "-1" do %>
+                <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+                  <%= tag.use href: image_path("sprite.svg#delete") %>
+                </svg>
+                Remove Station
+              <%- end %>
+            </div>
+          </div>
+        </div>
+      <%- end %>
+    </div>
+
+    <div class="grid-row">
+      <div class="grid-col-6 padding-left-1">
+        <%= f.link_to_add :station_logs, class: "usa-button usa-button--sm", data: { target: "#station_logs" } do %>
+          <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+            <%= tag.use href: image_path("sprite.svg#add") %>
+          </svg>
+          Add Station
+        <%- end %>
+      </div>
+    </div>
+
+    <div class="grid-row margin-top-2">
+      <div class="grid-col-6">
+        <%= f.submit class: "usa-button" %>
+        <%= link_to "Cancel", boat_logs_path, class: "usa-button usa-button--outline" %>
+      </div>
+    </div>
+  </fieldset>
+<%- end %>

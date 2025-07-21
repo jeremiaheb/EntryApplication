@@ -2,6 +2,8 @@ class BoatLogsController < ApplicationController
   before_action :authenticate_diver!
   load_and_authorize_resource
 
+  layout "application-uswds"
+
   # GET /boat_logs
   # GET /boat_logs.json
   def index
@@ -18,17 +20,6 @@ class BoatLogsController < ApplicationController
         # Prevent caching
         no_store
       end
-    end
-  end
-
-  # GET /boat_logs/1
-  # GET /boat_logs/1.json
-  def show
-    @boat_log = BoatLog.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @boat_log }
     end
   end
 
@@ -69,7 +60,7 @@ class BoatLogsController < ApplicationController
       if @boat_log.save
         Draft.destroy_for(diver_id: current_diver.id, model_klass: BoatLog, model_id: nil)
 
-        format.html { redirect_to @boat_log, notice: "Boat log was successfully created." }
+        format.html { redirect_to boat_logs_url, notice: "Boat log was successfully created." }
         format.json { render json: @boat_log, status: :created, location: @boat_log }
       else
         format.html { render action: "new" }
@@ -87,7 +78,7 @@ class BoatLogsController < ApplicationController
       if @boat_log.update(boat_log_params)
         Draft.destroy_for(diver_id: current_diver.id, model_klass: BoatLog, model_id: @boat_log.id)
 
-        format.html { redirect_to @boat_log, notice: "Boat log was successfully updated." }
+        format.html { redirect_to boat_logs_url, notice: "Boat log was successfully updated." }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -103,7 +94,7 @@ class BoatLogsController < ApplicationController
     @boat_log.destroy
 
     respond_to do |format|
-      format.html { redirect_to boat_logs_url }
+      format.html { redirect_to boat_logs_url, notice: "Boat log was successfully deleted." }
       format.json { head :no_content }
     end
   end

@@ -1,7 +1,7 @@
 EntryApplication::Application.routes.draw do
   get "dashboard/show"
 
-  resources :boat_logs do
+  resources :boat_logs, except: [:show] do
     post :draft, on: :collection
   end
 

@@ -27,7 +27,7 @@ class BenthicCoversTest < ApplicationSystemTestCase
     find("body").click # blur for calendar popup
     find("input#benthic_cover_sample_begin_time").fill_in(with: "10:30")
     find("select#benthic_cover_habitat_type_id").select(habitat_type.habitat_name)
-    find("input#benthic_cover_meters_completed").fill_in(with: "10")
+    find("input#benthic_cover_meters_completed").fill_in(with: "15")
     find("textarea#benthic_cover_sample_description").fill_in(with: "Hello World")
 
     select2_choose(all("select[id$='cover_cat_id']", visible: nil).first, option: cover_cat1.display_name)

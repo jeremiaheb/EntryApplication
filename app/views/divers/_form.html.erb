@@ -6,36 +6,36 @@
     <%= f.label :active, "Active?", class: "usa-checkbox__label" %>
 
     <%= f.label :diver_number, class: "usa-label" %>
-    <%= f.text_field :diver_number, class: "usa-input", autocomplete: "off" %>
+    <%= f.text_field :diver_number, class: "usa-input usa-input--md", autocomplete: "off" %>
     
     <%= f.label :diver_name, class: "usa-label" %>
-    <%= f.text_field :diver_name, class: "usa-input", autocomplete: "off" %>
+    <%= f.text_field :diver_name, class: "usa-input usa-input--xl", autocomplete: "off" %>
 
     <%= f.label :username, class: "usa-label" %>
-    <%= f.text_field :username, class: "usa-input", autocomplete: "off" %>
+    <%= f.text_field :username, class: "usa-input usa-input--xl", autocomplete: "off" %>
 
     <%= f.label :firstname, "First Name", class: "usa-label" %>
-    <%= f.text_field :firstname, class: "usa-input", autocomplete: "off" %>
+    <%= f.text_field :firstname, class: "usa-input usa-input--xl", autocomplete: "off" %>
 
     <%= f.label :lastname, "Last Name", class: "usa-label" %>
-    <%= f.text_field :lastname, class: "usa-input", autocomplete: "off" %>
+    <%= f.text_field :lastname, class: "usa-input usa-input--xl", autocomplete: "off" %>
 
     <%= f.label :email, class: "usa-label" %>
-    <%= f.text_field :email, class: "usa-input", autocomplete: "off" %>
+    <%= f.text_field :email, class: "usa-input usa-input--xl", autocomplete: "off" %>
     
     <%- if @diver.new_record? %>
       <%= f.label :password, class: "usa-label" %>
-      <%= f.password_field :password, class: "usa-input", autocomplete: "new-password" %>
+      <%= f.password_field :password, class: "usa-input usa-input--xl", autocomplete: "new-password" %>
 
       <%= f.label :password_confirmation, class: "usa-label" %>
-      <%= f.password_field :password_confirmation, class: "usa-input", autocomplete: "new-password" %>
+      <%= f.password_field :password_confirmation, class: "usa-input usa-input--xl", autocomplete: "new-password" %>
     <%- end %>
 
     <%= f.label :role, class: "usa-label" %>
-    <%= f.collection_select :role, Diver::ROLES, :to_s, :humanize, { include_blank: false }, class: "usa-select", autocomplete: "off" %>
+    <%= f.collection_select :role, Diver::ROLES, :to_s, :humanize, { include_blank: false }, class: "usa-select usa-input--md", autocomplete: "off" %>
 
     <%= f.label :boatlog_manager_id, class: "usa-label" %>
-    <%= f.collection_select :boatlog_manager_id, BoatlogManager.all, :id, :agency_name, { include_blank: true }, class: "usa-select", autocomplete: "off" %>
+    <%= f.collection_select :boatlog_manager_id, BoatlogManager.all, :id, :agency_name, { include_blank: true }, class: "usa-select usa-input--xl", autocomplete: "off" %>
 
     <%= f.submit class: "usa-button" %>
     <%= link_to "Cancel", divers_path, class: "usa-button usa-button--outline" %>

@@ -46,6 +46,14 @@ EntryApplication::Application.routes.draw do
 
   resources :animals
 
+  resources :agencies, except: [:show]
+
+  resources :projects, except: [:show]
+
+  resources :jurisdictions, except: [:show]
+
+  resources :missions, except: [:show]
+
   get "samples/:id/proofing_template" => "samples#proofing_template"
   # The priority is based upon order of creation:
   # first created -> highest priority.

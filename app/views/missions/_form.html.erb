@@ -1,0 +1,20 @@
+  <%= form_for @mission, html: { class: "usa-form maxw-full bg-base-lightest" } do |f| %>
+    <%= render "shared/uswds_error_messages", target: @mission %>
+
+    <fieldset class="usa-fieldset padding-1">
+      <%= f.label :jurisdiction_id, class: "usa-label" %>
+      <%= f.collection_select :jurisdiction_id, Jurisdiction.order(:name), :id, :name, { required: true, include_blank: true }, class: "usa-select usa-input--lg", autofocus: true %>
+
+      <%= f.label :agency_id, class: "usa-label" %>
+      <%= f.collection_select :agency_id, Agency.order(:name), :id, :name, { required: true, include_blank: true }, class: "usa-select usa-input--lg" %>
+
+      <%= f.label :project_id, class: "usa-label" %>
+      <%= f.collection_select :project_id, Project.order(:name), :id, :name, { required: true, include_blank: true }, class: "usa-select usa-input--lg" %>
+
+      <%= f.label :manager_ids, "Managers", class: "usa-label" %>
+      <%= f.collection_select :manager_ids, Diver.order(:diver_name), :id, :diver_name, { required: true, multiple: true }, class: "usa-input--2xl" %>
+
+      <%= f.submit class: "usa-button" %>
+      <%= link_to "Cancel", missions_path, class: "usa-button usa-button--outline" %>
+    </fieldset>
+  <% end %>

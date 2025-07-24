@@ -1,0 +1,42 @@
+<div class="grid-row">
+  <div class="grid-col-12">
+    <%= render "shared/nav_breadcrumbs", object: [["Projects", ""]] %>
+
+    <ul class="usa-button-group margin-bottom-1">
+      <li class="usa-button-group__item">
+        <%= link_to new_project_path, class: "new-project-button usa-button" do %>
+          <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+            <%= tag.use href: image_path("sprite.svg#add") %>
+          </svg>
+          New Project
+        <%- end %>
+      </li>
+    </ul>
+
+    <table class="width-full display">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scole="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%- @projects.each do |project| %>
+          <tr>
+            <td><%= project.name %></td>
+            <td>
+              <ul class="usa-button-group float-right">
+                <li class="usa-button-group__item">
+                  <%= link_to "Edit", edit_project_path(project), class: "usa-button usa-button--outline" %>
+                </li>
+                <li class="usa-button-group__item">
+                  <%= link_to "Delete", project, data: { confirm: "Are you sure?" }, method: "delete", class: "usa-button usa-button--secondary" %>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        <%- end %>
+      </tbody>
+    </table>
+  </div>
+</div>

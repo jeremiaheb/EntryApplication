@@ -10,9 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_17_171610) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_24_155927) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "agencies", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_agencies_on_name", unique: true
+  end
 
   create_table "animals", force: :cascade do |t|
     t.string "species_code"
@@ -160,6 +167,38 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_17_171610) do
     t.integer "diadema_num"
   end
 
+  create_table "jurisdiction_habitat_types", force: :cascade do |t|
+    t.integer "jurisdiction_id", null: false
+    t.integer "habitat_type_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["jurisdiction_id", "habitat_type_id"], name: "idx_on_jurisdiction_id_habitat_type_id_d24fd55fd4", unique: true
+  end
+
+  create_table "jurisdictions", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_jurisdictions_on_name", unique: true
+  end
+
+  create_table "mission_managers", force: :cascade do |t|
+    t.integer "mission_id", null: false
+    t.integer "manager_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mission_id", "manager_id"], name: "index_mission_managers_on_mission_id_and_manager_id", unique: true
+  end
+
+  create_table "missions", force: :cascade do |t|
+    t.integer "project_id", null: false
+    t.integer "agency_id", null: false
+    t.integer "jurisdiction_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id", "agency_id", "jurisdiction_id"], name: "index_missions_on_project_id_and_agency_id_and_jurisdiction_id", unique: true
+  end
+
   create_table "point_intercepts", force: :cascade do |t|
     t.integer "benthic_cover_id"
     t.integer "cover_cat_id"
@@ -179,6 +218,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_17_171610) do
     t.integer "m_faveolata"
     t.integer "d_stokesii"
     t.integer "a_lamarcki"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_projects_on_name", unique: true
   end
 
   create_table "rep_logs", force: :cascade do |t|
@@ -279,6 +325,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_17_171610) do
     t.string "hard_pcov_other2_lab"
     t.integer "hard_pcov_other1"
     t.integer "hard_pcov_other2"
+    t.integer "mission_id"
   end
 
   create_table "station_logs", force: :cascade do |t|

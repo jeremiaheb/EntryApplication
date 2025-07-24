@@ -26,6 +26,7 @@
 //= require ./benthic_covers
 //= require ./boat_logs
 //= require ./coral_demographics
+//= require ./missions
 //= require ./samples
 //= require ./drafts
 //= require_self

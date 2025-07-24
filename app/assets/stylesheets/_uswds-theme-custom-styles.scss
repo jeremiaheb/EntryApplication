@@ -37,6 +37,12 @@ i.e.
   padding-bottom: calc(#{units(1)} - #{units($theme-input-state-border-width)});
 }
 
+.usa-form {
+  .select2-container {
+    display: block;
+  }
+}
+
 // Conflicting styles between USWDS and DataTables
 [type="search"] {
   float: initial;

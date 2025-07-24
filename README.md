@@ -94,16 +94,10 @@ bin/rails test:system
 
 Most formatting errors can be automatically corrected by the tools themselves.
 
-To run Rubocop and autocorrect any Ruby issues, connect to the Vagrant VM (`vagrant ssh`) and run:
+To run Rubocop and Prettier _and_ autocorrect any issues if possible, connect to the Vagrant VM (`vagrant ssh`) and run:
 
 ```bash
-bin/rubocop --autocorrect
-```
-
-To run Prettier and autocorrect any JS or CSS issues, connect to the Vagrant VM (`vagrant ssh`) and run:
-
-```bash
-bin/yarn prettier --write app/assets/**/*.{js,css,scss}
+bin/lint --autocorrect
 ```
 
 ### Data

@@ -54,6 +54,19 @@ namespace :deploy do
     end
   end
 
+  namespace :yarn do
+    desc "Install JavaScript packages"
+    task :install do
+      on roles(:web) do
+        within release_path do
+          execute "yarn", "install", "--production", "--frozen-lockfile"
+        end
+      end
+    end
+  end
+  before "deploy:assets:precompile", "deploy:yarn:install"
+
+
   desc "Restart the application via its systemd service"
   task :restart do
     on roles(:web), in: :sequence do

@@ -29,10 +29,8 @@ class BoatlogManagerTest < ActiveSupport::TestCase
     coral_demographic2 = FactoryBot.create(:coral_demographic)
     sample_animal = FactoryBot.create(:sample_animal, sample: nil)
     sample = FactoryBot.create(:sample, boatlog_manager: boatlog_manager, sample_animals: [sample_animal])
-    diver_sample = FactoryBot.create(:diver_sample, sample: sample)
-    diver_sample2 = FactoryBot.create(:diver_sample, sample: nil)
 
-    assert_equal [coral_demographic.diver, benthic_cover.diver, diver_sample.diver].sort, boatlog_manager.divers_responsible_for.sort
+    assert_equal [coral_demographic.diver, benthic_cover.diver, sample.diver].sort, boatlog_manager.divers_responsible_for.sort
   end
 
   test "#divers_responsible_for returns a unique list of divers" do
@@ -43,10 +41,8 @@ class BoatlogManagerTest < ActiveSupport::TestCase
     coral_demographic2 = FactoryBot.create(:coral_demographic)
     sample_animal = FactoryBot.create(:sample_animal, sample: nil)
     sample = FactoryBot.create(:sample, boatlog_manager: boatlog_manager, sample_animals: [sample_animal])
-    diver_sample = FactoryBot.create(:diver_sample, sample: sample)
-    diver_sample2 = FactoryBot.create(:diver_sample, sample: nil)
 
-    assert_equal [coral_demographic.diver, benthic_cover.diver, diver_sample.diver].sort, boatlog_manager.divers_responsible_for.sort
+    assert_equal [coral_demographic.diver, benthic_cover.diver, sample.diver].sort, boatlog_manager.divers_responsible_for.sort
   end
 
   test "#benthic_covers_for_diver returns benthic covers scoped to a given diver" do
@@ -80,14 +76,11 @@ class BoatlogManagerTest < ActiveSupport::TestCase
     sample_animal = FactoryBot.create(:sample_animal, sample: nil)
     diver = FactoryBot.create(:diver)
 
-    sample_where_diver_is_primary = FactoryBot.create(:sample, boatlog_manager: boatlog_manager, sample_animals: [sample_animal])
-    FactoryBot.create(:diver_sample, diver: diver, primary_diver: true, sample: sample_where_diver_is_primary)
+    sample_where_diver_is_primary = FactoryBot.create(:sample, diver: diver, boatlog_manager: boatlog_manager, sample_animals: [sample_animal])
 
-    sample_where_diver_is_not_primary = FactoryBot.create(:sample, boatlog_manager: boatlog_manager, sample_animals: [sample_animal])
-    FactoryBot.create(:diver_sample, diver: diver, primary_diver: false, sample: sample_where_diver_is_primary)
+    sample_where_diver_is_not_primary = FactoryBot.create(:sample, buddy: diver, boatlog_manager: boatlog_manager, sample_animals: [sample_animal])
 
     sample_with_other_diver = FactoryBot.create(:sample, boatlog_manager: boatlog_manager, sample_animals: [sample_animal])
-    FactoryBot.create(:diver_sample, primary_diver: true, sample: sample_with_other_diver)
 
     assert_equal [sample_where_diver_is_primary], boatlog_manager.samples_for_diver(diver)
   end

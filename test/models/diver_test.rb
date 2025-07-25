@@ -15,14 +15,13 @@ class DiverTest < ActiveSupport::TestCase
     diver = FactoryBot.create(:diver)
     boatlog_manager = FactoryBot.create(:boatlog_manager)
     sample_animal = FactoryBot.create(:sample_animal, sample: nil)
-    samples = FactoryBot.create_list(:sample, 3, boatlog_manager: boatlog_manager, sample_animals: [sample_animal])
 
-    # Diver will be primary on first, secondary on second and neither on the third
-    diver_sample0 = FactoryBot.create(:diver_sample, diver: diver, sample: samples[0], primary_diver: true)
-    diver_sample1 = FactoryBot.create(:diver_sample, diver: diver, sample: samples[1], primary_diver: false)
-    diver_sample2 = FactoryBot.create(:diver_sample, sample: samples[2], primary_diver: true)
+    # Diver is primary only on sample1
+    sample1 = FactoryBot.create(:sample, diver: diver, sample_animals: [FactoryBot.create(:sample_animal, sample: nil)])
+    sample2 = FactoryBot.create(:sample, buddy: diver, sample_animals: [FactoryBot.create(:sample_animal, sample: nil)])
+    sample3 = FactoryBot.create(:sample, sample_animals: [FactoryBot.create(:sample_animal, sample: nil)])
 
-    assert_equal [diver_sample0], diver.diver_proofing_samples
+    assert_equal [sample1], diver.diver_proofing_samples
   end
 
   test "#diver_proofing_benthic_cover returns a diver's benthic covers" do

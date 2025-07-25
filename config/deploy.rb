@@ -54,6 +54,20 @@ namespace :deploy do
     end
   end
 
+  namespace :yarn do
+    desc "Install JavaScript packages"
+    task :install do
+      on roles(:web) do
+        with path: "$PATH:$HOME/.nvm" do
+          within release_path do
+            execute "nvm-exec", "yarn", "install", "--production", "--frozen-lockfile"
+          end
+        end
+      end
+    end
+  end
+  before "deploy:assets:precompile", "deploy:yarn:install"
+
   desc "Restart the application via its systemd service"
   task :restart do
     on roles(:web), in: :sequence do

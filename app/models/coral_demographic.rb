@@ -17,7 +17,7 @@ class CoralDemographic < ActiveRecord::Base
   validates :sample_date,           presence: true
   validates :sample_begin_time,     presence: true
   validates :field_id,              presence: true, length: { minimun: 6, maximum: 6 }
-  validates_format_of :field_id,    with: /\d{5}[a-zA-Z]/
+  validates_format_of :field_id,    with: /\A\d{5}[a-zA-Z]\z/
   validates :habitat_type,          presence: true
   validates :meters_completed,      presence: true
   validates :percent_hardbottom,    presence: true

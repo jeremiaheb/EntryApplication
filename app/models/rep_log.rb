@@ -3,7 +3,7 @@ class RepLog < ActiveRecord::Base
   belongs_to  :diver
 
   validates :replicate,               presence: true
-  validates_format_of :replicate,     with: /[a-zA-Z]/, message: "Not one of Valid Letters"
+  validates_format_of :replicate,     with: /\A[a-zA-Z]\z/, message: "Not one of Valid Letters"
 
   def field_id
     [self.station_log.boat_log.primary_sample_unit, self.station_log.stn_number, self.replicate.upcase].join("")

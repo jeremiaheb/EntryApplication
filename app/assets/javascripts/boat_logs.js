@@ -9,15 +9,9 @@ $(function () {
     autoclose: true,
   });
 
-  $("#boat_log_station_logs_attributes_0_time").timeEntry({
-    show24Hours: true,
-    minTime: "06:00",
-    maxTime: "20:00",
-  });
-  $("#boat_log_station_logs_attributes_1_time").timeEntry({
-    show24Hours: true,
-    minTime: "06:00",
-    maxTime: "20:00",
+  $("#boat_log_station_logs_attributes_0_time").timepicker({
+    timeFormat: "HH:mm",
+    dropdown: false,
   });
 
   Number.prototype.toRad = function () {
@@ -186,6 +180,20 @@ $(function () {
         number: true,
         minlength: 1,
         maxlength: 1,
+      });
+    });
+    $('[name*="time"]').each(function () {
+      $(this).timepicker({
+        timeFormat: "HH:mm",
+        dropdown: false,
+      });
+
+      $(this).rules("add", {
+        required: true,
+        pattern: /^(06|07|08|09|10|11|12|13|14|15|16|17|18|19|20):([0-9]{2})$/,
+        messages: {
+          pattern: "Time must be between 06:00 and 20:00",
+        },
       });
     });
     $('[name*="latitude"]').each(function () {

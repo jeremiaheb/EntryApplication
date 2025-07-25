@@ -56,6 +56,13 @@ element-closest@^2.0.1:
   resolved "https://registry.yarnpkg.com/element-closest/-/element-closest-2.0.2.tgz#72a740a107453382e28df9ce5dbb5a8df0f966ec"
   integrity sha512-QCqAWP3kwj8Gz9UXncVXQGdrhnWxD8SQBSeZp5pOsyCcQ6RpL738L1/tfuwBiMi6F1fYkxqPnBrFBR4L+f49Cg==
 
+jquery-timepicker@^1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/jquery-timepicker/-/jquery-timepicker-1.3.3.tgz#034160c90a52619df68963eda7625d1fca89cb7a"
+  integrity sha512-yNIFmG80xyW6W4UNYUFBSQFfnjlz07MSIZRk3GNEnDbqLS0hikTu4l/FKtOMEF9HvP9fQvI27BMMnhiCu6wDsQ==
+  dependencies:
+    jquery ">= 1.4.3"
+
 jquery-ujs@^1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/jquery-ujs/-/jquery-ujs-1.2.3.tgz#dcac6026ab7268e5ee41faf9d31c997cd4ddd603"
@@ -68,7 +75,7 @@ jquery-validation@1.16.0:
   dependencies:
     jquery "^1.7 || ^2.0 || ^3.1"
 
-jquery@>=1.7, "jquery@>=3.4.0 <4.0.0", "jquery@^1.7 || ^2.0 || ^3.1", jquery@^3.7.1:
+"jquery@>= 1.4.3", jquery@>=1.7, "jquery@>=3.4.0 <4.0.0", "jquery@^1.7 || ^2.0 || ^3.1", jquery@^3.7.1:
   version "3.7.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.7.1.tgz#083ef98927c9a6a74d05a6af02806566d16274de"
   integrity sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg==

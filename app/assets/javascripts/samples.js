@@ -488,25 +488,11 @@ $(function () {
     autoclose: true,
   });
 
-  $("#sample_dive_begin_time").timeEntry({
-    show24Hours: true,
-    minTime: "06:00",
-    maxTime: "20:00",
-  });
-  $("#sample_dive_end_time").timeEntry({
-    show24Hours: true,
-    minTime: "06:00",
-    maxTime: "20:00",
-  });
-  $("#sample_sample_begin_time").timeEntry({
-    show24Hours: true,
-    minTime: "06:00",
-    maxTime: "20:00",
-  });
-  $("#sample_sample_end_time").timeEntry({
-    show24Hours: true,
-    minTime: "06:00",
-    maxTime: "20:00",
+  $(
+    "#sample_dive_begin_time, #sample_dive_end_time, #sample_sample_begin_time, #sample_sample_end_time",
+  ).timepicker({
+    timeFormat: "HH:mm",
+    dropdown: false,
   });
 
   $.validator.addMethod(
@@ -752,18 +738,22 @@ $(function () {
       },
       "sample[dive_begin_time]": {
         required: true,
+        pattern: /^(06|07|08|09|10|11|12|13|14|15|16|17|18|19|20):([0-9]{2})$/,
       },
       "sample[dive_end_time]": {
         required: true,
+        pattern: /^(06|07|08|09|10|11|12|13|14|15|16|17|18|19|20):([0-9]{2})$/,
         greaterThan: "#sample_dive_begin_time",
       },
       "sample[sample_begin_time]": {
         required: true,
+        pattern: /^(06|07|08|09|10|11|12|13|14|15|16|17|18|19|20):([0-9]{2})$/,
         greaterThan: "#sample_dive_begin_time",
         before: "#sample_dive_end_time",
       },
       "sample[sample_end_time]": {
         required: true,
+        pattern: /^(06|07|08|09|10|11|12|13|14|15|16|17|18|19|20):([0-9]{2})$/,
         greaterThan: "#sample_sample_begin_time",
         before: "#sample_dive_end_time",
       },
@@ -876,14 +866,20 @@ $(function () {
       },
     },
     messages: {
+      "sample[dive_begin_time]": {
+        pattern: "Time must be between 06:00 and 20:00",
+      },
       "sample[dive_end_time]": {
+        pattern: "Time must be between 06:00 and 20:00",
         greaterThan: "Dive end cannot be before dive begin",
       },
       "sample[sample_begin_time]": {
+        pattern: "Time must be between 06:00 and 20:00",
         greaterThan: "Sample begin cannot be before dive begin",
         before: "Sample begin time cannot be after dive end time",
       },
       "sample[sample_end_time]": {
+        pattern: "Time must be between 06:00 and 20:00",
         greaterThan: "Sample end time cannot be before begin time",
         before: "Sample end time cannot be after dive end time",
       },

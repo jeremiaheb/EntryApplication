@@ -68,7 +68,6 @@ namespace :deploy do
   end
   before "deploy:assets:precompile", "deploy:yarn:install"
 
-
   desc "Restart the application via its systemd service"
   task :restart do
     on roles(:web), in: :sequence do

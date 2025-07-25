@@ -1,5 +1,7 @@
 FactoryBot.define do
   factory :sample do
+    diver
+    buddy factory: :diver
     sample_type
     habitat_type
     boatlog_manager

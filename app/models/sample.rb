@@ -1,6 +1,9 @@
 class Sample < ActiveRecord::Base
   include CommonFields
 
+  belongs_to :diver
+  belongs_to :buddy, class_name: "Diver"
+
   belongs_to :sample_type
   belongs_to :habitat_type
   belongs_to :boatlog_manager
@@ -9,17 +12,6 @@ class Sample < ActiveRecord::Base
   validates_presence_of :sample_animals, message: "you must have at leat one species record (can be NO FISH)"
   has_many :animals, through: :sample_animals
   accepts_nested_attributes_for :sample_animals, reject_if: lambda {  |a| a[:animal_id].blank? }, allow_destroy: true
-
-
-  has_many :diver_samples, dependent: :destroy
-  has_many :divers, through: :diver_samples
-  accepts_nested_attributes_for :diver_samples, allow_destroy: true
-
-
-  # for use in CommonFields methods
-  def diver
-    diver_samples.primary.first.try(:diver)
-  end
 
   # validates :sample_date,                 :presence => true
   validates :sample_type_id,              presence: true

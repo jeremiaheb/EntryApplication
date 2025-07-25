@@ -15,7 +15,7 @@
        <tbody>
       <% @samples.each do |sample| %>
         <tr data-id="<%= sample.id %>">
-          <td><%= sample.diver_samples.primary.first.diver.diver_name %></td>
+          <td><%= sample.diver.diver_name %></td>
           <td class='fieldid_check'><%= sample.field_id %></td>
           <td><%= sample.sample_date %></td>
           <td><%= sample.sample_begin_time.strftime("%H:%M") %></td>

@@ -11,10 +11,10 @@
         <dt>Sample Date</dt><dd><%= @sample.sample_date %></dd>
       </dl>
       <dl class="dl-horizontal">
-        <dt>Diver</dt><dd><%= @sample.diver_samples.primary.first.diver.diver_name %></dd>
+        <dt>Diver</dt><dd><%= @sample.diver.diver_name %></dd>
       </dl>
       <dl class="dl-horizontal">
-        <dt>Buddy</dt><dd><%= @sample.diver_samples.secondary.first.diver.diver_name %></dd>
+        <dt>Buddy</dt><dd><%= @sample.buddy.diver_name %></dd>
       </dl>
       <dl class="dl-horizontal">
         <dt>Sample Type</dt><dd><%= @sample.sample_type.sample_type_name %></dd>

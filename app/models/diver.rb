@@ -7,9 +7,8 @@ class Diver < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :registerable, :rememberable, :trackable, :validatable
 
   belongs_to  :boatlog_manager
-  has_many    :diver_samples
-  has_many    :samples, through: :diver_samples, dependent: :destroy
 
+  has_many    :samples
   has_many    :benthic_covers
   has_many    :coral_demographics
 
@@ -22,7 +21,7 @@ class Diver < ActiveRecord::Base
   scope       :active_divers,      lambda { where(active: true) }
 
   def diver_proofing_samples
-    diver_samples.primary.joins(:sample).order("sample_date")
+    samples.order("sample_date")
   end
 
   def diver_proofing_benthic_cover

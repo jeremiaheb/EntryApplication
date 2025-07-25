@@ -14,7 +14,7 @@ class SamplePdf < Prawn::Document
       comments
       biotic_cover
       species_data_27
-      if @sample.sample.sample_animals.length > 27
+      if @sample.sample_animals.length > 27
         species_data_54
       end
       start_new_page
@@ -25,16 +25,16 @@ class SamplePdf < Prawn::Document
 
   def sample_head
     data =  [[],
-            ["Diver", "#{@sample.diver.diver_name}", "Date", "#{@sample.sample.sample_date}", "Field Number", "#{@sample.sample.field_id}", "Boatlog/Manger:", "#{@sample.sample.boatlog_manager.agency_name}"],
-            ["Buddy", "#{@sample.sample.diver_samples.secondary[0].diver.diver_name}", "Sample Start", "#{@sample.sample.sample_begin_time.strftime("%H:%M")}", "Habitat", "#{@sample.sample.habitat_type.habitat_name}", "Visibility", "#{@sample.sample.underwater_visibility}"],
-            ["Dive Start", @sample.sample.dive_begin_time.strftime("%H:%M"), "Sample End", "#{@sample.sample.sample_end_time.strftime("%H:%M")}", "Fish Gear", "#{@sample.sample.fishing_gear}", "Water Temp", "#{@sample.sample.water_temp}"],
-            ["Dive End", @sample.sample.dive_end_time.strftime("%H:%M"), "Max Depth", "#{@sample.sample.dive_depth}", "Stn Depth", "#{@sample.sample.sample_depth}", "Current", "#{@sample.sample.current}"],
+            ["Diver", "#{@sample.diver.diver_name}", "Date", "#{@sample.sample_date}", "Field Number", "#{@sample.field_id}", "Boatlog/Manger:", "#{@sample.boatlog_manager.agency_name}"],
+            ["Buddy", "#{@sample.buddy.diver_name}", "Sample Start", "#{@sample.sample_begin_time.strftime("%H:%M")}", "Habitat", "#{@sample.habitat_type.habitat_name}", "Visibility", "#{@sample.underwater_visibility}"],
+            ["Dive Start", @sample.dive_begin_time.strftime("%H:%M"), "Sample End", "#{@sample.sample_end_time.strftime("%H:%M")}", "Fish Gear", "#{@sample.fishing_gear}", "Water Temp", "#{@sample.water_temp}"],
+            ["Dive End", @sample.dive_end_time.strftime("%H:%M"), "Max Depth", "#{@sample.dive_depth}", "Stn Depth", "#{@sample.sample_depth}", "Current", "#{@sample.current}"],
 ]
     table data, cell_style: { size: 8, border_width: 0, height: 17, padding: 5 }
   end
 
  def substrate_slope
-   data = [[{ content: "Substrate Slope", align: :center, colspan: 2 }], [{ content: "Max Depth:", border_right_width: 0 }, { content: "#{@sample.sample.substrate_max_depth}", border_left_width: 0 }], [{ content: "Min Depth:", border_right_width: 0 }, { content: "#{@sample.sample.substrate_min_depth}", border_left_width: 0 }]]
+   data = [[{ content: "Substrate Slope", align: :center, colspan: 2 }], [{ content: "Max Depth:", border_right_width: 0 }, { content: "#{@sample.substrate_max_depth}", border_left_width: 0 }], [{ content: "Min Depth:", border_right_width: 0 }, { content: "#{@sample.substrate_min_depth}", border_left_width: 0 }]]
 
    table data,
      cell_style: { size: 8, height: 17, padding: 2  },
@@ -42,7 +42,7 @@ class SamplePdf < Prawn::Document
  end
 
  def max_vert_relief
-   data = [[{ content: "Max Vertical Relief", align: :center, colspan: 2 }], [{ content: "Hard Relief:", border_right_width: 0 }, { content: "#{@sample.sample.hard_verticle_relief}", border_left_width: 0 }], [{ content: "Soft Relief:", border_right_width: 0 }, { content: "#{@sample.sample.soft_verticle_relief}", border_left_width: 0 }]]
+   data = [[{ content: "Max Vertical Relief", align: :center, colspan: 2 }], [{ content: "Hard Relief:", border_right_width: 0 }, { content: "#{@sample.hard_verticle_relief}", border_left_width: 0 }], [{ content: "Soft Relief:", border_right_width: 0 }, { content: "#{@sample.soft_verticle_relief}", border_left_width: 0 }]]
 
    table data,
      cell_style: { size: 8, height: 17, padding: 2 },
@@ -53,11 +53,11 @@ class SamplePdf < Prawn::Document
    data = [
           [{ content: "Surface Relief %", colspan: 3 }],
           [{ content: "" }, { content: "Hard" }, { content: "Avg. Soft", align: :center }],
-          [{ content: "<0.2" }, { content: "#{@sample.sample.hard_relief_cat_0}" }, { content: "#{@sample.sample.soft_relief_cat_0}" }],
-          [{ content: "0.2-0.5" }, { content: "#{@sample.sample.hard_relief_cat_1}" }, { content: "#{@sample.sample.soft_relief_cat_1}" }],
-          [{ content: "0.5-1.0" }, { content: "#{@sample.sample.hard_relief_cat_2}" }, { content: "#{@sample.sample.soft_relief_cat_2}" }],
-          [{ content: "1.0-1.5" }, { content: "#{@sample.sample.hard_relief_cat_3}" }, { content: "#{@sample.sample.soft_relief_cat_3}" }],
-          [{ content: ">1.5" }, { content: "#{@sample.sample.hard_relief_cat_4}" }, { content: "#{@sample.sample.soft_relief_cat_4}" }],
+          [{ content: "<0.2" }, { content: "#{@sample.hard_relief_cat_0}" }, { content: "#{@sample.soft_relief_cat_0}" }],
+          [{ content: "0.2-0.5" }, { content: "#{@sample.hard_relief_cat_1}" }, { content: "#{@sample.soft_relief_cat_1}" }],
+          [{ content: "0.5-1.0" }, { content: "#{@sample.hard_relief_cat_2}" }, { content: "#{@sample.soft_relief_cat_2}" }],
+          [{ content: "1.0-1.5" }, { content: "#{@sample.hard_relief_cat_3}" }, { content: "#{@sample.soft_relief_cat_3}" }],
+          [{ content: ">1.5" }, { content: "#{@sample.hard_relief_cat_4}" }, { content: "#{@sample.soft_relief_cat_4}" }],
           ]
 
    table data,
@@ -80,9 +80,9 @@ class SamplePdf < Prawn::Document
    indent(150) do
     data = [
            [{ content: "Abiotic Footprint", align: :center, colspan: 2 }],
-           [{ content: "Sand" }, { content: "#{@sample.sample.sand_percentage}" }],
-           [{ content: "Hard-B" }, { content: "#{@sample.sample.hardbottom_percentage}" }],
-           [{ content: "Rubble" }, { content: "#{@sample.sample.rubble_percentage}" }],
+           [{ content: "Sand" }, { content: "#{@sample.sand_percentage}" }],
+           [{ content: "Hard-B" }, { content: "#{@sample.hardbottom_percentage}" }],
+           [{ content: "Rubble" }, { content: "#{@sample.rubble_percentage}" }],
     ]
 
     table data,
@@ -105,7 +105,7 @@ class SamplePdf < Prawn::Document
   move_up 221
   indent(250) do
     data =  [
-              [{ content: "Comments: " + "#{@sample.sample.sample_description}", align: :left, colspan: 4 }],
+              [{ content: "Comments: " + "#{@sample.sample_description}", align: :left, colspan: 4 }],
             ]
 
     table data,
@@ -119,13 +119,13 @@ class SamplePdf < Prawn::Document
     data =  [
               [{ content: "Biotic Cover %", align: :center, colspan: 4 }],
               [{ content: "Sand", align: :center, colspan: 2 }, { content: "Hardbottom", align: :center, colspan: 2 }],
-              [{ content: "Bare", align: :center, colspan: 1 }, { content: "#{@sample.sample.sand_bare}", align: :center, colspan: 1 }, { content: "Algae(<1)", align: :center, colspan: 1 }, { content: "#{@sample.sample.hardbottom_algal_turf}", align: :center, colspan: 1 }],
-              [{ content: "Macro Algae", align: :center, colspan: 1 }, { content: "#{@sample.sample.sand_macro_algae}", align: :center, colspan: 1 }, { content: "Algae(>1)", align: :center, colspan: 1 }, { content: "#{@sample.sample.hardbottom_macro_algae}", align: :center, colspan: 1 }],
-              [{ content: "Seagrass", align: :center, colspan: 1 }, { content: "#{@sample.sample.sand_seagrass}", align: :center, colspan: 1 }, { content: "Live Coral", align: :center, colspan: 1 }, { content: "#{@sample.sample.hardbottom_live_coral}", align: :center, colspan: 1 }],
-              [{ content: "Sponge", align: :center, colspan: 1 }, { content: "#{@sample.sample.sand_sponge}", align: :center, colspan: 1 }, { content: "Octocoral", align: :center, colspan: 1 }, { content: "#{@sample.sample.hardbottom_octocoral}", align: :center, colspan: 1 }],
-              [{ content: "1:" + "#{@sample.sample.sand_pcov_other1_lab}", align: :left, colspan: 1 }, { content: "#{@sample.sample.sand_pcov_other1}", align: :center, colspan: 1 }, { content: "Sponge", align: :center, colspan: 1 }, { content: "#{@sample.sample.hardbottom_sponge}", align: :center, colspan: 1 }],
-              [{ content: "2:" + "#{@sample.sample.sand_pcov_other2_lab}", align: :left, colspan: 1 }, { content: "#{@sample.sample.sand_pcov_other2}", align: :center, colspan: 1 }, { content: "1: " + "#{@sample.sample.hard_pcov_other1_lab}", align: :left, colspan: 1 }, { content: "#{@sample.sample.hard_pcov_other1}", align: :center, colspan: 1 }],
-              [{ content: "", align: :center, colspan: 1 }, { content: "", align: :center, colspan: 1 }, { content: "2: " + "#{@sample.sample.hard_pcov_other2_lab}", align: :left, colspan: 1 }, { content: "#{@sample.sample.hard_pcov_other2}", align: :center, colspan: 1 }],
+              [{ content: "Bare", align: :center, colspan: 1 }, { content: "#{@sample.sand_bare}", align: :center, colspan: 1 }, { content: "Algae(<1)", align: :center, colspan: 1 }, { content: "#{@sample.hardbottom_algal_turf}", align: :center, colspan: 1 }],
+              [{ content: "Macro Algae", align: :center, colspan: 1 }, { content: "#{@sample.sand_macro_algae}", align: :center, colspan: 1 }, { content: "Algae(>1)", align: :center, colspan: 1 }, { content: "#{@sample.hardbottom_macro_algae}", align: :center, colspan: 1 }],
+              [{ content: "Seagrass", align: :center, colspan: 1 }, { content: "#{@sample.sand_seagrass}", align: :center, colspan: 1 }, { content: "Live Coral", align: :center, colspan: 1 }, { content: "#{@sample.hardbottom_live_coral}", align: :center, colspan: 1 }],
+              [{ content: "Sponge", align: :center, colspan: 1 }, { content: "#{@sample.sand_sponge}", align: :center, colspan: 1 }, { content: "Octocoral", align: :center, colspan: 1 }, { content: "#{@sample.hardbottom_octocoral}", align: :center, colspan: 1 }],
+              [{ content: "1:" + "#{@sample.sand_pcov_other1_lab}", align: :left, colspan: 1 }, { content: "#{@sample.sand_pcov_other1}", align: :center, colspan: 1 }, { content: "Sponge", align: :center, colspan: 1 }, { content: "#{@sample.hardbottom_sponge}", align: :center, colspan: 1 }],
+              [{ content: "2:" + "#{@sample.sand_pcov_other2_lab}", align: :left, colspan: 1 }, { content: "#{@sample.sand_pcov_other2}", align: :center, colspan: 1 }, { content: "1: " + "#{@sample.hard_pcov_other1_lab}", align: :left, colspan: 1 }, { content: "#{@sample.hard_pcov_other1}", align: :center, colspan: 1 }],
+              [{ content: "", align: :center, colspan: 1 }, { content: "", align: :center, colspan: 1 }, { content: "2: " + "#{@sample.hard_pcov_other2_lab}", align: :left, colspan: 1 }, { content: "#{@sample.hard_pcov_other2}", align: :center, colspan: 1 }],
               [{ content: "", align: :center, colspan: 1 }, { content: "", align: :center, colspan: 1 }, { content: "", align: :center, colspan: 1 }, { content: "", align: :center, colspan: 1 }],
             ]
 
@@ -152,14 +152,14 @@ class SamplePdf < Prawn::Document
 
  def spp_1_27
   [["", "Period", "Species", "N/Avg-Min-Max"]] +
-  @sample.sample.sample_animals[0..26].map.with_index do |spp, index|
+  @sample.sample_animals[0..26].map.with_index do |spp, index|
     report_line(index + 1, spp)
   end
  end
 
  def spp_28_54
   [["", "Period", "Species", "N/Avg-Min-Max"]] +
-  @sample.sample.sample_animals[27..@sample.sample.sample_animals.length].map.with_index do |spp, index|
+  @sample.sample_animals[27..@sample.sample_animals.length].map.with_index do |spp, index|
     report_line(index + 28, spp)
   end
  end

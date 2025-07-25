@@ -27,8 +27,8 @@ wb.add_worksheet(name: "Sample") do |sampSheet|
                       "SAMPLE_DESCR",]
   @samples.each do |sample|
     sampSheet.add_row [sample.msn,
-                        sample.diver_samples.primary[0].diver.diver_number,
-                        sample.diver_samples.secondary[0].diver.diver_number,
+                        sample.diver.diver_number,
+                        sample.buddy.diver_number,
                         sample.sample_type_id,
                         sample.habitat_type.id,
                         sample.habitat_type.habitat_name,

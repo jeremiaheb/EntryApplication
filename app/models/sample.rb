@@ -35,7 +35,7 @@ class Sample < ActiveRecord::Base
   validate  :sample_starts_before_ends
 
   validates :field_id,                    presence: true
-  validates_format_of :field_id,          with: /\A...\d[a-zA-Z]\z/
+  validates_format_of :field_id,          with: /\A\d{5}[a-zA-Z]\z/
   validates :dive_depth,                  presence: true, numericality: true
   validates :sample_depth,                presence: true, numericality: true
   validates :underwater_visibility,       presence: true, numericality: true

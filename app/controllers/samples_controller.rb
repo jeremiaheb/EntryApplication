@@ -12,7 +12,7 @@ class SamplesController < ApplicationController
     if current_diver.role == "admin"
       @samples = Sample.all
     elsif current_diver.role == "manager"
-      @samples = Sample.where("diver_id=? OR boatlog_manager_id=?", current_diver.id, current_diver.boatlog_manager_id).uniq
+      @samples = Sample.where("diver_id=? OR boatlog_manager_id=?", current_diver.id, current_diver.boatlog_manager_id)
     else
       @samples = current_diver.samples
     end

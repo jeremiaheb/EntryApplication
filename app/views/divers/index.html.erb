@@ -6,7 +6,7 @@
       <li class="usa-button-group__item">
         <%= link_to new_diver_path, class: "new-diver-button usa-button" do %>
           <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
-            <%= tag.use href: image_path("sprite.svg#add") %>
+            <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#add") %>
           </svg>
           New Diver
         <%- end %>
@@ -14,7 +14,7 @@
       <li class="usa-button-group__item">
         <%= link_to divers_path(format: "xlsx", nocache: SecureRandom.alphanumeric), class: "usa-button usa-button--accent-cool" do %>
           <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
-            <%= tag.use href: image_path("sprite.svg#file_download") %>
+            <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#file_download") %>
           </svg> 
           Download Current Diver List
         <%- end %>

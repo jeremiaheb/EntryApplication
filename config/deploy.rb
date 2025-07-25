@@ -58,8 +58,10 @@ namespace :deploy do
     desc "Install JavaScript packages"
     task :install do
       on roles(:web) do
-        within release_path do
-          execute "yarn", "install", "--production", "--frozen-lockfile"
+        with path: "$PATH:$HOME/.nvm" do
+          within release_path do
+            execute "nvm-exec", "yarn", "install", "--production", "--frozen-lockfile"
+          end
         end
       end
     end

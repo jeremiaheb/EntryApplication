@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_17_171610) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_25_153944) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -279,6 +279,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_17_171610) do
     t.string "hard_pcov_other2_lab"
     t.integer "hard_pcov_other1"
     t.integer "hard_pcov_other2"
+    t.integer "diver_id"
+    t.integer "buddy_id"
+    t.index ["buddy_id"], name: "index_samples_on_buddy_id"
+    t.index ["diver_id"], name: "index_samples_on_diver_id"
   end
 
   create_table "station_logs", force: :cascade do |t|

@@ -12,11 +12,15 @@ class BoatlogManager < ActiveRecord::Base
   validates :agency, :firstname, :lastname, presence: true
 
   def divers_responsible_for
-    boatlog_replicate_divers = boat_logs.map(&:divers).flatten
-    sample_divers = samples.joins(:diver_samples).where("diver_samples.primary_diver = ?", true).map { |sample| sample.diver_samples.first.diver }
-    lpi_divers = benthic_covers.map { |benthic_cover| benthic_cover.diver }
-    demo_divers = coral_demographics.map { |coral_demographic| coral_demographic.diver }
-    (boatlog_replicate_divers + sample_divers + lpi_divers + demo_divers).uniq.sort_by(&:diver_name)
+    # Cache result
+    return @divers_responsible_for if defined?(@divers_responsible_for)
+
+    boatlog_replicate_divers = boat_logs.includes(:divers).map(&:divers).flatten
+    sample_divers = samples.includes(:diver_samples => :diver).map { |sample| sample.diver_samples.find(&:primary_diver)&.diver }
+    lpi_divers = benthic_covers.includes(:diver).map { |benthic_cover| benthic_cover.diver }
+    demo_divers = coral_demographics.includes(:diver).map { |coral_demographic| coral_demographic.diver }
+
+    @divers_responsible_for = (boatlog_replicate_divers + sample_divers + lpi_divers + demo_divers).to_a.compact.uniq.sort_by(&:diver_name)
   end
 
   def benthic_covers_for_diver(diver, for_admin = false)
@@ -60,7 +64,7 @@ class BoatlogManager < ActiveRecord::Base
   end
 
   def boatlog_diver_list
-    boat_logs.flat_map(&:boatlog_divers)
+    boat_logs.includes(:rep_logs => [:diver, :station_log]).flat_map(&:boatlog_divers)
   end
 
   def samples_diver_entered

@@ -62,7 +62,7 @@ class SamplesController < ApplicationController
   def new
     @draft = Draft.latest_for(diver_id: current_diver.id, model_klass: Sample, model_id: nil)
     if @draft
-      @sample = Sample.new(@draft.model_attributes)
+      @sample = @draft.assign_attributes_to(Sample.new)
     else
       @sample = Sample.new.tap do |s|
         s.sample_date ||= Date.current
@@ -81,7 +81,7 @@ class SamplesController < ApplicationController
   def edit
     @draft = Draft.latest_for(diver_id: current_diver.id, model_klass: Sample, model_id: params[:id])
     if @draft
-      @sample.assign_attributes(@draft.model_attributes)
+      @draft.assign_attributes_to(@sample)
     end
   end
 

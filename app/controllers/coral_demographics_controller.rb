@@ -49,7 +49,7 @@ class CoralDemographicsController < ApplicationController
   def new
     @draft = Draft.latest_for(diver_id: current_diver.id, model_klass: CoralDemographic, model_id: nil)
     if @draft
-      @coral_demographic = CoralDemographic.new(@draft.model_attributes)
+      @coral_demographic = @draft.assign_attributes_to(CoralDemographic.new)
     else
       @coral_demographic = CoralDemographic.new.tap do |c|
         c.sample_date ||= Date.current
@@ -68,7 +68,7 @@ class CoralDemographicsController < ApplicationController
   def edit
     @draft = Draft.latest_for(diver_id: current_diver.id, model_klass: CoralDemographic, model_id: params[:id])
     if @draft
-      @coral_demographic.assign_attributes(@draft.model_attributes)
+      @draft.assign_attributes_to(@coral_demographic)
     end
   end
 

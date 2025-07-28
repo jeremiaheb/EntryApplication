@@ -327,9 +327,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_25_153944) do
     t.integer "hard_pcov_other2"
     t.integer "diver_id"
     t.integer "buddy_id"
+    t.integer "mission_id"
     t.index ["buddy_id"], name: "index_samples_on_buddy_id"
     t.index ["diver_id"], name: "index_samples_on_diver_id"
-    t.integer "mission_id"
   end
 
   create_table "station_logs", force: :cascade do |t|

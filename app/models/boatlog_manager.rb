@@ -12,10 +12,10 @@ class BoatlogManager < ActiveRecord::Base
   validates :agency, :firstname, :lastname, presence: true
 
   def divers_responsible_for
-    boatlog_replicate_divers = boat_logs.map(&:divers).flatten
-    sample_divers = samples.map { |sample| sample.diver }
-    lpi_divers = benthic_covers.map { |benthic_cover| benthic_cover.diver }
-    demo_divers = coral_demographics.map { |coral_demographic| coral_demographic.diver }
+    boatlog_replicate_divers = boat_logs.includes([:divers]).flat_map(&:divers)
+    sample_divers = samples.includes([:diver]).map(&:diver)
+    lpi_divers = benthic_covers.includes([:diver]).map(&:diver)
+    demo_divers = coral_demographics.includes([:diver]).map(&:diver)
     (boatlog_replicate_divers + sample_divers + lpi_divers + demo_divers).uniq.sort_by(&:diver_name)
   end
 
@@ -23,40 +23,16 @@ class BoatlogManager < ActiveRecord::Base
     (for_admin ? BenthicCover : benthic_covers).where(diver_id: diver.id)
   end
 
-  # TODO: Remove this method and propagate the .count down to the caller. It is
-  # a trivial call, and one fewer API to expose and test.
-  def benthic_covers_count_for_diver(diver)
-    benthic_covers_for_diver(diver).count
-  end
-
   def coral_demographics_for_diver(diver)
     coral_demographics.where(diver_id: diver.id)
-  end
-
-  # TODO: Remove this method and propagate the .count down to the caller. It is
-  # a trivial call, and one fewer API to expose and test.
-  def coral_demographics_count_for_diver(diver)
-    coral_demographics_for_diver(diver).count
   end
 
   def samples_for_diver(diver)
     samples.where(diver_id: diver.id)
   end
 
-  # TODO: Remove this method and propagate the .count down to the caller. It is
-  # a trivial call, and one fewer API to expose and test.
-  def samples_count_for_diver(diver)
-    samples_for_diver(diver).count
-  end
-
   def boatlog_replicates_for_diver(diver)
     boat_logs.joins(:rep_logs).where("rep_logs.diver_id = ?", diver.id)
-  end
-
-  # TODO: Remove this method and propagate the .count down to the caller. It is
-  # a trivial call, and one fewer API to expose and test.
-  def boatlog_replicates_count_for_diver(diver)
-    boatlog_replicates_for_diver(diver).count
   end
 
   def boatlog_diver_list
@@ -64,14 +40,14 @@ class BoatlogManager < ActiveRecord::Base
   end
 
   def samples_diver_entered
+    diver_ids = divers_responsible_for.map(&:id)
+
+    samples = self.samples.includes([:diver]).where(diver_id: diver_ids)
+    benthic_covers = self.benthic_covers.includes([:diver]).where(diver_id: diver_ids)
+    coral_demographics = self.coral_demographics.includes([:diver]).where(diver_id: diver_ids)
+
     divers_list = []
-    divers_responsible_for.flat_map { |d| samples_for_diver(d) }.each do |rep|
-      divers_list << [rep.sample_date, rep.field_id, rep.diver.diver_name]
-    end
-    divers_responsible_for.flat_map { |d| benthic_covers_for_diver(d) }.each do |rep|
-      divers_list << [rep.sample_date, rep.field_id, rep.diver.diver_name]
-    end
-    divers_responsible_for.flat_map { |d| coral_demographics_for_diver(d) }.each do |rep|
+    (samples + benthic_covers + coral_demographics).each do |rep|
       divers_list << [rep.sample_date, rep.field_id, rep.diver.diver_name]
     end
     divers_list.sort_by { |e| e[0] }

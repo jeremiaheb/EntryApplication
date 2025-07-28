@@ -13,7 +13,7 @@ class BoatlogManager < ActiveRecord::Base
 
   def divers_responsible_for
     boatlog_replicate_divers = boat_logs.map(&:divers).flatten
-    sample_divers = samples.joins(:diver_samples).where("diver_samples.primary_diver = ?", true).map { |sample| sample.diver_samples.first.diver }
+    sample_divers = samples.map { |sample| sample.diver }
     lpi_divers = benthic_covers.map { |benthic_cover| benthic_cover.diver }
     demo_divers = coral_demographics.map { |coral_demographic| coral_demographic.diver }
     (boatlog_replicate_divers + sample_divers + lpi_divers + demo_divers).uniq.sort_by(&:diver_name)
@@ -40,7 +40,7 @@ class BoatlogManager < ActiveRecord::Base
   end
 
   def samples_for_diver(diver)
-    samples.joins(:diver_samples).where("diver_samples.primary_diver = ?", true).where("diver_samples.diver_id = ?", diver.id)
+    samples.where(diver_id: diver.id)
   end
 
   # TODO: Remove this method and propagate the .count down to the caller. It is

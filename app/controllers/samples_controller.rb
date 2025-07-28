@@ -12,9 +12,9 @@ class SamplesController < ApplicationController
     if current_diver.role == "admin"
       @samples = Sample.all
     elsif current_diver.role == "manager"
-      @samples = Sample.joins(:diver_samples).where("diver_samples.diver_id=? AND diver_samples.primary_diver=? OR boatlog_manager_id=?", current_diver, true, current_diver.boatlog_manager_id).uniq
+      @samples = Sample.where("diver_id=? OR boatlog_manager_id=?", current_diver.id, current_diver.boatlog_manager_id)
     else
-      @samples = current_diver.samples.merge(DiverSample.primary)
+      @samples = Sample.where("diver_id=?", current_diver.id)
     end
 
     respond_to do |format|

@@ -37,7 +37,7 @@ class BoatLogsController < ApplicationController
   def new
     @draft = Draft.latest_for(diver_id: current_diver.id, model_klass: BoatLog, model_id: nil)
     if @draft
-      @boat_log = BoatLog.new(@draft.model_attributes)
+      @boat_log = @draft.assign_attributes_to(BoatLog.new)
     else
       @boat_log = BoatLog.new.tap do |bl|
         bl.date ||= Date.current
@@ -56,7 +56,7 @@ class BoatLogsController < ApplicationController
   def edit
     @draft = Draft.latest_for(diver_id: current_diver.id, model_klass: BoatLog, model_id: params[:id])
     if @draft
-      @boat_log.assign_attributes(@draft.model_attributes)
+      @draft.assign_attributes_to(@boat_log)
     end
   end
 

@@ -77,4 +77,35 @@ class DraftTest < ActiveSupport::TestCase
     Draft.destroy_for(diver_id: diver2.id, model_klass: Sample, model_id: nil)
     assert 0, Draft.count
   end
+
+  test "#assign_attributes_to" do
+    diver = FactoryBot.create(:diver)
+
+    sample = FactoryBot.build(:sample, field_id: "12345A")
+    draft = Draft.create!(diver_id: diver.id, model_klass: Sample, model_id: nil, model_attributes: sample.attributes, sequence: 1000)
+
+    restored_sample = Sample.new
+    assert_nil restored_sample.field_id
+
+    restored_sample = draft.assign_attributes_to(restored_sample)
+    assert_equal "12345A", restored_sample.field_id
+  end
+
+  test "#assign_attributes_to does not raise if some model_attributes are invalid" do
+    # This case happens when, e.g., a field is removed from a model but there
+    # are outstanding drafts that still have that field. We want to ignore the
+    # attributes, but not raise.
+    diver = FactoryBot.create(:diver)
+
+    sample = FactoryBot.build(:sample, field_id: "12345A")
+    draft = Draft.create!(diver_id: diver.id, model_klass: Sample, model_id: nil, model_attributes: sample.attributes.merge("bogus" => "bogus field"), sequence: 1000)
+
+    restored_sample = draft.assign_attributes_to(Sample.new)
+    assert_equal "12345A", restored_sample.field_id
+
+    # But if attributes are assigned in another way later, it will raise as usual
+    assert_raises ActiveModel::UnknownAttributeError do
+      restored_sample.assign_attributes("bogus" => "bogus field")
+    end
+  end
 end

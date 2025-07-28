@@ -30,10 +30,10 @@ class DashboardController < ApplicationController
         }
       end
 
-      @data_by_divers[diver]["boat"] += boatlog_manager.boatlog_replicates_count_for_diver(diver)
-      @data_by_divers[diver]["sample"] += boatlog_manager.samples_count_for_diver(diver)
-      @data_by_divers[diver]["lpi"] += boatlog_manager.benthic_covers_count_for_diver(diver)
-      @data_by_divers[diver]["demo"] += boatlog_manager.coral_demographics_count_for_diver(diver)
+      @data_by_divers[diver]["boat"] += boatlog_manager.boatlog_replicates_for_diver(diver).count
+      @data_by_divers[diver]["sample"] += boatlog_manager.samples_for_diver(diver).count
+      @data_by_divers[diver]["lpi"] += boatlog_manager.benthic_covers_for_diver(diver).count
+      @data_by_divers[diver]["demo"] += boatlog_manager.coral_demographics_for_diver(diver).count
     end
   end
   @data_by_divers.sort_by { |diver, data| diver }

@@ -13,8 +13,8 @@ class BoatLog < ActiveRecord::Base
 
   def boatlog_divers
     boatlog_divers_list = []
-    rep_logs.each do |rep|
-      boatlog_divers_list << [rep.station_log.boat_log.date, rep.field_id, rep.diver.diver_name]
+    rep_logs.includes([:diver]).each do |rep|
+      boatlog_divers_list << [date, rep.field_id, rep.diver.diver_name]
     end
     boatlog_divers_list.sort_by { |e| e[0] }
   end

@@ -36,8 +36,8 @@ class FishSamplesTest < ApplicationSystemTestCase
 
     # Assert that field values were restored
     assert_css "select#sample_boatlog_manager_id", text: boatlog_manager.agency_name
-    assert_css "select#sample_diver_samples_attributes_0_diver_id", text: diver.diver_name
-    assert_css "select#sample_diver_samples_attributes_1_diver_id", text: buddy.diver_name
+    assert_css "select#sample_diver_id", text: diver.diver_name
+    assert_css "select#sample_buddy_id", text: buddy.diver_name
     assert_css "select#sample_sample_type_id", text: sample_type.sample_type_name
     assert_css "select#sample_habitat_type_id", text: habitat_type.habitat_name
     assert_css "input#sample_dive_begin_time[value='10:00']"
@@ -51,9 +51,7 @@ class FishSamplesTest < ApplicationSystemTestCase
     sample_type = FactoryBot.create(:sample_type)
     habitat_type = FactoryBot.create(:habitat_type, region: "Caribbean")
     sample_animal = FactoryBot.create(:sample_animal, sample: nil, time_seen: 1)
-    sample = FactoryBot.create(:sample, sample_type: sample_type, habitat_type: habitat_type, sample_animals: [sample_animal])
-    diver_primary = FactoryBot.create(:diver_sample, sample: sample, diver: diver, primary_diver: true)
-    diver_buddy = FactoryBot.create(:diver_sample, sample: sample, diver: buddy, primary_diver: false)
+    sample = FactoryBot.create(:sample, diver: diver, buddy: buddy, sample_type: sample_type, habitat_type: habitat_type, sample_animals: [sample_animal])
     draft_count_before = Draft.count
 
     visit root_url
@@ -212,9 +210,7 @@ class FishSamplesTest < ApplicationSystemTestCase
     sample_animal1 = FactoryBot.create(:sample_animal, sample: nil, animal: animal1, time_seen: 1)
     animal2 = FactoryBot.create(:animal, common_name: "Fish 2")
     sample_animal2 = FactoryBot.create(:sample_animal, sample: nil, animal: animal2, time_seen: 1)
-    sample = FactoryBot.create(:sample, sample_type: sample_type, habitat_type: habitat_type, sample_animals: [sample_animal1, sample_animal2])
-    diver_primary = FactoryBot.create(:diver_sample, sample: sample, diver: diver, primary_diver: true)
-    diver_buddy = FactoryBot.create(:diver_sample, sample: sample, diver: buddy, primary_diver: false)
+    sample = FactoryBot.create(:sample, diver: diver, buddy: buddy, sample_type: sample_type, habitat_type: habitat_type, sample_animals: [sample_animal1, sample_animal2])
 
     visit root_url
     find(".samples-link").click
@@ -264,8 +260,8 @@ class FishSamplesTest < ApplicationSystemTestCase
 
   def fill_in_sample_section(boatlog_manager:, diver:, buddy:, sample_type:, habitat_type:)
     find("select#sample_boatlog_manager_id").select(boatlog_manager.agency_name)
-    find("select#sample_diver_samples_attributes_0_diver_id").select(diver.diver_name)
-    find("select#sample_diver_samples_attributes_1_diver_id").select(buddy.diver_name)
+    find("select#sample_diver_id").select(diver.diver_name)
+    find("select#sample_buddy_id").select(buddy.diver_name)
     find("select#sample_sample_type_id").select(sample_type.sample_type_name)
     find("select#sample_habitat_type_id").select(habitat_type.habitat_name)
     find("input#sample_dive_begin_time").fill_in(with: "10:00")

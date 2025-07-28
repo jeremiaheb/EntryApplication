@@ -29,7 +29,7 @@
         </div>
         <nav aria-label="Primary navigation" class="usa-nav">
           <button type="button" class="usa-nav__close">
-            <%= image_tag "usa-icons/close.svg", role: "img", alt: "Close" %>
+            <%= image_tag "@uswds/uswds/dist/img/usa-icons/close.svg", role: "img", alt: "Close" %>
           </button>
           <ul class="usa-nav__primary usa-accordion">
             <li class="usa-nav__primary-item">
@@ -37,7 +37,7 @@
                 <button type="button" class="usa-accordion__button usa-nav__link" aria-expanded="false" aria-controls="nav-my-account">
                   <span>
                     <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
-                      <%= tag.use href: image_path("sprite.svg#account_circle") %>
+                      <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#account_circle") %>
                     </svg> 
                     <%= current_diver.username %>
                   </span>
@@ -49,7 +49,7 @@
                   <li class="usa-nav__submenu-item">
                     <%= link_to destroy_diver_session_path, method: "delete" do %>
                       <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
-                        <%= tag.use href: image_path("sprite.svg#logout") %>
+                        <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#logout") %>
                       </svg> 
                       Logout
                     <%- end %>
@@ -58,7 +58,7 @@
               <%- else %>
                 <%= link_to new_diver_session_path, class: "usa-button usa-button--outline" do %>
                   <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
-                    <%= tag.use href: image_path("sprite.svg#account_circle") %>
+                    <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#account_circle") %>
                   </svg> 
                   Login
                 <%- end %>

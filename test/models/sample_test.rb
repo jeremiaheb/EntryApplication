@@ -18,8 +18,7 @@ class SampleTest < ActiveSupport::TestCase
   test "#myId returns diver ID" do
     diver = FactoryBot.create(:diver)
     sample_animal = FactoryBot.create(:sample_animal, sample: nil)
-    sample = FactoryBot.create(:sample, sample_animals: [sample_animal])
-    diver_sample = FactoryBot.create(:diver_sample, sample: sample, diver: diver, primary_diver: true)
+    sample = FactoryBot.create(:sample, diver: diver, sample_animals: [sample_animal])
 
     assert_equal sample.diver.id, sample.myId
   end
@@ -29,11 +28,11 @@ class SampleTest < ActiveSupport::TestCase
     sample_animal = FactoryBot.create(:sample_animal, sample: nil)
     sample = FactoryBot.create(
       :sample,
+      diver: diver,
       sample_date: Date.parse("2022-05-06"),
       sample_begin_time: Time.parse("2022-05-06T09:10:11Z"),
       sample_animals: [sample_animal],
     )
-    diver_sample = FactoryBot.create(:diver_sample, sample: sample, diver: diver, primary_diver: true)
 
     assert_equal "A202205060910#{sample.diver.diver_number}", sample.msn
   end
@@ -41,8 +40,7 @@ class SampleTest < ActiveSupport::TestCase
   test "associating a sample with a diver" do
     diver = FactoryBot.create(:diver)
     sample_animal = FactoryBot.create(:sample_animal, sample: nil)
-    sample = FactoryBot.create(:sample, sample_animals: [sample_animal])
-    diver_sample = FactoryBot.create(:diver_sample, sample: sample, diver: diver, primary_diver: true)
+    sample = FactoryBot.create(:sample, diver: diver, sample_animals: [sample_animal])
 
     assert_equal diver, sample.diver
   end

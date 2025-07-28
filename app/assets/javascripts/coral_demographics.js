@@ -9,10 +9,9 @@ $(function () {
     autoclose: true,
   });
 
-  $("#coral_demographic_sample_begin_time").timeEntry({
-    show24Hours: true,
-    minTime: "06:00",
-    maxTime: "20:00",
+  $("#coral_demographic_sample_begin_time").timepicker({
+    timeFormat: "HH:mm",
+    dropdown: false,
   });
 
   $(".demo_corals").find(".coralSpecies").select2();
@@ -125,6 +124,7 @@ $(function () {
       },
       "coral_demographic[sample_begin_time]": {
         required: true,
+        pattern: /^(06|07|08|09|10|11|12|13|14|15|16|17|18|19|20):([0-9]{2})$/,
       },
       "coral_demographic[habitat_type_id]": {
         required: true,
@@ -142,7 +142,11 @@ $(function () {
         maxlength: 150,
       },
     },
-    messages: {},
+    messages: {
+      "coral_demographic[sample_begin_time]": {
+        pattern: "Time must be between 06:00 and 20:00",
+      },
+    },
   });
 
   function validate_fields() {

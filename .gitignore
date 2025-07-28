@@ -53,6 +53,7 @@
 # VSCode local settings
 /.vscode
 /.Rproj*
+/.ruby-lsp
 
 # Database backups
 *.dump

@@ -91,7 +91,7 @@ class DraftTest < ActiveSupport::TestCase
     assert_equal "12345A", restored_sample.field_id
   end
 
-  test "#assign_attributes_to does not raise if some model_attributes are invalid" do
+  test "#assign_attributes_to skips and does not raise if some model attribute keys are invalid" do
     # This case happens when, e.g., a field is removed from a model but there
     # are outstanding drafts that still have that field. We want to ignore the
     # attributes, but not raise.
@@ -107,5 +107,24 @@ class DraftTest < ActiveSupport::TestCase
     assert_raises ActiveModel::UnknownAttributeError do
       restored_sample.assign_attributes("bogus" => "bogus field")
     end
+  end
+
+  test "#assign_attributes_to skips and does not raise if some model attribute values are invalid" do
+    # This case happens when, e.g., a field changes format (e.g., from a number to a string, or vice versa)
+    diver = FactoryBot.create(:diver)
+    benthic_cover = FactoryBot.create(:benthic_cover, field_id: "12345A")
+
+    draft_attributes = {
+      # Valid attribute (changed A to B)
+      field_id: "12345B",
+      presence_belt_attributes: {
+        # Invalid attribute
+        a_cervicornis: "0",
+      },
+    }
+    draft = Draft.create!(diver_id: diver.id, model_klass: BenthicCover, model_id: benthic_cover.id, model_attributes: draft_attributes, sequence: 1000)
+
+    restored_benthic_cover = draft.assign_attributes_to(BenthicCover.find(benthic_cover.id))
+    assert_equal "12345B", restored_benthic_cover.field_id
   end
 end

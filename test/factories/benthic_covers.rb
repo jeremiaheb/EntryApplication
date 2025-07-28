@@ -9,5 +9,16 @@ FactoryBot.define do
     habitat_type
     meters_completed { 20 }
     sample_description { "Here is my sample" }
+    presence_belt
+  end
+
+  factory :presence_belt do
+    a_palmata { PresenceBelt::ENUM_VALUES.keys.sample }
+    a_cervicornis { PresenceBelt::ENUM_VALUES.keys.sample }
+    d_cylindrus { PresenceBelt::ENUM_VALUES.keys.sample }
+    m_ferox { PresenceBelt::ENUM_VALUES.keys.sample }
+    m_annularis { PresenceBelt::ENUM_VALUES.keys.sample }
+    m_franksi { PresenceBelt::ENUM_VALUES.keys.sample }
+    m_faveolata { PresenceBelt::ENUM_VALUES.keys.sample }
   end
 end

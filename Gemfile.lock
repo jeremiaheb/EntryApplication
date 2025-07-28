@@ -155,9 +155,6 @@ GEM
       i18n (>= 1.8.11, < 2)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    google-protobuf (4.31.1)
-      bigdecimal
-      rake (>= 13)
     google-protobuf (4.31.1-x64-mingw-ucrt)
       bigdecimal
       rake (>= 13)
@@ -319,9 +316,6 @@ GEM
       rubocop-rails (>= 2.30)
     ruby-progressbar (1.13.0)
     rubyzip (2.4.1)
-    sass-embedded (1.89.2)
-      google-protobuf (~> 4.31)
-      rake (>= 13)
     sass-embedded (1.89.2-x64-mingw-ucrt)
       google-protobuf (~> 4.31)
     sass-embedded (1.89.2-x86_64-linux-gnu)
@@ -392,7 +386,7 @@ DEPENDENCIES
   factory_bot_rails (~> 6.5)
   faker (~> 3.5, >= 3.5.2)
   nested_form (= 0.3.2)
-  pg (~> 1.5, >= 1.5.9)
+  pg (~> 1.5, < 1.6)
   prawn (~> 2.5)
   prawn-table (~> 0.2.2)
   pry
@@ -404,4 +398,4 @@ DEPENDENCIES
   sprockets-rails
 
 BUNDLED WITH
-   2.7.0
+   2.7.1

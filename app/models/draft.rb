@@ -39,8 +39,15 @@ class Draft < ActiveRecord::Base
   # Reconstruct the model for this draft using the saved attributes. Returns the
   # model with updated attributes.
   def assign_attributes_to(model)
-    valid_attributes = model_attributes.dup.delete_if { |k, _| !model.respond_to?(:"#{k}=") }
-    model.assign_attributes(valid_attributes)
+    model_attributes.each_pair do |k, v|
+      model.public_send(:"#{k}=", v)
+    rescue NoMethodError
+      # This key is apparently invalid. We'll apply the other attributes and
+      # ignore this one.
+    rescue StandardError
+      # The value is apparently invalid. We'll apply the other attributes and
+      # ignore this one.
+    end
 
     model
   end

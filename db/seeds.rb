@@ -16,6 +16,12 @@ Region.find_or_create_by!(name: "St. Thomas and St. John")
 Region.find_or_create_by!(name: "St. Croix")
 Region.find_or_create_by!(name: "Flower Garden Banks")
 
+# Agencies
+Agency.find_or_create_by!(name: "NOAA")
+
+# Projects
+Project.find_or_create_by!(name: "NCRMP")
+
 # Habitat Types
 HabitatType.find_or_initialize_by(habitat_name: "Sand").
   update!(habitat_description: "Sand only", region: "Atlantic")

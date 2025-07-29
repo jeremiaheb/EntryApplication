@@ -8,6 +8,14 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+# Jurisdictions
+Jurisdiction.find_or_create_by!(name: "Dry Tortugas")
+Jurisdiction.find_or_create_by!(name: "Florida Keys")
+Jurisdiction.find_or_create_by!(name: "Southeast Peninsilar Florida")
+Jurisdiction.find_or_create_by!(name: "St. Thomas and St. John")
+Jurisdiction.find_or_create_by!(name: "St. Croix")
+Jurisdiction.find_or_create_by!(name: "Flower Garden Banks National Marine Sanctuary")
+
 # Habitat Types
 HabitatType.find_or_initialize_by(habitat_name: "Sand").
   update!(habitat_description: "Sand only", region: "Atlantic")

@@ -11,10 +11,10 @@
 # Regions
 Region.find_or_create_by!(name: "Dry Tortugas")
 Region.find_or_create_by!(name: "Florida Keys")
-Region.find_or_create_by!(name: "Southeast Peninsilar Florida")
+Region.find_or_create_by!(name: "Southeast Florida")
 Region.find_or_create_by!(name: "St. Thomas and St. John")
 Region.find_or_create_by!(name: "St. Croix")
-Region.find_or_create_by!(name: "Flower Garden Banks National Marine Sanctuary")
+Region.find_or_create_by!(name: "Flower Garden Banks")
 
 # Habitat Types
 HabitatType.find_or_initialize_by(habitat_name: "Sand").

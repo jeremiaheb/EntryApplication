@@ -1,5 +1,5 @@
-  <%= form_for @jurisdiction, html: { class: "usa-form maxw-full bg-base-lightest" } do |f| %>
-    <%= render "shared/uswds_error_messages", target: @jurisdiction %>
+  <%= form_for @region, html: { class: "usa-form maxw-full bg-base-lightest" } do |f| %>
+    <%= render "shared/uswds_error_messages", target: @region %>
 
     <fieldset class="usa-fieldset padding-1">
       <%= f.label :name, class: "usa-label" %>
@@ -14,6 +14,6 @@
       %>
 
       <%= f.submit class: "usa-button" %>
-      <%= link_to "Cancel", jurisdictions_path, class: "usa-button usa-button--outline" %>
+      <%= link_to "Cancel", regions_path, class: "usa-button usa-button--outline" %>
     </fieldset>
   <% end %>

@@ -1,6 +1,6 @@
 require "test_helper"
 
-class JurisdictionTest < ActiveSupport::TestCase
+class RegionTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

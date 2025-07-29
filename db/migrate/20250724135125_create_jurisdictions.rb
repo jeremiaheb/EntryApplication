@@ -1,6 +1,6 @@
-class CreateJurisdictions < ActiveRecord::Migration[7.1]
+class CreateRegions < ActiveRecord::Migration[7.1]
   def change
-    create_table :jurisdictions do |t|
+    create_table :regions do |t|
       t.string :name, null: false, index: { unique: true }
 
       t.timestamps null: false

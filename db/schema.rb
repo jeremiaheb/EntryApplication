@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_25_153944) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_29_143813) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -167,21 +167,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_25_153944) do
     t.integer "diadema_num"
   end
 
-  create_table "jurisdiction_habitat_types", force: :cascade do |t|
-    t.integer "jurisdiction_id", null: false
-    t.integer "habitat_type_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["jurisdiction_id", "habitat_type_id"], name: "idx_on_jurisdiction_id_habitat_type_id_d24fd55fd4", unique: true
-  end
-
-  create_table "jurisdictions", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_jurisdictions_on_name", unique: true
-  end
-
   create_table "mission_managers", force: :cascade do |t|
     t.integer "mission_id", null: false
     t.integer "manager_id", null: false
@@ -193,10 +178,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_25_153944) do
   create_table "missions", force: :cascade do |t|
     t.integer "project_id", null: false
     t.integer "agency_id", null: false
-    t.integer "jurisdiction_id", null: false
+    t.integer "region_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["project_id", "agency_id", "jurisdiction_id"], name: "index_missions_on_project_id_and_agency_id_and_jurisdiction_id", unique: true
+    t.index ["project_id", "agency_id", "region_id"], name: "index_missions_on_project_id_and_agency_id_and_region_id", unique: true
   end
 
   create_table "point_intercepts", force: :cascade do |t|
@@ -225,6 +210,21 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_25_153944) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_projects_on_name", unique: true
+  end
+
+  create_table "region_habitat_types", force: :cascade do |t|
+    t.integer "region_id", null: false
+    t.integer "habitat_type_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["region_id", "habitat_type_id"], name: "index_region_habitat_types_on_region_id_and_habitat_type_id", unique: true
+  end
+
+  create_table "regions", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_regions_on_name", unique: true
   end
 
   create_table "rep_logs", force: :cascade do |t|

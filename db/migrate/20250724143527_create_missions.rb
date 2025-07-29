@@ -3,9 +3,9 @@ class CreateMissions < ActiveRecord::Migration[7.1]
     create_table :missions do |t|
       t.integer :project_id, null: false
       t.integer :agency_id, null: false
-      t.integer :jurisdiction_id, null: false
+      t.integer :region_id, null: false
 
-      t.index [:project_id, :agency_id, :jurisdiction_id], unique: true
+      t.index [:project_id, :agency_id, :region_id], unique: true
 
       t.timestamps null: false
     end

@@ -2,8 +2,8 @@
     <%= render "shared/uswds_error_messages", target: @mission %>
 
     <fieldset class="usa-fieldset padding-1">
-      <%= f.label :jurisdiction_id, class: "usa-label" %>
-      <%= f.collection_select :jurisdiction_id, Jurisdiction.order(:name), :id, :name, { required: true, include_blank: true }, class: "usa-select usa-input--lg", autofocus: true %>
+      <%= f.label :region_id, class: "usa-label" %>
+      <%= f.collection_select :region_id, Region.order(:name), :id, :name, { required: true, include_blank: true }, class: "usa-select usa-input--lg", autofocus: true %>
 
       <%= f.label :agency_id, class: "usa-label" %>
       <%= f.collection_select :agency_id, Agency.order(:name), :id, :name, { required: true, include_blank: true }, class: "usa-select usa-input--lg" %>

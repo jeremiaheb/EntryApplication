@@ -50,7 +50,7 @@ EntryApplication::Application.routes.draw do
 
   resources :projects, except: [:show]
 
-  resources :jurisdictions, except: [:show]
+  resources :regions, except: [:show]
 
   resources :missions, except: [:show]
 

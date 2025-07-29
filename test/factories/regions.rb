@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :jurisdiction do
+  factory :region do
     name { "MyString" }
   end
 end

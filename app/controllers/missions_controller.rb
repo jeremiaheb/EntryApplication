@@ -5,7 +5,7 @@ class MissionsController < ApplicationController
   layout "application-uswds"
 
   def index
-    @missions = @missions.includes(:jurisdiction, :agency, :project, :managers).standard_order
+    @missions = @missions.includes(:region, :agency, :project, :managers).standard_order
   end
 
   def new
@@ -38,6 +38,6 @@ class MissionsController < ApplicationController
   private
 
   def mission_params
-    params.require(:mission).permit(:project_id, :agency_id, :jurisdiction_id, manager_ids: [])
+    params.require(:mission).permit(:project_id, :agency_id, :region_id, manager_ids: [])
   end
 end

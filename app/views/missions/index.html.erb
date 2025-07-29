@@ -16,7 +16,7 @@
     <table class="width-full display">
       <thead>
         <tr>
-          <th scope="col">Jurisdiction</th>
+          <th scope="col">Region</th>
           <th scope="col">Agency</th>
           <th scope="col">Project</th>
           <th scope="col">Managers</th>
@@ -26,7 +26,7 @@
       <tbody>
         <%- @missions.each do |mission| %>
           <tr>
-            <td><%= mission.jurisdiction.name %></td>
+            <td><%= mission.region.name %></td>
             <td><%= mission.agency.name %></td>
             <td><%= mission.project.name %></td>
             <td><%= mission.managers.pluck(:diver_name).sort.join(", ") %></td>

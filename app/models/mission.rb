@@ -9,9 +9,5 @@ class Mission < ActiveRecord::Base
   has_many :mission_managers, dependent: :destroy
   has_many :managers, through: :mission_managers, class_name: "Diver"
 
-  scope :standard_order, -> { joins(:region, :agency, :project).order(:"regions.id", :"agencies.id", :"projects.id", :id) }
-
-  def display_name
-    [region.name, agency.name, project.name].join(" ▸ ")
-  end
+  scope :standard_order, -> { joins(:agency, :project).order(:"agencies.name", :"projects.name", :id) }
 end

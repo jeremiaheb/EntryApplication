@@ -19,11 +19,19 @@
   <div id="sampleSection" class="sectionDiv">
     <div class='section_1'>
      <div id='section_1_part_1'>
+       <div class="control-group">
+          <label class="control-label" title="The region where this data was collected">Region</label>
+          <div class="controls">
+            <%= f.collection_select :region_id, Region.order(:name), :id, :name, { include_blank: true }, class: 'tab_1', tabindex: "1" %><br />
+          </div>
+        </div>
        
        <div class="control-group">
           <label class="control-label" title="The mission associated with this data">Mission</label>
           <div class="controls">
-            <%= f.collection_select :mission_id, Mission.includes(:region, :agency, :project).standard_order, :id, :display_name, { :include_blank => "" }, {  :class => 'tab_1', :tabindex => "1" } %><br />
+            <%= f.hidden_field :agency_id %>
+            <%= f.hidden_field :project_id %>
+            <%= select_tag "sample_mission_id", options_for_select(Mission.includes(:agency, :project).standard_order.group_by { |m| [m.agency, m.project] }.map { |(agency, project), missions| ["#{agency.name} ▸ #{project.name}", missions.first.id, selected: (f.object.agency_id == agency.id && f.object.project_id == project.id), disabled: !missions.map(&:region_id).include?(f.object.region_id), data: { region_ids: missions.map(&:region_id), agency_id: agency.id, project_id: project.id }] }), include_blank: true, class: "tab_1", tabindex: "1" %>
           </div>
         </div>
          
@@ -58,7 +66,7 @@
         <div class="control-group">
           <label class="control-label">Habitat Type</label>
           <div class="controls">
-            <%= f.collection_select :habitat_type_id, HabitatType.caribbean_habitats, :id, :habitat_name, { :include_blank => "" }, { :class => 'tab_1', :tabindex => "1" } %><br />
+            <%= f.collection_select :habitat_type_id, HabitatType.caribbean_habitats, :id, :habitat_name, { :include_blank => "" }, class: 'tab_1', tabindex: "1", "data-region-habitat-types": RegionHabitatType.all.to_json %><br />
           </div>
         </div>
 

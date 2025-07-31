@@ -31,7 +31,7 @@
           <div class="controls">
             <%= f.hidden_field :agency_id %>
             <%= f.hidden_field :project_id %>
-            <%= select_tag "sample_mission_id", options_for_select(Mission.includes(:agency, :project).standard_order.group_by { |m| [m.agency, m.project] }.map { |(agency, project), missions| ["#{agency.name} ▸ #{project.name}", missions.first.id, selected: (f.object.agency_id == agency.id && f.object.project_id == project.id), disabled: !missions.map(&:region_id).include?(f.object.region_id), data: { region_ids: missions.map(&:region_id), agency_id: agency.id, project_id: project.id }] }), include_blank: true, class: "tab_1", tabindex: "1" %>
+            <%= select_tag "sample_mission_id", options_for_select(Mission.active.includes(:agency, :project).standard_order.group_by { |m| [m.agency, m.project] }.map { |(agency, project), missions| ["#{agency.name} ▸ #{project.name}", missions.first.id, selected: (f.object.agency_id == agency.id && f.object.project_id == project.id), disabled: !missions.map(&:region_id).include?(f.object.region_id), data: { region_ids: missions.map(&:region_id), agency_id: agency.id, project_id: project.id }] }), include_blank: true, class: "tab_1", tabindex: "1" %>
           </div>
         </div>
          

@@ -19,6 +19,7 @@
           <th scope="col">Region</th>
           <th scope="col">Agency</th>
           <th scope="col">Project</th>
+          <th scope="col">Active?</th>
           <th scope="col">Managers</th>
           <th scole="col"></th>
         </tr>
@@ -29,14 +30,12 @@
             <td><%= mission.region.name %></td>
             <td><%= mission.agency.name %></td>
             <td><%= mission.project.name %></td>
+            <td><%= mission.active %></td>
             <td><%= mission.managers.pluck(:diver_name).sort.join(", ") %></td>
             <td>
               <ul class="usa-button-group float-right">
                 <li class="usa-button-group__item">
                   <%= link_to "Edit", edit_mission_path(mission), class: "usa-button usa-button--outline" %>
-                </li>
-                <li class="usa-button-group__item">
-                  <%= link_to "Delete", mission, data: { confirm: "Are you sure?" }, method: "delete", class: "usa-button usa-button--secondary" %>
                 </li>
               </ul>
             </td>

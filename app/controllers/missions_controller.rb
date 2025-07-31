@@ -30,14 +30,9 @@ class MissionsController < ApplicationController
     end
   end
 
-  def destroy
-    @mission.destroy
-    redirect_to missions_path, notice: "Mission was successfully deleted."
-  end
-
   private
 
   def mission_params
-    params.require(:mission).permit(:project_id, :agency_id, :region_id, manager_ids: [])
+    params.require(:mission).permit(:active, :project_id, :agency_id, :region_id, manager_ids: [])
   end
 end

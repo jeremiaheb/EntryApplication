@@ -52,7 +52,7 @@ EntryApplication::Application.routes.draw do
 
   resources :regions, except: [:show]
 
-  resources :missions, except: [:show]
+  resources :missions, except: [:show, :destroy]
 
   get "samples/:id/proofing_template" => "samples#proofing_template"
   # The priority is based upon order of creation:

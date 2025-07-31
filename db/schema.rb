@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_30_002836) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_31_002324) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -181,6 +181,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_30_002836) do
     t.integer "region_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "active", default: true, null: false
+    t.index ["active"], name: "index_missions_on_active"
     t.index ["project_id", "agency_id", "region_id"], name: "index_missions_on_project_id_and_agency_id_and_region_id", unique: true
   end
 

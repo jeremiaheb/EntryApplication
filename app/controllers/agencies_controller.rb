@@ -31,8 +31,11 @@ class AgenciesController < ApplicationController
   end
 
   def destroy
-    @agency.destroy
-    redirect_to agencies_path, notice: "Agency was successfully deleted."
+    if @agency.destroy
+      redirect_to agencies_path, notice: "Agency was successfully deleted."
+    else
+      redirect_to agencies_path, alert: "Agency was not deleted: #{@agency.errors.full_messages.join(", ")}"
+    end
   end
 
   private

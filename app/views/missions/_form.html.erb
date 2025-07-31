@@ -2,6 +2,9 @@
     <%= render "shared/uswds_error_messages", target: @mission %>
 
     <fieldset class="usa-fieldset padding-1">
+      <%= f.check_box :active, class: "usa-checkbox__input" %>
+      <%= f.label :active, "Active?", class: "usa-checkbox__label" %>
+
       <%= f.label :region_id, class: "usa-label" %>
       <%= f.collection_select :region_id, Region.order(:name), :id, :name, { required: true, include_blank: true }, class: "usa-select usa-input--lg", autofocus: true %>
 

@@ -31,8 +31,11 @@ class RegionsController < ApplicationController
   end
 
   def destroy
-    @region.destroy
-    redirect_to regions_path, notice: "Region was successfully deleted."
+    if @region.destroy
+      redirect_to regions_path, notice: "Region was successfully deleted."
+    else
+      redirect_to regions_path, alert: "Region was not deleted: #{@region.errors.full_messages.join(", ")}"
+    end
   end
 
   private

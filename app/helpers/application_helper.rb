@@ -9,7 +9,7 @@ module ApplicationHelper
 
   # Returns a list of regions, extracted from active missions and the current
   # mission (if no longer active).
-  def region_options_for_select(current_mission:)
+  def region_options_for_select(current_mission: nil)
     regions = (Mission.active.includes(:region) + [current_mission]).
       compact.
       map(&:region).
@@ -24,13 +24,47 @@ module ApplicationHelper
     }
   end
 
+  # Returns a list of agencies, extracted from active missions and the current
+  # mission (if no longer active).
+  def agency_options_for_select(current_mission: nil)
+    agencies = (Mission.active.includes(:agency) + [current_mission]).
+      compact.
+      map(&:agency).
+      uniq.
+      sort_by(&:name)
+
+    agencies.map { |agency|
+      [
+        agency.name,
+        agency.id,
+      ]
+    }
+  end
+
+  # Returns a list of projects, extracted from active missions and the current
+  # mission (if no longer active).
+  def project_options_for_select(current_mission: nil)
+    projects = (Mission.active.includes(:project) + [current_mission]).
+      compact.
+      map(&:project).
+      uniq.
+      sort_by(&:name)
+
+    projects.map { |project|
+      [
+        project.name,
+        project.id,
+      ]
+    }
+  end
+
   # Returns a list of missions, comprising all active missions and the current
   # mission (if no longer active).
   #
   # Each option will have a data-region-id attribute specifying the region for
   # the given mission. This can be used to toggle available options when the
   # region is selected.
-  def mission_options_for_select(current_mission:)
+  def mission_options_for_select(current_mission: nil)
     missions = (Mission.active.includes(:region, :agency, :project) + [current_mission]).
       compact.
       uniq.
@@ -53,13 +87,13 @@ module ApplicationHelper
   #
   # An option will be initially disabled unless the current_region_id is in the
   # list of valid region IDs for the given habitat type.
-  def habitat_type_options_for_select(current_region_id:)
+  def habitat_type_options_for_select(current_region_id: nil)
     HabitatType.includes(:regions).order(:habitat_name).map { |habitat_type|
       [
         habitat_type.habitat_name,
         habitat_type.id,
         "data-region-ids": habitat_type.region_ids.to_json,
-        "disabled": !habitat_type.region_ids.include?(current_region_id),
+        "disabled": current_region_id && !habitat_type.region_ids.include?(current_region_id),
       ]
     }
   end

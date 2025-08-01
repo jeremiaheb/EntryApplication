@@ -144,6 +144,8 @@ $(function () {
     updateHabitatTypeSelectForRegion();
   });
 
+  $("#region_ids, #agency_ids, #project_ids").select2();
+
   function cancelBackspace(event) {
     if (event.keyCode == 8) {
       return false;

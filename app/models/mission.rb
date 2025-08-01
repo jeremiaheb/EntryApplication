@@ -12,6 +12,8 @@ class Mission < ActiveRecord::Base
   has_many :mission_managers, dependent: :destroy
   has_many :managers, through: :mission_managers, class_name: "Diver"
 
+  has_many :samples
+
   validates :active, inclusion: [true, false]
 
   scope :standard_order, -> { joins(:region, :agency, :project).order(:"regions.name", :"agencies.name", :"projects.name", :id) }

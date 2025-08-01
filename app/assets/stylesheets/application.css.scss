@@ -30,6 +30,12 @@
  *= require ./scaffolds
 */
 
+.habitat-type-select {
+  option:disabled {
+    display: none;
+  }
+}
+
 #substrateSection,
 #speciesSection {
   display: none;

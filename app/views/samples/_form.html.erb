@@ -19,11 +19,18 @@
   <div id="sampleSection" class="sectionDiv">
     <div class='section_1'>
      <div id='section_1_part_1'>
-       
        <div class="control-group">
-          <label class="control-label" title="The person/agency who is responsible for this data">Boatlog/Manager</label>
+          <label class="control-label" title="The region where this data was collected">Region</label>
           <div class="controls">
-            <%= f.collection_select :boatlog_manager_id, BoatlogManager.all, :id, :agency_name, { :include_blank => "" }, {  :class => 'tab_1', :tabindex => "1" } %><br />
+            <%= select_tag :sample_region_id, options_for_select(region_options_for_select(current_mission: f.object.mission), f.object.mission.try(:region_id)), include_blank: true, class: "tab_1 region-select", tabindex: "1" %><br />
+          </div>
+        </div>
+       
+        <div class="control-group">
+          <label class="control-label" title="The mission associated with this data">Mission</label>
+          <div class="controls">
+            <%# The <option> tags are created dynamically with JavaScript because they vary based on the selected region %>
+            <%= f.select :mission_id, mission_options_for_select(current_mission: f.object.mission), { include_blank: true }, class: "tab_1 mission-select", tabindex: "1" %>
           </div>
         </div>
          
@@ -58,7 +65,7 @@
         <div class="control-group">
           <label class="control-label">Habitat Type</label>
           <div class="controls">
-            <%= f.collection_select :habitat_type_id, HabitatType.caribbean_habitats, :id, :habitat_name, { :include_blank => "" }, { :class => 'tab_1', :tabindex => "1" } %><br />
+            <%= f.select :habitat_type_id, habitat_type_options_for_select(current_region_id: f.object.region.try(:id)), { include_blank: true }, class: "tab_1 habitat-type-select", tabindex: "1" %><br />
           </div>
         </div>
 

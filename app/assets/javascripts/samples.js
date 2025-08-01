@@ -3,34 +3,6 @@ $(function () {
     return;
   }
 
-  $("#sample_region_id").on("change", function(e) {
-    var selectedRegionID = Number($(this).val());
-
-    $("#sample_mission_id").find("option").each(function() {
-      // Keep the include_blank option selectable.
-      if ($(this).val() === "") {
-        return;
-      }
-
-      // Enable/disable based on matching the newly selected region ID
-      $(this).prop("disabled", !$(this).data("region-ids").includes(selectedRegionID));
-
-      // Selected option is becoming disabled. Re-select the empty option to
-      // force a re-selection.
-      if ($(this).is(":disabled:selected")) {
-        $("#sample_mission_id").val("").trigger("change");
-      }
-    });
-  });
-
-  $("#sample_mission_id").on("change", function(e) {
-    var selectedOption = $(this).find("option:selected");
-
-    // Set the two underlying hidden fields
-    $("#sample_agency_id").val(selectedOption.data("agency-id"));
-    $("#sample_project_id").val(selectedOption.data("project-id"));
-  });
-
   $("#substrateSection").hide();
   $("#speciesSection").hide();
   $(".changeSection").change(function () {
@@ -752,10 +724,10 @@ $(function () {
     },
 
     rules: {
-      "sample[region_id]": {
+      sample_region_id: {
         required: true,
       },
-      "sample_mission_id": {
+      "sample[mission_id]": {
         required: true,
       },
       "sample[sample_date]": {

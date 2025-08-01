@@ -9,6 +9,7 @@
 #   end
 
 # Regions
+Region.find_or_create_by!(name: "Puerto Rico")
 Region.find_or_create_by!(name: "Dry Tortugas")
 Region.find_or_create_by!(name: "Florida Keys")
 Region.find_or_create_by!(name: "Southeast Florida")

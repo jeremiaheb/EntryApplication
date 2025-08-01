@@ -8,9 +8,10 @@ class Sample < ActiveRecord::Base
   belongs_to :habitat_type
   belongs_to :boatlog_manager
 
-  belongs_to :region, optional: true # TODO: Remove optional
-  belongs_to :agency, optional: true # TODO: Remove optional
-  belongs_to :project, optional: true # TODO: Remove optional
+  belongs_to :mission, optional: true # TODO: Remove optional
+  has_one :region, through: :mission
+  has_one :agency, through: :mission
+  has_one :project, through: :mission
 
   has_many :sample_animals, dependent: :destroy
   validates_presence_of :sample_animals, message: "you must have at leat one species record (can be NO FISH)"

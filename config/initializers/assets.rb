@@ -11,6 +11,9 @@ Rails.application.config.assets.paths << Rails.root.join("node_modules", "@uswds
 Rails.application.config.assets.paths << Rails.root.join("vendor", "bootstrap")
 Rails.application.config.assets.paths << Rails.root.join("vendor", "select2-3.2.0")
 
+# Generate source maps, etc in development
+Rails.application.config.assets.debug = Rails.env.development?
+
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.

@@ -22,16 +22,15 @@
        <div class="control-group">
           <label class="control-label" title="The region where this data was collected">Region</label>
           <div class="controls">
-            <%= f.collection_select :region_id, Region.order(:name), :id, :name, { include_blank: true }, class: 'tab_1', tabindex: "1" %><br />
+            <%= select_tag :sample_region_id, options_for_select(region_options_for_select(current_mission: f.object.mission), f.object.mission.try(:region_id)), include_blank: true, class: "tab_1 region-select", tabindex: "1" %><br />
           </div>
         </div>
        
-       <div class="control-group">
+        <div class="control-group">
           <label class="control-label" title="The mission associated with this data">Mission</label>
           <div class="controls">
-            <%= f.hidden_field :agency_id %>
-            <%= f.hidden_field :project_id %>
-            <%= select_tag "sample_mission_id", options_for_select(Mission.active.includes(:agency, :project).standard_order.group_by { |m| [m.agency, m.project] }.map { |(agency, project), missions| ["#{agency.name} ▸ #{project.name}", missions.first.id, selected: (f.object.agency_id == agency.id && f.object.project_id == project.id), disabled: !missions.map(&:region_id).include?(f.object.region_id), data: { region_ids: missions.map(&:region_id), agency_id: agency.id, project_id: project.id }] }), include_blank: true, class: "tab_1", tabindex: "1" %>
+            <%# The <option> tags are created dynamically with JavaScript because they vary based on the selected region %>
+            <%= f.select :mission_id, mission_options_for_select(current_mission: f.object.mission), { include_blank: true }, class: "tab_1 mission-select", tabindex: "1" %>
           </div>
         </div>
          
@@ -66,7 +65,7 @@
         <div class="control-group">
           <label class="control-label">Habitat Type</label>
           <div class="controls">
-            <%= f.collection_select :habitat_type_id, HabitatType.caribbean_habitats, :id, :habitat_name, { :include_blank => "" }, class: 'tab_1', tabindex: "1", "data-region-habitat-types": RegionHabitatType.all.to_json %><br />
+            <%= f.select :habitat_type_id, habitat_type_options_for_select(current_region_id: f.object.region.try(:id)), { include_blank: true }, class: "tab_1 habitat-type-select", tabindex: "1" %><br />
           </div>
         </div>
 

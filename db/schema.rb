@@ -329,14 +329,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_31_002324) do
     t.integer "hard_pcov_other2"
     t.integer "diver_id"
     t.integer "buddy_id"
-    t.integer "region_id"
-    t.integer "agency_id"
-    t.integer "project_id"
-    t.index ["agency_id"], name: "index_samples_on_agency_id"
+    t.integer "mission_id"
     t.index ["buddy_id"], name: "index_samples_on_buddy_id"
     t.index ["diver_id"], name: "index_samples_on_diver_id"
-    t.index ["project_id"], name: "index_samples_on_project_id"
-    t.index ["region_id"], name: "index_samples_on_region_id"
+    t.index ["mission_id"], name: "index_samples_on_mission_id"
   end
 
   create_table "station_logs", force: :cascade do |t|

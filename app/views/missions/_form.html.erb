@@ -6,13 +6,13 @@
       <%= f.label :active, "Active?", class: "usa-checkbox__label" %>
 
       <%= f.label :region_id, class: "usa-label" %>
-      <%= f.collection_select :region_id, Region.order(:name), :id, :name, { required: true, include_blank: true }, class: "usa-select usa-input--lg", autofocus: true %>
+      <%= f.collection_select :region_id, Region.order(:name), :id, :name, { required: true, include_blank: true }, class: "usa-select usa-input--lg", disabled: @mission.persisted?, autofocus: true %>
 
       <%= f.label :agency_id, class: "usa-label" %>
-      <%= f.collection_select :agency_id, Agency.order(:name), :id, :name, { required: true, include_blank: true }, class: "usa-select usa-input--lg" %>
+      <%= f.collection_select :agency_id, Agency.order(:name), :id, :name, { required: true, include_blank: true }, class: "usa-select usa-input--lg", disabled: @mission.persisted? %>
 
       <%= f.label :project_id, class: "usa-label" %>
-      <%= f.collection_select :project_id, Project.order(:name), :id, :name, { required: true, include_blank: true }, class: "usa-select usa-input--lg" %>
+      <%= f.collection_select :project_id, Project.order(:name), :id, :name, { required: true, include_blank: true }, class: "usa-select usa-input--lg", disabled: @mission.persisted? %>
 
       <%= f.label :manager_ids, "Managers", class: "usa-label" %>
       <%= f.collection_select :manager_ids, Diver.order(:diver_name), :id, :diver_name, { required: true, multiple: true }, class: "usa-input--2xl" %>

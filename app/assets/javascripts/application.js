@@ -88,8 +88,8 @@ $(function () {
       let $lastVisibleOption = $(missionSelectOptions[0]);
       for (let i = 1; i < missionSelectOptions.length; i++) {
         const $option = $(missionSelectOptions[i]);
-        const regionIDForOption = Number($option.data("region-id"));
 
+        const regionIDForOption = Number($option.data("region-id"));
         if (regionIDForOption === regionID) {
           if ($option.prop("detached")) {
             $option.removeProp("detached");
@@ -97,7 +97,7 @@ $(function () {
           }
 
           $lastVisibleOption = $option;
-        } else if (regionIDForOption !== regionID) {
+        } else {
           if ($option.is(":selected")) {
             $missionSelect.val("");
           }

@@ -4,22 +4,37 @@
     - name: gather service facts
       ansible.builtin.service_facts:
 
-    - name: remove cloud-init ssh configuration
+    - name: detect cloud instance
+      ansible.builtin.stat:
+        path: /etc/google_instance_id
+      register: google_instance_id
+
+    - name: override cloud usernames
+      ansible.builtin.set_fact:
+        usernames:
+          alindeman: andy_lindeman_noaa_gov
+          jeremiaheb: jeremiah_blondeau_noaa_gov
+      when: "google_instance_id.stat.exists"
+
+    - name: remove cloud-init ssh configuration for non-cloud instances
       ansible.builtin.file:
         path: "/etc/ssh/sshd_config.d/50-cloud-init.conf"
         state: absent
+      when: "not google_instance_id.stat.exists"
       become: true
     
-    - name: remove cloud-init profile configuration
+    - name: remove cloud-init profile configuration for non-cloud instances
       ansible.builtin.file:
         path: "/etc/profile.d/Z99-cloudinit-warnings.sh"
         state: absent
+      when: "not google_instance_id.stat.exists"
       become: true
 
-    - name: remove cloud-init netplan configuration
+    - name: remove cloud-init netplan configuration for non-cloud instances
       ansible.builtin.file:
         path: "/etc/netplan/50-cloud-init.yaml"
         state: absent
+      when: "not google_instance_id.stat.exists"
       become: true
 
     - name: detect cloud-init configuration
@@ -27,30 +42,30 @@
         path: "/etc/cloud/cloud.cfg.d"
       register: cloud_cfg_d
 
-    - name: disable cloud-init network configuration
+    - name: disable cloud-init network configuration for non-cloud instances
       ansible.builtin.copy:
         dest: "/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg"
         content: |
           network:
             config: disabled
       become: true
-      when: "cloud_cfg_d.stat.exists and cloud_cfg_d.stat.isdir"
+      when: "not google_instance_id.stat.exists and cloud_cfg_d.stat.exists and cloud_cfg_d.stat.isdir"
 
-    - name: disable cloud-init
+    - name: disable cloud-init for non-cloud instances
       ansible.builtin.service:
         name: cloud-init
         enabled: false
         state: stopped
       become: true
-      when: "'cloud-init.service' in ansible_facts.services"
+      when: "not google_instance_id.stat.exists and 'cloud-init.service' in ansible_facts.services"
 
-    - name: disable cloud-init-local
+    - name: disable cloud-init-local for non-cloud instances
       ansible.builtin.service:
         name: cloud-init-local
         enabled: false
         state: stopped
       become: true
-      when: "'cloud-init-local.service' in ansible_facts.services"
+      when: "not google_instance_id.stat.exists and 'cloud-init-local.service' in ansible_facts.services"
 
     - name: enable ssh server
       ansible.builtin.service:
@@ -139,7 +154,7 @@
 
     - name: create user alindeman
       ansible.builtin.user:
-        name: alindeman
+        name: "{{ usernames['alindeman'] | default('alindeman') }}"
         create_home: true
         password: '!' # disable password
         shell: /bin/bash
@@ -150,13 +165,13 @@
 
     - name: install ssh key for alindeman
       ansible.posix.authorized_key:
-        user: alindeman
+        user: "{{ usernames['alindeman'] | default('alindeman') }}"
         key: "https://github.com/alindeman-NOAA.keys"
       become: true
 
     - name: create user jeremiaheb
       ansible.builtin.user:
-        name: jeremiaheb
+        name: "{{ usernames['jeremiaheb'] | default('jeremiaheb') }}"
         create_home: true
         password: "$6$fFfXVu1e4x8eDD/c$OC6TS/4ZCdSZs0QSdG6F/rIYZ0sE3nXoUZnAFhcv4fbsircL/3ET/R.qJU/F0Ayl9O.Z94cD3vNVwmDWUZYfE1"
         shell: /bin/bash
@@ -167,7 +182,7 @@
 
     - name: install ssh key for jeremiaheb
       ansible.posix.authorized_key:
-        user: jeremiaheb
+        user: "{{ usernames['jeremiaheb'] | default('jeremiaheb') }}"
         key: "https://github.com/jeremiaheb.keys"
       become: true
 

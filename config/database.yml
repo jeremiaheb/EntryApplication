@@ -21,6 +21,6 @@ test:
 production:
   <<: *common
   database: entryapplication_production
-  username: jeremiaheb
-  password: noaaRails
+  username: entryapplication_production
+  password: entryapplication_production
   pool: 5

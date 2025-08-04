@@ -4,7 +4,7 @@ gem "rails", "7.1.5.1"
 
 # PostgreSQL. pg 1.6 removed support for PostgreSQL < 10. The server must be
 # upgraded before upgrading to pg >= 1.6.
-gem "pg", "~> 1.5", "< 1.6"
+gem "pg", "~> 1.6"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 6.6"

@@ -1,30 +1,52 @@
-<div class="appContainer">
-  <div class="animalsListContainer">
-    <h2>Listing animals</h2>
-      <table id="animalsList" class="display table table-striped table-condensed">
-        <thead>
+<div class="grid-row">
+  <div class="grid-col-12">
+    <%= render "shared/nav_breadcrumbs", object: [["Animals", ""]] %>
+
+    <ul class="usa-button-group margin-bottom-1">
+      <li class="usa-button-group__item">
+        <%= link_to new_animal_path, class: "new-animal-button usa-button" do %>
+          <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+            <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#add") %>
+          </svg>
+          New Species
+        <%- end %>
+      </li>
+      <li class="usa-button-group__item">
+        <%= link_to animals_path(format: "xlsx", nocache: SecureRandom.alphanumeric), class: "usa-button usa-button--accent-cool" do %>
+          <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+            <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#file_download") %>
+          </svg> 
+          Download Current Species List
+        <%- end %>
+      </li>
+    </ul>
+
+    <table class="width-full display">
+      <thead>
         <tr>
-          <th> Scientific Name </th>
-          <th> Common Name </th>
-          <th> Edit </th>
-          <th> Delete </th>
+          <th scope="col">Scientific Name</th>
+          <th scope="col">Common Name</th>
+          <th scole="col"></th>
         </tr>
       </thead>
       <tbody>
-      <% @animals.each do |animal| %>
-        <tr>
-          <td><%= animal.scientific_name %> </td>
-          <td><%= animal.common_name %> </td>
-          <td><%= link_to 'Edit', edit_animal_path(animal) %></td>
-          <td><%= link_to 'Destroy', animal, data: { confirm: 'Are you sure?' }, method: :delete %></td>
-        </tr>
-      <% end %>
+        <%- @animals.each do |animal| %>
+          <tr>
+            <td><%= animal.scientific_name %></td>
+            <td><%= animal.common_name %></td>
+            <td>
+              <ul class="usa-button-group float-right">
+                <li class="usa-button-group__item">
+                  <%= link_to "Edit", edit_animal_path(animal), class: "usa-button usa-button--outline" %>
+                </li>
+                <li class="usa-button-group__item">
+                  <%= link_to "Delete", animal, data: { confirm: "Are you sure?" }, method: "delete", class: "usa-button usa-button--secondary" %>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        <%- end %>
       </tbody>
-      </table>
+    </table>
   </div>
 </div>
-
-  <%= button_to('New Species', new_animal_path, :method => "get", :class => 'btn btn-large btn-primary wrap')  %>   
-<% if !current_diver.diver? %>
-    <%= button_to('Download Current Species List', animals_path(format: "xlsx", nocache: SecureRandom.alphanumeric), :method => "get", :class => 'btn btn-small btn-primary')  %>   
-<% end %>

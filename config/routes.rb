@@ -44,7 +44,7 @@ EntryApplication::Application.routes.draw do
     post :draft, on: :collection
   end
 
-  resources :animals
+  resources :animals, except: [:show]
 
   get "samples/:id/proofing_template" => "samples#proofing_template"
   # The priority is based upon order of creation:

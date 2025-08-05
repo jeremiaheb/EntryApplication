@@ -36,7 +36,7 @@ EntryApplication::Application.routes.draw do
 
   resources :divers, except: [:show]
 
-  resources :habitat_types
+  resources :habitat_types, except: [:show]
 
   resources :sample_types, except: [:show]
 

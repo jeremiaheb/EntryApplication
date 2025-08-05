@@ -38,7 +38,7 @@ class SampleTypesController < ApplicationController
   # DELETE /sample_types/1
   def destroy
     if @sample_type.destroy
-      redirect_to sample_types_url, notice: "Sample type was succesfully deleted."
+      redirect_to sample_types_url, notice: "Sample type was successfully deleted."
     else
       redirect_to sample_types_url, alert: "Sample type was not deleted: #{@sample_type.errors.full_messages.join(", ")}"
     end

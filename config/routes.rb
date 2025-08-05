@@ -17,7 +17,7 @@ EntryApplication::Application.routes.draw do
     post :draft, on: :collection
   end
 
-  resources :boatlog_managers
+  resources :boatlog_managers, except: [:show]
 
   # devise_for :divers
   devise_for :divers, skip: [:registrations]

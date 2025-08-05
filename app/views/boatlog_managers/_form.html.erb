@@ -1,30 +1,17 @@
-<div class="form-horizontal">
-<%= form_for(@boatlog_manager) do |f| %>
-  <%= render "shared/error_messages", :target => @boatlog_manager%>
+  <%= form_for @boatlog_manager, html: { class: "usa-form maxw-full bg-base-lightest" } do |f| %>
+    <%= render "shared/uswds_error_messages", target: @boatlog_manager %>
 
+    <fieldset class="usa-fieldset padding-1">
+      <%= f.label :agency, class: "usa-label" %>
+      <%= f.text_field :agency, class: "usa-input usa-input--lg" %>
 
-<div class="control-group">
-    <label class="control-label">Agency</label>
-    <div class="controls">
-      <%= f.text_field :agency %>
-    </div>
-  </div>
+      <%= f.label :firstname, "First name", class: "usa-label" %>
+      <%= f.text_field :firstname, class: "usa-input usa-input--lg" %>
 
-  <div class="control-group">
-    <label class="control-label">First name</label>
-    <div class="controls">
-      <%= f.text_field :firstname %>
-    </div>
-  </div>
+      <%= f.label :lastname, "Last name", class: "usa-label" %>
+      <%= f.text_field :lastname, class: "usa-input usa-input--lg" %>
 
-  <div class="control-group">
-    <label class="control-label">Last name</label>
-    <div class="controls">
-      <%= f.text_field :lastname %>
-    </div>
-  </div>
-
-
-  <div><%= f.submit "Update" %></div>
-<% end %>
-</div>
+      <%= f.submit class: "usa-button" %>
+      <%= link_to "Cancel", boatlog_managers_path, class: "usa-button usa-button--outline" %>
+    </fieldset>
+  <% end %>

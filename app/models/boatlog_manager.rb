@@ -1,9 +1,9 @@
 class BoatlogManager < ActiveRecord::Base
-  has_many  :samples
+  has_many  :samples, dependent: :restrict_with_error
   has_one   :diver
-  has_many  :benthic_covers
-  has_many  :coral_demographics
-  has_many  :boat_logs
+  has_many  :benthic_covers, dependent: :restrict_with_error
+  has_many  :coral_demographics, dependent: :restrict_with_error
+  has_many  :boat_logs, dependent: :restrict_with_error
 
   def agency_name
     "#{agency}/#{lastname}"

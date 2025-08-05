@@ -1,30 +1,46 @@
-<div class="appContainer">
-<h3>Boatlog Managers</h3>
-<table class="display table table-bordered table-condensed">
-  <thead>
-  <tr>
-    <th>Agency</th>
-    <th>Firstname</th>
-    <th>Lastname</th>
-    <th></th>
-  </tr>
-  </thead>
-  <tbody>
-<% @boatlog_managers.each do |boatlog_manager| %>
-  <tr>
-    <td><%= boatlog_manager.agency %></td>
-    <td><%= boatlog_manager.firstname %></td>
-    <td><%= boatlog_manager.lastname %></td>
-    <td>
-      <%= link_to 'Edit', edit_boatlog_manager_path(boatlog_manager) %>
-      <%= link_to 'Destroy', boatlog_manager, data: { confirm: 'Are you sure?' }, method: :delete %>
-    </td>
-  </tr>
-<% end %>
-</tbody>
-</table>
+<div class="grid-row">
+  <div class="grid-col-12">
+    <%= render "shared/nav_breadcrumbs", object: [["Boatlog Managers", ""]] %>
 
-<br />
+    <ul class="usa-button-group margin-bottom-1">
+      <li class="usa-button-group__item">
+        <%= link_to new_boatlog_manager_path, class: "new-boatlog-manager-button usa-button" do %>
+          <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+            <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#add") %>
+          </svg>
+          New Boatlog Manager
+        <%- end %>
+      </li>
+    </ul>
 
-    <%= button_to('New Boatlog Manger', new_boatlog_manager_path, :method => "get", :class => 'btn btn-large btn-primary wrap')  %>   
+    <table class="width-full display">
+      <thead>
+        <tr>
+          <th scope="col">Agency</th>
+          <th scope="col">First name</th>
+          <th scope="col">Last name</th>
+          <th scole="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%- @boatlog_managers.each do |boatlog_manager| %>
+          <tr>
+            <td><%= boatlog_manager.agency %></td>
+            <td><%= boatlog_manager.firstname %></td>
+            <td><%= boatlog_manager.lastname %></td>
+            <td>
+              <ul class="usa-button-group float-right">
+                <li class="usa-button-group__item">
+                  <%= link_to "Edit", edit_boatlog_manager_path(boatlog_manager), class: "usa-button usa-button--outline" %>
+                </li>
+                <li class="usa-button-group__item">
+                  <%= link_to "Delete", boatlog_manager, data: { confirm: "Are you sure?" }, method: "delete", class: "usa-button usa-button--secondary" %>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        <%- end %>
+      </tbody>
+    </table>
+  </div>
 </div>

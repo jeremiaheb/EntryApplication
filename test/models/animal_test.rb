@@ -21,7 +21,8 @@ class AnimalTest < ActiveSupport::TestCase
 
   test "does not allow destruction if a sample exists referencing the animal" do
     animal = FactoryBot.create(:animal)
-    sample = FactoryBot.create(:sample, sample_animals: [FactoryBot.build(:sample_animal, animal: animal)])
+    sample_animal = FactoryBot.create(:sample_animal, animal: animal, sample: nil)
+    sample = FactoryBot.create(:sample, sample_animals: [sample_animal])
 
     refute animal.destroy
     assert_not_nil animal.errors[:base]

@@ -45,7 +45,6 @@ class AnimalsController < ApplicationController
 
   # DELETE /animals/1
   def destroy
-    @animal = Animal.find(params[:id])
     if @animal.destroy
       redirect_to animals_url, notice: "Animal was successfully deleted."
     else

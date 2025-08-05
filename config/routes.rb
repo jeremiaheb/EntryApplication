@@ -38,7 +38,7 @@ EntryApplication::Application.routes.draw do
 
   resources :habitat_types
 
-  resources :sample_types
+  resources :sample_types, except: [:show]
 
   resources :samples do
     post :draft, on: :collection

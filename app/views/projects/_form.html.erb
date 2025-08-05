@@ -1,0 +1,11 @@
+  <%= form_for @project, html: { class: "usa-form maxw-full bg-base-lightest" } do |f| %>
+    <%= render "shared/uswds_error_messages", target: @project %>
+
+    <fieldset class="usa-fieldset padding-1">
+      <%= f.label :name, class: "usa-label" %>
+      <%= f.text_field :name, class: "usa-input usa-input--lg", autofocus: true %>
+
+      <%= f.submit class: "usa-button" %>
+      <%= link_to "Cancel", projects_path, class: "usa-button usa-button--outline" %>
+    </fieldset>
+  <% end %>

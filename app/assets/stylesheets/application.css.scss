@@ -30,6 +30,12 @@
  *= require ./scaffolds
 */
 
+.habitat-type-select {
+  option:disabled {
+    display: none;
+  }
+}
+
 #substrateSection,
 #speciesSection {
   display: none;
@@ -486,7 +492,7 @@ input.timeSeen_3 {
   color: white !important;
 }
 
-#downloadXLSXButton {
+#downloadXLSXForm, #downloadXLSXButton {
   position: absolute;
   left: 5px;
   top: 250px;

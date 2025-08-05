@@ -7,7 +7,7 @@ EntryApplication::Application.routes.draw do
 
   resources :corals, except: [:show]
 
-  resources :cover_cats
+  resources :cover_cats, except: [:show]
 
   resources :coral_demographics do
     post :draft, on: :collection

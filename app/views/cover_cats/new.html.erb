@@ -1,5 +1,6 @@
-<h1>New cover_cat</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', cover_cats_path %>
+<div class="grid-row">
+  <div class="grid-col-12">
+    <%= render "shared/nav_breadcrumbs", object: [["Benthic Cover Categories", cover_cats_path], ["New Cover Category", ""]] %>
+    <%= render 'form' %>
+  </div>
+</div>

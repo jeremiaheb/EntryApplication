@@ -40,7 +40,7 @@ class CoralsController < ApplicationController
     if @coral.destroy
       redirect_to corals_url, notice: "Coral was successfully deleted."
     else
-      redirect_to corals_url, notice: "Coral was not deleted: #{@coral.errors.full_messages.join(", ")}"
+      redirect_to corals_url, alert: "Coral was not deleted: #{@coral.errors.full_messages.join(", ")}"
     end
   end
 

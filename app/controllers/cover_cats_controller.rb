@@ -40,7 +40,7 @@ class CoverCatsController < ApplicationController
     if @cover_cat.destroy
       redirect_to cover_cats_url, notice: "Cover cat was successfully deleted."
     else
-      redirect_to cover_cats_url, notice: "Cover cat was not deleted: #{@cover_cat.errors.full_messages.join(", ")}"
+      redirect_to cover_cats_url, alert: "Cover cat was not deleted: #{@cover_cat.errors.full_messages.join(", ")}"
     end
   end
 

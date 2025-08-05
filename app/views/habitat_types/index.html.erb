@@ -1,27 +1,46 @@
-<div class="appContainer">
-<body>
-<table class="table table-striped">
-  <tr>
-    <th>Habitat Name</th>
-    <th>Habitat Description</th>
-    <th>Region</th>
-    <th></th>
-  </tr>
+<div class="grid-row">
+  <div class="grid-col-12">
+    <%= render "shared/nav_breadcrumbs", object: [["Habitat Types", ""]] %>
 
-<% @habitat_types.each do |habitat_type| %>
-  <tr>
-    <td><%= habitat_type.habitat_name %></td>
-    <td><%= habitat_type.habitat_description %></td>
-    <td><%= habitat_type.region %></td>
-    <td><%= link_to 'Show', habitat_type %></td>
-    <td><%= link_to 'Edit', edit_habitat_type_path(habitat_type) %></td>
-    <td><%= link_to 'Destroy', habitat_type, data: { confirm: 'Are you sure?' }, method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-</body>
-<br />
+    <ul class="usa-button-group margin-bottom-1">
+      <li class="usa-button-group__item">
+        <%= link_to new_habitat_type_path, class: "new-habitat-type-button usa-button" do %>
+          <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+            <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#add") %>
+          </svg>
+          New Habitat Type
+        <%- end %>
+      </li>
+    </ul>
 
-    <%= button_to('New Habitat Type', new_habitat_type_path, :method => "get", :class => 'btn btn-large btn-primary wrap')  %>   
-
+    <table class="width-full display">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Region</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%- @habitat_types.each do |habitat_type| %>
+          <tr>
+            <td><%= habitat_type.habitat_name %></td>
+            <td><%= habitat_type.habitat_description %></td>
+            <td><%= habitat_type.region %></td>
+            <td>
+              <ul class="usa-button-group float-right">
+                <li class="usa-button-group__item">
+                  <%= link_to "Edit", edit_habitat_type_path(habitat_type), class: "usa-button usa-button--outline" %>
+                </li>
+                <li class="usa-button-group__item">
+                  <%= link_to "Delete", habitat_type, data: { confirm: "Are you sure?" }, method: "delete", class: "usa-button usa-button--secondary" %>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        <%- end %>
+      </tbody>
+    </table>
+  </div>
 </div>

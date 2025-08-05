@@ -1,27 +1,48 @@
-<div class="appContainer">
-  <div class="animalsListContainer">
-    <h2>Benthic Cover Categories</h2>
-      <table id="animalsList" class="display table table-striped table-condensed">
-        <thead>
+<div class="grid-row">
+  <div class="grid-col-12">
+    <%= render "shared/nav_breadcrumbs", object: [["Benthic Cover Categories", ""]] %>
+
+    <ul class="usa-button-group margin-bottom-1">
+      <li class="usa-button-group__item">
+        <%= link_to new_cover_cat_path, class: "new-cover-cat-button usa-button" do %>
+          <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+            <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#add") %>
+          </svg>
+          New Cover Category
+        <%- end %>
+      </li>
+    </ul>
+
+    <table class="width-full display">
+      <thead>
         <tr>
-          <th> Code </th>
-          <th> Name </th>
-          <th> Edit </th>
-          <th> Delete </th>
+          <th scope="col">Code</th>
+          <th scope="col">Name</th>
+          <th scope="col">Proofing Code</th>
+          <th scope="col">Rank</th>
+          <th scole="col"></th>
         </tr>
       </thead>
       <tbody>
-      <% @cover_cats.each do |cover_cat| %>
-        <tr>
-          <td><%= cover_cat.code %> </td>
-          <td><%= cover_cat.name %> </td>
-          <td><%= link_to 'Edit', edit_cover_cat_path(cover_cat) %></td>
-          <td><%= link_to 'Destroy', cover_cat, data: { confirm: 'Are you sure?' }, method: :delete %></td>
-        </tr>
-      <% end %>
+        <%- @cover_cats.each do |cover_cat| %>
+          <tr>
+            <td><%= cover_cat.code %></td>
+            <td><%= cover_cat.name %></td>
+            <td><%= cover_cat.proofing_code %></td>
+            <td><%= cover_cat.rank %></td>
+            <td>
+              <ul class="usa-button-group float-right">
+                <li class="usa-button-group__item">
+                  <%= link_to "Edit", edit_cover_cat_path(cover_cat), class: "usa-button usa-button--outline" %>
+                </li>
+                <li class="usa-button-group__item">
+                  <%= link_to "Delete", cover_cat, data: { confirm: "Are you sure?" }, method: "delete", class: "usa-button usa-button--secondary" %>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        <%- end %>
       </tbody>
-      </table>
+    </table>
   </div>
 </div>
-
-    <%= button_to('New Cover Category', new_cover_cat_path, :method => "get", :class => 'btn btn-large btn-primary wrap')  %>   

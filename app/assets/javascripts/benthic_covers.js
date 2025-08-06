@@ -325,6 +325,12 @@ $(function () {
     },
   });
 
+  $("#benthic_cover_meters_completed").on("focusout", function (e) {
+    if (Number($(this).val()) != 15) {
+      alert("Caution: Full survey (15m) not entered");
+    }
+  });
+
   function validate_fields() {
     $('[name*="hardbottom_num"]').each(function () {
       $(this).rules("add", {

@@ -1,4 +1,4 @@
-class BoatlogManager < ActiveRecord::Base
+class BoatlogManager < ApplicationRecord
   has_many  :samples, dependent: :restrict_with_error
   has_one   :diver
   has_many  :benthic_covers, dependent: :restrict_with_error

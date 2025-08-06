@@ -1,4 +1,4 @@
-class InvertBelt < ActiveRecord::Base
+class InvertBelt < ApplicationRecord
   belongs_to :benthic_cover
 
   validates :lobster_num,     presence: true

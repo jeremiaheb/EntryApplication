@@ -1,4 +1,4 @@
-class Animal < ActiveRecord::Base
+class Animal < ApplicationRecord
   has_many :sample_animals, dependent: :restrict_with_error
   has_many :samples, through: :sample_animals
 

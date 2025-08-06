@@ -1,4 +1,4 @@
-class Draft < ActiveRecord::Base
+class Draft < ApplicationRecord
   belongs_to :diver
   validates :diver_id, presence: true
 

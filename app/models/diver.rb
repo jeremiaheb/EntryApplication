@@ -1,4 +1,4 @@
-class Diver < ActiveRecord::Base
+class Diver < ApplicationRecord
   ADMIN   = "admin"
   MANAGER = "manager"
   DIVER   = "diver"

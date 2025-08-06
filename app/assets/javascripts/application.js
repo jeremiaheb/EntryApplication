@@ -23,6 +23,7 @@
 //= require bootstrap-datepicker/dist/js/bootstrap-datepicker
 //= require jquery-timepicker/jquery.timepicker
 //
+//= require ./validations
 //= require ./benthic_covers
 //= require ./boat_logs
 //= require ./coral_demographics

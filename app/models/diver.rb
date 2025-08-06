@@ -21,15 +21,15 @@ class Diver < ActiveRecord::Base
   scope       :active_divers,      lambda { where(active: true) }
 
   def diver_proofing_samples
-    samples.order("sample_date")
+    samples.order(:sample_date, :sample_begin_time)
   end
 
   def diver_proofing_benthic_cover
-    benthic_covers.order("sample_date")
+    benthic_covers.order(:sample_date, :sample_begin_time)
   end
 
   def diver_proofing_coral_demo
-    coral_demographics.order("sample_date")
+    coral_demographics.order(:sample_date, :sample_begin_time)
   end
 
   def whole_name

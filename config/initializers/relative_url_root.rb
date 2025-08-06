@@ -1,6 +1,6 @@
 case Rails.env
 when "production"
-  if ::File.directory?(Rails.root.join("public/ncrmp_data_entry/assets"))
+  if ::File.exist?(Rails.root.join("public/ncrmp_data_entry/assets"))
     Rails.application.config.assets.prefix = "/ncrmp_data_entry/assets"
     Rails.application.config.relative_url_root = "/ncrmp_data_entry"
   else

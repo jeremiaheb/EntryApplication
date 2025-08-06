@@ -1,4 +1,4 @@
-class CoverCat < ActiveRecord::Base
+class CoverCat < ApplicationRecord
   has_many :point_intercepts, dependent: :restrict_with_error
   has_many :benthic_covers, through: :point_intercepts
 

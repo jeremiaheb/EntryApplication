@@ -1,4 +1,4 @@
-class DiverSample < ActiveRecord::Base
+class DiverSample < ApplicationRecord
   belongs_to :diver
   belongs_to :sample
 

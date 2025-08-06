@@ -1,4 +1,4 @@
-class BoatLog < ActiveRecord::Base
+class BoatLog < ApplicationRecord
   belongs_to :boatlog_manager
 
   has_many :station_logs, dependent: :destroy

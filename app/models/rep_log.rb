@@ -1,4 +1,4 @@
-class RepLog < ActiveRecord::Base
+class RepLog < ApplicationRecord
   belongs_to  :station_log
   belongs_to  :diver
 

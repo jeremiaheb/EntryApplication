@@ -1,4 +1,4 @@
-class DemographicCoral < ActiveRecord::Base
+class DemographicCoral < ApplicationRecord
   belongs_to :coral_demographic
   belongs_to :coral
 

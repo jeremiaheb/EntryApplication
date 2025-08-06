@@ -1,4 +1,4 @@
-class Coral < ActiveRecord::Base
+class Coral < ApplicationRecord
   has_many :demographic_corals, dependent: :restrict_with_error
   has_many :coral_demographics, through: :demographic_corals
 

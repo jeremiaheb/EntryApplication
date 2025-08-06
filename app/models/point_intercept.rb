@@ -1,4 +1,4 @@
-class PointIntercept < ActiveRecord::Base
+class PointIntercept < ApplicationRecord
   belongs_to  :benthic_cover
   belongs_to  :cover_cat
 

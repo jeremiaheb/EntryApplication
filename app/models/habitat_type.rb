@@ -1,4 +1,4 @@
-class HabitatType < ActiveRecord::Base
+class HabitatType < ApplicationRecord
   VALID_REGIONS = [
     "Atlantic",
     "Caribbean",

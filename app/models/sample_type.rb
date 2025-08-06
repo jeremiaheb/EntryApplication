@@ -1,4 +1,4 @@
-class SampleType < ActiveRecord::Base
+class SampleType < ApplicationRecord
   has_many :samples, dependent: :restrict_with_error
 
   validates :sample_type_name, presence: true

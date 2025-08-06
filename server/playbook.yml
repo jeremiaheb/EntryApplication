@@ -293,11 +293,16 @@
               AllowOverride None
               Require all granted
             </Directory>
-            Alias "/caribbean_data_entry/assets" "/var/www/apps/EntryApplication/current/public/caribbean_data_entry/assets"
-            ProxyPass "/caribbean_data_entry/assets" "!"
+
+            ProxyPass "/ncrmp_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/ncrmp_data_entry"
+            ProxyPassReverse "/ncrmp_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/ncrmp_data_entry"
+            ProxyPass "/ncrmp_data_entry/assets" "!"
+            Alias "/ncrmp_data_entry/assets" "/var/www/apps/EntryApplication/current/public/ncrmp_data_entry/assets"
 
             ProxyPass "/caribbean_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/caribbean_data_entry"
             ProxyPassReverse "/caribbean_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/caribbean_data_entry"
+            ProxyPass "/caribbean_data_entry/assets" "!"
+            Alias "/caribbean_data_entry/assets" "/var/www/apps/EntryApplication/current/public/caribbean_data_entry/assets"
 
             # Assume TLS-terminating proxy when host is noaa.gov
             <If "%{HTTP_HOST} =~ /\.noaa\.gov$/">

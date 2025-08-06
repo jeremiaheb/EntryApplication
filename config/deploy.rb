@@ -54,6 +54,22 @@ namespace :deploy do
     end
   end
 
+  namespace :assets do
+    desc "Link new_assets_prefix if present"
+    task :link_new_assets_prefix do
+      on roles(:web) do |host|
+        if host.fetch(:new_assets_prefix)
+          old_assets_path = release_path.join("public", fetch(:assets_prefix))
+          new_assets_path = release_path.join("public", host.fetch(:new_assets_prefix))
+
+          execute :mkdir, "-p", File.dirname(new_assets_path)
+          execute :ln, "-s", old_assets_path, new_assets_path
+        end
+      end
+    end
+  end
+  after "deploy:updated", "deploy:assets:link_new_assets_prefix"
+
   namespace :yarn do
     desc "Install JavaScript packages"
     task :install do

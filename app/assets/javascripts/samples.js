@@ -495,26 +495,6 @@ $(function () {
     dropdown: false,
   });
 
-  $.validator.addMethod(
-    "fieldID",
-    function (value, element) {
-      return this.optional(element) || /^\d{5}[a-zA-Z]$/i.test(value);
-    },
-    "FieldID is wrong format",
-  );
-
-  $.validator.addMethod("greaterThan", function (value, element, params) {
-    return value > $(params).val();
-  });
-
-  $.validator.addMethod("before", function (value, element, params) {
-    return value < $(params).val();
-  });
-
-  $.validator.addMethod("lessThanEqualTo", function (value, element, params) {
-    return Number(value) <= Number($(params).val());
-  });
-
   // Check that a species record does not have overlapping sizes with another
   // record of the same species
 
@@ -615,7 +595,7 @@ $(function () {
   );
 
   $.validator.addMethod(
-    "lessThan",
+    "lessThanEqualToAvg",
     function (value, element, params) {
       function meanIsEnabled(e) {
         //return e.parent().find('[id$="average_length"]').is(":enabled");
@@ -675,29 +655,6 @@ $(function () {
 
   // modified from http://orip.org/2010/06/jquery-validate-required-if-visible.html
 
-  $.validator.addMethod(
-    "requiredIfEnabled",
-    function (value, element, params) {
-      function isEnabled(e) {
-        // the element and all of its parents must be :visible
-        // inspiration: http://remysharp.com/2008/10/17/jquery-really-visible/
-        return e.is(":enabled");
-      }
-
-      if (isEnabled($(element))) {
-        // call the "required" method
-        return $.validator.methods.required.call(
-          this,
-          $.trim(element.value),
-          element,
-        );
-      }
-
-      return true;
-    },
-    $.validator.messages.required,
-  );
-
   $.validator.setDefaults({
     errorPlacement: function (error, element) {
       if (
@@ -743,18 +700,18 @@ $(function () {
       "sample[dive_end_time]": {
         required: true,
         pattern: /^(06|07|08|09|10|11|12|13|14|15|16|17|18|19|20):([0-9]{2})$/,
-        greaterThan: "#sample_dive_begin_time",
+        after: "#sample_dive_begin_time",
       },
       "sample[sample_begin_time]": {
         required: true,
         pattern: /^(06|07|08|09|10|11|12|13|14|15|16|17|18|19|20):([0-9]{2})$/,
-        greaterThan: "#sample_dive_begin_time",
+        after: "#sample_dive_begin_time",
         before: "#sample_dive_end_time",
       },
       "sample[sample_end_time]": {
         required: true,
         pattern: /^(06|07|08|09|10|11|12|13|14|15|16|17|18|19|20):([0-9]{2})$/,
-        greaterThan: "#sample_sample_begin_time",
+        after: "#sample_sample_begin_time",
         before: "#sample_dive_end_time",
       },
       "sample[field_id]": {
@@ -871,16 +828,16 @@ $(function () {
       },
       "sample[dive_end_time]": {
         pattern: "Time must be between 06:00 and 20:00",
-        greaterThan: "Dive end cannot be before dive begin",
+        after: "Dive end cannot be before dive begin",
       },
       "sample[sample_begin_time]": {
         pattern: "Time must be between 06:00 and 20:00",
-        greaterThan: "Sample begin cannot be before dive begin",
+        after: "Sample begin cannot be before dive begin",
         before: "Sample begin time cannot be after dive end time",
       },
       "sample[sample_end_time]": {
         pattern: "Time must be between 06:00 and 20:00",
-        greaterThan: "Sample end time cannot be before begin time",
+        after: "Sample end time cannot be before begin time",
         before: "Sample end time cannot be after dive end time",
       },
       "sample[substrate_min_depth]": {
@@ -912,7 +869,7 @@ $(function () {
       $(this).rules("add", {
         requiredIfEnabled: true,
         digits: true,
-        lessThan: true,
+        lessThanEqualToAvg: true,
         doesNotHaveOverlap: true,
       });
     });

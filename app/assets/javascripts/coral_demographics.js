@@ -66,15 +66,7 @@ $(function () {
   });
 
   $.validator.addMethod(
-    "fieldID",
-    function (value, element) {
-      return this.optional(element) || /^\d{5}[a-zA-Z]$/i.test(value);
-    },
-    "FieldID is wrong format",
-  );
-
-  $.validator.addMethod(
-    "lessThan",
+    "lessThanEqualToMaxDiameter",
     function (value, element, params) {
       return (
         parseFloat(value) <=
@@ -169,7 +161,7 @@ $(function () {
         required: true,
         digits: true,
         min: 1,
-        lessThan: true,
+        lessThanEqualToMaxDiameter: true,
       });
     });
     $('[name*="height"]').each(function () {

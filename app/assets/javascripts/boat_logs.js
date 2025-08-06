@@ -141,14 +141,6 @@ $(function () {
     setDiverTypeLabel();
   });
 
-  jQuery.validator.addMethod(
-    "lettersonly",
-    function (value, element) {
-      return this.optional(element) || /[a-zA-Z]+$/.test(value);
-    },
-    "Only one letter",
-  );
-
   $(".new_boat_log, .edit_boat_log").validate({
     errorElement: "span",
 

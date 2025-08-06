@@ -8,6 +8,10 @@ EntryApplication::Application.routes.draw do
     get "edit_diver_registration",      to: "devise/registrations#edit"
   end
 
+  authenticate :diver, -> (diver) { diver.admin? } do
+    mount SolidErrors::Engine, at: "/errors"
+  end
+
   resources :animals, except: [:show]
 
   resources :benthic_covers do

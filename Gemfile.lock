@@ -329,6 +329,12 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    solid_errors (0.7.0)
+      actionpack (>= 7.0)
+      actionview (>= 7.0)
+      activerecord (>= 7.0)
+      activesupport (>= 7.0)
+      railties (>= 7.0)
     sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
       logger
@@ -395,6 +401,7 @@ DEPENDENCIES
   rubocop-rails-omakase
   sassc-embedded
   selenium-webdriver
+  solid_errors (~> 0.7.0)
   sprockets-rails
 
 BUNDLED WITH

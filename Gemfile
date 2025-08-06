@@ -23,6 +23,9 @@ gem "prawn", "~> 2.5"
 gem "prawn-table", "~> 0.2.2"
 gem "caxlsx_rails", "~> 0.6.4"
 
+# App-internal exception tracker [https://github.com/fractaledmind/solid_errors]
+gem "solid_errors", "~> 0.7.0"
+
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 

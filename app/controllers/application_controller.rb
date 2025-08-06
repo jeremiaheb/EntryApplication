@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  before_action :set_error_context
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def current_ability
@@ -15,5 +16,10 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:account_update, keys: [:username, :email, :firstname, :lastname])
+  end
+
+  def set_error_context
+    # https://github.com/fractaledmind/solid_errors?tab=readme-ov-file#usage
+    Rails.error.set_context(request_url: request.original_url, params: request.filtered_parameters, session: session.to_h)
   end
 end

@@ -246,6 +246,8 @@ $(function () {
       "benthic_cover[rugosity_measure_attributes][max_depth]": {
         required: true,
         digits: true,
+        greaterThanEqualTo:
+          "#benthic_cover_rugosity_measure_attributes_min_depth",
       },
       "benthic_cover[rugosity_measure_attributes][rug_meters_completed]": {
         required: true,
@@ -316,6 +318,9 @@ $(function () {
     messages: {
       "benthic_cover[sample_begin_time]": {
         pattern: "Time must be between 06:00 and 20:00",
+      },
+      "benthic_cover[rugosity_measure_attributes][max_depth]": {
+        greaterThanEqualTo: "must be greater than or equal to min depth",
       },
     },
   });

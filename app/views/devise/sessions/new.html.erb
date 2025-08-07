@@ -29,7 +29,7 @@
           <%= f.text_field :username, class: "usa-input usa-input--lg", autofocus: true, autocomplete: "username" %>
 
           <%= f.label :password, class: "usa-label" %>
-          <%= f.password_field :password, class: "usa-input usa-input--lg", autofocus: true, autocomplete: "current-password" %>
+          <%= f.password_field :password, class: "usa-input usa-input--lg", autocomplete: "current-password" %>
 
           <%= f.submit "Login", class: "usa-button" %>
           <%= link_to "Forgot password?", new_password_path(resource_name), class: "usa-button usa-button--outline" %>

@@ -1,69 +1,35 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="grid-row">
+  <div class="grid-col-12">
+    <%= render "shared/nav_breadcrumbs", object: [["Edit Profile", ""]] %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "form-horizontal" }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="bg-base-lightest">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "usa-form maxw-full padding-1" }) do |f| %>
+        <%= render "shared/uswds_error_messages", target: resource %>
+        
+        <%= f.label :username, class: "usa-label margin-top-0" %>
+        <%= f.text_field :username, class: "usa-input usa-input--lg", autofocus: true, autocomplete: "username", required: true %>
 
-  <div class="control-group">
-    <%= f.label :username, class: "control-label" %>
-    <div class="controls">
-      <%= f.text_field :username, autofocus: true, autocomplete: "username", required: true %>
+        <%= f.label :firstname, "First name", class: "usa-label" %>
+        <%= f.text_field :firstname, class: "usa-input usa-input--lg", autocomplete: "given-name" %>
+
+        <%= f.label :lastname, "Last name", class: "usa-label" %>
+        <%= f.text_field :lastname, class: "usa-input usa-input--lg", autocomplete: "family-name" %>
+
+        <%= f.label :email, class: "usa-label" %>
+        <%= f.text_field :email, class: "usa-input usa-input--xl", autocomplete: "email", required: true %>
+
+        <%= f.label :password, "New password (leave blank to leave it unchanged)", class: "usa-label" %>
+        <%= f.password_field :password, class: "usa-input usa-input--lg", autocomplete: "new-password", minlength: @minimum_password_length %>
+
+        <%= f.label :password_confirmation, "New password confirmation (leave blank to leave it unchanged)", class: "usa-label" %>
+        <%= f.password_field :password_confirmation, class: "usa-input usa-input--lg", autocomplete: "new-password", minlength: @minimum_password_length %>
+
+        <%= f.label :current_password, class: "usa-label" %>
+        <%= f.password_field :current_password, class: "usa-input usa-input--lg", autocomplete: "current-password", required: true %>
+
+        <%= f.submit "Save", class: "usa-button" %>
+        <%= link_to "Cancel", root_path, class: "usa-button usa-button--outline" %>
+      <% end %>
     </div>
   </div>
-
-  <div class="control-group">
-    <%= f.label :firstname, "First name", class: "control-label" %>
-    <div class="controls">
-      <%= f.text_field :firstname, autocomplete: "given-name" %>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <%= f.label :lastname, "Last name", class: "control-label" %>
-    <div class="controls">
-      <%= f.text_field :lastname, autocomplete: "family-name" %>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <%= f.label :email, class: "control-label" %>
-    <div class="controls">
-      <%= f.email_field :email, autocomplete: "email", required: true %>
-    </div>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="control-group">
-    <%= f.label :password, class: "control-label" %>
-    <div class="controls">
-      <%= f.password_field :password, autocomplete: "new-password" %>
-      <small>(leave blank if you don't want to change it)</small>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <%= f.label :password_confirmation, class: "control-label" %>
-    <div class="controls">
-      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-      <small>(leave blank if you don't want to change it)</small>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <%= f.label :current_password, class: "control-label" %>
-    <div class="controls">
-      <%= f.password_field :current_password, autocomplete: "current-password", required: true %>
-      <small>(we need your current password to confirm your changes)</small>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <div class="controls">
-      <%= f.submit "Update" %>
-    </div>
-  </div>
-<% end %>
-
-<%= link_to "Back", :back %>
+</div>

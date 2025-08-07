@@ -13,7 +13,7 @@
           <%= f.password_field :password, class: "usa-input usa-input--lg", autofocus: true, autocomplete: "new-password", minlength: @minimum_password_length %>
 
           <%= f.label :password_confirmation, "Confirm new password", class: "usa-label" %>
-          <%= f.password_field :password_confirmation, class: "usa-input usa-input--lg", autofocus: true, autocomplete: "new-password", minlength: @minimum_password_length %>
+          <%= f.password_field :password_confirmation, class: "usa-input usa-input--lg", autocomplete: "new-password", minlength: @minimum_password_length %>
 
           <%= f.submit "Change my password", class: "usa-button" %>
           <%= link_to "Cancel", new_session_path(resource_name), class: "usa-button usa-button--outline" %>

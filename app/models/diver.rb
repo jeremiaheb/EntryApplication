@@ -5,6 +5,7 @@ class Diver < ApplicationRecord
   ROLES   = [ADMIN, MANAGER, DIVER]
 
   devise :database_authenticatable, :recoverable, :registerable, :rememberable, :trackable, :validatable
+  devise :omniauthable, omniauth_providers: [:icam, :developer]
 
   belongs_to  :boatlog_manager
 

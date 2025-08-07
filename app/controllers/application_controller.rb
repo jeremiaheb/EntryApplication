@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   before_action :set_error_context
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  layout :determine_layout
+
   def current_ability
     @current_ability ||= Ability.new(current_diver)
   end
@@ -13,6 +15,12 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
+  def determine_layout
+    return "application-uswds" if self.class <= DeviseController
+
+    "application"
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:account_update, keys: [:username, :email, :firstname, :lastname])

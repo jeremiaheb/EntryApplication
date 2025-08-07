@@ -1,5 +1,7 @@
 EntryApplication::Application.routes.draw do
-  devise_for :divers, skip: [:registrations]
+  devise_for :divers, skip: [:registrations], controllers: {
+    omniauth_callbacks: "divers/omniauth_callbacks",
+  }
   devise_scope :diver do
     get "signin",                       to: "devise/sessions#new"
     get "signout",                      to: "devise/sessions#destroy"

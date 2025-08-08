@@ -61,6 +61,7 @@ class SamplesController < ApplicationController
       @sample = @draft.assign_attributes_to(Sample.new)
     else
       @sample = Sample.new.tap do |s|
+        s.diver_id ||= current_diver.id
         s.sample_type ||= SampleType.default
         s.sample_animals.build
       end

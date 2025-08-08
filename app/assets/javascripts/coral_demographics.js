@@ -3,11 +3,16 @@ $(function () {
     return;
   }
 
-  $("#coral_demographic_sample_date").datepicker({
+  const $coralDemographicSampleDate = $("#coral_demographic_sample_date");
+  $coralDemographicSampleDate.datepicker({
     format: "yyyy-mm-dd",
     orientation: "bottom",
     autoclose: true,
   });
+  if ($coralDemographicSampleDate.val() === "") {
+    // Default to today if not set
+    $coralDemographicSampleDate.datepicker("setDate", new Date());
+  }
 
   $("#coral_demographic_sample_begin_time").timepicker({
     timeFormat: "HH:mm",

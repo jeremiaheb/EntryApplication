@@ -3,11 +3,16 @@ $(function () {
     return;
   }
 
-  $("#boat_log_date").datepicker({
+  const $boatLogDate = $("#boat_log_date");
+  $boatLogDate.datepicker({
     format: "yyyy-mm-dd",
     orientation: "bottom",
     autoclose: true,
   });
+  if ($boatLogDate.val() === "") {
+    // Default to today if not set
+    $boatLogDate.datepicker("setDate", new Date());
+  }
 
   $("#boat_log_station_logs_attributes_0_time").timepicker({
     timeFormat: "HH:mm",

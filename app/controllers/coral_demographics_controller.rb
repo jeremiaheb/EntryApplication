@@ -52,7 +52,6 @@ class CoralDemographicsController < ApplicationController
       @coral_demographic = @draft.assign_attributes_to(CoralDemographic.new)
     else
       @coral_demographic = CoralDemographic.new.tap do |c|
-        c.sample_date ||= Date.current
         c.diver_id ||= current_diver.id
         c.demographic_corals.build
       end

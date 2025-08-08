@@ -9,11 +9,16 @@ $(function () {
     return;
   }
 
-  $("#benthic_cover_sample_date").datepicker({
+  const $benthicCoverSampleDate = $("#benthic_cover_sample_date");
+  $benthicCoverSampleDate.datepicker({
     format: "yyyy-mm-dd",
     orientation: "bottom",
     autoclose: true,
   });
+  if ($benthicCoverSampleDate.val() === "") {
+    // Default to today if not set
+    $benthicCoverSampleDate.datepicker("setDate", new Date());
+  }
 
   $("#benthic_cover_sample_begin_time").timepicker({
     timeFormat: "HH:mm",

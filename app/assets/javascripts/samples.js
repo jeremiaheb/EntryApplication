@@ -482,11 +482,16 @@ $(function () {
     }
   });
 
-  $("#sample_sample_date").datepicker({
+  const $sampleSampleDate = $("#sample_sample_date");
+  $sampleSampleDate.datepicker({
     format: "yyyy-mm-dd",
     orientation: "bottom",
     autoclose: true,
   });
+  if ($sampleSampleDate.val() === "") {
+    // Default to today if not set
+    $sampleSampleDate.datepicker("setDate", new Date());
+  }
 
   $(
     "#sample_dive_begin_time, #sample_dive_end_time, #sample_sample_begin_time, #sample_sample_end_time",

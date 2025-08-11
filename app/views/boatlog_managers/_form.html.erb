@@ -1,7 +1,7 @@
   <%= form_for @boatlog_manager, html: { class: "usa-form maxw-full bg-base-lightest" } do |f| %>
     <%= render "shared/uswds_error_messages", target: @boatlog_manager %>
 
-    <fieldset class="usa-fieldset padding-1">
+    <fieldset class="usa-fieldset padding-1 padding-top-0">
       <%= f.label :agency, class: "usa-label" %>
       <%= f.text_field :agency, class: "usa-input usa-input--lg" %>
 

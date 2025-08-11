@@ -6,6 +6,7 @@ class BoatLogsController < ApplicationController
 
   # GET /boat_logs
   def index
+    @boat_logs = @boat_logs.includes(:station_logs)
     if current_diver.role == "admin"
       @boat_logs = @boat_logs.all
     elsif current_diver.role == "manager"

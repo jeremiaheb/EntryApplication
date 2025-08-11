@@ -6,7 +6,7 @@
   <fieldset class="usa-fieldset padding-1 padding-top-0">
     <div>
       <%= f.label :boatlog_manager_id, "Boatlog/Manager", class: "usa-label display-inline-block width-card" %>
-      <%= f.collection_select :boatlog_manager_id, BoatlogManager.all, :id, :agency_name, { include_blank: true }, class: "usa-select usa-input--lg display-inline-block" %>
+      <%= f.collection_select :boatlog_manager_id, BoatlogManager.all, :id, :agency_name, { include_blank: true }, autofocus: true, class: "usa-select usa-input--lg display-inline-block" %>
     </div>
 
     <div class="date">

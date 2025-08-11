@@ -2,18 +2,18 @@ class BoatLogsController < ApplicationController
   before_action :authenticate_diver!
   load_and_authorize_resource
 
+  layout "application-uswds"
+
   # GET /boat_logs
-  # GET /boat_logs.json
   def index
     if current_diver.role == "admin"
-      @boat_logs = BoatLog.all
+      @boat_logs = @boat_logs.all
     elsif current_diver.role == "manager"
-      @boat_logs = BoatLog.where("boatlog_manager_id=?", current_diver.boatlog_manager_id)
+      @boat_logs = @boat_logs.where("boatlog_manager_id=?", current_diver.boatlog_manager_id)
     end
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @boat_logs }
       format.xlsx do
         # Prevent caching
         no_store
@@ -21,19 +21,7 @@ class BoatLogsController < ApplicationController
     end
   end
 
-  # GET /boat_logs/1
-  # GET /boat_logs/1.json
-  def show
-    @boat_log = BoatLog.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @boat_log }
-    end
-  end
-
   # GET /boat_logs/new
-  # GET /boat_logs/new.json
   def new
     @draft = Draft.latest_for(diver_id: current_diver.id, model_klass: BoatLog, model_id: nil)
     if @draft
@@ -43,11 +31,6 @@ class BoatLogsController < ApplicationController
         station = bl.station_logs.build
         2.times { station.rep_logs.build }
       end
-    end
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @boat_log }
     end
   end
 
@@ -60,50 +43,32 @@ class BoatLogsController < ApplicationController
   end
 
   # POST /boat_logs
-  # POST /boat_logs.json
   def create
-    @boat_log = BoatLog.new(boat_log_params)
-
-    respond_to do |format|
-      if @boat_log.save
-        Draft.destroy_for(diver_id: current_diver.id, model_klass: BoatLog, model_id: nil)
-
-        format.html { redirect_to @boat_log, notice: "Boat log was successfully created." }
-        format.json { render json: @boat_log, status: :created, location: @boat_log }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @boat_log.errors, status: :unprocessable_entity }
-      end
+    if @boat_log.save
+      Draft.destroy_for(diver_id: current_diver.id, model_klass: BoatLog, model_id: nil)
+      redirect_to boat_logs_url, notice: "Boat log was successfully created."
+    else
+      render action: "new"
     end
   end
 
   # PUT /boat_logs/1
-  # PUT /boat_logs/1.json
   def update
-    @boat_log = BoatLog.find(params[:id])
-
-    respond_to do |format|
-      if @boat_log.update(boat_log_params)
-        Draft.destroy_for(diver_id: current_diver.id, model_klass: BoatLog, model_id: @boat_log.id)
-
-        format.html { redirect_to @boat_log, notice: "Boat log was successfully updated." }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @boat_log.errors, status: :unprocessable_entity }
-      end
+    if @boat_log.update(boat_log_params)
+      Draft.destroy_for(diver_id: current_diver.id, model_klass: BoatLog, model_id: @boat_log.id)
+      redirect_to boat_logs_url, notice: "Boat log was successfully updated."
+    else
+      render action: "edit"
     end
   end
 
   # DELETE /boat_logs/1
-  # DELETE /boat_logs/1.json
   def destroy
-    @boat_log = BoatLog.find(params[:id])
-    @boat_log.destroy
-
-    respond_to do |format|
-      format.html { redirect_to boat_logs_url }
-      format.json { head :no_content }
+    if @boat_log.destroy
+      Draft.destroy_for(diver_id: current_diver.id, model_klass: BoatLog, model_id: @boat_log.id)
+      redirect_to boat_logs_url, notice: "Boat log was successfully deleted."
+    else
+      redirect_to boat_logs_url, notice: "Boat log was not deleted: #{@boat_log.errors.full_messages.join(", ")}"
     end
   end
 

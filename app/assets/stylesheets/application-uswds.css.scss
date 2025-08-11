@@ -3,3 +3,37 @@
 //= require jquery-timepicker/jquery.timepicker
 //= require datatables.net-dt/css/dataTables.dataTables
 //= require_self
+
+.field_with_errors {
+  display: contents;
+}
+
+@keyframes spin360 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Drafts
+.draft-progress {
+  font-variant: small-caps;
+
+  .draft-saved {
+    background-color: #ffbc78;
+  }
+  .draft-pending {
+    background-color: #f3e1e4;
+  }
+  .draft-saving {
+    .usa-icon {
+      animation: spin360 4s linear infinite;
+    }
+    background-color: #97d4ea;
+  }
+  .saved {
+    background-color: #04c585;
+  }
+}

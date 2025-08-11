@@ -96,10 +96,10 @@ $(function () {
     const longitude = parts[2].replace(/[^0-9\.]+/g, "");
 
     const $closestLatitudeField = $this
-      .closest("div.row")
+      .closest("div.grid-row")
       .find("input[name*='latitude']");
     const $closestLongitudeField = $this
-      .closest("div.row")
+      .closest("div.grid-row")
       .find("input[name*='longitude']");
 
     $closestLatitudeField.val(latitude);
@@ -146,8 +146,8 @@ $(function () {
     setDiverTypeLabel();
   });
 
-  $(".new_boat_log, .edit_boat_log").validate({
-    errorElement: "span",
+  $(".new_boat_log, .edit_boat_log, .boat-log-form").validate({
+    errorElement: "div",
 
     onfocusout: function (element) {
       this.element(element);

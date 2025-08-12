@@ -13,7 +13,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
   def select2_choose(select_element, option:)
     # Close any open select2 that happens to be open for other reasons
-    find("body").click
+    all(".select2-dropdown-open").each(&:click)
 
     select_element.sibling(".select2-container").find("a").click
 

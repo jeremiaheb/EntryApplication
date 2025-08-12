@@ -1,5 +1,6 @@
-<h1>Editing Benthic Cover Sample <%=  @benthic_cover.field_id %></h1>
-
-<%= render partial: "draft_present_alert", locals: { discard_draft_url: draft_benthic_covers_path(id: @benthic_cover.id) } %>
-
-<%= render 'form' %>
+<div class="grid-row">
+  <div class="grid-col-12">
+    <%= render "shared/nav_breadcrumbs", object: [["Benthic Covers", benthic_covers_path], ["Edit Benthic Cover #{@benthic_cover.field_id}", ""]] %>
+    <%= render 'form' %>
+  </div>
+</div>

@@ -16,7 +16,7 @@ class BenthicCoversTest < ApplicationSystemTestCase
     find("input#diver_password").fill_in(with: diver.password)
     find("input[type=submit]").click
 
-    find("#newSampleButton").click
+    find(".new-benthic-cover-button").click
 
     # TODO: If reuse is desired, extract this complex input to a function
     find("select#benthic_cover_boatlog_manager_id").select(boatlog_manager.agency_name)
@@ -24,7 +24,6 @@ class BenthicCoversTest < ApplicationSystemTestCase
     find("select#benthic_cover_buddy").select(buddy.diver_name)
     find("input#benthic_cover_field_id").fill_in(with: "30591A")
     find("input#benthic_cover_sample_date").fill_in(with: "2025-01-17")
-    find("body").click # blur for calendar popup
     find("input#benthic_cover_sample_begin_time").fill_in(with: "10:30")
     find("select#benthic_cover_habitat_type_id").select(habitat_type.habitat_name)
     find("input#benthic_cover_meters_completed").fill_in(with: "15")
@@ -40,7 +39,7 @@ class BenthicCoversTest < ApplicationSystemTestCase
     all("input[id$='hardbottom_num']").last.fill_in(with: "30")
     all("input[id$='softbottom_num']").last.fill_in(with: "14")
     all("input[id$='rubble_num']").last.fill_in(with: "11")
-    find("body").click # blur for calculation
+    all(".coverTotal").first.click # blur for calculation
     assert_css ".coverTotal", text: "Total Points 100"
 
     find("input#benthic_cover_rugosity_measure_attributes_min_depth").fill_in(with: "5")
@@ -61,7 +60,7 @@ class BenthicCoversTest < ApplicationSystemTestCase
     find("input#benthic_cover_rugosity_measure_attributes_meter_mark_13").fill_in(with: "13")
     find("input#benthic_cover_rugosity_measure_attributes_meter_mark_14").fill_in(with: "14")
     find("input#benthic_cover_rugosity_measure_attributes_meter_mark_15").fill_in(with: "15")
-    find("body").click # trigger validation
+    all(".coverTotal").first.click # trigger validation
     assert_equal "120", find("input#RugosityTotalDisplay").value
 
     find("input#benthic_cover_invert_belt_attributes_lobster_num").fill_in(with: "1")
@@ -76,10 +75,10 @@ class BenthicCoversTest < ApplicationSystemTestCase
     find("select#benthic_cover_presence_belt_attributes_m_franksi").select("Present_Transect")
     find("select#benthic_cover_presence_belt_attributes_m_ferox").select("Present_Site")
 
-    find("body").click
+    all(".coverTotal").first.click
     find("input[type=submit]").click
 
-    assert_selector(".alert", text: "Benthic cover was successfully created")
+    assert_selector(".usa-alert", text: "Benthic cover was successfully created")
 
     assert_equal 1, BenthicCover.count
 

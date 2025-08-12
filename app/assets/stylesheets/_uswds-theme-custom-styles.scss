@@ -29,9 +29,9 @@ i.e.
   }
 }
 
-.field_with_errors .usa-input,
+.field_with_errors input,
 .usa-input.error,
-.field_with_errors .usa-select,
+.field_with_errors select,
 .usa-select.error {
   background-color: yellow;
   @include u-outline("2px");

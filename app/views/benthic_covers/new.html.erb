@@ -1,7 +1,6 @@
-<h1>New benthic_cover</h1>
-
-<%= render partial: "draft_present_alert", locals: { discard_draft_url: draft_benthic_covers_path } %>
-
-<%= render 'form' %>
-
-<%= link_to 'Benthic Sample List', benthic_covers_path %>
+<div class="grid-row">
+  <div class="grid-col-12">
+    <%= render "shared/nav_breadcrumbs", object: [["Benthic Covers", benthic_covers_path], ["New Benthic Cover", ""]] %>
+    <%= render 'form' %>
+  </div>
+</div>

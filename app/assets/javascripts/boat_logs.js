@@ -1,5 +1,5 @@
 $(function () {
-  if (!EA.onRailsPage("boat_logs", ["edit", "new"])) {
+  if (!EA.onRailsPage("boat_logs", ["edit", "new", "create", "update"])) {
     return;
   }
 

@@ -7,9 +7,9 @@ class BoatLogsController < ApplicationController
   # GET /boat_logs
   def index
     @boat_logs = @boat_logs.includes(:station_logs)
-    if current_diver.role == "admin"
+    if current_diver.admin?
       @boat_logs = @boat_logs.all
-    elsif current_diver.role == "manager"
+    elsif current_diver.manager?
       @boat_logs = @boat_logs.where("boatlog_manager_id=?", current_diver.boatlog_manager_id)
     end
 
@@ -69,7 +69,7 @@ class BoatLogsController < ApplicationController
       Draft.destroy_for(diver_id: current_diver.id, model_klass: BoatLog, model_id: @boat_log.id)
       redirect_to boat_logs_url, notice: "Boat log was successfully deleted."
     else
-      redirect_to boat_logs_url, notice: "Boat log was not deleted: #{@boat_log.errors.full_messages.join(", ")}"
+      redirect_to boat_logs_url, alert: "Boat log was not deleted: #{@boat_log.errors.full_messages.join(", ")}"
     end
   end
 

@@ -79,11 +79,7 @@ $(function () {
 
     return saveDraftThrottled(e);
   };
-  $formsWithDraftsURLs.on("input", ":input", handleChange);
-  // timeentry only fires 'change' for some reason
-  $formsWithDraftsURLs.on("change", "input.is-timeEntry", handleChange);
-  // select2 only fires 'change' events on the <select>
-  $formsWithDraftsURLs.on("change", "select", handleChange);
+  $formsWithDraftsURLs.on("input change", ":input", handleChange);
   // Events fired by nested_form.js
   $formsWithDraftsURLs.on(
     "nested:fieldAdded, nested:fieldRemoved",

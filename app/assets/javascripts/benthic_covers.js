@@ -126,12 +126,16 @@ $(function () {
   $("#lpiSubmit").click(function (e) {
     e.preventDefault();
 
-    $(".new_benthic_cover, .edit_benthic_cover, .benthic-cover-form").validate().cancelSubmit = true;
+    $(
+      ".new_benthic_cover, .edit_benthic_cover, .benthic-cover-form",
+    ).validate().cancelSubmit = true;
 
     $(".benthic_covers")
       .find("input:enabled")
       .each(function () {
-        $(".new_benthic_cover, .edit_benthic_cover, .benthic-cover-form").validate().element(this);
+        $(".new_benthic_cover, .edit_benthic_cover, .benthic-cover-form")
+          .validate()
+          .element(this);
       });
 
     var $errors =
@@ -150,7 +154,9 @@ $(function () {
       }
 
       $(".formContainer :input").not(this).attr("disabled", false);
-      $(".new_benthic_cover, .edit_benthic_cover, .benthic-cover-form").submit();
+      $(
+        ".new_benthic_cover, .edit_benthic_cover, .benthic-cover-form",
+      ).submit();
     }
   });
 

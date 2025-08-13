@@ -183,6 +183,16 @@ $(function () {
 
   $(".new_benthic_cover, .edit_benthic_cover, .benthic-cover-form").validate({
     errorElement: "div",
+    errorPlacement: function ($error, $element) {
+      if ($element.closest(".coverCats").length > 0) {
+        // Place the error under the row
+        $element.closest(".fields").append($error);
+        return;
+      }
+
+      // Default
+      $error.insertAfter($element);
+    },
 
     onfocusout: function (element) {
       this.element(element);

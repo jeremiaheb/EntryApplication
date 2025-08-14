@@ -144,8 +144,13 @@ $(function () {
       });
     }
 
+    // Refresh page when draft is discarded so the form is either blanked out
+    // (for "new") or restored to the saved version (for "edit").
     $("a.discard-draft-link").on("ajax:success", function (e) {
       window.removeEventListener("beforeunload", warnBeforeUnload);
+      suppressDraftSaving();
+
+      location.reload(true);
     });
 
     // Visualize draft saving progress
@@ -169,11 +174,5 @@ $(function () {
       $(".draft-progress .bar").hide();
       $(".draft-progress .bar.draft-pending").show();
     });
-  });
-
-  // After the draft is discarded, reload the page to empty out all fields and
-  // start from scratch cleanly.
-  $("a.discard-draft-link").on("ajax:success", function (e) {
-    location.reload(true);
   });
 });

@@ -51,7 +51,7 @@ class BoatLogsController < ApplicationController
   def create
     if @boat_log.save
       Draft.destroy_for(diver_id: current_diver.id, model_klass: BoatLog, model_id: nil)
-      redirect_to boat_logs_url, notice: "Boat log was successfully created."
+      redirect_to @boat_log, notice: "Boat log was successfully created."
     else
       render action: "new"
     end
@@ -61,7 +61,7 @@ class BoatLogsController < ApplicationController
   def update
     if @boat_log.update(boat_log_params)
       Draft.destroy_for(diver_id: current_diver.id, model_klass: BoatLog, model_id: @boat_log.id)
-      redirect_to boat_logs_url, notice: "Boat log was successfully updated."
+      redirect_to @boat_log, notice: "Boat log was successfully updated."
     else
       render action: "edit"
     end

@@ -41,10 +41,10 @@
             <td>
               <ul class="usa-button-group float-right">
                 <li class="usa-button-group__item">
-                  <%= link_to "Edit", edit_boat_log_path(boat_log), class: "usa-button usa-button--outline" %>
+                  <%= link_to "View", boat_log, class: "usa-button" %>
                 </li>
                 <li class="usa-button-group__item">
-                  <%= link_to "Delete", boat_log, data: { confirm: "Are you sure?" }, method: "delete", class: "usa-button usa-button--secondary" %>
+                  <%= link_to "Edit", edit_boat_log_path(boat_log), class: "usa-button usa-button--outline" %>
                 </li>
               </ul>
             </td>

@@ -64,7 +64,7 @@
           </tr>
         <tbody>
         <% diverMissing.each do |missing| %>
-          <tr data-link=" <%= edit_boat_log_path(@boat_logs.find_by_primary_sample_unit(missing[1][0..3])) %> ">
+          <tr data-link=" <%= boat_log_path(@boat_logs.find_by_primary_sample_unit(missing[1][0..3])) %> ">
             <td> <%= missing[2] %></td>
             <td> <%= missing[0] %></td>
             <td> <%= missing[1] %></td>

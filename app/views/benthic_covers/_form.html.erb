@@ -1,137 +1,242 @@
-<div class="row-fluid">
-  <div class="span6">
-  </div>
-  <div class="span6">
-    <%= render "draft_progress", object: @benthic_cover %>
-  </div>
-</div>
+<%= render partial: "draft_present_alert", locals: { discard_draft_url: draft_benthic_covers_path(id: @benthic_cover.id) } %>
+<%= nested_form_for @benthic_cover, data: { "drafts-url": draft_benthic_covers_path(id: @benthic_cover.id), "draft-restored": @draft.present?, "draft-focused-dom-id": @draft&.focused_dom_id }, html: { id: "benthicCoverData", class: "benthic-cover-form formContainer usa-form maxw-full bg-base-lightest" } do |f| %>
+  <%= render "shared/uswds_error_messages", target: @benthic_cover %>
+  <%= render "draft_progress_uswds", object: @benthic_cover %>
 
-<div class="form-horizontal">
-<%= nested_form_for @benthic_cover, data: { "drafts-url": draft_benthic_covers_path(id: @benthic_cover.id), "draft-restored": @draft.present?, "draft-focused-dom-id": @draft&.focused_dom_id } do |f| %>
-  <%= render "shared/error_messages", :target => @benthic_cover %>
-
-
-    <div class="formContainer" id="benthicCoverData">
-      <div class="row">
-        <div class="span4 part_1">
-
-       <div class="control-group">
-          <label class="control-label">Boatlog/Manager</label>
-          <div class="controls">
-            <%= f.collection_select :boatlog_manager_id, BoatlogManager.all, :id, :agency_name, { :include_blank => "" } %><br />
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label class="control-label">Diver</label>
-          <div class="controls">
-            <%= f.collection_select :diver_id, Diver.active_divers.order(:diver_name), :id, :diver_name, :include_blank => true %><br />
-          </div>
-        </div>
-         
-        <div class="control-group">
-          <label class="control-label">Buddy</label>
-          <div class="controls">
-            <%= f.collection_select :buddy, Diver.active_divers.order(:diver_name), :id, :diver_name, :include_blank => true %><br />
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label class="control-label">Field ID</label>
-          <div class="controls">
-            <%= f.text_field :field_id %>
-          </div>
-        </div>
-
-        <div class="control-group date">
-          <label class="control-label">Sample Date</label>
-          <div class="controls">
-            <%= f.text_field :sample_date %>
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label class="control-label">Sample Begin Time</label>
-          <div class="controls">
-            <%= f.text_field :sample_begin_time, {value: @benthic_cover.try(:sample_begin_time).try(:strftime, "%H:%M") }%>
-          </div>
-        </div>
-
-        </div> 
-        <div class="span4 part_2">
-
-        <div class="control-group">
-          <label class="control-label">Habitat Type</label>
-          <div class="controls">
-            <%= f.collection_select :habitat_type_id, HabitatType.caribbean_habitats, :id, :habitat_name, { :include_blank => "" } %><br />
-          </div>
-        </div>
-
-
-        <div class="control-group">
-          <label class="control-label">Meters Completed LPI</label>
-          <div class="controls">
-            <%= f.text_field :meters_completed %>
-          </div>
-        </div>
-
-         <div class="control-group">
-          <label class="control-label">Notes</label>
-          <div class="controls">
-            <%= f.text_area :sample_description, { :size => "200x5" } %>
-          </div>
-        </div> 
-
-      </div>
-      </div>
-
-  <div class="row">
-    <div class="span6 coverCats">
-      <fieldset>
-
-        <ul class="inline lpiHeaders">
-          <li id="cover"> Cover </li> <li id="hard"> Hard </li> <li id=soft> Soft </li> <li id="rubble"> Rubble </li>
-        </ul>
-
-        
-
-        <legend> Cover Categories <span class="label coverTotal">  </span></legend>
-        <div class="cover_data">
-          <%= f.fields_for :point_intercepts do |builder| %>
-            <%= render 'point_intercept_fields', f: builder %>
-          <% end %>
-          <%= f.link_to_add "Add Cover", :point_intercepts %>
-        </div>
-      </fieldset>
-    </div>
-
-    <div class=span3>
-      <fieldset>
-        <legend> Rugosity Measurement </legend>
+  <fieldset class="usa-fieldset grid-container padding-1 padding-top-0">
+    <div class="grid-row">
+      <div class="grid-col-6">
         <div>
-          <%= f.fields_for :rugosity_measure do |builder| %>
-            <%= render 'rugosity_measure_fields', f: builder %>
-          <% end %>
+          <%= f.label :boatlog_manager_id, "Boatlog/Manager", class: "usa-label display-inline-block width-card" %>
+          <%= f.collection_select :boatlog_manager_id, BoatlogManager.all, :id, :agency_name, { include_blank: true }, autofocus: true, class: "usa-select usa-input--lg display-inline-block" %>
         </div>
-      </fieldset>
-      <%= f.fields_for :invert_belt do |builder| %>
-        <%= render 'invert_belt_fields', f: builder %>
-      <% end %>
 
-      <%= f.fields_for :presence_belt do |builder| %>
-        <%= render 'presence_belt_fields', f: builder %>
-      <% end %>
+        <div>
+          <%= f.label :diver_id, "Diver", class: "usa-label display-inline-block width-card" %>
+          <%= f.collection_select :diver_id, Diver.active_divers.order(:diver_name), :id, :diver_name, { include_blank: true }, class: "usa-select usa-input--lg display-inline-block" %>
+        </div>
+
+        <div>
+          <%= f.label :buddy, "Buddy", class: "usa-label display-inline-block width-card" %>
+          <%= f.collection_select :buddy, Diver.active_divers.order(:diver_name), :id, :diver_name, { include_blank: true }, class: "usa-select usa-input--lg display-inline-block" %>
+        </div>
+
+        <div>
+          <%= f.label :field_id, "Field ID", class: "usa-label display-inline-block width-card" %>
+          <%= f.text_field :field_id, class: "usa-input usa-input--sm display-inline-block" %>
+        </div>
+
+        <div>
+          <%= f.label :sample_date, "Sample Date", class: "usa-label display-inline-block width-card" %>
+          <%= f.text_field :sample_date, class: "usa-input usa-input--md display-inline-block" %>
+        </div>
+
+        <div>
+          <%= f.label :sample_begin_time, "Sample Begin Time", class: "usa-label display-inline-block width-card" %>
+          <%= f.text_field :sample_begin_time, value: f.object.sample_begin_time&.strftime("%H:%M"), class: "usa-input usa-input--sm display-inline-block" %>
+        </div>
+      </div>
+
+      <div class="grid-col-6">
+        <div>
+          <%= f.label :habitat_type_id, "Habitat Type", class: "usa-label display-inline-block width-card" %>
+          <%= f.collection_select :habitat_type_id, HabitatType.caribbean_habitats, :id, :habitat_name, { include_blank: true }, class: "usa-select usa-input--lg display-inline-block" %>
+        </div>
+
+        <div>
+          <%= f.label :meters_completed, "Meters Completed LPI", class: "usa-label display-inline-block width-card" %>
+          <%= f.text_field :meters_completed, class: "usa-input usa-input--xs display-inline-block" %>
+        </div>
+
+        <div>
+          <%= f.label :sample_description, "Notes", class: "usa-label display-inline-block width-card text-top" %>
+          <%= f.text_area :sample_description, size: "200x5", class: "usa-input usa-input--lg height-15 display-inline-block" %>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-<div class="actions">
-  <div align="left" style="float:none;font-size:150%"> You are submitting </div>
-  <div align="left" style="float:none;font-size:250%" class="coverTotal"> </div>
-  <br>
-    <%= f.submit "Submit LPI", :id => "lpiSubmit" %>
-</div>
+    <div class="grid-row margin-top-2 border-top">
+      <div class="grid-col-8 cover_data border-right">
+        <fieldset class="usa-fieldset margin-top-2 coverCats">
+          <legend class="usa-legend">
+            <span class="text-bold font-body-md">
+              Cover Categories
+            </span>
+            <span class="coverTotal text-bold font-body-2xs margin-left-1 padding-1 radius-lg bg-base-lighter"></span>
+          </legend>
 
-</div>
+          <span class="usa-legend margin-top-1 margin-right-1 text-bold font-body-xs width-full usa-input--lg display-inline-block">Cover</span>
+          <span class="usa-legend margin-top-1 margin-right-1 text-bold font-body-xs width-full usa-input--xs display-inline-block">Hard</span>
+          <span class="usa-legend margin-top-1 margin-right-1 text-bold font-body-xs width-full usa-input--xs display-inline-block">Soft</span>
+          <span class="usa-legend margin-top-1 margin-right-1 text-bold font-body-xs width-full usa-input--xs display-inline-block">Rubble</span>
 
+          <%= f.fields_for :point_intercepts do |ff| %>
+            <%= ff.select :cover_cat_id, CoverCat.order(:rank, :code).map { |cc| [cc.display_name, cc.id, { data: { rank: cc.rank }}] }, { include_blank: true }, class: "coverCategory width-full margin-top-1 height-auto usa-input--lg display-inline-block" %>
+            <%= ff.text_field :hardbottom_num, class: "coverPoints usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+            <%= ff.text_field :softbottom_num, class: "coverPoints usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+            <%= ff.text_field :rubble_num, class: "coverPoints usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+            <%= ff.link_to_remove "Remove Cover", tabindex: "-1" %>
+          <%- end %>
+          <%= f.link_to_add "Add Cover", :point_intercepts %>
+        </fieldset>
+      </div>
+
+      <div class="grid-col-4 padding-left-1">
+        <fieldset class="usa-fieldset rugosityCategories margin-top-2">
+          <legend class="usa-legend text-bold font-body-md">Rugosity Measurement</legend>
+
+          <%= f.fields_for :rugosity_measure do |ff| %>
+            <div>
+              <%= ff.label :min_depth, "Min Depth (ft)", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.text_field :min_depth, class: "usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+            </div>
+
+            <div>
+              <%= ff.label :max_depth, "Max Depth (ft)", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.text_field :max_depth, class: "usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+            </div>
+
+            <div>
+              <%= ff.label :rug_meters_completed, "Meters Completed Rugosity (m)", class: "usa-label display-inline-block width-15" %>
+              <%= ff.text_field :rug_meters_completed, class: "usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+            </div>
+
+            <legend class="usa-legend text-light font-body-xs margin-top-2 margin-left-15">(use cm)</legend>
+            <div>
+              <%= ff.label :meter_mark_1, "meter 0-1", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.text_field :meter_mark_1, class: "RugosityCat usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+            </div>
+            <div>
+              <%= ff.label :meter_mark_2, "meter 1-2", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.text_field :meter_mark_2, class: "RugosityCat usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+            </div>
+            <div>
+              <%= ff.label :meter_mark_3, "meter 2-3", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.text_field :meter_mark_3, class: "RugosityCat usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+            </div>
+            <div>
+              <%= ff.label :meter_mark_4, "meter 3-4", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.text_field :meter_mark_4, class: "RugosityCat usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+            </div>
+            <div>
+              <%= ff.label :meter_mark_5, "meter 4-5", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.text_field :meter_mark_5, class: "RugosityCat usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+            </div>
+            <div>
+              <%= ff.label :meter_mark_6, "meter 5-6", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.text_field :meter_mark_6, class: "RugosityCat usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+            </div>
+            <div>
+              <%= ff.label :meter_mark_7, "meter 6-7", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.text_field :meter_mark_7, class: "RugosityCat usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+            </div>
+            <div>
+              <%= ff.label :meter_mark_8, "meter 7-8", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.text_field :meter_mark_8, class: "RugosityCat usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+            </div>
+            <div>
+              <%= ff.label :meter_mark_9, "meter 8-9", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.text_field :meter_mark_9, class: "RugosityCat usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+            </div>
+            <div>
+              <%= ff.label :meter_mark_10, "meter 9-10", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.text_field :meter_mark_10, class: "RugosityCat usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+            </div>
+            <div>
+              <%= ff.label :meter_mark_11, "meter 10-11", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.text_field :meter_mark_11, class: "RugosityCat usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+            </div>
+            <div>
+              <%= ff.label :meter_mark_12, "meter 11-12", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.text_field :meter_mark_12, class: "RugosityCat usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+            </div>
+            <div>
+              <%= ff.label :meter_mark_13, "meter 12-13", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.text_field :meter_mark_13, class: "RugosityCat usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+            </div>
+            <div>
+              <%= ff.label :meter_mark_14, "meter 13-14", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.text_field :meter_mark_14, class: "RugosityCat usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+            </div>
+            <div>
+              <%= ff.label :meter_mark_15, "meter 14-15", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.text_field :meter_mark_15, class: "RugosityCat usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+            </div>
+            <div>
+              <%= label_tag :RugosityTotalDisplay, "total", class: "usa-label display-inline-block margin-top-1 width-15 text-bold" %>
+              <%= text_field_tag :RugosityTotalDisplay, 0, disabled: true, id: "RugosityTotalDisplay", class: "usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+            </div>
+          <%- end %>
+        </fieldset>
+
+        <fieldset class="usa-fieldset margin-top-2">
+          <legend class="usa-legend text-bold font-body-md">Macro Invertebrates</legend>
+
+          <%= f.fields_for :invert_belt do |ff| %>
+            <div>
+              <%= ff.label :lobster_num, "P. argus", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.text_field :lobster_num, class: "usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+            </div>
+            <div>
+              <%= ff.label :conch_num, "S. gigus", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.text_field :conch_num, class: "usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+            </div>
+            <div>
+              <%= ff.label :diadema_num, "D. antillarum", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.text_field :diadema_num, class: "usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+            </div>
+          <%- end %>
+        </fieldset>
+
+        <fieldset class="usa-fieldset margin-top-2">
+          <legend class="usa-legend text-bold font-body-md">Presence/Absence</legend>
+
+          <%= f.fields_for :presence_belt do |ff| %>
+            <div>
+              <%= ff.label :a_cervicornis, "A. cervicornis", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.select :a_cervicornis, PresenceBelt::ENUM_VALUES.keys, { include_blank: true }, class: "usa-select usa-input--md padding-y-0 height-auto display-inline-block" %>
+            </div>
+            <div>
+              <%= ff.label :a_palmata, "A. palmata", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.select :a_palmata, PresenceBelt::ENUM_VALUES.keys, { include_blank: true }, class: "usa-select usa-input--md padding-y-0 height-auto display-inline-block" %>
+            </div>
+            <div>
+              <%= ff.label :d_cylindrus, "D. cylindrus", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.select :d_cylindrus, PresenceBelt::ENUM_VALUES.keys, { include_blank: true }, class: "usa-select usa-input--md padding-y-0 height-auto display-inline-block" %>
+            </div>
+            <div>
+              <%= ff.label :m_annularis, "O. annularis", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.select :m_annularis, PresenceBelt::ENUM_VALUES.keys, { include_blank: true }, class: "usa-select usa-input--md padding-y-0 height-auto display-inline-block" %>
+            </div>
+            <div>
+              <%= ff.label :m_faveolata, "O. faveolata", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.select :m_faveolata, PresenceBelt::ENUM_VALUES.keys, { include_blank: true }, class: "usa-select usa-input--md padding-y-0 height-auto display-inline-block" %>
+            </div>
+            <div>
+              <%= ff.label :m_franksi, "O. franksi", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.select :m_franksi, PresenceBelt::ENUM_VALUES.keys, { include_blank: true }, class: "usa-select usa-input--md padding-y-0 height-auto display-inline-block" %>
+            </div>
+            <div>
+              <%= ff.label :m_ferox, "M. ferox", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.select :m_ferox, PresenceBelt::ENUM_VALUES.keys, { include_blank: true }, class: "usa-select usa-input--md padding-y-0 height-auto display-inline-block" %>
+            </div>
+          <%- end %>
+        </fieldset>
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="grid-col-12">
+        <span>You are submitting: </span>
+        <span class="coverTotal text-bold"></span>
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="grid-col-12 margin-top-neg-2">
+        <%= f.submit id: "lpiSubmit", class: "usa-button" %>
+        <%= link_to "Cancel", benthic_covers_path, class: "usa-button usa-button--outline" %>
+      </div>
+    </div>
+  </fieldset>
 <% end %>

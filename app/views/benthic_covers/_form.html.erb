@@ -32,7 +32,7 @@
         <div class="control-group">
           <label class="control-label">Buddy</label>
           <div class="controls">
-            <%= f.collection_select :buddy, Diver.active_divers.order(:diver_name), :id, :diver_name, :include_blank => true %><br />
+            <%= f.collection_select :buddy_id, Diver.active_divers.order(:diver_name), :id, :diver_name, :include_blank => true %><br />
           </div>
         </div>
 

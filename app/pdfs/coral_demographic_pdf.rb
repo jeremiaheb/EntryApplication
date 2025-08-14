@@ -23,7 +23,7 @@ class CoralDemographicPdf < Prawn::Document
 
   def sample_head
     data =  [["Diver", "#{@coral_demographic.diver.diver_name}", "Boatlog/Manger:", "#{@coral_demographic.boatlog_manager.agency_name}"],
-              ["Buddy", "#{Diver.find(@coral_demographic.buddy).diver_name}", "Field ID", "#{@coral_demographic.field_id}", "Date", "#{@coral_demographic.sample_date}", "Sample Time", "#{@coral_demographic.sample_begin_time.strftime("%H:%M")}"],
+              ["Buddy", "#{@coral_demographic.buddy.diver_name}", "Field ID", "#{@coral_demographic.field_id}", "Date", "#{@coral_demographic.sample_date}", "Sample Time", "#{@coral_demographic.sample_begin_time.strftime("%H:%M")}"],
               ["Habitat", "#{@coral_demographic.habitat_type.habitat_name}", "Meters Completed", "#{@coral_demographic.meters_completed}", "Percent Hardbottom", "#{@coral_demographic.percent_hardbottom}"],
 ]
     table data, cell_style: { size: 8, border_width: 0, height: 17, padding: 5 }

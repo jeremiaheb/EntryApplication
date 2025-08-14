@@ -33,6 +33,10 @@ class BenthicCoversController < ApplicationController
     end
   end
 
+  # GET /benthic_covers/1
+  def show
+  end
+
   # GET /benthic_covers/new
   def new
     @draft = Draft.latest_for(diver_id: current_diver.id, model_klass: BenthicCover, model_id: nil)

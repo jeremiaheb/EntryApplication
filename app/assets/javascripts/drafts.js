@@ -88,6 +88,7 @@ $(function () {
 
   $formsWithDraftsURLs.each(function () {
     const $form = $(this);
+    const validator = $.data($form[0], "validator");
 
     // warnBeforeUnload will cause the browser to pop up a dialog warning the
     // user before they navigate away.
@@ -98,7 +99,9 @@ $(function () {
 
     // Trigger validation and cursor restoration for draft-enabled forms
     if ($form.data("draft-restored")) {
-      $form.validate().form(); // trigger validation
+      if (validator) {
+        validator.form(); // trigger validation and showing error messages (if any)
+      }
       window.addEventListener("beforeunload", warnBeforeUnload);
     }
     if ($form.data("draft-focused-dom-id")) {
@@ -119,19 +122,27 @@ $(function () {
       }),
     );
 
-    // Suppress drafts while the form is submitting.
-    $form.on("submit", function () {
+    const suppressDraftSaving = function () {
       if (saveDraftInterval) {
         clearInterval(saveDraftInterval);
       }
 
       $form.data("drafts-suppress", true);
-    });
+    };
 
-    // Do not warn if draft is about to be saved or discarded.
-    $form.on("submit", function (e) {
-      window.removeEventListener("beforeunload", warnBeforeUnload);
-    });
+    if (validator) {
+      validator.settings.submitHandler = function () {
+        window.removeEventListener("beforeunload", warnBeforeUnload);
+        suppressDraftSaving();
+        return true;
+      };
+    } else {
+      $form.on("submit", function () {
+        window.removeEventListener("beforeunload", warnBeforeUnload);
+        suppressDraftSaving();
+      });
+    }
+
     $("a.discard-draft-link").on("ajax:success", function (e) {
       window.removeEventListener("beforeunload", warnBeforeUnload);
     });

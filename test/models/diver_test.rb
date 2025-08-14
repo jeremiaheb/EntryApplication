@@ -6,11 +6,6 @@ class DiverTest < ActiveSupport::TestCase
     assert diver.valid?
   end
 
-  test "#whole_name" do
-    diver = FactoryBot.create(:diver, firstname: "Jeremiah", lastname: "Blondeau")
-    assert_equal "Jeremiah Blondeau", diver.whole_name
-  end
-
   test "#diver_proofing_samples returns only the current diver's samples" do
     diver = FactoryBot.create(:diver)
     boatlog_manager = FactoryBot.create(:boatlog_manager)

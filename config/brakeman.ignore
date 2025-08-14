@@ -7,7 +7,7 @@
       "check_name": "MassAssignment",
       "message": "Specify exact keys allowed for mass assignment instead of using `permit!` which allows any keys",
       "file": "app/controllers/samples_controller.rb",
-      "line": 186,
+      "line": 182,
       "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
       "code": "params.require(:sample).permit!",
       "render_path": null,
@@ -24,59 +24,13 @@
       "note": ""
     },
     {
-      "warning_type": "Mass Assignment",
-      "warning_code": 70,
-      "fingerprint": "17c14a654dca6836237ba921c59795918860a463022053a65ccc7345f5898d44",
-      "check_name": "MassAssignment",
-      "message": "Specify exact keys allowed for mass assignment instead of using `permit!` which allows any keys",
-      "file": "app/controllers/animals_controller.rb",
-      "line": 98,
-      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
-      "code": "params.require(:animal).permit!",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "AnimalsController",
-        "method": "animal_params"
-      },
-      "user_input": null,
-      "confidence": "Medium",
-      "cwe_id": [
-        915
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "Mass Assignment",
-      "warning_code": 105,
-      "fingerprint": "1b51bcb7737f284db2324df64a1dd02b5e27715c7db7f07bdefdbce00e111627",
-      "check_name": "PermitAttributes",
-      "message": "Potentially dangerous key allowed for mass assignment",
-      "file": "app/controllers/divers_controller.rb",
-      "line": 92,
-      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
-      "code": "params.require(:diver).permit(:active, :diver_number, :diver_name, :username, :password, :password_confirmation, :firstname, :lastname, :email, :current_password, :boatlog_manager_id, :role)",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "DiversController",
-        "method": "diver_params"
-      },
-      "user_input": ":role",
-      "confidence": "Medium",
-      "cwe_id": [
-        915
-      ],
-      "note": ""
-    },
-    {
       "warning_type": "Unmaintained Dependency",
       "warning_code": 122,
       "fingerprint": "21ab0fe00fdd5899ffc405cff75aadb91b805ee996a614f7e27b08a287e9062d",
       "check_name": "EOLRails",
       "message": "Support for Rails 7.1.5.1 ends on 2025-10-01",
       "file": "Gemfile.lock",
-      "line": 248,
+      "line": 305,
       "link": "https://brakemanscanner.org/docs/warning_types/unmaintained_dependency/",
       "code": null,
       "render_path": null,
@@ -90,49 +44,26 @@
     },
     {
       "warning_type": "Mass Assignment",
-      "warning_code": 70,
-      "fingerprint": "2d2cf45e3fe899a0f056620119f8665bcfa3ea44254a9125a2c07a947d0a395f",
-      "check_name": "MassAssignment",
-      "message": "Specify exact keys allowed for mass assignment instead of using `permit!` which allows any keys",
-      "file": "app/controllers/corals_controller.rb",
-      "line": 85,
+      "warning_code": 105,
+      "fingerprint": "6b1c9bb097ad5fbf4a759d21683d2932a8b9b94f5ff73e1d5898ec85ee4e23c7",
+      "check_name": "PermitAttributes",
+      "message": "Potentially dangerous key allowed for mass assignment",
+      "file": "app/controllers/divers_controller.rb",
+      "line": 91,
       "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
-      "code": "params.require(:coral).permit!",
+      "code": "params.require(:diver).permit(:active, :diver_number, :diver_name, :username, :password, :password_confirmation, :email, :current_password, :boatlog_manager_id, :role)",
       "render_path": null,
       "location": {
         "type": "method",
-        "class": "CoralsController",
-        "method": "coral_params"
+        "class": "DiversController",
+        "method": "diver_params"
       },
-      "user_input": null,
+      "user_input": ":role",
       "confidence": "Medium",
       "cwe_id": [
         915
       ],
-      "note": ""
-    },
-    {
-      "warning_type": "Mass Assignment",
-      "warning_code": 70,
-      "fingerprint": "963adb4514ab3f899dc2158b05ffd3f1671fc251dfe6b9fec16be5667723a914",
-      "check_name": "MassAssignment",
-      "message": "Specify exact keys allowed for mass assignment instead of using `permit!` which allows any keys",
-      "file": "app/controllers/boatlog_managers_controller.rb",
-      "line": 94,
-      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
-      "code": "params.require(:boatlog_manager).permit!",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "BoatlogManagersController",
-        "method": "boatlog_manager_params"
-      },
-      "user_input": null,
-      "confidence": "Medium",
-      "cwe_id": [
-        915
-      ],
-      "note": ""
+      "note": ":role is only allowed for admins"
     },
     {
       "warning_type": "Remote Code Execution",
@@ -161,7 +92,7 @@
       "check_name": "MassAssignment",
       "message": "Specify exact keys allowed for mass assignment instead of using `permit!` which allows any keys",
       "file": "app/controllers/coral_demographics_controller.rb",
-      "line": 155,
+      "line": 154,
       "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
       "code": "params.require(:coral_demographic).permit!",
       "render_path": null,
@@ -180,57 +111,11 @@
     {
       "warning_type": "Mass Assignment",
       "warning_code": 70,
-      "fingerprint": "b1e8ffc3ee7497ae7153c884e05f4f595ce05f62604a240e9958ab9a78e6497a",
-      "check_name": "MassAssignment",
-      "message": "Specify exact keys allowed for mass assignment instead of using `permit!` which allows any keys",
-      "file": "app/controllers/cover_cats_controller.rb",
-      "line": 94,
-      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
-      "code": "params.require(:cover_cat).permit!",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "CoverCatsController",
-        "method": "cover_cat_params"
-      },
-      "user_input": null,
-      "confidence": "Medium",
-      "cwe_id": [
-        915
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "Mass Assignment",
-      "warning_code": 70,
-      "fingerprint": "b8cf90097d48ca0781ce4cbcb10d9df757820ee06335ec2d6e23df0d97465c1e",
-      "check_name": "MassAssignment",
-      "message": "Specify exact keys allowed for mass assignment instead of using `permit!` which allows any keys",
-      "file": "app/controllers/habitat_types_controller.rb",
-      "line": 94,
-      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
-      "code": "params.require(:habitat_type).permit!",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "HabitatTypesController",
-        "method": "habitat_type_params"
-      },
-      "user_input": null,
-      "confidence": "Medium",
-      "cwe_id": [
-        915
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "Mass Assignment",
-      "warning_code": 70,
       "fingerprint": "e83471b6b1d2d82d0a301a23fb7b88929712d911ee96e17c564a54e86dcb5132",
       "check_name": "MassAssignment",
       "message": "Specify exact keys allowed for mass assignment instead of using `permit!` which allows any keys",
       "file": "app/controllers/boat_logs_controller.rb",
-      "line": 143,
+      "line": 112,
       "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
       "code": "params.require(:boat_log).permit!",
       "render_path": null,
@@ -238,29 +123,6 @@
         "type": "method",
         "class": "BoatLogsController",
         "method": "boat_log_params"
-      },
-      "user_input": null,
-      "confidence": "Medium",
-      "cwe_id": [
-        915
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "Mass Assignment",
-      "warning_code": 70,
-      "fingerprint": "fb100913c3950093caf7825cd20809a04a179fd0e153073e08d7c3f70dba8c02",
-      "check_name": "MassAssignment",
-      "message": "Specify exact keys allowed for mass assignment instead of using `permit!` which allows any keys",
-      "file": "app/controllers/sample_types_controller.rb",
-      "line": 94,
-      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
-      "code": "params.require(:sample_type).permit!",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "SampleTypesController",
-        "method": "sample_type_params"
       },
       "user_input": null,
       "confidence": "Medium",

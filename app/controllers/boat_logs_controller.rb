@@ -22,6 +22,10 @@ class BoatLogsController < ApplicationController
     end
   end
 
+  # GET /boat_logs/1
+  def show
+  end
+
   # GET /boat_logs/new
   def new
     @draft = Draft.latest_for(diver_id: current_diver.id, model_klass: BoatLog, model_id: nil)

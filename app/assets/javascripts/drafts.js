@@ -130,6 +130,7 @@ $(function () {
       $form.data("drafts-suppress", true);
     };
 
+    // Suppress draft saving while form is submitting.
     if (validator) {
       validator.settings.submitHandler = function () {
         window.removeEventListener("beforeunload", warnBeforeUnload);

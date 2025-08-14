@@ -184,7 +184,7 @@ $(function () {
       "benthic_cover[diver_id]": {
         required: true,
       },
-      "benthic_cover[buddy]": {
+      "benthic_cover[buddy_id]": {
         required: true,
       },
       "benthic_cover[field_id]": {

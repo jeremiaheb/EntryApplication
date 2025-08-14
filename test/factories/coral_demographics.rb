@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :coral_demographic do
     boatlog_manager
     diver
-    sequence(:buddy)              { |n| "buddy#{n}" }
+    buddy factory: :diver
     field_id { "10011A" }
     sequence(:meters_completed)
     sequence(:sample_begin_time)  { |n| Time.current }

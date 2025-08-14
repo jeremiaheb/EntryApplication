@@ -150,7 +150,7 @@ class BenthicCoversController < ApplicationController
   private
 
   def benthic_cover_params
-    params.require(:benthic_cover).permit(:id, "_destroy", :boatlog_manager_id, :diver_id, :buddy, :field_id, :sample_date, :sample_begin_time, :habitat_type_id, :meters_completed, :sample_description,
+    params.require(:benthic_cover).permit(:id, "_destroy", :boatlog_manager_id, :diver_id, :buddy_id, :field_id, :sample_date, :sample_begin_time, :habitat_type_id, :meters_completed, :sample_description,
                                          point_intercepts_attributes: [:id, "_destroy", :cover_cat_id, :hardbottom_num, :softbottom_num, :rubble_num],
                                          rugosity_measure_attributes: [:id, "_destroy", :min_depth, :max_depth, :rug_meters_completed, :meter_mark_1,
                                                                       :meter_mark_2, :meter_mark_3, :meter_mark_4, :meter_mark_5, :meter_mark_6,

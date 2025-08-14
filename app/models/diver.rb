@@ -33,10 +33,6 @@ class Diver < ApplicationRecord
     coral_demographics.order(:sample_date, :sample_begin_time)
   end
 
-  def whole_name
-    "#{firstname} #{lastname}"
-  end
-
   def diver?
     self.role == Diver::DIVER
   end

@@ -20,7 +20,7 @@ EntryApplication::Application.routes.draw do
     post :draft, on: :collection
   end
 
-  resources :boat_logs, except: [:show] do
+  resources :boat_logs do
     post :draft, on: :collection
   end
 

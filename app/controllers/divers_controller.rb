@@ -83,8 +83,7 @@ class DiversController < ApplicationController
 
   def diver_params
     allowed_keys = [
-      :active, :diver_number, :diver_name, :username, :password, :password_confirmation, :firstname,
-      :lastname, :email, :current_password, :boatlog_manager_id,
+      :active, :diver_number, :diver_name, :username, :password, :password_confirmation, :email, :current_password, :boatlog_manager_id,
     ]
 
     allowed_keys << :role if current_diver.admin?

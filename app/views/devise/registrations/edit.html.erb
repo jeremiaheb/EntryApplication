@@ -5,15 +5,15 @@
     <div class="bg-base-lightest">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "usa-form maxw-full padding-1" }) do |f| %>
         <%= render "shared/uswds_error_messages", target: resource %>
+
+        <%= f.label :diver_number, class: "usa-label margin-top-0" %>
+        <%= f.text_field :diver_number, class: "usa-input usa-input--md", autocomplete: "off", disabled: true %>
         
-        <%= f.label :username, class: "usa-label margin-top-0" %>
+        <%= f.label :diver_name, class: "usa-label" %>
+        <%= f.text_field :diver_name, class: "usa-input usa-input--xl", autocomplete: "off", disabled: true %>
+        
+        <%= f.label :username, class: "usa-label" %>
         <%= f.text_field :username, class: "usa-input usa-input--lg", autofocus: true, autocomplete: "username", required: true %>
-
-        <%= f.label :firstname, "First name", class: "usa-label" %>
-        <%= f.text_field :firstname, class: "usa-input usa-input--lg", autocomplete: "given-name" %>
-
-        <%= f.label :lastname, "Last name", class: "usa-label" %>
-        <%= f.text_field :lastname, class: "usa-input usa-input--lg", autocomplete: "family-name" %>
 
         <%= f.label :email, class: "usa-label" %>
         <%= f.email_field :email, class: "usa-input usa-input--xl", autocomplete: "email", required: true %>

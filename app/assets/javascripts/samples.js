@@ -416,32 +416,40 @@ $(function () {
   }
 
   function enable_disable_animals_fields() {
-    $("[id$=number_individuals]").on("focusout", function () {
+    $("[id$=number_individuals]").on("focusout", function (e) {
       var $indValue = $(this).val();
       var $recordID = $(this).attr("id");
       var $mean = $recordID.replace("_number_individuals", "_average_length");
       var $min = $recordID.replace("_number_individuals", "_min_length");
       var $max = $recordID.replace("_number_individuals", "_max_length");
+      // $relatedTarget is the field that will be focused next
+      var $relatedTarget = $(e.relatedTarget);
 
       if ($indValue >= 3) {
         $("input#" + $mean).attr("disabled", false);
         $("input#" + $min).attr("disabled", false);
         $("input#" + $max).attr("disabled", false);
-        $("input#" + $mean).focus();
+        if ($relatedTarget.is(":disabled")) {
+          $("input#" + $mean).focus();
+        }
       } else if ($indValue == 1) {
         $("input#" + $mean).attr("disabled", false);
         $("input#" + $min).val("");
         $("input#" + $min).attr("disabled", true);
         $("input#" + $max).val("");
         $("input#" + $max).attr("disabled", true);
-        $("input#" + $mean).focus();
+        if ($relatedTarget.is(":disabled")) {
+          $("input#" + $mean).focus();
+        }
       } else if ($indValue == 2) {
         $("input#" + $mean)
           .val("")
           .attr("disabled", true);
         $("input#" + $min).attr("disabled", false);
         $("input#" + $max).attr("disabled", false);
-        $("input#" + $min).focus();
+        if ($relatedTarget.is(":disabled")) {
+          $("input#" + $min).focus();
+        }
       }
     });
   }

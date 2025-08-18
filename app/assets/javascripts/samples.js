@@ -347,7 +347,7 @@ $(function () {
   });
 
   function set_time_seen_field_on_focus() {
-    $(".sppCommon").on("open", function () {
+    $(".sppCommon").on("select2-open", function () {
       var $thisID = $(this).attr("id").slice(0, -10);
       var $radioTimeSeenVal = $('.time_seen_button[class*="active"]').val();
 

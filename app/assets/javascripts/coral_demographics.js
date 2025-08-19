@@ -1,5 +1,5 @@
 $(function () {
-  if (!EA.onRailsPage("coral_demographics", ["edit", "new"])) {
+  if (!EA.onRailsPage("coral_demographics", ["edit", "new", "create", "update"])) {
     return;
   }
 

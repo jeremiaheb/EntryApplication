@@ -107,7 +107,7 @@ $(function () {
       "coral_demographic[diver_id]": {
         required: true,
       },
-      "coral_demographic[buddy]": {
+      "coral_demographic[buddy_id]": {
         required: true,
       },
       "coral_demographic[field_id]": {

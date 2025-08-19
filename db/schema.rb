@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_06_161152) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_14_192342) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,7 +28,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_06_161152) do
   create_table "benthic_covers", force: :cascade do |t|
     t.integer "diver_id"
     t.integer "habitat_type_id"
-    t.integer "buddy"
+    t.integer "buddy_id"
     t.string "field_id"
     t.date "sample_date"
     t.time "sample_begin_time"
@@ -58,7 +58,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_06_161152) do
   create_table "coral_demographics", force: :cascade do |t|
     t.integer "diver_id"
     t.integer "habitat_type_id"
-    t.integer "buddy"
+    t.integer "buddy_id"
     t.string "field_id"
     t.date "sample_date"
     t.time "sample_begin_time"

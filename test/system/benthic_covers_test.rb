@@ -21,7 +21,7 @@ class BenthicCoversTest < ApplicationSystemTestCase
     # TODO: If reuse is desired, extract this complex input to a function
     find("select#benthic_cover_boatlog_manager_id").select(boatlog_manager.agency_name)
     find("select#benthic_cover_diver_id").select(diver.diver_name)
-    find("select#benthic_cover_buddy").select(buddy.diver_name)
+    find("select#benthic_cover_buddy_id").select(buddy.diver_name)
     find("input#benthic_cover_field_id").fill_in(with: "30591A")
     find("input#benthic_cover_sample_date").fill_in(with: "2025-01-17")
     find("body").click # blur for calendar popup

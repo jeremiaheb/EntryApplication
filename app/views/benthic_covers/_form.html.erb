@@ -1,11 +1,12 @@
 <%= render partial: "draft_present_alert", locals: { discard_draft_url: draft_benthic_covers_path(id: @benthic_cover.id) } %>
+
 <%= nested_form_for @benthic_cover, data: { "drafts-url": draft_benthic_covers_path(id: @benthic_cover.id), "draft-restored": @draft.present?, "draft-focused-dom-id": @draft&.focused_dom_id }, html: { id: "benthicCoverData", class: "benthic-cover-form formContainer usa-form maxw-full bg-base-lightest" } do |f| %>
   <%= render "shared/uswds_error_messages", target: @benthic_cover %>
   <%= render "draft_progress_uswds", object: @benthic_cover %>
 
-  <fieldset class="usa-fieldset grid-container padding-1 padding-top-0">
-    <div class="grid-row">
-      <div class="grid-col-6">
+  <fieldset class="usa-fieldset padding-1 padding-top-0">
+    <div class="grid-row flex-row">
+      <div class="grid-col flex-6">
         <div>
           <%= f.label :boatlog_manager_id, "Boatlog/Manager", class: "usa-label display-inline-block width-card" %>
           <%= f.collection_select :boatlog_manager_id, BoatlogManager.all, :id, :agency_name, { include_blank: true }, autofocus: true, class: "usa-select usa-input--lg display-inline-block" %>
@@ -37,7 +38,7 @@
         </div>
       </div>
 
-      <div class="grid-col-6">
+      <div class="grid-col flex-6">
         <div>
           <%= f.label :habitat_type_id, "Habitat Type", class: "usa-label display-inline-block width-card" %>
           <%= f.collection_select :habitat_type_id, HabitatType.caribbean_habitats, :id, :habitat_name, { include_blank: true }, class: "usa-select usa-input--lg display-inline-block" %>
@@ -55,33 +56,87 @@
       </div>
     </div>
 
-    <div class="grid-row margin-top-2 border-top">
-      <div class="grid-col-8 cover_data border-right">
+    <div class="grid-row flex-row margin-top-2 border-top">
+      <div class="grid-col flex-5 cover_data border-right">
         <fieldset class="usa-fieldset margin-top-2 coverCats">
           <legend class="usa-legend">
             <span class="text-bold font-body-md">
               Cover Categories
             </span>
-            <span class="coverTotal text-bold font-body-2xs margin-left-1 padding-1 radius-lg bg-base-lighter"></span>
+            <span class="coverTotal text-bold font-body-2xs margin-left-1 padding-05 radius-lg bg-base-lighter"></span>
           </legend>
 
-          <span class="usa-legend margin-top-1 margin-right-1 text-bold font-body-xs width-full usa-input--lg display-inline-block">Cover</span>
-          <span class="usa-legend margin-top-1 margin-right-1 text-bold font-body-xs width-full usa-input--xs display-inline-block">Hard</span>
-          <span class="usa-legend margin-top-1 margin-right-1 text-bold font-body-xs width-full usa-input--xs display-inline-block">Soft</span>
-          <span class="usa-legend margin-top-1 margin-right-1 text-bold font-body-xs width-full usa-input--xs display-inline-block">Rubble</span>
+          <div class="line-point-intercepts-modal-container">
+            <%= link_to "#line-point-intercepts-modal", class: "usa-button usa-button--outline line-point-intercepts-modal-opener" do %>
+              <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+                <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#launch") %>
+              </svg>
+              Tally Line Point Intercepts
+            <%- end %>
+            <div id="line-point-intercepts-modal" title="Tally Line Point Intercepts" style="display: none">
+              <div class="grid-row flex-row flex-no-wrap">
+                <%- @benthic_cover.line_point_intercepts.sort_by(&:meter_mark).each_with_index do |lpi, i| %>
+                  <%- if i % 30 == 0 %>
+                    <%- if i != 0 %>
+                      </div>
+                    <%- end %>
+                    <div class="grid-col-3">
+                  <%- end %>
+                  <%= f.fields_for :line_point_intercepts, lpi do |ff| %>
+                    <div>
+                      <%= ff.hidden_field :meter_mark %>
+                      <div class="width-4 font-body-2xs display-inline-block">
+                        <%= "%.2f" % ff.object.meter_mark %>
+                      </div>
+                      <%= ff.select :cover_cat_id, CoverCat.order(:rank, :code).map { |cc| [cc.display_name, cc.id, { data: { rank: cc.rank }}] }, { include_blank: true }, class: "cover-cat-select height-auto width-card font-body-3xs display-inline-block", tabindex: "0" %>
+                      <%= ff.select :habitat, LinePointIntercept::HABITATS.keys.map { |name| [name[0].upcase, name] }, { include_blank: true }, class: "height-auto width-5 display-inline-block" %>
+                    </div>
+                  <%- end %>
+                <%- end %>
+                </div>
+              </div>
+              <div class="grid-row margin-top-1">
+                <div class="grid-col flex-fill">
+                  <%= button_tag type: "button", class: "usa-button line-point-intercepts-modal-tally-button" do %>
+                    <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+                      <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#assessment") %>
+                    </svg> 
+                    Tally and Close Dialog
+                  <%- end %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <span class="usa-legend margin-top-1 text-bold font-body-2xs width-full maxw-card-lg margin-x-0 display-inline-block">Cover</span>
+          <span class="usa-legend margin-top-1 text-bold font-body-2xs width-full usa-input--2xs margin-x-0 display-inline-block">Hard</span>
+          <span class="usa-legend margin-top-1 text-bold font-body-2xs width-full usa-input--2xs margin-x-0 display-inline-block">Soft</span>
+          <span class="usa-legend margin-top-1 text-bold font-body-2xs width-full usa-input--2xs margin-x-0 display-inline-block">Rubble</span>
 
           <%= f.fields_for :point_intercepts do |ff| %>
-            <%= ff.select :cover_cat_id, CoverCat.order(:rank, :code).map { |cc| [cc.display_name, cc.id, { data: { rank: cc.rank }}] }, { include_blank: true }, class: "coverCategory width-full margin-top-1 height-auto usa-input--lg display-inline-block" %>
-            <%= ff.text_field :hardbottom_num, class: "coverPoints usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
-            <%= ff.text_field :softbottom_num, class: "coverPoints usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
-            <%= ff.text_field :rubble_num, class: "coverPoints usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
-            <%= ff.link_to_remove "Remove Cover", tabindex: "-1" %>
+            <%= ff.select :cover_cat_id, CoverCat.order(:rank, :code).map { |cc| [cc.display_name, cc.id, { data: { rank: cc.rank }}] }, { include_blank: true }, class: "coverCategory width-full maxw-card-lg margin-top-1 height-auto font-body-3xs display-inline-block" %>
+            <%= ff.text_field :hardbottom_num, class: "coverPoints usa-input usa-input--2xs font-body-2xs padding-05 height-auto display-inline-block" %>
+            <%= ff.text_field :softbottom_num, class: "coverPoints usa-input usa-input--2xs font-body-2xs padding-05 height-auto display-inline-block" %>
+            <%= ff.text_field :rubble_num, class: "coverPoints usa-input usa-input--2xs font-body-2xs padding-05 height-auto display-inline-block" %>
+            <%= ff.link_to_remove tabindex: "-1", class: "font-body-xs" do %>
+              <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+                <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#remove_circle") %>
+              </svg>
+              Remove
+            <%- end %>
           <%- end %>
-          <%= f.link_to_add "Add Cover", :point_intercepts %>
+          <div class="margin-top-1">
+            <%= f.link_to_add :point_intercepts, class: "font-body-xs" do %>
+              <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+                <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#add_circle") %>
+              </svg>
+              Add Cover
+            <%- end %>
+          </div>
         </fieldset>
       </div>
 
-      <div class="grid-col-4 padding-left-1">
+      <div class="grid-col flex-3 padding-left-1 border-right">
         <fieldset class="usa-fieldset rugosityCategories margin-top-2">
           <legend class="usa-legend text-bold font-body-md">Rugosity Measurement</legend>
 
@@ -168,7 +223,8 @@
             </div>
           <%- end %>
         </fieldset>
-
+      </div>
+      <div class="grid-col flex-4 padding-left-1">
         <fieldset class="usa-fieldset margin-top-2">
           <legend class="usa-legend text-bold font-body-md">Macro Invertebrates</legend>
 
@@ -225,15 +281,15 @@
       </div>
     </div>
 
-    <div class="grid-row">
-      <div class="grid-col-12">
+    <div class="grid-row flex-row">
+      <div class="grid-col flex-fill">
         <span>You are submitting: </span>
-        <span class="coverTotal text-bold"></span>
+        <span class="coverTotal padding-05 text-bold radius-lg"></span>
       </div>
     </div>
 
-    <div class="grid-row">
-      <div class="grid-col-12 margin-top-neg-2">
+    <div class="grid-row flex-row">
+      <div class="grid-col flex-fill margin-top-neg-1">
         <%= f.submit id: "lpiSubmit", class: "usa-button" %>
         <%= link_to "Cancel", benthic_covers_path, class: "usa-button usa-button--outline" %>
       </div>

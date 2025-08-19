@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_06_161152) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_15_164031) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -158,6 +158,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_06_161152) do
     t.integer "lobster_num"
     t.integer "conch_num"
     t.integer "diadema_num"
+  end
+
+  create_table "line_point_intercepts", force: :cascade do |t|
+    t.integer "benthic_cover_id", null: false
+    t.decimal "meter_mark", precision: 5, scale: 2, null: false
+    t.integer "cover_cat_id"
+    t.integer "habitat"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["benthic_cover_id", "meter_mark"], name: "index_line_point_intercepts_on_benthic_cover_id_and_meter_mark", unique: true
   end
 
   create_table "point_intercepts", force: :cascade do |t|

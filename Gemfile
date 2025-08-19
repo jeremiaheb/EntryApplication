@@ -14,6 +14,7 @@ gem "sprockets-rails"
 gem "dartsass-sprockets", "~> 3.2", ">= 3.2.1"
 gem "sassc-embedded"
 
+gem "jquery-ui-rails", "~> 8.0"
 gem "nested_form", "0.3.2"
 
 gem "devise", "~> 4.9", ">= 4.9.4"

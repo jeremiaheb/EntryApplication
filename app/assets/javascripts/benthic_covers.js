@@ -25,9 +25,22 @@ $(function () {
     dropdown: false,
   });
 
-  $(".coverCats").find(".coverCategory").select2();
+  $(".coverCats .coverCategory, .cover-cat-select").select2();
   $(document).on("nested:fieldAdded", function (event) {
     event.field.find(".coverCategory").select2();
+  });
+
+  $("#line-point-intercepts-modal").dialog({
+    _allowInteraction: function (event) {
+      return !!$(event.target).is(".select2-input") || this._super(event);
+    },
+    appendTo: ".benthic-cover-form",
+    autoOpen: false,
+    width: 1200, // desktop-lg
+  });
+  $(".line-point-intercepts-modal-opener").on("click", function (e) {
+    e.preventDefault();
+    $("#line-point-intercepts-modal").dialog("open");
   });
 
   function disable_rugosity_meter_marks() {
@@ -91,7 +104,18 @@ $(function () {
   }
 
   function updateCoverTotalText() {
-    $(".coverTotal").text(" Total Points " + getCoverTotal());
+    const coverTotal = getCoverTotal();
+
+    $(".coverTotal").text("Total Points: " + coverTotal);
+    if (coverTotal == 100) {
+      $(".coverTotal")
+        .removeClass("bg-secondary-light")
+        .addClass("bg-primary-light");
+    } else {
+      $(".coverTotal")
+        .addClass("bg-secondary-light")
+        .removeClass("bg-primary-light");
+    }
   }
 
   updateCoverTotalText();

@@ -2,6 +2,8 @@ class CoralDemographicsController < ApplicationController
   before_action :authenticate_diver!
   load_and_authorize_resource
 
+  layout "application-uswds", only: [:index]
+
   # GET /coral_demographics
   def index
     if current_diver.admin?

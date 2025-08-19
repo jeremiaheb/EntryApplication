@@ -1,55 +1,110 @@
-<div class="appContainer">
-  <div class="sampleListContainer">
-    <h3>Coral Demographic Samples</h3>
-  
-      <table id="sampleList" class="display table table-condensed">
-        <thead>
-         <tr>
-           <th>Diver</th>
-           <th>field ID</th>
-           <th>Date</th>
-           <th>Sample Start Time</th>
-           <th></th>
-         </tr>
-       </thead>
-       <tbody>
-      <% @coral_demographics.each do |coral_demographic| %>
-        <tr>
-          <td><%= coral_demographic.diver.diver_name %></td>
-          <td class='fieldid_check'><%= coral_demographic.field_id %></td>
-          <td><%= coral_demographic.sample_date %></td>
-          <td><%= coral_demographic.sample_begin_time.strftime("%H:%M") %></td>
-          <td>
-            <%= link_to "View", coral_demographic %>
-            <%= link_to "Edit", edit_coral_demographic_path(coral_demographic) %>
-          </td>
-        </tr>
-      <% end %>
-      </tbody>
-      </table>
-  </div>
-  <div id="newSampleButton"> 
-    <%= button_to('New Demo', new_coral_demographic_path, :method => "get", :class => 'btn btn-large btn-primary wrap')  %>   
-  </div>
-  <div id="downloadSampleButton"> 
-    <%= link_to('Download Proofing Report (.pdf)', coral_demographics_path(format: "pdf", nocache: SecureRandom.alphanumeric, diver_id: current_diver.id), :class => 'btn btn-small btn-primary')  %>   
-  </div>
-<% if !current_diver.diver? %>
-  <div id="downloadXLSXButton"> 
-    <%= link_to('Download Samples (.xlsx)', coral_demographics_path(format: "xlsx", nocache: SecureRandom.alphanumeric), :class => 'btn btn-small btn-primary')  %>   
-  </div>
-<% end %>
+<div class="grid-row">
+  <div class="grid-col-12">
+    <%= render "shared/nav_breadcrumbs", object: [["Coral Demographics", ""]] %>
 
-<% if current_diver.manager? %>
-  <div id="diverProofingReports" class="btn-group">
-      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-        DiverProofingReports      
-    </button>
-      <ul class="dropdown-menu" role="menu">
-        <% current_diver.boatlog_manager.divers_responsible_for.each do |diver| %>
-          <li> <%= link_to(diver.diver_name, coral_demographics_path(format: "pdf", nocache: SecureRandom.alphanumeric, diver_id: diver.id)) %> </li>
-        <% end %>
-      </ul>
+    <ul class="usa-button-group margin-bottom-1">
+      <li class="usa-button-group__item">
+        <%= link_to new_coral_demographic_path, class: "new-coral-demographic-button usa-button" do %>
+          <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+            <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#add") %>
+          </svg>
+          New Demo
+        <%- end %>
+      </li>
+      <li class="usa-button-group__item">
+        <%= link_to coral_demographics_path(format: "pdf", nocache: SecureRandom.alphanumeric, diver_id: current_diver.id), class: "usa-button usa-button--accent-cool" do %>
+          <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+            <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#file_download") %>
+          </svg> 
+          Download Proofing Report (.pdf)
+        <%- end %>
+      </li>
+      <%- if current_diver.manager? || current_diver.admin? %>
+        <li class="usa-button-group__item">
+          <%= link_to coral_demographics_path(format: "xlsx", nocache: SecureRandom.alphanumeric), class: "usa-button usa-button--accent-cool" do %>
+            <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+              <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#file_download") %>
+            </svg> 
+            Download Samples (.xlsx)
+          <%- end %>
+        </li>
+      <%- end %>
+      <%- if current_diver.manager? %>
+        <li class="usa-button-group__item">
+          <%= link_to "#diver-proofing-report-modal", class: "usa-button usa-button--accent-warm", "aria-controls": "diver-proofing-report-modal", "data-open-modal": true do %>
+            <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+              <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#people") %>
+            </svg> 
+            Diver Proofing Reports
+          <%- end %>
+          <div class="usa-modal" id="diver-proofing-report-modal" aria-labelledby="diver-proofing-report-modal-heading" aria-describedby="diver-proofing-report-modal-description">
+            <div class="usa-modal__content">
+              <div class="usa-modal__main">
+                <h2 id="diver-proofing-report-modal-heading" class="usa-modal__heading">
+                  <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+                    <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#people") %>
+                  </svg> 
+                  Diver Proofing Reports
+                </h2>
+                <div id="diver-proofing-report-modal-description">
+                  <%= form_tag coral_demographics_path(format: "pdf"), class: "usa-form", method: "get" do %>
+                    <%= hidden_field_tag :nocache, SecureRandom.alphanumeric %>
+
+                    <%= select_tag :diver_id, options_from_collection_for_select(current_diver.boatlog_manager.divers_responsible_for, :id, :diver_name), class: "usa-select usa-input--lg" %>
+
+                    <%= button_tag class: "usa-button" do %>
+                      <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+                        <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#file_download") %>
+                      </svg> 
+                      Download Proofing Report (.pdf)
+                    <%- end %>
+
+                    <%= button_tag "Close", type: "button", class: "usa-button usa-button--outline", "data-close-modal": true %>
+                  <%- end %>
+                </div>
+              </div>
+
+              <%= button_tag type: "button", class: "usa-button usa-modal__close", "aria-label": "Close this dialog", "data-close-modal": true do %>
+                <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+                  <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#close") %>
+                </svg> 
+              <%- end %>
+            </div>
+          </div>
+        </li>
+      <%- end %>
+    </ul>
+
+    <table class="width-full display">
+      <thead>
+        <tr>
+          <th scope="col">Diver</th>
+          <th scope="col">Field ID</th>
+          <th scope="col">Date</th>
+          <th scope="col">Sample Start Time</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%- @coral_demographics.each do |coral_demographic| %>
+          <tr>
+            <td><%= coral_demographic.diver&.diver_name %></td>
+            <td class="fieldid_check"><%= coral_demographic.field_id %></td>
+            <td><%= coral_demographic.sample_date %></td>
+            <td><%= coral_demographic.sample_begin_time&.strftime("%H:%M") %></td>
+            <td>
+              <ul class="usa-button-group float-right">
+                <li class="usa-button-group__item">
+                  <%= link_to "View", coral_demographic, class: "usa-button" %>
+                </li>
+                <li class="usa-button-group__item">
+                  <%= link_to "Edit", edit_coral_demographic_path(coral_demographic), class: "usa-button usa-button--outline" %>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        <%- end %>
+      </tbody>
+    </table>
   </div>
-<% end %>
 </div>

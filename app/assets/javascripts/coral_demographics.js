@@ -24,6 +24,11 @@ $(function () {
     event.field.find(".coralSpecies").select2();
   });
 
+  $(".demo_corals").sortable({
+    handle: ".drag-handle",
+    items: "> .fields",
+  });
+
   function disable_fields_if_no_coral() {
     $(".coralSpecies").on("focusout", function () {
       $coralCat = $(this).find("span").text();
@@ -57,7 +62,7 @@ $(function () {
   //supress submitting form on pressing enter key, enter key adds new coral
   //while inside coverCat class
 
-  $("#coralDemoData").bind("keypress", function (e) {
+  $(".coral-demographic-form").bind("keypress", function (e) {
     if (e.keyCode == 13) {
       e.preventDefault();
     }
@@ -93,8 +98,17 @@ $(function () {
     "Old Mortality and Recent Mortality connot be greater than 100",
   );
 
-  $(".new_coral_demographic, .edit_coral_demographic").validate({
-    errorElement: "span",
+  $(".new_coral_demographic, .edit_coral_demographic, .coral-demographic-form").validate({
+    errorElement: "div",
+
+    errorPlacement: function($error, $element) {
+      $demoCoralWrapper = $element.closest(".demo_corals .fields");
+      if ($demoCoralWrapper.length > 0) {
+        $demoCoralWrapper.append($error);
+      } else {
+        $error.insertAfter($element);
+      }
+    },
 
     onfocusout: function (element) {
       this.element(element);

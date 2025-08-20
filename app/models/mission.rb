@@ -12,7 +12,7 @@ class Mission < ActiveRecord::Base
   has_many :mission_managers, dependent: :destroy
   has_many :managers, through: :mission_managers, class_name: "Diver"
 
-  has_many :samples
+  has_many :samples, dependent: :restrict_with_error
 
   validates :active, inclusion: [true, false]
 

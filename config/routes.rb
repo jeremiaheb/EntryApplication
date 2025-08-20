@@ -46,6 +46,14 @@ EntryApplication::Application.routes.draw do
     post :draft, on: :collection
   end
 
+  resources :agencies, except: [:show]
+
+  resources :projects, except: [:show]
+
+  resources :regions, except: [:show]
+
+  resources :missions, except: [:show, :destroy]
+
   get "samples/:id/proofing_template" => "samples#proofing_template"
 
   get "static_pages/home"

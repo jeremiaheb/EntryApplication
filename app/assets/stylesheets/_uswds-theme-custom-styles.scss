@@ -38,6 +38,12 @@ i.e.
   @include u-outline-color("secondary");
 }
 
+.usa-form {
+  .select2-container {
+    display: block;
+  }
+}
+
 // Conflicting styles between USWDS and DataTables
 [type="search"] {
   float: initial;

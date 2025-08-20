@@ -694,7 +694,10 @@ $(function () {
     },
 
     rules: {
-      "sample[boatlog_manager_id]": {
+      sample_region_id: {
+        required: true,
+      },
+      "sample[mission_id]": {
         required: true,
       },
       "sample[sample_date]": {

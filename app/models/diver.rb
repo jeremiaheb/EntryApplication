@@ -13,6 +13,9 @@ class Diver < ApplicationRecord
   has_many    :benthic_covers
   has_many    :coral_demographics
 
+  has_many :mission_managers, inverse_of: :manager
+  has_many :missions_managed, through: :mission_managers, source: :mission
+
   has_many    :rep_logs
 
   validates   :diver_number, presence: true
@@ -43,5 +46,11 @@ class Diver < ApplicationRecord
 
   def manager?
     self.role == Diver::MANAGER
+  end
+
+  def divers_responsible_for
+    missions_managed.includes([samples: :diver]).flat_map { |mission|
+      mission.samples.map { |sample| sample.diver }
+  }.uniq.sort_by(&:diver_name)
   end
 end

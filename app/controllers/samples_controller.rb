@@ -5,12 +5,23 @@ class SamplesController < ApplicationController
   # GET /samples
   # GET /samples.json
   def index
-    if current_diver.role == "admin"
-      @samples = Sample.all
-    elsif current_diver.role == "manager"
-      @samples = Sample.where("diver_id=? OR boatlog_manager_id=?", current_diver.id, current_diver.boatlog_manager_id)
+    @samples = @samples.includes(:diver, :mission, :region, :agency, :project)
+    if current_diver.admin?
+      @samples = @samples.all
+    elsif current_diver.manager?
+      @samples = @samples.where("diver_id=? OR boatlog_manager_id=?", current_diver.id, current_diver.boatlog_manager_id)
     else
-      @samples = Sample.where("diver_id=?", current_diver.id)
+      @samples = @samples.where("diver_id=?", current_diver.id)
+    end
+
+    if params[:region_ids].present?
+      @samples = @samples.where(mission: { region_id: Array(params[:region_ids]) })
+    end
+    if params[:agency_ids].present?
+      @samples = @samples.where(mission: { agency_id: Array(params[:agency_ids]) })
+    end
+    if params[:project_ids].present?
+      @samples = @samples.where(mission: { project_id: Array(params[:project_ids]) })
     end
 
     respond_to do |format|

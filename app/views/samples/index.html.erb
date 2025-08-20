@@ -14,7 +14,7 @@
        </thead>
        <tbody>
       <% @samples.each do |sample| %>
-        <tr data-id="<%= sample.id %>">
+        <%= tag.tr "data-id": sample.id, "data-region-id": sample.mission&.region_id, "data-agency-id": sample.mission&.agency_id, "data-project-id": sample.mission&.project_id do %>
           <td><%= sample.diver.diver_name %></td>
           <td class='fieldid_check'><%= sample.field_id %></td>
           <td><%= sample.sample_date %></td>
@@ -23,7 +23,7 @@
             <%= link_to "View", sample, class: "view-link" %>
             <%= link_to "Edit", edit_sample_path(sample), class: "edit-link" %>
           </td>
-        </tr>
+        <%- end %>
       <% end %>
       </tbody>
       </table>
@@ -40,19 +40,19 @@
     <%= link_to('Download Proofing Report (Common Name)', samples_path(format: "pdf", nocache: SecureRandom.alphanumeric, diver_id: current_diver.id, fishtype: "common_name"), :class => 'btn btn-small btn-primary')  %>   
   </div>
 
-<% if !current_diver.diver? || current_diver.missions_managed.any? %>
-  <%= form_tag samples_path(format: "xlsx"), method: "get", id: "downloadXLSXForm" do %>
-    <%= hidden_field_tag :nocache, SecureRandom.alphanumeric %>
+<%= form_tag samples_path(format: "xlsx"), method: "get", id: "downloadXLSXForm" do %>
+  <%= hidden_field_tag :nocache, SecureRandom.alphanumeric %>
 
-    <%= label_tag :region_ids, "Regions" %>
-    <%= select_tag :region_ids, options_for_select(region_options_for_select, current_diver.missions_managed.map(&:region_id)), multiple: true %><br>
+  <%= label_tag :region_ids, "Regions" %>
+  <%= select_tag :region_ids, options_from_collection_for_select(@samples.map(&:region).uniq, :id, :name, ->(region) { true }), multiple: true %><br>
 
-    <%= label_tag :agency_ids, "Agencies" %>
-    <%= select_tag :agency_ids, options_for_select(agency_options_for_select, current_diver.missions_managed.map(&:agency_id)), multiple: true %><br>
+  <%= label_tag :agency_ids, "Agencies" %>
+  <%= select_tag :agency_ids, options_from_collection_for_select(@samples.map(&:agency).uniq, :id, :name, ->(agency) { true }), multiple: true %><br>
 
-    <%= label_tag :project_ids, "Projects" %>
-    <%= select_tag :project_ids, options_for_select(project_options_for_select, current_diver.missions_managed.map(&:project_id)), multiple: true %><br>
+  <%= label_tag :project_ids, "Projects" %>
+  <%= select_tag :project_ids, options_from_collection_for_select(@samples.map(&:project).uniq, :id, :name, ->(project) { true }), multiple: true %><br>
 
+  <%- if !current_diver.diver? || current_diver.missions_managed.any? %>
     <%= submit_tag "Download Samples (.xlsx)", class: "btn btn-small btn-primary", data: { disable_with: false } %>
   <%- end %>
 <% end %>

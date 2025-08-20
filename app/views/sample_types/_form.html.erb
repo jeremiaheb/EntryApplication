@@ -1,20 +1,14 @@
-<div class="formContainer">
-  <div class="section_1">
-<%= form_for @sample_type do |f| %>
-  
-  <%= render "shared/error_messages", :target => @sample_type %>
+<%= form_for @sample_type, html: { class: "usa-form maxw-full bg-base-lightest", autocomplete: "off" } do |f| %>
+  <%= render "shared/uswds_error_messages", target: @sample_type %>
 
-  <div class='field'>
-    <%= f.label :'Sample Type Name' %><br />
-    <%= f.text_field :sample_type_name %>
-  </div>
-  <div class='field'>
-    <%= f.label :'Sample Type Description' %><br />
-    <%= f.text_field :sample_type_description %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <fieldset class="usa-fieldset padding-1 padding-top-0">
+    <%= f.label :sample_type_name, "Name", class: "usa-label" %>
+    <%= f.text_field :sample_type_name, class: "usa-input usa-input--xl", autocomplete: "off" %>
+
+    <%= f.label :sample_type_description, "Description", class: "usa-label" %>
+    <%= f.text_field :sample_type_description, class: "usa-input usa-input--xl", autocomplete: "off" %>
+    
+    <%= f.submit class: "usa-button" %>
+    <%= link_to "Cancel", sample_types_path, class: "usa-button usa-button--outline" %>
+  </fieldset>
 <% end %>
-</div>
-</div>

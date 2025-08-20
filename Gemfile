@@ -14,14 +14,21 @@ gem "sprockets-rails"
 gem "dartsass-sprockets", "~> 3.2", ">= 3.2.1"
 gem "sassc-embedded"
 
+gem "jquery-ui-rails", "~> 8.0"
 gem "nested_form", "0.3.2"
 
 gem "devise", "~> 4.9", ">= 4.9.4"
+gem "omniauth", "~> 2.1", ">= 2.1.3"
+gem "omniauth-rails_csrf_protection", "~> 1.0", ">= 1.0.2"
+gem "omniauth_openid_connect", "~> 0.8.0"
 gem "cancancan", "~> 3.6", ">= 3.6.1"
 
 gem "prawn", "~> 2.5"
 gem "prawn-table", "~> 0.2.2"
 gem "caxlsx_rails", "~> 0.6.4"
+
+# App-internal exception tracker [https://github.com/fractaledmind/solid_errors]
+gem "solid_errors", "~> 0.7.0"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false

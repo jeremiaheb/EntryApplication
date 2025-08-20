@@ -30,11 +30,12 @@ i.e.
 }
 
 .field_with_errors .usa-input,
-.field_with_errors .usa-select {
-  // Copied from styles for .usa-input--error
-  @include u-border($theme-input-state-border-width, "error-dark");
-  padding-top: calc(#{units(1)} - #{units($theme-input-state-border-width)});
-  padding-bottom: calc(#{units(1)} - #{units($theme-input-state-border-width)});
+.usa-input.error,
+.field_with_errors .usa-select,
+.usa-select.error {
+  background-color: yellow;
+  @include u-outline("2px");
+  @include u-outline-color("secondary");
 }
 
 .usa-form {
@@ -46,4 +47,10 @@ i.e.
 // Conflicting styles between USWDS and DataTables
 [type="search"] {
   float: initial;
+}
+
+div.error,
+span.error {
+  @include u-text("secondary");
+  @include u-font("ui", "2xs");
 }

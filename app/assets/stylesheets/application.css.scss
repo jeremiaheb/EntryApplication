@@ -18,12 +18,10 @@
  *= require ./animals
  *= require ./benthic_covers
  *= require ./bootstrap_and_overrides
- *= require ./boat_logs
  *= require ./coral_demographics
  *= require ./corals
  *= require ./dashboard
  *= require ./divers
- *= require ./drafts
  *= require ./habitat_types
  *= require ./sample_types
  *= require ./samples
@@ -552,4 +550,10 @@ input.timeSeen_3 {
 
 .carousel-caption p {
   font-size: 15px;
+}
+
+.draft-progress {
+  width: 100px;
+  height: 20px;
+  font-variant: small-caps;
 }

@@ -9,12 +9,7 @@ Rails.application.config.assets.paths << Rails.root.join("node_modules")
 Rails.application.config.assets.paths << Rails.root.join("node_modules", "@uswds", "uswds", "dist", "img")
 Rails.application.config.assets.paths << Rails.root.join("node_modules", "@uswds", "uswds", "packages")
 Rails.application.config.assets.paths << Rails.root.join("vendor", "bootstrap")
-Rails.application.config.assets.paths << Rails.root.join("vendor", "select2-3.2.0")
+Rails.application.config.assets.paths << Rails.root.join("vendor", "select2-3.5.4")
 
-# Generate source maps, etc in development
+# Serve assets individually in development
 Rails.application.config.assets.debug = Rails.env.development?
-
-# Precompile additional assets.
-# application.js, application.css, and all non-JS/CSS in the app/assets
-# folder are already added.
-# Rails.application.config.assets.precompile += %w( admin.js admin.css )

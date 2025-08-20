@@ -13,4 +13,10 @@ class HabitatTypeTest < ActiveSupport::TestCase
       assert_not_nil habitat_type.errors[attribute]
     end
   end
+
+  test "requires a valid region" do
+    habitat_type = FactoryBot.build(:habitat_type, region: "bogus")
+    assert_not habitat_type.valid?
+    assert_not_nil habitat_type.errors[:region]
+  end
 end

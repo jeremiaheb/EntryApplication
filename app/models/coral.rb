@@ -1,7 +1,6 @@
-class Coral < ActiveRecord::Base
-  has_many :demographic_corals
+class Coral < ApplicationRecord
+  has_many :demographic_corals, dependent: :restrict_with_error
   has_many :coral_demographics, through: :demographic_corals
-  accepts_nested_attributes_for :demographic_corals, allow_destroy: true
 
   validates :short_code, presence: true
   validates :code, presence: true

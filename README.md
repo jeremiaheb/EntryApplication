@@ -132,23 +132,23 @@ bin/rake import:all
 Next, add the key to an agent running locally. Open a terminal (Git Bash on Windows) and run:
 
 ```bash
-eval $(ssh-agent); ssh-add
+eval "$(ssh-agent)"; ssh-add
 ```
 
-Within this same terminal, login to the virtual machine:
+Within this same terminal, login to the Vagrant VM:
 
 ```bash
 vagrant ssh
 ```
 
-Verify the key is available within the virtual machine:
+Verify the key is available:
 
 ```bash
 # long, random public key should print
 ssh-add -L
 ```
 
-With the key available to be used by Capistrano, run:
+With the key available, run:
 
 ```
 bin/cap production deploy
@@ -158,9 +158,9 @@ You will be prompted for a branch name, which defaults to the current branch. If
 
 ## Production Setup
 
-### Virtual Machine
+### Machine Build
 
-This repository builds and snapshots an Ubuntu-based virtual machine that is setup to host the application. It uses the same Ansible playbook as Vagrant (eliding some development tasks).
+This repository builds and snapshots an Ubuntu-based virtual machine that is setup to host the application. It uses the same [Ansible playbook](./server/playbook.yml) as Vagrant (eliding some development tasks).
 
 To build the virtual machine, install [Packer](https://www.packer.io).
 
@@ -171,3 +171,32 @@ packer build -force server
 ```
 
 The VM will be snapshot into the `./server/output` directory. The VM will be left powered off in VirtualBox, but it can be powered back on for experimentation or use in development.
+
+### Ansible
+
+To run Ansible to provision an existing virtual machine (either one created `packer` above or a trusted Ubuntu cloud image), open a terminal (Git Bash on Windows) and run:
+
+```bash
+eval "$(ssh-agent)"; ssh-add
+```
+
+Within this same terminal, login to the Vagrant machine:
+
+```bash
+vagrant ssh
+```
+
+Direct Ansible to connect to the server at `IP_ADDR` and run the [playbook](./server/playbook.yml):
+
+```bash
+ansible-playbook --inventory IP_ADDR, --extra-vars ansible_user=USERNAME server/playbook.yml
+```
+
+Replace `IP_ADDR` and `USERNAME` with the IP address of the server and your username on the server, respectively. For example:
+
+```bash
+# NOTE: the comma after the IP address is intentional and required
+ansible-playbook --inventory 192.0.2.1, --extra-vars ansible_user=alindeman server/playbook.yml
+```
+
+To run the Ansible without actually changing anything, add the `--check` flag. To run the Ansible with more details about what did (or would) change, add the `--verbose` flag.

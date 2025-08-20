@@ -219,7 +219,7 @@ Devise.setup do |config|
   # ==> Configuration for :recoverable
   #
   # Defines which key will be used when recovering the password for an account
-  # config.reset_password_keys = [:email]
+  config.reset_password_keys = [:username]
 
   # Time interval you can reset your password with a reset password key.
   # Don't put a too small interval or your users won't have the time to
@@ -271,7 +271,27 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+
+  if Rails.env.development?
+    config.omniauth :developer, {
+      fields: [:email],
+      uid_field: :email,
+    }
+  end
+
+  if Rails.env.development?
+    config.omniauth :icam, {
+      name: :icam,
+      strategy_class: ::OmniAuth::Strategies::OpenIDConnect,
+      scope: [:openid, :email, :profile],
+      response_type: :code,
+      client_options: {
+        identifier: Rails.application.credentials.fetch(:icam_client_id, ""),
+        secret: Rails.application.credentials.fetch(:icam_client_secret, ""),
+        redirect_uri: "http://localhost:3000/divers/auth/icam/callback",
+      },
+    }
+  end
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

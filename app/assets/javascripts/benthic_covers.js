@@ -9,11 +9,16 @@ $(function () {
     return;
   }
 
-  $("#benthic_cover_sample_date").datepicker({
+  const $benthicCoverSampleDate = $("#benthic_cover_sample_date");
+  $benthicCoverSampleDate.datepicker({
     format: "yyyy-mm-dd",
     orientation: "bottom",
     autoclose: true,
   });
+  if ($benthicCoverSampleDate.val() === "") {
+    // Default to today if not set
+    $benthicCoverSampleDate.datepicker("setDate", new Date());
+  }
 
   $("#benthic_cover_sample_begin_time").timepicker({
     timeFormat: "HH:mm",
@@ -66,26 +71,30 @@ $(function () {
     getRugosityTotals();
   });
 
-  function getCoverTotals() {
-    var $coverTotals = 0;
+  function getCoverTotal() {
+    var coverTotal = 0;
 
     $(".coverCats")
       .find(".coverPoints:visible")
       .each(function () {
         if ($(this).val() != "") {
-          $coverTotals += parseFloat($(this).val());
+          coverTotal += parseFloat($(this).val());
         }
       });
-    $(".coverTotal").text(" Total Points " + $coverTotals);
+
+    return coverTotal;
   }
 
-  getCoverTotals();
-  $(".coverCats").change(function () {
-    getCoverTotals();
-  });
+  function updateCoverTotalText() {
+    $(".coverTotal").text(" Total Points " + getCoverTotal());
+  }
 
+  updateCoverTotalText();
+  $(".coverCats").change(function () {
+    updateCoverTotalText();
+  });
   $(document).delegate(".remove_nested_fields", "click", function () {
-    getCoverTotals();
+    updateCoverTotalText();
   });
 
   //puts focus on the select_2 drop down after adding cover pressed
@@ -125,18 +134,20 @@ $(function () {
       $(".benthic_covers").find("select:visible.error").length;
 
     if ($errors == 0) {
+      var coverTotal = getCoverTotal();
+      if (
+        coverTotal != 100 &&
+        !confirm(
+          "Confirm: You are submitting fewer than 100 points. Please confirm you want to proceed.",
+        )
+      ) {
+        return;
+      }
+
       $(".formContainer :input").not(this).attr("disabled", false);
       $(".new_benthic_cover, .edit_benthic_cover").submit();
     }
   });
-
-  $.validator.addMethod(
-    "fieldID",
-    function (value, element) {
-      return this.optional(element) || /^\d{5}[a-zA-Z]$/i.test(value);
-    },
-    "FieldID is wrong format",
-  );
 
   $.validator.addMethod(
     "isOnlyCat",
@@ -240,6 +251,8 @@ $(function () {
       "benthic_cover[rugosity_measure_attributes][max_depth]": {
         required: true,
         digits: true,
+        greaterThanEqualTo:
+          "#benthic_cover_rugosity_measure_attributes_min_depth",
       },
       "benthic_cover[rugosity_measure_attributes][rug_meters_completed]": {
         required: true,
@@ -311,7 +324,16 @@ $(function () {
       "benthic_cover[sample_begin_time]": {
         pattern: "Time must be between 06:00 and 20:00",
       },
+      "benthic_cover[rugosity_measure_attributes][max_depth]": {
+        greaterThanEqualTo: "must be greater than or equal to min depth",
+      },
     },
+  });
+
+  $("#benthic_cover_meters_completed").on("focusout", function (e) {
+    if (Number($(this).val()) != 15) {
+      alert("Caution: Full survey (15m) not entered");
+    }
   });
 
   function validate_fields() {

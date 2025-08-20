@@ -1,4 +1,4 @@
-class RugosityMeasure < ActiveRecord::Base
+class RugosityMeasure < ApplicationRecord
   belongs_to :benthic_cover
 
   validates :min_depth,               presence: true

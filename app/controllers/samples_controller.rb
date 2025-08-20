@@ -2,10 +2,6 @@ class SamplesController < ApplicationController
   before_action :authenticate_diver!
   load_and_authorize_resource
 
-  def current_ability
-    @current_ability ||= Ability.new(current_diver)
-  end
-
   # GET /samples
   # GET /samples.json
   def index
@@ -65,7 +61,7 @@ class SamplesController < ApplicationController
       @sample = @draft.assign_attributes_to(Sample.new)
     else
       @sample = Sample.new.tap do |s|
-        s.sample_date ||= Date.current
+        s.diver_id ||= current_diver.id
         s.sample_type ||= SampleType.default
         s.sample_animals.build
       end

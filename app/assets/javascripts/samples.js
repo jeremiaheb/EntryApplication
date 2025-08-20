@@ -347,7 +347,7 @@ $(function () {
   });
 
   function set_time_seen_field_on_focus() {
-    $(".sppCommon").on("open", function () {
+    $(".sppCommon").on("select2-open", function () {
       var $thisID = $(this).attr("id").slice(0, -10);
       var $radioTimeSeenVal = $('.time_seen_button[class*="active"]').val();
 
@@ -416,32 +416,40 @@ $(function () {
   }
 
   function enable_disable_animals_fields() {
-    $("[id$=number_individuals]").on("focusout", function () {
+    $("[id$=number_individuals]").on("focusout", function (e) {
       var $indValue = $(this).val();
       var $recordID = $(this).attr("id");
       var $mean = $recordID.replace("_number_individuals", "_average_length");
       var $min = $recordID.replace("_number_individuals", "_min_length");
       var $max = $recordID.replace("_number_individuals", "_max_length");
+      // $relatedTarget is the field that will be focused next
+      var $relatedTarget = $(e.relatedTarget);
 
       if ($indValue >= 3) {
         $("input#" + $mean).attr("disabled", false);
         $("input#" + $min).attr("disabled", false);
         $("input#" + $max).attr("disabled", false);
-        $("input#" + $mean).focus();
+        if ($relatedTarget.is(":disabled")) {
+          $("input#" + $mean).focus();
+        }
       } else if ($indValue == 1) {
         $("input#" + $mean).attr("disabled", false);
         $("input#" + $min).val("");
         $("input#" + $min).attr("disabled", true);
         $("input#" + $max).val("");
         $("input#" + $max).attr("disabled", true);
-        $("input#" + $mean).focus();
+        if ($relatedTarget.is(":disabled")) {
+          $("input#" + $mean).focus();
+        }
       } else if ($indValue == 2) {
         $("input#" + $mean)
           .val("")
           .attr("disabled", true);
         $("input#" + $min).attr("disabled", false);
         $("input#" + $max).attr("disabled", false);
-        $("input#" + $min).focus();
+        if ($relatedTarget.is(":disabled")) {
+          $("input#" + $min).focus();
+        }
       }
     });
   }
@@ -482,37 +490,22 @@ $(function () {
     }
   });
 
-  $("#sample_sample_date").datepicker({
+  const $sampleSampleDate = $("#sample_sample_date");
+  $sampleSampleDate.datepicker({
     format: "yyyy-mm-dd",
     orientation: "bottom",
     autoclose: true,
   });
+  if ($sampleSampleDate.val() === "") {
+    // Default to today if not set
+    $sampleSampleDate.datepicker("setDate", new Date());
+  }
 
   $(
     "#sample_dive_begin_time, #sample_dive_end_time, #sample_sample_begin_time, #sample_sample_end_time",
   ).timepicker({
     timeFormat: "HH:mm",
     dropdown: false,
-  });
-
-  $.validator.addMethod(
-    "fieldID",
-    function (value, element) {
-      return this.optional(element) || /^\d{5}[a-zA-Z]$/i.test(value);
-    },
-    "FieldID is wrong format",
-  );
-
-  $.validator.addMethod("greaterThan", function (value, element, params) {
-    return value > $(params).val();
-  });
-
-  $.validator.addMethod("before", function (value, element, params) {
-    return value < $(params).val();
-  });
-
-  $.validator.addMethod("lessThanEqualTo", function (value, element, params) {
-    return Number(value) <= Number($(params).val());
   });
 
   // Check that a species record does not have overlapping sizes with another
@@ -615,7 +608,7 @@ $(function () {
   );
 
   $.validator.addMethod(
-    "lessThan",
+    "lessThanEqualToAvg",
     function (value, element, params) {
       function meanIsEnabled(e) {
         //return e.parent().find('[id$="average_length"]').is(":enabled");
@@ -675,29 +668,6 @@ $(function () {
 
   // modified from http://orip.org/2010/06/jquery-validate-required-if-visible.html
 
-  $.validator.addMethod(
-    "requiredIfEnabled",
-    function (value, element, params) {
-      function isEnabled(e) {
-        // the element and all of its parents must be :visible
-        // inspiration: http://remysharp.com/2008/10/17/jquery-really-visible/
-        return e.is(":enabled");
-      }
-
-      if (isEnabled($(element))) {
-        // call the "required" method
-        return $.validator.methods.required.call(
-          this,
-          $.trim(element.value),
-          element,
-        );
-      }
-
-      return true;
-    },
-    $.validator.messages.required,
-  );
-
   $.validator.setDefaults({
     errorPlacement: function (error, element) {
       if (
@@ -746,18 +716,18 @@ $(function () {
       "sample[dive_end_time]": {
         required: true,
         pattern: /^(06|07|08|09|10|11|12|13|14|15|16|17|18|19|20):([0-9]{2})$/,
-        greaterThan: "#sample_dive_begin_time",
+        after: "#sample_dive_begin_time",
       },
       "sample[sample_begin_time]": {
         required: true,
         pattern: /^(06|07|08|09|10|11|12|13|14|15|16|17|18|19|20):([0-9]{2})$/,
-        greaterThan: "#sample_dive_begin_time",
+        after: "#sample_dive_begin_time",
         before: "#sample_dive_end_time",
       },
       "sample[sample_end_time]": {
         required: true,
         pattern: /^(06|07|08|09|10|11|12|13|14|15|16|17|18|19|20):([0-9]{2})$/,
-        greaterThan: "#sample_sample_begin_time",
+        after: "#sample_sample_begin_time",
         before: "#sample_dive_end_time",
       },
       "sample[field_id]": {
@@ -874,16 +844,16 @@ $(function () {
       },
       "sample[dive_end_time]": {
         pattern: "Time must be between 06:00 and 20:00",
-        greaterThan: "Dive end cannot be before dive begin",
+        after: "Dive end cannot be before dive begin",
       },
       "sample[sample_begin_time]": {
         pattern: "Time must be between 06:00 and 20:00",
-        greaterThan: "Sample begin cannot be before dive begin",
+        after: "Sample begin cannot be before dive begin",
         before: "Sample begin time cannot be after dive end time",
       },
       "sample[sample_end_time]": {
         pattern: "Time must be between 06:00 and 20:00",
-        greaterThan: "Sample end time cannot be before begin time",
+        after: "Sample end time cannot be before begin time",
         before: "Sample end time cannot be after dive end time",
       },
       "sample[substrate_min_depth]": {
@@ -915,7 +885,7 @@ $(function () {
       $(this).rules("add", {
         requiredIfEnabled: true,
         digits: true,
-        lessThan: true,
+        lessThanEqualToAvg: true,
         doesNotHaveOverlap: true,
       });
     });

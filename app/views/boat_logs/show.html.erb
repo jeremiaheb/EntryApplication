@@ -1,31 +1,65 @@
+<div class="grid-row">
+  <div class="grid-col-12">
+    <%= render "shared/nav_breadcrumbs", object: [["Boat Logs", boat_logs_path], ["Boat Log #{@boat_log.primary_sample_unit}", ""]] %>
+  </div>
+</div>
 
-<div class='formContainer'>
-  <div id="sampleSection" class="sectionDiv">
-  <div class='show_section_1'>
-    <div id='section_1_part_1'>
-
-      <dl class="dl-horizontal">
-        <dt>Boatlog Manager</dt><dd><%= @boat_log.boatlog_manager.agency_name %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>Sample Date</dt><dd><%= @boat_log.date %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>PSU</dt><dd><%= @boat_log.primary_sample_unit %></dd>
-      </dl>
+<div class="grid-row maxw-full bg-base-lightest">
+  <div class="grid-col-5 padding-1">
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Boatlog/Manager</span>
+      <span class="width-card-lg display-inline-block"><%= @boat_log.boatlog_manager&.agency_name %></span>
     </div>
 
-    <div id='section_1_part_2'>
-      <% @boat_log.boatlog_divers.each do |b_divers|  %>
-       <dl class="dl-horizontal">
-        <dt> <%= b_divers[2] %> </dt><dd><%= b_divers[1] %></dd>
-      </dl>   
-      <% end %>
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Sample Date</span>
+      <span class="width-card-lg display-inline-block"><%= @boat_log.date %></span>
+    </div>
+
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">PSU</span>
+      <span class="width-card-lg display-inline-block"><%= @boat_log.primary_sample_unit %></span>
+    </div>
+  </div>
+  <div class="grid-col-5 padding-1">
+    <div class="margin-1">
+      <table class="usa-table maxw-full margin-top-0">
+        <thead>
+          <tr>
+            <th scope="col">Diver</th>
+            <th scope="col">Field ID</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%- @boat_log.rep_logs.includes(:diver).each do |rep_log| %>
+            <tr>
+              <td class="text-bold"><%= rep_log.diver&.diver_name %></td>
+              <td><%= rep_log.field_id %></td>
+            </tr>
+          <%- end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
-<div class="showActions" >
- <%= button_to('Edit Boatlog', edit_boat_log_path(@boat_log), :method => "get", :class => 'btn btn-large btn-primary showAction') %>
- <%= button_to("Delete Boatlog", @boat_log, data: { confirm: 'Are you sure?' }, method: :delete, :class => 'btn btn-large btn-primary showAction') %>
- <%= button_to('Boatlog List', boat_logs_path, :method => "get", :class => 'btn btn-large btn-primary showAction') %>
+
+<div class="grid-row maxw-full bg-base-lightest">
+  <div class="grid-col-12 padding-1">
+    <ul class="usa-button-group">
+      <li class="usa-button-group__item">
+        <%= link_to boat_logs_path, class: "usa-button" do %>
+          <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+            <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#arrow_back") %>
+          </svg>
+          Back to List
+        <%- end %>
+      </li>
+      <li class="usa-button-group__item">
+        <%= link_to "Edit", edit_boat_log_path(@boat_log), class: "usa-button usa-button--outline" %>
+      </li>
+      <li class="usa-button-group__item">
+        <%= link_to "Delete", @boat_log, data: { confirm: "Are you sure?" }, method: "delete", class: "usa-button usa-button--secondary" %>
+      </li>
+    </ul>
+  </div>
 </div>

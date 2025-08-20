@@ -1,13 +1,18 @@
 $(function () {
-  if (!EA.onRailsPage("boat_logs", ["edit", "new"])) {
+  if (!EA.onRailsPage("boat_logs", ["edit", "new", "create", "update"])) {
     return;
   }
 
-  $("#boat_log_date").datepicker({
+  const $boatLogDate = $("#boat_log_date");
+  $boatLogDate.datepicker({
     format: "yyyy-mm-dd",
     orientation: "bottom",
     autoclose: true,
   });
+  if ($boatLogDate.val() === "") {
+    // Default to today if not set
+    $boatLogDate.datepicker("setDate", new Date());
+  }
 
   $("#boat_log_station_logs_attributes_0_time").timepicker({
     timeFormat: "HH:mm",
@@ -91,10 +96,10 @@ $(function () {
     const longitude = parts[2].replace(/[^0-9\.]+/g, "");
 
     const $closestLatitudeField = $this
-      .closest("div.row")
+      .closest("div.grid-row")
       .find("input[name*='latitude']");
     const $closestLongitudeField = $this
-      .closest("div.row")
+      .closest("div.grid-row")
       .find("input[name*='longitude']");
 
     $closestLatitudeField.val(latitude);
@@ -141,16 +146,8 @@ $(function () {
     setDiverTypeLabel();
   });
 
-  jQuery.validator.addMethod(
-    "lettersonly",
-    function (value, element) {
-      return this.optional(element) || /[a-zA-Z]+$/.test(value);
-    },
-    "Only one letter",
-  );
-
-  $(".new_boat_log, .edit_boat_log").validate({
-    errorElement: "span",
+  $(".new_boat_log, .edit_boat_log, .boat-log-form").validate({
+    errorElement: "div",
 
     onfocusout: function (element) {
       this.element(element);

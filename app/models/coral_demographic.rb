@@ -1,4 +1,4 @@
-class CoralDemographic < ActiveRecord::Base
+class CoralDemographic < ApplicationRecord
   include CommonFields
 
   has_many :demographic_corals, dependent: :destroy

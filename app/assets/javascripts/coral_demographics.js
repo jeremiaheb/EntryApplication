@@ -3,11 +3,16 @@ $(function () {
     return;
   }
 
-  $("#coral_demographic_sample_date").datepicker({
+  const $coralDemographicSampleDate = $("#coral_demographic_sample_date");
+  $coralDemographicSampleDate.datepicker({
     format: "yyyy-mm-dd",
     orientation: "bottom",
     autoclose: true,
   });
+  if ($coralDemographicSampleDate.val() === "") {
+    // Default to today if not set
+    $coralDemographicSampleDate.datepicker("setDate", new Date());
+  }
 
   $("#coral_demographic_sample_begin_time").timepicker({
     timeFormat: "HH:mm",
@@ -66,15 +71,7 @@ $(function () {
   });
 
   $.validator.addMethod(
-    "fieldID",
-    function (value, element) {
-      return this.optional(element) || /^\d{5}[a-zA-Z]$/i.test(value);
-    },
-    "FieldID is wrong format",
-  );
-
-  $.validator.addMethod(
-    "lessThan",
+    "lessThanEqualToMaxDiameter",
     function (value, element, params) {
       return (
         parseFloat(value) <=
@@ -169,7 +166,7 @@ $(function () {
         required: true,
         digits: true,
         min: 1,
-        lessThan: true,
+        lessThanEqualToMaxDiameter: true,
       });
     });
     $('[name*="height"]').each(function () {

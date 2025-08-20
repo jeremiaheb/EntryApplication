@@ -52,7 +52,6 @@ class BenthicCoversController < ApplicationController
       @benthic_cover = @draft.assign_attributes_to(BenthicCover.new)
     else
       @benthic_cover = BenthicCover.new.tap do |b|
-        b.sample_date ||= Date.current
         b.diver_id ||= current_diver.id
         b.build_invert_belt
         b.build_presence_belt

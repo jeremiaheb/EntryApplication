@@ -1,6 +1,6 @@
-<h1>Editing animal</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', animal_path(@animal) %> |
-<%= link_to 'Back', animals_path %>
+<div class="grid-row">
+  <div class="grid-col-12">
+    <%= render "shared/nav_breadcrumbs", object: [["Species", animals_path], ["Edit Species", ""]] %>
+    <%= render 'form' %>
+  </div>
+</div>

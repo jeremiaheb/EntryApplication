@@ -46,7 +46,7 @@ class BoatLogsTest < ApplicationSystemTestCase
     find("body").click
     find("input[type=submit]").click
 
-    assert_selector ".alert", text: "Boat log was successfully created"
+    assert_selector ".usa-alert", text: "Boat log was successfully created"
 
     assert_equal 1, BoatLog.count
 

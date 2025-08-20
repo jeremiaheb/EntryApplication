@@ -1,4 +1,4 @@
-class BenthicCover < ActiveRecord::Base
+class BenthicCover < ApplicationRecord
   include CommonFields
 
   has_many :point_intercepts, dependent: :destroy

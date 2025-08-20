@@ -1,4 +1,4 @@
-class PresenceBelt < ActiveRecord::Base
+class PresenceBelt < ApplicationRecord
   ENUM_VALUES = {
     "Absent"           => 0,
     "Present_Transect" => 1,

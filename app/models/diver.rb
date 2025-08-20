@@ -1,10 +1,11 @@
-class Diver < ActiveRecord::Base
+class Diver < ApplicationRecord
   ADMIN   = "admin"
   MANAGER = "manager"
   DIVER   = "diver"
   ROLES   = [ADMIN, MANAGER, DIVER]
 
   devise :database_authenticatable, :recoverable, :registerable, :rememberable, :trackable, :validatable
+  devise :omniauthable, omniauth_providers: [:icam, :developer]
 
   belongs_to  :boatlog_manager
 
@@ -24,19 +25,15 @@ class Diver < ActiveRecord::Base
   scope       :active_divers,      lambda { where(active: true) }
 
   def diver_proofing_samples
-    samples.order("sample_date")
+    samples.order(:sample_date, :sample_begin_time)
   end
 
   def diver_proofing_benthic_cover
-    benthic_covers.order("sample_date")
+    benthic_covers.order(:sample_date, :sample_begin_time)
   end
 
   def diver_proofing_coral_demo
-    coral_demographics.order("sample_date")
-  end
-
-  def whole_name
-    "#{firstname} #{lastname}"
+    coral_demographics.order(:sample_date, :sample_begin_time)
   end
 
   def diver?

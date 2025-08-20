@@ -1,0 +1,26 @@
+<div id="draft-progress" class="draft-progress position-absolute top-0 right-0 text-center width-card margin-top-1">
+  <div class="bar bar-warning width-full padding-05 radius-pill draft-saved" title="Please fully save the record when you are finished. A draft is only temporary." style="<%- unless @draft.present? %>display: none<%- end %>">
+    <svg class="usa-icon text-middle" aria-hidden="true" focusable="false" role="img">
+      <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#save_alt") %>
+    </svg>
+    Draft Saved
+  </div>
+  <div class="bar bar-danger width-full padding-05 radius-pill draft-pending" style="display: none">
+    <svg class="usa-icon text-middle" aria-hidden="true" focusable="false" role="img">
+      <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#alarm") %>
+    </svg>
+    Typing...
+  </div>
+  <div class="bar bar-info width-full padding-05 radius-pill draft-saving" style="display: none">
+    <svg class="usa-icon text-middle" aria-hidden="true" focusable="false" role="img">
+      <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#hurricane") %>
+    </svg>
+    Saving Draft
+  </div>
+  <div class="bar bar-success width-full padding-05 radius-pill saved" style="<%- if @draft.present? || !object.persisted? %>display: none<%- end %>">
+    <svg class="usa-icon text-middle" aria-hidden="true" focusable="false" role="img">
+      <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#check") %>
+    </svg>
+    Saved
+  </div>
+</div>

@@ -1,4 +1,4 @@
-class SampleAnimal < ActiveRecord::Base
+class SampleAnimal < ApplicationRecord
   belongs_to :animal
   belongs_to :sample
 

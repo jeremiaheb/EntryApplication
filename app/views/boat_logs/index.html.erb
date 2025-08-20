@@ -1,37 +1,56 @@
-<div class="appContainer">
-  <div class="sampleListContainer">
-    <h3><%= current_diver.whole_name %> Boat Logs</h3>
-  
-      <table id="sampleList" class="display table table-condensed">
-        <thead>
-         <tr>
-           <th>Primary Sample Unit</th>
-           <th>Date</th>
-           <th>Time</th>
-           <th>Comments</th>
-           <th></th>
-         </tr>
-       </thead>
-       <tbody>
-      <% @boat_logs.each do |log| %>
+<div class="grid-row">
+  <div class="grid-col-12">
+    <%= render "shared/nav_breadcrumbs", object: [["Boat Logs", ""]] %>
+
+    <ul class="usa-button-group margin-bottom-1">
+      <li class="usa-button-group__item">
+        <%= link_to new_boat_log_path, class: "new-boat-log-button usa-button" do %>
+          <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+            <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#add") %>
+          </svg>
+          New Boat Log
+        <%- end %>
+      </li>
+      <li class="usa-button-group__item">
+        <%= link_to boat_logs_path(format: "xlsx", nocache: SecureRandom.alphanumeric), class: "usa-button usa-button--accent-cool" do %>
+          <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+            <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#file_download") %>
+          </svg> 
+          Download Boat Logs (.xlsx)
+        <%- end %>
+      </li>
+    </ul>
+
+    <table class="width-full display">
+      <thead>
         <tr>
-          <td><%= log.primary_sample_unit %></td>
-          <td class='fieldid_check'><%= log.date %></td>
-          <td><%= log.station_logs.first.time.strftime("%H:%M") %></td>
-          <td><%= log.station_logs.first.comments %></td>
-          <td>
-            <%= link_to "View", log %>
-            <%= link_to "Edit", edit_boat_log_path(log) %>
-          </td>
+          <th scope="col">Primary Sample Unit</th>
+          <th scope="col">Date</th>
+          <th scope="col">Time</th>
+          <th scope="col">Comments</th>
+          <th scope="col"></th>
         </tr>
-      <% end %>
+      </thead>
+      <tbody>
+        <%- @boat_logs.each do |boat_log| %>
+          <tr>
+            <td><%= boat_log.primary_sample_unit %></td>
+            <td class="fieldid_check"><%= boat_log.date %></td>
+            <td><%= boat_log.station_logs&.first&.time&.strftime("%H:%M") %></td>
+            <td><%= boat_log.station_logs&.first&.comments %></td>
+            <td>
+              <ul class="usa-button-group float-right">
+                <li class="usa-button-group__item">
+                  <%= link_to "View", boat_log, class: "usa-button" %>
+                </li>
+                <li class="usa-button-group__item">
+                  <%= link_to "Edit", edit_boat_log_path(boat_log), class: "usa-button usa-button--outline" %>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        <%- end %>
       </tbody>
-      </table>
+    </table>
   </div>
-  <div id="newSampleButton"> 
-    <%= button_to('New Boat Log', new_boat_log_path, :method => "get", :class => 'btn btn-large btn-primary new-boat-log-button')  %>   
-    
-    <% if diver_signed_in? && (current_diver.role == "admin" || current_diver.role == "manager") %>
-        <%= button_to('Download Boatlogs (.xlsx)', boat_logs_path(format: "xlsx", nocache: SecureRandom.alphanumeric), :method => "get", :class => 'btn btn-small btn-primary')  %>   
-    <% end %>
-  </div>
+</div>

@@ -1,20 +1,17 @@
-<%= form_for(@habitat_type) do |f| %>
-  
-  <%= render "shared/error_messages", :target => @habitat_type %>
+<%= form_for @habitat_type, html: { class: "usa-form maxw-full bg-base-lightest", autocomplete: "off" } do |f| %>
+  <%= render "shared/uswds_error_messages", target: @habitat_type %>
 
-  <div class='field'>
-    <%= f.label :'Habitat Name' %><br />
-    <%= f.text_field :habitat_name %>
-  </div>
-  <div class='field'>
-    <%= f.label :'Habitat Description' %><br />
-    <%= f.text_field :habitat_description %>
-  </div>
-  <div class='field'>
-    <%= f.label :'Region' %><br />
-    <%= f.text_field :region %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <fieldset class="usa-fieldset padding-1 padding-top-0">
+    <%= f.label :habitat_name, "Name", class: "usa-label" %>
+    <%= f.text_field :habitat_name, class: "usa-input usa-input--xl", autocomplete: "off" %>
+
+    <%= f.label :habitat_description, "Description", class: "usa-label" %>
+    <%= f.text_field :habitat_description, class: "usa-input usa-input--xl", autocomplete: "off" %>
+
+    <%= f.label :region, class: "usa-label" %>
+    <%= f.select :region, HabitatType::VALID_REGIONS, { include_blank: true }, class: "usa-select usa-input--lg", autocomplete: "off" %>
+    
+    <%= f.submit class: "usa-button" %>
+    <%= link_to "Cancel", habitat_types_path, class: "usa-button usa-button--outline" %>
+  </fieldset>
 <% end %>

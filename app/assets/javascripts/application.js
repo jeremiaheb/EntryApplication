@@ -72,31 +72,37 @@ $(function () {
       .select2()
       .on("change", function (e) {
         const regionIDs = $(this).val();
-        dataTable.search.fixed("region", function(str, rowData, dataIndex) {
-          const $row = $(dataTable.row(dataIndex).node());
-          return regionIDs.includes($row.attr("data-region-id"));
-        }).draw();
-    });
+        dataTable.search
+          .fixed("region", function (str, rowData, dataIndex) {
+            const $row = $(dataTable.row(dataIndex).node());
+            return regionIDs.includes($row.attr("data-region-id"));
+          })
+          .draw();
+      });
 
     $("#agency_ids")
       .select2()
       .on("change", function (e) {
         const agencyIDs = $(this).val();
-        dataTable.search.fixed("agency", function(str, rowData, dataIndex) {
-          const $row = $(dataTable.row(dataIndex).node());
-          return agencyIDs.includes($row.attr("data-agency-id"));
-        }).draw();
-    });
+        dataTable.search
+          .fixed("agency", function (str, rowData, dataIndex) {
+            const $row = $(dataTable.row(dataIndex).node());
+            return agencyIDs.includes($row.attr("data-agency-id"));
+          })
+          .draw();
+      });
 
     $("#project_ids")
       .select2()
       .on("change", function (e) {
         const projectIDs = $(this).val();
-        dataTable.search.fixed("project", function(str, rowData, dataIndex) {
-          const $row = $(dataTable.row(dataIndex).node());
-          return projectIDs.includes($row.attr("data-project-id"));
-        }).draw();
-    });
+        dataTable.search
+          .fixed("project", function (str, rowData, dataIndex) {
+            const $row = $(dataTable.row(dataIndex).node());
+            return projectIDs.includes($row.attr("data-project-id"));
+          })
+          .draw();
+      });
 
     $("form").attr("autocomplete", "off");
 

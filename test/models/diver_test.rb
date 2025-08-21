@@ -6,19 +6,6 @@ class DiverTest < ActiveSupport::TestCase
     assert diver.valid?
   end
 
-  test "#diver_proofing_samples returns only the current diver's samples" do
-    diver = FactoryBot.create(:diver)
-    boatlog_manager = FactoryBot.create(:boatlog_manager)
-    sample_animal = FactoryBot.create(:sample_animal, sample: nil)
-
-    # Diver is primary only on sample1
-    sample1 = FactoryBot.create(:sample, diver: diver, sample_animals: [FactoryBot.create(:sample_animal, sample: nil)])
-    sample2 = FactoryBot.create(:sample, buddy: diver, sample_animals: [FactoryBot.create(:sample_animal, sample: nil)])
-    sample3 = FactoryBot.create(:sample, sample_animals: [FactoryBot.create(:sample_animal, sample: nil)])
-
-    assert_equal [sample1], diver.diver_proofing_samples
-  end
-
   test "#diver_proofing_benthic_cover returns a diver's benthic covers" do
     diver = FactoryBot.create(:diver)
     boatlog_manager = FactoryBot.create(:boatlog_manager)

@@ -26,7 +26,10 @@ class SamplesController < ApplicationController
         no_store
 
         diver = Diver.find(params[:diver_id].presence || current_diver.id)
-        pdf = SamplePdf.new(diver.diver_proofing_samples, params[:fishtype].to_s)
+        samples = diver.samples.
+          includes(:boatlog_manager, :buddy, :habitat_type, sample_animals: :animal).
+          order(:sample_date, :sample_begin_time)
+        pdf = SamplePdf.new(samples, params[:fishtype].to_s)
 
         send_data pdf.render, filename: "#{diver.diver_name}_ProofingReport.pdf",
           type: "application/pdf"

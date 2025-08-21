@@ -1,5 +1,5 @@
 $(function () {
-  if (!EA.onRailsPage("samples", ["edit", "new"])) {
+  if (!EA.onRailsPage("samples", ["edit", "new", "create", "update"])) {
     return;
   }
 

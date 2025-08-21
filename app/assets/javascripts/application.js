@@ -65,6 +65,10 @@ $(function () {
         bottomEnd: ["info", "paging"],
       },
       pagingType: "full",
+      columnDefs: [
+        { targets: ".not-orderable", orderable: false },
+        { targets: ".not-searchable", searchable: false },
+      ],
     });
 
     $("form").attr("autocomplete", "off");

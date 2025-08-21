@@ -46,8 +46,6 @@ EntryApplication::Application.routes.draw do
     post :draft, on: :collection
   end
 
-  get "samples/:id/proofing_template" => "samples#proofing_template"
-
   get "static_pages/home"
   get "static_pages/help"
 

@@ -6,17 +6,6 @@ class DiverTest < ActiveSupport::TestCase
     assert diver.valid?
   end
 
-  test "#diver_proofing_benthic_cover returns a diver's benthic covers" do
-    diver = FactoryBot.create(:diver)
-    boatlog_manager = FactoryBot.create(:boatlog_manager)
-    benthic_cover1 = FactoryBot.create(:benthic_cover, boatlog_manager: boatlog_manager, diver: diver)
-    benthic_cover2 = FactoryBot.create(:benthic_cover, boatlog_manager: boatlog_manager, diver: diver)
-    benthic_cover3 = FactoryBot.create(:benthic_cover, diver: diver)
-    benthic_cover4 = FactoryBot.create(:benthic_cover)
-
-    assert_equal [benthic_cover1, benthic_cover2, benthic_cover3].sort, diver.diver_proofing_benthic_cover
-  end
-
   test "#diver_proofing_coral_demo returns a diver's coral demographics" do
     diver = FactoryBot.create(:diver)
     boatlog_manager = FactoryBot.create(:boatlog_manager)

@@ -21,10 +21,6 @@ class Diver < ApplicationRecord
 
   scope       :active_divers,      lambda { where(active: true) }
 
-  def diver_proofing_benthic_cover
-    benthic_covers.order(:sample_date, :sample_begin_time)
-  end
-
   def diver_proofing_coral_demo
     coral_demographics.order(:sample_date, :sample_begin_time)
   end

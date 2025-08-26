@@ -1,264 +1,408 @@
-<div class="row-fluid">
-  <div class="span6">
-    <select class="changeSection" tabindex="1">
-      <option value="sampleSection">Sample Section</option>
-      <option value="substrateSection">Substrate Section</option>
-      <option value="speciesSection">Species Section</option>
-    </select>
-  </div>
-  <div class="span6">
-    <%= render "draft_progress", object: @sample %>
-  </div>
-</div>
+<%= render partial: "draft_present_alert", locals: { discard_draft_url: draft_samples_path(id: @sample.id) } %>
 
-<div class="form-horizontal">
-  <%= nested_form_for @sample, data: {"drafts-url": draft_samples_path(id: @sample.id), "draft-restored": @draft.present?, "draft-focused-dom-id": @draft&.focused_dom_id }, :validate => false do |f| %>
-  <%= render "shared/error_messages", :target => @sample%>
+<%= nested_form_for @sample, data: { "drafts-url": draft_samples_path(id: @sample.id), "draft-restored": @draft.present?, "draft-focused-dom-id": @draft&.focused_dom_id }, html: { class: "sample-form formContainer usa-form maxw-full", autocomplete: "off" } do |f| %>
+  <%= render "shared/uswds_error_messages", target: @sample %>
+  <%= render "draft_progress_uswds", object: @sample %> 
 
-<div class='formContainer'>
-  <div id="sampleSection" class="sectionDiv">
-    <div class='section_1'>
-     <div id='section_1_part_1'>
-       
-       <div class="control-group">
-          <label class="control-label" title="The person/agency who is responsible for this data">Boatlog/Manager</label>
-          <div class="controls">
-            <%= f.collection_select :boatlog_manager_id, BoatlogManager.all, :id, :agency_name, { :include_blank => "" }, {  :class => 'tab_1', :tabindex => "1" } %><br />
+  <div class="tabs">
+    <ul>
+      <li><a href="#sample-tab">Sample</a></li>
+      <li><a href="#substrate-tab">Substrate</a></li>
+      <li><a href="#species-tab">Species</a></li>
+    </ul>
+    <div id="sample-tab">
+      <div class="grid-row flex-row bg-base-lightest maxw-full padding-2 padding-top-0">
+        <div class="grid-col-6">
+          <div>
+            <%= f.label :boatlog_manager_id, "Boatlog/Manager", class: "usa-label display-inline-block width-card" %>
+            <%= f.collection_select :boatlog_manager_id, BoatlogManager.all, :id, :agency_name, { include_blank: true }, autofocus: true, class: "usa-select usa-input--lg display-inline-block", required: true %>
+          </div>
+
+          <div>
+            <%= f.label :sample_date, "Sample Date", class: "usa-label display-inline-block width-card" %>
+            <%= f.text_field :sample_date, class: "usa-input usa-input--md display-inline-block", required: true %>
+          </div>
+
+          <div>
+            <%= f.label :diver_id, "Diver", class: "usa-label display-inline-block width-card" %>
+            <%= f.collection_select :diver_id, Diver.active_divers.order(:diver_name), :id, :diver_name, { include_blank: true }, class: "usa-select usa-input--lg display-inline-block", required: true %>
+          </div>
+
+          <div>
+            <%= f.label :buddy_id, "Buddy", class: "usa-label display-inline-block width-card" %>
+            <%= f.collection_select :buddy_id, Diver.active_divers.order(:diver_name), :id, :diver_name, { include_blank: true }, class: "usa-select usa-input--lg display-inline-block", required: true %>
+          </div>
+
+          <div>
+            <%= f.label :sample_type_id, "Sample Type", class: "usa-label display-inline-block width-card" %>
+            <%= f.collection_select :sample_type_id, SampleType.order(:sample_type_name), :id, :sample_type_name, { include_blank: true }, class: "usa-select usa-input--lg display-inline-block", required: true %>
+          </div>
+
+          <div>
+            <%= f.label :habitat_type_id, "Habitat Type", class: "usa-label display-inline-block width-card" %>
+            <%= f.collection_select :habitat_type_id, HabitatType.caribbean_habitats.order(:habitat_name), :id, :habitat_name, { include_blank: true }, class: "usa-select usa-input--lg display-inline-block", required: true %>
+          </div>
+
+          <div>
+            <%= f.label :dive_begin_time, "Dive Begin Time", class: "usa-label display-inline-block width-card" %>
+            <%= f.text_field :dive_begin_time, value: f.object.dive_begin_time&.strftime("%H:%M"), class: "usa-input usa-input--sm display-inline-block", required: true %>
+          </div>
+
+          <div>
+            <%= f.label :dive_end_time, "Dive End Time", class: "usa-label display-inline-block width-card" %>
+            <%= f.text_field :dive_end_time, value: f.object.dive_end_time&.strftime("%H:%M"), class: "usa-input usa-input--sm display-inline-block", required: true %>
+          </div>
+
+          <div>
+            <%= f.label :sample_begin_time, "Sample Begin Time", class: "usa-label display-inline-block width-card" %>
+            <%= f.text_field :sample_begin_time, value: f.object.sample_begin_time&.strftime("%H:%M"), class: "usa-input usa-input--sm display-inline-block", required: true %>
+          </div>
+
+          <div>
+            <%= f.label :sample_end_time, "Sample End Time", class: "usa-label display-inline-block width-card" %>
+            <%= f.text_field :sample_end_time, value: f.object.sample_end_time&.strftime("%H:%M"), class: "usa-input usa-input--sm display-inline-block", required: true %>
           </div>
         </div>
-         
-        <div class="control-group">
-          <label class="control-label" title="The date sample was completed">Sample Date</label>
-          <div class="controls">
-            <%= f.text_field :sample_date, { :class => 'tab_1', :tabindex => "1" } %>
+        <div class="grid-col-6">
+          <div>
+            <%= f.label :field_id, "Field ID", class: "usa-label display-inline-block width-card" %>
+            <%= f.text_field :field_id, class: "usa-input usa-input--sm display-inline-block", required: true %>
           </div>
-        </div>
 
-        <div class="control-group">
-          <label class="control-label">Diver</label>
-          <div class="controls">
-            <%= f.collection_select :diver_id, Diver.active_divers.order(:diver_name), :id, :diver_name, { include_blank: true }, { class: "tab_1", tabindex: "1" } %>
+          <div>
+            <%= f.label :dive_depth, "Dive Depth (ft)", class: "usa-label display-inline-block width-card" %>
+            <%= f.text_field :dive_depth, class: "usa-input usa-input--xs display-inline-block", required: true %>
           </div>
-        </div>
 
-        <div class="control-group">
-          <label class="control-label">Buddy</label>
-          <div class="controls">
-            <%= f.collection_select :buddy_id, Diver.active_divers.order(:diver_name), :id, :diver_name, { include_blank: true }, { class: "tab_1", tabindex: "1" } %>
+          <div>
+            <%= f.label :sample_depth, "Sample Depth (ft)", class: "usa-label display-inline-block width-card" %>
+            <%= f.text_field :sample_depth, class: "usa-input usa-input--xs display-inline-block", required: true %>
           </div>
-        </div>
 
-        <div class="control-group">
-          <label class="control-label">Sample Type</label>
-          <div class="controls">
-            <%= f.collection_select :sample_type_id, SampleType.all, :id, :sample_type_name, { :include_blank => "" }, { :class => 'tab_1', :tabindex => "1" } %><br />
+          <div>
+            <%= f.label :underwater_visibility, "Visibility (M)", class: "usa-label display-inline-block width-card" %>
+            <%= f.text_field :underwater_visibility, class: "usa-input usa-input--xs display-inline-block", required: true %>
           </div>
-        </div>
 
-        <div class="control-group">
-          <label class="control-label">Habitat Type</label>
-          <div class="controls">
-            <%= f.collection_select :habitat_type_id, HabitatType.caribbean_habitats, :id, :habitat_name, { :include_blank => "" }, { :class => 'tab_1', :tabindex => "1" } %><br />
+          <div>
+            <%= f.label :water_temp, "Water Temp (°F)", class: "usa-label display-inline-block width-card" %>
+            <%= f.text_field :water_temp, class: "usa-input usa-input--xs display-inline-block", required: true %>
           </div>
-        </div>
 
-        <div class="control-group">
-          <label class="control-label">Dive Begin Time</label>
-          <div class="controls">
-            <%= f.text_field :dive_begin_time, {value: @sample.try(:dive_begin_time).try(:strftime, "%H:%M"), :class => 'tab_1 timimg', :tabindex => "1" } %>
+          <div>
+            <%= f.label :current, "Current", class: "usa-label display-inline-block width-card" %>
+            <%= f.select :current, { "None" => "none", "Moderate" => "moderate", "Strong" => "strong" }, { include_blank: true }, class: "usa-select usa-input--md display-inline-block", required: true %>
           </div>
-        </div>
 
-        <div class="control-group">
-          <label class="control-label">Dive End Time</label>
-          <div class="controls">
-            <%= f.text_field :dive_end_time, {value: @sample.try(:dive_end_time).try(:strftime, "%H:%M"), :class => 'tab_1 timimg', :tabindex => "1" } %>
+          <div>
+            <%= f.label :fishing_gear, "Fishing Gear", class: "usa-label display-inline-block width-card" %>
+            <%= f.select :fishing_gear, { "None" => "none", "Trap" => "trap", "Trap Debris" => "trap debris", "Fishing" => "fishing", "Other" => "other" }, { include_blank: true }, class: "usa-select usa-input--md display-inline-block", required: true %>
           </div>
-        </div>
 
-        <div class="control-group">
-          <label class="control-label">Sample Begin Time</label>
-          <div class="controls">
-            <%= f.text_field :sample_begin_time, {value: @sample.try(:sample_begin_time).try(:strftime, "%H:%M"), :class => 'tab_1 timimg', :tabindex => "1" } %>
-          </div>
-        </div>
-      
-        <div class="control-group">
-          <label class="control-label">Sample End Time</label>
-          <div class="controls">
-            <%= f.text_field :sample_end_time, {value: @sample.try(:sample_end_time).try(:strftime, "%H:%M"), :class => 'tab_1 timimg', :tabindex => "1" } %>
+          <div>
+            <%= f.label :sample_description, "Comments", class: "usa-label display-inline-block width-card text-top" %>
+            <%= f.text_area :sample_description, size: "60x3", autocomplete: "off", class: "usa-input usa-input--lg height-10 display-inline-block", required: false %>
           </div>
         </div>
       </div>
-
-    <div id='section_1_part_2'>
-
-        <div class="control-group">
-          <label class="control-label">Field ID</label>
-          <div class="controls">
-            <%= f.text_field :field_id, { :class => 'tab_1', :tabindex => "1", :autocomplete => :off, :validate => true } %>
-          </div>
+      <div class="grid-row flex-row bg-base-lightest maxw-full padding-2 padding-top-0">
+        <div class="grid-col-12 margin-top-neg-2">
+          <button type="button" class="go-to-substrate-button usa-button float-right" disabled>Go To Substrate</button>
         </div>
-
-        <div class="control-group">
-          <label class="control-label">Dive Depth (ft)</label>
-          <div class="controls">
-            <%= f.text_field :dive_depth, { :class => 'tab_1', :tabindex => "1", :autocomplete => :off } %>
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label class="control-label">Sample Depth (ft)</label>
-          <div class="controls">
-            <%= f.text_field :sample_depth, { :class => 'tab_1', :tabindex => "1", :autocomplete => :off } %>
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label class="control-label">Visibility (M)</label>
-          <div class="controls">
-            <%= f.text_field :underwater_visibility, { :class => 'tab_1', :tabindex => "1", :autocomplete => :off } %>
-          </div>
-        </div>
-      
-        <div class="control-group">
-          <label class="control-label">Water Temp (°F)</label>
-          <div class="controls">
-            <%= f.text_field :water_temp, { :class => 'tab_1', :tabindex => "1", :autocomplete => :off } %>
-          </div>
-        </div>
-     
-        <div class="control-group">
-          <label class="control-label">Current</label>
-          <div class="controls">
-            <%= f.select( :current, { "None" => "none", "Moderate" => "moderate", "Strong" => "strong" }, {}, { :class => 'tab_1', :tabindex => "1" } ) %>
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label class="control-label">Fishing Gear</label>
-          <div class="controls">
-            <%= f.select :fishing_gear, { "None" => "none", "Trap" => "trap", "Trap Debris" => "trap debris", "Fishing" => "fishing", "Other" => "other" },{}, { :tabindex => "1"} %>
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label class="control-label">Comments</label>
-          <div class="controls">
-            <%= f.text_area :sample_description, { :size => '60x3', :autocomplete => :off, :tabindex => "1" } %>
-          </div>
-        </div>
-
-    </div>
-  </div>
-    <button type="button" class="btn gotoButton" id="gotoSubstrate" disabled>Go To Substrate</button>
-</div>
-
-<div id="substrateSection" class="sectionDiv">
-  <div class='section_2'>
-    <div id='section_2_part_1'>
-      
-      <fieldset id="slope">
-        <legend> Substrate Slope </legend>
-        <em>
-        <div class="control-group">
-          <label class="control-label">Max Substrate Depth (ft)</label>
-          <div class="controls">
-            <%= f.text_field :substrate_max_depth, {:class => "tab_2", :tabindex => "1", :autocomplete => :off } %>
-          </div>
-        </div>
-          
-        <div class="control-group">
-          <label class="control-label">Min Substrate Depth (ft)</label>
-          <div class="controls">
-            <%= f.text_field :substrate_min_depth, {:class => "tab_2", :tabindex => "1", :autocomplete => :off } %>
-          </div>
-        </div>
-      </em>
-      </fieldset>
-      
-     
-      <fieldset id="vertRelief">
-        <legend> Max Verticle Relief </legend>
-        <em>
-        <div class="control-group">
-          <label class="control-label">Hard Substrate (m)</label>
-          <div class="controls">
-            <%= f.text_field :hard_verticle_relief, {:class => "tab_2", :tabindex => "1", :autocomplete => :off } %>
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label class="control-label">Soft Substrate (m)</label>
-          <div class="controls">
-            <%= f.text_field :soft_verticle_relief, {:class => "tab_2", :tabindex => "1", :autocomplete => :off } %>
-          </div>
-        </div>
-      </em>
-      </fieldset>
-      
-      <%= render "surface_relief_coverage", :object => f %>
-    
-    </div>
-
-    <div id='section_2_part_2'>
-      <%= render "abiotic_footprint", :object => f %>
-    </div>
-
-    <div id='section_2_part_3'>
-      <%= render "biotic_cover_sand", :object => f %>
-    </div>
-
-    <div id='section_2_part_4'>
-      <%= render "biotic_cover_hardbottom", :object => f %>
-    </div>
-
-  </div>
-    <button type="button" class="btn gotoButton" id="gotoSpecies" disabled tabindex="13">Go To Species</button>
-</div>
-
-<div id="speciesSection" class="sectionDiv">
-  <div class='section_3'>
-
-      <div class="btn-group">
-        <button class='btn btn-primary time_seen_button active' type='button' id='timeSeen1' Value='1' >First 5 Minutes </button>
-        <button class='btn btn-primary time_seen_button' type='button' id='timeSeen2' Value='2'>5 to 10 Minutes </button>
-        <button class='btn btn-primary time_seen_button' type='button' id='timeSeen3' Value='3'>After 10 Minutes </button>
       </div>
-     
-      <div class="speciesLabels">
-        <ul class="inline">
-          <li id="species"> Species </li> <li id="num"> Num </li> <li id="mean"> Mean </li> <li id="min"> Min </li> <li id="max"> Max </li>
-        </ul>
+    </div>
+
+    <div id="substrate-tab">
+      <div class="grid-row flex-row bg-base-lightest maxw-full padding-2 padding-top-0">
+        <div class="grid-col-4 padding-right-1">
+          <fieldset class="usa-fieldset margin-top-1 padding-1 padding-top-0 border">
+            <legend class="usa-legend text-semibold">
+              Substrate Slope
+            </legend>
+
+            <div>
+              <%= f.label :substrate_max_depth, "Max Substrate Depth (ft)", class: "usa-label display-inline-block width-card margin-top-05" %>
+              <%= f.text_field :substrate_max_depth, class: "usa-input usa-input--xs display-inline-block", required: true %>
+            </div>
+
+            <div>
+              <%= f.label :substrate_min_depth, "Min Substrate Depth (ft)", class: "usa-label display-inline-block width-card" %>
+              <%= f.text_field :substrate_min_depth, class: "usa-input usa-input--xs display-inline-block", required: true %>
+            </div>
+          </fieldset>
+
+          <fieldset class="usa-fieldset margin-top-1 padding-1 padding-top-0 border">
+            <legend class="usa-legend text-semibold">
+              Max Vertical Relief
+            </legend>
+
+            <div>
+              <%= f.label :hard_verticle_relief, "Hard Substrate (m)", class: "usa-label display-inline-block width-card margin-top-05" %>
+              <%= f.text_field :hard_verticle_relief, class: "usa-input usa-input--xs display-inline-block", required: true %>
+            </div>
+
+            <div>
+              <%= f.label :soft_verticle_relief, "Soft Substrate (m)", class: "usa-label display-inline-block width-card" %>
+              <%= f.text_field :soft_verticle_relief, class: "usa-input usa-input--xs display-inline-block", required: true %>
+            </div>
+          </fieldset>
+
+          <fieldset class="usa-fieldset margin-top-1 padding-1 padding-top-0 border">
+            <legend class="usa-legend text-semibold">
+              Surface Relief Coverage &percnt;
+            </legend>
+
+            <div class="grid-row flex-row flex-no-wrap margin-top-1">
+              <div class="grid-col flex-auto minw-10 margin-right-1">
+                <div>&nbsp;</div>
+                <%= f.label :hard_relief_cat_0, "< 0.2m", class: "usa-label" %>
+                <%= f.label :hard_relief_cat_1, "0.2 - 0.5m", class: "usa-label" %>
+                <%= f.label :hard_relief_cat_2, "0.5 - 1.0m", class: "usa-label" %>
+                <%= f.label :hard_relief_cat_3, "1.0 - 1.5m", class: "usa-label" %>
+                <%= f.label :hard_relief_cat_4, "> 1.5m", class: "usa-label" %>
+                <%= label_tag :hard_relief_total, "Total", class: "usa-label text-semibold" %>
+              </div>
+              <div class="grid-col flex-auto margin-right-1">
+                <div class="text-semibold font-body-2xs">Hard</div>
+                <div>
+                  <%= f.text_field :hard_relief_cat_0, class: "hard_relief usa-input usa-input--xs display-inline-block" %>
+                </div>
+                <div>
+                  <%= f.text_field :hard_relief_cat_1, class: "hard_relief usa-input usa-input--xs display-inline-block" %>
+                </div>
+                <div>
+                  <%= f.text_field :hard_relief_cat_2, class: "hard_relief usa-input usa-input--xs display-inline-block" %>
+                </div>
+                <div>
+                  <%= f.text_field :hard_relief_cat_3, class: "hard_relief usa-input usa-input--xs display-inline-block" %>
+                </div>
+                <div>
+                  <%= f.text_field :hard_relief_cat_4, class: "hard_relief usa-input usa-input--xs display-inline-block" %>
+                </div>
+                <div>
+                  <%= text_field_tag :hard_relief_total, "0", class: "usa-input usa-input--xs text-semibold display-inline-block", disabled: true %>
+                </div>
+              </div>
+              <div class="grid-col flex-auto">
+                <div class="text-semibold font-body-2xs">Soft</div>
+                <div>
+                  <%= f.text_field :soft_relief_cat_0, class: "soft_relief usa-input usa-input--xs display-inline-block" %>
+                </div>
+                <div>
+                  <%= f.text_field :soft_relief_cat_1, class: "soft_relief usa-input usa-input--xs display-inline-block" %>
+                </div>
+                <div>
+                  <%= f.text_field :soft_relief_cat_2, class: "soft_relief usa-input usa-input--xs display-inline-block" %>
+                </div>
+                <div>
+                  <%= f.text_field :soft_relief_cat_3, class: "soft_relief usa-input usa-input--xs display-inline-block" %>
+                </div>
+                <div>
+                  <%= f.text_field :soft_relief_cat_4, class: "soft_relief usa-input usa-input--xs display-inline-block" %>
+                </div>
+                <div>
+                  <%= text_field_tag :soft_relief_total, "0", class: "usa-input usa-input--xs text-semibold display-inline-block", disabled: true %>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="grid-col-8">
+          <div class="grid-row">
+            <div class="grid-col-4 grid-offset-4">
+              <fieldset class="usa-fieldset margin-top-1 padding-1 padding-top-0 border">
+                <legend class="usa-legend text-semibold">
+                  Abiotic Footprint &percnt;
+                </legend>
+
+                <div>
+                  <%= f.label :sand_percentage, "Sand", class: "usa-label display-inline-block width-15 margin-top-05" %>
+                  <%= f.text_field :sand_percentage, class: "abiotic_percentage usa-input usa-input--xs display-inline-block" %>
+                </div>
+
+                <div>
+                  <%= f.label :hardbottom_percentage, "Hardbottom", class: "usa-label display-inline-block width-15 margin-top-05" %>
+                  <%= f.text_field :hardbottom_percentage, class: "abiotic_percentage usa-input usa-input--xs display-inline-block" %>
+                </div>
+
+                <div>
+                  <%= f.label :rubble_percentage, "Rubble", class: "usa-label display-inline-block width-15 margin-top-05" %>
+                  <%= f.text_field :rubble_percentage, class: "abiotic_percentage usa-input usa-input--xs display-inline-block" %>
+                </div>
+
+                <div>
+                  <%= label_tag :abiotic_percentage_total, "Total", class: "usa-label width-15 display-inline-block margin-top-05 text-semibold" %>
+                  <%= text_field_tag :abiotic_percentage_total, "0", class: "usa-input usa-input--xs text-semibold display-inline-block", disabled: true %>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          <div class="grid-row">
+            <div class="grid-col-6 padding-right-1">
+              <fieldset class="usa-fieldset margin-top-1 padding-1 padding-top-0 border">
+                <legend class="usa-legend text-semibold">
+                  Biotic Cover Sand &percnt;
+                </legend>
+
+                <div>
+                  <%= f.label :sand_bare, "Bare", class: "usa-label display-inline-block width-card margin-top-05" %>
+                  <%= f.text_field :sand_bare, class: "biotic_percentage_sand usa-input usa-input--xs display-inline-block" %>
+                </div>
+
+                <div>
+                  <%= f.label :sand_macro_algae, "Macro algae", class: "usa-label display-inline-block width-card margin-top-05" %>
+                  <%= f.text_field :sand_macro_algae, class: "biotic_percentage_sand usa-input usa-input--xs display-inline-block" %>
+                </div>
+
+                <div>
+                  <%= f.label :sand_seagrass, "Seagrass", class: "usa-label display-inline-block width-card margin-top-05" %>
+                  <%= f.text_field :sand_seagrass, class: "biotic_percentage_sand usa-input usa-input--xs display-inline-block" %>
+                </div>
+
+                <div>
+                  <%= f.label :sand_sponge, "Sponge", class: "usa-label display-inline-block width-card margin-top-05" %>
+                  <%= f.text_field :sand_sponge, class: "biotic_percentage_sand usa-input usa-input--xs display-inline-block" %>
+                </div>
+
+                <div>
+                  <%= f.label :sand_pcov_other1, "Other1", class: "usa-label display-inline-block width-10 margin-top-05" %>
+                  <%= f.text_field :sand_pcov_other1_lab, class: "usa-input usa-input--xs display-inline-block margin-right-05" %>
+                  <%= f.text_field :sand_pcov_other1, class: "biotic_percentage_sand usa-input usa-input--xs display-inline-block" %>
+                </div>
+
+                <div>
+                  <%= f.label :sand_pcov_other2, "Other2", class: "usa-label display-inline-block width-10 margin-top-05" %>
+                  <%= f.text_field :sand_pcov_other2_lab, class: "usa-input usa-input--xs display-inline-block margin-right-05" %>
+                  <%= f.text_field :sand_pcov_other2, class: "biotic_percentage_sand usa-input usa-input--xs display-inline-block" %>
+                </div>
+
+                <div>
+                  <%= label_tag :biotic_percentage_sand_total, "Total", class: "usa-label width-card display-inline-block margin-top-05 text-semibold" %>
+                  <%= text_field_tag :biotic_percentage_sand_total, "0", class: "usa-input usa-input--xs text-semibold display-inline-block", disabled: true %>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="grid-col-6">
+              <fieldset class="usa-fieldset margin-top-1 padding-1 padding-top-0 border">
+                <legend class="usa-legend text-semibold">
+                  Biotic Cover Hardbottom &percnt;
+                </legend>
+
+                <div>
+                  <%= f.label :hardbottom_algal_turf, "Algae <1cm", class: "usa-label display-inline-block width-card margin-top-05" %>
+                  <%= f.text_field :hardbottom_algal_turf, class: "biotic_percentage_hardbottom usa-input usa-input--xs display-inline-block" %>
+                </div>
+
+                <div>
+                  <%= f.label :hardbottom_macro_algae, "Algae >1cm", class: "usa-label display-inline-block width-card margin-top-05" %>
+                  <%= f.text_field :hardbottom_macro_algae, class: "biotic_percentage_hardbottom usa-input usa-input--xs display-inline-block" %>
+                </div>
+
+                <div>
+                  <%= f.label :hardbottom_live_coral, "Live Coral", class: "usa-label display-inline-block width-card margin-top-05" %>
+                  <%= f.text_field :hardbottom_live_coral, class: "biotic_percentage_hardbottom usa-input usa-input--xs display-inline-block" %>
+                </div>
+
+                <div>
+                  <%= f.label :hardbottom_octocoral, "Octocoral", class: "usa-label display-inline-block width-card margin-top-05" %>
+                  <%= f.text_field :hardbottom_octocoral, class: "biotic_percentage_hardbottom usa-input usa-input--xs display-inline-block" %>
+                </div>
+
+                <div>
+                  <%= f.label :hardbottom_sponge, "Sponge", class: "usa-label display-inline-block width-card margin-top-05" %>
+                  <%= f.text_field :hardbottom_sponge, class: "biotic_percentage_hardbottom usa-input usa-input--xs display-inline-block" %>
+                </div>
+
+                <div>
+                  <%= f.label :hard_pcov_other1, "Other1", class: "usa-label display-inline-block width-10 margin-top-05" %>
+                  <%= f.text_field :hard_pcov_other1_lab, class: "usa-input usa-input--xs display-inline-block margin-right-05" %>
+                  <%= f.text_field :hard_pcov_other1, class: "biotic_percentage_hardbottom usa-input usa-input--xs display-inline-block" %>
+                </div>
+
+                <div>
+                  <%= f.label :hard_pcov_other2, "Other2", class: "usa-label display-inline-block width-10 margin-top-05" %>
+                  <%= f.text_field :hard_pcov_other2_lab, class: "usa-input usa-input--xs display-inline-block margin-right-05" %>
+                  <%= f.text_field :hard_pcov_other2, class: "biotic_percentage_hardbottom usa-input usa-input--xs display-inline-block" %>
+                </div>
+
+                <div>
+                  <%= label_tag :biotic_percentage_hardbottom_total, "Total", class: "usa-label width-card display-inline-block margin-top-05 text-semibold" %>
+                  <%= text_field_tag :biotic_percentage_hardbottom_total, "0", class: "usa-input usa-input--xs text-semibold display-inline-block", disabled: true %>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
       </div>
-    
-    <div id="animals">
-    <ol>   
-      <%= render "animals", :object => f %>
-      
-      <%= f.link_to_add "Add species", :sample_animals %>
-    </ol>
+      <div class="grid-row flex-row bg-base-lightest maxw-full padding-2 padding-top-0">
+        <div class="grid-col-12 margin-top-neg-2">
+          <button type="button" class="go-to-species-button usa-button float-right" disabled>Go To Species</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="species-tab">
+      <div class="grid-row flex-row bg-base-lightest maxw-full padding-2 padding-top-0">
+        <div class="grid-col-12">
+          <button type="button" class="usa-button margin-right-2 time_seen_button usa-focus" id="timeSeen1" value="1">First 5 Minutes</button>
+          <button type="button" class="usa-button margin-right-2 time_seen_button" id="timeSeen2" value="2">5 to 10 Minutes</button>
+          <button type="button" class="usa-button margin-right-2 time_seen_button" id="timeSeen3" value="3">After 10 Minutes</button>
+        </div>
+      </div>
+      <div class="grid-row flex-row bg-base-lightest maxw-full padding-2 padding-top-0 padding-bottom-0">
+        <div class="grid-col-12">
+          <span class="width-full maxw-3 padding-right-1 text-semibold fond-body-xs text-right display-inline-block">&num;</span>
+          <span class="width-full maxw-card-lg text-semibold font-body-xs display-inline-block">Species</span>
+          <span class="width-full usa-input--xs margin-right-05 text-semibold font-body-xs display-inline-block">Num</span>
+          <span class="width-full usa-input--xs margin-right-05 text-semibold font-body-xs display-inline-block">Mean</span>
+          <span class="width-full usa-input--xs margin-right-05 text-semibold font-body-xs display-inline-block">Min</span>
+          <span class="width-full usa-input--xs margin-right-05 text-semibold font-body-xs display-inline-block">Max</span>
+        </div>
+      </div>
+      <div class="grid-row flex-row bg-base-lightest maxw-full padding-2 padding-top-0">
+        <div class="grid-col-12">
+          <ol id="animals" class="margin-top-0 padding-left-3">
+            <%= f.fields_for :sample_animals do |ff| %>
+              <li>
+                <%= ff.select :animal_id, Animal.order(:species_code).map { |a| [a.spp_code_common, a.id] }, { include_blank: true }, class: "sppCommon width-full maxw-card-lg height-auto font-body-3xs display-inline-block" %>
+                <%= ff.text_field :number_individuals, class: "usa-input usa-input--xs font-body-2xs padding-05 height-auto display-inline-block timeSeen_#{ff.object.time_seen} valCheck" %>
+                <%= ff.text_field :average_length, class: "usa-input usa-input--xs font-body-2xs padding-05 height-auto display-inline-block timeSeen_#{ff.object.time_seen} valCheck" %>
+                <%= ff.text_field :min_length, class: "usa-input usa-input--xs font-body-2xs padding-05 height-auto display-inline-block timeSeen_#{ff.object.time_seen} valCheck" %>
+                <%= ff.text_field :max_length, class: "usa-input usa-input--xs font-body-2xs padding-05 height-auto display-inline-block timeSeen_#{ff.object.time_seen} valCheck" %>
+                <%= ff.hidden_field :time_seen %>
+                <%= ff.link_to_remove tabindex: "-1", class: "font-body-xs" do %>
+                  <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+                    <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#remove_circle") %>
+                  </svg>
+                  Remove
+                <%- end %>
+              </li>
+            <%- end %>
+            <%= f.link_to_add :sample_animals, class: "font-body-xs" do %>
+              <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+                <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#add_circle") %>
+              </svg>
+              Add Species
+            <%- end %>
+          </ol>
+        </div>
+      </div>
+      <div class="grid-row flex-row bg-base-lightest maxw-full padding-2 padding-top-0">
+        <div class="grid-col-6 margin-top-neg-2">
+          <button type="button" class="validate-species-button usa-button usa-button--outline" id="validateAnimals">Validate Species</button>
+          <span class="validateCross" style="display: none;"><%= image_tag "cross.png" %></span>
+          <span class="validateCheck" style="display: none;"><%= image_tag "check.png" %></span>
+        </div>
+        <div class="grid-col-6 margin-top-neg-2">
+          <%= f.submit "Submit Sample", id: "submitButton", class: "usa-button float-right", disabled: true %>
+        </div>
+      </div>
     </div>
   </div>
+<%- end %>
 
- 
-
-  <div class="actions">
-    <button type="button" class="btn" id="validateAnimals">Validate Species</button>
-    <span class="validateCross" style="display: none;"><%= image_tag "cross.png" %></span>
-    <span class="validateCheck" style="display: none;"><%= image_tag "check.png" %></span>
-
-    <%= f.submit "Submit Sample", :id => "submitButton" %>
-  </div>
-
-  
-
-
-</div>
-</div>
-
-<% end %>
-</div>
 <script>
-  var animal_info = <%= raw Animal.all.to_json %>
+  var animal_info = <%= raw Animal.all.to_json %>;
 </script>

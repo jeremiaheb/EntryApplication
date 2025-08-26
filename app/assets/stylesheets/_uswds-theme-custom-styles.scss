@@ -31,11 +31,29 @@ i.e.
 
 .field_with_errors .usa-input,
 .usa-input.error,
+.usa-input.one_hundred_flag,
 .field_with_errors .usa-select,
 .usa-select.error {
-  background-color: yellow;
-  @include u-outline("2px");
-  @include u-outline-color("secondary");
+  &:enabled,
+  &:enabled:hover,
+  &.one_hundred_flag {
+    background-color: yellow !important;
+    @include u-outline("2px");
+    @include u-outline-color("secondary");
+  }
+}
+
+.usa-input.one_hundred_ok_flag {
+  &,
+  &:hover {
+    background-color: lightgreen;
+  }
+}
+
+.usa-form {
+  label.focused {
+    @include u-text("bold");
+  }
 }
 
 // Conflicting styles between USWDS and DataTables

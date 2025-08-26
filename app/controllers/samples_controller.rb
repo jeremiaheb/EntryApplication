@@ -2,7 +2,7 @@ class SamplesController < ApplicationController
   before_action :authenticate_diver!
   load_and_authorize_resource
 
-  layout "application-uswds", only: [:index]
+  layout "application-uswds"
 
   # GET /samples
   def index
@@ -49,6 +49,8 @@ class SamplesController < ApplicationController
     else
       @sample.diver_id = current_diver.id
       @sample.sample_type = SampleType.default
+      @sample.current = "none"
+      @sample.fishing_gear = "none"
       @sample.sample_animals.build
     end
   end

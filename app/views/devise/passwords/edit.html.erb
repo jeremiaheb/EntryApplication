@@ -1,24 +1,20 @@
-<div class="grid-row">
-  <div class="grid-col-12">
-    <%= render "shared/nav_breadcrumbs", object: [["Login", new_session_path(resource_name)], ["Change Password", ""]] %>
+<%= render "shared/nav_breadcrumbs", object: [["Login", new_session_path(resource_name)], ["Change Password", ""]] %>
 
-    <div class="bg-base-lightest">
-      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "usa-form maxw-full padding-1" }) do |f| %>
-        <%= render "shared/uswds_error_messages", target: resource %>
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "usa-form maxw-full bg-base-lightest" }) do |f| %>
+  <%= render "shared/uswds_error_messages", target: resource %>
 
-        <fieldset class="usa-fieldset">
-          <%= f.hidden_field :reset_password_token %>
+  <div class="grid-row padding-1">
+    <div class="grid-col-12">
+      <%= f.hidden_field :reset_password_token %>
 
-          <%= f.label :password, "New password", class: "usa-label margin-top-0" %>
-          <%= f.password_field :password, class: "usa-input usa-input--lg", autofocus: true, autocomplete: "new-password", minlength: @minimum_password_length %>
+      <%= f.label :password, "New password", class: "usa-label margin-top-0" %>
+      <%= f.password_field :password, class: "usa-input usa-input--lg", autofocus: true, autocomplete: "new-password", minlength: @minimum_password_length %>
 
-          <%= f.label :password_confirmation, "Confirm new password", class: "usa-label" %>
-          <%= f.password_field :password_confirmation, class: "usa-input usa-input--lg", autocomplete: "new-password", minlength: @minimum_password_length %>
+      <%= f.label :password_confirmation, "Confirm new password", class: "usa-label" %>
+      <%= f.password_field :password_confirmation, class: "usa-input usa-input--lg", autocomplete: "new-password", minlength: @minimum_password_length %>
 
-          <%= f.submit "Change my password", class: "usa-button" %>
-          <%= link_to "Cancel", new_session_path(resource_name), class: "usa-button usa-button--outline" %>
-        </fieldset>
-      <% end %>
+      <%= f.submit "Change my password", class: "usa-button" %>
+      <%= link_to "Cancel", new_session_path(resource_name), class: "usa-button usa-button--outline" %>
     </div>
   </div>
-</div>
+<% end %>

@@ -42,6 +42,14 @@ jobs:
       - name: Install NodeJS dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3"
+
+      - name: Install Python dependencies
+        run: pip install --requirement requirements.txt
+
       - name: Lint
         run: bin/lint
 

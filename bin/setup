@@ -17,6 +17,7 @@ FileUtils.chdir APP_ROOT do
   system! "gem install bundler --conservative"
   system("bundle check") || system!("bundle install")
   system("bin/yarn check") || system!("bin/yarn install")
+  system("pip check") || system!("pip install --user --requirement requirements.txt")
 
   # puts "\n== Copying sample files =="
   # unless File.exist?("config/database.yml")

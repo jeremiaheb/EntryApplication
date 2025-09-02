@@ -41,6 +41,9 @@
 # Ignore vagrant runtime files
 /.vagrant
 
+# Ansible runtime files
+/.ansible
+
 # Locally bundled gems
 /vendor/bundle
 

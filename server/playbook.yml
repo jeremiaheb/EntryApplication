@@ -583,7 +583,7 @@
       ansible.builtin.unarchive:
         src: "{{ ansible_user_dir }}/chrome-linux64.zip"
         dest: "{{ ansible_user_dir }}"
-        mode: "0644"
+        mode: "0755"
         remote_src: true
       when: development_build is defined
 
@@ -598,7 +598,7 @@
       ansible.builtin.unarchive:
         src: "{{ ansible_user_dir }}/chromedriver-linux64.zip"
         dest: "{{ ansible_user_dir }}"
-        mode: "0644"
+        mode: "0755"
         remote_src: true
       when: development_build is defined
 

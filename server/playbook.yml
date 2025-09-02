@@ -582,8 +582,8 @@
     - name: Unzip chrome binary
       ansible.builtin.unarchive:
         src: "{{ ansible_user_dir }}/chrome-linux64.zip"
-        dest: "{{ ansible_user_dir }}"
-        mode: "0755"
+        dest: "{{ ansible_user_dir }}/chrome-linux64"
+        mode: "u=rwX,g=rX,o=rX"
         remote_src: true
       when: development_build is defined
 
@@ -597,8 +597,8 @@
     - name: Unzip chromedriver binary
       ansible.builtin.unarchive:
         src: "{{ ansible_user_dir }}/chromedriver-linux64.zip"
-        dest: "{{ ansible_user_dir }}"
-        mode: "0755"
+        dest: "{{ ansible_user_dir }}/chromedriver-linux64"
+        mode: "u=rwX,g=rX,o=rX"
         remote_src: true
       when: development_build is defined
 
@@ -607,7 +607,7 @@
         path: "{{ ansible_user_dir }}/.bashrc"
         marker: "# {mark} ANSIBLE MANAGED CHROMEDRIVER INIT"
         block: |
-          export PATH="$PATH:$HOME/chrome-linux64:$HOME/chromedriver-linux64"
+          export PATH="$PATH:$HOME/chrome-linux64/chrome-linux64:$HOME/chromedriver-linux64/chromedriver-linux64"
       when: development_build is defined
 
     # We occasionally see timeouts of this service when using virtualized

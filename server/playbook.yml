@@ -579,6 +579,13 @@
         mode: "0644"
       when: development_build is defined
 
+    - name: Create /home/vagrant/chrome-linux64
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/chrome-linux64"
+        mode: "0755"
+        state: directory
+      when: development_build is defined
+
     - name: Unzip chrome binary
       ansible.builtin.unarchive:
         src: "{{ ansible_user_dir }}/chrome-linux64.zip"
@@ -592,6 +599,13 @@
         url: "https://storage.googleapis.com/chrome-for-testing-public/138.0.7204.92/linux64/chromedriver-linux64.zip"
         dest: "{{ ansible_user_dir }}/chromedriver-linux64.zip"
         mode: "0644"
+      when: development_build is defined
+
+    - name: Create /home/vagrant/chromedriver-linux64
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/chromedriver-linux64"
+        mode: "0755"
+        state: directory
       when: development_build is defined
 
     - name: Unzip chromedriver binary

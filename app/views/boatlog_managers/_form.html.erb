@@ -1,8 +1,9 @@
-  <%= form_for @boatlog_manager, html: { class: "usa-form maxw-full bg-base-lightest" } do |f| %>
-    <%= render "shared/uswds_error_messages", target: @boatlog_manager %>
+<%= form_for @boatlog_manager, html: { class: "usa-form maxw-full bg-base-lightest" } do |f| %>
+  <%= render "shared/uswds_error_messages", target: @boatlog_manager %>
 
-    <fieldset class="usa-fieldset padding-1 padding-top-0">
-      <%= f.label :agency, class: "usa-label" %>
+  <div class="grid-row padding-1">
+    <div class="grid-col-12">
+      <%= f.label :agency, class: "usa-label margin-top-0" %>
       <%= f.text_field :agency, class: "usa-input usa-input--lg" %>
 
       <%= f.label :firstname, "First name", class: "usa-label" %>
@@ -13,5 +14,6 @@
 
       <%= f.submit class: "usa-button" %>
       <%= link_to "Cancel", boatlog_managers_path, class: "usa-button usa-button--outline" %>
-    </fieldset>
-  <% end %>
+    </div>
+  </div>
+<% end %>

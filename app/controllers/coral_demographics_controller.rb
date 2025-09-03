@@ -25,7 +25,10 @@ class CoralDemographicsController < ApplicationController
         no_store
 
         diver = Diver.find(params[:diver_id].presence || current_diver.id)
-        pdf = CoralDemographicPdf.new(diver.diver_proofing_coral_demo)
+        coral_demographics = diver.coral_demographics.
+          includes(:boatlog_manager, :habitat_type, demographic_corals: :coral).
+          order(:sample_date, :sample_begin_time)
+        pdf = CoralDemographicPdf.new(coral_demographics)
 
         send_data pdf.render, filename: "#{diver.diver_name}_CoralDemographicsReport.pdf",
           type: "application/pdf"

@@ -2,7 +2,7 @@
 
 <%= nested_form_for @coral_demographic, data: { "drafts-url": draft_coral_demographics_path(id: @coral_demographic.id), "draft-restored": @draft.present?, "draft-focused-dom-id": @draft&.focused_dom_id }, html: { class: "coral-demographic-form formContainer usa-form maxw-full bg-base-lightest padding-1 padding-top-0" } do |f| %>
   <%= render "shared/uswds_error_messages", target: @coral_demographic %>
-  <%= render "draft_progress_uswds", object: @coral_demographic %> 
+  <%#= TODO/FIXME render "draft_progress_uswds", object: @coral_demographic %> 
 
   <div class="grid-row flex-row">
     <div class="grid-col-6">

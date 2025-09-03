@@ -2,7 +2,7 @@
 
 <%= nested_form_for @benthic_cover, data: { "drafts-url": draft_benthic_covers_path(id: @benthic_cover.id), "draft-restored": @draft.present?, "draft-focused-dom-id": @draft&.focused_dom_id }, html: { id: "benthicCoverData", class: "benthic-cover-form formContainer usa-form maxw-full bg-base-lightest" } do |f| %>
   <%= render "shared/uswds_error_messages", target: @benthic_cover %>
-  <%= render "draft_progress_uswds", object: @benthic_cover %>
+  <%#= TODO/FIXME render "draft_progress_uswds", object: @benthic_cover %>
 
   <fieldset class="usa-fieldset padding-1 padding-top-0">
     <div class="grid-row flex-row">

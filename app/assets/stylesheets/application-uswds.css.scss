@@ -38,3 +38,18 @@
     background-color: #04c585;
   }
 }
+
+// Coral demo form
+.coral-demographic-form {
+  ol.demo_corals {
+    list-style-type: none;
+    counter-reset: demo-corals-counter;
+
+    li {
+      counter-increment: demo-corals-counter;
+      &::marker {
+        content: counter(demo-corals-counter) " ";
+      }
+    }
+  }
+}

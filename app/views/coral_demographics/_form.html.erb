@@ -68,7 +68,8 @@
   </div>
   <div class="grid-row flex-row margin-top-05">
     <div class="grid-col-12">
-      <span class="width-full maxw-2 display-inline-block"></span>
+      <span class="width-full maxw-3 text-semibold fond-body-xs text-right display-inline-block">&num;</span>
+      <span class="width-full maxw-1 text-semibold fond-body-xs text-right display-inline-block">&nbsp;</span>
       <span class="width-full usa-input--2xs text-bold font-body-2xs display-inline-block">Meter</span>
       <span class="width-full maxw-card-lg padding-left-1 text-bold font-body-2xs display-inline-block">Coral</span>
       <span class="width-full usa-input--xs text-bold font-body-2xs display-inline-block">Max Diameter</span>
@@ -81,29 +82,33 @@
     </div>
   </div>
   <div class="grid-row flex-row margin-top-0">
-    <div class="demo_corals grid-col-12">
-      <%= f.fields_for :demographic_corals do |ff| %>
-        <span class="drag-handle width-full maxw-2 display-inline-block">
-          <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
-            <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#drag_handle") %>
-          </svg>
-        </span>
-        <%= ff.text_field :meter_mark, class: "usa-input usa-input--2xs font-body-2xs padding-05 height-auto display-inline-block" %>
-        <%= ff.select :coral_id, Coral.order(:rank, :code).map { |c| [c.display_name, c.id, { "data-rank": c.rank }] }, { include_blank: true }, class: "coralSpecies width-full maxw-card-lg margin-top-1 height-auto font-body-3xs display-inline-block" %>
-        <%= ff.text_field :max_diameter, class: "usa-input usa-input--xs font-body-2xs padding-05 height-auto display-inline-block" %>
-        <%= ff.text_field :perpendicular_diameter, class: "usa-input usa-input--xs font-body-2xs padding-05 height-auto display-inline-block" %>
-        <%= ff.text_field :height, class: "usa-input usa-input--xs font-body-2xs padding-05 height-auto display-inline-block" %>
-        <%= ff.text_field :old_mortality, class: "usa-input usa-input--xs font-body-2xs padding-05 height-auto display-inline-block" %>
-        <%= ff.text_field :recent_mortality, class: "usa-input usa-input--xs font-body-2xs padding-05 height-auto display-inline-block" %>
-        <%= ff.select :bleach_condition, { "None" => "N", "Partial Bleaching" => "PB", "Total" => "T", "Paling" => "P" }, { include_blank: true }, class: "usa-select usa-input--md font-body-2xs padding-05 height-auto display-inline-block" %>
-        <%= ff.select :disease, { "Absent" => "absent", "Present" => "present", "Fast" => "fast", "Slow" => "slow" }, { include_blank: true }, class: "usa-select usa-input--sm font-body-2xs padding-05 height-auto display-inline-block" %>
-        <%= ff.link_to_remove tabindex: "-1", class: "font-body-xs" do %>
-          <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
-            <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#remove_circle") %>
-          </svg>
-          Remove
+    <div class="grid-col-12">
+      <ol class="demo_corals margin-top-0 padding-left-3">
+        <%= f.fields_for :demographic_corals do |ff| %>
+          <li>
+            <span class="drag-handle width-full maxw-2 display-inline-block">
+              <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+                <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#drag_handle") %>
+              </svg>
+            </span>
+            <%= ff.text_field :meter_mark, class: "usa-input usa-input--2xs font-body-2xs padding-05 height-auto display-inline-block" %>
+            <%= ff.select :coral_id, Coral.order(:rank, :code).map { |c| [c.display_name, c.id, { "data-rank": c.rank }] }, { include_blank: true }, class: "coralSpecies width-full maxw-card-lg margin-top-1 height-auto font-body-3xs display-inline-block" %>
+            <%= ff.text_field :max_diameter, class: "usa-input usa-input--xs font-body-2xs padding-05 height-auto display-inline-block" %>
+            <%= ff.text_field :perpendicular_diameter, class: "usa-input usa-input--xs font-body-2xs padding-05 height-auto display-inline-block" %>
+            <%= ff.text_field :height, class: "usa-input usa-input--xs font-body-2xs padding-05 height-auto display-inline-block" %>
+            <%= ff.text_field :old_mortality, class: "usa-input usa-input--xs font-body-2xs padding-05 height-auto display-inline-block" %>
+            <%= ff.text_field :recent_mortality, class: "usa-input usa-input--xs font-body-2xs padding-05 height-auto display-inline-block" %>
+            <%= ff.select :bleach_condition, { "None" => "N", "Partial Bleaching" => "PB", "Total" => "T", "Paling" => "P" }, { include_blank: true }, class: "usa-select usa-input--md font-body-2xs padding-05 height-auto display-inline-block" %>
+            <%= ff.select :disease, { "Absent" => "absent", "Present" => "present", "Fast" => "fast", "Slow" => "slow" }, { include_blank: true }, class: "usa-select usa-input--sm font-body-2xs padding-05 height-auto display-inline-block" %>
+            <%= ff.link_to_remove tabindex: "-1", class: "font-body-xs" do %>
+              <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+                <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#remove_circle") %>
+              </svg>
+              Remove
+            <%- end %>
+          </li>
         <%- end %>
-      <%- end %>
+      </ol>
       <%= f.link_to_add :demographic_corals, class: "font-body-xs" do %>
         <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
           <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#add_circle") %>

@@ -12,7 +12,7 @@ class FishSamplesTest < ApplicationSystemTestCase
     visit root_url
     find(".samples-link").click
     login_as_diver(diver)
-    find("#newSampleButton").click
+    find(".new-sample-button").click
 
     # Samples, Sample Section
     fill_in_sample_section(
@@ -57,7 +57,7 @@ class FishSamplesTest < ApplicationSystemTestCase
     visit root_url
     find(".samples-link").click
     login_as_diver(diver)
-    find("[data-id='#{sample.id}'] .view-link").click
+    find("[data-id='#{sample.id}'] .view-sample-button").click
     find(".edit-button").click
 
     # Edit some field
@@ -90,7 +90,7 @@ class FishSamplesTest < ApplicationSystemTestCase
     visit root_url
     find(".samples-link").click
     login_as_diver(diver)
-    find("#newSampleButton").click
+    find(".new-sample-button").click
 
     # Samples, Sample Section
     fill_in_sample_section(
@@ -119,7 +119,7 @@ class FishSamplesTest < ApplicationSystemTestCase
     find("button#validateAnimals").click
     find("input[type=submit]").click
 
-    assert_selector(".alert", text: "Sample was successfully created")
+    assert_selector(".usa-alert", text: "Sample was successfully created")
 
     assert_equal 1, Sample.count
 
@@ -139,7 +139,7 @@ class FishSamplesTest < ApplicationSystemTestCase
     visit root_url
     find(".samples-link").click
     login_as_diver(diver)
-    find("#newSampleButton").click
+    find(".new-sample-button").click
 
     # Samples, Sample Section
     fill_in_sample_section(
@@ -183,7 +183,7 @@ class FishSamplesTest < ApplicationSystemTestCase
     find("button#validateAnimals").click
     find("input[type=submit]").click
 
-    assert_selector(".alert", text: "Sample was successfully created")
+    assert_selector(".usa-alert", text: "Sample was successfully created")
 
     assert_equal 1, Sample.count
     sample = Sample.first!
@@ -215,7 +215,7 @@ class FishSamplesTest < ApplicationSystemTestCase
     visit root_url
     find(".samples-link").click
     login_as_diver(diver)
-    find("[data-id='#{sample.id}'] .view-link").click
+    find("[data-id='#{sample.id}'] .view-sample-button").click
     find(".edit-button").click
 
     # Click through to Species section
@@ -239,7 +239,7 @@ class FishSamplesTest < ApplicationSystemTestCase
     find("button#validateAnimals").click
     find("input[type=submit]").click
 
-    assert_selector(".alert", text: "Sample was successfully updated")
+    assert_selector(".usa-alert", text: "Sample was successfully updated")
 
     assert_equal 1, Sample.count
     sample = Sample.first!

@@ -1,0 +1,5 @@
+# See https://ansible.readthedocs.io/projects/lint/profiles/#safety
+profile: "safety"
+
+skip_list:
+  - "yaml[line-length]"

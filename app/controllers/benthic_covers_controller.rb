@@ -25,7 +25,10 @@ class BenthicCoversController < ApplicationController
         no_store
 
         diver = Diver.find(params[:diver_id].presence || current_diver.id)
-        pdf = BenthicCoverPdf.new(diver.diver_proofing_benthic_cover)
+        benthic_covers = diver.benthic_covers.
+          includes(:boatlog_manager, :habitat_type, :rugosity_measure, :invert_belt, :presence_belt, point_intercepts: :cover_cat).
+          order(:sample_date, :sample_begin_time)
+        pdf = BenthicCoverPdf.new(benthic_covers)
 
         send_data pdf.render, filename: "#{diver.diver_name}_BenthicCoverReport.pdf",
           type: "application/pdf"

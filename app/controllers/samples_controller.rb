@@ -2,20 +2,21 @@ class SamplesController < ApplicationController
   before_action :authenticate_diver!
   load_and_authorize_resource
 
+  layout "application-uswds", only: [:index]
+
   # GET /samples
-  # GET /samples.json
   def index
-    if current_diver.role == "admin"
-      @samples = Sample.all
-    elsif current_diver.role == "manager"
-      @samples = Sample.where("diver_id=? OR boatlog_manager_id=?", current_diver.id, current_diver.boatlog_manager_id)
+    @samples = @samples.includes(:diver)
+    if current_diver.admin?
+      @samples = @samples.all
+    elsif current_diver.manager?
+      @samples = @samples.where("diver_id=? OR boatlog_manager_id=?", current_diver.id, current_diver.boatlog_manager_id)
     else
-      @samples = Sample.where("diver_id=?", current_diver.id)
+      @samples = @samples.where("diver_id=?", current_diver.id)
     end
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @samples }
+      format.html
       format.xlsx do
         # Prevent caching
         no_store
@@ -25,7 +26,10 @@ class SamplesController < ApplicationController
         no_store
 
         diver = Diver.find(params[:diver_id].presence || current_diver.id)
-        pdf = SamplePdf.new(diver.diver_proofing_samples, params[:fishtype].to_s)
+        samples = diver.samples.
+          includes(:boatlog_manager, :buddy, :habitat_type, sample_animals: :animal).
+          order(:sample_date, :sample_begin_time)
+        pdf = SamplePdf.new(samples, params[:fishtype].to_s)
 
         send_data pdf.render, filename: "#{diver.diver_name}_ProofingReport.pdf",
           type: "application/pdf"
@@ -34,42 +38,18 @@ class SamplesController < ApplicationController
   end
 
   # GET /samples/1
-  # GET /samples/1.json
   def show
-    @sample = Sample.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @sample }
-      format.pdf do
-        # Prevent caching
-        no_store
-
-        pdf = SamplePdf.new(@sample)
-        send_data pdf.render, filename: "sample_#{@sample.field_id}.pdf",
-                              type: "application/pdf",
-                              disposition: "inline"
-      end
-    end
   end
 
   # GET /samples/new
-  # GET /samples/new.json
   def new
     @draft = Draft.latest_for(diver_id: current_diver.id, model_klass: Sample, model_id: nil)
     if @draft
-      @sample = @draft.assign_attributes_to(Sample.new)
+      @draft.assign_attributes_to(@sample)
     else
-      @sample = Sample.new.tap do |s|
-        s.diver_id ||= current_diver.id
-        s.sample_type ||= SampleType.default
-        s.sample_animals.build
-      end
-    end
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @sample }
+      @sample.diver_id = current_diver.id
+      @sample.sample_type = SampleType.default
+      @sample.sample_animals.build
     end
   end
 
@@ -82,50 +62,31 @@ class SamplesController < ApplicationController
   end
 
   # POST /samples
-  # POST /samples.json
   def create
-    @sample = Sample.new(sample_params)
-
-    respond_to do |format|
-      if @sample.save
-        Draft.destroy_for(diver_id: current_diver.id, model_klass: Sample, model_id: nil)
-
-        format.html { redirect_to samples_path, notice: "Sample was successfully created." }
-        format.json { render json: @sample, status: :created, location: @sample }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @sample.errors, status: :unprocessable_entity }
-      end
+    if @sample.save
+      Draft.destroy_for(diver_id: current_diver.id, model_klass: Sample, model_id: nil)
+      redirect_to samples_url, notice: "Sample was successfully created."
+    else
+      render action: "new"
     end
   end
 
   # PUT /samples/1
-  # PUT /samples/1.json
   def update
-    @sample = Sample.find(params[:id])
-
-    respond_to do |format|
-      if @sample.update(sample_params)
-        Draft.destroy_for(diver_id: current_diver.id, model_klass: Sample, model_id: @sample.id)
-
-        format.html { redirect_to samples_path, notice: "Sample was successfully updated." }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @sample.errors, status: :unprocessable_entity }
-      end
+    if @sample.update(sample_params)
+      Draft.destroy_for(diver_id: current_diver.id, model_klass: Sample, model_id: @sample.id)
+      redirect_to samples_url, notice: "Sample was successfully updated."
+    else
+      render action: "edit"
     end
   end
 
   # DELETE /samples/1
-  # DELETE /samples/1.json
   def destroy
-    @sample = Sample.find(params[:id])
-    @sample.destroy
-
-    respond_to do |format|
-      format.html { redirect_to samples_url }
-      format.json { head :no_content }
+    if @sample.destroy
+      redirect_to samples_url, notice: "Sample was successfully deleted."
+    else
+      redirect_to samples_url, alert: "Sample was not deleted: #{@sample.errors.full_messages.join(", ")}"
     end
   end
 
@@ -151,24 +112,6 @@ class SamplesController < ApplicationController
       render json: {}, status: :created
     else
       render json: draft.errors, status: :unprocessable_entity
-    end
-  end
-
-  def proofing_template
-    @sample = Sample.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @sample }
-      format.pdf do
-        # Prevent caching
-        no_store
-
-        pdf = SamplePdf.new(@sample)
-        send_data pdf.render, filename: "sample_#{@sample.field_id}.pdf",
-                              type: "application/pdf",
-                              disposition: "inline"
-      end
     end
   end
 

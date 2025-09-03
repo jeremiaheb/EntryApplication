@@ -1,57 +1,59 @@
-- name: provision server
-  hosts: '*'
+---
+- name: Provision server
+  hosts: "*"
   tasks:
-    - name: gather service facts
+    - name: Gather service facts
       ansible.builtin.service_facts:
 
-    - name: detect cloud instance
+    - name: Detect cloud instance
       ansible.builtin.stat:
         path: /etc/google_instance_id
       register: google_instance_id
 
-    - name: override cloud usernames
+    - name: Override cloud usernames
       ansible.builtin.set_fact:
         usernames:
           alindeman: andy_lindeman_noaa_gov
           jeremiaheb: jeremiah_blondeau_noaa_gov
       when: "google_instance_id.stat.exists"
 
-    - name: remove cloud-init ssh configuration for non-cloud instances
+    - name: Remove cloud-init ssh configuration for non-cloud instances
       ansible.builtin.file:
         path: "/etc/ssh/sshd_config.d/50-cloud-init.conf"
         state: absent
       when: "not google_instance_id.stat.exists"
       become: true
-    
-    - name: remove cloud-init profile configuration for non-cloud instances
+
+    - name: Remove cloud-init profile configuration for non-cloud instances
       ansible.builtin.file:
         path: "/etc/profile.d/Z99-cloudinit-warnings.sh"
         state: absent
       when: "not google_instance_id.stat.exists"
       become: true
 
-    - name: remove cloud-init netplan configuration for non-cloud instances
+    - name: Remove cloud-init netplan configuration for non-cloud instances
       ansible.builtin.file:
         path: "/etc/netplan/50-cloud-init.yaml"
         state: absent
       when: "not google_instance_id.stat.exists"
       become: true
 
-    - name: detect cloud-init configuration
+    - name: Detect cloud-init configuration
       ansible.builtin.stat:
         path: "/etc/cloud/cloud.cfg.d"
       register: cloud_cfg_d
 
-    - name: disable cloud-init network configuration for non-cloud instances
+    - name: Disable cloud-init network configuration for non-cloud instances
       ansible.builtin.copy:
         dest: "/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg"
+        mode: "0644"
         content: |
           network:
             config: disabled
       become: true
       when: "not google_instance_id.stat.exists and cloud_cfg_d.stat.exists and cloud_cfg_d.stat.isdir"
 
-    - name: disable cloud-init for non-cloud instances
+    - name: Disable cloud-init for non-cloud instances
       ansible.builtin.service:
         name: cloud-init
         enabled: false
@@ -59,7 +61,7 @@
       become: true
       when: "not google_instance_id.stat.exists and 'cloud-init.service' in ansible_facts.services"
 
-    - name: disable cloud-init-local for non-cloud instances
+    - name: Disable cloud-init-local for non-cloud instances
       ansible.builtin.service:
         name: cloud-init-local
         enabled: false
@@ -67,19 +69,19 @@
       become: true
       when: "not google_instance_id.stat.exists and 'cloud-init-local.service' in ansible_facts.services"
 
-    - name: enable ssh server
+    - name: Enable ssh server
       ansible.builtin.service:
         name: ssh
         enabled: true
         state: started
       become: true
 
-    - name: set hostname
+    - name: Set hostname
       ansible.builtin.hostname:
         name: entryapplication.nmfs.noaa.gov
       become: true
 
-    - name: replace hostname in /etc/hosts
+    - name: Replace hostname in /etc/hosts
       ansible.builtin.replace:
         path: /etc/hosts
         regexp: "^127.0.1.1 .*$"
@@ -88,7 +90,7 @@
 
     # IPv6 is not currently available in production. Make sure it does not
     # accidentally get enabled.
-    - name: disable ipv6
+    - name: Disable ipv6
       ansible.posix.sysctl:
         name: net.ipv6.conf.all.disable_ipv6
         value: "1"
@@ -96,9 +98,10 @@
         sysctl_set: true
       become: true
 
-    - name: create systemd service to regenerate openssh host keys
+    - name: Create systemd service to regenerate openssh host keys
       ansible.builtin.copy:
         dest: /etc/systemd/system/reconfigure-openssh-server.service
+        mode: "0644"
         content: |
           [Unit]
           Description=Regenerate SSH host keys if missing
@@ -114,13 +117,13 @@
           WantedBy=multi-user.target
       become: true
 
-    - name: enable systemd service for reconfigure-openssh-server
+    - name: Enable systemd service for reconfigure-openssh-server
       ansible.builtin.service:
         name: reconfigure-openssh-server
         enabled: true
       become: true
 
-    - name: install required packages
+    - name: Install required packages
       ansible.builtin.package:
         name:
           - build-essential
@@ -133,7 +136,7 @@
           - zlib1g-dev
       become: true
 
-    - name: install required libraries for ansible
+    - name: Install required libraries for ansible
       ansible.builtin.package:
         name:
           # Required for https://docs.ansible.com/ansible-core/2.17/playbook_guide/playbooks_privilege_escalation.html#risks-of-becoming-an-unprivileged-user
@@ -142,62 +145,62 @@
           - python3-psycopg2
       become: true
 
-    - name: create user alindeman
+    - name: Create user alindeman
       ansible.builtin.user:
         name: "{{ usernames['alindeman'] | default('alindeman') }}"
         create_home: true
-        password: '!' # disable password
+        password: "!" # disable password
         shell: /bin/bash
         groups:
           - users
           - sudo
       become: true
 
-    - name: install ssh key for alindeman
+    - name: Install ssh key for alindeman
       ansible.posix.authorized_key:
         user: "{{ usernames['alindeman'] | default('alindeman') }}"
         key: "https://github.com/alindeman-NOAA.keys"
       become: true
 
-    - name: create user jeremiaheb
+    - name: Create user jeremiaheb
       ansible.builtin.user:
         name: "{{ usernames['jeremiaheb'] | default('jeremiaheb') }}"
         create_home: true
-        password: '!' # disable password
+        password: "!" # disable password
         shell: /bin/bash
         groups:
           - users
           - sudo
       become: true
 
-    - name: install ssh key for jeremiaheb
+    - name: Install ssh key for jeremiaheb
       ansible.posix.authorized_key:
         user: "{{ usernames['jeremiaheb'] | default('jeremiaheb') }}"
         key: "https://github.com/jeremiaheb.keys"
       become: true
 
-    - name: install postgresql server
+    - name: Install postgresql server
       ansible.builtin.package:
         name:
           - postgresql
           - postgresql-contrib
       become: true
 
-    - name: create entryapplication_development database user
+    - name: Create entryapplication_development database user
       community.postgresql.postgresql_user:
         name: entryapplication_development
         password: entryapplication_development
       become: true
       become_user: postgres
 
-    - name: create entryapplication_development database
+    - name: Create entryapplication_development database
       community.postgresql.postgresql_db:
         name: entryapplication_development
         owner: entryapplication_development
       become: true
       become_user: postgres
 
-    - name: create entryapplication_test database user
+    - name: Create entryapplication_test database user
       community.postgresql.postgresql_user:
         name: entryapplication_test
         password: entryapplication_test
@@ -206,21 +209,21 @@
       become: true
       become_user: postgres
 
-    - name: create entryapplication_test database
+    - name: Create entryapplication_test database
       community.postgresql.postgresql_db:
         name: entryapplication_test
         owner: entryapplication_test
       become: true
       become_user: postgres
 
-    - name: create entryapplication_production database user
+    - name: Create entryapplication_production database user
       community.postgresql.postgresql_user:
         name: entryapplication_production
         password: entryapplication_production
       become: true
       become_user: postgres
 
-    - name: create entryapplication_production databases
+    - name: Create entryapplication_production databases
       community.postgresql.postgresql_db:
         name: "{{ item }}"
         owner: entryapplication_production
@@ -232,48 +235,49 @@
       become: true
       become_user: postgres
 
-    - name: install apache2 server
+    - name: Install apache2 server
       ansible.builtin.package:
         name: apache2
       become: true
 
-    - name: disable default apache2 index page
+    - name: Disable default apache2 index page
       ansible.builtin.file:
         path: "/var/www/html/index.html"
         state: absent
       become: true
 
-    - name: disable serve-cgi-bin apache2 conf
+    - name: Disable serve-cgi-bin apache2 conf
       ansible.builtin.command:
         cmd: "a2disconf serve-cgi-bin"
         removes: "/etc/apache2/conf-enabled/serve-cgi-bin.conf"
       become: true
-      notify: reload apache2
+      notify: Reload apache2
 
-    - name: disable default apache2 site
+    - name: Disable default apache2 site
       ansible.builtin.command:
         cmd: "a2dissite 000-default"
         removes: "/etc/apache2/sites-enabled/000-default.conf"
       become: true
-      notify: reload apache2
+      notify: Reload apache2
 
-    - name: enable proxy_http apache2 module
+    - name: Enable proxy_http apache2 module
       ansible.builtin.command:
         cmd: "a2enmod proxy_http"
         creates: "/etc/apache2/mods-enabled/proxy_http.load"
       become: true
-      notify: restart apache2
+      notify: Restart apache2
 
-    - name: enable headers apache2 module
+    - name: Enable headers apache2 module
       ansible.builtin.command:
         cmd: "a2enmod headers"
         creates: "/etc/apache2/mods-enabled/headers.load"
       become: true
-      notify: restart apache2
+      notify: Restart apache2
 
-    - name: create entryapplication apache2 site
+    - name: Create entryapplication apache2 site
       ansible.builtin.copy:
         dest: "/etc/apache2/sites-available/entryapplication.conf"
+        mode: "0644"
         content: |
           Listen 8000
           <VirtualHost *:80 *:8000>
@@ -303,16 +307,16 @@
             CustomLog "${APACHE_LOG_DIR}/access.log" combined
           </VirtualHost>
       become: true
-      notify: reload apache2
+      notify: Reload apache2
 
-    - name: enable entryapplication apache2 site
+    - name: Enable entryapplication apache2 site
       ansible.builtin.command:
         cmd: "a2ensite entryapplication"
         creates: "/etc/apache2/sites-enabled/entryapplication.conf"
       become: true
-      notify: reload apache2
+      notify: Reload apache2
 
-    - name: create /var/www directory
+    - name: Create /var/www directory
       ansible.builtin.file:
         path: /var/www
         owner: root
@@ -321,7 +325,7 @@
         state: directory
       become: true
 
-    - name: create /var/www/apps directory
+    - name: Create /var/www/apps directory
       ansible.builtin.file:
         path: /var/www/apps
         owner: root
@@ -330,16 +334,16 @@
         state: directory
       become: true
 
-    - name: create user entryapplication
+    - name: Create user entryapplication
       ansible.builtin.user:
         name: entryapplication
         home: /var/www/apps/EntryApplication
         create_home: true
-        password: '!' # disable password
+        password: "!" # disable password
         shell: /bin/bash
       become: true
 
-    - name: make entryapplication directory world readable
+    - name: Make entryapplication directory world readable
       ansible.builtin.file:
         path: /var/www/apps/EntryApplication
         mode: "0755"
@@ -348,7 +352,7 @@
         state: "directory"
       become: true
 
-    - name: make entryapplication socket directory world readable
+    - name: Make entryapplication socket directory world readable
       ansible.builtin.file:
         path: "{{ item }}"
         mode: "0755"
@@ -361,7 +365,7 @@
         - "/var/www/apps/EntryApplication/shared/tmp"
         - "/var/www/apps/EntryApplication/shared/tmp/sockets"
 
-    - name: add /vagrant as a safe git directory for local deployments
+    - name: Add /vagrant as a safe git directory for local deployments
       ansible.builtin.copy:
         dest: /var/www/apps/EntryApplication/.gitconfig
         content: |
@@ -373,7 +377,7 @@
       become: true
       become_user: entryapplication
 
-    - name: install deploy keys for entryapplication
+    - name: Install deploy keys for entryapplication
       ansible.posix.authorized_key:
         user: entryapplication
         key: "https://github.com/{{ item }}.keys"
@@ -383,7 +387,7 @@
         - "alindeman-NOAA"
         - "jeremiaheb"
 
-    - name: install rbenv
+    - name: Install rbenv
       ansible.builtin.git:
         repo: "https://github.com/rbenv/rbenv"
         dest: "/var/www/apps/EntryApplication/.rbenv"
@@ -391,7 +395,7 @@
       become: true
       become_user: entryapplication
 
-    - name: install ruby-build
+    - name: Install ruby-build
       ansible.builtin.git:
         repo: "https://github.com/rbenv/ruby-build"
         dest: "/var/www/apps/EntryApplication/.rbenv/plugins/ruby-build"
@@ -399,7 +403,7 @@
       become: true
       become_user: entryapplication
 
-    - name: add rbenv init to ~/.bashrc
+    - name: Add rbenv init to ~/.bashrc
       ansible.builtin.blockinfile:
         path: "/var/www/apps/EntryApplication/.bashrc"
         marker: "# {mark} ANSIBLE MANAGED RBENV INIT"
@@ -408,7 +412,7 @@
       become: true
       become_user: entryapplication
 
-    - name: add convenient environment variables to ~/.bashrc
+    - name: Add convenient environment variables to ~/.bashrc
       ansible.builtin.blockinfile:
         path: "/var/www/apps/EntryApplication/.bashrc"
         marker: "# {mark} ANSIBLE MANAGED ENV INIT"
@@ -417,14 +421,14 @@
       become: true
       become_user: entryapplication
 
-    - name: install ruby 3.2.8
+    - name: Install ruby
       ansible.builtin.command:
         cmd: "/var/www/apps/EntryApplication/.rbenv/bin/rbenv install 3.2.8"
         creates: "/var/www/apps/EntryApplication/.rbenv/versions/3.2.8"
       become: true
       become_user: entryapplication
 
-    - name: install nvm
+    - name: Install nvm
       ansible.builtin.git:
         repo: "http://github.com/nvm-sh/nvm"
         dest: "/var/www/apps/EntryApplication/.nvm"
@@ -433,7 +437,7 @@
       become: true
       become_user: entryapplication
 
-    - name: add nvm init to ~/.bashrc
+    - name: Add nvm init to ~/.bashrc
       ansible.builtin.blockinfile:
         path: "/var/www/apps/EntryApplication/.bashrc"
         marker: "# {mark} ANSIBLE MANAGED NVM INIT"
@@ -442,15 +446,16 @@
       become: true
       become_user: entryapplication
 
-    - name: add nvm init as rbenv exec hook
+    - name: Add nvm init as rbenv exec hook
       ansible.builtin.copy:
         dest: "/var/www/apps/EntryApplication/.rbenv/rbenv.d/exec/nvm.bash"
+        mode: "0644"
         content: |
           source "$HOME/.nvm/nvm.sh"
       become: true
       become_user: entryapplication
 
-    - name: install node 22.16.0
+    - name: Install node
       ansible.builtin.shell: |
         . "$HOME/.nvm/nvm.sh" --no-use
         nvm install 22.16.0
@@ -460,7 +465,7 @@
       become: true
       become_user: entryapplication
 
-    - name: install yarn package manager
+    - name: Install yarn package manager
       community.general.npm:
         name: yarn
         version: "1.22.22"
@@ -470,9 +475,10 @@
       become: true
       become_user: entryapplication
 
-    - name: create systemd socket for entryapplication
+    - name: Create systemd socket for entryapplication
       ansible.builtin.copy:
         dest: /etc/systemd/system/entryapplication.socket
+        mode: "0644"
         content: |
           [Unit]
           Description=EntryApplication
@@ -488,15 +494,16 @@
           WantedBy=sockets.target
       become: true
 
-    - name: enable systemd socket for entryapplication
+    - name: Enable systemd socket for entryapplication
       ansible.builtin.service:
         name: entryapplication.socket
         enabled: true
       become: true
 
-    - name: create systemd service for entryapplication
+    - name: Create systemd service for entryapplication
       ansible.builtin.copy:
         dest: /etc/systemd/system/entryapplication.service
+        mode: "0644"
         content: |
           [Unit]
           Description=EntryApplication
@@ -515,15 +522,15 @@
           [Install]
           WantedBy=multi-user.target
       become: true
-      notify: restart entryapplication
+      notify: Restart entryapplication
 
-    - name: enable systemd service for entryapplication
+    - name: Enable systemd service for entryapplication
       ansible.builtin.service:
         name: entryapplication.service
         enabled: true
       become: true
 
-    - name: allow entryapplication to manage its systemd service
+    - name: Allow entryapplication to manage its systemd service
       ansible.builtin.copy:
         dest: /etc/sudoers.d/entryapplication
         content: |
@@ -546,48 +553,75 @@
     # tasks are skipped because they are meaningless for the production virtual
     # machine, which is not used with Vagrant.
     # --------------------------
-    - name: install required packages for development
+    - name: Install required packages for development
       ansible.builtin.package:
         name:
           - xdg-utils # for chrome/chromedriver
           - libgbm1 # for chrome/chromedriver
           - libasound2 # chrome chrome/chromedriver
+          - python3-pip # for python requirements
       become: true
       when: development_build is defined
 
+    - name: Add pip user directory to PATH
+      ansible.builtin.blockinfile:
+        path: "{{ ansible_user_dir }}/.bashrc"
+        marker: "# {mark} ANSIBLE MANAGED PIP INIT"
+        block: |
+          export PATH="$PATH:$HOME/.local/bin"
+      when: development_build is defined
+
     # See https://googlechromelabs.github.io/chrome-for-testing/ for latest versions
-    - name: download chrome binary
+    - name: Download chrome binary
       ansible.builtin.get_url:
         url: "https://storage.googleapis.com/chrome-for-testing-public/138.0.7204.92/linux64/chrome-linux64.zip"
         dest: "{{ ansible_user_dir }}/chrome-linux64.zip"
+        mode: "0644"
       when: development_build is defined
 
-    - name: unzip chrome binary
+    - name: Create /home/vagrant/chrome-linux64
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/chrome-linux64"
+        mode: "0755"
+        state: directory
+      when: development_build is defined
+
+    - name: Unzip chrome binary
       ansible.builtin.unarchive:
         src: "{{ ansible_user_dir }}/chrome-linux64.zip"
-        dest: "{{ ansible_user_dir }}"
+        dest: "{{ ansible_user_dir }}/chrome-linux64"
+        mode: "u=rwX,g=rX,o=rX"
         remote_src: true
       when: development_build is defined
 
-    - name: download chromedriver binary
+    - name: Download chromedriver binary
       ansible.builtin.get_url:
         url: "https://storage.googleapis.com/chrome-for-testing-public/138.0.7204.92/linux64/chromedriver-linux64.zip"
         dest: "{{ ansible_user_dir }}/chromedriver-linux64.zip"
+        mode: "0644"
       when: development_build is defined
 
-    - name: unzip chromedriver binary
+    - name: Create /home/vagrant/chromedriver-linux64
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/chromedriver-linux64"
+        mode: "0755"
+        state: directory
+      when: development_build is defined
+
+    - name: Unzip chromedriver binary
       ansible.builtin.unarchive:
         src: "{{ ansible_user_dir }}/chromedriver-linux64.zip"
-        dest: "{{ ansible_user_dir }}"
+        dest: "{{ ansible_user_dir }}/chromedriver-linux64"
+        mode: "u=rwX,g=rX,o=rX"
         remote_src: true
       when: development_build is defined
 
-    - name: add chrome and chromedriver to PATH
+    - name: Add chrome and chromedriver to PATH
       ansible.builtin.blockinfile:
         path: "{{ ansible_user_dir }}/.bashrc"
         marker: "# {mark} ANSIBLE MANAGED CHROMEDRIVER INIT"
         block: |
-          export PATH="$PATH:$HOME/chrome-linux64:$HOME/chromedriver-linux64"
+          export PATH="$PATH:$HOME/chrome-linux64/chrome-linux64:$HOME/chromedriver-linux64/chromedriver-linux64"
       when: development_build is defined
 
     # We occasionally see timeouts of this service when using virtualized
@@ -596,28 +630,28 @@
     #
     # At some point in the future it may be good to remove this and see if the
     # problem still exists.
-    - name: disable waiting for network on boot
+    - name: Disable waiting for network on boot
       ansible.builtin.service:
         name: systemd-networkd-wait-online
         enabled: false
       become: true
       when: development_build is defined
 
-    - name: install rbenv
+    - name: Install rbenv (development)
       ansible.builtin.git:
         repo: "https://github.com/rbenv/rbenv"
         dest: "{{ ansible_user_dir }}/.rbenv"
         version: "v1.3.2"
       when: development_build is defined
 
-    - name: install ruby-build
+    - name: Install ruby-build (development)
       ansible.builtin.git:
         repo: "https://github.com/rbenv/ruby-build"
         dest: "{{ ansible_user_dir }}/.rbenv/plugins/ruby-build"
         version: "v20250716"
       when: development_build is defined
 
-    - name: add rbenv init to ~/.bashrc
+    - name: Add rbenv init to ~/.bashrc (development)
       ansible.builtin.blockinfile:
         path: "{{ ansible_user_dir }}/.bashrc"
         marker: "# {mark} ANSIBLE MANAGED RBENV INIT"
@@ -625,13 +659,13 @@
           eval "$(~/.rbenv/bin/rbenv init - --no-rehash bash)"
       when: development_build is defined
 
-    - name: install ruby 3.2.8
+    - name: Install ruby (development)
       ansible.builtin.command:
         cmd: "{{ ansible_user_dir }}/.rbenv/bin/rbenv install 3.2.8"
         creates: "{{ ansible_user_dir }}/.rbenv/versions/3.2.8"
       when: development_build is defined
 
-    - name: install nvm
+    - name: Install nvm (development)
       ansible.builtin.git:
         repo: "http://github.com/nvm-sh/nvm"
         dest: "{{ ansible_user_dir }}/.nvm"
@@ -639,7 +673,7 @@
         recursive: false
       when: development_build is defined
 
-    - name: add nvm init to ~/.bashrc
+    - name: Add nvm init to ~/.bashrc (development)
       ansible.builtin.blockinfile:
         path: "{{ ansible_user_dir }}/.bashrc"
         marker: "# {mark} ANSIBLE MANAGED NVM INIT"
@@ -647,7 +681,7 @@
           source "$HOME/.nvm/nvm.sh"
       when: development_build is defined
 
-    - name: install node 22.16.0
+    - name: Install node (development)
       ansible.builtin.shell: |
         . "$HOME/.nvm/nvm.sh" --no-use
         nvm install 22.16.0
@@ -656,7 +690,7 @@
         creates: "{{ ansible_user_dir }}/.nvm/versions/node/v22.16.0"
       when: development_build is defined
 
-    - name: install yarn package manager
+    - name: Install yarn package manager (development)
       community.general.npm:
         name: yarn
         version: "1.22.22"
@@ -665,7 +699,7 @@
         PATH: "{{ ansible_user_dir }}/.nvm/versions/node/v22.16.0/bin:{{ ansible_env.PATH }}"
       when: development_build is defined
 
-    - name: add automatic cd to /vagrant in ~/.bashrc
+    - name: Add automatic cd to /vagrant in ~/.bashrc
       ansible.builtin.blockinfile:
         path: "{{ ansible_user_dir }}/.bashrc"
         marker: "# {mark} ANSIBLE MANAGED CD INIT"
@@ -675,13 +709,14 @@
           fi
       when: development_build is defined
 
-    - name: create /home/vagrant/node_modules
+    - name: Create /home/vagrant/node_modules
       ansible.builtin.file:
         path: "{{ ansible_user_dir }}/node_modules"
+        mode: "0755"
         state: directory
       when: development_build is defined
 
-    - name: bind mount /vagrant/node_modules to /home/vagrant/node_modules so it supports symbolic links
+    - name: Bind mount /vagrant/node_modules to /home/vagrant/node_modules so it supports symbolic links
       ansible.posix.mount:
         src: "/home/vagrant/node_modules"
         path: "/vagrant/node_modules"
@@ -692,25 +727,25 @@
       when: development_build is defined
 
   handlers:
-    - name: reload apache2
+    - name: Reload apache2
       ansible.builtin.service:
         name: apache2
         state: reloaded
       become: true
 
-    - name: restart apache2
+    - name: Restart apache2
       ansible.builtin.service:
         name: apache2
         state: restarted
       become: true
 
-    - name: restart entryapplication
+    - name: Restart entryapplication
       ansible.builtin.service:
         name: entryapplication
         state: restarted
       become: true
 
-    - name: restart sshd
+    - name: Restart sshd
       ansible.builtin.service:
         name: sshd
         state: restarted

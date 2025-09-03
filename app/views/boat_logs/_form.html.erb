@@ -1,87 +1,90 @@
 <%= render partial: "draft_present_alert", locals: { discard_draft_url: draft_boat_logs_path(id: @boat_log.id) } %>
+
 <%= nested_form_for @boat_log, data: { "drafts-url": draft_boat_logs_path(id: @boat_log.id), "draft-restored": @draft.present?, "draft-focused-dom-id": @draft&.focused_dom_id }, html: { class: "boat-log-form usa-form maxw-full bg-base-lightest" } do |f| %>
   <%= render "shared/uswds_error_messages", target: @boat_log %>
   <%= render "draft_progress_uswds", object: @boat_log %>
 
-  <fieldset class="usa-fieldset padding-1 padding-top-0">
-    <div>
-      <%= f.label :boatlog_manager_id, "Boatlog/Manager", class: "usa-label display-inline-block width-card" %>
-      <%= f.collection_select :boatlog_manager_id, BoatlogManager.all, :id, :agency_name, { include_blank: true }, autofocus: true, class: "usa-select usa-input--lg display-inline-block" %>
-    </div>
-
-    <div class="date">
-      <%= f.label :date, "Sample Date", class: "usa-label display-inline-block width-card" %>
-      <%= f.text_field :date, class: "usa-input usa-input--md display-inline-block" %>
-    </div>
-
-    <div>
-      <%= f.label :primary_sample_unit, "PSU", class: "usa-label display-inline-block width-card" %>
-      <%= f.text_field :primary_sample_unit, class: "usa-input usa-input--sm display-inline-block" %>
-    </div>
-
-    <%= f.fields_for :station_logs do |ff| %>
-      <div class="grid-container margin-top-1 padding-1 padding-top-0 border">
-        <div class="grid-row">
-          <div class="grid-col-4">
-            <%= ff.label :stn_number, "Station", class: "usa-label display-inline-block width-15" %>
-            <%= ff.text_field :stn_number, class: "usa-input usa-input--xs display-inline-block" %>
-          </div>
-          <div class="grid-col-4">
-            <%= ff.label :time, class: "usa-label display-inline-block width-15" %>
-            <%= ff.text_field :time, value: ff.object&.time&.strftime("%H:%M"), class: "boatlog_time usa-input usa-input--sm display-inline-block" %>
-          </div>
-        </div>
-
-        <div class="grid-row">
-          <div class="grid-col-4">
-            <%= ff.label :latitude_in_northern_degrees, "Latitude (°N)", class: "usa-label display-inline-block width-15" %>
-            <%= ff.text_field :latitude_in_northern_degrees, inputmode: "numeric", pattern: "\\d*(\\.\\d*)?", class: "coords coords-positive usa-input usa-input--md display-inline-block" %>
-          </div>
-          <div class="grid-col-4">
-            <%= ff.label :longitude_in_western_degrees, "Longitude (°W)", class: "usa-label display-inline-block width-15" %>
-            <%= ff.text_field :longitude_in_western_degrees, inputmode: "numeric", pattern: "\\d*(\\.\\d*)?", class: "coords coords-positive usa-input usa-input--md display-inline-block" %>
-          </div>
-        </div>
-
-        <%= ff.fields_for :rep_logs do |ff| %>
-          <div class="grid-row replicate_record">
-            <div class="grid-col-4 replicate_type">
-              <%= ff.label :replicate, class: "usa-label display-inline-block width-15" %>
-              <%= ff.text_field :replicate, class: "usa-input usa-input--xs display-inline-block" %>
-            </div>
-            <div class="grid-col-5">
-              <%= ff.label :diver_id, "Diver", class: "usa-label display-inline-block width-15 diver_type_label" %>
-              <%= ff.collection_select :diver_id, Diver.active_divers.order(:diver_name), :id, :diver_name, { include_blank: true }, class: "usa-select usa-input--lg display-inline-block" %>
-            </div>
-            <div class="grid-col-3 padding-top-3">
-              <%= ff.link_to_remove "Remove Replicate", class: "remove-replicate-link", tabindex: "-1" %>
-            </div>
-          </div>
-        <%- end %>
-        <%= ff.link_to_add "Add Replicate", :rep_logs, class: "add-rep-log-link" %>
-
-        <div class="grid-row">
-          <div class="grid-col-12">
-            <%= ff.label :comments, "Comments", class: "usa-label display-inline-block width-15 text-top" %>
-            <%= ff.text_area :comments, size: "60x3", autocomplete: "off", class: "usa-input usa-input--lg height-10 display-inline-block" %>
-          </div>
-        </div>
-
-        <div class="grid-row">
-          <div class="grid-col-12">
-            <%= ff.link_to_remove "Remove Station", class: "remove-station-link", tabindex: "-1" %>
-          </div>
-        </div>
+  <div class="grid-row padding-1">
+    <div class="grid-col-12">
+      <div>
+        <%= f.label :boatlog_manager_id, "Boatlog/Manager", class: "usa-label display-inline-block width-card margin-top-0" %>
+        <%= f.collection_select :boatlog_manager_id, BoatlogManager.all, :id, :agency_name, { include_blank: true }, autofocus: true, class: "usa-select usa-input--lg display-inline-block" %>
       </div>
-    <%- end %>
 
-    <div>
-      <%= f.link_to_add "Add Station", :station_logs, class: "add-station-link" %>
-    </div>
+      <div class="date">
+        <%= f.label :date, "Sample Date", class: "usa-label display-inline-block width-card" %>
+        <%= f.text_field :date, class: "usa-input usa-input--md display-inline-block" %>
+      </div>
 
-    <div>
-      <%= f.submit class: "usa-button" %>
-      <%= link_to "Cancel", boat_logs_path, class: "usa-button usa-button--outline" %>
+      <div>
+        <%= f.label :primary_sample_unit, "PSU", class: "usa-label display-inline-block width-card" %>
+        <%= f.text_field :primary_sample_unit, class: "usa-input usa-input--sm display-inline-block" %>
+      </div>
+
+      <%= f.fields_for :station_logs do |ff| %>
+        <div class="grid-container margin-top-1 padding-1 padding-top-0 border">
+          <div class="grid-row">
+            <div class="grid-col-4">
+              <%= ff.label :stn_number, "Station", class: "usa-label display-inline-block width-15" %>
+              <%= ff.text_field :stn_number, class: "usa-input usa-input--xs display-inline-block" %>
+            </div>
+            <div class="grid-col-4">
+              <%= ff.label :time, class: "usa-label display-inline-block width-15" %>
+              <%= ff.text_field :time, value: ff.object&.time&.strftime("%H:%M"), class: "boatlog_time usa-input usa-input--sm display-inline-block" %>
+            </div>
+          </div>
+
+          <div class="grid-row">
+            <div class="grid-col-4">
+              <%= ff.label :latitude_in_northern_degrees, "Latitude (°N)", class: "usa-label display-inline-block width-15" %>
+              <%= ff.text_field :latitude_in_northern_degrees, inputmode: "numeric", pattern: "\\d*(\\.\\d*)?", class: "coords coords-positive usa-input usa-input--md display-inline-block" %>
+            </div>
+            <div class="grid-col-4">
+              <%= ff.label :longitude_in_western_degrees, "Longitude (°W)", class: "usa-label display-inline-block width-15" %>
+              <%= ff.text_field :longitude_in_western_degrees, inputmode: "numeric", pattern: "\\d*(\\.\\d*)?", class: "coords coords-positive usa-input usa-input--md display-inline-block" %>
+            </div>
+          </div>
+
+          <%= ff.fields_for :rep_logs do |ff| %>
+            <div class="grid-row replicate_record">
+              <div class="grid-col-4 replicate_type">
+                <%= ff.label :replicate, class: "usa-label display-inline-block width-15" %>
+                <%= ff.text_field :replicate, class: "usa-input usa-input--xs display-inline-block" %>
+              </div>
+              <div class="grid-col-5">
+                <%= ff.label :diver_id, "Diver", class: "usa-label display-inline-block width-15 diver_type_label" %>
+                <%= ff.collection_select :diver_id, Diver.active_divers.order(:diver_name), :id, :diver_name, { include_blank: true }, class: "usa-select usa-input--lg display-inline-block" %>
+              </div>
+              <div class="grid-col-3 padding-top-3">
+                <%= ff.link_to_remove "Remove Replicate", class: "remove-replicate-link", tabindex: "-1" %>
+              </div>
+            </div>
+          <%- end %>
+          <%= ff.link_to_add "Add Replicate", :rep_logs, class: "add-rep-log-link" %>
+
+          <div class="grid-row">
+            <div class="grid-col-12">
+              <%= ff.label :comments, "Comments", class: "usa-label display-inline-block width-15 text-top" %>
+              <%= ff.text_area :comments, size: "60x3", autocomplete: "off", class: "usa-input usa-input--lg height-10 display-inline-block" %>
+            </div>
+          </div>
+
+          <div class="grid-row">
+            <div class="grid-col-12">
+              <%= ff.link_to_remove "Remove Station", class: "remove-station-link", tabindex: "-1" %>
+            </div>
+          </div>
+        </div>
+      <%- end %>
+
+      <div>
+        <%= f.link_to_add "Add Station", :station_logs, class: "add-station-link" %>
+      </div>
+
+      <div>
+        <%= f.submit class: "usa-button" %>
+        <%= link_to "Cancel", boat_logs_path, class: "usa-button usa-button--outline" %>
+      </div>
     </div>
-  </fieldset>
+  </div>
 <% end %>

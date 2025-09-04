@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#/ Set as the ansible_ssh_executable to allow Ansible to connect a Google Cloud
+#/ virtual machine via https://cloud.google.com/compute/docs/oslogin/set-up-oslogin
+#/
+#/ Requires 'gcloud auth login' to have been previously run
+set -euo pipefail
+[ -n "${DEBUG-}" ] && set -x
+
+# Fullhost is the second to last argument, in the form NAME.ZONE.PROJECT
+# See https://cloud.google.com/sdk/gcloud/reference/compute/config-ssh
+fullhost="${*:$#-1:1}"
+
+# Split fullhost into its component parts
+IFS="." read -r host zone project <<<"$fullhost"
+
+# The command is the last argument
+command="${*:$#:1}"
+
+exec gcloud --project="$project" compute ssh "$host" --zone="$zone" --command="$command" -- "${@:1:$#-2}"

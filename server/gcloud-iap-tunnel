@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+#/ Creates a tunnel to a Google Cloud virtual machine via https://cloud.google.com/security/products/iap
+#/ Necessary for cloud virtual machines that do not have a public IP address
+#/ 
+#/ Exmaple usage via ssh ProxyCommand (see `man ssh_config`):
+#/ ssh -o 'ProxyCommand=/path/to/gcloud-iap-tunnel %h %p' USER@NAME.ZONE.PROJECT
+#/
+#/ Requires 'gcloud auth login' to have been previously run
+set -euo pipefail
+[ -n "${DEBUG-}" ] && set -x
+
+if [ "$#" != 2 ]; then
+  echo "Usage: $0 NAME.ZONE.PROJECT PORT" >&2
+  exit 1
+fi
+
+# fullhost is in the form NAME.ZONE.PROJECT
+# See https://cloud.google.com/sdk/gcloud/reference/compute/config-ssh
+fullhost="$1"
+
+# Split fullhost into its component parts
+IFS="." read -r host zone project <<<"$fullhost"
+
+# port is generally "22" for SSH
+port="$2"
+
+exec gcloud --project="$project" compute start-iap-tunnel --zone="$zone" --listen-on-stdin "$host" "$port"

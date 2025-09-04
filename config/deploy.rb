@@ -43,6 +43,9 @@ set :ssh_options, forward_agent: true
 # rbenv settings
 set :rbenv_type, :user
 
+# Public assets must be readable by Apache
+SSHKit.config.umask = "0002"
+
 namespace :deploy do
   namespace :check do
     before :linked_files, :upload_encryption_keys do

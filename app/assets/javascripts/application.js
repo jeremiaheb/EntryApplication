@@ -22,6 +22,7 @@
 //= require underscore/underscore-umd
 //= require bootstrap-datepicker/dist/js/bootstrap-datepicker
 //= require jquery-timepicker/jquery.timepicker
+//= require jquery-ui/widgets/sortable
 //= require jquery-ui/widgets/tabs
 //
 //= require ./validations

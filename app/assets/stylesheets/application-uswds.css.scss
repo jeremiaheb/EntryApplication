@@ -79,6 +79,21 @@
   }
 }
 
+// Coral demo form
+.coral-demographic-form {
+  ol.demo_corals {
+    list-style-type: none;
+    counter-reset: demo-corals-counter;
+
+    li {
+      counter-increment: demo-corals-counter;
+      &::marker {
+        content: counter(demo-corals-counter) " ";
+      }
+    }
+  }
+}
+
 // Tweaks to jquery-ui theme which would otherwise conflict with USWDS
 .ui-tabs .ui-tabs-panel {
   padding: initial;

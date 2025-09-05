@@ -1,5 +1,5 @@
 $(function () {
-  if (!EA.onRailsPage("coral_demographics", ["edit", "new"])) {
+  if (!EA.onRailsPage("coral_demographics", ["edit", "new", "create", "update"])) {
     return;
   }
 
@@ -54,15 +54,15 @@ $(function () {
     $(".demo_corals").scrollTop(1e10);
   });
 
-  //supress submitting form on pressing enter key, enter key adds new coral
-  //while inside coverCat class
-
-  $("#coralDemoData").bind("keypress", function (e) {
-    if (e.keyCode == 13) {
+  // Suppres default behavior of enter except on buttons
+  $(".coral-demographic-form").bind("keypress", function (e) {
+    const $target = $(e.target);
+    if (e.keyCode == 13 && !$target.is(":button") && !$target.is(":submit")) {
       e.preventDefault();
     }
   });
 
+  // Within the Individual Corals section, enter adds a new row
   $(".demo_corals").bind("keypress", function (e) {
     if (e.keyCode == 13) {
       e.preventDefault();
@@ -93,8 +93,17 @@ $(function () {
     "Old Mortality and Recent Mortality connot be greater than 100",
   );
 
-  $(".new_coral_demographic, .edit_coral_demographic").validate({
-    errorElement: "span",
+  $(".new_coral_demographic, .edit_coral_demographic, .coral-demographic-form").validate({
+    errorElement: "div",
+
+    errorPlacement: function($error, $element) {
+      $demoCoralWrapper = $element.closest(".demo_corals .fields");
+      if ($demoCoralWrapper.length > 0) {
+        $demoCoralWrapper.append($error);
+      } else {
+        $error.insertAfter($element);
+      }
+    },
 
     onfocusout: function (element) {
       this.element(element);

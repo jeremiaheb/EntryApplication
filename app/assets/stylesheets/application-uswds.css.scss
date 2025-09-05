@@ -2,6 +2,7 @@
 //= require bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone
 //= require jquery-timepicker/jquery.timepicker
 //= require datatables.net-dt/css/dataTables.dataTables
+//= require jquery-ui
 //= require_self
 
 .field_with_errors {
@@ -36,4 +37,76 @@
   .saved {
     background-color: #04c585;
   }
+}
+
+// Samples form
+.sample-form {
+  .timeSeen_1,
+  #timeSeen1 {
+    &:enabled {
+      background-color: hsl(0, 0%, 100%);
+    }
+  }
+  .timeSeen_2,
+  #timeSeen2 {
+    &:enabled {
+      background-color: hsl(195, 79%, 43%);
+    }
+  }
+  .timeSeen_3,
+  #timeSeen3 {
+    &:enabled {
+      background-color: hsl(145, 62%, 68%);
+    }
+  }
+  .time_seen_button {
+    &,
+    &:hover,
+    &:active {
+      color: #333333;
+    }
+  }
+  ol#animals {
+    list-style-type: none;
+    counter-reset: animal-counter;
+
+    li {
+      counter-increment: animal-counter;
+      &::marker {
+        content: counter(animal-counter) " ";
+      }
+    }
+  }
+}
+
+// Coral demo form
+.coral-demographic-form {
+  ol.demo_corals {
+    list-style-type: none;
+    counter-reset: demo-corals-counter;
+
+    li {
+      counter-increment: demo-corals-counter;
+      &::marker {
+        content: counter(demo-corals-counter) " ";
+      }
+    }
+  }
+}
+
+// Tweaks to jquery-ui theme which would otherwise conflict with USWDS
+.ui-tabs .ui-tabs-panel {
+  padding: initial;
+}
+.ui-widget,
+.ui-widget .ui-widget,
+.ui-widget input,
+.ui-widget select,
+.ui-widget textarea,
+.ui-widget button {
+  font-family: unset;
+  font-size: unset;
+}
+.ui-widget-content {
+  color: unset;
 }

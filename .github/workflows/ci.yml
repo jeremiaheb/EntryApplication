@@ -35,12 +35,20 @@ jobs:
           bundler-cache: true
 
       - name: Set up NodeJS
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version-file: .nvmrc
 
       - name: Install NodeJS dependencies
         run: yarn install --frozen-lockfile
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3"
+
+      - name: Install Python dependencies
+        run: pip install --requirement requirements.txt
 
       - name: Lint
         run: bin/lint
@@ -75,7 +83,7 @@ jobs:
           bundler-cache: true
 
       - name: Set up NodeJS
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version-file: .nvmrc
 

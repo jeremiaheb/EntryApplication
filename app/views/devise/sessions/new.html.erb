@@ -1,40 +1,40 @@
-<div class="grid-row">
-  <div class="grid-col-12">
-    <%= render "shared/nav_breadcrumbs", object: [["Login", ""]] %>
+<%= render "shared/nav_breadcrumbs", object: [["Login", ""]] %>
 
-    <%- if Rails.env.development? %>
-    <div class="maxw-full bg-base-lightest padding-1 margin-bottom-1">
-      <legend class="usa-legend text-bold margin-top-0">Login with SSO</legend>
-      <ul class="usa-button-group">
-        <li class="usa-button-group__item">
-          <%= button_to "ICAM", omniauth_authorize_path(resource_name, :icam), class: "usa-button usa-button--accent-cool" %>
-        </li>
-        <li class="usa-button-group__item">
-          <%- if Rails.env.development? %>
-          <%= button_to "Developer", omniauth_authorize_path(resource_name, :developer), class: "usa-button usa-button--accent-cool" %>
-          <%- end %>
-        </li>
-      </ul>
-    </div>
-    <%- end %>
-
-    <div class="bg-base-lightest">
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "usa-form maxw-full padding-1" }) do |f| %>
-        <%= render "shared/uswds_error_messages", target: resource %>
-
-        <fieldset class="usa-fieldset">
-          <legend class="usa-legend text-bold margin-top-0">Login with username and password</legend>
-
-          <%= f.label :username, class: "usa-label" %>
-          <%= f.text_field :username, class: "usa-input usa-input--lg", autofocus: true, autocomplete: "username" %>
-
-          <%= f.label :password, class: "usa-label" %>
-          <%= f.password_field :password, class: "usa-input usa-input--lg", autocomplete: "current-password" %>
-
-          <%= f.submit "Login", class: "usa-button" %>
-          <%= link_to "Forgot password?", new_password_path(resource_name), class: "usa-button usa-button--outline" %>
-        </fieldset>
-      <% end %>
+<div class="maxw-full bg-base-lightest">
+  <div class="grid-row padding-1 margin-bottom-1">
+    <div class="grid-col-12">
+      <%- if Rails.env.development? %>
+        <legend class="usa-legend text-semibold margin-top-0">Login with SSO</legend>
+        <ul class="usa-button-group margin-top-1">
+          <li class="usa-button-group__item">
+            <%= button_to "ICAM", omniauth_authorize_path(resource_name, :icam), class: "usa-button usa-button--accent-cool" %>
+          </li>
+          <li class="usa-button-group__item">
+            <%- if Rails.env.development? %>
+            <%= button_to "Developer", omniauth_authorize_path(resource_name, :developer), class: "usa-button usa-button--accent-cool" %>
+            <%- end %>
+          </li>
+        </ul>
+      <%- end %>
     </div>
   </div>
 </div>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "usa-form maxw-full bg-base-lightest" }) do |f| %>
+  <%= render "shared/uswds_error_messages", target: resource %>
+
+  <div class="grid-row padding-1">
+    <div class="grid-col-12">
+      <legend class="usa-legend text-semibold margin-top-0">Login with username and password</legend>
+
+      <%= f.label :username, class: "usa-label margin-top-1" %>
+      <%= f.text_field :username, class: "usa-input usa-input--lg", autofocus: true, autocomplete: "username" %>
+
+      <%= f.label :password, class: "usa-label" %>
+      <%= f.password_field :password, class: "usa-input usa-input--lg", autocomplete: "current-password" %>
+
+      <%= f.submit "Login", class: "usa-button" %>
+      <%= link_to "Forgot password?", new_password_path(resource_name), class: "usa-button usa-button--outline" %>
+    </div>
+  </div>
+<%- end %>

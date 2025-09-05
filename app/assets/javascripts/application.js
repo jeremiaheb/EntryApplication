@@ -22,6 +22,8 @@
 //= require underscore/underscore-umd
 //= require bootstrap-datepicker/dist/js/bootstrap-datepicker
 //= require jquery-timepicker/jquery.timepicker
+//= require jquery-ui/widgets/sortable
+//= require jquery-ui/widgets/tabs
 //
 //= require ./validations
 //= require ./benthic_covers
@@ -65,6 +67,10 @@ $(function () {
         bottomEnd: ["info", "paging"],
       },
       pagingType: "full",
+      columnDefs: [
+        { targets: ".not-orderable", orderable: false },
+        { targets: ".not-searchable", searchable: false },
+      ],
     });
 
     $("form").attr("autocomplete", "off");
@@ -82,4 +88,17 @@ $(function () {
       return false;
     }
   }
+
+  const addFocusClassToLabel = function () {
+    const $focused = $(document.activeElement);
+    const focusedID = $focused.attr("id");
+
+    $("label.focused").removeClass("focused");
+    if (focusedID) {
+      $("label[for='" + focusedID + "']").addClass("focused");
+    }
+  };
+
+  addFocusClassToLabel();
+  $(document).on("focusin focusout", ":input", addFocusClassToLabel);
 });

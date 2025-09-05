@@ -30,12 +30,24 @@ i.e.
 }
 
 .field_with_errors input,
-.usa-input.error,
 .field_with_errors select,
-.usa-select.error {
-  background-color: yellow;
-  @include u-outline("2px");
-  @include u-outline-color("secondary");
+.usa-input.error,
+.usa-select.error,
+.one_hundred_flag {
+  &:enabled,
+  &:enabled:hover,
+  &.one_hundred_flag {
+    background-color: yellow !important;
+    @include u-outline("2px");
+    @include u-outline-color("secondary");
+  }
+}
+
+.one_hundred_ok_flag {
+  &,
+  &:hover {
+    background-color: lightgreen;
+  }
 }
 
 // Conflicting styles between USWDS and DataTables

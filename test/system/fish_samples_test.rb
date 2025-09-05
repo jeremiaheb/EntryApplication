@@ -12,7 +12,7 @@ class FishSamplesTest < ApplicationSystemTestCase
     visit root_url
     find(".samples-link").click
     login_as_diver(diver)
-    find("#newSampleButton").click
+    find(".new-sample-button").click
 
     # Samples, Sample Section
     fill_in_sample_section(
@@ -22,7 +22,7 @@ class FishSamplesTest < ApplicationSystemTestCase
       sample_type: sample_type,
       habitat_type: habitat_type,
     )
-    find("button#gotoSubstrate").click
+    find(".go-to-substrate-button").click
 
     # Wait up to 5 seconds for draft to be saved
     page.document.synchronize(5.seconds) do
@@ -57,7 +57,7 @@ class FishSamplesTest < ApplicationSystemTestCase
     visit root_url
     find(".samples-link").click
     login_as_diver(diver)
-    find("[data-id='#{sample.id}'] .view-link").click
+    find("[data-id='#{sample.id}'] .view-sample-button").click
     find(".edit-button").click
 
     # Edit some field
@@ -90,7 +90,7 @@ class FishSamplesTest < ApplicationSystemTestCase
     visit root_url
     find(".samples-link").click
     login_as_diver(diver)
-    find("#newSampleButton").click
+    find(".new-sample-button").click
 
     # Samples, Sample Section
     fill_in_sample_section(
@@ -100,10 +100,10 @@ class FishSamplesTest < ApplicationSystemTestCase
       sample_type: sample_type,
       habitat_type: habitat_type,
     )
-    find("button#gotoSubstrate").click
+    find(".go-to-substrate-button").click
     # Samples, Substrate Section
     fill_in_substrate_section
-    find("button#gotoSpecies").click
+    find(".go-to-species-button").click
     # Samples, Species Section
     select2_choose(all("select[id$='animal_id']", visible: nil).first, option: animal1.spp_code_common)
     all("input[id$='number_individuals']").first.fill_in(with: "3")
@@ -119,7 +119,7 @@ class FishSamplesTest < ApplicationSystemTestCase
     find("button#validateAnimals").click
     find("input[type=submit]").click
 
-    assert_selector(".alert", text: "Sample was successfully created")
+    assert_selector(".usa-alert", text: "Sample was successfully created")
 
     assert_equal 1, Sample.count
 
@@ -139,7 +139,7 @@ class FishSamplesTest < ApplicationSystemTestCase
     visit root_url
     find(".samples-link").click
     login_as_diver(diver)
-    find("#newSampleButton").click
+    find(".new-sample-button").click
 
     # Samples, Sample Section
     fill_in_sample_section(
@@ -149,10 +149,10 @@ class FishSamplesTest < ApplicationSystemTestCase
       sample_type: sample_type,
       habitat_type: habitat_type,
     )
-    find("button#gotoSubstrate").click
+    find(".go-to-substrate-button").click
     # Samples, Substrate Section
     fill_in_substrate_section
-    find("button#gotoSpecies").click
+    find(".go-to-species-button").click
 
     # Samples, Species Section
     select2_choose(all("select[id$='animal_id']", visible: nil).first, option: animal1.spp_code_common)
@@ -183,7 +183,7 @@ class FishSamplesTest < ApplicationSystemTestCase
     find("button#validateAnimals").click
     find("input[type=submit]").click
 
-    assert_selector(".alert", text: "Sample was successfully created")
+    assert_selector(".usa-alert", text: "Sample was successfully created")
 
     assert_equal 1, Sample.count
     sample = Sample.first!
@@ -210,16 +210,21 @@ class FishSamplesTest < ApplicationSystemTestCase
     sample_animal1 = FactoryBot.create(:sample_animal, sample: nil, animal: animal1, time_seen: 1)
     animal2 = FactoryBot.create(:animal, common_name: "Fish 2")
     sample_animal2 = FactoryBot.create(:sample_animal, sample: nil, animal: animal2, time_seen: 1)
-    sample = FactoryBot.create(:sample, diver: diver, buddy: buddy, sample_type: sample_type, habitat_type: habitat_type, sample_animals: [sample_animal1, sample_animal2])
+    sample = FactoryBot.create(:sample, boatlog_manager: boatlog_manager, diver: diver, buddy: buddy, sample_type: sample_type, habitat_type: habitat_type, sample_animals: [sample_animal1, sample_animal2])
 
     visit root_url
     find(".samples-link").click
     login_as_diver(diver)
-    find("[data-id='#{sample.id}'] .view-link").click
+    find("[data-id='#{sample.id}'] .view-sample-button").click
     find(".edit-button").click
 
-    # Click through to Species section
-    find("select.changeSection").select("Species Section")
+    # FIXME: The Species tab is not enabled until something in the Substrate tab
+    # is focused. The likely cause is an ordering issue where total fields are
+    # not calculated before we validate the Substrate tab.
+    find(".go-to-substrate-button").click
+    find("input#sample_substrate_max_depth").click
+    find("input#sample_substrate_min_depth").click
+    find(".go-to-species-button").click
 
     # Simulate mistake: animal2 should be in the 5-10 Minutes time seen
     #
@@ -239,7 +244,7 @@ class FishSamplesTest < ApplicationSystemTestCase
     find("button#validateAnimals").click
     find("input[type=submit]").click
 
-    assert_selector(".alert", text: "Sample was successfully updated")
+    assert_selector(".usa-alert", text: "Sample was successfully updated")
 
     assert_equal 1, Sample.count
     sample = Sample.first!

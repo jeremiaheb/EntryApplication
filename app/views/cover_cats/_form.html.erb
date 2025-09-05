@@ -1,23 +1,27 @@
   <%= form_for @cover_cat, html: { class: "usa-form maxw-full bg-base-lightest" } do |f| %>
     <%= render "shared/uswds_error_messages", target: @cover_cat %>
 
-    <fieldset class="usa-fieldset padding-1 padding-top-0">
-      <%= f.label :code, class: "usa-label" %>
-      <%= f.text_field :code, class: "usa-input usa-input--md" %>
+    <div class="grid-row">
+      <div class="grid-col-12">
+        <fieldset class="usa-fieldset padding-1 padding-top-0">
+          <%= f.label :code, class: "usa-label" %>
+          <%= f.text_field :code, class: "usa-input usa-input--md" %>
 
-      <%= f.label :name, class: "usa-label" %>
-      <%= f.text_field :name, class: "usa-input usa-input--xl" %>
+          <%= f.label :name, class: "usa-label" %>
+          <%= f.text_field :name, class: "usa-input usa-input--xl" %>
 
-      <%= f.label :common, "Common name", class: "usa-label" %>
-      <%= f.text_field :common, class: "usa-input usa-input--xl" %>
+          <%= f.label :common, "Common name", class: "usa-label" %>
+          <%= f.text_field :common, class: "usa-input usa-input--xl" %>
 
-      <%= f.label :proofing_code, class: "usa-label" %>
-      <%= f.text_field :proofing_code, class: "usa-input usa-input--xl" %>
+          <%= f.label :proofing_code, class: "usa-label" %>
+          <%= f.text_field :proofing_code, class: "usa-input usa-input--xl" %>
 
-      <%= f.label :rank, class: "usa-label" %>
-      <%= f.number_field :rank, class: "usa-input usa-input--md", min: "1" %>
+          <%= f.label :rank, class: "usa-label" %>
+          <%= f.number_field :rank, class: "usa-input usa-input--md", min: "1" %>
 
-      <%= f.submit class: "usa-button" %>
-      <%= link_to "Cancel", cover_cats_path, class: "usa-button usa-button--outline" %>
-    </fieldset>
+          <%= f.submit class: "usa-button" %>
+          <%= link_to "Cancel", cover_cats_path, class: "usa-button usa-button--outline" %>
+        </fieldset>
+      </div>
+    </div>
   <% end %>

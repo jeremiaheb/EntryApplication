@@ -19,11 +19,14 @@ done
 if [ -n "$autocorrect" ]; then
   rubocop_args=(--autocorrect)
   prettier_args=(--write)
+  ansible_lint_args=(--fix)
 else
   rubocop_args=()
   prettier_args=(--check)
+  ansible_lint_args=()
 fi
 
 set -x
 bin/rubocop "${rubocop_args[@]}"
 bin/yarn prettier "${prettier_args[@]}" "app/assets/**/*.{js,css,scss}"
+ansible-lint "${ansible_lint_args[@]}" "server/playbook.yml"

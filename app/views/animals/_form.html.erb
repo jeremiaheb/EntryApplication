@@ -1,26 +1,28 @@
 <%= form_for @animal, html: { class: "usa-form maxw-full bg-base-lightest", autocomplete: "off" } do |f| %>
   <%= render "shared/uswds_error_messages", target: @animal %>
 
-  <fieldset class="usa-fieldset padding-1 padding-top-0">
-    <%= f.label :species_code, class: "usa-label" %>
-    <%= f.text_field :species_code, class: "usa-input usa-input--md", autocomplete: "off" %>
-    
-    <%= f.label :scientific_name, class: "usa-label" %>
-    <%= f.text_field :scientific_name, class: "usa-input usa-input--xl", autocomplete: "off" %>
+  <div class="grid-row padding-1">
+    <div class="grid-col-12">
+      <%= f.label :species_code, class: "usa-label margin-top-0" %>
+      <%= f.text_field :species_code, class: "usa-input usa-input--md", autocomplete: "off" %>
+      
+      <%= f.label :scientific_name, class: "usa-label" %>
+      <%= f.text_field :scientific_name, class: "usa-input usa-input--xl", autocomplete: "off" %>
 
-    <%= f.label :common_name, class: "usa-label" %>
-    <%= f.text_field :common_name, class: "usa-input usa-input--xl", autocomplete: "off" %>
+      <%= f.label :common_name, class: "usa-label" %>
+      <%= f.text_field :common_name, class: "usa-input usa-input--xl", autocomplete: "off" %>
 
-    <%= f.label :min_size, "Minimum size", class: "usa-label" %>
-    <%= f.text_field :min_size, class: "usa-input usa-input--sm", autocomplete: "off" %>
+      <%= f.label :min_size, "Minimum size", class: "usa-label" %>
+      <%= f.text_field :min_size, class: "usa-input usa-input--sm", autocomplete: "off" %>
 
-    <%= f.label :max_size, "Maximum size", class: "usa-label" %>
-    <%= f.text_field :max_size, class: "usa-input usa-input--sm", autocomplete: "off" %>
+      <%= f.label :max_size, "Maximum size", class: "usa-label" %>
+      <%= f.text_field :max_size, class: "usa-input usa-input--sm", autocomplete: "off" %>
 
-    <%= f.label :max_number, "Maximum number", class: "usa-label" %>
-    <%= f.text_field :max_number, class: "usa-input usa-input--sm", autocomplete: "off" %>
+      <%= f.label :max_number, "Maximum number", class: "usa-label" %>
+      <%= f.text_field :max_number, class: "usa-input usa-input--sm", autocomplete: "off" %>
 
-    <%= f.submit class: "usa-button" %>
-    <%= link_to "Cancel", animals_path, class: "usa-button usa-button--outline" %>
-  </fieldset>
+      <%= f.submit class: "usa-button" %>
+      <%= link_to "Cancel", animals_path, class: "usa-button usa-button--outline" %>
+    </div>
+  </div>
 <% end %>

@@ -1,8 +1,9 @@
-  <%= form_for @coral, html: { class: "usa-form maxw-full bg-base-lightest" } do |f| %>
-    <%= render "shared/uswds_error_messages", target: @coral %>
+<%= form_for @coral, html: { class: "usa-form maxw-full bg-base-lightest" } do |f| %>
+  <%= render "shared/uswds_error_messages", target: @coral %>
 
-    <fieldset class="usa-fieldset padding-1 padding-top-0">
-      <%= f.label :code, class: "usa-label" %>
+  <div class="grid-row padding-1">
+    <div class="grid-col-12">
+      <%= f.label :code, class: "usa-label margin-top-0" %>
       <%= f.text_field :code, class: "usa-input usa-input--md" %>
 
       <%= f.label :scientific_name, class: "usa-label" %>
@@ -19,5 +20,6 @@
 
       <%= f.submit class: "usa-button" %>
       <%= link_to "Cancel", corals_path, class: "usa-button usa-button--outline" %>
-    </fieldset>
-  <% end %>
+    </div>
+  </div>
+<% end %>

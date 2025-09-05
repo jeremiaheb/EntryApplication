@@ -50,6 +50,12 @@ i.e.
   }
 }
 
+.usa-form {
+  label.focused {
+    @include u-text("bold");
+  }
+}
+
 // Conflicting styles between USWDS and DataTables
 [type="search"] {
   float: initial;

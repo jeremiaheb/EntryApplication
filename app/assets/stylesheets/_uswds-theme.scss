@@ -10,6 +10,7 @@ in the form $setting: value,
 // Refer to https://designsystem.digital.gov/documentation/settings/
 @use "uswds-core" with (
   $theme-font-path: "@uswds/uswds/dist/fonts",
+  $theme-font-weight-semibold: 600,
   $theme-footer-max-width: "desktop-lg",
   $theme-grid-container-max-width: "desktop-lg",
   $theme-header-max-width: "desktop-lg",

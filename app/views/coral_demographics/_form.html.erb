@@ -103,13 +103,13 @@
             <%- end %>
           </li>
         <%- end %>
+        <%= f.link_to_add :demographic_corals, class: "font-body-xs" do %>
+          <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+            <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#add_circle") %>
+          </svg>
+          Add Coral
+        <%- end %>
       </ol>
-      <%= f.link_to_add :demographic_corals, class: "font-body-xs" do %>
-        <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
-          <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#add_circle") %>
-        </svg>
-        Add Coral
-      <%- end %>
     </div>
   </div>
 

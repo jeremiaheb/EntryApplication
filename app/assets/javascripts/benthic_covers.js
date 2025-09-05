@@ -91,7 +91,18 @@ $(function () {
   }
 
   function updateCoverTotalText() {
-    $(".coverTotal").text(" Total Points " + getCoverTotal());
+    const coverTotal = getCoverTotal();
+
+    $(".coverTotal").text("Total Points: " + coverTotal);
+    if (coverTotal == 100) {
+      $(".coverTotal")
+        .removeClass("bg-secondary-light")
+        .addClass("bg-primary-light");
+    } else {
+      $(".coverTotal")
+        .addClass("bg-secondary-light")
+        .removeClass("bg-primary-light");
+    }
   }
 
   updateCoverTotalText();

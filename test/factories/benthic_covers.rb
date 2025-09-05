@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :benthic_cover do
     boatlog_manager
     diver
-    sequence(:buddy)
+    buddy factory: :diver
     sample_date { Date.parse("2013-09-15") }
     sample_begin_time { Time.parse("2013-09-15T15:00:00Z") }
     field_id { "10011a" }

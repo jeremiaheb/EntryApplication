@@ -26,7 +26,7 @@ class BenthicCoverPdf < Prawn::Document
 
   def sample_head
     data =  [["Diver", "#{@benthic_cover.diver.diver_name}", "Boatlog/Manger:", "#{@benthic_cover.boatlog_manager.agency_name}"],
-              ["Buddy", "#{Diver.find(@benthic_cover.buddy).diver_name}", "Field ID", "#{@benthic_cover.field_id}", "Date", "#{@benthic_cover.sample_date}", "Sample Time", "#{@benthic_cover.sample_begin_time.strftime("%H:%M")}"],
+              ["Buddy", "#{@benthic_cover.buddy.diver_name}", "Field ID", "#{@benthic_cover.field_id}", "Date", "#{@benthic_cover.sample_date}", "Sample Time", "#{@benthic_cover.sample_begin_time.strftime("%H:%M")}"],
               ["Habitat", "#{@benthic_cover.habitat_type.habitat_name}", "Meters Completed", "#{@benthic_cover.meters_completed}"],
 ]
     table data, cell_style: { size: 8, border_width: 0, height: 17, padding: 5 }

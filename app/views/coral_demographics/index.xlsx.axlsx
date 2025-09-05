@@ -18,7 +18,7 @@ wb.add_worksheet(name: "CoralDemoSample") do |sampSheet|
   @coral_demographics.each do |c_demo|
     sampSheet.add_row [c_demo.msn,
                         c_demo.diver.diver_number,
-                        Diver.find(c_demo.buddy).diver_number,
+                        c_demo.buddy.diver_number,
                         c_demo.habitat_type.id,
                         c_demo.habitat_type.habitat_name,
                         c_demo.sample_date.strftime("%Y"),

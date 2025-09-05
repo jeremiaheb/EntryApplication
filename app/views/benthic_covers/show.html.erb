@@ -11,7 +11,7 @@
         <dt>Diver</dt><dd><%= @benthic_cover.diver.diver_name %></dd>
       </dl>
       <dl class="dl-horizontal">
-        <dt>Buddy</dt><dd><%= Diver.find(@benthic_cover.buddy).diver_name %></dd>
+        <dt>Buddy</dt><dd><%= @benthic_cover.buddy.diver_name %></dd>
       </dl>
       <dl class="dl-horizontal">
         <dt>Field ID</dt><dd><%= @benthic_cover.field_id %></dd>

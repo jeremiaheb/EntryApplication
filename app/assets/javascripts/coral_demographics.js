@@ -1,5 +1,7 @@
 $(function () {
-  if (!EA.onRailsPage("coral_demographics", ["edit", "new", "create", "update"])) {
+  if (
+    !EA.onRailsPage("coral_demographics", ["edit", "new", "create", "update"])
+  ) {
     return;
   }
 
@@ -93,10 +95,12 @@ $(function () {
     "Old Mortality and Recent Mortality connot be greater than 100",
   );
 
-  $(".new_coral_demographic, .edit_coral_demographic, .coral-demographic-form").validate({
+  $(
+    ".new_coral_demographic, .edit_coral_demographic, .coral-demographic-form",
+  ).validate({
     errorElement: "div",
 
-    errorPlacement: function($error, $element) {
+    errorPlacement: function ($error, $element) {
       $demoCoralWrapper = $element.closest(".demo_corals .fields");
       if ($demoCoralWrapper.length > 0) {
         $demoCoralWrapper.append($error);

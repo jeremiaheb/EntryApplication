@@ -361,7 +361,7 @@
           <span class="width-full usa-input--xs margin-right-05 text-semibold font-body-xs display-inline-block">Max</span>
         </div>
       </div>
-      <div class="grid-row flex-row bg-base-lightest maxw-full padding-2 padding-top-0">
+      <div class="grid-row flex-row bg-base-lightest maxw-full padding-x-2 padding-top-0 padding-bottom-15">
         <div class="grid-col-12">
           <ol id="animals" class="margin-top-0 padding-left-3">
             <%= f.fields_for :sample_animals do |ff| %>
@@ -389,13 +389,13 @@
           </ol>
         </div>
       </div>
-      <div class="grid-row flex-row bg-base-lightest maxw-full padding-2 padding-top-0">
-        <div class="grid-col-6 margin-top-neg-2">
+      <div class="grid-row flex-row bg-base-lightest maxw-full padding-x-2 padding-top-5 padding-bottom-2">
+        <div class="grid-col-6">
           <button type="button" class="validate-species-button usa-button usa-button--outline" id="validateAnimals">Validate Species</button>
           <span class="validateCross" style="display: none;"><%= image_tag "cross.png" %></span>
           <span class="validateCheck" style="display: none;"><%= image_tag "check.png" %></span>
         </div>
-        <div class="grid-col-6 margin-top-neg-2">
+        <div class="grid-col-6">
           <%= f.submit "Submit Sample", id: "submitButton", class: "usa-button float-right", disabled: true %>
         </div>
       </div>

@@ -346,9 +346,10 @@ $(function () {
     set_time_seen_field_on_focus();
     enable_disable_animals_fields();
     alertSpeciesSizes();
-    $("#species-tab input:text:visible").eq(-5);
-    $("#species-tab .sppCommon:visible").last().select2("open");
-    $("#animals").scrollTop($("#animals")[0].scrollHeight);
+
+    const $lastSpeciesSelect = $("#species-tab .sppCommon:visible").last();
+    $lastSpeciesSelect[0].scrollIntoView(true);
+    $lastSpeciesSelect.select2("open");
   });
 
   $("#animals").find(".sppCommon").select2();

@@ -21,7 +21,7 @@ class CoralDemographicsTest < ApplicationSystemTestCase
     # TODO: If reuse is desired, extract this complex input to a function
     find("select#coral_demographic_boatlog_manager_id").select(boatlog_manager.agency_name)
     find("select#coral_demographic_diver_id").select(diver.diver_name)
-    find("select#coral_demographic_buddy").select(buddy.diver_name)
+    find("select#coral_demographic_buddy_id").select(buddy.diver_name)
     find("input#coral_demographic_field_id").fill_in(with: "30591A")
     find("input#coral_demographic_sample_date").fill_in(with: "2025-01-17")
     find("body").click # blur for calendar popup

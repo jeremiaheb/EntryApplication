@@ -6,6 +6,7 @@ class BenthicCover < ApplicationRecord
   accepts_nested_attributes_for :point_intercepts, allow_destroy: true
 
   belongs_to :diver
+  belongs_to :buddy, class_name: "Diver"
   belongs_to :habitat_type
   belongs_to :boatlog_manager
 
@@ -19,7 +20,7 @@ class BenthicCover < ApplicationRecord
 
   validates :boatlog_manager_id,    presence: true
   validates :diver_id,              presence: true
-  validates :buddy,                 presence: true
+  validates :buddy_id,              presence: true
   validates :sample_date,           presence: true
   validates :sample_begin_time,     presence: true
   validates :field_id,              presence: true, length: { minimun: 6, maximum: 6 }

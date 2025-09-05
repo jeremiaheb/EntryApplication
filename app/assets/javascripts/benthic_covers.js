@@ -5,7 +5,7 @@
 //#
 
 $(function () {
-  if (!EA.onRailsPage("benthic_covers", ["edit", "new"])) {
+  if (!EA.onRailsPage("benthic_covers", ["edit", "new", "update", "create"])) {
     return;
   }
 
@@ -40,7 +40,7 @@ $(function () {
 
       if (value > parseInt($rugIndexLess)) {
         $(el).val("").removeClass("error").attr("disabled", true);
-        $(el).siblings("span").remove();
+        $(el).siblings("div.error").remove();
       } else {
         $(el).attr("disabled", false);
       }
@@ -53,6 +53,7 @@ $(function () {
     "focusout",
     function () {
       disable_rugosity_meter_marks();
+      getRugosityTotals();
     },
   );
 
@@ -61,7 +62,10 @@ $(function () {
     $(".rugosityCategories")
       .find(".RugosityCat")
       .each(function () {
-        $rugosityTotals += parseInt($(this).val());
+        const val = $(this).val();
+        if (val != "") {
+          $rugosityTotals += parseInt(val);
+        }
       });
     $("#RugosityTotalDisplay").val($rugosityTotals);
   }
@@ -77,8 +81,9 @@ $(function () {
     $(".coverCats")
       .find(".coverPoints:visible")
       .each(function () {
-        if ($(this).val() != "") {
-          coverTotal += parseFloat($(this).val());
+        const val = $(this).val();
+        if (val != "") {
+          coverTotal += parseFloat(val);
         }
       });
 
@@ -86,7 +91,18 @@ $(function () {
   }
 
   function updateCoverTotalText() {
-    $(".coverTotal").text(" Total Points " + getCoverTotal());
+    const coverTotal = getCoverTotal();
+
+    $(".coverTotal").text("Total Points: " + coverTotal);
+    if (coverTotal == 100) {
+      $(".coverTotal")
+        .removeClass("bg-secondary-light")
+        .addClass("bg-primary-light");
+    } else {
+      $(".coverTotal")
+        .addClass("bg-secondary-light")
+        .removeClass("bg-primary-light");
+    }
   }
 
   updateCoverTotalText();
@@ -121,12 +137,16 @@ $(function () {
   $("#lpiSubmit").click(function (e) {
     e.preventDefault();
 
-    $(".new_benthic_cover, .edit_benthic_cover").validate().cancelSubmit = true;
+    $(
+      ".new_benthic_cover, .edit_benthic_cover, .benthic-cover-form",
+    ).validate().cancelSubmit = true;
 
     $(".benthic_covers")
       .find("input:enabled")
       .each(function () {
-        $(".new_benthic_cover, .edit_benthic_cover").validate().element(this);
+        $(".new_benthic_cover, .edit_benthic_cover, .benthic-cover-form")
+          .validate()
+          .element(this);
       });
 
     var $errors =
@@ -145,7 +165,9 @@ $(function () {
       }
 
       $(".formContainer :input").not(this).attr("disabled", false);
-      $(".new_benthic_cover, .edit_benthic_cover").submit();
+      $(
+        ".new_benthic_cover, .edit_benthic_cover, .benthic-cover-form",
+      ).submit();
     }
   });
 
@@ -170,8 +192,18 @@ $(function () {
     "Only one entry per cover Category",
   );
 
-  $(".new_benthic_cover, .edit_benthic_cover").validate({
-    errorElement: "span",
+  $(".new_benthic_cover, .edit_benthic_cover, .benthic-cover-form").validate({
+    errorElement: "div",
+    errorPlacement: function ($error, $element) {
+      if ($element.closest(".coverCats").length > 0) {
+        // Place the error under the row
+        $element.closest(".fields").append($error);
+        return;
+      }
+
+      // Default
+      $error.insertAfter($element);
+    },
 
     onfocusout: function (element) {
       this.element(element);

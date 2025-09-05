@@ -4,7 +4,7 @@
   <div class="grid-row padding-1 margin-bottom-1">
     <div class="grid-col-12">
       <%- if Rails.env.development? %>
-        <legend class="usa-legend text-bold margin-top-0">Login with SSO</legend>
+        <legend class="usa-legend text-semibold margin-top-0">Login with SSO</legend>
         <ul class="usa-button-group margin-top-1">
           <li class="usa-button-group__item">
             <%= button_to "ICAM", omniauth_authorize_path(resource_name, :icam), class: "usa-button usa-button--accent-cool" %>
@@ -25,7 +25,7 @@
 
   <div class="grid-row padding-1">
     <div class="grid-col-12">
-      <legend class="usa-legend text-bold margin-top-0">Login with username and password</legend>
+      <legend class="usa-legend text-semibold margin-top-0">Login with username and password</legend>
 
       <%= f.label :username, class: "usa-label margin-top-1" %>
       <%= f.text_field :username, class: "usa-input usa-input--lg", autofocus: true, autocomplete: "username" %>

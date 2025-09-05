@@ -54,15 +54,15 @@ $(function () {
     $(".demo_corals").scrollTop(1e10);
   });
 
-  //supress submitting form on pressing enter key, enter key adds new coral
-  //while inside coverCat class
-
+  // Suppres default behavior of enter except on buttons
   $(".coral-demographic-form").bind("keypress", function (e) {
-    if (e.keyCode == 13) {
+    const $target = $(e.target);
+    if (e.keyCode == 13 && !$target.is(":button") && !$target.is(":submit")) {
       e.preventDefault();
     }
   });
 
+  // Within the Individual Corals section, enter adds a new row
   $(".demo_corals").bind("keypress", function (e) {
     if (e.keyCode == 13) {
       e.preventDefault();

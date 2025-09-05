@@ -23,8 +23,8 @@ FactoryBot.define do
     current { "none" }
     substrate_max_depth { 50 }
     substrate_min_depth { 50 }
-    hard_verticle_relief { 1 }
-    soft_verticle_relief { 1 }
+    hard_verticle_relief { 2 }
+    soft_verticle_relief { 2 }
     hard_relief_cat_0 { 20 }
     hard_relief_cat_1 { 20 }
     hard_relief_cat_2 { 20 }

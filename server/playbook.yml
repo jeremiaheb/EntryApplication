@@ -5,17 +5,16 @@
     - name: Gather service facts
       ansible.builtin.service_facts:
 
+    - name: Update apt cache if stale
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+      become: true
+
     - name: Detect cloud instance
       ansible.builtin.stat:
         path: /etc/google_instance_id
       register: google_instance_id
-
-    - name: Override cloud usernames
-      ansible.builtin.set_fact:
-        usernames:
-          alindeman: andy_lindeman_noaa_gov
-          jeremiaheb: jeremiah_blondeau_noaa_gov
-      when: "google_instance_id.stat.exists"
 
     - name: Remove cloud-init ssh configuration for non-cloud instances
       ansible.builtin.file:
@@ -50,24 +49,24 @@
         content: |
           network:
             config: disabled
-      become: true
       when: "not google_instance_id.stat.exists and cloud_cfg_d.stat.exists and cloud_cfg_d.stat.isdir"
+      become: true
 
     - name: Disable cloud-init for non-cloud instances
       ansible.builtin.service:
         name: cloud-init
         enabled: false
         state: stopped
-      become: true
       when: "not google_instance_id.stat.exists and 'cloud-init.service' in ansible_facts.services"
+      become: true
 
     - name: Disable cloud-init-local for non-cloud instances
       ansible.builtin.service:
         name: cloud-init-local
         enabled: false
         state: stopped
-      become: true
       when: "not google_instance_id.stat.exists and 'cloud-init-local.service' in ansible_facts.services"
+      become: true
 
     - name: Enable ssh server
       ansible.builtin.service:
@@ -76,29 +75,32 @@
         state: started
       become: true
 
-    - name: Set hostname
+    - name: Set hostname for non-cloud instances
       ansible.builtin.hostname:
         name: entryapplication.nmfs.noaa.gov
+      when: "not google_instance_id.stat.exists"
       become: true
 
-    - name: Replace hostname in /etc/hosts
+    - name: Replace hostname in /etc/hosts for non-cloud instances
       ansible.builtin.replace:
         path: /etc/hosts
         regexp: "^127.0.1.1 .*$"
         replace: "127.0.1.1 entryapplication entryapplication.nmfs.noaa.gov"
+      when: "not google_instance_id.stat.exists"
       become: true
 
     # IPv6 is not currently available in production. Make sure it does not
     # accidentally get enabled.
-    - name: Disable ipv6
+    - name: Disable ipv6 for non-cloud instances
       ansible.posix.sysctl:
         name: net.ipv6.conf.all.disable_ipv6
         value: "1"
         sysctl_file: "/etc/sysctl.d/99-disable-ipv6.conf"
         sysctl_set: true
+      when: "not google_instance_id.stat.exists"
       become: true
 
-    - name: Create systemd service to regenerate openssh host keys
+    - name: Create systemd service to regenerate openssh host keys for non-cloud instances
       ansible.builtin.copy:
         dest: /etc/systemd/system/reconfigure-openssh-server.service
         mode: "0644"
@@ -115,12 +117,14 @@
 
           [Install]
           WantedBy=multi-user.target
+      when: "not google_instance_id.stat.exists"
       become: true
 
     - name: Enable systemd service for reconfigure-openssh-server
       ansible.builtin.service:
         name: reconfigure-openssh-server
         enabled: true
+      when: "not google_instance_id.stat.exists"
       become: true
 
     - name: Install required packages
@@ -143,40 +147,50 @@
           - acl
           # Required for community.postgresql
           - python3-psycopg2
+          # Required for deb822_repository
+          - python3-debian
       become: true
 
-    - name: Create user alindeman
+    # Cloud instances have users created automatically by OSLogin
+    # See https://cloud.google.com/compute/docs/oslogin/set-up-oslogin
+    - name: Create user alindeman for non-cloud instances
       ansible.builtin.user:
-        name: "{{ usernames['alindeman'] | default('alindeman') }}"
+        name: "alindeman"
         create_home: true
         password: "!" # disable password
         shell: /bin/bash
         groups:
           - users
           - sudo
+      when: "not google_instance_id.stat.exists"
       become: true
 
-    - name: Install ssh key for alindeman
+    - name: Install ssh key for alindeman for non-cloud instances
       ansible.posix.authorized_key:
-        user: "{{ usernames['alindeman'] | default('alindeman') }}"
+        user: "alindeman"
         key: "https://github.com/alindeman-NOAA.keys"
+      when: "not google_instance_id.stat.exists"
       become: true
 
-    - name: Create user jeremiaheb
+    # Cloud instances have users created automatically by OSLogin
+    # See https://cloud.google.com/compute/docs/oslogin/set-up-oslogin
+    - name: Create user jeremiaheb for non-cloud instances
       ansible.builtin.user:
-        name: "{{ usernames['jeremiaheb'] | default('jeremiaheb') }}"
+        name: "jeremiaheb"
         create_home: true
         password: "!" # disable password
         shell: /bin/bash
         groups:
           - users
           - sudo
+      when: "not google_instance_id.stat.exists"
       become: true
 
-    - name: Install ssh key for jeremiaheb
+    - name: Install ssh key for jeremiaheb for non-cloud instances
       ansible.posix.authorized_key:
-        user: "{{ usernames['jeremiaheb'] | default('jeremiaheb') }}"
+        user: "jeremiaheb"
         key: "https://github.com/jeremiaheb.keys"
+      when: "not google_instance_id.stat.exists"
       become: true
 
     - name: Install postgresql server
@@ -282,19 +296,19 @@
           Listen 8000
           <VirtualHost *:80 *:8000>
             # Static assets
-            <Directory "/var/www/apps/EntryApplication/current/public">
+            <Directory "/var/www/apps/EntryApplication/shared/public">
               Options FollowSymLinks
               AllowOverride None
               Require all granted
             </Directory>
 
             ProxyPass "/ncrmp_data_entry/assets" "!"
-            Alias "/ncrmp_data_entry/assets" "/var/www/apps/EntryApplication/current/public/ncrmp_data_entry/assets"
+            Alias "/ncrmp_data_entry/assets" "/var/www/apps/EntryApplication/shared/public/ncrmp_data_entry/assets"
             ProxyPass "/ncrmp_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/ncrmp_data_entry"
             ProxyPassReverse "/ncrmp_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/ncrmp_data_entry"
 
             ProxyPass "/caribbean_data_entry/assets" "!"
-            Alias "/caribbean_data_entry/assets" "/var/www/apps/EntryApplication/current/public/caribbean_data_entry/assets"
+            Alias "/caribbean_data_entry/assets" "/var/www/apps/EntryApplication/shared/public/caribbean_data_entry/assets"
             ProxyPass "/caribbean_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/caribbean_data_entry"
             ProxyPassReverse "/caribbean_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/caribbean_data_entry"
 
@@ -343,16 +357,7 @@
         shell: /bin/bash
       become: true
 
-    - name: Make entryapplication directory world readable
-      ansible.builtin.file:
-        path: /var/www/apps/EntryApplication
-        mode: "0755"
-        owner: "entryapplication"
-        group: "entryapplication"
-        state: "directory"
-      become: true
-
-    - name: Make entryapplication socket directory world readable
+    - name: Make certain entryapplication directory world readable
       ansible.builtin.file:
         path: "{{ item }}"
         mode: "0755"
@@ -361,21 +366,11 @@
         state: "directory"
       become: true
       with_items:
+        - "/var/www/apps/EntryApplication"
         - "/var/www/apps/EntryApplication/shared"
+        - "/var/www/apps/EntryApplication/shared/public"
         - "/var/www/apps/EntryApplication/shared/tmp"
         - "/var/www/apps/EntryApplication/shared/tmp/sockets"
-
-    - name: Add /vagrant as a safe git directory for local deployments
-      ansible.builtin.copy:
-        dest: /var/www/apps/EntryApplication/.gitconfig
-        content: |
-          [safe]
-          directory = /vagrant/.git
-        owner: entryapplication
-        group: entryapplication
-        mode: "0644"
-      become: true
-      become_user: entryapplication
 
     - name: Install deploy keys for entryapplication
       ansible.posix.authorized_key:
@@ -699,6 +694,26 @@
         PATH: "{{ ansible_user_dir }}/.nvm/versions/node/v22.16.0/bin:{{ ansible_env.PATH }}"
       when: development_build is defined
 
+    - name: Add Google Cloud apt repository
+      ansible.builtin.deb822_repository:
+        name: "gcloud"
+        types: "deb"
+        uris: "https://packages.cloud.google.com/apt"
+        suites: "cloud-sdk"
+        components:
+          - "main"
+        signed_by: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
+      become: true
+      register: google_cloud_apt_repository
+      when: development_build is defined
+
+    - name: Install gcloud CLI
+      ansible.builtin.apt:
+        name: google-cloud-cli
+        update_cache: "{{ google_cloud_apt_repository.changed }}"
+      become: true
+      when: development_build is defined
+
     - name: Add automatic cd to /vagrant in ~/.bashrc
       ansible.builtin.blockinfile:
         path: "{{ ansible_user_dir }}/.bashrc"
@@ -724,6 +739,19 @@
         opts: "bind,nofail"
         state: mounted
       become: true
+      when: development_build is defined
+
+    - name: Add /vagrant as a safe git directory for local deployments
+      ansible.builtin.copy:
+        dest: /var/www/apps/EntryApplication/.gitconfig
+        content: |
+          [safe]
+          directory = /vagrant/.git
+        owner: entryapplication
+        group: entryapplication
+        mode: "0644"
+      become: true
+      become_user: entryapplication
       when: development_build is defined
 
   handlers:

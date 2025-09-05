@@ -23,6 +23,7 @@
 //= require bootstrap-datepicker/dist/js/bootstrap-datepicker
 //= require jquery-timepicker/jquery.timepicker
 //= require jquery-ui/widgets/sortable
+//= require jquery-ui/widgets/tabs
 //
 //= require ./validations
 //= require ./benthic_covers
@@ -87,4 +88,17 @@ $(function () {
       return false;
     }
   }
+
+  const addFocusClassToLabel = function () {
+    const $focused = $(document.activeElement);
+    const focusedID = $focused.attr("id");
+
+    $("label.focused").removeClass("focused");
+    if (focusedID) {
+      $("label[for='" + focusedID + "']").addClass("focused");
+    }
+  };
+
+  addFocusClassToLabel();
+  $(document).on("focusin focusout", ":input", addFocusClassToLabel);
 });

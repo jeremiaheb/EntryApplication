@@ -3,9 +3,9 @@
     <%- ([["Home", root_path]] + object).each do |(name, options)| %>
       <li class="usa-breadcrumb__list-item">
         <%- if options.present? %>
-          <%= link_to name, options, class: "usa-breadcrumb__link font-heading-lg text-bold" %>
+          <%= link_to name, options, class: "usa-breadcrumb__link font-heading-lg text-semibold" %>
         <%- else %>
-          <span class="font-heading-lg text-bold"><%= name %></span>
+          <span class="font-heading-lg text-semibold"><%= name %></span>
         <%- end %>
       </li>
     <%- end %>

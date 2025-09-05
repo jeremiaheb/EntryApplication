@@ -86,11 +86,6 @@
       <ol class="demo_corals margin-top-0 padding-left-3">
         <%= f.fields_for :demographic_corals do |ff| %>
           <li>
-            <span class="drag-handle width-full maxw-2 display-inline-block">
-              <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
-                <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#drag_handle") %>
-              </svg>
-            </span>
             <%= ff.text_field :meter_mark, class: "usa-input usa-input--2xs font-body-2xs padding-05 height-auto display-inline-block" %>
             <%= ff.select :coral_id, Coral.order(:rank, :code).map { |c| [c.display_name, c.id, { "data-rank": c.rank }] }, { include_blank: true }, class: "coralSpecies width-full maxw-card-lg margin-top-1 height-auto font-body-3xs display-inline-block" %>
             <%= ff.text_field :max_diameter, class: "usa-input usa-input--xs font-body-2xs padding-05 height-auto display-inline-block" %>

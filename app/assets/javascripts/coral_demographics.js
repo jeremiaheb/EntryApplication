@@ -24,11 +24,6 @@ $(function () {
     event.field.find(".coralSpecies").select2();
   });
 
-  $(".demo_corals").sortable({
-    handle: ".drag-handle",
-    items: "> .fields",
-  });
-
   function disable_fields_if_no_coral() {
     $(".coralSpecies").on("focusout", function () {
       $coralCat = $(this).find("span").text();

@@ -39,11 +39,11 @@ class CrosscheckReport
   end
 
   def missing_samples_from_diver
-    all_samples_as_missing_entries - all_boat_log_replicates_as_missing_entries
+    all_boat_log_replicates_as_missing_entries - all_samples_as_missing_entries
   end
 
   def missing_samples_from_boat_log
-    all_boat_log_replicates_as_missing_entries - all_samples_as_missing_entries
+    all_samples_as_missing_entries - all_boat_log_replicates_as_missing_entries
   end
 
   private

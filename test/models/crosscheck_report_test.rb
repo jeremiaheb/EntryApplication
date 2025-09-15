@@ -39,8 +39,8 @@ class CrosscheckReportTest < ActiveSupport::TestCase
     coral_demoX = FactoryBot.create(:coral_demographic, sample_date: "2025-05-06", field_id: "12341X", boatlog_manager: boatlog_manager, diver: diver2, buddy: diver1)
 
     report = CrosscheckReport.new([boatlog_manager])
-    assert_equal 4, report.missing_samples_from_diver.length
-    assert_equal 0, report.missing_samples_from_boat_log.length
+    assert_equal 0, report.missing_samples_from_diver.length
+    assert_equal 4, report.missing_samples_from_boat_log.length
   end
 
   test "identifies potentially missing samples" do
@@ -56,8 +56,8 @@ class CrosscheckReportTest < ActiveSupport::TestCase
     rep_logX = FactoryBot.create(:rep_log, station_log: station_log, diver: diver2, replicate: "X")
 
     report = CrosscheckReport.new([boatlog_manager])
-    assert_equal 0, report.missing_samples_from_diver.length
-    assert_equal 4, report.missing_samples_from_boat_log.length
+    assert_equal 4, report.missing_samples_from_diver.length
+    assert_equal 0, report.missing_samples_from_boat_log.length
   end
 
   test "identifies date mismatches for potentially missing boat logs" do
@@ -76,8 +76,8 @@ class CrosscheckReportTest < ActiveSupport::TestCase
 
     report = CrosscheckReport.new([boatlog_manager])
     assert_equal 1, report.missing_samples_from_diver.length
-    assert_equal sampleA, report.missing_samples_from_diver[0].related_model
+    assert_equal boat_log, report.missing_samples_from_diver[0].related_model
     assert_equal 1, report.missing_samples_from_boat_log.length
-    assert_equal boat_log, report.missing_samples_from_boat_log[0].related_model
+    assert_equal sampleA, report.missing_samples_from_boat_log[0].related_model
   end
 end

@@ -55,7 +55,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @crosscheck_report.missing_samples_from_boat_log.each do |missing| %>
+          <% @crosscheck_report.missing_samples_from_diver.each do |missing| %>
             <%= tag.tr "data-link": url_for(missing.related_model) do %>
               <td><%= missing.diver&.diver_name %></td>
               <td><%= missing.date %></td>
@@ -76,7 +76,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @crosscheck_report.missing_samples_from_diver.each do |missing| %>
+          <% @crosscheck_report.missing_samples_from_boat_log.each do |missing| %>
             <%= tag.tr "data-link": url_for(missing.related_model) do %>
               <td><%= missing.diver&.diver_name %></td>
               <td><%= missing.date %></td>

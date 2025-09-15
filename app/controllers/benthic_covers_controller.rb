@@ -2,6 +2,8 @@ class BenthicCoversController < ApplicationController
   before_action :authenticate_diver!
   load_and_authorize_resource
 
+  layout "application-uswds", only: [:index]
+
   # GET /benthic_covers
   # GET /benthic_covers.json
   def index

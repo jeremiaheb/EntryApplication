@@ -1,56 +1,112 @@
-<div class="appContainer">
-  <div class="sampleListContainer">
-    <h3>Benthic Cover Samples</h3>
-  
-      <table id="sampleList" class="display table table-condensed">
-        <thead>
-         <tr>
-           <th>Diver</th>
-           <th>field ID</th>
-           <th>Date</th>
-           <th>Sample Start Time</th>
-           <th></th>
-         </tr>
-       </thead>
-       <tbody>
-      <% @benthic_covers.each do |benthic_cover| %>
+<%= render "shared/nav_breadcrumbs", object: [["Benthic Cover Samples", ""]] %>
+
+<div class="grid-row">
+  <div class="grid-col-12">
+    <ul class="usa-button-group margin-bottom-1">
+      <li class="usa-button-group__item">
+        <%= link_to new_benthic_cover_path, class: "new-sample-button usa-button" do %>
+          <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+            <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#add") %>
+          </svg>
+          New LPI
+        <%- end %>
+      </li>
+      <li class="usa-button-group__item">
+        <%= link_to benthic_covers_path(format: "pdf", nocache: SecureRandom.alphanumeric, diver_id: current_diver.id), class: "usa-button usa-button--accent-cool" do %>
+          <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+            <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#file_download") %>
+          </svg> 
+          <div>
+            Proofing Report (.pdf)
+          </div>
+        <%- end %>
+      </li>
+      <%- if current_diver.manager? || current_diver.admin? %>
+        <li class="usa-button-group__item">
+          <%= link_to benthic_covers_path(format: "xlsx", nocache: SecureRandom.alphanumeric), class: "usa-button usa-button--accent-cool" do %>
+            <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+              <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#file_download") %>
+            </svg> 
+            Samples (.xlsx)
+          <%- end %>
+        </li>
+      <%- end %>
+      <%- if current_diver.manager? %>
+        <li class="usa-button-group__item">
+          <%= link_to "#diver-proofing-report-modal", class: "usa-button usa-button--accent-warm", "aria-controls": "diver-proofing-report-modal", "data-open-modal": true do %>
+            <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+              <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#people") %>
+            </svg> 
+            Diver Proofing Reports
+          <%- end %>
+          <div class="usa-modal" id="diver-proofing-report-modal" aria-labelledby="diver-proofing-report-modal-heading" aria-describedby="diver-proofing-report-modal-description">
+            <div class="usa-modal__content">
+              <div class="usa-modal__main">
+                <h2 id="diver-proofing-report-modal-heading" class="usa-modal__heading">
+                  <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+                    <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#people") %>
+                  </svg> 
+                  Diver Proofing Reports
+                </h2>
+                <div id="diver-proofing-report-modal-description">
+                  <%= form_tag benthic_covers_path(format: "pdf"), class: "usa-form", method: "get" do %>
+                    <%= hidden_field_tag :nocache, SecureRandom.alphanumeric %>
+
+                    <%= select_tag :diver_id, options_from_collection_for_select(current_diver.boatlog_manager.divers_responsible_for, :id, :diver_name), class: "usa-select usa-input--lg" %>
+
+                    <%= button_tag class: "usa-button" do %>
+                      <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+                        <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#file_download") %>
+                      </svg> 
+                      Proofing Report (.pdf)
+                    <%- end %>
+
+                    <%= button_tag "Close", type: "button", class: "usa-button usa-button--outline", "data-close-modal": true %>
+                  <%- end %>
+                </div>
+              </div>
+
+              <%= button_tag type: "button", class: "usa-button usa-modal__close", "aria-label": "Close this dialog", "data-close-modal": true do %>
+                <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+                  <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#close") %>
+                </svg> 
+              <%- end %>
+            </div>
+          </div>
+        </li>
+      <%- end %>
+    </ul>
+
+    <table class="width-full display">
+      <thead>
         <tr>
-          <td><%= benthic_cover.diver.diver_name %></td>
-          <td class='fieldid_check'><%= benthic_cover.field_id %></td>
-          <td><%= benthic_cover.sample_date %></td>
-          <td><%= benthic_cover.sample_begin_time.strftime("%H:%M") %></td>
-          <td>
-            <%= link_to "View", benthic_cover %>
-            <%= link_to "Edit", edit_benthic_cover_path(benthic_cover) %>
-          </td>
+          <th scope="col">Diver</th>
+          <th scope="col">Field ID</th>
+          <th scope="col">Date</th>
+          <th scope="col">Sample Start Time</th>
+          <th scope="col" class="not-orderable not-searchable"></th>
         </tr>
-      <% end %>
+      </thead>
+      <tbody>
+        <%- @benthic_covers.each do |benthic_cover| %>
+          <%= tag.tr "data-id": benthic_cover.id do %>
+            <td><%= benthic_cover.diver&.diver_name %></td>
+            <td class="fieldid_check"><%= benthic_cover.field_id %></td>
+            <td><%= benthic_cover.sample_date %></td>
+            <td><%= benthic_cover.sample_begin_time&.strftime("%H:%M") %></td>
+            <td>
+              <ul class="usa-button-group float-right">
+                <li class="usa-button-group__item">
+                  <%= link_to "View", benthic_cover, class: "view-sample-button usa-button" %>
+                </li>
+                <li class="usa-button-group__item">
+                  <%= link_to "Edit", edit_benthic_cover_path(benthic_cover), class: "edit-sample-button usa-button usa-button--outline" %>
+                </li>
+              </ul>
+            </td>
+          <%- end %>
+        <%- end %>
       </tbody>
-      </table>
+    </table>
   </div>
-  <div id="newSampleButton"> 
-    <%= button_to('New LPI', new_benthic_cover_path, :method => "get", :class => 'btn btn-large btn-primary wrap')  %>   
-  </div>
-  <div id="downloadSampleButton"> 
-    <%= link_to('Download Proofing Report (.pdf)', benthic_covers_path(format: "pdf", nocache: SecureRandom.alphanumeric, diver_id: current_diver.id), :class => 'btn btn-small btn-primary')  %>   
-  </div>
-<% if !current_diver.diver? %>
-  <div id="downloadXLSXButton"> 
-    <%= link_to('Download Samples (.xlsx)', benthic_covers_path(format: "xlsx", nocache: SecureRandom.alphanumeric), :class => 'btn btn-small btn-primary')  %>   
-  </div>
-<% end %>
-
-<% if current_diver.manager? %>
-  <div id="diverProofingReports" class="btn-group">
-      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-        DiverProofingReports      
-    </button>
-      <ul class="dropdown-menu" role="menu">
-        <% current_diver.boatlog_manager.divers_responsible_for.each do |diver| %>
-          <li> <%= link_to(diver.diver_name, benthic_covers_path(format: "pdf", nocache: SecureRandom.alphanumeric, diver_id: diver.id)) %> </li>
-        <% end %>
-      </ul>
-  </div>
-<% end %>
 </div>
-

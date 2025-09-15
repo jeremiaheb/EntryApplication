@@ -16,7 +16,7 @@ class CoralDemographicsTest < ApplicationSystemTestCase
     find("input#diver_password").fill_in(with: diver.password)
     find("input[type=submit]").click
 
-    find("#newSampleButton").click
+    find(".new-sample-button").click
 
     # TODO: If reuse is desired, extract this complex input to a function
     find("select#coral_demographic_boatlog_manager_id").select(boatlog_manager.agency_name)
@@ -55,7 +55,7 @@ class CoralDemographicsTest < ApplicationSystemTestCase
     find("body").click
     find("input[type=submit]").click
 
-    assert_selector(".alert", text: "Coral demographic was successfully created")
+    assert_selector(".usa-alert", text: "Coral demographic was successfully created")
 
     assert_equal 1, CoralDemographic.count
 

@@ -36,18 +36,18 @@ bootstrap-datepicker@1.10.0:
   dependencies:
     jquery ">=3.4.0 <4.0.0"
 
-datatables.net-dt@^2.3.3:
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/datatables.net-dt/-/datatables.net-dt-2.3.3.tgz#0710aec3d34bc64398b088c0bcb774435f1a918a"
-  integrity sha512-7rCTiXqyLSSAo63Ltg31B67yORR6TG1cvFTqK5MrDY6IHNsZ3n9ORNwCH8pFaLquz5ve3LFV9OO9+6m4SKuvoA==
+datatables.net-dt@^2.3.4:
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/datatables.net-dt/-/datatables.net-dt-2.3.4.tgz#febb0ed194ba8f327b98d51e683dba4038c4d20a"
+  integrity sha512-qOCnnUuFTiju4AOMM4xy4Lx87UfyHdIHIMYdbBXD4pAtvoWTH9wMzVTN/2gFNT4GlbrLkmGf5ZkU6uLRTTymMA==
   dependencies:
-    datatables.net "2.3.3"
+    datatables.net "2.3.4"
     jquery ">=1.7"
 
-datatables.net@2.3.3:
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/datatables.net/-/datatables.net-2.3.3.tgz#fe4f96bdbc4cf47c8d11162a7af525ca6a3683d2"
-  integrity sha512-SWL3za6nheY6gdoiLgCc++tYmxbwrmv2bjrEiII9rXBWXXSbOZct6pjR3FueMVRM5jmt7pQcXiGovfuFDnutQg==
+datatables.net@2.3.4:
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/datatables.net/-/datatables.net-2.3.4.tgz#8cf69f2e6cb8d271be3d5c4f75a479684d20f253"
+  integrity sha512-fKuRlrBIdpAl2uIFgl9enKecHB41QmFd/2nN9LBbOvItV/JalAxLcyqdZXex7wX4ZXjnJQEnv6xeS9veOpKzSw==
   dependencies:
     jquery ">=1.7"
 

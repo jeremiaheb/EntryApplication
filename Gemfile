@@ -7,7 +7,7 @@ gem "rails", "7.1.5.1"
 gem "pg", "~> 1.5", "< 1.6"
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 6.6"
+gem "puma", "~> 7.0"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_09_15_163308) do
+ActiveRecord::Schema[7.1].define(version: 2025_09_15_163505) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,7 +26,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_15_163308) do
   end
 
   create_table "benthic_covers", force: :cascade do |t|
-    t.integer "diver_id"
+    t.integer "diver_id", null: false
     t.integer "habitat_type_id"
     t.integer "buddy_id"
     t.string "field_id"
@@ -38,6 +38,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_15_163308) do
     t.datetime "updated_at", precision: nil
     t.integer "boatlog_manager_id", null: false
     t.index ["boatlog_manager_id"], name: "index_benthic_covers_on_boatlog_manager_id"
+    t.index ["diver_id"], name: "index_benthic_covers_on_diver_id"
   end
 
   create_table "boat_logs", force: :cascade do |t|
@@ -58,7 +59,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_15_163308) do
   end
 
   create_table "coral_demographics", force: :cascade do |t|
-    t.integer "diver_id"
+    t.integer "diver_id", null: false
     t.integer "habitat_type_id"
     t.integer "buddy_id"
     t.string "field_id"
@@ -71,6 +72,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_15_163308) do
     t.integer "boatlog_manager_id", null: false
     t.integer "percent_hardbottom"
     t.index ["boatlog_manager_id"], name: "index_coral_demographics_on_boatlog_manager_id"
+    t.index ["diver_id"], name: "index_coral_demographics_on_diver_id"
   end
 
   create_table "corals", force: :cascade do |t|
@@ -107,9 +109,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_15_163308) do
   end
 
   create_table "diver_samples", force: :cascade do |t|
-    t.integer "sample_id"
-    t.integer "diver_id"
+    t.integer "sample_id", null: false
+    t.integer "diver_id", null: false
     t.boolean "primary_diver"
+    t.index ["diver_id", "sample_id"], name: "index_diver_samples_on_diver_id_and_sample_id"
+    t.index ["sample_id"], name: "index_diver_samples_on_sample_id"
   end
 
   create_table "divers", force: :cascade do |t|

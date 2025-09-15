@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_09_15_162731) do
+ActiveRecord::Schema[7.1].define(version: 2025_09_15_163308) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -185,9 +185,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_15_162731) do
   end
 
   create_table "rep_logs", force: :cascade do |t|
-    t.integer "station_log_id"
+    t.integer "station_log_id", null: false
     t.string "replicate"
-    t.integer "diver_id"
+    t.integer "diver_id", null: false
+    t.index ["diver_id"], name: "index_rep_logs_on_diver_id"
+    t.index ["station_log_id"], name: "index_rep_logs_on_station_log_id"
   end
 
   create_table "rugosity_measures", force: :cascade do |t|
@@ -312,12 +314,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_15_162731) do
   end
 
   create_table "station_logs", force: :cascade do |t|
-    t.integer "boat_log_id"
+    t.integer "boat_log_id", null: false
     t.integer "stn_number"
     t.time "time"
     t.text "comments"
     t.float "latitude"
     t.float "longitude"
+    t.index ["boat_log_id"], name: "index_station_logs_on_boat_log_id"
   end
 
   add_foreign_key "solid_errors_occurrences", "solid_errors", column: "error_id"

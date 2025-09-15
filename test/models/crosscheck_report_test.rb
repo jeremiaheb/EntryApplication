@@ -10,7 +10,7 @@ class CrosscheckReportTest < ActiveSupport::TestCase
     station_log = FactoryBot.create(:station_log, stn_number: "1", boat_log: boat_log)
     rep_logA = FactoryBot.create(:rep_log, station_log: station_log, diver: diver1, replicate: "A")
     rep_logB = FactoryBot.create(:rep_log, station_log: station_log, diver: diver2, replicate: "B")
-    rep_logJ = FactoryBot.create(:rep_log, station_log: station_log, diver: diver1, replicate: "I")
+    rep_logI = FactoryBot.create(:rep_log, station_log: station_log, diver: diver1, replicate: "I")
     rep_logX = FactoryBot.create(:rep_log, station_log: station_log, diver: diver2, replicate: "X")
 
     sample_animalA = FactoryBot.create(:sample_animal, sample: nil)
@@ -52,7 +52,7 @@ class CrosscheckReportTest < ActiveSupport::TestCase
     station_log = FactoryBot.create(:station_log, stn_number: "1", boat_log: boat_log)
     rep_logA = FactoryBot.create(:rep_log, station_log: station_log, diver: diver1, replicate: "A")
     rep_logB = FactoryBot.create(:rep_log, station_log: station_log, diver: diver2, replicate: "B")
-    rep_logJ = FactoryBot.create(:rep_log, station_log: station_log, diver: diver1, replicate: "I")
+    rep_logI = FactoryBot.create(:rep_log, station_log: station_log, diver: diver1, replicate: "I")
     rep_logX = FactoryBot.create(:rep_log, station_log: station_log, diver: diver2, replicate: "X")
 
     report = CrosscheckReport.new([boatlog_manager])

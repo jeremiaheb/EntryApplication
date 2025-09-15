@@ -50,18 +50,18 @@ class CrosscheckReport
 
   def all_samples_as_missing_entries
     # Memoize to avoid running expensive queries multiple times
-    return @all_samples_as_missing_samples if defined?(@all_samples_as_missing_samples)
+    return @all_samples_as_missing_entries if defined?(@all_samples_as_missing_entries)
 
-    @all_samples_as_missing_samples = (samples + benthic_covers + coral_demographics).map { |sample|
+    @all_samples_as_missing_entries = (samples + benthic_covers + coral_demographics).map { |sample|
       MissingEntry.new(sample.diver, sample.sample_date, sample.field_id, sample)
     }.sort_by(&:date)
   end
 
   def all_boat_log_replicates_as_missing_entries
     # Memoize to avoid running expensive queries multiple times
-    return @all_boat_log_replicates_as_missing_samples if defined?(@all_boat_log_replicates_as_missing_samples)
+    return @all_boat_log_replicates_as_missing_entries if defined?(@all_boat_log_replicates_as_missing_entries)
 
-    @all_boat_log_replicates_as_missing_samples = boat_log_replicates.map { |rep_log|
+    @all_boat_log_replicates_as_missing_entries = boat_log_replicates.map { |rep_log|
       MissingEntry.new(rep_log.diver, rep_log.station_log.boat_log.date, rep_log.field_id, rep_log.station_log.boat_log)
     }.sort_by(&:date)
   end

@@ -80,4 +80,26 @@ class CrosscheckReportTest < ActiveSupport::TestCase
     assert_equal 1, report.missing_samples_from_boat_log.length
     assert_equal sampleA, report.missing_samples_from_boat_log[0].related_model
   end
+
+  test "identifies boatlog manager ID mismatches for potentially mismatched entries" do
+    # Sometimes a diver will log a sample under the incorrect boatlog manager
+    diver1 = FactoryBot.create(:diver)
+    diver2 = FactoryBot.create(:diver)
+    boatlog_manager1 = FactoryBot.create(:boatlog_manager)
+    boatlog_manager2 = FactoryBot.create(:boatlog_manager)
+
+    boat_log = FactoryBot.create(:boat_log, date: "2025-05-06", boatlog_manager: boatlog_manager1, primary_sample_unit: "1234")
+    station_log = FactoryBot.create(:station_log, stn_number: "1", boat_log: boat_log)
+    rep_logA = FactoryBot.create(:rep_log, station_log: station_log, diver: diver1, replicate: "A")
+
+    # Sample would otherwise match up, but the boatlog manager is incorrect
+    sample_animalA = FactoryBot.create(:sample_animal, sample: nil)
+    sampleA = FactoryBot.create(:sample, sample_date: "2025-05-06", field_id: "12341A", boatlog_manager: boatlog_manager2, diver: diver1, buddy: diver2, sample_animals: [sample_animalA])
+
+    report = CrosscheckReport.new([boatlog_manager1, boatlog_manager2])
+    assert_equal 1, report.missing_samples_from_diver.length
+    assert_equal boat_log, report.missing_samples_from_diver[0].related_model
+    assert_equal 1, report.missing_samples_from_boat_log.length
+    assert_equal sampleA, report.missing_samples_from_boat_log[0].related_model
+  end
 end

@@ -8,29 +8,31 @@ class CrosscheckReport
   # For a MissingEntry representing a sample, the related_model will be a boat log.
   # For a MissingEntry representing a boat log, the related_model will be a sample.
   class MissingEntry
-    attr_reader :diver, :date, :field_id, :related_model
+    attr_reader :diver, :boatlog_manager_id, :date, :field_id, :related_model
 
-    def initialize(diver, date, field_id, related_model)
+    def initialize(diver, boatlog_manager_id, date, field_id, related_model)
       @diver = diver
+      @boatlog_manager_id = boatlog_manager_id
       @date = date
       @field_id = field_id
       @related_model = related_model
     end
 
-    # eql? is true if the diver, date and field ID match. The related_model is
-    # NOT considered because it is used only to link a user to the related
-    # model.
+    # eql? is true if the diver, boatlog manager ID, date and field ID match.
+    # The related_model is NOT considered because it is used only to link a user
+    # to the related model.
     def eql?(other)
       return false unless other.is_a?(MissingEntry)
 
       diver == other.diver &&
+        boatlog_manager_id == other.boatlog_manager_id &&
         date == other.date &&
         field_id == other.field_id
     end
     alias == eql?
 
     def hash
-      [diver, date, field_id].hash
+      [diver, boatlog_manager_id, date, field_id].hash
     end
   end
 
@@ -53,7 +55,7 @@ class CrosscheckReport
     return @all_samples_as_missing_entries if defined?(@all_samples_as_missing_entries)
 
     @all_samples_as_missing_entries = (samples + benthic_covers + coral_demographics).map { |sample|
-      MissingEntry.new(sample.diver, sample.sample_date, sample.field_id, sample)
+      MissingEntry.new(sample.diver, sample.boatlog_manager_id, sample.sample_date, sample.field_id, sample)
     }.sort_by(&:date)
   end
 
@@ -62,7 +64,7 @@ class CrosscheckReport
     return @all_boat_log_replicates_as_missing_entries if defined?(@all_boat_log_replicates_as_missing_entries)
 
     @all_boat_log_replicates_as_missing_entries = boat_log_replicates.map { |rep_log|
-      MissingEntry.new(rep_log.diver, rep_log.station_log.boat_log.date, rep_log.field_id, rep_log.station_log.boat_log)
+      MissingEntry.new(rep_log.diver, rep_log.station_log.boat_log.boatlog_manager_id, rep_log.station_log.boat_log.date, rep_log.field_id, rep_log.station_log.boat_log)
     }.sort_by(&:date)
   end
 

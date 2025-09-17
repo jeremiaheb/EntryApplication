@@ -28,7 +28,7 @@
             <th>Demographic Count</th>
           </tr>
         <tbody>
-        <% @data_by_divers.each do |diver, value| %>
+        <% @sample_count_report.counts_by_diver.each do |diver, value| %>
           <tr>
             <td> <%= diver.diver_name %></td>
             <td> <%= value["boat"] %></td>
@@ -45,15 +45,6 @@
   <input type="button" class="btn btn-primary" data-toggle="collapse" data-target=".missingRecords" value="Crosscheck Boatlog vs. Samples">
   <div class="span8 missingRecords collapse out">
     <div class="span3">
-      <% diverMissing = Array.new %>
-      <% boatlogMissing = Array.new %>
-      <% @boatlog_managers.each do |m| %>
-        <% a = m.missing_samples_from_diver %>
-        <% diverMissing += a %>
-        <% b = m.missing_samples_from_boatlog %> 
-        <% boatlogMissing += b %>
-      <% end %>
-
       <table class="display table table-bordered table-condensed">
         <h6>These are in the boatlog but do not have a matching diver sample </h6>
         <thead>
@@ -62,13 +53,14 @@
             <th>Date</th>
             <th>Field ID</th>
           </tr>
+        </thead>
         <tbody>
-        <% diverMissing.each do |missing| %>
-          <tr data-link=" <%= boat_log_path(@boat_logs.find_by_primary_sample_unit(missing[1][0..3])) %> ">
-            <td> <%= missing[2] %></td>
-            <td> <%= missing[0] %></td>
-            <td> <%= missing[1] %></td>
-          </tr>
+          <% @crosscheck_report.missing_samples_from_diver.each do |missing| %>
+            <%= tag.tr "data-link": url_for(missing.related_model) do %>
+              <td><%= missing.diver&.diver_name %></td>
+              <td><%= missing.date %></td>
+              <td><%= missing.field_id %></td>
+            <%- end %>
           <% end %>
         </tbody>
       </table>
@@ -82,13 +74,14 @@
             <th>Date</th>
             <th>Field ID</th>
           </tr>
+        </thead>
         <tbody>
-        <% boatlogMissing.each do |missing| %>
-          <tr data-link=" <%= send_to_path(missing[1]) %> ">
-            <td> <%= missing[2] %></td>
-            <td> <%= missing[0] %></td>
-            <td> <%= missing[1] %></td>
-          </tr>
+          <% @crosscheck_report.missing_samples_from_boat_log.each do |missing| %>
+            <%= tag.tr "data-link": url_for(missing.related_model) do %>
+              <td><%= missing.diver&.diver_name %></td>
+              <td><%= missing.date %></td>
+              <td><%= missing.field_id %></td>
+            <%- end %>
           <% end %>
         </tbody>
       </table>

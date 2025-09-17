@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_14_192342) do
+ActiveRecord::Schema[7.1].define(version: 2025_09_15_163505) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,7 +26,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_192342) do
   end
 
   create_table "benthic_covers", force: :cascade do |t|
-    t.integer "diver_id"
+    t.integer "diver_id", null: false
     t.integer "habitat_type_id"
     t.integer "buddy_id"
     t.string "field_id"
@@ -36,15 +36,18 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_192342) do
     t.text "sample_description"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
-    t.integer "boatlog_manager_id"
+    t.integer "boatlog_manager_id", null: false
+    t.index ["boatlog_manager_id"], name: "index_benthic_covers_on_boatlog_manager_id"
+    t.index ["diver_id"], name: "index_benthic_covers_on_diver_id"
   end
 
   create_table "boat_logs", force: :cascade do |t|
     t.string "primary_sample_unit"
     t.date "date"
-    t.integer "boatlog_manager_id"
+    t.integer "boatlog_manager_id", null: false
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
+    t.index ["boatlog_manager_id"], name: "index_boat_logs_on_boatlog_manager_id"
   end
 
   create_table "boatlog_managers", force: :cascade do |t|
@@ -56,7 +59,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_192342) do
   end
 
   create_table "coral_demographics", force: :cascade do |t|
-    t.integer "diver_id"
+    t.integer "diver_id", null: false
     t.integer "habitat_type_id"
     t.integer "buddy_id"
     t.string "field_id"
@@ -66,8 +69,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_192342) do
     t.text "sample_description"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
-    t.integer "boatlog_manager_id"
+    t.integer "boatlog_manager_id", null: false
     t.integer "percent_hardbottom"
+    t.index ["boatlog_manager_id"], name: "index_coral_demographics_on_boatlog_manager_id"
+    t.index ["diver_id"], name: "index_coral_demographics_on_diver_id"
   end
 
   create_table "corals", force: :cascade do |t|
@@ -104,9 +109,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_192342) do
   end
 
   create_table "diver_samples", force: :cascade do |t|
-    t.integer "sample_id"
-    t.integer "diver_id"
+    t.integer "sample_id", null: false
+    t.integer "diver_id", null: false
     t.boolean "primary_diver"
+    t.index ["diver_id", "sample_id"], name: "index_diver_samples_on_diver_id_and_sample_id"
+    t.index ["sample_id"], name: "index_diver_samples_on_sample_id"
   end
 
   create_table "divers", force: :cascade do |t|
@@ -182,9 +189,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_192342) do
   end
 
   create_table "rep_logs", force: :cascade do |t|
-    t.integer "station_log_id"
+    t.integer "station_log_id", null: false
     t.string "replicate"
-    t.integer "diver_id"
+    t.integer "diver_id", null: false
+    t.index ["diver_id"], name: "index_rep_logs_on_diver_id"
+    t.index ["station_log_id"], name: "index_rep_logs_on_station_log_id"
   end
 
   create_table "rugosity_measures", force: :cascade do |t|
@@ -247,7 +256,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_192342) do
     t.datetime "updated_at", precision: nil
     t.integer "water_temp"
     t.string "current"
-    t.integer "boatlog_manager_id"
+    t.integer "boatlog_manager_id", null: false
     t.integer "substrate_max_depth"
     t.integer "substrate_min_depth"
     t.float "hard_verticle_relief"
@@ -281,6 +290,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_192342) do
     t.integer "hard_pcov_other2"
     t.integer "diver_id"
     t.integer "buddy_id"
+    t.index ["boatlog_manager_id"], name: "index_samples_on_boatlog_manager_id"
     t.index ["buddy_id"], name: "index_samples_on_buddy_id"
     t.index ["diver_id"], name: "index_samples_on_diver_id"
   end
@@ -308,12 +318,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_14_192342) do
   end
 
   create_table "station_logs", force: :cascade do |t|
-    t.integer "boat_log_id"
+    t.integer "boat_log_id", null: false
     t.integer "stn_number"
     t.time "time"
     t.text "comments"
     t.float "latitude"
     t.float "longitude"
+    t.index ["boat_log_id"], name: "index_station_logs_on_boat_log_id"
   end
 
   add_foreign_key "solid_errors_occurrences", "solid_errors", column: "error_id"

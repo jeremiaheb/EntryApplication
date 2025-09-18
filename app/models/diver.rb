@@ -23,13 +23,20 @@ class Diver < ApplicationRecord
 
   scope       :active_divers,      lambda { where(active: true) }
 
-  def self.find_for_database_authentication(conditions)
-    # See https://github.com/heartcombo/devise/wiki/How-To:-Allow-users-to-sign-in-using-their-username-or-email-address
-    if (login = conditions[:login])
-      where("(email IS NOT NULL AND LENGTH(email) > 0 AND LOWER(email) = LOWER(:login)) OR (username IS NOT NULL AND LENGTH(username) > 0 AND LOWER(username) = LOWER(:login))", login: login).first
-    else
-      super
+  # Temporarily allow a diver to be found by "login" which is EITHER email or
+  # username.
+  #
+  # Eventually username will be deprecated.
+  def self.find_first_by_auth_conditions(tainted_conditions, opts = {})
+    conditions = devise_parameter_filter.filter(tainted_conditions).merge(opts)
+    login = conditions.delete(:login)
+
+    relation = where(conditions)
+    if login
+      relation = relation.where("(email IS NOT NULL AND LENGTH(email) > 0 AND LOWER(email) = LOWER(:login)) OR (username IS NOT NULL AND LENGTH(username) > 0 AND LOWER(username) = LOWER(:login))", login: login)
     end
+
+    relation.first
   end
 
   def diver?
@@ -47,7 +54,7 @@ class Diver < ApplicationRecord
   # Login always returns email address. However, during a transition period, a
   # diver may use email OR username as their login for authentication.
   #
-  # See Diver.find_for_database_authentication for the implementation of login
+  # See Diver.find_first_by_auth_conditions for the implementation of login
   # via email or username.
   def login
     email

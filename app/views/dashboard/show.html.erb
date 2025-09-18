@@ -24,86 +24,77 @@
         <%- end %>
       </li>
     </ul>
+  </div>
+</div>
 
-    <div class="usa-accordion usa-accordion--bordered usa-accordion--multiselectable" data-allow-multiple>
-      <h4 class="usa-accordion__heading">
-        <button type="button" class="usa-accordion__button" aria-expanded="true" aria-controls="sample-count-report">Sample Counts by Diver</button>
-      </h4>
-      <div id="sample-count-report" class="usa-accordion__content">
-        <table class="usa-table usa-table--striped">
-          <thead>
-            <tr>
-              <th scope="col">Diver</th>
-              <th scope="col">Boatlog Count</th>
-              <th scope="col">Fish Count</th>
-              <th scope="col">LPI Count</th>
-              <th scope="col">Demographic Count</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @sample_count_report.counts_by_diver.each do |diver, value| %>
-              <tr>
-                <td><%= diver.diver_name %></td>
-                <td><%= value["boat"] %></td>
-                <td><%= value["sample"] %></td>
-                <td><%= value["lpi"] %></td>
-                <td><%= value["demo"] %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
+<div class="grid-row grid-gap">
+  <div class="grid-col-5">
+    <h4>Sample Counts by Diver</h4>
 
-      <h4 class="usa-accordion__heading">
-        <button type="button" class="usa-accordion__button" aria-expanded="true" aria-controls="crosscheck-report">Crosscheck Boat Log vs. Samples</button>
-      </h4>
-      <div id="crosscheck-report" class="usa-accordion__content">
-        <div class="grid-row grid-gap">
-          <div class="grid-col-6 usa-prose">
-            These exist as a <strong>boat log</strong> but do not have a matching <strong>sample</strong>
-            <table class="width-full display">
-              <thead>
-                <tr>
-                  <th scope="col">Diver</th>
-                  <th scope="col">Date</th>
-                  <th scope="col">Field ID</th>
-                </tr>
-              </thead>
-              <tbody>
-                <%- @crosscheck_report.missing_samples_from_diver.each do |missing| %>
-                  <%= tag.tr "data-link": url_for(missing.related_model) do %>
-                    <td><%= missing.diver&.diver_name %></td>
-                    <td><%= missing.date %></td>
-                    <td><%= missing.field_id %></td>
-                  <%- end %>
-                <%- end %>
-              </tbody>
-            </table>
-          </div>
+    <table class="usa-table usa-table--compact usa-table--striped font-sans-2xs">
+      <thead>
+        <tr>
+          <th scope="col">Diver</th>
+          <th scope="col">BoatLog Count</th>
+          <th scope="col">Fish Count</th>
+          <th scope="col">LPI Count</th>
+          <th scope="col">Demo Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @sample_count_report.counts_by_diver.each do |diver, value| %>
+          <tr>
+            <td><%= diver.diver_name %></td>
+            <td><%= value["boat"] %></td>
+            <td><%= value["sample"] %></td>
+            <td><%= value["lpi"] %></td>
+            <td><%= value["demo"] %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="grid-col-7">
+    <h4>Crosscheck Boat Log vs. Samples</h4>
 
-          <div class="grid-col-6 usa-prose">
-            These exist as a <strong>sample</strong> but do not have a matching <strong>boat log</strong>
-            <table class="width-full display">
-              <thead>
-                <tr>
-                  <th scope="col">Diver</th>
-                  <th scope="col">Date</th>
-                  <th scope="col">Field ID</th>
-                </tr>
-              </thead>
-              <tbody>
-                <%- @crosscheck_report.missing_samples_from_boat_log.each do |missing| %>
-                  <%= tag.tr "data-link": url_for(missing.related_model) do %>
-                    <td><%= missing.diver&.diver_name %></td>
-                    <td><%= missing.date %></td>
-                    <td><%= missing.field_id %></td>
-                  <%- end %>
-                <%- end %>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
+    These exist as a <strong>boat log</strong> but do not have a matching <strong>sample</strong>.
+    <table class="width-full font-sans-xs display">
+      <thead>
+        <tr>
+          <th scope="col">Diver</th>
+          <th scope="col">Date</th>
+          <th scope="col">Field ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%- @crosscheck_report.missing_samples_from_diver.each do |missing| %>
+          <%= tag.tr "data-link": url_for(missing.related_model) do %>
+            <td><%= missing.diver&.diver_name %></td>
+            <td><%= missing.date %></td>
+            <td><%= missing.field_id %></td>
+          <%- end %>
+        <%- end %>
+      </tbody>
+    </table>
+
+    These exist as a <strong>sample</strong> but do not have a matching <strong>boat log</strong>.
+    <table class="width-full font-sans-xs display">
+      <thead>
+        <tr>
+          <th scope="col">Diver</th>
+          <th scope="col">Date</th>
+          <th scope="col">Field ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%- @crosscheck_report.missing_samples_from_boat_log.each do |missing| %>
+          <%= tag.tr "data-link": url_for(missing.related_model) do %>
+            <td><%= missing.diver&.diver_name %></td>
+            <td><%= missing.date %></td>
+            <td><%= missing.field_id %></td>
+          <%- end %>
+        <%- end %>
+      </tbody>
+    </table>
   </div>
 </div>

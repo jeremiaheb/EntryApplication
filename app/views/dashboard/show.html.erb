@@ -1,91 +1,101 @@
-<div class="container">
-  
-  <div class="row">
-    <div class="span2"> 
-        <%= button_to('Boat Logs', boat_logs_path, :method => "get", :class => 'btn btn-sm btn-primary')  %>   
-    </div>
-    <div class="span2"> 
-        <%= button_to('Fish Samples', samples_path, :method => "get", :class => 'btn btn-sm btn-primary')  %>   
-    </div>
-    <div class="span2"> 
-        <%= button_to('LPI', benthic_covers_path, :method => "get", :class => 'btn btn-sm btn-primary')  %>   
-    </div>
-    <div class="span2"> 
-        <%= button_to('Demo', coral_demographics_path, :method => "get", :class => 'btn btn-sm btn-primary')  %>   
-    </div>
+<%= render "shared/nav_breadcrumbs", object: [["Manager Dashboard", ""]] %>
+
+<div class="grid-row">
+  <div class="grid-col-12">
+    <ul class="usa-button-group margin-bottom-1">
+      <li class="usa-button-group__item">
+        <%= link_to boat_logs_path, class: "usa-button" do %>
+          Boat Logs
+        <%- end %>
+      </li>
+      <li class="usa-button-group__item">
+        <%= link_to samples_path, class: "usa-button" do %>
+          Fish Samples
+        <%- end %>
+      </li>
+      <li class="usa-button-group__item">
+        <%= link_to benthic_covers_path, class: "usa-button" do %>
+          LPI
+        <%- end %>
+      </li>
+      <li class="usa-button-group__item">
+        <%= link_to coral_demographics_path, class: "usa-button" do %>
+          Demo
+        <%- end %>
+      </li>
+    </ul>
   </div>
+</div>
 
+<div class="grid-row grid-gap">
+  <div class="grid-col-5">
+    <h4>Sample Counts by Diver</h4>
 
-  <div class="row">
-    <div class="span4">
-      <table class="table table-striped table-bordered table-condensed">
-        <thead>
-          <tr>
-            <th>Diver</th>
-            <th>Boatlog Count</th>
-            <th>Fish Count</th>
-            <th>LPI Count</th>
-            <th>Demographic Count</th>
-          </tr>
-        <tbody>
+    <table class="usa-table usa-table--compact usa-table--striped font-sans-2xs">
+      <thead>
+        <tr>
+          <th scope="col">Diver</th>
+          <th scope="col">BoatLog Count</th>
+          <th scope="col">Fish Count</th>
+          <th scope="col">LPI Count</th>
+          <th scope="col">Demo Count</th>
+        </tr>
+      </thead>
+      <tbody>
         <% @sample_count_report.counts_by_diver.each do |diver, value| %>
-          <tr>
-            <td> <%= diver.diver_name %></td>
-            <td> <%= value["boat"] %></td>
-            <td> <%= value["sample"] %></td>
-            <td> <%= value["lpi"] %></td>
-            <td> <%= value["demo"] %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-
-
-  <input type="button" class="btn btn-primary" data-toggle="collapse" data-target=".missingRecords" value="Crosscheck Boatlog vs. Samples">
-  <div class="span8 missingRecords collapse out">
-    <div class="span3">
-      <table class="display table table-bordered table-condensed">
-        <h6>These are in the boatlog but do not have a matching diver sample </h6>
-        <thead>
-          <tr>
-            <th>Diver</th>
-            <th>Date</th>
-            <th>Field ID</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @crosscheck_report.missing_samples_from_diver.each do |missing| %>
-            <%= tag.tr "data-link": url_for(missing.related_model) do %>
-              <td><%= missing.diver&.diver_name %></td>
-              <td><%= missing.date %></td>
-              <td><%= missing.field_id %></td>
-            <%- end %>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-    <div class="span3">
-      <table class="display table table-bordered table-condensed">
-        <h6>Diver has entered these but do not have matching Boatlog entry </h6>
-        <thead>
-          <tr>
-            <th>Diver</th>
-            <th>Date</th>
-            <th>Field ID</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @crosscheck_report.missing_samples_from_boat_log.each do |missing| %>
-            <%= tag.tr "data-link": url_for(missing.related_model) do %>
-              <td><%= missing.diver&.diver_name %></td>
-              <td><%= missing.date %></td>
-              <td><%= missing.field_id %></td>
-            <%- end %>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+          <%- bg_class = ((value["boat"] == (value["sample"] + value["lpi"] + value["demo"])) ? "" : "bg-secondary-light") %>
+          <%= tag.tr class: bg_class do %>
+            <%= tag.td diver.diver_name, class: bg_class %>
+            <%= tag.td value["boat"], class: bg_class %>
+            <%= tag.td value["sample"], class: bg_class %>
+            <%= tag.td value["lpi"], class: bg_class %>
+            <%= tag.td value["demo"], class: bg_class %>
+          <%- end %>
+        <% end %>
+      </tbody>
+    </table>
   </div>
+  <div class="grid-col-7">
+    <h4>Crosscheck Boat Log vs. Samples</h4>
+
+    These exist as a <strong>boat log</strong> but do not have a matching <strong>sample</strong>.
+    <table class="width-full font-sans-xs display">
+      <thead>
+        <tr>
+          <th scope="col">Diver</th>
+          <th scope="col">Date</th>
+          <th scope="col">Field ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%- @crosscheck_report.missing_samples_from_diver.each do |missing| %>
+          <%= tag.tr "data-link": url_for(missing.related_model) do %>
+            <td><%= missing.diver&.diver_name %></td>
+            <td><%= missing.date %></td>
+            <td><%= missing.field_id %></td>
+          <%- end %>
+        <%- end %>
+      </tbody>
+    </table>
+
+    These exist as a <strong>sample</strong> but do not have a matching <strong>boat log</strong>.
+    <table class="width-full font-sans-xs display">
+      <thead>
+        <tr>
+          <th scope="col">Diver</th>
+          <th scope="col">Date</th>
+          <th scope="col">Field ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%- @crosscheck_report.missing_samples_from_boat_log.each do |missing| %>
+          <%= tag.tr "data-link": url_for(missing.related_model) do %>
+            <td><%= missing.diver&.diver_name %></td>
+            <td><%= missing.date %></td>
+            <td><%= missing.field_id %></td>
+          <%- end %>
+        <%- end %>
+      </tbody>
+    </table>
   </div>
 </div>

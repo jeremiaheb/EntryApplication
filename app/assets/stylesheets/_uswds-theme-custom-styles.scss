@@ -48,3 +48,12 @@ span.error {
   @include u-text("secondary");
   @include u-font("ui", "2xs");
 }
+
+.usa-table {
+  .bg-secondary-lighter {
+    @include u-bg("secondary-lighter");
+  }
+  .bg-secondary-light {
+    @include u-bg("secondary-light");
+  }
+}

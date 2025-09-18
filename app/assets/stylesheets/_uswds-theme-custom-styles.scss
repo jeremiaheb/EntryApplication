@@ -50,10 +50,14 @@ span.error {
 }
 
 .usa-table {
-  .bg-secondary-lighter {
-    @include u-bg("secondary-lighter");
-  }
-  .bg-secondary-light {
-    @include u-bg("secondary-light");
+  tr,
+  td,
+  th {
+    &.bg-secondary-lighter {
+      @include u-bg("secondary-lighter", "!important");
+    }
+    &.bg-secondary-light {
+      @include u-bg("secondary-light", "!important");
+    }
   }
 }

@@ -5,8 +5,8 @@
 
   <div class="grid-row padding-1">
     <div class="grid-col-12">
-      <%= f.label :username, class: "usa-label margin-top-0" %>
-      <%= f.text_field :username, class: "usa-input usa-input--lg", autofocus: true, autocomplete: "username" %>
+      <%= f.label "Login (email or username)", class: "usa-label margin-top-0" %>
+      <%= f.text_field :login, class: "usa-input usa-input--lg", autofocus: true, autocomplete: "email" %>
 
       <%= f.submit "Email me reset instructions", class: "usa-button" %>
       <%= link_to "Cancel", new_session_path(resource_name), class: "usa-button usa-button--outline" %>

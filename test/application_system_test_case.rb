@@ -6,9 +6,11 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   private
 
   def login_as_diver(diver)
-    find("input#diver_username").fill_in(with: diver.username)
+    find("input#diver_login").fill_in(with: diver.email)
     find("input#diver_password").fill_in(with: diver.password)
     find("input[type=submit]").click
+
+    assert_css("div", text: "Signed in successfully")
   end
 
   def select2_choose(select_element, option:)

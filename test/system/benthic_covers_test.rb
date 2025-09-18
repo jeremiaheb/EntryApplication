@@ -11,11 +11,7 @@ class BenthicCoversTest < ApplicationSystemTestCase
 
     visit root_url
     find(".benthic-covers-link").click
-
-    find("input#diver_username").fill_in(with: diver.username)
-    find("input#diver_password").fill_in(with: diver.password)
-    find("input[type=submit]").click
-
+    login_as_diver(diver)
     find(".new-sample-button").click
 
     # TODO: If reuse is desired, extract this complex input to a function

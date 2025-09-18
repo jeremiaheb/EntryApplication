@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   before_action :authenticate_diver!
-  before_action :manager_or_admin?
+  before_action :require_manager_or_admin!
 
   def show
     if current_diver.admin?
@@ -11,17 +11,5 @@ class DashboardController < ApplicationController
 
     @sample_count_report = SampleCountReport.new(@boatlog_managers)
     @crosscheck_report = CrosscheckReport.new(@boatlog_managers)
-  end
-
-  protected
-
-  def manager_or_admin?
-    if current_diver.admin? || current_diver.manager?
-      true
-    else
-      flash[:alert] = "You are not authorized to see this page"
-      redirect_to root_path
-      false
-    end
   end
 end

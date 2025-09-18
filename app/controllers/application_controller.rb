@@ -10,16 +10,26 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:alert] = "Access denied!"
-    redirect_to root_url
+    redirect_to root_url, alert: "You are not authorized to see this page"
   end
 
   protected
 
-  def determine_layout
-    return "application-uswds" if self.class <= DeviseController
+  def require_manager_or_admin!
+    if current_diver.admin? || current_diver.manager?
+      true
+    else
+      redirect_to root_url, alert: "You are not authorized to see this page"
+      false
+    end
+  end
 
-    "application"
+  def determine_layout
+    if devise_controller?
+      "application-uswds"
+    else
+      "application"
+    end
   end
 
   def configure_permitted_parameters

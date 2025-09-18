@@ -24,20 +24,20 @@
     <table class="width-full display">
       <thead>
         <tr>
-          <th scope="col" class="maxw-15">Primary Sample Unit</th>
+          <th scope="col">Primary Sample Unit</th>
           <th scope="col">Date</th>
           <th scope="col">Time</th>
-          <th scope="col" class="maxw-card">Comments</th>
+          <th scope="col" class="width-mobile">Comments</th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <%- @boat_logs.each do |boat_log| %>
           <tr>
-            <td class="maxw-15"><%= boat_log.primary_sample_unit %></td>
+            <td><%= boat_log.primary_sample_unit %></td>
             <td class="fieldid_check"><%= boat_log.date %></td>
             <td><%= boat_log.station_logs&.first&.time&.strftime("%H:%M") %></td>
-            <td class="maxw-card"><%= boat_log.station_logs&.first&.comments %></td>
+            <td class="width-mobile"><%= boat_log.station_logs&.first&.comments %></td>
             <td>
               <ul class="usa-button-group float-right">
                 <li class="usa-button-group__item">

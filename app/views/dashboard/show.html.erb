@@ -43,13 +43,14 @@
       </thead>
       <tbody>
         <% @sample_count_report.counts_by_diver.each do |diver, value| %>
-          <tr>
-            <td><%= diver.diver_name %></td>
-            <td><%= value["boat"] %></td>
-            <td><%= value["sample"] %></td>
-            <td><%= value["lpi"] %></td>
-            <td><%= value["demo"] %></td>
-          </tr>
+          <%- bg_class = ((value["boat"] == (value["sample"] + value["lpi"] + value["demo"])) ? "" : "bg-secondary-light") %>
+          <%= tag.tr class: bg_class do %>
+            <%= tag.td diver.diver_name, class: bg_class %>
+            <%= tag.td value["boat"], class: bg_class %>
+            <%= tag.td value["sample"], class: bg_class %>
+            <%= tag.td value["lpi"], class: bg_class %>
+            <%= tag.td value["demo"], class: bg_class %>
+          <%- end %>
         <% end %>
       </tbody>
     </table>

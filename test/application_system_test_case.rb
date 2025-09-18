@@ -10,7 +10,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     find("input#diver_password").fill_in(with: diver.password)
     find("input[type=submit]").click
 
-    assert_css(".alert", text: "Signed in successfully")
+    assert_css("div", text: "Signed in successfully")
   end
 
   def select2_choose(select_element, option:)

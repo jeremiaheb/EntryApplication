@@ -16,19 +16,19 @@
     <table class="width-full display">
       <thead>
         <tr>
-          <th scope="col">Agency</th>
-          <th scope="col">First name</th>
-          <th scope="col">Last name</th>
-          <th scope="col"></th>
+          <th scope="col" class="width-card">Agency</th>
+          <th scope="col" class="width-card">First name</th>
+          <th scope="col" class="width-card">Last name</th>
+          <th scope="col" class="width-card-lg not-orderable not-searchable"></th>
         </tr>
       </thead>
       <tbody>
         <%- @boatlog_managers.each do |boatlog_manager| %>
           <tr>
-            <td><%= boatlog_manager.agency %></td>
-            <td><%= boatlog_manager.firstname %></td>
-            <td><%= boatlog_manager.lastname %></td>
-            <td>
+            <td class="width-card"><%= boatlog_manager.agency %></td>
+            <td class="width-card"><%= boatlog_manager.firstname %></td>
+            <td class="width-card"><%= boatlog_manager.lastname %></td>
+            <td class="width-card-lg">
               <ul class="usa-button-group float-right">
                 <li class="usa-button-group__item">
                   <%= link_to "Edit", edit_boatlog_manager_path(boatlog_manager), class: "usa-button usa-button--outline" %>

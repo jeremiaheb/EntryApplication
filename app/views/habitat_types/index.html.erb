@@ -16,19 +16,19 @@
     <table class="width-full display">
       <thead>
         <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Description</th>
-          <th scope="col">Region</th>
-          <th scope="col"></th>
+          <th scope="col" class="width-card-lg">Name</th>
+          <th scope="col" class="width-auto">Description</th>
+          <th scope="col" class="width-card">Region</th>
+          <th scope="col" class="width-card-lg not-orderable not-searchable"></th>
         </tr>
       </thead>
       <tbody>
         <%- @habitat_types.each do |habitat_type| %>
           <tr>
-            <td><%= habitat_type.habitat_name %></td>
-            <td><%= habitat_type.habitat_description %></td>
-            <td><%= habitat_type.region %></td>
-            <td>
+            <td class="width-card-lg"><%= habitat_type.habitat_name %></td>
+            <td class="width-auto"><%= habitat_type.habitat_description %></td>
+            <td class="width-card"><%= habitat_type.region %></td>
+            <td class="width-card-lg">
               <ul class="usa-button-group float-right">
                 <li class="usa-button-group__item">
                   <%= link_to "Edit", edit_habitat_type_path(habitat_type), class: "usa-button usa-button--outline" %>

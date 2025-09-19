@@ -16,17 +16,17 @@
     <table class="width-full display">
       <thead>
         <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Description</th>
-          <th scope="col"></th>
+          <th scope="col" class="width-card-lg">Name</th>
+          <th scope="col" class="width-auto">Description</th>
+          <th scope="col" class="width-card-lg not-orderable not-searchable"></th>
         </tr>
       </thead>
       <tbody>
         <%- @sample_types.each do |sample_type| %>
           <tr>
-            <td><%= sample_type.sample_type_name %></td>
-            <td><%= sample_type.sample_type_description %></td>
-            <td>
+            <td class="width-card-lg"><%= sample_type.sample_type_name %></td>
+            <td class="width-auto"><%= sample_type.sample_type_description %></td>
+            <td class="width-card-lg">
               <ul class="usa-button-group float-right">
                 <li class="usa-button-group__item">
                   <%= link_to "Edit", edit_sample_type_path(sample_type), class: "usa-button usa-button--outline" %>

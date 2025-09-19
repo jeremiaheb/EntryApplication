@@ -16,21 +16,21 @@
     <table class="width-full display">
       <thead>
         <tr>
-          <th scope="col">Code</th>
-          <th scope="col">Name</th>
-          <th scope="col">Proofing Code</th>
-          <th scope="col">Rank</th>
-          <th scope="col"></th>
+          <th scope="col" class="width-15">Code</th>
+          <th scope="col" class="width-auto">Name</th>
+          <th scope="col" class="width-auto">Proofing Code</th>
+          <th scope="col" class="width-10">Rank</th>
+          <th scope="col" class="width-card-lg not-orderable not-searchable"></th>
         </tr>
       </thead>
       <tbody>
         <%- @cover_cats.each do |cover_cat| %>
           <tr>
-            <td><%= cover_cat.code %></td>
-            <td><%= cover_cat.name %></td>
-            <td><%= cover_cat.proofing_code %></td>
-            <td><%= cover_cat.rank %></td>
-            <td>
+            <td class="width-15"><%= cover_cat.code %></td>
+            <td class="width-auto"><%= cover_cat.name %></td>
+            <td class="width-auto"><%= cover_cat.proofing_code %></td>
+            <td class="width-10"><%= cover_cat.rank %></td>
+            <td class="width-card-lg">
               <ul class="usa-button-group float-right">
                 <li class="usa-button-group__item">
                   <%= link_to "Edit", edit_cover_cat_path(cover_cat), class: "usa-button usa-button--outline" %>

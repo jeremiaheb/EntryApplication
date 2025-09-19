@@ -16,21 +16,21 @@
     <table class="width-full display">
       <thead>
         <tr>
-          <th scope="col">Code</th>
-          <th scope="col">Scientific Name</th>
-          <th scope="col">Short Code</th>
-          <th scope="col">Rank</th>
-          <th scope="col"></th>
+          <th scope="col" class="width-15">Code</th>
+          <th scope="col" class="width-auto">Scientific Name</th>
+          <th scope="col" class="width-15">Short Code</th>
+          <th scope="col" class="width-10">Rank</th>
+          <th scope="col" class="width-card-lg not-orderable not-searchable"></th>
         </tr>
       </thead>
       <tbody>
         <%- @corals.each do |coral| %>
           <tr>
-            <td><%= coral.code %></td>
-            <td><%= coral.scientific_name %></td>
-            <td><%= coral.short_code %></td>
-            <td><%= coral.rank %></td>
-            <td>
+            <td class="width-15"><%= coral.code %></td>
+            <td class="width-auto"><%= coral.scientific_name %></td>
+            <td class="width-15"><%= coral.short_code %></td>
+            <td class="width-10"><%= coral.rank %></td>
+            <td class="width-card-lg">
               <ul class="usa-button-group float-right">
                 <li class="usa-button-group__item">
                   <%= link_to "Edit", edit_coral_path(coral), class: "usa-button usa-button--outline" %>

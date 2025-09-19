@@ -24,17 +24,17 @@
     <table class="width-full display">
       <thead>
         <tr>
-          <th scope="col">Scientific Name</th>
-          <th scope="col">Common Name</th>
-          <th scope="col"></th>
+          <th scope="col" class="width-auto">Scientific Name</th>
+          <th scope="col" class="width-auto">Common Name</th>
+          <th scope="col" class="width-card-lg not-orderable not-searchable"></th>
         </tr>
       </thead>
       <tbody>
         <%- @animals.each do |animal| %>
           <tr>
-            <td><%= animal.scientific_name %></td>
-            <td><%= animal.common_name %></td>
-            <td>
+            <td class="width-auto"><%= animal.scientific_name %></td>
+            <td class="width-auto"><%= animal.common_name %></td>
+            <td class="width-card-lg">
               <ul class="usa-button-group float-right">
                 <li class="usa-button-group__item">
                   <%= link_to "Edit", edit_animal_path(animal), class: "usa-button usa-button--outline" %>

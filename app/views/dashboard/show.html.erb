@@ -72,7 +72,7 @@
           <%= tag.tr "data-link": url_for(missing.related_model) do %>
             <td class="width-card"><%= missing.diver&.diver_name %></td>
             <td class="width-15"><%= missing.date %></td>
-            <td class="width-15"><%= missing.field_id %></td>
+            <td class="width-15"><%= link_to missing.field_id, missing.related_model %></td>
           <%- end %>
         <%- end %>
       </tbody>
@@ -92,7 +92,7 @@
           <%= tag.tr "data-link": url_for(missing.related_model) do %>
             <td class="width-card"><%= missing.diver&.diver_name %></td>
             <td class="width-15"><%= missing.date %></td>
-            <td class="width-15"><%= missing.field_id %></td>
+            <td class="width-15"><%= link_to missing.field_id, missing.related_model %></td>
           <%- end %>
         <%- end %>
       </tbody>
@@ -111,7 +111,7 @@
         <%- @possible_duplicate_report.duplicate_boat_logs_by_primary_sample_unit.each do |psu, boat_logs| %>
           <%- boat_logs.each do |boat_log| %>
             <%= tag.tr "data-link": url_for(boat_log) do %>
-              <td class="width-15"><%= boat_log.primary_sample_unit %></td>
+              <td class="width-15"><%= link_to boat_log.primary_sample_unit, boat_log %></td>
               <td class="width-15"><%= boat_log.date %></td>
               <td class="width-card"><%= boat_log.boatlog_manager&.agency_name %></td>
             <%- end %>
@@ -124,7 +124,7 @@
     <table class="width-full font-sans-xs display">
       <thead>
         <tr>
-          <th scope="col" class="width-15">Primary Sample Unit</th>
+          <th scope="col" class="width-15">Field ID</th>
           <th scope="col" class="width-15">Date</th>
           <th scope="col" class="width-card">Diver</th>
         </tr>
@@ -133,7 +133,7 @@
         <%- @possible_duplicate_report.duplicate_samples_by_field_id.each do |field_id, samples| %>
           <%- samples.each do |sample| %>
             <%= tag.tr "data-link": url_for(sample) do %>
-              <td class="width-15"><%= sample.field_id %></td>
+              <td class="width-15"><%= link_to sample.field_id, sample %></td>
               <td class="width-15"><%= sample.sample_date %></td>
               <td class="width-card"><%= sample.diver&.diver_name %></td>
             <%- end %>

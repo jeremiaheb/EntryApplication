@@ -42,11 +42,24 @@ EA.onRailsPage = function (railsController, railsActions) {
 };
 
 $(function () {
-  $("tr[data-link]").click(function () {
-    window.location = this.dataset.link;
+  $trLinks = $("tr[data-link]");
+
+  $trLinks.on("click", function (e) {
+    const $this = $(this);
+    const $target = $(e.target);
+
+    // If the user actually clicked on an <a> within the <tr>, let the default
+    // behavior prevail. The user may have, e.g., ctrl-clicked on it to open it
+    // in a new tab or window, and we do not want to interfere with that
+    // behavior.
+    if ($target.is("a[href]")) {
+      return;
+    }
+
+    window.location.href = $this.attr("data-link");
   });
 
-  $("tr[data-link]").hover(
+  $trLinks.hover(
     function () {
       $(this).css("background", "yellow");
       $(this).css("cursor", "pointer");
@@ -56,29 +69,29 @@ $(function () {
     },
   );
 
-  $(document).ready(function () {
-    $(".display").DataTable({
-      layout: {
-        topStart: "search",
-        topEnd: ["info", "paging"],
-        bottomStart: null,
-        bottomEnd: ["info", "paging"],
-      },
-      pagingType: "full",
-      columnDefs: [
-        { targets: ".not-orderable", orderable: false },
-        { targets: ".not-searchable", searchable: false },
-      ],
-    });
+  $(".display").DataTable({
+    layout: {
+      topStart: "search",
+      topEnd: ["info", "paging"],
+      bottomStart: null,
+      bottomEnd: ["info", "paging"],
+    },
+    pagingType: "full",
+    columnDefs: [
+      { targets: ".not-orderable", orderable: false },
+      { targets: ".not-searchable", searchable: false },
+      // Default (must be last in the list)
+      { targets: "_all", type: "text" },
+    ],
+  });
 
-    $("form").attr("autocomplete", "off");
+  $("form").attr("autocomplete", "off");
 
-    $("select").keypress(function (event) {
-      return cancelBackspace(event);
-    });
-    $("select").keydown(function (event) {
-      return cancelBackspace(event);
-    });
+  $("select").keypress(function (event) {
+    return cancelBackspace(event);
+  });
+  $("select").keydown(function (event) {
+    return cancelBackspace(event);
   });
 
   function cancelBackspace(event) {

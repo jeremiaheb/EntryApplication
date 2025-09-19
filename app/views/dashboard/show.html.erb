@@ -72,7 +72,9 @@
           <%= tag.tr "data-link": url_for(missing.related_model) do %>
             <td class="width-card"><%= missing.diver&.diver_name %></td>
             <td class="width-15"><%= missing.date %></td>
-            <td class="width-15"><%= link_to missing.field_id, missing.related_model %></td>
+            <%= tag.td class: "width-15", "data-order": missing.field_id do %>
+              <%= link_to missing.field_id, missing.related_model %>
+            <%- end %>
           <%- end %>
         <%- end %>
       </tbody>
@@ -92,7 +94,9 @@
           <%= tag.tr "data-link": url_for(missing.related_model) do %>
             <td class="width-card"><%= missing.diver&.diver_name %></td>
             <td class="width-15"><%= missing.date %></td>
-            <td class="width-15"><%= link_to missing.field_id, missing.related_model %></td>
+            <%= tag.td class: "width-15", "data-order": missing.field_id do %>
+              <%= link_to missing.field_id, missing.related_model %>
+            <%- end %>
           <%- end %>
         <%- end %>
       </tbody>
@@ -111,7 +115,9 @@
         <%- @possible_duplicate_report.duplicate_boat_logs_by_primary_sample_unit.each do |psu, boat_logs| %>
           <%- boat_logs.each do |boat_log| %>
             <%= tag.tr "data-link": url_for(boat_log) do %>
-              <td class="width-15"><%= link_to boat_log.primary_sample_unit, boat_log %></td>
+              <%= tag.td class: "width-15", "data-order": boat_log.primary_sample_unit do %>
+                <%= link_to boat_log.primary_sample_unit, boat_log %>
+              <%- end %>
               <td class="width-15"><%= boat_log.date %></td>
               <td class="width-card"><%= boat_log.boatlog_manager&.agency_name %></td>
             <%- end %>
@@ -133,7 +139,9 @@
         <%- @possible_duplicate_report.duplicate_samples_by_field_id.each do |field_id, samples| %>
           <%- samples.each do |sample| %>
             <%= tag.tr "data-link": url_for(sample) do %>
-              <td class="width-15"><%= link_to sample.field_id, sample %></td>
+              <%= tag.td class: "width-15", "data-order": sample.field_id do %>
+                <%= link_to sample.field_id, sample %>
+              <%- end %>
               <td class="width-15"><%= sample.sample_date %></td>
               <td class="width-card"><%= sample.diver&.diver_name %></td>
             <%- end %>

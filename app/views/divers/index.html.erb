@@ -24,19 +24,19 @@
     <table class="width-full display">
       <thead>
         <tr>
-          <th scope="col">Diver Number</th>
-          <th scope="col">Diver Name</th>
-          <th scope="col">Active Diver?</th>
-          <th scope="col"></th>
+          <th scope="col" class="width-10">Diver Number</th>
+          <th scope="col" class="width-card">Diver Name</th>
+          <th scope="col" class="width-10">Active Diver?</th>
+          <th scope="col" class="width-card-lg not-orderable not-searchable"></th>
         </tr>
       </thead>
       <tbody>
         <%- @divers.each do |diver| %>
           <tr>
-            <td><%= diver.diver_number %></td>
-            <td><%= diver.diver_name %></td>
-            <td><%= diver.active %></td>
-            <td>
+            <td class="width-10"><%= diver.diver_number %></td>
+            <td class="width-card"><%= diver.diver_name %></td>
+            <td class="width-10"><%= diver.active %></td>
+            <td class="width-card-lg">
               <ul class="usa-button-group float-right">
                 <li class="usa-button-group__item">
                   <%= link_to "Edit", edit_diver_path(diver), class: "usa-button usa-button--outline" %>

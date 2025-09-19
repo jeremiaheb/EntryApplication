@@ -62,17 +62,17 @@
     <table class="width-full font-sans-xs display">
       <thead>
         <tr>
-          <th scope="col">Diver</th>
-          <th scope="col">Date</th>
-          <th scope="col">Field ID</th>
+          <th scope="col" class="width-card">Diver</th>
+          <th scope="col" class="width-15">Date</th>
+          <th scope="col" class="width-15">Field ID</th>
         </tr>
       </thead>
       <tbody>
         <%- @crosscheck_report.missing_samples_from_diver.each do |missing| %>
           <%= tag.tr "data-link": url_for(missing.related_model) do %>
-            <td><%= missing.diver&.diver_name %></td>
-            <td><%= missing.date %></td>
-            <td><%= missing.field_id %></td>
+            <td class="width-card"><%= missing.diver&.diver_name %></td>
+            <td class="width-15"><%= missing.date %></td>
+            <td class="width-15"><%= missing.field_id %></td>
           <%- end %>
         <%- end %>
       </tbody>
@@ -82,17 +82,17 @@
     <table class="width-full font-sans-xs display">
       <thead>
         <tr>
-          <th scope="col">Diver</th>
-          <th scope="col">Date</th>
-          <th scope="col">Field ID</th>
+          <th scope="col" class="width-card">Diver</th>
+          <th scope="col" class="width-15">Date</th>
+          <th scope="col" class="width-15">Field ID</th>
         </tr>
       </thead>
       <tbody>
         <%- @crosscheck_report.missing_samples_from_boat_log.each do |missing| %>
           <%= tag.tr "data-link": url_for(missing.related_model) do %>
-            <td><%= missing.diver&.diver_name %></td>
-            <td><%= missing.date %></td>
-            <td><%= missing.field_id %></td>
+            <td class="width-card"><%= missing.diver&.diver_name %></td>
+            <td class="width-15"><%= missing.date %></td>
+            <td class="width-15"><%= missing.field_id %></td>
           <%- end %>
         <%- end %>
       </tbody>

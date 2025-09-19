@@ -80,21 +80,21 @@
     <table class="width-full display">
       <thead>
         <tr>
-          <th scope="col">Diver</th>
-          <th scope="col">Field ID</th>
-          <th scope="col">Date</th>
-          <th scope="col">Sample Start Time</th>
-          <th scope="col" class="not-orderable not-searchable"></th>
+          <th scope="col" class="width-card">Diver</th>
+          <th scope="col" class="width-15">Field ID</th>
+          <th scope="col" class="width-15">Date</th>
+          <th scope="col" class="width-15">Sample Start Time</th>
+          <th scope="col" class="width-card-lg not-orderable not-searchable"></th>
         </tr>
       </thead>
       <tbody>
         <%- @coral_demographics.each do |coral_demographic| %>
           <%= tag.tr "data-id": coral_demographic.id do %>
-            <td><%= coral_demographic.diver&.diver_name %></td>
-            <td class="fieldid_check"><%= coral_demographic.field_id %></td>
-            <td><%= coral_demographic.sample_date %></td>
-            <td><%= coral_demographic.sample_begin_time&.strftime("%H:%M") %></td>
-            <td>
+            <td class="width-card"><%= coral_demographic.diver&.diver_name %></td>
+            <td class="width-15 fieldid_check"><%= coral_demographic.field_id %></td>
+            <td class="width-15"><%= coral_demographic.sample_date %></td>
+            <td class="width-15"><%= coral_demographic.sample_begin_time&.strftime("%H:%M") %></td>
+            <td class="width-card-lg">
               <ul class="usa-button-group float-right">
                 <li class="usa-button-group__item">
                   <%= link_to "View", coral_demographic, class: "view-sample-button usa-button" %>

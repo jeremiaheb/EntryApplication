@@ -24,21 +24,21 @@
     <table class="width-full display">
       <thead>
         <tr>
-          <th scope="col">Primary Sample Unit</th>
-          <th scope="col">Date</th>
-          <th scope="col">Time</th>
-          <th scope="col" class="width-mobile">Comments</th>
-          <th scope="col"></th>
+          <th scope="col" class="width-15">Primary Sample Unit</th>
+          <th scope="col" class="width-15">Date</th>
+          <th scope="col" class="width-15">Time</th>
+          <th scope="col" class="width-auto">Comments</th>
+          <th scope="col" class="width-card-lg not-orderable not-searchable"></th>
         </tr>
       </thead>
       <tbody>
         <%- @boat_logs.each do |boat_log| %>
           <tr>
-            <td><%= boat_log.primary_sample_unit %></td>
-            <td class="fieldid_check"><%= boat_log.date %></td>
-            <td><%= boat_log.station_logs&.first&.time&.strftime("%H:%M") %></td>
-            <td class="width-mobile"><%= boat_log.station_logs&.first&.comments %></td>
-            <td>
+            <td class="width-15"><%= boat_log.primary_sample_unit %></td>
+            <td class="width-15 fieldid_check"><%= boat_log.date %></td>
+            <td class="width-15"><%= boat_log.station_logs&.first&.time&.strftime("%H:%M") %></td>
+            <td class="width-auto"><%= boat_log.station_logs&.first&.comments %></td>
+            <td class="width-card-lg">
               <ul class="usa-button-group float-right">
                 <li class="usa-button-group__item">
                   <%= link_to "View", boat_log, class: "usa-button" %>

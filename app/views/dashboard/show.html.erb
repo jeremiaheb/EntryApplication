@@ -58,7 +58,7 @@
   <div class="grid-col-7">
     <h4>Crosscheck Boat Log vs. Samples</h4>
 
-    These exist as a <strong>boat log</strong> but do not have a matching <strong>sample</strong>.
+    These exist as a <strong>boat log</strong> but do not have a matching <strong>sample</strong>:
     <table class="width-full font-sans-xs display">
       <thead>
         <tr>
@@ -72,13 +72,15 @@
           <%= tag.tr "data-link": url_for(missing.related_model) do %>
             <td class="width-card"><%= missing.diver&.diver_name %></td>
             <td class="width-15"><%= missing.date %></td>
-            <td class="width-15"><%= missing.field_id %></td>
+            <%= tag.td class: "width-15", "data-order": missing.field_id do %>
+              <%= link_to missing.field_id, missing.related_model %>
+            <%- end %>
           <%- end %>
         <%- end %>
       </tbody>
     </table>
 
-    These exist as a <strong>sample</strong> but do not have a matching <strong>boat log</strong>.
+    These exist as a <strong>sample</strong> but do not have a matching <strong>boat log</strong>:
     <table class="width-full font-sans-xs display">
       <thead>
         <tr>
@@ -92,7 +94,57 @@
           <%= tag.tr "data-link": url_for(missing.related_model) do %>
             <td class="width-card"><%= missing.diver&.diver_name %></td>
             <td class="width-15"><%= missing.date %></td>
-            <td class="width-15"><%= missing.field_id %></td>
+            <%= tag.td class: "width-15", "data-order": missing.field_id do %>
+              <%= link_to missing.field_id, missing.related_model %>
+            <%- end %>
+          <%- end %>
+        <%- end %>
+      </tbody>
+    </table>
+
+    These <strong>boat logs</strong> have a duplicated <strong>primary sample unit</strong>:
+    <table class="width-full font-sans-xs display">
+      <thead>
+        <tr>
+          <th scope="col" class="width-15">Primary Sample Unit</th>
+          <th scope="col" class="width-15">Date</th>
+          <th scope="col" class="width-card">Manager</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%- @possible_duplicate_report.duplicate_boat_logs_by_primary_sample_unit.each do |psu, boat_logs| %>
+          <%- boat_logs.each do |boat_log| %>
+            <%= tag.tr "data-link": url_for(boat_log) do %>
+              <%= tag.td class: "width-15", "data-order": boat_log.primary_sample_unit do %>
+                <%= link_to boat_log.primary_sample_unit, boat_log %>
+              <%- end %>
+              <td class="width-15"><%= boat_log.date %></td>
+              <td class="width-card"><%= boat_log.boatlog_manager&.agency_name %></td>
+            <%- end %>
+          <%- end %>
+        <%- end %>
+      </tbody>
+    </table>
+
+    These <strong>samples</strong> have a duplicated <strong>field ID</strong>:
+    <table class="width-full font-sans-xs display">
+      <thead>
+        <tr>
+          <th scope="col" class="width-15">Field ID</th>
+          <th scope="col" class="width-15">Date</th>
+          <th scope="col" class="width-card">Diver</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%- @possible_duplicate_report.duplicate_samples_by_field_id.each do |field_id, samples| %>
+          <%- samples.each do |sample| %>
+            <%= tag.tr "data-link": url_for(sample) do %>
+              <%= tag.td class: "width-15", "data-order": sample.field_id do %>
+                <%= link_to sample.field_id, sample %>
+              <%- end %>
+              <td class="width-15"><%= sample.sample_date %></td>
+              <td class="width-card"><%= sample.diver&.diver_name %></td>
+            <%- end %>
           <%- end %>
         <%- end %>
       </tbody>

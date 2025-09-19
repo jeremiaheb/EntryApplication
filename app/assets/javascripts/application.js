@@ -42,7 +42,7 @@ EA.onRailsPage = function (railsController, railsActions) {
 };
 
 $(function () {
-  $trLinks = $("tr[data-link]");
+  const $trLinks = $("tr[data-link]");
 
   $trLinks.on("click", function (e) {
     const $this = $(this);

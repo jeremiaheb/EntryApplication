@@ -13,5 +13,6 @@ class DashboardController < ApplicationController
 
     @sample_count_report = SampleCountReport.new(@boatlog_managers)
     @crosscheck_report = CrosscheckReport.new(@boatlog_managers)
+    @possible_duplicate_report = PossibleDuplicateReport.new(@boatlog_managers)
   end
 end

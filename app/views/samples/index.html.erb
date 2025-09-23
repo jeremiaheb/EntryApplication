@@ -2,6 +2,14 @@
 
 <div class="grid-row">
   <div class="grid-col-12">
+    <%= tag.div class: "sample-length-histogram maxh-mobile", data: { title: "Fishes with typical max lengths < 15cm", "url": length_histogram_samples_path(max_size_range_end: 15), "x-range": [0, 30].to_json } %>
+    <%= tag.div class: "sample-length-histogram maxh-mobile", data: { title: "Fishes with typical max lengths between 15-30cm", "url": length_histogram_samples_path(max_size_range_begin: 15, max_size_range_end: 30), "x-range": [0, 30].to_json } %>
+    <%= tag.div class: "sample-length-histogram maxh-mobile", data: { title: "Fishes with typical max lengths > 30cm", "url": length_histogram_samples_path(max_size_range_begin: 30), "x-range": [0, 30].to_json } %>
+  </div>
+</div>
+
+<div class="grid-row">
+  <div class="grid-col-12">
     <ul class="usa-button-group margin-bottom-1">
       <li class="usa-button-group__item">
         <%= link_to new_sample_path, class: "new-sample-button usa-button" do %>

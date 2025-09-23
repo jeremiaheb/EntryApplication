@@ -10,6 +10,7 @@ class Diver < ApplicationRecord
   belongs_to  :boatlog_manager
 
   has_many    :samples
+  has_many    :sample_animals, through: :samples
   has_many    :benthic_covers
   has_many    :coral_demographics
 

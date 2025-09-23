@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_09_18_171021) do
+ActiveRecord::Schema[7.1].define(version: 2025_09_23_214803) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -226,6 +226,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_18_171021) do
     t.integer "min_length"
     t.integer "max_length"
     t.integer "time_seen"
+    t.index ["animal_id"], name: "index_sample_animals_on_animal_id"
+    t.index ["sample_id", "animal_id"], name: "index_sample_animals_on_sample_id_and_animal_id"
   end
 
   create_table "sample_types", force: :cascade do |t|

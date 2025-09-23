@@ -1,7 +1,49 @@
 $(function () {
-  if (!EA.onRailsPage("samples", ["edit", "new", "create", "update"])) {
+  if (
+    !EA.onRailsPage("samples", ["index", "edit", "new", "create", "update"])
+  ) {
     return;
   }
+
+  $(".sample-length-histogram").each(function () {
+    const $this = $(this);
+    $.ajax({
+      dataType: "json",
+      url: $this.data("url"),
+      success: function (data, status, xhr) {
+        Plotly.newPlot(
+          $this[0],
+          data,
+          {
+            title: {
+              text: $this.data("title"),
+            },
+            xaxis: {
+              range: $this.data("x-range"),
+              dtick: 1,
+              title: {
+                text: "Size (cm)",
+                standoff: 10,
+              },
+            },
+            yaxis: {
+              showticklabels: false,
+            },
+            legend: {},
+            margin: {
+              b: 80,
+              l: 40,
+              r: 80,
+              t: 100,
+            },
+          },
+          {
+            staticPlot: false,
+          },
+        );
+      },
+    });
+  });
 
   $("#substrateSection").hide();
   $("#speciesSection").hide();

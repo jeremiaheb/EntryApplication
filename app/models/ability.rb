@@ -38,6 +38,7 @@ class Ability
       can :draft, [Sample, BenthicCover, CoralDemographic]
       can :create, [Sample, BenthicCover, CoralDemographic]
       can :read, [Sample, BenthicCover, CoralDemographic]
+      can :length_histogram, [Sample]
       can :destroy, [Sample, BenthicCover, CoralDemographic]
       can :update, Sample do |sample|
         sample.try(:myId) == current_diver.id

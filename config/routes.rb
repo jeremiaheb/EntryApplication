@@ -44,6 +44,7 @@ EntryApplication::Application.routes.draw do
 
   resources :samples do
     post :draft, on: :collection
+    get :length_histogram, on: :collection
   end
 
   get "static_pages/home"

@@ -115,6 +115,19 @@ class SamplesController < ApplicationController
     end
   end
 
+  def length_histogram
+    max_size_range = Range.new(params[:max_size_range_begin]&.to_i, params[:max_size_range_end]&.to_i, true)
+    sample_animals = SampleAnimal.joins(:animal).where("animals.max_size": max_size_range)
+
+    histogram = SampleLengthHistogram.new(
+      sample_animals.joins(:sample).where("samples.diver_id = ?", current_diver.id),
+      sample_animals,
+      (0...30), # TODO
+    )
+
+    render json: histogram.as_plotly_data
+  end
+
   private
 
   def sample_params

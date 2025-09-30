@@ -118,10 +118,10 @@ object-assign@^4.1.0:
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
   integrity sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==
 
-plotly.js-dist-min@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/plotly.js-dist-min/-/plotly.js-dist-min-3.1.0.tgz#22318db3ed1608e4d6e7af5f8a925993d871c502"
-  integrity sha512-aihvA/+SnwEQxSufaPn8AWDUzdHFAbsCk2+w/IJResDafK3E2tvCvzW+ZV6JlMciJc7hQ3kCILS5Ao22OZ6kWA==
+plotly.js-dist-min@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/plotly.js-dist-min/-/plotly.js-dist-min-3.1.1.tgz#fade7a386fd7a0a915f151f046697b4ca408e3a4"
+  integrity sha512-eyuiESylUXW4kaF+v9J2gy9eZ+YT2uSVLILM4w1Afxnuv9u4UX9OnZnHR1OdF9ybq4x7+9chAzWUUbQ6HvBb3g==
 
 prettier@3.6.2:
   version "3.6.2"

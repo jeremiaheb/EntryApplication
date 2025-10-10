@@ -1,4 +1,4 @@
 web:
   hosts:
-    "sefsc-ncrmp-web-prod.us-east4-a.ggn-nmfs-sencrmp-prod-1":
-      ansible_ssh_executable: "{{ inventory_dir }}/gcloud-ansible-ssh"
+    "entryapplication.nmfs.noaa.gov":
+      ansible_host: "155.206.222.145"

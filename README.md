@@ -186,17 +186,34 @@ Within this same terminal, login to the Vagrant machine:
 vagrant ssh
 ```
 
-Direct Ansible to connect to the server at `IP_ADDR` and run the [playbook](./server/playbook.yml):
+Direct Ansible to connect to the servers in the [inventory](./server/production.yml) and run the [playbook](./server/playbook.yml):
 
 ```bash
-ansible-playbook --inventory IP_ADDR, --extra-vars ansible_user=USERNAME server/playbook.yml
+ansible-playbook --inventory server/production.yml --extra-vars ansible_user=USERNAME server/playbook.yml
 ```
 
-Replace `IP_ADDR` and `USERNAME` with the IP address of the server and your username on the server, respectively. For example:
+Replace `USERNAME` with your username on the server. For example:
 
 ```bash
-# NOTE: the comma after the IP address is intentional and required
-ansible-playbook --inventory 192.0.2.1, --extra-vars ansible_user=alindeman server/playbook.yml
+ansible-playbook --inventory server/production.yml --extra-vars ansible_user=alindeman server/playbook.yml
+```
+
+To run the Ansible without actually changing anything, add the `--check` flag. To run the Ansible with more details about what did (or would) change, add the `--verbose` flag.
+
+#### Cloud Instances
+
+To run the Ansible playbook on cloud instances, within a `vagrant ssh` session, first run:
+
+```bash
+gcloud auth login
+```
+
+Click on the link provided, login with your Google account and paste the verification code into the terminal when prompted.
+
+With the authentication setup, direct Ansible to connect to the servers in the [cloud inventory](./server/production_cloud.yml) and run the [playbook](./server/playbook.yml):
+
+```bash
+ansible-playbook --inventory server/production_cloud.yml server/playbook.yml
 ```
 
 To run the Ansible without actually changing anything, add the `--check` flag. To run the Ansible with more details about what did (or would) change, add the `--verbose` flag.

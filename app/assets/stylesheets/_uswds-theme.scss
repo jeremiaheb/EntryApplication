@@ -9,14 +9,25 @@ in the form $setting: value,
 
 // Refer to https://designsystem.digital.gov/documentation/settings/
 @use "uswds-core" with (
+  // Disable noisy notifications
+  $theme-show-notifications: false,
+
+  // The default (larger) focus width interferes with select2 styling
+  $theme-focus-width: "2px",
+
+  // Enable semi-bold weight
+  $theme-font-weight-semibold: 600,
+
+  // Align paths with Rails asset pipeline
   $theme-font-path: "@uswds/uswds/dist/fonts",
+  $theme-image-path: "@uswds/uswds/dist/img",
+
+  // Assume larger desktop width to give more horizontal space
   $theme-footer-max-width: "desktop-lg",
   $theme-grid-container-max-width: "desktop-lg",
   $theme-header-max-width: "desktop-lg",
   $theme-identifier-max-width: "desktop-lg",
-  $theme-image-path: "@uswds/uswds/dist/img",
   $theme-in-page-nav-main-content-max-width: "desktop-lg",
-  $theme-show-notifications: false,
   $theme-site-margins-breakpoint: "desktop-lg",
   $theme-site-margins-width: 2
 );

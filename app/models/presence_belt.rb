@@ -16,13 +16,11 @@ class PresenceBelt < ApplicationRecord
   validates :m_franksi,         presence: true
   validates :m_faveolata,       presence: true
 
-  enum a_palmata:  ENUM_VALUES,
-    a_cervicornis: ENUM_VALUES,
-    d_cylindrus:   ENUM_VALUES,
-    m_ferox:       ENUM_VALUES,
-    m_annularis:   ENUM_VALUES,
-    m_franksi:     ENUM_VALUES,
-    m_faveolata:   ENUM_VALUES,
-    _prefix:       true,
-    _suffix:       false
+  enum :a_palmata,     ENUM_VALUES, instance_methods: false
+  enum :a_cervicornis, ENUM_VALUES, instance_methods: false
+  enum :d_cylindrus,   ENUM_VALUES, instance_methods: false
+  enum :m_ferox,       ENUM_VALUES, instance_methods: false
+  enum :m_annularis,   ENUM_VALUES, instance_methods: false
+  enum :m_franksi,     ENUM_VALUES, instance_methods: false
+  enum :m_faveolata,   ENUM_VALUES, instance_methods: false
 end

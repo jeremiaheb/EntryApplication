@@ -66,5 +66,7 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
+  # Workaround for https://github.com/teamcapybara/capybara/issues/2800
+  gem "capybara-lockstep"
   gem "selenium-webdriver"
 end

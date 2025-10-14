@@ -51,10 +51,11 @@ class DiversController < ApplicationController
 
   # DELETE /divers/1
   def destroy
-    @diver = Diver.find(params[:id])
-    @diver.destroy
-
-    redirect_to divers_url, notice: "Diver was successfully deleted."
+    if @diver.destroy
+      redirect_to divers_url, notice: "Diver was successfully deleted."
+    else
+      redirect_to divers_url, alert: "Diver was not deleted: #{@diver.errors.full_messages.join(", ")}"
+    end
   end
 
   private

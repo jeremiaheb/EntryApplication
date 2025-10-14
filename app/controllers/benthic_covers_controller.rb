@@ -7,9 +7,9 @@ class BenthicCoversController < ApplicationController
   # GET /benthic_covers
   def index
     if current_diver.role == "admin"
-      @benthic_covers = BenthicCover.all
+      @benthic_covers = @benthic_covers.all
     elsif current_diver.role == "manager"
-      @benthic_covers = BenthicCover.where("diver_id=? OR boatlog_manager_id=?", current_diver, current_diver.boatlog_manager_id)
+      @benthic_covers = @benthic_covers.where("diver_id=? OR boatlog_manager_id=?", current_diver, current_diver.boatlog_manager_id)
     else
       @benthic_covers = current_diver.benthic_covers
     end
@@ -38,7 +38,6 @@ class BenthicCoversController < ApplicationController
 
   # GET /benthic_covers/1
   def show
-    @benthic_cover = BenthicCover.find(params[:id])
   end
 
   # GET /benthic_covers/new
@@ -67,8 +66,6 @@ class BenthicCoversController < ApplicationController
 
   # POST /benthic_covers
   def create
-    @benthic_cover = BenthicCover.new(benthic_cover_params)
-
     if @benthic_cover.save
       Draft.destroy_for(diver_id: current_diver.id, model_klass: BenthicCover, model_id: nil)
       redirect_to benthic_covers_path, notice: "Benthic cover was successfully created."
@@ -79,8 +76,6 @@ class BenthicCoversController < ApplicationController
 
   # PUT /benthic_covers/1
   def update
-    @benthic_cover = BenthicCover.find(params[:id])
-
     if @benthic_cover.update(benthic_cover_params)
       Draft.destroy_for(diver_id: current_diver.id, model_klass: BenthicCover, model_id: @benthic_cover.id)
       redirect_to benthic_covers_path, notice: "Benthic cover was successfully updated."
@@ -91,10 +86,11 @@ class BenthicCoversController < ApplicationController
 
   # DELETE /benthic_covers/1
   def destroy
-    @benthic_cover = BenthicCover.find(params[:id])
-    @benthic_cover.destroy
-
-    redirect_to benthic_covers_url
+    if @benthic_cover.destroy
+      redirect_to benthic_covers_url, notice: "Benthic cover was successfully deleted."
+    else
+      redirect_to benthic_covers_url, alert: "Benthic cover was not deleted: #{@benthic_cover.errors.full_messages.join(", ")}"
+    end
   end
 
   # PUT /draft

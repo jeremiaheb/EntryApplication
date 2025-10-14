@@ -7,9 +7,9 @@ class CoralDemographicsController < ApplicationController
   # GET /coral_demographics
   def index
     if current_diver.role == "admin"
-      @coral_demographics = CoralDemographic.all
+      @coral_demographics = @coral_demographics.all
     elsif current_diver.role == "manager"
-      @coral_demographics = CoralDemographic.where("diver_id=? OR boatlog_manager_id=?", current_diver, current_diver.boatlog_manager_id)
+      @coral_demographics = @coral_demographics.where("diver_id=? OR boatlog_manager_id=?", current_diver, current_diver.boatlog_manager_id)
     else
       @coral_demographics = current_diver.coral_demographics
     end
@@ -38,7 +38,6 @@ class CoralDemographicsController < ApplicationController
 
   # GET /coral_demographics/1
   def show
-    @coral_demographic = CoralDemographic.find(params[:id])
   end
 
   # GET /coral_demographics/new
@@ -64,8 +63,6 @@ class CoralDemographicsController < ApplicationController
 
   # POST /coral_demographics
   def create
-    @coral_demographic = CoralDemographic.new(coral_demographic_params)
-
     if @coral_demographic.save
       Draft.destroy_for(diver_id: current_diver.id, model_klass: CoralDemographic, model_id: nil)
       redirect_to coral_demographics_path, notice: "Coral demographic was successfully created."
@@ -76,8 +73,6 @@ class CoralDemographicsController < ApplicationController
 
   # PUT /coral_demographics/1
   def update
-    @coral_demographic = CoralDemographic.find(params[:id])
-
     if @coral_demographic.update(coral_demographic_params)
       Draft.destroy_for(diver_id: current_diver.id, model_klass: CoralDemographic, model_id: @coral_demographic.id)
       redirect_to coral_demographics_path, notice: "Coral demographic was successfully updated."
@@ -88,10 +83,11 @@ class CoralDemographicsController < ApplicationController
 
   # DELETE /coral_demographics/1
   def destroy
-    @coral_demographic = CoralDemographic.find(params[:id])
-    @coral_demographic.destroy
-
-    redirect_to coral_demographics_url
+    if @coral_demographic.destroy
+      redirect_to coral_demographics_url, notice: "Coral demographic was successfully deleted."
+    else
+      redirect_to coral_demographics_url, alert: "Coral demographic was not deleted: #{@coral_demographic.errors.full_messages.join(", ")}"
+    end
   end
 
   # PUT /draft

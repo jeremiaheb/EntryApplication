@@ -5,7 +5,6 @@ class BenthicCoversController < ApplicationController
   layout "application-uswds", only: [:index]
 
   # GET /benthic_covers
-  # GET /benthic_covers.json
   def index
     if current_diver.role == "admin"
       @benthic_covers = BenthicCover.all
@@ -17,7 +16,6 @@ class BenthicCoversController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @benthic_covers }
       format.xlsx do
         # Prevent caching
         no_store
@@ -39,18 +37,11 @@ class BenthicCoversController < ApplicationController
   end
 
   # GET /benthic_covers/1
-  # GET /benthic_covers/1.json
   def show
     @benthic_cover = BenthicCover.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @benthic_cover }
-    end
   end
 
   # GET /benthic_covers/new
-  # GET /benthic_covers/new.json
   def new
     @draft = Draft.latest_for(diver_id: current_diver.id, model_klass: BenthicCover, model_id: nil)
     if @draft
@@ -64,11 +55,6 @@ class BenthicCoversController < ApplicationController
         b.build_rugosity_measure
       end
     end
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @benthic_cover }
-    end
   end
 
   # GET /benthic_covers/1/edit
@@ -80,51 +66,35 @@ class BenthicCoversController < ApplicationController
   end
 
   # POST /benthic_covers
-  # POST /benthic_covers.json
   def create
     @benthic_cover = BenthicCover.new(benthic_cover_params)
 
-    respond_to do |format|
-      if @benthic_cover.save
-        Draft.destroy_for(diver_id: current_diver.id, model_klass: BenthicCover, model_id: nil)
-
-        format.html { redirect_to benthic_covers_path, notice: "Benthic cover was successfully created." }
-        format.json { render json: @benthic_cover, status: :created, location: @benthic_cover }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @benthic_cover.errors, status: :unprocessable_entity }
-      end
+    if @benthic_cover.save
+      Draft.destroy_for(diver_id: current_diver.id, model_klass: BenthicCover, model_id: nil)
+      redirect_to benthic_covers_path, notice: "Benthic cover was successfully created."
+    else
+      render action: "new"
     end
   end
 
   # PUT /benthic_covers/1
-  # PUT /benthic_covers/1.json
   def update
     @benthic_cover = BenthicCover.find(params[:id])
 
-    respond_to do |format|
-      if @benthic_cover.update(benthic_cover_params)
-        Draft.destroy_for(diver_id: current_diver.id, model_klass: BenthicCover, model_id: @benthic_cover.id)
-
-        format.html { redirect_to benthic_covers_path, notice: "Benthic cover was successfully updated." }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @benthic_cover.errors, status: :unprocessable_entity }
-      end
+    if @benthic_cover.update(benthic_cover_params)
+      Draft.destroy_for(diver_id: current_diver.id, model_klass: BenthicCover, model_id: @benthic_cover.id)
+      redirect_to benthic_covers_path, notice: "Benthic cover was successfully updated."
+    else
+      render action: "edit"
     end
   end
 
   # DELETE /benthic_covers/1
-  # DELETE /benthic_covers/1.json
   def destroy
     @benthic_cover = BenthicCover.find(params[:id])
     @benthic_cover.destroy
 
-    respond_to do |format|
-      format.html { redirect_to benthic_covers_url }
-      format.json { head :no_content }
-    end
+    redirect_to benthic_covers_url
   end
 
   # PUT /draft

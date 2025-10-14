@@ -11,6 +11,7 @@
     <%= stylesheet_link_tag "uswds-styles", "application-uswds", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= javascript_include_tag "@uswds/uswds/dist/js/uswds-init" %>
+    <%= capybara_lockstep if defined?(Capybara::Lockstep) %>
   </head>
 
   <body class="<%= controller_name %> <%= action_name %>">

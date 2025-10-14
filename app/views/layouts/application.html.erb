@@ -6,6 +6,7 @@
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "RVC Data Entry System" %>">
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
+    <%= capybara_lockstep if defined?(Capybara::Lockstep) %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= yield(:head) %>

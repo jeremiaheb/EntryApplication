@@ -6,7 +6,7 @@ class DiversController < ApplicationController
 
   # GET /divers
   def index
-    @divers = Diver.order(:diver_number)
+    @divers = @divers.order(:diver_number)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -19,18 +19,14 @@ class DiversController < ApplicationController
 
   # GET /divers/new
   def new
-    @diver = Diver.new
   end
 
   # GET /divers/1/edit
   def edit
-    @diver = Diver.find(params[:id])
   end
 
   # POST /divers
   def create
-    @diver = Diver.new(diver_params)
-
     if @diver.save
       redirect_to divers_url, notice: "Diver was successfully created."
     else
@@ -40,8 +36,6 @@ class DiversController < ApplicationController
 
   # PUT /divers/1
   def update
-    @diver = Diver.find(params[:id])
-
     if @diver.update(diver_params)
       redirect_to divers_url, notice: "Diver was successfully updated."
     else

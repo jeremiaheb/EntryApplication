@@ -29,13 +29,23 @@ i.e.
   }
 }
 
-.field_with_errors .usa-input,
+.field_with_errors input,
+.field_with_errors select,
 .usa-input.error,
-.field_with_errors .usa-select,
 .usa-select.error {
-  background-color: yellow;
-  @include u-outline("2px");
-  @include u-outline-color("secondary");
+  &:enabled,
+  &:enabled:hover {
+    background-color: yellow;
+    @include u-outline("2px");
+    @include u-outline-color("secondary");
+  }
+}
+
+// Embolden the label associated with the focused element
+.usa-form {
+  label.focused {
+    @include u-text("bold");
+  }
 }
 
 // Conflicting styles between USWDS and DataTables

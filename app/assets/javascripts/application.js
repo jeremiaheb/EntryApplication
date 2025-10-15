@@ -100,4 +100,17 @@ $(function () {
       return false;
     }
   }
+
+  const addFocusClassToLabel = function () {
+    const $focused = $(document.activeElement);
+    const focusedID = $focused.attr("id");
+
+    $("label.focused").removeClass("focused");
+    if (focusedID) {
+      $("label[for='" + focusedID + "']").addClass("focused");
+    }
+  };
+
+  addFocusClassToLabel();
+  $(document).on("focusin focusout", ":input", addFocusClassToLabel);
 });

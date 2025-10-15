@@ -1,5 +1,2 @@
-<h1>New Fish Sample</h1>
-
-<%= render partial: "draft_present_alert", locals: { discard_draft_url: draft_samples_path } %>
-
-<%= render 'form' %>
+<%= render "shared/nav_breadcrumbs", object: [["Fish Samples", samples_path], ["New Fish Sample", ""]] %>
+<%= render "form" %>

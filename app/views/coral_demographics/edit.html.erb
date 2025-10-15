@@ -1,6 +1,2 @@
-<h1>Editing Coral Demographic Sample <%=  @coral_demographic.field_id %></h1>
-
-<%= render partial: "draft_present_alert", locals: { discard_draft_url: draft_coral_demographics_path(id: @coral_demographic.id) } %>
-
-<%= render 'form' %>
-
+<%= render "shared/nav_breadcrumbs", object: [["Coral Demographics", coral_demographics_path], ["Edit Coral Demographic #{@coral_demographic.field_id}", ""]] %>
+<%= render "form" %>

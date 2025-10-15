@@ -17,7 +17,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     # Close any open select2 that happens to be open for other reasons
     page.execute_script("$('.select2-container').select2('close')")
 
-    select_element.sibling(".select2-container").find(".select2-arrow").click
+    select_element.sibling(".select2-container").find(".select2-choice").click
 
     within(".select2-drop") do
       find(".select2-result", text: option).click

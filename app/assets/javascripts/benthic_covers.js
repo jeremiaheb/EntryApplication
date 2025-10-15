@@ -1,177 +1,55 @@
-//# Place all the behaviors and hooks related to the matching controller here.
-//# All this logic will automatically be available in application.js.
-//# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-//#
-//#
-
 $(function () {
-  if (!EA.onRailsPage("benthic_covers", ["edit", "new"])) {
+  if (!EA.onRailsPage("benthic_covers", ["edit", "new", "update", "create"])) {
     return;
   }
-
-  const $benthicCoverSampleDate = $("#benthic_cover_sample_date");
-  $benthicCoverSampleDate.datepicker({
-    format: "yyyy-mm-dd",
-    orientation: "bottom",
-    autoclose: true,
-  });
-  if ($benthicCoverSampleDate.val() === "") {
-    // Default to today if not set
-    $benthicCoverSampleDate.datepicker("setDate", new Date());
-  }
-
-  $("#benthic_cover_sample_begin_time").timepicker({
-    timeFormat: "HH:mm",
-    dropdown: false,
-  });
-
-  $(".coverCats").find(".coverCategory").select2();
-  $(document).on("nested:fieldAdded", function (event) {
-    event.field.find(".coverCategory").select2();
-  });
-
-  function disable_rugosity_meter_marks() {
-    var $rugIndexLess = $(
-      "#benthic_cover_rugosity_measure_attributes_rug_meters_completed",
-    ).val();
-
-    $(".RugosityCat").each(function (index, el) {
-      var value = index + 1;
-
-      if (value > parseInt($rugIndexLess)) {
-        $(el).val("").removeClass("error").attr("disabled", true);
-        $(el).siblings("span").remove();
-      } else {
-        $(el).attr("disabled", false);
-      }
-    });
-  }
-
-  disable_rugosity_meter_marks();
-
-  $("#benthic_cover_rugosity_measure_attributes_rug_meters_completed").on(
-    "focusout",
-    function () {
-      disable_rugosity_meter_marks();
-    },
-  );
-
-  function getRugosityTotals() {
-    var $rugosityTotals = 0;
-    $(".rugosityCategories")
-      .find(".RugosityCat")
-      .each(function () {
-        $rugosityTotals += parseInt($(this).val());
-      });
-    $("#RugosityTotalDisplay").val($rugosityTotals);
-  }
-
-  getRugosityTotals();
-  $(".RugosityCat").change(function () {
-    getRugosityTotals();
-  });
-
-  function getCoverTotal() {
-    var coverTotal = 0;
-
-    $(".coverCats")
-      .find(".coverPoints:visible")
-      .each(function () {
-        if ($(this).val() != "") {
-          coverTotal += parseFloat($(this).val());
-        }
-      });
-
-    return coverTotal;
-  }
-
-  function updateCoverTotalText() {
-    $(".coverTotal").text(" Total Points " + getCoverTotal());
-  }
-
-  updateCoverTotalText();
-  $(".coverCats").change(function () {
-    updateCoverTotalText();
-  });
-  $(document).delegate(".remove_nested_fields", "click", function () {
-    updateCoverTotalText();
-  });
-
-  //puts focus on the select_2 drop down after adding cover pressed
-  $(document).delegate(".add_nested_fields", "click", function () {
-    $(".cover_data input:text:visible").eq(-4).focus();
-  });
-
-  //supress submitting form on pressing enter key, enter key adds new cover
-  //cat while inside coverCat class
-
-  $("#benthicCoverData").bind("keypress", function (e) {
-    if (e.keyCode == 13) {
-      e.preventDefault();
-    }
-  });
-
-  $(".coverCats").bind("keypress", function (e) {
-    if (e.keyCode == 13) {
-      e.preventDefault();
-      $(".add_nested_fields").trigger("click");
-    }
-  });
-
-  $("#lpiSubmit").click(function (e) {
-    e.preventDefault();
-
-    $(".new_benthic_cover, .edit_benthic_cover").validate().cancelSubmit = true;
-
-    $(".benthic_covers")
-      .find("input:enabled")
-      .each(function () {
-        $(".new_benthic_cover, .edit_benthic_cover").validate().element(this);
-      });
-
-    var $errors =
-      $(".benthic_covers").find("input:visible.error").length +
-      $(".benthic_covers").find("select:visible.error").length;
-
-    if ($errors == 0) {
-      var coverTotal = getCoverTotal();
-      if (
-        coverTotal != 100 &&
-        !confirm(
-          "Confirm: You are submitting fewer than 100 points. Please confirm you want to proceed.",
-        )
-      ) {
-        return;
-      }
-
-      $(".formContainer :input").not(this).attr("disabled", false);
-      $(".new_benthic_cover, .edit_benthic_cover").submit();
-    }
-  });
 
   $.validator.addMethod(
     "isOnlyCat",
     function (value, element, params) {
-      var $catList = [];
-      var $thisCat = $(element).parent().find(".coverCategory").select2("val");
-      var $index = $(element).parent().parent().index();
+      const $element = $(element);
+      if (!$element.is(":visible")) {
+        return true;
+      }
 
-      $(".coverCats .fields").each(function (i) {
-        if ($(this).is(":visible")) {
-          var $category = $(this).find(".coverCategory").select2("val");
-          $catList.push($category);
-        }
+      const thisCategory = $element
+        .parent()
+        .find(".coverCategory")
+        .select2("val");
+      const categoriesWithThisCategory = $(
+        ".coverCats .coverCategory.select2-container:visible",
+      ).filter(function () {
+        return $(this).select2("val") == thisCategory;
       });
 
-      console.log($catList);
-      var $uniqCatList = _.uniq($catList);
-      return $catList.length == $uniqCatList.length;
+      return categoriesWithThisCategory.length <= 1;
     },
     "Only one entry per cover Category",
   );
 
-  $(".new_benthic_cover, .edit_benthic_cover").validate({
-    errorElement: "span",
+  // Rules for dynamically added fields
+  $.validator.addClassRules("hardbottom-num-field", {
+    digits: true,
+    isOnlyCat: true,
+  });
+  $.validator.addClassRules("softbottom-num-field", {
+    digits: true,
+  });
+  $.validator.addClassRules("rubble-num-field", {
+    digits: true,
+  });
+
+  const validator = $(".benthic-cover-form").validate({
+    errorElement: "div",
+    errorPlacement: function ($error, $element) {
+      if ($element.closest(".coverCats").length > 0) {
+        // Place the error under the row
+        $element.closest(".fields").append($error);
+        return;
+      }
+
+      // Default
+      $error.insertAfter($element);
+    },
 
     onfocusout: function (element) {
       this.element(element);
@@ -260,63 +138,153 @@ $(function () {
         max: 15,
       },
       "benthic_cover[rugosity_measure_attributes][meter_mark_1]": {
-        required: true,
+        required: function (element) {
+          return (
+            $(
+              "#benthic_cover_rugosity_measure_attributes_rug_meters_completed",
+            ).val() >= 1
+          );
+        },
         digits: true,
       },
       "benthic_cover[rugosity_measure_attributes][meter_mark_2]": {
-        required: true,
+        required: function (element) {
+          return (
+            $(
+              "#benthic_cover_rugosity_measure_attributes_rug_meters_completed",
+            ).val() >= 2
+          );
+        },
         digits: true,
       },
       "benthic_cover[rugosity_measure_attributes][meter_mark_3]": {
-        required: true,
+        required: function (element) {
+          return (
+            $(
+              "#benthic_cover_rugosity_measure_attributes_rug_meters_completed",
+            ).val() >= 3
+          );
+        },
         digits: true,
       },
       "benthic_cover[rugosity_measure_attributes][meter_mark_4]": {
-        required: true,
+        required: function (element) {
+          return (
+            $(
+              "#benthic_cover_rugosity_measure_attributes_rug_meters_completed",
+            ).val() >= 4
+          );
+        },
         digits: true,
       },
       "benthic_cover[rugosity_measure_attributes][meter_mark_5]": {
-        required: true,
+        required: function (element) {
+          return (
+            $(
+              "#benthic_cover_rugosity_measure_attributes_rug_meters_completed",
+            ).val() >= 5
+          );
+        },
         digits: true,
       },
       "benthic_cover[rugosity_measure_attributes][meter_mark_6]": {
-        required: true,
+        required: function (element) {
+          return (
+            $(
+              "#benthic_cover_rugosity_measure_attributes_rug_meters_completed",
+            ).val() >= 6
+          );
+        },
         digits: true,
       },
       "benthic_cover[rugosity_measure_attributes][meter_mark_7]": {
-        required: true,
+        required: function (element) {
+          return (
+            $(
+              "#benthic_cover_rugosity_measure_attributes_rug_meters_completed",
+            ).val() >= 7
+          );
+        },
         digits: true,
       },
       "benthic_cover[rugosity_measure_attributes][meter_mark_8]": {
-        required: true,
+        required: function (element) {
+          return (
+            $(
+              "#benthic_cover_rugosity_measure_attributes_rug_meters_completed",
+            ).val() >= 8
+          );
+        },
         digits: true,
       },
       "benthic_cover[rugosity_measure_attributes][meter_mark_9]": {
-        required: true,
+        required: function (element) {
+          return (
+            $(
+              "#benthic_cover_rugosity_measure_attributes_rug_meters_completed",
+            ).val() >= 9
+          );
+        },
         digits: true,
       },
       "benthic_cover[rugosity_measure_attributes][meter_mark_10]": {
-        required: true,
+        required: function (element) {
+          return (
+            $(
+              "#benthic_cover_rugosity_measure_attributes_rug_meters_completed",
+            ).val() >= 10
+          );
+        },
         digits: true,
       },
       "benthic_cover[rugosity_measure_attributes][meter_mark_11]": {
-        required: true,
+        required: function (element) {
+          return (
+            $(
+              "#benthic_cover_rugosity_measure_attributes_rug_meters_completed",
+            ).val() >= 11
+          );
+        },
         digits: true,
       },
       "benthic_cover[rugosity_measure_attributes][meter_mark_12]": {
-        required: true,
+        required: function (element) {
+          return (
+            $(
+              "#benthic_cover_rugosity_measure_attributes_rug_meters_completed",
+            ).val() >= 12
+          );
+        },
         digits: true,
       },
       "benthic_cover[rugosity_measure_attributes][meter_mark_13]": {
-        required: true,
+        required: function (element) {
+          return (
+            $(
+              "#benthic_cover_rugosity_measure_attributes_rug_meters_completed",
+            ).val() >= 13
+          );
+        },
         digits: true,
       },
       "benthic_cover[rugosity_measure_attributes][meter_mark_14]": {
-        required: true,
+        required: function (element) {
+          return (
+            $(
+              "#benthic_cover_rugosity_measure_attributes_rug_meters_completed",
+            ).val() >= 14
+          );
+        },
         digits: true,
       },
       "benthic_cover[rugosity_measure_attributes][meter_mark_15]": {
-        required: true,
+        required: function (element) {
+          return (
+            $(
+              "#benthic_cover_rugosity_measure_attributes_rug_meters_completed",
+            ).val() >= 15
+          );
+        },
         digits: true,
       },
     },
@@ -330,39 +298,162 @@ $(function () {
     },
   });
 
+  const $benthicCoverSampleDate = $("#benthic_cover_sample_date");
+  $benthicCoverSampleDate.datepicker({
+    format: "yyyy-mm-dd",
+    orientation: "bottom",
+    autoclose: true,
+  });
+  if ($benthicCoverSampleDate.val() === "") {
+    // Default to today if not set
+    $benthicCoverSampleDate.datepicker("setDate", new Date());
+  }
+
+  $("#benthic_cover_sample_begin_time").timepicker({
+    timeFormat: "HH:mm",
+    dropdown: false,
+  });
+
+  $(".coverCats").find(".coverCategory").select2();
+  $(".benthic-cover-form").on("nested:fieldAdded", function (event) {
+    event.field.find(".coverCategory").select2();
+  });
+
+  const disableRugosityMeterMarks = function () {
+    let metersCompleted = parseInt(
+      $(
+        "#benthic_cover_rugosity_measure_attributes_rug_meters_completed",
+      ).val(),
+    );
+
+    $(".RugosityCat").each(function (index) {
+      const $this = $(this);
+
+      let value = index + 1;
+      if (value > metersCompleted) {
+        $this.val("").prop("disabled", true);
+        validator.element($this);
+      } else {
+        $this.prop("disabled", false);
+      }
+    });
+  };
+  disableRugosityMeterMarks();
+  $("#benthic_cover_rugosity_measure_attributes_rug_meters_completed").on(
+    "focusout",
+    disableRugosityMeterMarks,
+  );
+
+  const calculateRugosityTotal = function () {
+    let rugosityTotal = $(".RugosityCat").sumValues();
+    $("#RugosityTotalDisplay").val(rugosityTotal);
+  };
+  calculateRugosityTotal();
+  $("#benthic_cover_rugosity_measure_attributes_rug_meters_completed").on(
+    "focusout",
+    calculateRugosityTotal,
+  );
+  $(".RugosityCat").on("change", calculateRugosityTotal);
+
+  const updateCoverTotalText = function () {
+    let coverTotal = $(".coverCats .coverPoints:visible").sumValues();
+
+    $(".coverTotal").text("Total Points: " + coverTotal);
+    if (coverTotal == 100) {
+      $(".coverTotal")
+        .removeClass("bg-secondary-light")
+        .addClass("bg-primary-light");
+    } else {
+      $(".coverTotal")
+        .addClass("bg-secondary-light")
+        .removeClass("bg-primary-light");
+    }
+  };
+  updateCoverTotalText();
+  $(".coverCats").on("change", updateCoverTotalText);
+  $(".benthic-cover-form").on(
+    "nested:fieldAdded nested:fieldRemoved",
+    updateCoverTotalText,
+  );
+
+  // Focus on the select2 drop down after adding cover pressed
+  $(".benthic-cover-form").on("nested:fieldAdded", function () {
+    const $lastCoverSelect = $(".coverCats .coverCategory:visible").last();
+    if ($lastCoverSelect.length > 0) {
+      $lastCoverSelect[0].scrollIntoView();
+      $lastCoverSelect.select2("open");
+    }
+  });
+
+  // supress submitting form on pressing enter key, enter key adds new cover cat
+  // while inside coverCat class
+  $("#benthicCoverData").bind("keypress", function (e) {
+    if (e.keyCode == 13) {
+      e.preventDefault();
+    }
+  });
+  $(".coverCats").bind("keypress", function (e) {
+    if (e.keyCode == 13) {
+      e.preventDefault();
+      $(".add_nested_fields").trigger("click");
+    }
+  });
+
+  $("#lpiSubmit").click(function (e) {
+    e.preventDefault();
+    const $this = $(this);
+
+    validator.cancelSubmit = true;
+
+    $(".benthic-cover-form")
+      .find("input:enabled, select:enabled")
+      .each(function () {
+        validator.element(this);
+      });
+
+    let errorCount = $(".benthic-cover-form").find(
+      "input:visible.error, select:visible.error",
+    ).length;
+    if (errorCount == 0) {
+      let coverTotal = $(".coverCats .coverPoints:visible").sumValues();
+      if (
+        coverTotal != 100 &&
+        !confirm(
+          "Confirm: You are submitting fewer than 100 points. Please confirm you want to proceed.",
+        )
+      ) {
+        return;
+      }
+
+      $(".benthic-cover-form :input").not($this).prop("disabled", false);
+      $this.prop("disabled", true);
+      $(".benthic-cover-form").submit();
+    }
+  });
+
   $("#benthic_cover_meters_completed").on("focusout", function (e) {
-    if (Number($(this).val()) != 15) {
+    let $this = $(this);
+    let meters = Number($this.val());
+
+    if (meters != 15) {
       alert("Caution: Full survey (15m) not entered");
     }
   });
 
-  function validate_fields() {
-    $('[name*="hardbottom_num"]').each(function () {
-      $(this).rules("add", {
-        digits: true,
-        isOnlyCat: true,
+  $(".benthic-cover-form").on(
+    "nested:fieldAdded nested:fieldRemoved",
+    function () {
+      // Force re-check of any fields that are currently shown as errors
+      $("input.error").each(function () {
+        validator.element(this);
       });
-    });
-    $('[name*="softbottom_num"]').each(function () {
-      $(this).rules("add", {
-        digits: true,
-      });
-    });
-    $('[name*="rubble_num"]').each(function () {
-      $(this).rules("add", {
-        digits: true,
-      });
-    });
-  }
+    },
+  );
 
-  validate_fields();
-  $(document).delegate(".add_nested_fields", "click", function () {
-    validate_fields();
-  });
-
-  $(".coverCats").change(function () {
+  $(".coverCats").on("change", function () {
+    // Force re-check of any fields that are currently shown as errors
     $("input.error").each(function () {
-      $("form").validate().element(this);
+      validator.element(this);
     });
   });
 });

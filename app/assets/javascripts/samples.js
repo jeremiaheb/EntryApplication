@@ -3,513 +3,21 @@ $(function () {
     return;
   }
 
-  $("#substrateSection").hide();
-  $("#speciesSection").hide();
-  $(".changeSection").change(function () {
-    // hide
-    $("div.sectionDiv").hide();
-    // val is something like #div1 or #div2
-    var targetId = $(this).val();
-    // show the new selected one
-    $("#" + targetId).show();
-  });
-
-  if ($("form").hasClass("new_sample")) {
-    $(".changeSection option[value='substrateSection']").attr(
-      "disabled",
-      "disabled",
-    );
-    $(".changeSection option[value='speciesSection']").attr(
-      "disabled",
-      "disabled",
-    );
-  }
-
-  function show_or_hide_substrate() {
-    var should_display_substrate = new Array();
-    var errorCount = $("#sampleSection :input.error").length;
-
-    $("#sampleSection")
-      .find(".tab_1")
-      .each(function () {
-        // This equality test does NOT work with '0' because they time
-        // option_selects can be '0'
-        if ($(this).val() == "") {
-          should_display_substrate.push($(this));
-        }
-      });
-
-    if (should_display_substrate.length == 0 && errorCount == 0) {
-      $(".changeSection option[value='substrateSection']").removeAttr(
-        "disabled",
-      );
-      $("#gotoSubstrate").attr("disabled", false);
-    } else {
-      $(".changeSection option[value='substrateSection']").attr(
-        "disabled",
-        true,
-      );
-      $("#gotoSubstrate").attr("disabled", true);
-    }
-  }
-
-  function show_or_hide_species() {
-    var should_display_species = new Array();
-    var all_totals_equal_hundred = new Boolean();
-    var errorCount = $("#substrateSection :input.error").length;
-
-    if (
-      $("#sample_sand_percentage").val() > 0 &&
-      $("#sample_hardbottom_percentage").val() > 0 &&
-      $("#hard_relief_total").val() == 100 &&
-      $("#soft_relief_total").val() == 100 &&
-      $("#biotic_percentage_hardbottom_total").val() == 100 &&
-      $("#biotic_percentage_sand_total").val() == 100 &&
-      $("#abiotic_percentage_total").val() == 100
-    ) {
-      all_totals_equal_hundred = true;
-    } else if (
-      $("#sample_sand_percentage").val() == 0 &&
-      $("#sample_hardbottom_percentage").val() > 0 &&
-      $("#hard_relief_total").val() == 100 &&
-      $("#soft_relief_total").val() == 100 &&
-      $("#biotic_percentage_hardbottom_total").val() == 100 &&
-      $("#abiotic_percentage_total").val() == 100
-    ) {
-      all_totals_equal_hundred = true;
-    } else if (
-      $("#sample_sand_percentage").val() > 0 &&
-      $("#sample_hardbottom_percentage").val() == 0 &&
-      $("#hard_relief_total").val() == 100 &&
-      $("#soft_relief_total").val() == 100 &&
-      $("#biotic_percentage_sand_total").val() == 100 &&
-      $("#abiotic_percentage_total").val() == 100
-    ) {
-      all_totals_equal_hundred = true;
-    } else {
-      all_totals_equal_hundred = false;
-    }
-
-    $("#substrateSection")
-      .find(".tab_2")
-      .each(function () {
-        // This equality test does NOT work with '0' because they time
-        // option_selects can be '0'
-        if ($(this).val() == "") {
-          should_display_species.push($(this));
-        }
-      });
-
-    if (
-      should_display_species.length == 0 &&
-      all_totals_equal_hundred == true &&
-      errorCount == 0
-    ) {
-      $(".changeSection option[value='speciesSection']").removeAttr("disabled");
-      $("#gotoSpecies").attr("disabled", false);
-    } else {
-      $(".changeSection option[value='speciesSection']").attr("disabled", true);
-      $("#gotoSpecies").attr("disabled", true);
-    }
-  }
-
-  $("#gotoSubstrate").click(function () {
-    $("#sampleSection").hide();
-    $("#substrateSection").show();
-    $(".changeSection").val("substrateSection");
-  });
-
-  $("#gotoSpecies").click(function () {
-    $("#substrateSection").hide();
-    $("#speciesSection").show();
-    $(".changeSection").val("speciesSection");
-  });
-
-  //Show or hide sections
-  if ($("form").hasClass("new_sample")) {
-    show_or_hide_substrate();
-    show_or_hide_species();
-  }
-
-  //on change check if section should show
-  $(".tab_1").focusout(function () {
-    show_or_hide_substrate();
-  });
-
-  $("#substrateSection").focusout(function () {
-    show_or_hide_species();
-    $("#substrateSection")
-      .find(
-        ".hard_relief[disabled=disabled], .soft_relief[disabled=disabled], .biotic_percentage_sand[disabled=disabled] ",
-      )
-      .val("");
-  });
-
-  function disable_hard_surface_relief_coverage() {
-    $(
-      "#sample_hard_relief_cat_1, #sample_hard_relief_cat_2, #sample_hard_relief_cat_3, #sample_hard_relief_cat_4",
-    ).attr("disabled", false);
-    var $hardVertVal = $("#sample_hard_verticle_relief").val();
-
-    if ($hardVertVal <= 0.2) {
-      $(
-        "#sample_hard_relief_cat_1, #sample_hard_relief_cat_2, #sample_hard_relief_cat_3, #sample_hard_relief_cat_4",
-      ).attr("disabled", true);
-    } else if ($hardVertVal > 0.2 && $hardVertVal <= 0.5) {
-      $(
-        "#sample_hard_relief_cat_2, #sample_hard_relief_cat_3, #sample_hard_relief_cat_4",
-      ).attr("disabled", true);
-    } else if ($hardVertVal > 0.5 && $hardVertVal <= 1.0) {
-      $("#sample_hard_relief_cat_3, #sample_hard_relief_cat_4").attr(
-        "disabled",
-        true,
-      );
-    } else if ($hardVertVal > 1.0 && $hardVertVal <= 1.5) {
-      $("#sample_hard_relief_cat_4").attr("disabled", true);
-    } else {
-    }
-  }
-
-  function disable_soft_surface_relief_coverage() {
-    $(
-      "#sample_soft_relief_cat_1, #sample_soft_relief_cat_2, #sample_soft_relief_cat_3, #sample_soft_relief_cat_4",
-    ).attr("disabled", false);
-    var $softVertVal = $("#sample_soft_verticle_relief").val();
-
-    if ($softVertVal <= 0.2) {
-      $(
-        "#sample_soft_relief_cat_1, #sample_soft_relief_cat_2, #sample_soft_relief_cat_3, #sample_soft_relief_cat_4",
-      ).attr("disabled", true);
-    } else if ($softVertVal > 0.2 && $softVertVal <= 0.5) {
-      $(
-        "#sample_soft_relief_cat_2, #sample_soft_relief_cat_3, #sample_soft_relief_cat_4",
-      ).attr("disabled", true);
-    } else if ($softVertVal > 0.5 && $softVertVal <= 1.0) {
-      $("#sample_soft_relief_cat_3, #sample_soft_relief_cat_4").attr(
-        "disabled",
-        true,
-      );
-    } else if ($softVertVal > 1.0 && $softVertVal <= 1.5) {
-      $("#sample_soft_relief_cat_4").attr("disabled", true);
-    } else {
-    }
-  }
-
-  disable_hard_surface_relief_coverage();
-  disable_soft_surface_relief_coverage();
-
-  $("#sample_hard_verticle_relief").on("focusout", function () {
-    disable_hard_surface_relief_coverage();
-    show_or_hide_species();
-  });
-
-  $("#sample_soft_verticle_relief").on("focusout", function () {
-    disable_soft_surface_relief_coverage();
-    show_or_hide_species();
-  });
-
-  function disable_biotic_perc_sand() {
-    $(".biotic_percentage_sand").attr("disabled", false);
-    $("#sample_sand_pcov_other1_lab, #sample_sand_pcov_other2_lab").attr(
-      "disabled",
-      false,
-    );
-    var $bioticSandVal = $("#sample_sand_percentage").val();
-
-    if ($bioticSandVal == "" || $bioticSandVal == 0) {
-      $(".biotic_percentage_sand").val("").attr("disabled", true);
-      $("#sample_sand_pcov_other1_lab, #sample_sand_pcov_other2_lab").attr(
-        "disabled",
-        true,
-      );
-      $("#biotic_percentage_sand_total").removeClass();
-    }
-  }
-
-  function disable_biotic_perc_hard() {
-    $(".biotic_percentage_hardbottom").attr("disabled", false);
-    $("#sample_hard_pcov_other1_lab, #sample_hard_pcov_other2_lab").attr(
-      "disabled",
-      false,
-    );
-    var $bioticHardVal = $("#sample_hardbottom_percentage").val();
-
-    if ($bioticHardVal == "" || $bioticHardVal == 0) {
-      $(".biotic_percentage_hardbottom").val("").attr("disabled", true);
-      $("#sample_hard_pcov_other1_lab, #sample_hard_pcov_other2_lab").attr(
-        "disabled",
-        true,
-      );
-      $("#biotic_percentage_hardbottom_total").removeClass();
-    }
-  }
-
-  disable_biotic_perc_sand();
-  disable_biotic_perc_hard();
-
-  $("#sample_sand_percentage, #sample_hardbottom_percentage").on(
-    "focusout",
-    function () {
-      disable_biotic_perc_sand();
-      disable_biotic_perc_hard();
+  const $sampleFormTabs = $(".sample-form .tabs").tabs({
+    activate: function (e, ui) {
+      // After tab switch, focus the first input element in the tab
+      $(ui.newPanel).find(":input:enabled").first().focus();
     },
-  );
-
-  function calculate_totals(input_class_to_sum, id_to_display_total) {
-    var sum_for_display_total = new Array();
-
-    $(".section_2")
-      .find("." + input_class_to_sum)
-      .each(function () {
-        if ($(this).val() != 0) {
-          sum_for_display_total.push($(this).val());
-        }
-      });
-
-    var total = 0;
-
-    $.each(sum_for_display_total, function () {
-      total += parseFloat(this);
-    });
-
-    // If total is gr)ater than 100 then flag it by add a red background.
-    if (total != 100) {
-      $("#" + id_to_display_total).removeClass("one_hundred_ok_flag");
-      $("#" + id_to_display_total).addClass("one_hundred_flag");
-    } else {
-      $("#" + id_to_display_total).addClass("one_hundred_ok_flag");
-      $("#" + id_to_display_total).removeClass("one_hundred_flag");
-    }
-
-    $("#" + id_to_display_total).val(total);
-  }
-
-  // Calculate total for 'surface_hard' when page loads
-  calculate_totals("hard_relief", "hard_relief_total");
-
-  // Calculate total for 'surface_hard' on change
-  $("#sample_hard_verticle_relief").on("focusout", function () {
-    calculate_totals("hard_relief", "hard_relief_total");
-    $(".hard_relief").trigger("focusout");
-  });
-  $(".hard_relief").focusout(function () {
-    calculate_totals("hard_relief", "hard_relief_total");
   });
 
-  // Calculate total for 'surface_soft' when page loads
-  calculate_totals("soft_relief", "soft_relief_total");
-
-  // Calculate total for 'surface_soft' on change
-  $("#sample_soft_verticle_relief").on("focusout", function () {
-    calculate_totals("soft_relief", "soft_relief_total");
-    $(".soft_relief").trigger("focusout");
-  });
-  $(".soft_relief").focusout(function () {
-    calculate_totals("soft_relief", "soft_relief_total");
-  });
-
-  // Calculate total for 'abiotic_footprint' when page loads
-  calculate_totals("abiotic_percentage", "abiotic_percentage_total");
-
-  // Calculate total for 'abiotic_footprint' on change
-  $(".abiotic_percentage").change(function () {
-    calculate_totals("abiotic_percentage", "abiotic_percentage_total");
-  });
-
-  // Calculate total for 'biotic_percentage_sand' when page loads
-  if ($("#sample_sand_percentage").val() != 0) {
-    calculate_totals("biotic_percentage_sand", "biotic_percentage_sand_total");
-  }
-
-  // Calculate total for 'biotic_percentage_sand' on change
-  $(".biotic_percentage_sand").change(function () {
-    calculate_totals("biotic_percentage_sand", "biotic_percentage_sand_total");
-  });
-
-  // Calculate total for 'biotic_percentage_hardbottom' when page loads
-  if ($("#sample_hardbottom_percentage").val() != 0) {
-    calculate_totals(
-      "biotic_percentage_hardbottom",
-      "biotic_percentage_hardbottom_total",
-    );
-  }
-
-  // Calculate total for 'biotic_percentage_hardbottom' on change
-  $(".biotic_percentage_hardbottom").change(function () {
-    calculate_totals(
-      "biotic_percentage_hardbottom",
-      "biotic_percentage_hardbottom_total",
-    );
-  });
-
-  $(".time_seen_button").click(function () {
-    $(this).addClass("active").siblings().removeClass("active");
-  });
-
-  function set_time_seen_field_on_focus() {
-    $(".sppCommon").on("select2-open", function () {
-      var $thisID = $(this).attr("id").slice(0, -10);
-      var $radioTimeSeenVal = $('.time_seen_button[class*="active"]').val();
-
-      $("input#" + $thisID + "_time_seen").attr("value", $radioTimeSeenVal);
-      $("input#" + $thisID + "_time_seen").trigger("change");
-      $("input#" + $thisID + "_number_individuals").attr(
-        "class",
-        "timeSeen_" + $radioTimeSeenVal,
-      );
-      $("input#" + $thisID + "_average_length").attr(
-        "class",
-        "timeSeen_" + $radioTimeSeenVal,
-      );
-      $("input#" + $thisID + "_min_length").attr(
-        "class",
-        "timeSeen_" + $radioTimeSeenVal,
-      );
-      $("input#" + $thisID + "_max_length").attr(
-        "class",
-        "timeSeen_" + $radioTimeSeenVal,
-      );
-    });
-  }
-
-  set_time_seen_field_on_focus();
-
-  $(document).delegate(".add_nested_fields", "click", function () {
-    set_time_seen_field_on_focus();
-    enable_disable_animals_fields();
-    alertSpeciesSizes();
-    //$(".section_3 input:text:visible").eq(-5).focus();
-    $(".section_3 input:text:visible").eq(-5);
-    $(".section_3 .sppCommon:visible").last().select2("open");
-    $("#animals").scrollTop($("#animals")[0].scrollHeight);
-  });
-
-  $("#animals").find(".sppCommon").select2();
-  $(document).on("nested:fieldAdded", function (event) {
-    event.field.find(".sppCommon").select2();
-  });
-
-  function enable_disable_animals_fields_on_load() {
-    $("#animals")
-      .find(".fields [id$=number_individuals]")
-      .each(function () {
-        var $indValue = $(this).val();
-        var $recordID = $(this).attr("id");
-        var $mean = $recordID.replace("_number_individuals", "_average_length");
-        var $min = $recordID.replace("_number_individuals", "_min_length");
-        var $max = $recordID.replace("_number_individuals", "_max_length");
-
-        if ($indValue >= 3) {
-          $("input#" + $mean).attr("disabled", false);
-          $("input#" + $min).attr("disabled", false);
-          $("input#" + $max).attr("disabled", false);
-        } else if ($indValue == 1) {
-          $("input#" + $mean).attr("disabled", false);
-          $("input#" + $min).attr("disabled", true);
-          $("input#" + $max).attr("disabled", true);
-        } else if ($indValue == 2) {
-          $("input#" + $mean).attr("disabled", true);
-          $("input#" + $min).attr("disabled", false);
-          $("input#" + $max).attr("disabled", false);
-        }
-      });
-  }
-
-  function enable_disable_animals_fields() {
-    $("[id$=number_individuals]").on("focusout", function (e) {
-      var $indValue = $(this).val();
-      var $recordID = $(this).attr("id");
-      var $mean = $recordID.replace("_number_individuals", "_average_length");
-      var $min = $recordID.replace("_number_individuals", "_min_length");
-      var $max = $recordID.replace("_number_individuals", "_max_length");
-      // $relatedTarget is the field that will be focused next
-      var $relatedTarget = $(e.relatedTarget);
-
-      if ($indValue >= 3) {
-        $("input#" + $mean).attr("disabled", false);
-        $("input#" + $min).attr("disabled", false);
-        $("input#" + $max).attr("disabled", false);
-        if ($relatedTarget.is(":disabled")) {
-          $("input#" + $mean).focus();
-        }
-      } else if ($indValue == 1) {
-        $("input#" + $mean).attr("disabled", false);
-        $("input#" + $min).val("");
-        $("input#" + $min).attr("disabled", true);
-        $("input#" + $max).val("");
-        $("input#" + $max).attr("disabled", true);
-        if ($relatedTarget.is(":disabled")) {
-          $("input#" + $mean).focus();
-        }
-      } else if ($indValue == 2) {
-        $("input#" + $mean)
-          .val("")
-          .attr("disabled", true);
-        $("input#" + $min).attr("disabled", false);
-        $("input#" + $max).attr("disabled", false);
-        if ($relatedTarget.is(":disabled")) {
-          $("input#" + $min).focus();
-        }
-      }
-    });
-  }
-
-  enable_disable_animals_fields_on_load();
-  enable_disable_animals_fields();
-
-  $("#validateAnimals").click(function () {
-    $(".validateCross, .validateCheck").hide();
-
-    $("#animals")
-      .find("input:enabled")
-      .each(function () {
-        $(".new_sample, .edit_sample").validate().element(this);
-      });
-
-    if ($("#animals").find("input:visible.error").length > 0) {
-      $(".validateCross").show();
-    } else {
-      $(".validateCheck").show();
-      $("#submitButton").attr("disabled", false);
-    }
-  });
-
-  $("#submitButton").click(function (e) {
+  $(".go-to-substrate-button").on("click", function (e) {
     e.preventDefault();
-    $(this).attr("disabled", true);
-
-    $(".new_sample, .edit_sample").validate().cancelSubmit = true;
-    $(".formContainer :input").not(this).attr("disabled", false);
-    $(".new_sample, .edit_sample").submit();
+    $sampleFormTabs.tabs("option", "active", 1);
   });
-
-  $("#animals").bind("keypress", function (e) {
-    if (e.keyCode == 13) {
-      e.preventDefault();
-      $(".add_nested_fields").trigger("click");
-    }
+  $(".go-to-species-button").on("click", function (e) {
+    e.preventDefault();
+    $sampleFormTabs.tabs("option", "active", 2);
   });
-
-  const $sampleSampleDate = $("#sample_sample_date");
-  $sampleSampleDate.datepicker({
-    format: "yyyy-mm-dd",
-    orientation: "bottom",
-    autoclose: true,
-  });
-  if ($sampleSampleDate.val() === "") {
-    // Default to today if not set
-    $sampleSampleDate.datepicker("setDate", new Date());
-  }
-
-  $(
-    "#sample_dive_begin_time, #sample_dive_end_time, #sample_sample_begin_time, #sample_sample_end_time",
-  ).timepicker({
-    timeFormat: "HH:mm",
-    dropdown: false,
-  });
-
-  // Check that a species record does not have overlapping sizes with another
-  // record of the same species
 
   $.validator.addMethod(
     "doesNotHaveOverlap",
@@ -666,27 +174,45 @@ $(function () {
     "must be greater than or equal to min length",
   );
 
-  // modified from http://orip.org/2010/06/jquery-validate-required-if-visible.html
-
-  $.validator.setDefaults({
-    errorPlacement: function (error, element) {
-      if (
-        element.is('[id$="number_individuals"]') ||
-        element.is('[id$="average_length"]') ||
-        element.is('[id$="min_length"]') ||
-        element.is('[id$="max_length"]')
-      ) {
-        error.insertAfter(element.parent().find('[id$="max_length"]'));
-      } else if (element.is(".hard_relief") || element.is(".soft_relief")) {
-        error.insertAfter(element.parent().parent().parent().parent());
-      } else {
-        error.insertAfter(element);
-      }
-    },
+  // Rules for dynamically added fields
+  $.validator.addClassRules("number-individuals", {
+    required: true,
+    digits: true,
+    isNotInPreviousTimePeriod: true,
+  });
+  $.validator.addClassRules("average-length", {
+    requiredIfEnabled: true,
+    digits: true,
+    doesNotHaveOverlap: true,
+  });
+  $.validator.addClassRules("min-length", {
+    requiredIfEnabled: true,
+    digits: true,
+    lessThanEqualToAvg: true,
+    doesNotHaveOverlap: true,
+  });
+  $.validator.addClassRules("max-length", {
+    requiredIfEnabled: true,
+    digits: true,
+    greaterThanEqualToAvg: true,
+    greaterThanEqualToMin: true,
+    doesNotHaveOverlap: true,
   });
 
-  $(".new_sample, .edit_sample").validate({
-    errorElement: "span",
+  const validator = $(".sample-form").validate({
+    errorElement: "div",
+    errorPlacement: function ($error, $element) {
+      if ($element.closest(".grid-col").length > 0) {
+        $error.addClass(["margin-left-05", "display-inline-block"]);
+      }
+
+      $closestNestedFields = $element.closest(".fields");
+      if ($closestNestedFields.length > 0) {
+        $closestNestedFields.append($error);
+      } else {
+        $error.insertAfter($element);
+      }
+    },
     ignore: ".ignore",
 
     onfocusout: function (element) {
@@ -698,6 +224,12 @@ $(function () {
         required: true,
       },
       "sample[sample_date]": {
+        required: true,
+      },
+      "sample[diver_id]": {
+        required: true,
+      },
+      "sample[buddy_id]": {
         required: true,
       },
       "sample[sample_type_id]": {
@@ -859,68 +391,345 @@ $(function () {
     },
   });
 
-  $('[name*="diver_id"]').each(function () {
-    $(this).rules("add", { required: true });
+  const enableSurfaceReliefCoverageFields = function (e) {
+    // Hard substrate
+    const maxHardSubstrate = $("#sample_hard_verticle_relief").val();
+
+    const $sampleHardReliefCat1 = $("#sample_hard_relief_cat_1");
+    if (maxHardSubstrate <= 0.2) {
+      $sampleHardReliefCat1.val("").prop("disabled", true);
+    } else {
+      $sampleHardReliefCat1.prop("disabled", false);
+    }
+    validator.element($sampleHardReliefCat1);
+
+    const $sampleHardReliefCat2 = $("#sample_hard_relief_cat_2");
+    if (maxHardSubstrate <= 0.5) {
+      $sampleHardReliefCat2.val("").prop("disabled", true);
+    } else {
+      $sampleHardReliefCat2.prop("disabled", false);
+    }
+    validator.element($sampleHardReliefCat2);
+
+    const $sampleHardReliefCat3 = $("#sample_hard_relief_cat_3");
+    if (maxHardSubstrate <= 1.0) {
+      $sampleHardReliefCat3.val("").prop("disabled", true);
+    } else {
+      $sampleHardReliefCat3.prop("disabled", false);
+    }
+    validator.element($sampleHardReliefCat3);
+
+    const $sampleHardReliefCat4 = $("#sample_hard_relief_cat_4");
+    if (maxHardSubstrate <= 1.5) {
+      $sampleHardReliefCat4.val("").prop("disabled", true);
+    } else {
+      $sampleHardReliefCat4.prop("disabled", false);
+    }
+    validator.element($sampleHardReliefCat4);
+
+    // Soft substrate
+    const maxSoftSubstrate = $("#sample_soft_verticle_relief").val();
+
+    const $sampleSoftReliefCat1 = $("#sample_soft_relief_cat_1");
+    if (maxSoftSubstrate <= 0.2) {
+      $sampleSoftReliefCat1.val("").prop("disabled", true);
+    } else {
+      $sampleSoftReliefCat1.prop("disabled", false);
+    }
+    validator.element($sampleSoftReliefCat1);
+
+    const $sampleSoftReliefCat2 = $("#sample_soft_relief_cat_2");
+    if (maxSoftSubstrate <= 0.5) {
+      $sampleSoftReliefCat2.val("").prop("disabled", true);
+    } else {
+      $sampleSoftReliefCat2.prop("disabled", false);
+    }
+    validator.element($sampleSoftReliefCat2);
+
+    const $sampleSoftReliefCat3 = $("#sample_soft_relief_cat_3");
+    if (maxSoftSubstrate <= 1.0) {
+      $sampleSoftReliefCat3.val("").prop("disabled", true);
+    } else {
+      $sampleSoftReliefCat3.prop("disabled", false);
+    }
+    validator.element($sampleSoftReliefCat3);
+
+    const $sampleSoftReliefCat4 = $("#sample_soft_relief_cat_4");
+    if (maxSoftSubstrate <= 1.5) {
+      $sampleSoftReliefCat4.val("").prop("disabled", true);
+    } else {
+      $sampleSoftReliefCat4.prop("disabled", false);
+    }
+    validator.element($sampleSoftReliefCat4);
+  };
+  $("#sample_hard_verticle_relief, #sample_soft_verticle_relief").on(
+    "focusout",
+    enableSurfaceReliefCoverageFields,
+  );
+  enableSurfaceReliefCoverageFields();
+
+  const calculateSubstrateTotals = function (e) {
+    // Hard relief
+    let hardReliefTotal = $("input.hard_relief").sumValues();
+    $("#hard_relief_total").val(hardReliefTotal).setTotalValidClass();
+
+    // Soft relief
+    let softReliefTotal = $("input.soft_relief").sumValues();
+    $("#soft_relief_total").val(softReliefTotal).setTotalValidClass();
+
+    // Abiotic footprint
+    let abioticFootprintTotal = $("input.abiotic_percentage").sumValues();
+    $("#abiotic_percentage_total")
+      .val(abioticFootprintTotal)
+      .setTotalValidClass();
+
+    // Sand (if enabled)
+    const $sandFields = $(
+      ".biotic_percentage_sand, #sample_sand_pcov_other1_lab, #sample_sand_pcov_other2_lab",
+    );
+    if ($("#sample_sand_percentage").val() > 0) {
+      $sandFields.prop("disabled", false);
+
+      let sandTotal = $("input.biotic_percentage_sand").sumValues();
+      $("#biotic_percentage_sand_total").val(sandTotal).setTotalValidClass();
+    } else {
+      $sandFields.val("").prop("disabled", true);
+      $("#biotic_percentage_sand_total").val("").setTotalValidClass();
+    }
+
+    // Hardbottom (if enabled)
+    const $hardbottomFields = $(
+      ".biotic_percentage_hardbottom, #sample_hard_pcov_other1_lab, #sample_hard_pcov_other2_lab",
+    );
+    if ($("#sample_hardbottom_percentage").val() > 0) {
+      $hardbottomFields.prop("disabled", false);
+
+      let hardbottomTotal = $("input.biotic_percentage_hardbottom").sumValues();
+      $("#biotic_percentage_hardbottom_total")
+        .val(hardbottomTotal)
+        .setTotalValidClass();
+    } else {
+      $hardbottomFields.val("").prop("disabled", true);
+      $("#biotic_percentage_hardbottom_total").val("").setTotalValidClass();
+    }
+  };
+  $("#substrate-tab").on("focusout", calculateSubstrateTotals);
+  calculateSubstrateTotals();
+
+  const enableTabs = function () {
+    // Enable substrate tab if no errors on sample tab
+    let sampleTabFieldsWithErrors = $("#sample-tab :input.error");
+    let sampleTabEmptyRequiredFields = $("#sample-tab :input[required]").filter(
+      function () {
+        return $(this).val() == "";
+      },
+    );
+
+    if (
+      sampleTabFieldsWithErrors.length === 0 &&
+      sampleTabEmptyRequiredFields.length === 0
+    ) {
+      $sampleFormTabs.tabs("enable", "#substrate-tab");
+      $(".go-to-substrate-button").prop("disabled", false);
+    } else {
+      $sampleFormTabs.tabs("disable", "#substrate-tab");
+      $(".go-to-substrate-button").prop("disabled", true);
+    }
+
+    // Enable species tab if no errors on substrate tab
+    let substrateTabFieldsWithErrors = $("#substrate-tab :input.error");
+    let substrateTabEmptyRequiredFields = $(
+      "#substrate-tab :input[required]",
+    ).filter(function () {
+      return $(this).val() == "";
+    });
+    let substrateTabAllSumsToOneHundred =
+      $("#hard_relief_total").val() == 100 &&
+      $("#soft_relief_total").val() == 100 &&
+      $("#abiotic_percentage_total").val() == 100 &&
+      ($("#sample_sand_percentage").val() == 0 ||
+        $("#biotic_percentage_sand_total").val() == 100) &&
+      ($("#sample_hardbottom_percentage").val() == 0 ||
+        $("#biotic_percentage_hardbottom_total").val() == 100);
+
+    if (
+      substrateTabFieldsWithErrors.length === 0 &&
+      substrateTabEmptyRequiredFields.length === 0 &&
+      substrateTabAllSumsToOneHundred
+    ) {
+      $sampleFormTabs.tabs("enable", "#species-tab");
+      $(".go-to-species-button").prop("disabled", false);
+    } else {
+      $sampleFormTabs.tabs("disable", "#species-tab");
+      $(".go-to-species-button").prop("disabled", true);
+    }
+  };
+  $(".sample-form").on("focusout", enableTabs);
+  enableTabs();
+
+  $(".time_seen_button").click(function () {
+    // Add focus ring to active time seen
+    const $this = $(this);
+    $this.siblings().removeClass("usa-focus");
+    $this.addClass("usa-focus");
   });
 
-  function validate_fields() {
-    $('[name*="number_individuals"]').each(function () {
-      $(this).rules("add", {
-        required: true,
-        digits: true,
-        isNotInPreviousTimePeriod: true,
-      });
-    });
-    $('[name*="average_length"]').each(function () {
-      $(this).rules("add", {
-        requiredIfEnabled: true,
-        digits: true,
-        doesNotHaveOverlap: true,
-      });
-    });
-    $('[name*="min_length"]').each(function () {
-      $(this).rules("add", {
-        requiredIfEnabled: true,
-        digits: true,
-        lessThanEqualToAvg: true,
-        doesNotHaveOverlap: true,
-      });
-    });
-    $('[name*="max_length"]').each(function () {
-      $(this).rules("add", {
-        requiredIfEnabled: true,
-        digits: true,
-        greaterThanEqualToAvg: true,
-        greaterThanEqualToMin: true,
-        doesNotHaveOverlap: true,
-      });
-    });
+  // Set time seen hidden field and CSS class when species select is opened
+  $("#animals").on("select2-open", ".sppCommon", function (e) {
+    const $target = $(e.target);
+    const thisID = $target.attr("id").slice(0, -10);
+    const currentTimeSeenVal = $(".time_seen_button.usa-focus").val();
+
+    $("input#" + thisID + "_time_seen").val(currentTimeSeenVal);
+    $("input#" + thisID + "_time_seen").trigger("change");
+    $("input#" + thisID + "_number_individuals")
+      .removeClass(["timeSeen_1", "timeSeen_2", "timeSeen_3"])
+      .addClass("timeSeen_" + currentTimeSeenVal);
+    $("input#" + thisID + "_average_length")
+      .removeClass(["timeSeen_1", "timeSeen_2", "timeSeen_3"])
+      .addClass("timeSeen_" + currentTimeSeenVal);
+    $("input#" + thisID + "_min_length")
+      .removeClass(["timeSeen_1", "timeSeen_2", "timeSeen_3"])
+      .addClass("timeSeen_" + currentTimeSeenVal);
+    $("input#" + thisID + "_max_length")
+      .removeClass(["timeSeen_1", "timeSeen_2", "timeSeen_3"])
+      .addClass("timeSeen_" + currentTimeSeenVal);
+  });
+
+  // Open species select automatically after adding a new row
+  $(".sample-form").on("nested:fieldAdded", function () {
+    const $lastSpeciesSelect = $("#species-tab .sppCommon:visible").last();
+    if ($lastSpeciesSelect.length > 0) {
+      $lastSpeciesSelect[0].scrollIntoView(true);
+      $lastSpeciesSelect.select2("open");
+    }
+  });
+
+  const enableSpeciesFieldsForRow = function ($row) {
+    const $numIndividualsField = $row.find("[id$='number_individuals']");
+    if ($numIndividualsField.length == 0) {
+      return;
+    }
+
+    var $indValue = $numIndividualsField.val();
+    var $recordID = $numIndividualsField.attr("id");
+    var $mean = $recordID.replace("_number_individuals", "_average_length");
+    var $min = $recordID.replace("_number_individuals", "_min_length");
+    var $max = $recordID.replace("_number_individuals", "_max_length");
+
+    if ($indValue >= 3) {
+      $("input#" + $mean).prop("disabled", false);
+      $("input#" + $min).prop("disabled", false);
+      $("input#" + $max).prop("disabled", false);
+    } else if ($indValue == 1) {
+      $("input#" + $mean).prop("disabled", false);
+      $("input#" + $min)
+        .val("")
+        .prop("disabled", true);
+      $("input#" + $max)
+        .val("")
+        .prop("disabled", true);
+    } else if ($indValue == 2) {
+      $("input#" + $mean)
+        .val("")
+        .prop("disabled", true);
+      $("input#" + $min).prop("disabled", false);
+      $("input#" + $max).prop("disabled", false);
+    }
+  };
+
+  $("#animals .fields").each(function () {
+    const $row = $(this);
+    enableSpeciesFieldsForRow($row);
+  });
+  $("#animals").on("focusout", "[id$='number_individuals']", function (e) {
+    const $target = $(e.target);
+    const $row = $target.closest(".fields");
+
+    enableSpeciesFieldsForRow($row);
+
+    // If the next focus target is now disabled, focus the next enabled field
+    const $relatedTarget = $(e.relatedTarget);
+    if ($relatedTarget.is(":disabled")) {
+      $target.nextAll(":input:enabled").first().focus();
+    }
+  });
+
+  $("#animals").on("keypress", function (e) {
+    if (e.keyCode == 13) {
+      e.preventDefault();
+      $(".add_nested_fields").trigger("click");
+    }
+  });
+
+  const $sampleSampleDate = $("#sample_sample_date");
+  $sampleSampleDate.datepicker({
+    format: "yyyy-mm-dd",
+    orientation: "bottom",
+    autoclose: true,
+  });
+  if ($sampleSampleDate.val() === "") {
+    // Default to today if not set
+    $sampleSampleDate.datepicker("setDate", new Date());
   }
 
-  validate_fields();
-  $(document).delegate(".add_nested_fields", "click", function () {
-    validate_fields();
-    $(".validateCross, .validateCheck").hide();
-    $("#submitButton").attr("disabled", true);
+  $(
+    "#sample_dive_begin_time, #sample_dive_end_time, #sample_sample_begin_time, #sample_sample_end_time",
+  ).timepicker({
+    timeFormat: "HH:mm",
+    dropdown: false,
   });
 
-  $("#animals").change(function () {
-    $("input.error").each(function () {
-      $("form").validate().element(this);
+  $("#animals").find(".sppCommon").select2();
+  $("#animals").on("nested:fieldAdded", function (e) {
+    e.field.find(".sppCommon").select2();
+  });
+  $("#animals").on("nested:fieldAdded nested:fieldRemoved", function (e) {
+    // Force re-validation
+    $(".validateCross, .validateCheck").hide();
+    $("#submitButton").prop("disabled", true);
+  });
+
+  $("#animals").on("input change", function () {
+    // Force re-check of any fields that are currently shown as errors
+    $("#animals input.error").each(function () {
+      validator.element(this);
     });
+
+    // Force re-validation
     $(".validateCross, .validateCheck").hide();
-    $("#submitButton").attr("disabled", true);
+    $("#submitButton").prop("disabled", true);
   });
 
-  //$('form').bind('change keyup', function() {
-  //if ( $('#animals input:visible.error').length == 0 ) {
-  //$('#submitButton').attr('disabled', false);
-  //} else {
-  //$('#submitButton').attr('disabled', true);
-  //}
-  //});
+  $("#validateAnimals").on("click", function () {
+    $(".validateCross, .validateCheck").hide();
 
-  speciesInformation = {};
+    $("#animals")
+      .find("input:enabled")
+      .each(function () {
+        validator.element(this);
+      });
+
+    if ($("#animals").find("input:visible.error").length > 0) {
+      $(".validateCross").show();
+    } else {
+      $(".validateCheck").show();
+      $("#submitButton").prop("disabled", false);
+    }
+  });
+
+  $("#submitButton").on("click", function (e) {
+    e.preventDefault();
+    const $this = $(this);
+
+    $this.prop("disabled", true);
+
+    validator.cancelSubmit = true;
+    $(".sample-form :input").not($this).prop("disabled", false);
+    $(".sample-form").submit();
+  });
+
+  let speciesInformation = {};
   if (typeof animal_info !== "undefined") {
     $.each(animal_info, function (a) {
       speciesInformation[animal_info[a].id] = {
@@ -931,44 +740,74 @@ $(function () {
     });
   }
 
-  function alertSpeciesSizes() {
-    $('[id$="number_individuals"]').on("focusout", function () {
-      var $species = $(this).parent().find(".sppCommon").select2("val");
-      if ($(this).val() > speciesInformation[$species].max_num) {
-        alert("over max number");
-      }
-    });
+  // Alert for anomalous looking data
+  $("#animals").on(
+    "change focusout",
+    "[id$='number_individuals']",
+    function (e) {
+      const $target = $(e.target);
+      const $row = $target.closest(".fields");
 
-    $('[id$="average_length"]').on("focusout", function () {
-      var $species = $(this).parent().find(".sppCommon").select2("val");
-      var $speciesNumber = $(this)
-        .parent()
-        .find('[id$="number_individuals"]')
-        .val();
-      if ($speciesNumber == 1) {
-        if ($(this).val() < speciesInformation[$species].min_size) {
+      if (e.type === "change") {
+        $target.removeData("number-individuals-alerted");
+      } else if (!$target.data("number-individuals-alerted")) {
+        let species = $row.find(".sppCommon").select2("val");
+        if ($target.val() > speciesInformation[species].max_num) {
+          $target.data("number-individuals-alerted", true);
+          alert("over max number");
+        }
+      }
+    },
+  );
+
+  $("#animals").on("change focusout", "[id$='average_length']", function (e) {
+    const $target = $(e.target);
+    const $row = $target.closest(".fields");
+
+    if (e.type === "change") {
+      $target.removeData("average-length-alerted");
+    } else if (!$target.data("average-length-alerted")) {
+      let species = $row.find(".sppCommon").select2("val");
+      let speciesNumber = $row.find("[id$='number_individuals']").val();
+      if (speciesNumber == 1) {
+        if ($target.val() < speciesInformation[species].min_size) {
+          $target.data("average-length-alerted", true);
           alert("under min size");
-        } else if ($(this).val() > speciesInformation[$species].max_size) {
+        } else if ($target.val() > speciesInformation[species].max_size) {
+          $target.data("average-length-alerted", true);
           alert("over max size");
         }
       }
-    });
+    }
+  });
 
-    $('[id$="min_length"]').on("focusout", function () {
-      var $species = $(this).parent().find(".sppCommon").select2("val");
-      if ($(this).val() < speciesInformation[$species].min_size) {
+  $("#animals").on("change focusout", "[id$='min_length']", function (e) {
+    const $target = $(e.target);
+    const $row = $target.closest(".fields");
+
+    if (e.type === "change") {
+      $target.removeData("min-length-alerted");
+    } else if (!$target.data("min-length-alerted")) {
+      let species = $row.find(".sppCommon").select2("val");
+      if ($target.val() < speciesInformation[species].min_size) {
+        $target.data("min-length-alerted", true);
         alert("under min size");
       }
-    });
-    $('[id$="max_length"]').on("focusout", function () {
-      var $species = $(this).parent().find(".sppCommon").select2("val");
-      if ($(this).val() > speciesInformation[$species].max_size) {
+    }
+  });
+
+  $("#animals").on("change focusout", "[id$='max_length']", function (e) {
+    const $target = $(e.target);
+    const $row = $target.closest(".fields");
+
+    if (e.type === "change") {
+      $target.removeData("max-length-alerted");
+    } else if (!$target.data("max-length-alerted")) {
+      let species = $row.find(".sppCommon").select2("val");
+      if ($target.val() > speciesInformation[species].max_size) {
+        $target.data("max-length-alerted", true);
         alert("over max size");
       }
-    });
-  }
-
-  alertSpeciesSizes();
-
-  $("#submitButton").attr("disabled", true);
+    }
+  });
 });

@@ -23,6 +23,8 @@
 //= require bootstrap-datepicker/dist/js/bootstrap-datepicker
 //= require jquery-timepicker/jquery.timepicker
 //= require plotly.js-dist-min/plotly.min.js
+//= require jquery-ui/widgets/sortable
+//= require jquery-ui/widgets/tabs
 //
 //= require ./validations
 //= require ./benthic_covers

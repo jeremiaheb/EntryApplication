@@ -73,7 +73,7 @@ class BoatLogsController < ApplicationController
       Draft.destroy_for(diver_id: current_diver.id, model_klass: BoatLog, model_id: @boat_log.id)
       redirect_to boat_logs_url, notice: "Boat log was successfully deleted."
     else
-      redirect_to boat_logs_url, notice: "Boat log was not deleted: #{@boat_log.errors.full_messages.join(", ")}"
+      redirect_to boat_logs_url, alert: "Boat log was not deleted: #{@boat_log.errors.full_messages.join(", ")}"
     end
   end
 

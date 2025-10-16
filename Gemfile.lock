@@ -186,7 +186,7 @@ GEM
     jquery-ui-rails (8.0.0)
       railties (>= 3.2.16)
     json (2.13.2)
-    json-jwt (1.16.7)
+    json-jwt (1.17.0)
       activesupport (>= 4.2)
       aes_key_wrap
       base64

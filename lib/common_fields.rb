@@ -1,8 +1,4 @@
 module CommonFields
-  def myId
-    diver.id
-  end
-
   def field_id=(value)
     write_attribute(:field_id, value.upcase)
   end

@@ -7,13 +7,6 @@ class SamplesController < ApplicationController
   # GET /samples
   def index
     @samples = @samples.includes(:diver)
-    if current_diver.admin?
-      @samples = @samples.all
-    elsif current_diver.manager?
-      @samples = @samples.where("diver_id=? OR boatlog_manager_id=?", current_diver.id, current_diver.boatlog_manager_id)
-    else
-      @samples = @samples.where("diver_id=?", current_diver.id)
-    end
 
     respond_to do |format|
       format.html

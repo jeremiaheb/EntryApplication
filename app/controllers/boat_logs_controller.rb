@@ -7,11 +7,6 @@ class BoatLogsController < ApplicationController
   # GET /boat_logs
   def index
     @boat_logs = @boat_logs.includes(:station_logs)
-    if current_diver.role == "admin"
-      @boat_logs = @boat_logs.all
-    elsif current_diver.role == "manager"
-      @boat_logs = @boat_logs.where("boatlog_manager_id=?", current_diver.boatlog_manager_id)
-    end
 
     respond_to do |format|
       format.html # index.html.erb

@@ -3,7 +3,7 @@ require "application_system_test_case"
 class BoatLogsTest < ApplicationSystemTestCase
   test "new boat log" do
     boatlog_manager = FactoryBot.create(:boatlog_manager)
-    manager_diver = FactoryBot.create(:diver, role: "manager")
+    manager_diver = FactoryBot.create(:diver, role: "manager", boatlog_manager: boatlog_manager)
     fish_diver1 = FactoryBot.create(:diver)
     fish_diver2 = FactoryBot.create(:diver)
     demo_diver1 = FactoryBot.create(:diver)

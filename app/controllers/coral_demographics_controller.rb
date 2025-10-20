@@ -6,14 +6,6 @@ class CoralDemographicsController < ApplicationController
 
   # GET /coral_demographics
   def index
-    if current_diver.role == "admin"
-      @coral_demographics = @coral_demographics.all
-    elsif current_diver.role == "manager"
-      @coral_demographics = @coral_demographics.where("diver_id=? OR boatlog_manager_id=?", current_diver, current_diver.boatlog_manager_id)
-    else
-      @coral_demographics = current_diver.coral_demographics
-    end
-
     respond_to do |format|
       format.html # index.html.erb
       format.xlsx do

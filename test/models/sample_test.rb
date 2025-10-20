@@ -15,14 +15,6 @@ class SampleTest < ActiveSupport::TestCase
     assert_equal "10011A", sample.field_id
   end
 
-  test "#myId returns diver ID" do
-    diver = FactoryBot.create(:diver)
-    sample_animal = FactoryBot.create(:sample_animal, sample: nil)
-    sample = FactoryBot.create(:sample, diver: diver, sample_animals: [sample_animal])
-
-    assert_equal sample.diver.id, sample.myId
-  end
-
   test "#msn is correct" do
     diver = FactoryBot.create(:diver)
     sample_animal = FactoryBot.create(:sample_animal, sample: nil)

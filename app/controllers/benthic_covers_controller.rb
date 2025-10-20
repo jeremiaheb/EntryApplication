@@ -6,14 +6,6 @@ class BenthicCoversController < ApplicationController
 
   # GET /benthic_covers
   def index
-    if current_diver.role == "admin"
-      @benthic_covers = @benthic_covers.all
-    elsif current_diver.role == "manager"
-      @benthic_covers = @benthic_covers.where("diver_id=? OR boatlog_manager_id=?", current_diver, current_diver.boatlog_manager_id)
-    else
-      @benthic_covers = current_diver.benthic_covers
-    end
-
     respond_to do |format|
       format.html # index.html.erb
       format.xlsx do

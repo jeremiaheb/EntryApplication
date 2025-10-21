@@ -1,4 +1,4 @@
-<div id="draft-progress" class="draft-progress float-right margin-1 text-center width-card margin-top-1">
+<div id="draft-progress" class="draft-progress margin-y-1 text-center width-card">
   <div class="bar bar-warning width-full padding-05 radius-pill draft-saved" title="Please fully save the record when you are finished. A draft is only temporary." style="<%- unless @draft.present? %>display: none<%- end %>">
     <svg class="usa-icon text-middle" aria-hidden="true" focusable="false" role="img">
       <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#save_alt") %>

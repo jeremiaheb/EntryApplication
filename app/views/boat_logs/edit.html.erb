@@ -1,2 +1,11 @@
-<%= render "shared/nav_breadcrumbs", object: [["Boat Logs", boat_logs_path], ["Edit Boat Log #{@boat_log.primary_sample_unit}", ""]] %>
-<%= render 'form' %>
+<div class="grid-row">
+  <div class="grid-col-fill">
+    <%= render "shared/nav_breadcrumbs", object: [["Boat Logs", boat_logs_path], ["Edit Boat Log #{@boat_log.primary_sample_unit}", ""]] %>
+  </div>
+  <div class="grid-col-auto">
+    <%= render "draft_progress_uswds", object: @boat_log %> 
+  </div>
+</div>
+
+<%= render partial: "draft_present_alert", locals: { discard_draft_url: draft_boat_logs_path(id: @boat_log.id) } %>
+<%= render "form" %>

@@ -1,8 +1,5 @@
-<%= render partial: "draft_present_alert", locals: { discard_draft_url: draft_boat_logs_path(id: @boat_log.id) } %>
-
 <%= nested_form_for @boat_log, data: { "drafts-url": draft_boat_logs_path(id: @boat_log.id), "draft-restored": @draft.present?, "draft-focused-dom-id": @draft&.focused_dom_id }, html: { class: "boat-log-form usa-form maxw-full bg-base-lightest" } do |f| %>
   <%= render "shared/uswds_error_messages", target: @boat_log %>
-  <%= render "draft_progress_uswds", object: @boat_log %>
 
   <div class="grid-row padding-1">
     <div class="grid-col-12">
@@ -23,7 +20,7 @@
 
       <%= f.fields_for :station_logs do |ff| %>
         <div class="grid-container margin-top-1 padding-1 padding-top-0 border">
-          <div class="grid-row grid-gap-lg">
+          <div class="grid-row">
             <div class="grid-col-4">
               <%= ff.label :stn_number, "Station", class: "usa-label display-inline-block width-15" %>
               <%= ff.text_field :stn_number, class: "usa-input usa-input--xs display-inline-block" %>
@@ -34,7 +31,7 @@
             </div>
           </div>
 
-          <div class="grid-row grid-gap-lg">
+          <div class="grid-row">
             <div class="grid-col-4">
               <%= ff.label :latitude_in_northern_degrees, "Latitude (°N)", class: "usa-label display-inline-block width-15" %>
               <%= ff.text_field :latitude_in_northern_degrees, inputmode: "numeric", pattern: "\\d*(\\.\\d*)?", class: "coords coords-positive usa-input usa-input--md display-inline-block" %>
@@ -46,7 +43,7 @@
           </div>
 
           <%= ff.fields_for :rep_logs do |ff| %>
-            <div class="grid-row grid-gap-lg replicate_record">
+            <div class="grid-row replicate_record">
               <div class="grid-col-4 replicate_type">
                 <%= ff.label :replicate, class: "usa-label display-inline-block width-15" %>
                 <%= ff.text_field :replicate, class: "usa-input usa-input--xs display-inline-block" %>

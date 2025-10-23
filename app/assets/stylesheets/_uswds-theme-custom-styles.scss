@@ -32,9 +32,7 @@ i.e.
 .field_with_errors .usa-input,
 .field_with_errors .usa-select,
 .usa-input.error,
-.usa-select.error,
-.usa-input.one_hundred_flag,
-.usa-select.one_hundred_flag {
+.usa-select.error {
   &:enabled,
   &:enabled:hover {
     background-color: yellow;
@@ -43,11 +41,19 @@ i.e.
   }
 }
 
-.usa-input.one_hundred_ok_flag,
-.usa-select.one_hundred_ok_flag {
+// Total fields
+.usa-input.total-valid {
   &,
   &:hover {
     background-color: lightgreen;
+  }
+}
+.usa-input.total-invalid {
+  &,
+  &:hover {
+    background-color: yellow;
+    @include u-outline("2px");
+    @include u-outline-color("secondary");
   }
 }
 

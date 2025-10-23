@@ -1,5 +1,11 @@
-<h1>Editing sample <%= @sample.field_id %></h1>
+<div class="grid-row">
+  <div class="grid-col-fill">
+    <%= render "shared/nav_breadcrumbs", object: [["Fish Samples", samples_path], ["Edit Fish Sample #{@sample.field_id}", ""]] %>
+  </div>
+  <div class="grid-col-auto">
+    <%= render "draft_progress_uswds", object: @sample %> 
+  </div>
+</div>
 
 <%= render partial: "draft_present_alert", locals: { discard_draft_url: draft_samples_path(id: @sample.id) } %>
-
-<%= render 'form' %>
+<%= render "form" %>

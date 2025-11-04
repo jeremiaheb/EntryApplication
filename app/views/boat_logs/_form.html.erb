@@ -53,11 +53,21 @@
                 <%= ff.collection_select :diver_id, Diver.active_divers.order(:diver_name), :id, :diver_name, { include_blank: true }, class: "usa-select usa-input--lg display-inline-block" %>
               </div>
               <div class="grid-col-3 padding-top-3">
-                <%= ff.link_to_remove "Remove Replicate", class: "remove-replicate-link", tabindex: "-1" %>
+                <%= ff.link_to_remove tabindex: "-1", class: "remove-replicate-link font-body-xs" do %>
+                  <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+                    <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#remove_circle") %>
+                  </svg>
+                  Remove Replicate
+                <%- end %>
               </div>
             </div>
           <%- end %>
-          <%= ff.link_to_add "Add Replicate", :rep_logs, class: "add-rep-log-link" %>
+          <%= ff.link_to_add :rep_logs, class: "add-rep-log-link font-body-xs" do %>
+            <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+              <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#add_circle") %>
+            </svg>
+            Add Replicate
+          <%- end %>
 
           <div class="grid-row">
             <div class="grid-col-12">
@@ -68,14 +78,24 @@
 
           <div class="grid-row">
             <div class="grid-col-12">
-              <%= ff.link_to_remove "Remove Station", class: "remove-station-link", tabindex: "-1" %>
+              <%= ff.link_to_remove tabindex: "-1", class: "remove-station-link font-body-xs" do %>
+                <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+                  <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#remove_circle") %>
+                </svg>
+                Remove Station
+              <%- end %>
             </div>
           </div>
         </div>
       <%- end %>
 
       <div>
-        <%= f.link_to_add "Add Station", :station_logs, class: "add-station-link" %>
+        <%= f.link_to_add :station_logs, class: "add-station-link font-body-xs" do %>
+          <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+            <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#add_circle") %>
+          </svg>
+          Add Station
+        <%- end %>
       </div>
 
       <div>

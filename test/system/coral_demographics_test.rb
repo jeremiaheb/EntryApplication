@@ -20,14 +20,14 @@ class CoralDemographicsTest < ApplicationSystemTestCase
     find("select#coral_demographic_buddy_id").select(buddy.diver_name)
     find("input#coral_demographic_field_id").fill_in(with: "30591A")
     find("input#coral_demographic_sample_date").fill_in(with: "2025-01-17")
-    find("body").click # blur for calendar popup
+    find("label[for='coral_demographic_sample_begin_time']").click # blur for calendar popup
     find("input#coral_demographic_sample_begin_time").fill_in(with: "10:30")
     find("select#coral_demographic_habitat_type_id").select(habitat_type.habitat_name)
     find("input#coral_demographic_meters_completed").fill_in(with: "10")
     find("input#coral_demographic_percent_hardbottom").fill_in(with: "50")
     find("textarea#coral_demographic_sample_description").fill_in(with: "Hello World")
 
-    all("input#meter_mark").first.fill_in(with: "1")
+    all("input[id$='meter_mark']").first.fill_in(with: "1")
     select2_choose(all("select[id$='coral_id']", visible: nil).first, option: coral1.display_name)
     all("input[id$='max_diameter']").first.fill_in(with: "4")
     all("input[id$='perpendicular_diameter']").first.fill_in(with: "3")
@@ -38,7 +38,7 @@ class CoralDemographicsTest < ApplicationSystemTestCase
     all("select[id$='disease']").first.select("Absent")
 
     find("a.add_nested_fields[data-association=demographic_corals]").click # "Add Coral"
-    all("input#meter_mark").last.fill_in(with: "2")
+    all("input[id$='meter_mark']").last.fill_in(with: "2")
     select2_choose(all("select[id$='coral_id']", visible: nil).last, option: coral2.display_name)
     all("input[id$='max_diameter']").last.fill_in(with: "6")
     all("input[id$='perpendicular_diameter']").last.fill_in(with: "5")

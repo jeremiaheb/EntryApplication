@@ -26,6 +26,7 @@
 //= require jquery-ui/widgets/sortable
 //= require jquery-ui/widgets/tabs
 //
+//= require ./jquery_extensions
 //= require ./validations
 //= require ./benthic_covers
 //= require ./boat_logs

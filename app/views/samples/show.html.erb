@@ -1,76 +1,119 @@
+<div class="grid-row">
+  <div class="grid-col-12">
+    <%= render "shared/nav_breadcrumbs", object: [["Fish Samples", samples_path], ["Fish Sample #{@sample.field_id}", ""]] %>
+  </div>
+</div>
 
-<div class='formContainer'>
-  <div id="sampleSection" class="sectionDiv">
-  <div class='show_section_1'>
-    <div id='section_1_part_1'>
-
-      <dl class="dl-horizontal">
-        <dt>Boatlog Manager</dt><dd><%= @sample.boatlog_manager.agency_name %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>Sample Date</dt><dd><%= @sample.sample_date %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>Diver</dt><dd><%= @sample.diver.diver_name %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>Buddy</dt><dd><%= @sample.buddy.diver_name %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>Sample Type</dt><dd><%= @sample.sample_type.sample_type_name %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>Habitat Type</dt><dd><%= @sample.habitat_type.habitat_name %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>Dive Begin Time</dt><dd><%= @sample.dive_begin_time.strftime("%H:%M") %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>Dive End Time</dt><dd><%= @sample.dive_end_time.strftime("%H:%M") %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>Sample Begin Time</dt><dd><%= @sample.sample_begin_time.strftime("%H:%M") %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>Sample End Time</dt><dd><%= @sample.sample_end_time.strftime("%H:%M") %></dd>
-      </dl>
-
+<div class="grid-row maxw-full bg-base-lightest">
+  <div class="grid-col-5 padding-1">
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Boatlog/Manager</span>
+      <span class="width-card-lg display-inline-block"><%= @sample.boatlog_manager&.agency_name %></span>
     </div>
 
-    <div id='section_1_part_2'>
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Sample Date</span>
+      <span class="width-card-lg display-inline-block"><%= @sample.sample_date %></span>
+    </div>
 
-      <dl class="dl-horizontal">
-        <dt>Field ID</dt><dd><%= @sample.field_id %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>Max Dive Depth</dt><dd><%= @sample.dive_depth %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>Station Depth</dt><dd><%= @sample.sample_depth %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>Visibility</dt><dd><%= @sample.underwater_visibility %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>Water Temp</dt><dd><%= @sample.water_temp %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>Current</dt><dd><%= @sample.current %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>Fishing Gear</dt><dd><%= @sample.fishing_gear %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>Comments</dt><dd><%= @sample.sample_description %></dd>
-      </dl>
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Diver</span>
+      <span class="width-card-lg display-inline-block"><%= @sample.diver&.diver_name %></span>
+    </div>
 
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Buddy</span>
+      <span class="width-card-lg display-inline-block"><%= Diver.find_by(id: @sample.buddy)&.diver_name %></span>
+    </div>
+
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Sample Type</span>
+      <span class="width-card-lg display-inline-block"><%= @sample.sample_type&.sample_type_name %></span>
+    </div>
+
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Habitat Type</span>
+      <span class="width-card-lg display-inline-block"><%= @sample.habitat_type&.habitat_name %></span>
+    </div>
+
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Dive Begin Time</span>
+      <span class="width-card-lg display-inline-block"><%= @sample.dive_begin_time&.strftime("%H:%M") %></span>
+    </div>
+
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Dive End Time</span>
+      <span class="width-card-lg display-inline-block"><%= @sample.dive_end_time&.strftime("%H:%M") %></span>
+    </div>
+
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Sample Begin Time</span>
+      <span class="width-card-lg display-inline-block"><%= @sample.sample_begin_time&.strftime("%H:%M") %></span>
+    </div>
+
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Sample End Time</span>
+      <span class="width-card-lg display-inline-block"><%= @sample.sample_end_time&.strftime("%H:%M") %></span>
+    </div>
+
+    <div class="margin-1 margin-top-2">
+      <ul class="usa-button-group">
+        <li class="usa-button-group__item">
+          <%= link_to samples_path, class: "list-button usa-button" do %>
+            <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+              <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#arrow_back") %>
+            </svg>
+            Back to List
+          <%- end %>
+        </li>
+        <li class="usa-button-group__item">
+          <%= link_to "Edit", edit_sample_path(@sample), class: "edit-button usa-button usa-button--outline" %>
+        </li>
+        <li class="usa-button-group__item">
+          <%= link_to "Delete", @sample, data: { confirm: "Are you sure?" }, method: "delete", class: "delete-button usa-button usa-button--secondary" %>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="grid-col-5 padding-1">
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Field ID</span>
+      <span class="width-card-lg display-inline-block"><%= @sample.field_id %></span>
+    </div>
+
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Max Dive Depth</span>
+      <span class="width-card-lg display-inline-block"><%= @sample.dive_depth %></span>
+    </div>
+
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Station Depth</span>
+      <span class="width-card-lg display-inline-block"><%= @sample.sample_depth %></span>
+    </div>
+
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Visibility</span>
+      <span class="width-card-lg display-inline-block"><%= @sample.underwater_visibility %></span>
+    </div>
+
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Water Temp</span>
+      <span class="width-card-lg display-inline-block"><%= @sample.water_temp %></span>
+    </div>
+
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Current</span>
+      <span class="width-card-lg display-inline-block"><%= @sample.current %></span>
+    </div>
+
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Fishing Gear</span>
+      <span class="width-card-lg display-inline-block"><%= @sample.fishing_gear %></span>
+    </div>
+
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Comments</span>
+      <span class="width-card-lg display-inline-block"><%= @sample.sample_description %></span>
     </div>
   </div>
 </div>
-<br />
-<div class="showActions" >
- <%= button_to('Edit Fish Sample', edit_sample_path(@sample), :method => "get", :class => 'edit-button btn btn-large btn-primary showAction') %>
- <%= button_to("Delete Fish Sample", @sample, data: { confirm: 'Are you sure?' }, method: :delete, :class => 'btn btn-large btn-primary showAction') %>
- <%= button_to('Fish Sample List', samples_path, :method => "get", :class => 'btn btn-large btn-primary showAction') %>
-</div>
-

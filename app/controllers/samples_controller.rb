@@ -6,7 +6,18 @@ class SamplesController < ApplicationController
 
   # GET /samples
   def index
-    @samples = @samples.includes(:diver)
+    @samples = @samples.joins(:mission).includes(:diver)
+    @unfiltered_samples = @samples
+
+    # Apply filters
+    @region_ids = Array(params[:region_ids]).map(&:to_i)
+    @samples = @samples.where(missions: { region_id: @region_ids }) if @region_ids.present?
+
+    @agency_ids = Array(params[:agency_ids]).map(&:to_i)
+    @samples = @samples.where(missions: { agency_id: @agency_ids }) if @agency_ids.present?
+
+    @project_ids = Array(params[:project_ids]).map(&:to_i)
+    @samples = @samples.where(missions: { project_id: @project_ids }) if @project_ids.present?
 
     respond_to do |format|
       format.html

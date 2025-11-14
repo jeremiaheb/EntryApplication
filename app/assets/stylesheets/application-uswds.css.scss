@@ -5,6 +5,12 @@
 //= require jquery-ui
 //= require_self
 
+.habitat-type-select {
+  option:disabled {
+    display: none;
+  }
+}
+
 .field_with_errors {
   display: contents;
 }

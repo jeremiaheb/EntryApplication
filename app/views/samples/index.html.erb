@@ -1,5 +1,24 @@
 <%= render "shared/nav_breadcrumbs", object: [["Fish Samples", ""]] %>
 
+  <div class="grid-row">
+    <div class="grid-col-12 border border-dashed padding-05">
+      <%= form_tag samples_path, class: "usa-form maxw-full", method: "get" do %>
+        <div>
+          <span class="usa-legend width-full usa-input--xl text-bold margin-top-0 margin-right-neg-1 display-inline-block">Regions</span>
+          <span class="usa-legend width-full usa-input--xl text-bold margin-top-0 margin-right-neg-1 display-inline-block">Agencies</span>
+          <span class="usa-legend width-full usa-input--xl text-bold margin-top-0 margin-right-neg-1 display-inline-block">Projects</span>
+        </div>
+
+        <div>
+          <%= select_tag :region_ids, options_from_collection_for_select(@unfiltered_samples.map(&:region).sort_by(&:name).uniq, :id, :name, ->(region) { @region_ids.blank? || @region_ids.include?(region.id) }), class: "usa-input--xl width-full display-inline-block", multiple: true %>
+          <%= select_tag :agency_ids, options_from_collection_for_select(@unfiltered_samples.map(&:agency).sort_by(&:name).uniq, :id, :name, ->(agency) { @agency_ids.blank? || @agency_ids.include?(agency.id) }), class: "usa-input--xl width-full display-inline-block", multiple: true %>
+          <%= select_tag :project_ids, options_from_collection_for_select(@unfiltered_samples.map(&:project).sort_by(&:name).uniq, :id, :name, ->(project) { @project_ids.blank? || @project_ids.include?(project.id) }), class: "usa-input--xl width-full display-inline-block", multiple: true %>
+          <%= submit_tag "Update Filters", class: "usa-button margin-top-0 display-inline-block" %>
+        </div>
+      <%- end %>
+    </div>
+  </div>
+
 <div class="grid-row">
   <div class="grid-col-12">
     <ul class="usa-button-group margin-bottom-1">
@@ -12,6 +31,7 @@
         <%- end %>
       </li>
       <li class="usa-button-group__item">
+        <%# TODO: Include filters %>
         <%= link_to samples_path(format: "pdf", nocache: SecureRandom.alphanumeric, diver_id: current_diver.id, fishtype: "species_code"), class: "usa-button usa-button--accent-cool" do %>
           <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
             <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#file_download") %>
@@ -22,6 +42,7 @@
         <%- end %>
       </li>
       <li class="usa-button-group__item">
+        <%# TODO: Include filters %>
         <%= link_to samples_path(format: "pdf", nocache: SecureRandom.alphanumeric, diver_id: current_diver.id, fishtype: "common_name"), class: "usa-button usa-button--accent-cool" do %>
           <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
             <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#file_download") %>
@@ -33,6 +54,7 @@
       </li>
       <%- if current_diver.manager? || current_diver.admin? %>
         <li class="usa-button-group__item">
+          <%# TODO: Include filters %>
           <%= link_to samples_path(format: "xlsx", nocache: SecureRandom.alphanumeric), class: "usa-button usa-button--accent-cool" do %>
             <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
               <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#file_download") %>
@@ -59,6 +81,7 @@
                   Diver Proofing Reports
                 </h2>
                 <div id="diver-proofing-report-modal-description">
+                  <%# TODO: Include filters %>
                   <%= form_tag samples_path(format: "pdf"), class: "usa-form", method: "get" do %>
                     <%= hidden_field_tag :fishtype, "common_name" %>
                     <%= hidden_field_tag :nocache, SecureRandom.alphanumeric %>
@@ -87,7 +110,11 @@
         </li>
       <%- end %>
     </ul>
+  </div>
+</div>
 
+<div class="grid-row">
+  <div class="grid-col-12">
     <table class="width-full display">
       <thead>
         <tr>

@@ -15,6 +15,9 @@ class Diver < ApplicationRecord
 
   has_many    :rep_logs
 
+  has_many :mission_managers, inverse_of: :manager
+  has_many :missions_managed, through: :mission_managers, source: :mission
+
   validates   :diver_number, presence: true
   validates   :diver_name, presence: true
   validates   :username, uniqueness: { case_sensitive: false, allow_blank: true }

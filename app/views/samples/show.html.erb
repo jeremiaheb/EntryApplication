@@ -5,55 +5,55 @@
 </div>
 
 <div class="grid-row maxw-full bg-base-lightest">
-  <div class="grid-col-5 padding-1">
+  <div class="grid-col-6 padding-1">
     <div class="margin-1">
-      <span class="width-card margin-right-1 text-bold display-inline-block">Boatlog/Manager</span>
-      <span class="width-card-lg display-inline-block"><%= @sample.boatlog_manager&.agency_name %></span>
+      <span class="width-card margin-right-1 text-bold display-inline-block">Mission</span>
+      <span class="width-mobile display-inline-block"><%= @sample.mission&.display_name(include_region: true) %></span>
     </div>
 
     <div class="margin-1">
       <span class="width-card margin-right-1 text-bold display-inline-block">Sample Date</span>
-      <span class="width-card-lg display-inline-block"><%= @sample.sample_date %></span>
+      <span class="width-mobile display-inline-block"><%= @sample.sample_date %></span>
     </div>
 
     <div class="margin-1">
       <span class="width-card margin-right-1 text-bold display-inline-block">Diver</span>
-      <span class="width-card-lg display-inline-block"><%= @sample.diver&.diver_name %></span>
+      <span class="width-mobile display-inline-block"><%= @sample.diver&.diver_name %></span>
     </div>
 
     <div class="margin-1">
       <span class="width-card margin-right-1 text-bold display-inline-block">Buddy</span>
-      <span class="width-card-lg display-inline-block"><%= Diver.find_by(id: @sample.buddy)&.diver_name %></span>
+      <span class="width-mobile display-inline-block"><%= Diver.find_by(id: @sample.buddy)&.diver_name %></span>
     </div>
 
     <div class="margin-1">
       <span class="width-card margin-right-1 text-bold display-inline-block">Sample Type</span>
-      <span class="width-card-lg display-inline-block"><%= @sample.sample_type&.sample_type_name %></span>
+      <span class="width-mobile display-inline-block"><%= @sample.sample_type&.sample_type_name %></span>
     </div>
 
     <div class="margin-1">
       <span class="width-card margin-right-1 text-bold display-inline-block">Habitat Type</span>
-      <span class="width-card-lg display-inline-block"><%= @sample.habitat_type&.habitat_name %></span>
+      <span class="width-mobile display-inline-block"><%= @sample.habitat_type&.habitat_name %></span>
     </div>
 
     <div class="margin-1">
       <span class="width-card margin-right-1 text-bold display-inline-block">Dive Begin Time</span>
-      <span class="width-card-lg display-inline-block"><%= @sample.dive_begin_time&.strftime("%H:%M") %></span>
+      <span class="width-mobile display-inline-block"><%= @sample.dive_begin_time&.strftime("%H:%M") %></span>
     </div>
 
     <div class="margin-1">
       <span class="width-card margin-right-1 text-bold display-inline-block">Dive End Time</span>
-      <span class="width-card-lg display-inline-block"><%= @sample.dive_end_time&.strftime("%H:%M") %></span>
+      <span class="width-mobile display-inline-block"><%= @sample.dive_end_time&.strftime("%H:%M") %></span>
     </div>
 
     <div class="margin-1">
       <span class="width-card margin-right-1 text-bold display-inline-block">Sample Begin Time</span>
-      <span class="width-card-lg display-inline-block"><%= @sample.sample_begin_time&.strftime("%H:%M") %></span>
+      <span class="width-mobile display-inline-block"><%= @sample.sample_begin_time&.strftime("%H:%M") %></span>
     </div>
 
     <div class="margin-1">
       <span class="width-card margin-right-1 text-bold display-inline-block">Sample End Time</span>
-      <span class="width-card-lg display-inline-block"><%= @sample.sample_end_time&.strftime("%H:%M") %></span>
+      <span class="width-mobile display-inline-block"><%= @sample.sample_end_time&.strftime("%H:%M") %></span>
     </div>
 
     <div class="margin-1 margin-top-2">
@@ -75,7 +75,7 @@
       </ul>
     </div>
   </div>
-  <div class="grid-col-5 padding-1">
+  <div class="grid-col-6 padding-1">
     <div class="margin-1">
       <span class="width-card margin-right-1 text-bold display-inline-block">Field ID</span>
       <span class="width-card-lg display-inline-block"><%= @sample.field_id %></span>

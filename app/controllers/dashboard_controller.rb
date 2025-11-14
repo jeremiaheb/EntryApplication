@@ -6,13 +6,23 @@ class DashboardController < ApplicationController
 
   def show
     if current_diver.admin?
-      @boatlog_managers = BoatlogManager.all
+      @missions = Mission.active
     else
-      @boatlog_managers = [current_diver.boatlog_manager]
+      @missions = current_diver.missions_managed.active
     end
+    @missions = @missions.includes(:region, :agency, :project)
 
-    @sample_count_report = SampleCountReport.new(@boatlog_managers)
-    @crosscheck_report = CrosscheckReport.new(@boatlog_managers)
-    @possible_duplicate_report = PossibleDuplicateReport.new(@boatlog_managers)
+    # Apply filters
+    @filters = {
+      region_id: Array(params[:region_ids]).map(&:to_i),
+      agency_id: Array(params[:agency_ids]).map(&:to_i),
+      project_id: Array(params[:project_ids]).map(&:to_i),
+    }.reject { |_, v| v.empty? }
+    @unfiltered_missions = @missions
+    @missions = @missions.where(@filters)
+
+    @sample_count_report = SampleCountReport.new(@missions)
+    @crosscheck_report = CrosscheckReport.new(@missions)
+    @possible_duplicate_report = PossibleDuplicateReport.new(@missions)
   end
 end

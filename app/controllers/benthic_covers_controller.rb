@@ -6,6 +6,17 @@ class BenthicCoversController < ApplicationController
 
   # GET /benthic_covers
   def index
+    @benthic_covers = @benthic_covers.joins(:mission).includes(:diver, :region, :agency, :project)
+
+    # Apply filters
+    @filters = {
+      "mission.region_id": Array(params[:region_ids]).map(&:to_i),
+      "mission.agency_id": Array(params[:agency_ids]).map(&:to_i),
+      "mission.project_id": Array(params[:project_ids]).map(&:to_i),
+    }.reject { |_, v| v.empty? }
+    @unfiltered_benthic_covers = @benthic_covers
+    @benthic_covers = @benthic_covers.where(@filters)
+
     respond_to do |format|
       format.html # index.html.erb
       format.xlsx do
@@ -17,10 +28,11 @@ class BenthicCoversController < ApplicationController
         no_store
 
         diver = Diver.find(params[:diver_id].presence || current_diver.id)
-        benthic_covers = diver.benthic_covers.
-          includes(:boatlog_manager, :habitat_type, :rugosity_measure, :invert_belt, :presence_belt, point_intercepts: :cover_cat).
+        @benthic_covers = @benthic_covers.
+          where(diver: diver).
+          includes(:habitat_type, :rugosity_measure, :invert_belt, :presence_belt, point_intercepts: :cover_cat).
           order(:sample_date, :sample_begin_time)
-        pdf = BenthicCoverPdf.new(benthic_covers)
+        pdf = BenthicCoverPdf.new(@benthic_covers)
 
         send_data pdf.render, filename: "#{diver.diver_name}_BenthicCoverReport.pdf",
           type: "application/pdf"
@@ -113,7 +125,7 @@ class BenthicCoversController < ApplicationController
   private
 
   def benthic_cover_params
-    params.require(:benthic_cover).permit(:id, "_destroy", :boatlog_manager_id, :diver_id, :buddy_id, :field_id, :sample_date, :sample_begin_time, :habitat_type_id, :meters_completed, :sample_description,
+    params.require(:benthic_cover).permit(:id, "_destroy", :mission_id, :boatlog_manager_id, :diver_id, :buddy_id, :field_id, :sample_date, :sample_begin_time, :habitat_type_id, :meters_completed, :sample_description,
                                          point_intercepts_attributes: [:id, "_destroy", :cover_cat_id, :hardbottom_num, :softbottom_num, :rubble_num],
                                          rugosity_measure_attributes: [:id, "_destroy", :min_depth, :max_depth, :rug_meters_completed, :meter_mark_1,
                                                                       :meter_mark_2, :meter_mark_3, :meter_mark_4, :meter_mark_5, :meter_mark_6,

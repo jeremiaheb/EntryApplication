@@ -4,8 +4,13 @@
   <div class="grid-row padding-1">
     <div class="grid-col-12">
       <div>
-        <%= f.label :boatlog_manager_id, "Boatlog/Manager", class: "usa-label display-inline-block width-card margin-top-0" %>
-        <%= f.collection_select :boatlog_manager_id, BoatlogManager.all, :id, :agency_name, { include_blank: true }, autofocus: true, class: "usa-select usa-input--lg display-inline-block" %>
+        <%= label_tag :boat_log_region_id, "Region", class: "usa-label display-inline-block width-card" %>
+        <%= select_tag :boat_log_region_id, options_for_select(region_options(current_mission: f.object.mission), f.object.mission.try(:region_id)), include_blank: true, autofocus: true, class: "region-select usa-select usa-input--lg display-inline-block", required: true %>
+      </div>
+
+      <div>
+        <%= f.label :mission_id, "Mission", class: "usa-label display-inline-block width-card" %>
+        <%= f.select :mission_id, mission_options(current_mission: f.object.mission), { include_blank: true }, class: "mission-select usa-select usa-input--lg display-inline-block", required: true %>
       </div>
 
       <div class="date">

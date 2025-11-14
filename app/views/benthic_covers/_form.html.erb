@@ -5,8 +5,13 @@
     <div class="grid-row">
       <div class="grid-col-6">
         <div>
-          <%= f.label :boatlog_manager_id, "Boatlog/Manager", class: "usa-label display-inline-block width-card" %>
-          <%= f.collection_select :boatlog_manager_id, BoatlogManager.all, :id, :agency_name, { include_blank: true }, autofocus: true, class: "usa-select usa-input--lg display-inline-block" %>
+          <%= label_tag :benthic_cover_region_id, "Region", class: "usa-label display-inline-block width-card" %>
+          <%= select_tag :benthic_cover_region_id, options_for_select(region_options(current_mission: f.object.mission), f.object.mission.try(:region_id)), include_blank: true, autofocus: true, class: "region-select usa-select usa-input--lg display-inline-block", required: true %>
+        </div>
+
+        <div>
+          <%= f.label :mission_id, "Mission", class: "usa-label display-inline-block width-card" %>
+          <%= f.select :mission_id, mission_options(current_mission: f.object.mission), { include_blank: true }, class: "mission-select usa-select usa-input--lg display-inline-block", required: true %>
         </div>
 
         <div>
@@ -38,7 +43,7 @@
       <div class="grid-col-6">
         <div>
           <%= f.label :habitat_type_id, "Habitat Type", class: "usa-label display-inline-block width-card" %>
-          <%= f.collection_select :habitat_type_id, HabitatType.caribbean_habitats, :id, :habitat_name, { include_blank: true }, class: "usa-select usa-input--lg display-inline-block" %>
+          <%= f.select :habitat_type_id, habitat_type_options(current_region_id: f.object.region&.id), { include_blank: true }, class: "habitat-type-select usa-select usa-input--lg display-inline-block", required: true %>
         </div>
 
         <div>

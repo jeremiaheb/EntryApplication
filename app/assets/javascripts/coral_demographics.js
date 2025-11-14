@@ -85,7 +85,7 @@ $(function () {
     },
 
     rules: {
-      "coral_demographic[boatlog_manager_id]": {
+      "coral_demographic[mission_id]": {
         required: true,
       },
       "coral_demographic[diver_id]": {

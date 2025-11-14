@@ -68,9 +68,9 @@
         <h6>Coral Demographic Samples</h6>
       </div>
     </div>
-    <% if diver_signed_in? && current_diver.role == "admin" %>
+    <% if diver_signed_in? && current_diver.admin? %>
       <%= render "admin" %>
-    <% elsif diver_signed_in? && current_diver.role == 'manager' %>
+    <% elsif diver_signed_in? && (current_diver.manager? || current_diver.missions_managed.any?) %>
       <%= render 'manager' %>'
     <% end %>
 

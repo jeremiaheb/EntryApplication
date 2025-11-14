@@ -1,0 +1,37 @@
+<%= form_for @mission, html: { class: "usa-form maxw-full bg-base-lightest", autocomplete: "off" } do |f| %>
+  <%= render "shared/uswds_error_messages", target: @mission %>
+
+  <div class="grid-row padding-1">
+    <div class="grid-col-12">
+      <div>
+        <%= f.check_box :active, class: "usa-checkbox__input" %>
+        <%= f.label :active, "Active?", class: "usa-checkbox__label", autofocus: true %>
+      </div>
+
+      <div>
+        <%= f.label :region_id, class: "usa-label" %>
+        <%= f.collection_select :region_id, Region.order(:name), :id, :name, { required: true, include_blank: true }, class: "usa-select usa-input--lg", disabled: @mission.persisted? %>
+      </div>
+
+      <div>
+        <%= f.label :agency_id, class: "usa-label" %>
+        <%= f.collection_select :agency_id, Agency.order(:name), :id, :name, { required: true, include_blank: true }, class: "usa-select usa-input--lg", disabled: @mission.persisted? %>
+      </div>
+
+      <div>
+        <%= f.label :project_id, class: "usa-label" %>
+        <%= f.collection_select :project_id, Project.order(:name), :id, :name, { required: true, include_blank: true }, class: "usa-select usa-input--lg", disabled: @mission.persisted? %>
+      </div>
+
+      <div>
+        <%= f.label :manager_ids, "Managers", class: "usa-label" %>
+        <%= f.collection_select :manager_diver_ids, Diver.order(:diver_name), :id, :diver_name, { multiple: true }, class: "usa-input--2xl width-full" %>
+      </div>
+
+      <div>
+        <%= f.submit class: "usa-button" %>
+        <%= link_to "Cancel", missions_path, class: "usa-button usa-button--outline" %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :benthic_cover do
-    boatlog_manager
+    mission
     diver
     buddy factory: :diver
     sample_date { Date.parse("2013-09-15") }

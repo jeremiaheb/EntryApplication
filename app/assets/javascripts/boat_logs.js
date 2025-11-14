@@ -154,7 +154,7 @@ $(function () {
     },
 
     rules: {
-      "boat_log[boatlog_manager_id]": {
+      "boat_log[mission_id]": {
         required: true,
       },
       "boat_log[date]": {

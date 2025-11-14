@@ -56,7 +56,7 @@ $(function () {
     },
 
     rules: {
-      "benthic_cover[boatlog_manager_id]": {
+      "benthic_cover[mission_id]": {
         required: true,
       },
       "benthic_cover[diver_id]": {

@@ -1,6 +1,6 @@
 class PossibleDuplicateReport
-  def initialize(boatlog_managers)
-    @boatlog_managers = boatlog_managers
+  def initialize(missions)
+    @missions = missions
   end
 
   def duplicate_boat_logs_by_primary_sample_unit
@@ -22,12 +22,12 @@ class PossibleDuplicateReport
   private
 
   def boat_logs
-    BoatLog.where(boatlog_manager_id: @boatlog_managers).includes(:boatlog_manager)
+    BoatLog.where(mission_id: @missions).includes(:mission)
   end
 
   def samples
-    Sample.where(boatlog_manager_id: @boatlog_managers).includes(:diver) +
-      BenthicCover.where(boatlog_manager_id: @boatlog_managers).includes(:diver) +
-      CoralDemographic.where(boatlog_manager_id: @boatlog_managers).includes(:diver)
+    Sample.where(mission_id: @missions).includes(:diver) +
+      BenthicCover.where(mission_id: @missions).includes(:diver) +
+      CoralDemographic.where(mission_id: @missions).includes(:diver)
   end
 end

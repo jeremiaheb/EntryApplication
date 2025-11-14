@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :coral_demographic do
-    boatlog_manager
+    mission
     diver
     buddy factory: :diver
     field_id { "10011A" }

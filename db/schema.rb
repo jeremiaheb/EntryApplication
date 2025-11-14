@@ -10,9 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_09_18_171021) do
+ActiveRecord::Schema[7.2].define(version: 2025_11_19_200330) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "agencies", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_agencies_on_name", unique: true
+  end
 
   create_table "animals", force: :cascade do |t|
     t.string "species_code"
@@ -36,18 +43,22 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_18_171021) do
     t.text "sample_description"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
-    t.integer "boatlog_manager_id", null: false
+    t.integer "boatlog_manager_id"
+    t.integer "mission_id"
     t.index ["boatlog_manager_id"], name: "index_benthic_covers_on_boatlog_manager_id"
     t.index ["diver_id"], name: "index_benthic_covers_on_diver_id"
+    t.index ["mission_id"], name: "index_benthic_covers_on_mission_id"
   end
 
   create_table "boat_logs", force: :cascade do |t|
     t.string "primary_sample_unit"
     t.date "date"
-    t.integer "boatlog_manager_id", null: false
+    t.integer "boatlog_manager_id"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
+    t.integer "mission_id"
     t.index ["boatlog_manager_id"], name: "index_boat_logs_on_boatlog_manager_id"
+    t.index ["mission_id"], name: "index_boat_logs_on_mission_id"
   end
 
   create_table "boatlog_managers", force: :cascade do |t|
@@ -69,10 +80,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_18_171021) do
     t.text "sample_description"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
-    t.integer "boatlog_manager_id", null: false
+    t.integer "boatlog_manager_id"
     t.integer "percent_hardbottom"
+    t.integer "mission_id"
     t.index ["boatlog_manager_id"], name: "index_coral_demographics_on_boatlog_manager_id"
     t.index ["diver_id"], name: "index_coral_demographics_on_diver_id"
+    t.index ["mission_id"], name: "index_coral_demographics_on_mission_id"
   end
 
   create_table "corals", force: :cascade do |t|
@@ -167,6 +180,25 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_18_171021) do
     t.integer "diadema_num"
   end
 
+  create_table "mission_managers", force: :cascade do |t|
+    t.integer "mission_id", null: false
+    t.integer "diver_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mission_id", "diver_id"], name: "index_mission_managers_on_mission_id_and_diver_id", unique: true
+  end
+
+  create_table "missions", force: :cascade do |t|
+    t.integer "project_id", null: false
+    t.integer "agency_id", null: false
+    t.integer "region_id", null: false
+    t.boolean "active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["active"], name: "index_missions_on_active"
+    t.index ["project_id", "agency_id", "region_id"], name: "index_missions_on_project_id_and_agency_id_and_region_id", unique: true
+  end
+
   create_table "point_intercepts", force: :cascade do |t|
     t.integer "benthic_cover_id"
     t.integer "cover_cat_id"
@@ -186,6 +218,28 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_18_171021) do
     t.integer "m_faveolata"
     t.integer "d_stokesii"
     t.integer "a_lamarcki"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_projects_on_name", unique: true
+  end
+
+  create_table "region_habitat_types", force: :cascade do |t|
+    t.integer "region_id", null: false
+    t.integer "habitat_type_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["region_id", "habitat_type_id"], name: "index_region_habitat_types_on_region_id_and_habitat_type_id", unique: true
+  end
+
+  create_table "regions", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_regions_on_name", unique: true
   end
 
   create_table "rep_logs", force: :cascade do |t|
@@ -256,7 +310,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_18_171021) do
     t.datetime "updated_at", precision: nil
     t.integer "water_temp"
     t.string "current"
-    t.integer "boatlog_manager_id", null: false
+    t.integer "boatlog_manager_id"
     t.integer "substrate_max_depth"
     t.integer "substrate_min_depth"
     t.float "hard_verticle_relief"
@@ -290,9 +344,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_18_171021) do
     t.integer "hard_pcov_other2"
     t.integer "diver_id"
     t.integer "buddy_id"
+    t.integer "mission_id"
     t.index ["boatlog_manager_id"], name: "index_samples_on_boatlog_manager_id"
     t.index ["buddy_id"], name: "index_samples_on_buddy_id"
     t.index ["diver_id"], name: "index_samples_on_diver_id"
+    t.index ["mission_id"], name: "index_samples_on_mission_id"
   end
 
   create_table "solid_errors", force: :cascade do |t|

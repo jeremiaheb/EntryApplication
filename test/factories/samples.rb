@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :sample do
+    mission
     diver
     buddy factory: :diver
     sample_type
     habitat_type
-    boatlog_manager
     sample_date { Date.parse("2014-02-02") }
     dive_begin_time { Time.parse("2014-02-02T09:00:00Z") }
     dive_end_time { Time.parse("2014-02-02T09:45:00Z") }

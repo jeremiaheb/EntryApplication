@@ -9,10 +9,14 @@ class CoralDemographic < ApplicationRecord
   belongs_to :diver
   belongs_to :buddy, class_name: "Diver"
   belongs_to :habitat_type
-  belongs_to :boatlog_manager
+  belongs_to :boatlog_manager, optional: true # TODO: Remove boatlog_manager relation
 
+  belongs_to :mission, optional: true # TODO: Remove optional
+  has_one :region, through: :mission
+  has_one :agency, through: :mission
+  has_one :project, through: :mission
 
-  validates :boatlog_manager_id,    presence: true
+  validates :mission_id,            presence: true
   validates :diver_id,              presence: true
   validates :buddy_id,              presence: true
   validates :sample_date,           presence: true

@@ -2,10 +2,10 @@ require "application_system_test_case"
 
 class CoralDemographicsTest < ApplicationSystemTestCase
   test "new coral demographic" do
-    boatlog_manager = FactoryBot.create(:boatlog_manager)
+    mission = FactoryBot.create(:mission)
     diver = FactoryBot.create(:diver)
     buddy = FactoryBot.create(:diver)
-    habitat_type = FactoryBot.create(:habitat_type, region: "Caribbean")
+    habitat_type = FactoryBot.create(:habitat_type, regions: [mission.region])
     coral1 = FactoryBot.create(:coral)
     coral2 = FactoryBot.create(:coral)
 
@@ -15,7 +15,8 @@ class CoralDemographicsTest < ApplicationSystemTestCase
     find(".new-sample-button").click
 
     # TODO: If reuse is desired, extract this complex input to a function
-    find("select#coral_demographic_boatlog_manager_id").select(boatlog_manager.agency_name)
+    find("select#coral_demographic_region_id").select(mission.region.name)
+    find("select#coral_demographic_mission_id").select(mission.display_name)
     find("select#coral_demographic_diver_id").select(diver.diver_name)
     find("select#coral_demographic_buddy_id").select(buddy.diver_name)
     find("input#coral_demographic_field_id").fill_in(with: "30591A")
@@ -56,6 +57,7 @@ class CoralDemographicsTest < ApplicationSystemTestCase
     assert_equal 1, CoralDemographic.count
 
     coral_demographic = CoralDemographic.first
+    assert_equal mission, coral_demographic.mission
     assert_equal 2, coral_demographic.demographic_corals.count
     assert_equal coral1, coral_demographic.demographic_corals[0].coral
     assert_equal coral2, coral_demographic.demographic_corals[1].coral

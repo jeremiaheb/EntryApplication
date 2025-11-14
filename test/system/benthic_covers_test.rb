@@ -2,10 +2,10 @@ require "application_system_test_case"
 
 class BenthicCoversTest < ApplicationSystemTestCase
   test "new benthic cover" do
-    boatlog_manager = FactoryBot.create(:boatlog_manager)
+    mission = FactoryBot.create(:mission)
     diver = FactoryBot.create(:diver)
     buddy = FactoryBot.create(:diver)
-    habitat_type = FactoryBot.create(:habitat_type, region: "Caribbean")
+    habitat_type = FactoryBot.create(:habitat_type, regions: [mission.region])
     cover_cat1 = FactoryBot.create(:cover_cat)
     cover_cat2 = FactoryBot.create(:cover_cat)
 
@@ -15,7 +15,8 @@ class BenthicCoversTest < ApplicationSystemTestCase
     find(".new-sample-button").click
 
     # TODO: If reuse is desired, extract this complex input to a function
-    find("select#benthic_cover_boatlog_manager_id").select(boatlog_manager.agency_name)
+    find("select#benthic_cover_region_id").select(mission.region.name)
+    find("select#benthic_cover_mission_id").select(mission.display_name)
     find("select#benthic_cover_diver_id").select(diver.diver_name)
     find("select#benthic_cover_buddy_id").select(buddy.diver_name)
     find("input#benthic_cover_field_id").fill_in(with: "30591A")
@@ -80,6 +81,7 @@ class BenthicCoversTest < ApplicationSystemTestCase
     assert_equal 1, BenthicCover.count
 
     benthic_cover = BenthicCover.first
+    assert_equal mission, benthic_cover.mission
     assert_equal 2, benthic_cover.point_intercepts.count
     assert_equal 45, benthic_cover.point_intercepts[0].cover_total
     assert_equal 55, benthic_cover.point_intercepts[1].cover_total

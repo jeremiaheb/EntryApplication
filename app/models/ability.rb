@@ -6,24 +6,23 @@ class Ability
     if current_diver.admin?
       # All privileges
       can :manage, :all
-    elsif current_diver.manager?
-      # Create/draft samples
-      can [:create, :draft], [Sample, BenthicCover, CoralDemographic]
-
-      # Manage own samples
-      can :manage, [Sample, BenthicCover, CoralDemographic], diver_id: current_diver.id
-      can :manage, [Sample, BenthicCover, CoralDemographic], boatlog_manager_id: current_diver.boatlog_manager_id
-
-      # Create boat logs
-      can :create, [BoatLog]
-      # Manage own boat logs
-      can :manage, [BoatLog], boatlog_manager_id: current_diver.boatlog_manager_id
-    elsif current_diver.diver?
+    else
       # Create/draft samples
       can [:create, :draft], [Sample, BenthicCover, CoralDemographic]
 
       # Read/update/delete own samples
       can [:read, :update, :destroy], [Sample, BenthicCover, CoralDemographic], diver_id: current_diver.id
+
+      # If a mission manager ...
+      if current_diver.missions_managed_ids.any?
+        # Manage samples for missions managed
+        can :manage, [Sample, BenthicCover, CoralDemographic], mission_id: current_diver.missions_managed_ids
+
+        # Create boat logs
+        can :create, [BoatLog]
+        # Manage boat logs for missions managed
+        can :manage, [BoatLog], mission_id: current_diver.missions_managed_ids
+      end
     end
   end
 end

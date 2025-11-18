@@ -1,50 +1,79 @@
-
-<div class='formContainer'>
-  <div id="sampleSection" class="sectionDiv">
-  <div class='show_section_1'>
-    <div id='section_1_part_1'>
-
-      <dl class="dl-horizontal">
-        <dt>Boatlog/Manager</dt><dd><%= @coral_demographic.boatlog_manager.agency_name %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>Diver</dt><dd><%= @coral_demographic.diver.diver_name %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>Buddy</dt><dd><%= @coral_demographic.buddy.diver_name %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>Field ID</dt><dd><%= @coral_demographic.field_id %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>Sample Date</dt><dd><%= @coral_demographic.sample_date %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>Sample Time</dt><dd><%= @coral_demographic.sample_begin_time.strftime("%H:%M") %></dd>
-      </dl>
-
-    </div>
-
-    <div id='section_1_part_2'>
-
-      <dl class="dl-horizontal">
-        <dt>Habitat Type</dt><dd><%= @coral_demographic.habitat_type.habitat_name %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>Meters Completed</dt><dd><%= @coral_demographic.meters_completed %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>Percent Hardbottom</dt><dd><%= @coral_demographic.percent_hardbottom %></dd>
-      </dl>
-      <dl class="dl-horizontal">
-        <dt>Notes</dt><dd><%= @coral_demographic.sample_description %></dd>
-      </dl>
-      </div>
+<div class="grid-row">
+  <div class="grid-col-12">
+    <%= render "shared/nav_breadcrumbs", object: [["Coral Demographics", coral_demographics_path], ["Coral Demographic #{@coral_demographic.field_id}", ""]] %>
   </div>
 </div>
 
-<div class="showActions" >
- <%= button_to('Edit Demo', edit_coral_demographic_path(@coral_demographic), :method => "get", :class => 'btn btn-large btn-primary showAction') %>
- <%= button_to("Delete Demo", @coral_demographic, data: { confirm: 'Are you sure?' }, method: :delete, :class => 'btn btn-large btn-primary showAction') %>
- <%= button_to('Demo List', coral_demographics_path, :method => "get", :class => 'btn btn-large btn-primary showAction') %>
+<div class="grid-row maxw-full bg-base-lightest">
+  <div class="grid-col-5 padding-1">
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Boatlog/Manager</span>
+      <span class="width-card-lg display-inline-block"><%= @coral_demographic.boatlog_manager&.agency_name %></span>
+    </div>
+
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Diver</span>
+      <span class="width-card-lg display-inline-block"><%= @coral_demographic.diver&.diver_name %></span>
+    </div>
+
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Buddy</span>
+      <span class="width-card-lg display-inline-block"><%= Diver.find_by(id: @coral_demographic.buddy)&.diver_name %></span>
+    </div>
+
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Field ID</span>
+      <span class="width-card-lg display-inline-block"><%= @coral_demographic.field_id %></span>
+    </div>
+
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Sample Date</span>
+      <span class="width-card-lg display-inline-block"><%= @coral_demographic.sample_date %></span>
+    </div>
+
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Sample Time</span>
+      <span class="width-card-lg display-inline-block"><%= @coral_demographic.sample_begin_time&.strftime("%H:%M") %></span>
+    </div>
+
+    <div class="margin-1 margin-top-2">
+      <ul class="usa-button-group">
+        <li class="usa-button-group__item">
+          <%= link_to coral_demographics_path, class: "list-button usa-button" do %>
+            <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+              <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#arrow_back") %>
+            </svg>
+            Back to List
+          <%- end %>
+        </li>
+        <li class="usa-button-group__item">
+          <%= link_to "Edit", edit_coral_demographic_path(@coral_demographic), class: "edit-button usa-button usa-button--outline" %>
+        </li>
+        <li class="usa-button-group__item">
+          <%= link_to "Delete", @coral_demographic, data: { confirm: "Are you sure?" }, method: "delete", class: "delete-button usa-button usa-button--secondary" %>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="grid-col-5 padding-1">
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Habitat Type</span>
+      <span class="width-card-lg display-inline-block"><%= @coral_demographic.habitat_type.habitat_name %></span>
+    </div>
+
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Meters Completed</span>
+      <span class="width-card-lg display-inline-block"><%= @coral_demographic.meters_completed %></span>
+    </div>
+
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Percent Hardbottom</span>
+      <span class="width-card-lg display-inline-block"><%= @coral_demographic.percent_hardbottom %></span>
+    </div>
+
+    <div class="margin-1">
+      <span class="width-card margin-right-1 text-bold display-inline-block">Notes</span>
+      <span class="width-card-lg display-inline-block"><%= @coral_demographic.sample_description %></span>
+    </div>
+  </div>
 </div>

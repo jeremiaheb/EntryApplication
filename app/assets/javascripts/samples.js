@@ -536,7 +536,8 @@ $(function () {
       $(".go-to-substrate-button").prop("disabled", true);
     }
 
-    // Enable species tab if no errors on substrate tab
+    // Enable species tab if substrate tab is enabled AND no errors on substrate tab
+    let substrateTabEnabled = !$(".go-to-substrate-button").prop("disabled");
     let substrateTabFieldsWithErrors = $("#substrate-tab :input.error");
     let substrateTabEmptyRequiredFields = $(
       "#substrate-tab :input[required]",
@@ -553,6 +554,7 @@ $(function () {
         $("#biotic_percentage_hardbottom_total").val() == 100);
 
     if (
+      substrateTabEnabled &&
       substrateTabFieldsWithErrors.length === 0 &&
       substrateTabEmptyRequiredFields.length === 0 &&
       substrateTabAllSumsToOneHundred

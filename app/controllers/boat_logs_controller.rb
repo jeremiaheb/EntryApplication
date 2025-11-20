@@ -6,7 +6,7 @@ class BoatLogsController < ApplicationController
 
   # GET /boat_logs
   def index
-    @boat_logs = @boat_logs.includes(:station_logs)
+    @boat_logs = @boat_logs.includes(station_logs: { rep_logs: :diver })
 
     respond_to do |format|
       format.html # index.html.erb

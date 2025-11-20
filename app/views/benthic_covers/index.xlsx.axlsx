@@ -45,7 +45,7 @@ wb.add_worksheet(name: "BenthicCoverSample") do |sampSheet|
   @benthic_covers.each do |b_cover|
     sampSheet.add_row [b_cover.msn,
                         b_cover.diver.diver_number,
-                        Diver.find(b_cover.buddy).diver_number,
+                        b_cover.buddy.diver_number,
                         b_cover.habitat_type.id,
                         b_cover.habitat_type.habitat_name,
                         b_cover.sample_date.strftime("%Y"),

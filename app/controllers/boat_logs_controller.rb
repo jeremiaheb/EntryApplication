@@ -6,11 +6,22 @@ class BoatLogsController < ApplicationController
 
   # GET /boat_logs
   def index
-    @boat_logs = @boat_logs.includes(station_logs: { rep_logs: :diver })
+    @boat_logs = @boat_logs.joins(:mission).includes(:station_logs, :region, :agency, :project)
+
+    # Apply filters
+    @filters = {
+      "mission.region_id": Array(params[:region_ids]).map(&:to_i),
+      "mission.agency_id": Array(params[:agency_ids]).map(&:to_i),
+      "mission.project_id": Array(params[:project_ids]).map(&:to_i),
+    }.reject { |_, v| v.empty? }
+    @unfiltered_boat_logs = @boat_logs
+    @boat_logs = @boat_logs.where(@filters)
 
     respond_to do |format|
       format.html # index.html.erb
       format.xlsx do
+        @boat_logs = @boat_logs.includes(station_logs: { rep_logs: :diver })
+
         # Prevent caching
         no_store
       end

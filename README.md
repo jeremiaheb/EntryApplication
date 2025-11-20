@@ -117,11 +117,19 @@ bin/rake db:restore FILE=backup_CaribbeanDataEntry_2025-07-10.dump
 
 #### Import/Seed
 
-To import species lists from the seed files in [db/SupportData](./db/SupportData/), connect to the Vagrant VM (`vagrant ssh`) and run:
+To import a basic set of missions and habitat types from [db/seeds.rb](./db/seeds.rb), connect to the Vagrant VM (`vagrant ssh`) and run:
+
+```bash
+bin/rake db:seed
+```
+
+To import coral and cover category data from [db/SupportData](./db/SupportData/), run:
 
 ```bash
 bin/rake import:all
 ```
+
+To add additional import files, see [import.rake](./lib/tasks/import.rake).
 
 ## Deployment
 

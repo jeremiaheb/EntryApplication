@@ -20,6 +20,8 @@ class CoralDemographicsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xlsx do
+        @coral_demographics = @coral_demographics.includes(:buddy, :habitat_type, demographic_corals: :coral)
+
         # Prevent caching
         no_store
       end
@@ -30,7 +32,7 @@ class CoralDemographicsController < ApplicationController
         diver = Diver.find(params[:diver_id].presence || current_diver.id)
         @coral_demographics = @coral_demographics.
           where(diver: diver).
-          includes(:habitat_type, demographic_corals: :coral).
+          includes(:buddy, :habitat_type, demographic_corals: :coral).
           order(:sample_date, :sample_begin_time)
         pdf = CoralDemographicPdf.new(@coral_demographics)
 

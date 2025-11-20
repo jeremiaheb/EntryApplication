@@ -22,6 +22,8 @@ class SamplesController < ApplicationController
       format.xlsx do
         # Prevent caching
         no_store
+
+        @samples = @samples.includes(:buddy, :habitat_type, sample_animals: :animal)
       end
       format.pdf do
         # Prevent caching

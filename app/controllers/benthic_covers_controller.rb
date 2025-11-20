@@ -22,6 +22,8 @@ class BenthicCoversController < ApplicationController
       format.xlsx do
         # Prevent caching
         no_store
+
+        @benthic_covers = @benthic_covers.includes(:buddy, :habitat_type, :rugosity_measure, :invert_belt, :presence_belt, point_intercepts: :cover_cat)
       end
       format.pdf do
         # Prevent caching
@@ -30,7 +32,7 @@ class BenthicCoversController < ApplicationController
         diver = Diver.find(params[:diver_id].presence || current_diver.id)
         @benthic_covers = @benthic_covers.
           where(diver: diver).
-          includes(:habitat_type, :rugosity_measure, :invert_belt, :presence_belt, point_intercepts: :cover_cat).
+          includes(:buddy, :habitat_type, :rugosity_measure, :invert_belt, :presence_belt, point_intercepts: :cover_cat).
           order(:sample_date, :sample_begin_time)
         pdf = BenthicCoverPdf.new(@benthic_covers)
 

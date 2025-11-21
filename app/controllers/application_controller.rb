@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:account_update, keys: [:email, :email_confirmed])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:agency, :email, :email_confirmed])
   end
 
   def set_error_context

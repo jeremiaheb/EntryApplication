@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_21_180035) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_21_194138) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -151,6 +151,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_21_180035) do
     t.string "role", default: "diver", null: false
     t.integer "boatlog_manager_id"
     t.boolean "email_confirmed", default: false, null: false
+    t.string "agency"
     t.index ["boatlog_manager_id"], name: "index_divers_on_boatlog_manager_id", unique: true
   end
 

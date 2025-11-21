@@ -6,6 +6,7 @@ FactoryBot.define do
     sequence(:email) { |n| "diver#{n}@example.com" }
     email_confirmed { true }
     sequence(:password) { |n| "password#{n}" }
+    agency { "NOAA" }
     role { "diver" }
     active { true }
   end

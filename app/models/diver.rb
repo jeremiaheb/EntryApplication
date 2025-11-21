@@ -22,6 +22,7 @@ class Diver < ApplicationRecord
 
   validates   :diver_number, presence: true
   validates   :diver_name, presence: true
+  validates   :agency, presence: true
   validates   :username, uniqueness: { case_sensitive: false, allow_blank: true }
   validates   :email, uniqueness: { case_sensitive: false }
   validate    :current_password_is_not_username, unless: -> { password.present? }

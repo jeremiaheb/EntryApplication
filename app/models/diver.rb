@@ -10,10 +10,15 @@ class Diver < ApplicationRecord
   belongs_to  :boatlog_manager
 
   has_many    :samples
+  has_many    :samples_missions, through: :samples
+
   has_many    :benthic_covers
   has_many    :coral_demographics
 
   has_many    :rep_logs
+
+  has_many :mission_managers
+  has_many :missions_managed, through: :mission_managers, source: :mission
 
   validates   :diver_number, presence: true
   validates   :diver_name, presence: true

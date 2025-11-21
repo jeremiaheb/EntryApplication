@@ -6,23 +6,35 @@ class SamplesController < ApplicationController
 
   # GET /samples
   def index
-    @samples = @samples.includes(:diver)
+    @samples = @samples.joins(:mission).includes(:diver, :region, :agency, :project)
+
+    # Apply filters
+    @filters = {
+      "mission.region_id": Array(params[:region_ids]).map(&:to_i),
+      "mission.agency_id": Array(params[:agency_ids]).map(&:to_i),
+      "mission.project_id": Array(params[:project_ids]).map(&:to_i),
+    }.reject { |_, v| v.empty? }
+    @unfiltered_samples = @samples
+    @samples = @samples.where(@filters)
 
     respond_to do |format|
       format.html
       format.xlsx do
         # Prevent caching
         no_store
+
+        @samples = @samples.includes(:buddy, :habitat_type, sample_animals: :animal)
       end
       format.pdf do
         # Prevent caching
         no_store
 
         diver = Diver.find(params[:diver_id].presence || current_diver.id)
-        samples = diver.samples.
-          includes(:boatlog_manager, :buddy, :habitat_type, sample_animals: :animal).
+        @samples = @samples.
+          where(diver: diver).
+          includes(:buddy, :habitat_type, sample_animals: :animal).
           order(:sample_date, :sample_begin_time)
-        pdf = SamplePdf.new(samples, params[:fishtype].to_s)
+        pdf = SamplePdf.new(@samples, params[:fishtype].to_s)
 
         send_data pdf.render, filename: "#{diver.diver_name}_ProofingReport.pdf",
           type: "application/pdf"

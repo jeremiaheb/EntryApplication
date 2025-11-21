@@ -14,6 +14,8 @@ EntryApplication::Application.routes.draw do
     mount SolidErrors::Engine, at: "/errors"
   end
 
+  resources :agencies, except: [:show]
+
   resources :animals, except: [:show]
 
   resources :benthic_covers do
@@ -39,6 +41,12 @@ EntryApplication::Application.routes.draw do
   resources :divers, except: [:show]
 
   resources :habitat_types, except: [:show]
+
+  resources :missions, except: [:show]
+
+  resources :projects, except: [:show]
+
+  resources :regions, except: [:show]
 
   resources :sample_types, except: [:show]
 

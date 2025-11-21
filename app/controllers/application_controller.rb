@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def require_manager_or_admin!
-    if current_diver.admin? || current_diver.manager?
+    if current_diver.admin? || current_diver.manager? || current_diver.missions_managed.any?
       true
     else
       redirect_to root_url, alert: "You are not authorized to see this page"

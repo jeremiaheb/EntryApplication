@@ -22,7 +22,7 @@ class CoralDemographicPdf < Prawn::Document
   end
 
   def sample_head
-    data =  [["Diver", "#{@coral_demographic.diver.diver_name}", "Boatlog/Manger:", "#{@coral_demographic.boatlog_manager.agency_name}"],
+    data =  [["Diver", "#{@coral_demographic.diver.diver_name}", "Mission:", "#{@coral_demographic.mission.display_name(include_region: true)}"],
               ["Buddy", "#{@coral_demographic.buddy.diver_name}", "Field ID", "#{@coral_demographic.field_id}", "Date", "#{@coral_demographic.sample_date}", "Sample Time", "#{@coral_demographic.sample_begin_time.strftime("%H:%M")}"],
               ["Habitat", "#{@coral_demographic.habitat_type.habitat_name}", "Meters Completed", "#{@coral_demographic.meters_completed}", "Percent Hardbottom", "#{@coral_demographic.percent_hardbottom}"],
 ]

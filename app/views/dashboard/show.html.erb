@@ -1,8 +1,31 @@
 <%= render "shared/nav_breadcrumbs", object: [["Manager Dashboard", ""]] %>
 
 <div class="grid-row">
+  <div class="grid-col-12 border border-dashed padding-1">
+    <%= form_tag request.path, class: "usa-form maxw-full", method: "get" do %>
+      <div>
+        <span class="usa-legend width-full usa-input--xl text-bold margin-top-0 margin-right-neg-1 display-inline-block">Regions</span>
+        <span class="usa-legend width-full usa-input--xl text-bold margin-top-0 margin-right-neg-1 display-inline-block">Agencies</span>
+        <span class="usa-legend width-full usa-input--xl text-bold margin-top-0 margin-right-neg-1 display-inline-block">Projects</span>
+      </div>
+
+      <div>
+        <%= select_tag :region_ids, options_from_collection_for_select(@unfiltered_missions.map(&:region).uniq.sort_by(&:name), :id, :name, Array(@filters[:region_id]) + @missions.distinct.pluck(:region_id)), class: "usa-input--xl width-full display-inline-block", multiple: true %>
+        <%= select_tag :agency_ids, options_from_collection_for_select(@unfiltered_missions.map(&:agency).uniq.sort_by(&:name), :id, :name, Array(@filters[:agency_id]) + @missions.distinct.pluck(:agency_id)), class: "usa-input--xl width-full display-inline-block", multiple: true %>
+        <%= select_tag :project_ids, options_from_collection_for_select(@unfiltered_missions.map(&:project).uniq.sort_by(&:name), :id, :name, Array(@filters[:project_id]) + @missions.distinct.pluck(:project_id)), class: "usa-input--xl width-full display-inline-block", multiple: true %>
+      </div>
+
+      <div>
+        <%= submit_tag "Update Filters", class: "usa-button margin-top-1 display-inline-block" %>
+        <%= link_to "Reset Filters", request.path, class: "usa-button usa-button--outline margin-top-1 display-inline-block" %>
+      </div>
+    <%- end %>
+  </div>
+</div>
+
+<div class="grid-row">
   <div class="grid-col-12">
-    <ul class="usa-button-group margin-bottom-1">
+    <ul class="usa-button-group margin-top-1">
       <li class="usa-button-group__item">
         <%= link_to boat_logs_path, class: "usa-button" do %>
           Boat Logs
@@ -62,7 +85,7 @@
     <table class="width-full font-sans-xs display">
       <thead>
         <tr>
-          <th scope="col" class="width-card">Diver</th>
+          <th scope="col" class="width-auto">Diver</th>
           <th scope="col" class="width-15">Date</th>
           <th scope="col" class="width-15">Field ID</th>
         </tr>
@@ -70,7 +93,7 @@
       <tbody>
         <%- @crosscheck_report.missing_samples_from_diver.each do |missing| %>
           <%= tag.tr "data-link": url_for(missing.related_model) do %>
-            <td class="width-card"><%= missing.diver&.diver_name %></td>
+            <td class="width-auto"><%= missing.diver&.diver_name %></td>
             <td class="width-15"><%= missing.date %></td>
             <%= tag.td class: "width-15", "data-order": missing.field_id do %>
               <%= link_to missing.field_id, missing.related_model %>
@@ -84,7 +107,7 @@
     <table class="width-full font-sans-xs display">
       <thead>
         <tr>
-          <th scope="col" class="width-card">Diver</th>
+          <th scope="col" class="width-auto">Diver</th>
           <th scope="col" class="width-15">Date</th>
           <th scope="col" class="width-15">Field ID</th>
         </tr>
@@ -92,7 +115,7 @@
       <tbody>
         <%- @crosscheck_report.missing_samples_from_boat_log.each do |missing| %>
           <%= tag.tr "data-link": url_for(missing.related_model) do %>
-            <td class="width-card"><%= missing.diver&.diver_name %></td>
+            <td class="width-auto"><%= missing.diver&.diver_name %></td>
             <td class="width-15"><%= missing.date %></td>
             <%= tag.td class: "width-15", "data-order": missing.field_id do %>
               <%= link_to missing.field_id, missing.related_model %>
@@ -108,7 +131,7 @@
         <tr>
           <th scope="col" class="width-15">Primary Sample Unit</th>
           <th scope="col" class="width-15">Date</th>
-          <th scope="col" class="width-card">Manager</th>
+          <th scope="col" class="width-auto">Mission</th>
         </tr>
       </thead>
       <tbody>
@@ -119,7 +142,7 @@
                 <%= link_to boat_log.primary_sample_unit, boat_log %>
               <%- end %>
               <td class="width-15"><%= boat_log.date %></td>
-              <td class="width-card"><%= boat_log.boatlog_manager&.agency_name %></td>
+              <td class="width-auto"><%= boat_log.mission&.display_name(include_region: true) %></td>
             <%- end %>
           <%- end %>
         <%- end %>
@@ -132,7 +155,7 @@
         <tr>
           <th scope="col" class="width-15">Field ID</th>
           <th scope="col" class="width-15">Date</th>
-          <th scope="col" class="width-card">Diver</th>
+          <th scope="col" class="width-auto">Diver</th>
         </tr>
       </thead>
       <tbody>
@@ -143,7 +166,7 @@
                 <%= link_to sample.field_id, sample %>
               <%- end %>
               <td class="width-15"><%= sample.sample_date %></td>
-              <td class="width-card"><%= sample.diver&.diver_name %></td>
+              <td class="width-auto"><%= sample.diver&.diver_name %></td>
             <%- end %>
           <%- end %>
         <%- end %>

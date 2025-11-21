@@ -1,0 +1,44 @@
+<%= render "shared/nav_breadcrumbs", object: [["Regions", ""]] %>
+
+<div class="grid-row">
+  <div class="grid-col-12">
+    <ul class="usa-button-group margin-bottom-1">
+      <li class="usa-button-group__item">
+        <%= link_to new_region_path, class: "new-region-button usa-button" do %>
+          <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+            <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#add") %>
+          </svg>
+          New region
+        <%- end %>
+      </li>
+    </ul>
+
+    <table class="width-full display">
+      <thead>
+        <tr>
+          <th scope="col" class="width-card-lg">Name</th>
+          <th scope="col" class="width-auto">Valid Habitat Types</th>
+          <th scope="col" class="width-card-lg not-orderable not-searchable"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%- @regions.each do |region| %>
+          <tr>
+            <td class="width-card-lg"><%= region.name %></td>
+            <td class="width-auto"><%= region.habitat_types.pluck(:habitat_name).sort.join(", ") %></td>
+            <td class="width-card-lg">
+              <ul class="usa-button-group float-right">
+                <li class="usa-button-group__item">
+                  <%= link_to "Edit", edit_region_path(region), class: "usa-button usa-button--outline" %>
+                </li>
+                <li class="usa-button-group__item">
+                  <%= link_to "Delete", region, data: { confirm: "Are you sure?" }, method: "delete", class: "usa-button usa-button--secondary" %>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        <%- end %>
+      </tbody>
+    </table>
+  </div>
+</div>

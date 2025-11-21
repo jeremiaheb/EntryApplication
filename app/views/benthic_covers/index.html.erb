@@ -1,8 +1,31 @@
 <%= render "shared/nav_breadcrumbs", object: [["Benthic Cover Samples", ""]] %>
 
 <div class="grid-row">
+  <div class="grid-col-12 border border-dashed padding-1">
+    <%= form_tag benthic_covers_path, class: "usa-form maxw-full", method: "get" do %>
+      <div>
+        <span class="usa-legend width-full usa-input--xl text-bold margin-top-0 margin-right-neg-1 display-inline-block">Regions</span>
+        <span class="usa-legend width-full usa-input--xl text-bold margin-top-0 margin-right-neg-1 display-inline-block">Agencies</span>
+        <span class="usa-legend width-full usa-input--xl text-bold margin-top-0 margin-right-neg-1 display-inline-block">Projects</span>
+      </div>
+
+      <div>
+        <%= select_tag :region_ids, options_from_collection_for_select(@unfiltered_benthic_covers.map(&:region).uniq.sort_by(&:name), :id, :name, Array(@filters[:"mission.region_id"]) + @benthic_covers.distinct.pluck(:"mission.region_id")), class: "usa-input--xl width-full display-inline-block", multiple: true %>
+        <%= select_tag :agency_ids, options_from_collection_for_select(@unfiltered_benthic_covers.map(&:agency).uniq.sort_by(&:name), :id, :name, Array(@filters[:"mission.agency_id"]) + @benthic_covers.distinct.pluck(:"mission.agency_id")), class: "usa-input--xl width-full display-inline-block", multiple: true %>
+        <%= select_tag :project_ids, options_from_collection_for_select(@unfiltered_benthic_covers.map(&:project).uniq.sort_by(&:name), :id, :name, Array(@filters[:"mission.project_id"]) + @benthic_covers.distinct.pluck(:"mission.project_id")), class: "usa-input--xl width-full display-inline-block", multiple: true %>
+      </div>
+
+      <div>
+        <%= submit_tag "Update Filters", class: "usa-button margin-top-1 display-inline-block" %>
+        <%= link_to "Reset Filters", request.path, class: "usa-button usa-button--outline margin-top-1 display-inline-block" %>
+      </div>
+    <%- end %>
+  </div>
+</div>
+
+<div class="grid-row">
   <div class="grid-col-12">
-    <ul class="usa-button-group margin-bottom-1">
+    <ul class="usa-button-group margin-top-1">
       <li class="usa-button-group__item">
         <%= link_to new_benthic_cover_path, class: "new-sample-button usa-button" do %>
           <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
@@ -12,7 +35,7 @@
         <%- end %>
       </li>
       <li class="usa-button-group__item">
-        <%= link_to benthic_covers_path(format: "pdf", nocache: SecureRandom.alphanumeric, diver_id: current_diver.id), class: "usa-button usa-button--accent-cool" do %>
+        <%= link_to benthic_covers_path(format: "pdf", region_ids: params[:region_ids], agency_ids: params[:agency_ids], project_ids: params[:project_ids], diver_id: current_diver.id, nocache: SecureRandom.alphanumeric), class: "usa-button usa-button--accent-cool" do %>
           <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
             <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#file_download") %>
           </svg> 
@@ -21,17 +44,15 @@
           </div>
         <%- end %>
       </li>
-      <%- if current_diver.manager? || current_diver.admin? %>
+      <%- if current_diver.admin? || current_diver.missions_managed.any? %>
         <li class="usa-button-group__item">
-          <%= link_to benthic_covers_path(format: "xlsx", nocache: SecureRandom.alphanumeric), class: "usa-button usa-button--accent-cool" do %>
+          <%= link_to benthic_covers_path(format: "xlsx", region_ids: params[:region_ids], agency_ids: params[:agency_ids], project_ids: params[:project_ids], nocache: SecureRandom.alphanumeric), class: "usa-button usa-button--accent-cool" do %>
             <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
               <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#file_download") %>
             </svg> 
             Samples (.xlsx)
           <%- end %>
         </li>
-      <%- end %>
-      <%- if current_diver.manager? %>
         <li class="usa-button-group__item">
           <%= link_to "#diver-proofing-report-modal", class: "usa-button usa-button--accent-warm", "aria-controls": "diver-proofing-report-modal", "data-open-modal": true do %>
             <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
@@ -49,10 +70,20 @@
                   Diver Proofing Reports
                 </h2>
                 <div id="diver-proofing-report-modal-description">
-                  <%= form_tag benthic_covers_path(format: "pdf"), class: "usa-form", method: "get" do %>
+                  <%= form_tag benthic_covers_path, class: "usa-form", method: "get" do %>
+                    <%= hidden_field_tag :format, "pdf" %>
+                    <%- Array(params[:region_ids]).each do |region_id| %>
+                      <%= hidden_field_tag :"region_ids[]", region_id %>
+                    <%- end %>
+                    <%- Array(params[:agency_ids]).each do |agency_id| %>
+                      <%= hidden_field_tag :"agency_ids[]", agency_id %>
+                    <%- end %>
+                    <%- Array(params[:project_ids]).each do |project_id| %>
+                      <%= hidden_field_tag :"project_ids[]", project_id %>
+                    <%- end %>
                     <%= hidden_field_tag :nocache, SecureRandom.alphanumeric %>
 
-                    <%= select_tag :diver_id, options_from_collection_for_select(current_diver.boatlog_manager.divers_responsible_for, :id, :diver_name), class: "usa-select usa-input--lg" %>
+                    <%= select_tag :diver_id, options_from_collection_for_select(@benthic_covers.map(&:diver).uniq.sort_by(&:diver_name), :id, :diver_name), class: "usa-select usa-input--lg" %>
 
                     <%= button_tag class: "usa-button" do %>
                       <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">

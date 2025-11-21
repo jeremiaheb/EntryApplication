@@ -1,0 +1,27 @@
+<%= form_for @region, html: { class: "usa-form maxw-full bg-base-lightest", autocomplete: "off" } do |f| %>
+  <%= render "shared/uswds_error_messages", target: @region %>
+
+  <div class="grid-row padding-1">
+    <div class="grid-col-12">
+      <div>
+        <%= f.label :name, "Name", class: "usa-label margin-top-0" %>
+        <%= f.text_field :name, class: "usa-input usa-input--xl", autofocus: true, autocomplete: "off" %>
+      </div>
+
+      <div>
+        <label class="usa-label">Valid Habitat Types</label>
+        <%= f.collection_check_boxes :habitat_type_ids, HabitatType.order(:habitat_name), :id, :habitat_name do |b|
+          tag.div class: "usa-checkbox" do
+            b.check_box(class: "usa-checkbox__input") + b.label(class: "usa-checkbox__label")
+          end
+        end
+        %>
+      </div>
+
+      <div>
+        <%= f.submit class: "usa-button" %>
+        <%= link_to "Cancel", regions_path, class: "usa-button usa-button--outline" %>
+      </div>
+    </div>
+  </div>
+<% end %>

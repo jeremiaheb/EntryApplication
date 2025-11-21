@@ -8,36 +8,36 @@ class CrosscheckReport
   # For a MissingEntry representing a sample, the related_model will be a boat log.
   # For a MissingEntry representing a boat log, the related_model will be a sample.
   class MissingEntry
-    attr_reader :diver, :boatlog_manager_id, :date, :field_id, :related_model
+    attr_reader :diver, :mission_id, :date, :field_id, :related_model
 
-    def initialize(diver, boatlog_manager_id, date, field_id, related_model)
+    def initialize(diver, mission_id, date, field_id, related_model)
       @diver = diver
-      @boatlog_manager_id = boatlog_manager_id
+      @mission_id = mission_id
       @date = date
       @field_id = field_id
       @related_model = related_model
     end
 
-    # eql? is true if the diver, boatlog manager ID, date and field ID match.
+    # eql? is true if the diver, mission ID, date and field ID match.
     # The related_model is NOT considered because it is used only to link a user
     # to the related model.
     def eql?(other)
       return false unless other.is_a?(MissingEntry)
 
       diver == other.diver &&
-        boatlog_manager_id == other.boatlog_manager_id &&
+        mission_id == other.mission_id &&
         date == other.date &&
         field_id == other.field_id
     end
     alias == eql?
 
     def hash
-      [diver, boatlog_manager_id, date, field_id].hash
+      [diver, mission_id, date, field_id].hash
     end
   end
 
-  def initialize(boatlog_managers)
-    @boatlog_managers = boatlog_managers
+  def initialize(missions)
+    @missions = missions
   end
 
   def missing_samples_from_diver
@@ -55,7 +55,7 @@ class CrosscheckReport
     return @all_samples_as_missing_entries if defined?(@all_samples_as_missing_entries)
 
     @all_samples_as_missing_entries = (samples + benthic_covers + coral_demographics).map { |sample|
-      MissingEntry.new(sample.diver, sample.boatlog_manager_id, sample.sample_date, sample.field_id, sample)
+      MissingEntry.new(sample.diver, sample.mission_id, sample.sample_date, sample.field_id, sample)
     }.sort_by(&:date)
   end
 
@@ -64,23 +64,23 @@ class CrosscheckReport
     return @all_boat_log_replicates_as_missing_entries if defined?(@all_boat_log_replicates_as_missing_entries)
 
     @all_boat_log_replicates_as_missing_entries = boat_log_replicates.map { |rep_log|
-      MissingEntry.new(rep_log.diver, rep_log.station_log.boat_log.boatlog_manager_id, rep_log.station_log.boat_log.date, rep_log.field_id, rep_log.station_log.boat_log)
+      MissingEntry.new(rep_log.diver, rep_log.station_log.boat_log.mission_id, rep_log.station_log.boat_log.date, rep_log.field_id, rep_log.station_log.boat_log)
     }.sort_by(&:date)
   end
 
   def boat_log_replicates
-    RepLog.joins(station_log: :boat_log).where("boat_logs.boatlog_manager_id": @boatlog_managers).includes({ station_log: :boat_log }, :diver)
+    RepLog.joins(station_log: :boat_log).where("boat_logs.mission_id": @missions).includes({ station_log: :boat_log }, :diver)
   end
 
   def samples
-    Sample.where(boatlog_manager_id: @boatlog_managers).includes(:diver)
+    Sample.where(mission_id: @missions).includes(:diver)
   end
 
   def benthic_covers
-    BenthicCover.where(boatlog_manager_id: @boatlog_managers).includes(:diver)
+    BenthicCover.where(mission_id: @missions).includes(:diver)
   end
 
   def coral_demographics
-    CoralDemographic.where(boatlog_manager_id: @boatlog_managers).includes(:diver)
+    CoralDemographic.where(mission_id: @missions).includes(:diver)
   end
 end

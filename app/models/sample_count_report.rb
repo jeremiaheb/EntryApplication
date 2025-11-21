@@ -1,10 +1,10 @@
-# SampleCountReport creates a matrix of sample counts per diver that a boatlog
+# SampleCountReport creates a matrix of sample counts per diver that a mission
 # manager is responsible for.
 #
 # It is used to populate a table on the manager dashboard.
 class SampleCountReport
-  def initialize(boatlog_managers)
-    @boatlog_managers = boatlog_managers
+  def initialize(missions)
+    @missions = missions
   end
 
   def counts_by_diver
@@ -42,18 +42,18 @@ class SampleCountReport
   private
 
   def boat_log_replicates
-    RepLog.joins(station_log: :boat_log).where("boat_logs.boatlog_manager_id": @boatlog_managers).includes({ station_log: :boat_log }, :diver)
+    RepLog.joins(station_log: :boat_log).where("boat_logs.mission_id": @missions).includes({ station_log: :boat_log }, :diver)
   end
 
   def samples
-    Sample.where(boatlog_manager_id: @boatlog_managers).includes(:diver)
+    Sample.where(mission_id: @missions).includes(:diver)
   end
 
   def benthic_covers
-    BenthicCover.where(boatlog_manager_id: @boatlog_managers).includes(:diver)
+    BenthicCover.where(mission_id: @missions).includes(:diver)
   end
 
   def coral_demographics
-    CoralDemographic.where(boatlog_manager_id: @boatlog_managers).includes(:diver)
+    CoralDemographic.where(mission_id: @missions).includes(:diver)
   end
 end

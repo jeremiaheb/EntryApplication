@@ -6,9 +6,22 @@ class CoralDemographicsController < ApplicationController
 
   # GET /coral_demographics
   def index
+    @coral_demographics = @coral_demographics.joins(:mission).includes(:diver, :region, :agency, :project)
+
+    # Apply filters
+    @filters = {
+      "mission.region_id": Array(params[:region_ids]).map(&:to_i),
+      "mission.agency_id": Array(params[:agency_ids]).map(&:to_i),
+      "mission.project_id": Array(params[:project_ids]).map(&:to_i),
+    }.reject { |_, v| v.empty? }
+    @unfiltered_coral_demographics = @coral_demographics
+    @coral_demographics = @coral_demographics.where(@filters)
+
     respond_to do |format|
       format.html # index.html.erb
       format.xlsx do
+        @coral_demographics = @coral_demographics.includes(:buddy, :habitat_type, demographic_corals: :coral)
+
         # Prevent caching
         no_store
       end
@@ -17,10 +30,11 @@ class CoralDemographicsController < ApplicationController
         no_store
 
         diver = Diver.find(params[:diver_id].presence || current_diver.id)
-        coral_demographics = diver.coral_demographics.
-          includes(:boatlog_manager, :habitat_type, demographic_corals: :coral).
+        @coral_demographics = @coral_demographics.
+          where(diver: diver).
+          includes(:buddy, :habitat_type, demographic_corals: :coral).
           order(:sample_date, :sample_begin_time)
-        pdf = CoralDemographicPdf.new(coral_demographics)
+        pdf = CoralDemographicPdf.new(@coral_demographics)
 
         send_data pdf.render, filename: "#{diver.diver_name}_CoralDemographicsReport.pdf",
           type: "application/pdf"

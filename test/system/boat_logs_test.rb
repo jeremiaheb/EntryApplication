@@ -2,8 +2,8 @@ require "application_system_test_case"
 
 class BoatLogsTest < ApplicationSystemTestCase
   test "new boat log" do
-    boatlog_manager = FactoryBot.create(:boatlog_manager)
-    manager_diver = FactoryBot.create(:diver, role: "manager", boatlog_manager: boatlog_manager)
+    mission = FactoryBot.create(:mission)
+    manager_diver = FactoryBot.create(:diver, missions_managed: [mission])
     fish_diver1 = FactoryBot.create(:diver)
     fish_diver2 = FactoryBot.create(:diver)
     demo_diver1 = FactoryBot.create(:diver)
@@ -15,7 +15,8 @@ class BoatLogsTest < ApplicationSystemTestCase
     find(".boat-logs-link").click
     find(".new-boat-log-button").click
 
-    find("select#boat_log_boatlog_manager_id").select(boatlog_manager.agency_name)
+    find("select#boat_log_region_id").select(mission.region.name)
+    find("select#boat_log_mission_id").select(mission.display_name)
     find("input#boat_log_primary_sample_unit").fill_in(with: "4000")
 
     all("input[id$='stn_number']").first.fill_in(with: "1")
@@ -51,7 +52,7 @@ class BoatLogsTest < ApplicationSystemTestCase
     assert_equal 1, BoatLog.count
 
     boat_log = BoatLog.first
-    assert_equal boatlog_manager, boat_log.boatlog_manager
+    assert_equal mission, boat_log.mission
     assert_equal "4000", boat_log.primary_sample_unit
 
     assert_equal 1, boat_log.station_logs.count

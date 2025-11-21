@@ -1,6 +1,29 @@
 <%= render "shared/nav_breadcrumbs", object: [["Boat Logs", ""]] %>
 
 <div class="grid-row">
+  <div class="grid-col-12 border border-dashed padding-1">
+    <%= form_tag boat_logs_path, class: "usa-form maxw-full", method: "get" do %>
+      <div>
+        <span class="usa-legend width-full usa-input--xl text-bold margin-top-0 margin-right-neg-1 display-inline-block">Regions</span>
+        <span class="usa-legend width-full usa-input--xl text-bold margin-top-0 margin-right-neg-1 display-inline-block">Agencies</span>
+        <span class="usa-legend width-full usa-input--xl text-bold margin-top-0 margin-right-neg-1 display-inline-block">Projects</span>
+      </div>
+
+      <div>
+        <%= select_tag :region_ids, options_from_collection_for_select(@unfiltered_boat_logs.map(&:region).uniq.sort_by(&:name), :id, :name, Array(@filters[:"mission.region_id"]) + @boat_logs.distinct.pluck(:"mission.region_id")), class: "usa-input--xl width-full display-inline-block", multiple: true %>
+        <%= select_tag :agency_ids, options_from_collection_for_select(@unfiltered_boat_logs.map(&:agency).uniq.sort_by(&:name), :id, :name, Array(@filters[:"mission.agency_id"]) + @boat_logs.distinct.pluck(:"mission.agency_id")), class: "usa-input--xl width-full display-inline-block", multiple: true %>
+        <%= select_tag :project_ids, options_from_collection_for_select(@unfiltered_boat_logs.map(&:project).uniq.sort_by(&:name), :id, :name, Array(@filters[:"mission.project_id"]) + @boat_logs.distinct.pluck(:"mission.project_id")), class: "usa-input--xl width-full display-inline-block", multiple: true %>
+      </div>
+
+      <div>
+        <%= submit_tag "Update Filters", class: "usa-button margin-top-1 display-inline-block" %>
+        <%= link_to "Reset Filters", request.path, class: "usa-button usa-button--outline margin-top-1 display-inline-block" %>
+      </div>
+    <%- end %>
+  </div>
+</div>
+
+<div class="grid-row">
   <div class="grid-col-12">
     <ul class="usa-button-group margin-bottom-1">
       <li class="usa-button-group__item">
@@ -12,7 +35,7 @@
         <%- end %>
       </li>
       <li class="usa-button-group__item">
-        <%= link_to boat_logs_path(format: "xlsx", nocache: SecureRandom.alphanumeric), class: "usa-button usa-button--accent-cool" do %>
+        <%= link_to boat_logs_path(format: "xlsx", region_ids: params[:region_ids], agency_ids: params[:agency_ids], project_ids: params[:project_ids], nocache: SecureRandom.alphanumeric), class: "usa-button usa-button--accent-cool" do %>
           <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
             <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#file_download") %>
           </svg> 

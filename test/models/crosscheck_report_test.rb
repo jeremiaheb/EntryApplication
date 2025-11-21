@@ -5,8 +5,8 @@ class CrosscheckReportTest < ActiveSupport::TestCase
     diver1 = FactoryBot.create(:diver)
     diver2 = FactoryBot.create(:diver)
 
-    boatlog_manager = FactoryBot.create(:boatlog_manager)
-    boat_log = FactoryBot.create(:boat_log, date: "2025-05-06", boatlog_manager: boatlog_manager, primary_sample_unit: "1234")
+    mission = FactoryBot.create(:mission)
+    boat_log = FactoryBot.create(:boat_log, date: "2025-05-06", mission: mission, primary_sample_unit: "1234")
     station_log = FactoryBot.create(:station_log, stn_number: "1", boat_log: boat_log)
     rep_logA = FactoryBot.create(:rep_log, station_log: station_log, diver: diver1, replicate: "A")
     rep_logB = FactoryBot.create(:rep_log, station_log: station_log, diver: diver2, replicate: "B")
@@ -14,13 +14,13 @@ class CrosscheckReportTest < ActiveSupport::TestCase
     rep_logX = FactoryBot.create(:rep_log, station_log: station_log, diver: diver2, replicate: "X")
 
     sample_animalA = FactoryBot.create(:sample_animal, sample: nil)
-    sampleA = FactoryBot.create(:sample, sample_date: "2025-05-06", field_id: "12341A", boatlog_manager: boatlog_manager, diver: diver1, buddy: diver2, sample_animals: [sample_animalA])
+    sampleA = FactoryBot.create(:sample, sample_date: "2025-05-06", field_id: "12341A", mission: mission, diver: diver1, buddy: diver2, sample_animals: [sample_animalA])
     sample_animalB = FactoryBot.create(:sample_animal, sample: nil)
-    sampleB = FactoryBot.create(:sample, sample_date: "2025-05-06", field_id: "12341B", boatlog_manager: boatlog_manager, diver: diver2, buddy: diver1, sample_animals: [sample_animalB])
-    benthic_coverI = FactoryBot.create(:benthic_cover, sample_date: "2025-05-06", field_id: "12341I", boatlog_manager: boatlog_manager, diver: diver1, buddy: diver2)
-    coral_demoX = FactoryBot.create(:coral_demographic, sample_date: "2025-05-06", field_id: "12341X", boatlog_manager: boatlog_manager, diver: diver2, buddy: diver1)
+    sampleB = FactoryBot.create(:sample, sample_date: "2025-05-06", field_id: "12341B", mission: mission, diver: diver2, buddy: diver1, sample_animals: [sample_animalB])
+    benthic_coverI = FactoryBot.create(:benthic_cover, sample_date: "2025-05-06", field_id: "12341I", mission: mission, diver: diver1, buddy: diver2)
+    coral_demoX = FactoryBot.create(:coral_demographic, sample_date: "2025-05-06", field_id: "12341X", mission: mission, diver: diver2, buddy: diver1)
 
-    report = CrosscheckReport.new([boatlog_manager])
+    report = CrosscheckReport.new([mission])
     assert_equal [], report.missing_samples_from_diver
     assert_equal [], report.missing_samples_from_boat_log
   end
@@ -29,16 +29,16 @@ class CrosscheckReportTest < ActiveSupport::TestCase
     diver1 = FactoryBot.create(:diver)
     diver2 = FactoryBot.create(:diver)
 
-    boatlog_manager = FactoryBot.create(:boatlog_manager)
+    mission = FactoryBot.create(:mission)
 
     sample_animalA = FactoryBot.create(:sample_animal, sample: nil)
-    sampleA = FactoryBot.create(:sample, sample_date: "2025-05-06", field_id: "12341A", boatlog_manager: boatlog_manager, diver: diver1, buddy: diver2, sample_animals: [sample_animalA])
+    sampleA = FactoryBot.create(:sample, sample_date: "2025-05-06", field_id: "12341A", mission: mission, diver: diver1, buddy: diver2, sample_animals: [sample_animalA])
     sample_animalB = FactoryBot.create(:sample_animal, sample: nil)
-    sampleB = FactoryBot.create(:sample, sample_date: "2025-05-06", field_id: "12341B", boatlog_manager: boatlog_manager, diver: diver2, buddy: diver1, sample_animals: [sample_animalB])
-    benthic_coverI = FactoryBot.create(:benthic_cover, sample_date: "2025-05-06", field_id: "12341I", boatlog_manager: boatlog_manager, diver: diver1, buddy: diver2)
-    coral_demoX = FactoryBot.create(:coral_demographic, sample_date: "2025-05-06", field_id: "12341X", boatlog_manager: boatlog_manager, diver: diver2, buddy: diver1)
+    sampleB = FactoryBot.create(:sample, sample_date: "2025-05-06", field_id: "12341B", mission: mission, diver: diver2, buddy: diver1, sample_animals: [sample_animalB])
+    benthic_coverI = FactoryBot.create(:benthic_cover, sample_date: "2025-05-06", field_id: "12341I", mission: mission, diver: diver1, buddy: diver2)
+    coral_demoX = FactoryBot.create(:coral_demographic, sample_date: "2025-05-06", field_id: "12341X", mission: mission, diver: diver2, buddy: diver1)
 
-    report = CrosscheckReport.new([boatlog_manager])
+    report = CrosscheckReport.new([mission])
     assert_equal 0, report.missing_samples_from_diver.length
     assert_equal 4, report.missing_samples_from_boat_log.length
   end
@@ -47,15 +47,15 @@ class CrosscheckReportTest < ActiveSupport::TestCase
     diver1 = FactoryBot.create(:diver)
     diver2 = FactoryBot.create(:diver)
 
-    boatlog_manager = FactoryBot.create(:boatlog_manager)
-    boat_log = FactoryBot.create(:boat_log, date: "2025-05-06", boatlog_manager: boatlog_manager, primary_sample_unit: "1234")
+    mission = FactoryBot.create(:mission)
+    boat_log = FactoryBot.create(:boat_log, date: "2025-05-06", mission: mission, primary_sample_unit: "1234")
     station_log = FactoryBot.create(:station_log, stn_number: "1", boat_log: boat_log)
     rep_logA = FactoryBot.create(:rep_log, station_log: station_log, diver: diver1, replicate: "A")
     rep_logB = FactoryBot.create(:rep_log, station_log: station_log, diver: diver2, replicate: "B")
     rep_logI = FactoryBot.create(:rep_log, station_log: station_log, diver: diver1, replicate: "I")
     rep_logX = FactoryBot.create(:rep_log, station_log: station_log, diver: diver2, replicate: "X")
 
-    report = CrosscheckReport.new([boatlog_manager])
+    report = CrosscheckReport.new([mission])
     assert_equal 4, report.missing_samples_from_diver.length
     assert_equal 0, report.missing_samples_from_boat_log.length
   end
@@ -64,17 +64,17 @@ class CrosscheckReportTest < ActiveSupport::TestCase
     diver1 = FactoryBot.create(:diver)
     diver2 = FactoryBot.create(:diver)
 
-    boatlog_manager = FactoryBot.create(:boatlog_manager)
-    boat_log = FactoryBot.create(:boat_log, date: "2025-05-06", boatlog_manager: boatlog_manager, primary_sample_unit: "1234")
+    mission = FactoryBot.create(:mission)
+    boat_log = FactoryBot.create(:boat_log, date: "2025-05-06", mission: mission, primary_sample_unit: "1234")
     station_log = FactoryBot.create(:station_log, stn_number: "1", boat_log: boat_log)
     rep_logA = FactoryBot.create(:rep_log, station_log: station_log, diver: diver1, replicate: "A")
 
     # Sample would otherwise match up, but the date is wrong relative to the
     # boat log.
     sample_animalA = FactoryBot.create(:sample_animal, sample: nil)
-    sampleA = FactoryBot.create(:sample, sample_date: "2025-05-07", field_id: "12341A", boatlog_manager: boatlog_manager, diver: diver1, buddy: diver2, sample_animals: [sample_animalA])
+    sampleA = FactoryBot.create(:sample, sample_date: "2025-05-07", field_id: "12341A", mission: mission, diver: diver1, buddy: diver2, sample_animals: [sample_animalA])
 
-    report = CrosscheckReport.new([boatlog_manager])
+    report = CrosscheckReport.new([mission])
     assert_equal 1, report.missing_samples_from_diver.length
     assert_equal boat_log, report.missing_samples_from_diver[0].related_model
     assert_equal 1, report.missing_samples_from_boat_log.length
@@ -85,18 +85,18 @@ class CrosscheckReportTest < ActiveSupport::TestCase
     # Sometimes a diver will log a sample under the incorrect boatlog manager
     diver1 = FactoryBot.create(:diver)
     diver2 = FactoryBot.create(:diver)
-    boatlog_manager1 = FactoryBot.create(:boatlog_manager)
-    boatlog_manager2 = FactoryBot.create(:boatlog_manager)
+    mission1 = FactoryBot.create(:mission)
+    mission2 = FactoryBot.create(:mission)
 
-    boat_log = FactoryBot.create(:boat_log, date: "2025-05-06", boatlog_manager: boatlog_manager1, primary_sample_unit: "1234")
+    boat_log = FactoryBot.create(:boat_log, date: "2025-05-06", mission: mission1, primary_sample_unit: "1234")
     station_log = FactoryBot.create(:station_log, stn_number: "1", boat_log: boat_log)
     rep_logA = FactoryBot.create(:rep_log, station_log: station_log, diver: diver1, replicate: "A")
 
     # Sample would otherwise match up, but the boatlog manager is incorrect
     sample_animalA = FactoryBot.create(:sample_animal, sample: nil)
-    sampleA = FactoryBot.create(:sample, sample_date: "2025-05-06", field_id: "12341A", boatlog_manager: boatlog_manager2, diver: diver1, buddy: diver2, sample_animals: [sample_animalA])
+    sampleA = FactoryBot.create(:sample, sample_date: "2025-05-06", field_id: "12341A", mission: mission2, diver: diver1, buddy: diver2, sample_animals: [sample_animalA])
 
-    report = CrosscheckReport.new([boatlog_manager1, boatlog_manager2])
+    report = CrosscheckReport.new([mission1, mission2])
     assert_equal 1, report.missing_samples_from_diver.length
     assert_equal boat_log, report.missing_samples_from_diver[0].related_model
     assert_equal 1, report.missing_samples_from_boat_log.length

@@ -5,18 +5,18 @@ class SampleCountReportTest < ActiveSupport::TestCase
     diver1 = FactoryBot.create(:diver)
     diver2 = FactoryBot.create(:diver)
 
-    boatlog_manager = FactoryBot.create(:boatlog_manager)
-    boat_log = FactoryBot.create(:boat_log, boatlog_manager: boatlog_manager)
+    mission = FactoryBot.create(:mission)
+    boat_log = FactoryBot.create(:boat_log, mission: mission)
     station_log = FactoryBot.create(:station_log, boat_log: boat_log)
     rep_log1 = FactoryBot.create(:rep_log, station_log: station_log, diver: diver1, replicate: "A")
     rep_log2 = FactoryBot.create(:rep_log, station_log: station_log, diver: diver2, replicate: "B")
 
     sample_animal = FactoryBot.create(:sample_animal, sample: nil)
-    sample = FactoryBot.create(:sample, boatlog_manager: boatlog_manager, diver: diver1, buddy: diver2, sample_animals: [sample_animal])
-    benthic_cover = FactoryBot.create(:benthic_cover, boatlog_manager: boatlog_manager, diver: diver2, buddy: diver1)
-    coral_demo = FactoryBot.create(:coral_demographic, boatlog_manager: boatlog_manager, diver: diver1, buddy: diver2)
+    sample = FactoryBot.create(:sample, mission: mission, diver: diver1, buddy: diver2, sample_animals: [sample_animal])
+    benthic_cover = FactoryBot.create(:benthic_cover, mission: mission, diver: diver2, buddy: diver1)
+    coral_demo = FactoryBot.create(:coral_demographic, mission: mission, diver: diver1, buddy: diver2)
 
-    report = SampleCountReport.new([boatlog_manager])
+    report = SampleCountReport.new([mission])
     assert_equal({
       diver1 => { "boat" => 1, "sample" => 1, "lpi" => 0, "demo" => 1 },
       diver2 => { "boat" => 1, "sample" => 0, "lpi" => 1, "demo" => 0 },

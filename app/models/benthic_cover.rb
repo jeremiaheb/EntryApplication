@@ -8,9 +8,14 @@ class BenthicCover < ApplicationRecord
   belongs_to :diver
   belongs_to :buddy, class_name: "Diver"
   belongs_to :habitat_type
-  belongs_to :boatlog_manager
+  belongs_to :boatlog_manager, optional: true # TODO: Remove boatlog_manager relation
 
-  has_one    :invert_belt, dependent: :destroy
+  belongs_to :mission, optional: true # TODO: Remove optional
+  has_one :region, through: :mission
+  has_one :agency, through: :mission
+  has_one :project, through: :mission
+
+  has_one :invert_belt, dependent: :destroy
   accepts_nested_attributes_for :invert_belt, allow_destroy: true
   has_one :presence_belt, dependent: :destroy
   accepts_nested_attributes_for :presence_belt, allow_destroy: true
@@ -18,7 +23,7 @@ class BenthicCover < ApplicationRecord
   accepts_nested_attributes_for     :rugosity_measure, allow_destroy: true
 
 
-  validates :boatlog_manager_id,    presence: true
+  validates :mission_id,            presence: true
   validates :diver_id,              presence: true
   validates :buddy_id,              presence: true
   validates :sample_date,           presence: true

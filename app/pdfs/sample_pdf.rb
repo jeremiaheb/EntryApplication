@@ -25,7 +25,7 @@ class SamplePdf < Prawn::Document
 
   def sample_head
     data =  [[],
-            ["Diver", "#{@sample.diver.diver_name}", "Date", "#{@sample.sample_date}", "Field Number", "#{@sample.field_id}", "Boatlog/Manger:", "#{@sample.boatlog_manager.agency_name}"],
+            ["Diver", "#{@sample.diver.diver_name}", "Date", "#{@sample.sample_date}", "Field Number", "#{@sample.field_id}", "Mission:", "#{@sample.mission.display_name(include_region: true)}"],
             ["Buddy", "#{@sample.buddy.diver_name}", "Sample Start", "#{@sample.sample_begin_time.strftime("%H:%M")}", "Habitat", "#{@sample.habitat_type.habitat_name}", "Visibility", "#{@sample.underwater_visibility}"],
             ["Dive Start", @sample.dive_begin_time.strftime("%H:%M"), "Sample End", "#{@sample.sample_end_time.strftime("%H:%M")}", "Fish Gear", "#{@sample.fishing_gear}", "Water Temp", "#{@sample.water_temp}"],
             ["Dive End", @sample.dive_end_time.strftime("%H:%M"), "Max Depth", "#{@sample.dive_depth}", "Stn Depth", "#{@sample.sample_depth}", "Current", "#{@sample.current}"],

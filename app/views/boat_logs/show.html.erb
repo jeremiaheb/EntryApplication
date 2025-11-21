@@ -5,23 +5,23 @@
 </div>
 
 <div class="grid-row maxw-full bg-base-lightest">
-  <div class="grid-col-5 padding-1">
+  <div class="grid-col-6 padding-1">
     <div class="margin-1">
-      <span class="width-card margin-right-1 text-bold display-inline-block">Boatlog/Manager</span>
-      <span class="width-card-lg display-inline-block"><%= @boat_log.boatlog_manager&.agency_name %></span>
+      <span class="width-card margin-right-1 text-bold display-inline-block">Mission</span>
+      <span class="width-mobile display-inline-block"><%= @boat_log.mission&.display_name(include_region: true) %></span>
     </div>
 
     <div class="margin-1">
       <span class="width-card margin-right-1 text-bold display-inline-block">Sample Date</span>
-      <span class="width-card-lg display-inline-block"><%= @boat_log.date %></span>
+      <span class="width-mobile display-inline-block"><%= @boat_log.date %></span>
     </div>
 
     <div class="margin-1">
       <span class="width-card margin-right-1 text-bold display-inline-block">PSU</span>
-      <span class="width-card-lg display-inline-block"><%= @boat_log.primary_sample_unit %></span>
+      <span class="width-mobile display-inline-block"><%= @boat_log.primary_sample_unit %></span>
     </div>
   </div>
-  <div class="grid-col-5 padding-1">
+  <div class="grid-col-6 padding-1">
     <div class="margin-1">
       <table class="usa-table maxw-full margin-top-0">
         <thead>
@@ -31,7 +31,7 @@
           </tr>
         </thead>
         <tbody>
-          <%- @boat_log.rep_logs.includes(:diver).each do |rep_log| %>
+          <%- @boat_log.rep_logs.includes(:station_log, :diver).each do |rep_log| %>
             <tr>
               <td class="text-bold"><%= rep_log.diver&.diver_name %></td>
               <td><%= rep_log.field_id %></td>

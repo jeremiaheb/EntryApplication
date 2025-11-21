@@ -220,7 +220,7 @@ $(function () {
     },
 
     rules: {
-      "sample[boatlog_manager_id]": {
+      "sample[mission_id]": {
         required: true,
       },
       "sample[sample_date]": {

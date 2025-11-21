@@ -6,13 +6,19 @@ class Sample < ApplicationRecord
 
   belongs_to :sample_type
   belongs_to :habitat_type
-  belongs_to :boatlog_manager
+  belongs_to :boatlog_manager, optional: true # TODO: Remove boatlog_manager relation
+
+  belongs_to :mission, optional: true # TODO: Remove optional
+  has_one :region, through: :mission
+  has_one :agency, through: :mission
+  has_one :project, through: :mission
 
   has_many :sample_animals, dependent: :destroy
   validates_presence_of :sample_animals, message: "you must have at leat one species record (can be NO FISH)"
   has_many :animals, through: :sample_animals
   accepts_nested_attributes_for :sample_animals, reject_if: lambda {  |a| a[:animal_id].blank? }, allow_destroy: true
 
+  validates :mission_id,                  presence: true
   # validates :sample_date,                 :presence => true
   validates :sample_type_id,              presence: true
   validates :habitat_type_id,             presence: true

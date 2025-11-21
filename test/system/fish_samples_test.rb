@@ -2,11 +2,11 @@ require "application_system_test_case"
 
 class FishSamplesTest < ApplicationSystemTestCase
   test "automatically saving drafts" do
-    boatlog_manager = FactoryBot.create(:boatlog_manager)
+    mission = FactoryBot.create(:mission)
     diver = FactoryBot.create(:diver)
     buddy = FactoryBot.create(:diver)
     sample_type = FactoryBot.create(:sample_type)
-    habitat_type = FactoryBot.create(:habitat_type, region: "Caribbean")
+    habitat_type = FactoryBot.create(:habitat_type, regions: [mission.region])
     draft_count_before = Draft.count
 
     visit root_url
@@ -16,7 +16,7 @@ class FishSamplesTest < ApplicationSystemTestCase
 
     # Samples, Sample Section
     fill_in_sample_section(
-      boatlog_manager: boatlog_manager,
+      mission: mission,
       diver: diver,
       buddy: buddy,
       sample_type: sample_type,
@@ -35,7 +35,8 @@ class FishSamplesTest < ApplicationSystemTestCase
     assert_selector ".draft-present-alert", text: /Data was restored/
 
     # Assert that field values were restored
-    assert_css "select#sample_boatlog_manager_id", text: boatlog_manager.agency_name
+    assert_css "select#sample_region_id", text: mission.region.name
+    assert_css "select#sample_mission_id", text: mission.display_name
     assert_css "select#sample_diver_id", text: diver.diver_name
     assert_css "select#sample_buddy_id", text: buddy.diver_name
     assert_css "select#sample_sample_type_id", text: sample_type.sample_type_name
@@ -45,13 +46,13 @@ class FishSamplesTest < ApplicationSystemTestCase
   end
 
   test "automatically saving drafts (editing an existing sample)" do
-    boatlog_manager = FactoryBot.create(:boatlog_manager)
+    mission = FactoryBot.create(:mission)
     diver = FactoryBot.create(:diver)
     buddy = FactoryBot.create(:diver)
     sample_type = FactoryBot.create(:sample_type)
-    habitat_type = FactoryBot.create(:habitat_type, region: "Caribbean")
+    habitat_type = FactoryBot.create(:habitat_type, regions: [mission.region])
     sample_animal = FactoryBot.create(:sample_animal, sample: nil, time_seen: 1)
-    sample = FactoryBot.create(:sample, diver: diver, buddy: buddy, sample_type: sample_type, habitat_type: habitat_type, sample_animals: [sample_animal])
+    sample = FactoryBot.create(:sample, mission: mission, diver: diver, buddy: buddy, sample_type: sample_type, habitat_type: habitat_type, sample_animals: [sample_animal])
     draft_count_before = Draft.count
 
     visit root_url
@@ -79,11 +80,11 @@ class FishSamplesTest < ApplicationSystemTestCase
   end
 
   test "new fish sample" do
-    boatlog_manager = FactoryBot.create(:boatlog_manager)
+    mission = FactoryBot.create(:mission)
     diver = FactoryBot.create(:diver)
     buddy = FactoryBot.create(:diver)
     sample_type = FactoryBot.create(:sample_type)
-    habitat_type = FactoryBot.create(:habitat_type, region: "Caribbean")
+    habitat_type = FactoryBot.create(:habitat_type, regions: [mission.region])
     animal1 = FactoryBot.create(:animal, common_name: "Fish 1")
     animal2 = FactoryBot.create(:animal, common_name: "Fish 2")
 
@@ -94,7 +95,7 @@ class FishSamplesTest < ApplicationSystemTestCase
 
     # Samples, Sample Section
     fill_in_sample_section(
-      boatlog_manager: boatlog_manager,
+      mission: mission,
       diver: diver,
       buddy: buddy,
       sample_type: sample_type,
@@ -124,15 +125,16 @@ class FishSamplesTest < ApplicationSystemTestCase
     assert_equal 1, Sample.count
 
     sample = Sample.first
+    assert_equal mission, sample.mission
     assert_equal [animal1, animal2].sort, sample.animals.sort
   end
 
   test "new fish sample (adding and removing species to simulate correcting mistakes while inputting)" do
-    boatlog_manager = FactoryBot.create(:boatlog_manager)
+    mission = FactoryBot.create(:mission)
     diver = FactoryBot.create(:diver)
     buddy = FactoryBot.create(:diver)
     sample_type = FactoryBot.create(:sample_type)
-    habitat_type = FactoryBot.create(:habitat_type, region: "Caribbean")
+    habitat_type = FactoryBot.create(:habitat_type, regions: [mission.region])
     animal1 = FactoryBot.create(:animal, common_name: "Fish 1")
     animal2 = FactoryBot.create(:animal, common_name: "Fish 2")
 
@@ -143,7 +145,7 @@ class FishSamplesTest < ApplicationSystemTestCase
 
     # Samples, Sample Section
     fill_in_sample_section(
-      boatlog_manager: boatlog_manager,
+      mission: mission,
       diver: diver,
       buddy: buddy,
       sample_type: sample_type,
@@ -201,16 +203,16 @@ class FishSamplesTest < ApplicationSystemTestCase
   end
 
   test "editing existing fish sample (adding and removing species to simulate correcting mistakes while inputting)" do
-    boatlog_manager = FactoryBot.create(:boatlog_manager)
+    mission = FactoryBot.create(:mission)
     diver = FactoryBot.create(:diver)
     buddy = FactoryBot.create(:diver)
     sample_type = FactoryBot.create(:sample_type)
-    habitat_type = FactoryBot.create(:habitat_type, region: "Caribbean")
+    habitat_type = FactoryBot.create(:habitat_type, regions: [mission.region])
     animal1 = FactoryBot.create(:animal, common_name: "Fish 1")
     sample_animal1 = FactoryBot.create(:sample_animal, sample: nil, animal: animal1, time_seen: 1)
     animal2 = FactoryBot.create(:animal, common_name: "Fish 2")
     sample_animal2 = FactoryBot.create(:sample_animal, sample: nil, animal: animal2, time_seen: 1)
-    sample = FactoryBot.create(:sample, boatlog_manager: boatlog_manager, diver: diver, buddy: buddy, sample_type: sample_type, habitat_type: habitat_type, sample_animals: [sample_animal1, sample_animal2])
+    sample = FactoryBot.create(:sample, mission: mission, diver: diver, buddy: buddy, sample_type: sample_type, habitat_type: habitat_type, sample_animals: [sample_animal1, sample_animal2])
 
     visit root_url
     find(".samples-link").click
@@ -259,8 +261,9 @@ class FishSamplesTest < ApplicationSystemTestCase
 
   private
 
-  def fill_in_sample_section(boatlog_manager:, diver:, buddy:, sample_type:, habitat_type:)
-    find("select#sample_boatlog_manager_id").select(boatlog_manager.agency_name)
+  def fill_in_sample_section(mission:, diver:, buddy:, sample_type:, habitat_type:)
+    find("select#sample_region_id").select(mission.region.name)
+    find("select#sample_mission_id").select(mission.display_name)
     find("select#sample_diver_id").select(diver.diver_name)
     find("select#sample_buddy_id").select(buddy.diver_name)
     find("select#sample_sample_type_id").select(sample_type.sample_type_name)

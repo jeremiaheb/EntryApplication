@@ -28,9 +28,8 @@ class ApplicationController < ActionController::Base
   # yet confirmed their email address.
   def after_sign_in_path_for(diver)
     unless diver.email_confirmed?
-      flash.delete(:notice)
-      flash[:alert] = "You must update or confirm your work email address and change your password before continuing."
-      return edit_diver_registration_path
+      flash.clear
+      return edit_diver_registration_path(with_confirmation_messages: true)
     end
 
     super

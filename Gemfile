@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "rails", "7.2.2.2"
+gem "rails", "8.0.4"
 
 # PostgreSQL. pg 1.6 removed support for PostgreSQL < 10. The server must be
 # upgraded before upgrading to pg >= 1.6.

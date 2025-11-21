@@ -38,13 +38,7 @@ To setup the application, within a `vagrant ssh` session, run:
 bin/setup
 ```
 
-Once `bin/setup` completes, start the server by running:
-
-```bash
-bin/dev
-```
-
-Once `bin/dev` is running, the application will be available at <http://localhost:3000>
+Once `bin/setup` is running, the application will be available at <http://localhost:3000>
 
 To start a Rails console, within a new `vagrant ssh` session, run:
 

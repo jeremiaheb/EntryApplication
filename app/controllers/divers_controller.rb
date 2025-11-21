@@ -56,11 +56,14 @@ class DiversController < ApplicationController
 
   def diver_params
     allowed_keys = [
-      :active, :diver_number, :diver_name, :username, :password, :password_confirmation, :email, :current_password, :boatlog_manager_id,
+      :active, :diver_number, :diver_name, :username, :password, :password_confirmation, :email, :agency, :current_password, :boatlog_manager_id,
     ]
 
     allowed_keys << :role if current_diver.admin?
 
-    params.require(:diver).permit(*allowed_keys)
+    params.require(:diver).permit(*allowed_keys).tap do |params|
+      params.delete(:password) if params[:password].blank?
+      params.delete(:password_confirmation) if params[:password_confirmation].blank?
+    end
   end
 end

@@ -4,7 +4,9 @@ FactoryBot.define do
     sequence(:diver_name) { |n| "Random Diver#{n}" }
     sequence(:username) { |n| "diver#{n}" }
     sequence(:email) { |n| "diver#{n}@example.com" }
+    email_confirmed { true }
     sequence(:password) { |n| "password#{n}" }
+    agency { "NOAA" }
     role { "diver" }
     active { true }
   end

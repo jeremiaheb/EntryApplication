@@ -16,6 +16,7 @@
 
       <%= f.label :email, class: "usa-label" %>
       <%= f.email_field :email, class: "usa-input usa-input--xl", autofocus: true, autocomplete: "email", required: true %>
+      <%= hidden_field_tag "diver[email_confirmed]", true %>
 
       <%= f.label :password, "New password (leave blank to leave it unchanged)", class: "usa-label" %>
       <%= f.password_field :password, class: "usa-input usa-input--lg", autocomplete: "new-password", minlength: @minimum_password_length %>

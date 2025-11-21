@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_11_19_200330) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_21_180035) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension "pg_catalog.plpgsql"
 
   create_table "agencies", force: :cascade do |t|
     t.string "name", null: false
@@ -150,6 +150,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_19_200330) do
     t.string "lastname"
     t.string "role", default: "diver", null: false
     t.integer "boatlog_manager_id"
+    t.boolean "email_confirmed", default: false, null: false
     t.index ["boatlog_manager_id"], name: "index_divers_on_boatlog_manager_id", unique: true
   end
 

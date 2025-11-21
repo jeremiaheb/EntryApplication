@@ -42,7 +42,14 @@ class CoralDemographicPdf < Prawn::Document
  def species_data_30
    table spp_1_30,
     cell_style: { size: 8, height: 17, align: :center, padding: 2 },
-    column_widths: { 0 => 10, 1 => 60, 2 => 100, 3 => 30, 4 => 30, 5 => 30, 6 => 30 }
+    column_widths: { 0 => 10, 1 => 60, 2 => 100, 3 => 30, 4 => 30, 5 => 30, 6 => 30 } do
+      cells.style do |cell|
+        # Highlight bleaching other than "none"
+        cell.background_color = "f2938c" if cell.row > 0 && cell.column == 5 && cell.content.downcase != "n"
+        # Highlight disease other than "absent"
+        cell.background_color = "f2938c" if cell.row > 0 && cell.column == 6 && cell.content.downcase != "absent"
+      end
+    end
  end
 
  def spp_1_30

@@ -238,7 +238,7 @@ GEM
       logger
       rack (>= 2.2.3)
       rack-protection
-    omniauth-rails_csrf_protection (1.0.2)
+    omniauth-rails_csrf_protection (2.0.0)
       actionpack (>= 4.2)
       omniauth (~> 2.0)
     omniauth_openid_connect (0.8.0)
@@ -431,7 +431,7 @@ GEM
       unicode-emoji (~> 4.1)
     unicode-emoji (4.1.0)
     uniform_notifier (1.18.0)
-    uri (1.0.4)
+    uri (1.1.1)
     useragent (0.16.11)
     validate_url (1.0.15)
       activemodel (>= 3.0.0)
@@ -479,7 +479,7 @@ DEPENDENCIES
   jquery-ui-rails (~> 8.0)
   nested_form (= 0.3.2)
   omniauth (~> 2.1)
-  omniauth-rails_csrf_protection (~> 1.0, >= 1.0.2)
+  omniauth-rails_csrf_protection (~> 2.0)
   omniauth_openid_connect (~> 0.8.0)
   pg (~> 1.5, < 1.6)
   prawn (~> 2.5)

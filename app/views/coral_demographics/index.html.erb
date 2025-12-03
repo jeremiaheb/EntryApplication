@@ -70,8 +70,7 @@
                   Diver Proofing Reports
                 </h2>
                 <div id="diver-proofing-report-modal-description">
-                  <%= form_tag coral_demographics_path, class: "usa-form", method: "get" do %>
-                    <%= hidden_field_tag :format, "pdf" %>
+                  <%= form_tag coral_demographics_path(format: "pdf"), class: "usa-form", method: "get" do %>
                     <%- Array(params[:region_ids]).each do |region_id| %>
                       <%= hidden_field_tag :"region_ids[]", region_id %>
                     <%- end %>

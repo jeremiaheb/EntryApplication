@@ -37,7 +37,7 @@ gem "bootsnap", require: false
 group :development, :test do
   # Factories and fake data for testing
   gem "factory_bot_rails", "~> 6.5"
-  gem "faker", "~> 3.5", ">= 3.5.2"
+  gem "faker", "~> 3.5"
 
   gem "pry"
 

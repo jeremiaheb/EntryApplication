@@ -1,5 +1,27 @@
 <%= render "shared/nav_breadcrumbs", object: [["Edit Profile", ""]] %>
 
+<%- if params[:with_confirmation_messages] %>
+<div class="grid-row">
+  <div class="grid-col-12">
+    <div class="usa-alert usa-alert--error usa-alert--slim margin-top-1">
+      <div class="usa-alert__body">
+        <p class="usa-alert__text">You must update or confirm your work email address.</p>
+      </div>
+    </div>
+    <div class="usa-alert usa-alert--error usa-alert--slim margin-top-1">
+      <div class="usa-alert__body">
+        <p class="usa-alert__text">You must change your password before continuing (at least 8 characters, and cannot be your username or email).</p>
+      </div>
+    </div>
+    <div class="usa-alert usa-alert--error usa-alert--slim margin-top-1">
+      <div class="usa-alert__body">
+        <p class="usa-alert__text">You must update or confirm your agency (e.g., NOAA, NPS, FWC, UVI, TNC).</p>
+      </div>
+    </div>
+  </div>
+</div>
+<%- end %>
+
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "usa-form maxw-full bg-base-lightest" }) do |f| %>
   <%= render "shared/uswds_error_messages", target: resource %>
 
@@ -16,6 +38,10 @@
 
       <%= f.label :email, class: "usa-label" %>
       <%= f.email_field :email, class: "usa-input usa-input--xl", autofocus: true, autocomplete: "email", required: true %>
+      <%= hidden_field_tag "diver[email_confirmed]", true %>
+
+      <%= f.label :agency, class: "usa-label" %>
+      <%= f.text_field :agency, class: "usa-input usa-input--md", required: true %>
 
       <%= f.label :password, "New password (leave blank to leave it unchanged)", class: "usa-label" %>
       <%= f.password_field :password, class: "usa-input usa-input--lg", autocomplete: "new-password", minlength: @minimum_password_length %>

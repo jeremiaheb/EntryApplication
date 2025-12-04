@@ -22,8 +22,11 @@ class Diver < ApplicationRecord
 
   validates   :diver_number, presence: true
   validates   :diver_name, presence: true
+  validates   :agency, presence: true
   validates   :username, uniqueness: { case_sensitive: false, allow_blank: true }
   validates   :email, uniqueness: { case_sensitive: false }
+  validate    :current_password_is_not_username, unless: -> { password.present? }
+  validate    :password_is_not_username, if: -> { password.present? }
   validates   :boatlog_manager_id, uniqueness: true, allow_nil: true
 
   scope       :active_divers,      lambda { where(active: true) }
@@ -67,5 +70,17 @@ class Diver < ApplicationRecord
 
   def login=(login)
     # login cannot be set directly
+  end
+
+  def current_password_is_not_username
+    if valid_password?(username)
+      errors.add(:password, "must not be the same as username")
+    end
+  end
+
+  def password_is_not_username
+    if username.downcase == password.downcase || diver_name.downcase == password.downcase || email.downcase == password.downcase
+      errors.add(:password, "must not be the same as username, diver name or email")
+    end
   end
 end

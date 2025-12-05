@@ -254,6 +254,12 @@
         name: apache2
       become: true
 
+    - name: Allow Apache traffic through firewall
+      community.general.ufw:
+        rule: "allow"
+        app: "Apache Full"
+      become: true
+
     - name: Disable default apache2 index page
       ansible.builtin.file:
         path: "/var/www/html/index.html"

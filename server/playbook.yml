@@ -75,6 +75,12 @@
         state: started
       become: true
 
+    - name: Allow SSH traffic through firewall
+      community.general.ufw:
+        rule: "allow"
+        app: "OpenSSH"
+      become: true
+
     - name: Set hostname for non-cloud instances
       ansible.builtin.hostname:
         name: entryapplication.nmfs.noaa.gov

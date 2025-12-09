@@ -5,6 +5,9 @@ class BenthicCover < ApplicationRecord
   has_many :cover_cats, through: :point_intercepts
   accepts_nested_attributes_for :point_intercepts, allow_destroy: true
 
+  has_many :tally_marks, dependent: :destroy
+  accepts_nested_attributes_for :tally_marks
+
   belongs_to :diver
   belongs_to :buddy, class_name: "Diver"
   belongs_to :habitat_type
@@ -34,8 +37,15 @@ class BenthicCover < ApplicationRecord
   validates :meters_completed,      presence: true
   validates :sample_description,    length: { maximum: 150 }
 
-
   def msn_prefix
     "X"
+  end
+
+  def build_all_tally_marks
+    existing_tally_marks_by_meter_mark = Hash[tally_marks.map { |tm| [tm.meter_mark, tm] }]
+
+    BigDecimal("0.15").step(by: BigDecimal("0.15"), to: BigDecimal("15.00")).each do |meter_mark|
+      tally_marks.build(meter_mark: meter_mark) unless existing_tally_marks_by_meter_mark.key?(meter_mark)
+    end
   end
 end

@@ -3,6 +3,8 @@
 //= require jquery-timepicker/jquery.timepicker
 //= require datatables.net-dt/css/dataTables.dataTables
 //= require jquery-ui
+//= require jspreadsheet-ce/dist/jspreadsheet
+//= require jsuites/dist/jsuites
 //= require_self
 
 .habitat-type-select {
@@ -115,4 +117,9 @@
 }
 .ui-widget-content {
   color: unset;
+}
+
+// Tweaks to jspreadsheet-ce
+.jss_worksheet > tbody > tr > td.readonly {
+  color: inherit;
 }

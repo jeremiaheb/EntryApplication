@@ -25,6 +25,9 @@
 //= require plotly.js-dist-min/plotly.min.js
 //= require jquery-ui/widgets/sortable
 //= require jquery-ui/widgets/tabs
+//= require jquery-ui/widgets/dialog
+//= require jspreadsheet-ce/dist/index
+//= require jsuites/dist/jsuites
 //
 //= require ./jquery_extensions
 //= require ./validations

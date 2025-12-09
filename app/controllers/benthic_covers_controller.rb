@@ -60,6 +60,8 @@ class BenthicCoversController < ApplicationController
         b.build_rugosity_measure
       end
     end
+
+    @benthic_cover.build_all_tally_marks
   end
 
   # GET /benthic_covers/1/edit
@@ -68,6 +70,8 @@ class BenthicCoversController < ApplicationController
     if @draft
       @draft.assign_attributes_to(@benthic_cover)
     end
+
+    @benthic_cover.build_all_tally_marks
   end
 
   # POST /benthic_covers
@@ -76,6 +80,7 @@ class BenthicCoversController < ApplicationController
       Draft.destroy_for(diver_id: current_diver.id, model_klass: BenthicCover, model_id: nil)
       redirect_to benthic_covers_path, notice: "Benthic cover was successfully created."
     else
+      @benthic_cover.build_all_tally_marks
       render action: "new"
     end
   end
@@ -86,6 +91,7 @@ class BenthicCoversController < ApplicationController
       Draft.destroy_for(diver_id: current_diver.id, model_klass: BenthicCover, model_id: @benthic_cover.id)
       redirect_to benthic_covers_path, notice: "Benthic cover was successfully updated."
     else
+      @benthic_cover.build_all_tally_marks
       render action: "edit"
     end
   end
@@ -134,6 +140,7 @@ class BenthicCoversController < ApplicationController
                                                                       :meter_mark_7, :meter_mark_8, :meter_mark_9, :meter_mark_10, :meter_mark_11,
                                                                       :meter_mark_12, :meter_mark_13, :meter_mark_14, :meter_mark_15,],
                                          invert_belt_attributes: [:id, "_destroy", :lobster_num, :conch_num, :diadema_num],
-                                         presence_belt_attributes: [:id, "_destroy", :a_cervicornis, :a_palmata, :d_cylindrus, :m_annularis, :m_faveolata, :m_franksi, :m_ferox])
+                                         presence_belt_attributes: [:id, "_destroy", :a_cervicornis, :a_palmata, :d_cylindrus, :m_annularis, :m_faveolata, :m_franksi, :m_ferox],
+                                         tally_marks_attributes: [:id, :meter_mark, :cover_cat_id, :habitat])
   end
 end

@@ -3,7 +3,7 @@ require "csv"
 namespace :import do
   # rake import:all
   desc "Import corals and cover categories from db/SupportData"
-  task all: [:corals, :cover_cats]
+  task all: [:corals, :cover_cats, :animals]
 
   # rake import:corals FILE=db/SupportData/CoralSpecies_July2025.csv
   desc "Import corals from a CSV"

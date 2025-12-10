@@ -36,6 +36,7 @@ namespace :import do
       cover_cat.common = row["CommonName"]
       cover_cat.proofing_code = row["Proofing Code"]
       cover_cat.rank = row["Rank"]
+      cover_cat.short_code = row["Short Code"]
 
       if cover_cat.save
         STDOUT.puts "Imported cover cat '#{cover_cat.code}'"

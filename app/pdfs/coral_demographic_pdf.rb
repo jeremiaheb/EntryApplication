@@ -42,13 +42,13 @@ class CoralDemographicPdf < Prawn::Document
  def species_data_30
    table spp_1_30,
     cell_style: { size: 8, height: 17, align: :center, padding: 2 },
-    column_widths: { 0 => 10, 1 => 60, 2 => 100, 3 => 30, 4 => 30, 5 => 30, 6 => 30 }
+    column_widths: { 0 => 10, 1 => 60, 2 => 70, 3 => 30, 4 => 30, 5 => 30, 6 => 30, 7 => 30 }
  end
 
  def spp_1_30
-  [["M", "Species", "MD      PD      MH", "OM%", "RM%", "Blch", "Dis"]] +
+  [["M", "Species", "MD - PD - MH", "OM%", "RM%", "Blch", "Dis", "Rest"]] +
   @coral_demographic.demographic_corals[0..29].map.with_index do |spp, index|
-    [spp.meter_mark, spp.coral.try(:code), "%s  -  %s  -  %s" % [spp.try(:max_diameter), spp.try(:perpendicular_diameter), spp.try(:height)], spp.old_mortality, spp.recent_mortality, spp.bleach_condition, spp.disease]
+    [spp.meter_mark, spp.coral.try(:code), "%s - %s - %s" % [spp.try(:max_diameter), spp.try(:perpendicular_diameter), spp.try(:height)], spp.old_mortality, spp.recent_mortality, spp.bleach_condition, spp.disease_short, spp.restored_short]
   end
  end
 
@@ -57,27 +57,27 @@ class CoralDemographicPdf < Prawn::Document
    indent(290) do
      table spp_31_60,
        cell_style: { size: 8, height: 17, align: :center, padding: 2 },
-       column_widths: { 0 => 10, 1 => 60, 2 => 100, 3 => 30, 4 => 30, 5 => 30, 6 => 30 }
+       column_widths: { 0 => 10, 1 => 60, 2 => 70, 3 => 30, 4 => 30, 5 => 30, 6 => 30, 7 => 30 }
    end
  end
 
  def spp_31_60
-  [["M", "Species", "MD      PD      MH", "OM%", "RM%", "Blch", "Dis"]] +
+  [["M", "Species", "MD - PD - MH", "OM%", "RM%", "Blch", "Dis", "Rest"]] +
     @coral_demographic.demographic_corals[30..59].map.with_index do |spp, index|
-    [spp.meter_mark, spp.coral.try(:code), "%s  -  %s  -  %s" % [spp.try(:max_diameter), spp.try(:perpendicular_diameter), spp.try(:height)], spp.old_mortality, spp.recent_mortality, spp.bleach_condition, spp.disease]
+    [spp.meter_mark, spp.coral.try(:code), "%s - %s - %s" % [spp.try(:max_diameter), spp.try(:perpendicular_diameter), spp.try(:height)], spp.old_mortality, spp.recent_mortality, spp.bleach_condition, spp.disease_short, spp.restored_short]
   end
  end
 
  def species_data_90
    table spp_61_90,
     cell_style: { size: 8, height: 17, align: :center, padding: 2 },
-    column_widths: { 0 => 10, 1 => 60, 2 => 100, 3 => 30, 4 => 30, 5 => 30, 6 => 30 }
+    column_widths: { 0 => 10, 1 => 60, 2 => 70, 3 => 30, 4 => 30, 5 => 30, 6 => 30, 7 => 30 }
  end
 
  def spp_61_90
-  [["M", "Species", "MD      PD      MH", "OM%", "RM%", "Blch", "Dis"]] +
+  [["M", "Species", "MD - PD - MH", "OM%", "RM%", "Blch", "Dis", "Rest"]] +
   @coral_demographic.demographic_corals[60..89].map.with_index do |spp, index|
-    [spp.meter_mark, spp.coral.try(:code), "%s  -  %s  -  %s" % [spp.try(:max_diameter), spp.try(:perpendicular_diameter), spp.try(:height)], spp.old_mortality, spp.recent_mortality, spp.bleach_condition, spp.disease]
+    [spp.meter_mark, spp.coral.try(:code), "%s - %s - %s" % [spp.try(:max_diameter), spp.try(:perpendicular_diameter), spp.try(:height)], spp.old_mortality, spp.recent_mortality, spp.bleach_condition, spp.disease_short, spp.restored_short]
   end
  end
 
@@ -86,14 +86,14 @@ class CoralDemographicPdf < Prawn::Document
    indent(290) do
    table spp_91_120,
     cell_style: { size: 8, height: 17, align: :center, padding: 2 },
-    column_widths: { 0 => 10, 1 => 60, 2 => 100, 3 => 30, 4 => 30, 5 => 30, 6 => 30 }
+    column_widths: { 0 => 10, 1 => 60, 2 => 70, 3 => 30, 4 => 30, 5 => 30, 6 => 30, 7 => 30 }
   end
  end
 
  def spp_91_120
-  [["M", "Species", "MD      PD      MH", "OM%", "RM%", "Blch", "Dis"]] +
+  [["M", "Species", "MD - PD - MH", "OM%", "RM%", "Blch", "Dis", "Rest"]] +
   @coral_demographic.demographic_corals[90..119].map.with_index do |spp, index|
-    [spp.meter_mark, spp.coral.try(:code), "%s  -  %s  -  %s" % [spp.try(:max_diameter), spp.try(:perpendicular_diameter), spp.try(:height)], spp.old_mortality, spp.recent_mortality, spp.bleach_condition, spp.disease]
+    [spp.meter_mark, spp.coral.try(:code), "%s - %s - %s" % [spp.try(:max_diameter), spp.try(:perpendicular_diameter), spp.try(:height)], spp.old_mortality, spp.recent_mortality, spp.bleach_condition, spp.disease_short, spp.restored_short]
   end
  end
 end

@@ -80,6 +80,7 @@
       <span class="width-full usa-input--xs text-bold font-body-2xs display-inline-block">Recent Mortality</span>
       <span class="width-full usa-input--md text-bold font-body-2xs display-inline-block">Bleached</span>
       <span class="width-full usa-input--sm text-bold font-body-2xs display-inline-block">Disease</span>
+      <span class="width-full usa-input--sm text-bold font-body-2xs display-inline-block">Restored</span>
     </div>
   </div>
   <div class="grid-row flex-row margin-top-0">
@@ -96,6 +97,7 @@
             <%= ff.text_field :recent_mortality, class: "recent-mortality-field usa-input usa-input--xs font-body-2xs padding-05 height-auto display-inline-block" %>
             <%= ff.select :bleach_condition, { "None" => "N", "Partial Bleaching" => "PB", "Total" => "T", "Paling" => "P" }, { include_blank: false, selected: ff.object.bleach_condition || "N" }, class: "bleach-condition-field usa-select usa-input--md font-body-2xs padding-05 height-auto display-inline-block" %>
             <%= ff.select :disease, { "Absent" => "absent", "Present" => "present", "Fast" => "fast", "Slow" => "slow" }, { include_blank: false, selected: ff.object.disease || "absent" }, class: "disease-field usa-select usa-input--sm font-body-2xs padding-05 height-auto display-inline-block" %>
+            <%= ff.select :restored, { "Not Restored" => "not_restored", "Restored/Outplanted" => "restored", "Unknown" => "unknown" }, { include_blank: true, selected: (ff.object.new_record? ? "not_restored" : ff.object.restored) }, class: "restored-field usa-select usa-input--sm font-body-2xs padding-05 height-auto display-inline-block" %>
             <%= ff.link_to_remove tabindex: "-1", class: "font-body-xs" do %>
               <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
                 <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#remove_circle") %>

@@ -152,6 +152,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_10_172708) do
     t.string "lastname"
     t.string "role", default: "diver", null: false
     t.integer "boatlog_manager_id"
+    t.boolean "email_confirmed", default: false, null: false
+    t.string "agency"
     t.index ["boatlog_manager_id"], name: "index_divers_on_boatlog_manager_id", unique: true
   end
 

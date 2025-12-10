@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_12_10_125346) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_10_172708) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -107,6 +107,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_10_125346) do
     t.string "common"
     t.string "proofing_code", null: false
     t.integer "rank", default: 2147483647, null: false
+    t.string "short_code"
   end
 
   create_table "demographic_corals", force: :cascade do |t|

@@ -146,6 +146,15 @@ $(function () {
     dropdown: false,
   });
 
+  $("#coral_demographic_meters_completed").on("focusout", function (e) {
+    let $this = $(this);
+    let meters = Number($this.val());
+
+    if (meters != 10) {
+      alert("Caution: Please explain in the notes why a value other than 10 was entered");
+    }
+  });
+
   $(".demo_corals").find(".coralSpecies").select2();
   $(".coral-demographic-form").on("nested:fieldAdded", function (event) {
     event.field.find(".coralSpecies").select2();

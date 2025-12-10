@@ -151,7 +151,9 @@ $(function () {
     let meters = Number($this.val());
 
     if (meters != 10) {
-      alert("Caution: Please explain in the notes why a value other than 10 was entered");
+      alert(
+        "Caution: Please explain in the notes why a value other than 10 was entered",
+      );
     }
   });
 

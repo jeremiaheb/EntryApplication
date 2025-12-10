@@ -368,7 +368,7 @@
           <ol id="animals" class="margin-top-0 padding-left-3">
             <%= f.fields_for :sample_animals do |ff| %>
               <li>
-                <%= ff.select :animal_id, Animal.order(:species_code).map { |a| [a.spp_code_common, a.id] }, { include_blank: true }, class: "sppCommon width-full maxw-card-lg height-auto font-body-3xs display-inline-block" %>
+                <%= ff.select :animal_id, Animal.order(:rank, :species_code).map { |a| [a.spp_code_common, a.id, {data: { rank: a.rank }}] }, { include_blank: true }, class: "sppCommon width-full maxw-card-lg height-auto font-body-3xs display-inline-block" %>
                 <%= ff.text_field :number_individuals, class: "usa-input usa-input--xs font-body-2xs padding-05 height-auto display-inline-block timeSeen_#{ff.object.time_seen} number-individuals valCheck" %>
                 <%= ff.text_field :average_length, class: "usa-input usa-input--xs font-body-2xs padding-05 height-auto display-inline-block timeSeen_#{ff.object.time_seen} average-length valCheck" %>
                 <%= ff.text_field :min_length, class: "usa-input usa-input--xs font-body-2xs padding-05 height-auto display-inline-block timeSeen_#{ff.object.time_seen} min-length valCheck" %>

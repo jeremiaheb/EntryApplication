@@ -75,6 +75,12 @@
         state: started
       become: true
 
+    - name: Allow SSH traffic through firewall
+      community.general.ufw:
+        rule: "allow"
+        app: "OpenSSH"
+      become: true
+
     - name: Set hostname for non-cloud instances
       ansible.builtin.hostname:
         name: entryapplication.nmfs.noaa.gov
@@ -252,6 +258,12 @@
     - name: Install apache2 server
       ansible.builtin.package:
         name: apache2
+      become: true
+
+    - name: Allow Apache traffic through firewall
+      community.general.ufw:
+        rule: "allow"
+        app: "Apache Full"
       become: true
 
     - name: Disable default apache2 index page

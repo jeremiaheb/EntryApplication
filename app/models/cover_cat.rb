@@ -7,6 +7,6 @@ class CoverCat < ApplicationRecord
   validates :proofing_code, presence: true
 
   def display_name
-    [self.code, self.proofing_code].join(" __ ")
+    [self.short_code, self.code, self.proofing_code].join(" __ ")
   end
 end

@@ -8,6 +8,8 @@ namespace :db do
     stdout_s, stderr_s, status = Open3.capture3(
       { "PGPASSWORD" => connection_config["password"] },
       "pg_dump",
+      "--clean",
+      "--if-exists",
       "--encoding=#{connection_config["encoding"]}",
       "--host=#{connection_config["host"]}",
       "--username=#{connection_config["username"]}",
@@ -45,6 +47,7 @@ namespace :db do
       { "PGPASSWORD" => connection_config["password"] },
       "pg_restore",
       "--clean",
+      "--if-exists",
       "--no-owner",
       "--no-privileges",
       "--host=#{connection_config["host"]}",

@@ -187,15 +187,15 @@
 
           <%= f.fields_for :invert_belt do |ff| %>
             <div>
-              <%= ff.label :lobster_num, "P. argus", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.label :lobster_num, "Carib. Spiny Lobster", class: "usa-label display-inline-block margin-top-1 width-card" %>
               <%= ff.text_field :lobster_num, class: "usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
             </div>
             <div>
-              <%= ff.label :conch_num, "S. gigus", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.label :conch_num, "Queen Conch", class: "usa-label display-inline-block margin-top-1 width-card" %>
               <%= ff.text_field :conch_num, class: "usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
             </div>
             <div>
-              <%= ff.label :diadema_num, "D. antillarum", class: "usa-label display-inline-block margin-top-1 width-15" %>
+              <%= ff.label :diadema_num, "Long-Spined Sea Urchin", class: "usa-label display-inline-block margin-top-1 width-card" %>
               <%= ff.text_field :diadema_num, class: "usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
             </div>
           <%- end %>

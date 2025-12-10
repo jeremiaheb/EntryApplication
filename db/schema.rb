@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_11_19_200330) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_10_125346) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension "pg_catalog.plpgsql"
 
   create_table "agencies", force: :cascade do |t|
     t.string "name", null: false
@@ -30,6 +30,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_19_200330) do
     t.integer "max_number"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
+    t.integer "rank", default: 2147483647, null: false
   end
 
   create_table "benthic_covers", force: :cascade do |t|
@@ -349,6 +350,15 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_19_200330) do
     t.index ["buddy_id"], name: "index_samples_on_buddy_id"
     t.index ["diver_id"], name: "index_samples_on_diver_id"
     t.index ["mission_id"], name: "index_samples_on_mission_id"
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.string "session_id", null: false
+    t.text "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
+    t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
   create_table "solid_errors", force: :cascade do |t|

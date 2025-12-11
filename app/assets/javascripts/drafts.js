@@ -115,6 +115,8 @@ $(function () {
     $form.on(
       "draft:pending",
       _.once(function (e) {
+        $(".draft-saved-alert").show();
+
         window.addEventListener("beforeunload", warnBeforeUnload);
         saveDraftInterval = setInterval(function () {
           saveDraftThrottled(e);

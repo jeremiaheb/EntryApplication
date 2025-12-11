@@ -13,3 +13,11 @@
     </div>
   </div>
 <%- end %>
+
+<%= tag.div class: "usa-alert usa-alert--error usa-alert--slim margin-y-1 alert draft-saved-alert", style: (@draft.present? ? "" : "display: none") do %>
+  <div class="usa-alert__body">
+    <p class="usa-alert__text">
+      Please fully save the record when you are finished. A draft is only temporary.
+    </p>
+  </div>
+<%- end %>

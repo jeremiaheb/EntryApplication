@@ -35,7 +35,7 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "storage", "
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-set :assets_prefix, "caribbean_data_entry/assets"
+set :assets_prefix, "ncrmp_data_entry/assets"
 
 # Forward agent for git over SSH
 set :ssh_options, forward_agent: true
@@ -56,22 +56,6 @@ namespace :deploy do
       end
     end
   end
-
-  namespace :assets do
-    desc "Link new_assets_prefix if present"
-    task :link_new_assets_prefix do
-      on roles(:web) do |host|
-        if host.fetch(:new_assets_prefix)
-          old_assets_path = release_path.join("public", fetch(:assets_prefix))
-          new_assets_path = release_path.join("public", host.fetch(:new_assets_prefix))
-
-          execute :mkdir, "-p", File.dirname(new_assets_path)
-          execute :ln, "-s", old_assets_path, new_assets_path
-        end
-      end
-    end
-  end
-  after "deploy:updated", "deploy:assets:link_new_assets_prefix"
 
   namespace :yarn do
     desc "Install JavaScript packages"

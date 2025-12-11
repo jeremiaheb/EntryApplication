@@ -100,3 +100,11 @@ span.error {
     }
   }
 }
+
+// Do not draw an online around jspreadsheet-ce tables
+.jss_spreadsheet {
+  &[tabindex]:focus,
+  &[contentEditable="true"]:focus {
+    outline: 0px;
+  }
+}

@@ -388,5 +388,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_10_234000) do
     t.index ["boat_log_id"], name: "index_station_logs_on_boat_log_id"
   end
 
+  create_table "tally_marks", force: :cascade do |t|
+    t.decimal "meter_mark", precision: 7, scale: 2, null: false
+    t.integer "benthic_cover_id", null: false
+    t.integer "cover_cat_id"
+    t.string "habitat"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["benthic_cover_id", "meter_mark"], name: "index_tally_marks_on_benthic_cover_id_and_meter_mark", unique: true
+  end
+
   add_foreign_key "solid_errors_occurrences", "solid_errors", column: "error_id"
 end

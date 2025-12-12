@@ -5,6 +5,29 @@ namespace :import do
   desc "Import corals and cover categories from db/SupportData"
   task all: [:corals, :cover_cats, :animals]
 
+  # rake import:divers FILE=db/SupportData/NCRMP_DiverList_2025.csv
+  desc "Import divers from a CSV"
+  task divers: :environment do
+    file = ENV.fetch("FILE")
+    CSV.foreach(file, headers: true) do |row|
+      diver = Diver.find_or_initialize_by(diver_name: row["DIVER_NAME"])
+
+      diver.diver_number = row["DIVER_NUM"]
+      diver.username = row["username"]
+      diver.email = row["email"]
+      diver.password = (row["password"].presence || row["username"]) if diver.new_record?
+      diver.active = (row["active"].upcase == "TRUE")
+      diver.role = row["role"]
+
+      new_record = diver.new_record?
+      if diver.save(context: :import)
+        STDOUT.puts "Imported #{new_record ? "NEW " : ""}diver '#{diver.diver_name}'"
+      else
+        STDERR.puts "Saving diver '#{diver.diver_name}' failed: #{diver.errors.full_messages.join(", ")}"
+      end
+    end
+  end
+
   # rake import:corals FILE=db/SupportData/CoralSpecies_July2025.csv
   desc "Import corals from a CSV"
   task corals: :environment do
@@ -17,8 +40,9 @@ namespace :import do
       coral.short_code = row["Short Code"]
       coral.rank = row["Rank"]
 
+      new_record = coral.new_record?
       if coral.save
-        STDOUT.puts "Imported coral '#{coral.code}'"
+        STDOUT.puts "Imported #{new_record ? "NEW " : ""}coral '#{coral.code}'"
       else
         STDERR.puts "Saving coral '#{coral.code}' failed: #{coral.errors.full_messages.join(", ")}"
       end
@@ -38,8 +62,9 @@ namespace :import do
       cover_cat.rank = row["Rank"]
       cover_cat.short_code = row["Short Code"]
 
+      new_record = cover_cat.new_record?
       if cover_cat.save
-        STDOUT.puts "Imported cover cat '#{cover_cat.code}'"
+        STDOUT.puts "Imported #{new_record ? "NEW " : ""}cover cat '#{cover_cat.code}'"
       else
         STDERR.puts "Saving cover cat '#{cover_cat.code}' failed: #{cover_cat.errors.full_messages.join(", ")}"
       end
@@ -61,8 +86,9 @@ namespace :import do
       animal.max_number = row["max_num"]
       animal.rank = row["rank"]
 
+      new_record = animal.new_record?
       if animal.save
-        STDOUT.puts "Imported animal '#{animal.species_code}'"
+        STDOUT.puts "Imported #{new_record ? "NEW " : ""}animal '#{animal.species_code}'"
       else
         STDERR.puts "Saving animal '#{animal.species_code}' failed: #{animal.errors.full_messages.join(", ")}"
       end

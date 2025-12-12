@@ -22,11 +22,11 @@ class Diver < ApplicationRecord
 
   validates   :diver_number, presence: true
   validates   :diver_name, presence: true
-  validates   :agency, presence: true
+  validates   :agency, presence: true, except_on: :import
   validates   :username, uniqueness: { case_sensitive: false, allow_blank: true }
   validates   :email, uniqueness: { case_sensitive: false }
-  validate    :current_password_is_not_username, unless: -> { password.present? }
-  validate    :password_is_not_username, if: -> { password.present? }
+  validate    :current_password_is_not_username, except_on: :import, unless: -> { password.present? }
+  validate    :password_is_not_username, except_on: :import, if: -> { password.present? }
   validates   :boatlog_manager_id, uniqueness: true, allow_nil: true
 
   scope       :active_divers,      lambda { where(active: true) }

@@ -76,13 +76,13 @@
             </span>
           </legend>
 
-          <span class="usa-legend margin-top-1 margin-right-1 text-bold font-body-xs width-full usa-input--lg display-inline-block">Cover</span>
-          <span class="usa-legend margin-top-1 margin-right-1 text-bold font-body-xs width-full usa-input--xs display-inline-block">Hard</span>
-          <span class="usa-legend margin-top-1 margin-right-1 text-bold font-body-xs width-full usa-input--xs display-inline-block">Soft</span>
-          <span class="usa-legend margin-top-1 margin-right-1 text-bold font-body-xs width-full usa-input--xs display-inline-block">Rubble</span>
+          <span class="usa-legend margin-top-1 margin-right-0 text-bold font-body-xs width-full maxw-card-lg display-inline-block">Cover</span>
+          <span class="usa-legend margin-top-1 margin-right-05 text-bold font-body-xs width-full usa-input--xs display-inline-block">Hard</span>
+          <span class="usa-legend margin-top-1 margin-right-05 text-bold font-body-xs width-full usa-input--xs display-inline-block">Soft</span>
+          <span class="usa-legend margin-top-1 margin-right-05 text-bold font-body-xs width-full usa-input--xs display-inline-block">Rubble</span>
 
           <%= f.fields_for :point_intercepts do |ff| %>
-            <%= ff.select :cover_cat_id, CoverCat.order(:rank, :code).map { |cc| [cc.display_name, cc.id, { data: { rank: cc.rank }}] }, { include_blank: true }, class: "coverCategory width-full margin-top-1 height-auto usa-input--lg display-inline-block" %>
+            <%= ff.select :cover_cat_id, CoverCat.order(:rank, :code).map { |cc| [cc.display_name, cc.id, { data: { rank: cc.rank }}] }, { include_blank: true }, class: "coverCategory width-full maxw-card-lg margin-top-1 height-auto font-body-3xs display-inline-block" %>
             <%= ff.text_field :hardbottom_num, class: "coverPoints hardbottom-num-field usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
             <%= ff.text_field :softbottom_num, class: "coverPoints softbottom-num-field usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
             <%= ff.text_field :rubble_num, class: "coverPoints rubble-num-field usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>

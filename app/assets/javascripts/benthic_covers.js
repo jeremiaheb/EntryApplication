@@ -65,10 +65,53 @@ $(function () {
     tallyResultsWorksheets[0].setData(tallyData);
   };
 
+  const updateBenthicFormWithTally = function () {
+    let $tallyMarks = $("#tally-marks");
+    $tallyMarks.html(""); // clear
+
+    const rows = tallyInputWorksheets[0].getData(false, false, null, false);
+    for (let i = 0; i < rows.length; i++) {
+      const row = rows[i];
+
+      $tallyMarks.append(
+        $("<input>").attr({
+          type: "hidden",
+          name: "benthic_cover[tally_marks_attributes][" + i + "][id]",
+          value: row[0],
+        }),
+      );
+      $tallyMarks.append(
+        $("<input>").attr({
+          type: "hidden",
+          name: "benthic_cover[tally_marks_attributes][" + i + "][meter_mark]",
+          value: row[1],
+        }),
+      );
+      $tallyMarks.append(
+        $("<input>").attr({
+          type: "hidden",
+          name:
+            "benthic_cover[tally_marks_attributes][" + i + "][cover_cat_id]",
+          value: row[2],
+        }),
+      );
+      $tallyMarks.append(
+        $("<input>").attr({
+          type: "hidden",
+          name: "benthic_cover[tally_marks_attributes][" + i + "][habitat]",
+          value: row[3],
+        }),
+      );
+    }
+  };
+
   const $tallyInput = $("#tally-input");
   const tallyInputWorksheets = jspreadsheet($tallyInput[0], {
     onchange: function (worksheet, cell, x, y, value) {
       updateTallyResults();
+
+      updateBenthicFormWithTally();
+      $(".benthic-cover-form").trigger("draft:change");
     },
     // Instead of inserting a column, move to the first cell of the next row
     onbeforeinsertcolumn: function (e) {
@@ -138,46 +181,30 @@ $(function () {
       jspreadsheet.current = tallyInputWorksheets[0];
       tallyInputWorksheets[0].updateSelectionFromCoords(2, 0);
     },
-    close: function (event, ui) {
-      let $tallyMarks = $("#tally-marks");
-      $tallyMarks.html(""); // clear
+  });
 
-      const rows = tallyInputWorksheets[0].getData(false, false, null, false);
-      for (let i = 0; i < rows.length; i++) {
-        const row = rows[i];
+  const $tallyResultsCol = $("#tally-results-col");
+  const $tallyInputCol = $("#tally-input-col");
+  const showTallyInputCol = function () {
+    $tallyInputCol.show();
+    $tallyResultsCol.removeClass("grid-col-12").addClass("grid-col-6");
+    $tallyDialog.dialog("option", "width", 1000);
+    $(".tally-input-toggle-button span").text("Hide Tally Input");
+  };
+  const hideTallyInputCol = function () {
+    $tallyInputCol.hide();
+    $tallyResultsCol.removeClass("grid-col-6").addClass("grid-col-12");
+    $tallyDialog.dialog("option", "width", 500);
+    $(".tally-input-toggle-button span").text("Show Tally Input");
+  };
+  $(".tally-input-toggle-button").on("click", function (e) {
+    e.preventDefault();
 
-        $tallyMarks.append(
-          $("<input>").attr({
-            type: "hidden",
-            name: "benthic_cover[tally_marks_attributes][" + i + "][id]",
-            value: row[0],
-          }),
-        );
-        $tallyMarks.append(
-          $("<input>").attr({
-            type: "hidden",
-            name:
-              "benthic_cover[tally_marks_attributes][" + i + "][meter_mark]",
-            value: row[1],
-          }),
-        );
-        $tallyMarks.append(
-          $("<input>").attr({
-            type: "hidden",
-            name:
-              "benthic_cover[tally_marks_attributes][" + i + "][cover_cat_id]",
-            value: row[2],
-          }),
-        );
-        $tallyMarks.append(
-          $("<input>").attr({
-            type: "hidden",
-            name: "benthic_cover[tally_marks_attributes][" + i + "][habitat]",
-            value: row[3],
-          }),
-        );
-      }
-    },
+    if ($tallyInputCol.is(":hidden")) {
+      showTallyInputCol();
+    } else {
+      hideTallyInputCol();
+    }
   });
 
   $(".tally-modal-closer").on("click", function (e) {

@@ -262,23 +262,36 @@
 
   <div id="tally-modal" style="display: none">
     <div class="grid-row grid-gap-sm flex-row">
-      <div class="grid-col-6">
-        <div class="text-bold font-body-md margin-bottom-1">LPI Input</div>
-        <%= tag.div id: "tally-input", "data-tally-marks": @benthic_cover.tally_marks.sort_by(&:meter_mark).to_json, "data-cover-cats": CoverCat.order(:rank, :code).map { |cc| { name: cc.display_name, id: cc.id } }.to_json %>
-      </div>
-      <div class="grid-col-6">
+      <div id="tally-results-col" class="grid-col-6">
         <div class="position-sticky top-0">
           <div class="text-bold font-body-md margin-bottom-1">Tally</div>
           <%= tag.div id: "tally-results" %>
           <div class="margin-top-1">
-            <%= link_to "#tally-modal", class: "usa-button margin-top-0 tally-modal-closer" do %>
-              <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
-                <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#check") %>
-              </svg>
-              Save & Close
-            <%- end %>
+            <div>
+              <%= link_to "#tally-modal", class: "usa-button usa-button--accent-cool margin-top-0 tally-modal-closer" do %>
+                <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+                  <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#check") %>
+                </svg>
+                Close Tally Sheet
+              <%- end %>
+
+              <%= link_to "#", class: "usa-button usa-button--outline margin-top-0 tally-input-toggle-button" do %>
+                <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+                  <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#visibility") %>
+                </svg>
+
+                <span>Hide Tally Input</span>
+              <%- end %>
+            </div>
+            <div>
+              Please fully save the record when you are finished.
+            </div>
           </div>
         </div>
+      </div>
+      <div id="tally-input-col" class="grid-col-6">
+        <div class="text-bold font-body-md margin-bottom-1">LPI Input</div>
+        <%= tag.div id: "tally-input", "data-tally-marks": @benthic_cover.tally_marks.sort_by(&:meter_mark).to_json, "data-cover-cats": CoverCat.order(:rank, :code).map { |cc| { name: cc.display_name, id: cc.id } }.to_json %>
       </div>
     </div>
   </div>

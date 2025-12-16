@@ -66,15 +66,23 @@
               Cover Categories
             </span>
             <span class="coverTotal text-bold font-body-2xs margin-left-1 padding-1 radius-lg bg-base-lighter"></span>
+            <span>
+              <%= link_to "#tally-modal", class: "usa-button usa-button--outline margin-top-0 tally-modal-opener" do %>
+                <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+                  <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#launch") %>
+                </svg>
+                Open Tally Sheet
+              <%- end %>
+            </span>
           </legend>
 
-          <span class="usa-legend margin-top-1 margin-right-1 text-bold font-body-xs width-full usa-input--lg display-inline-block">Cover</span>
-          <span class="usa-legend margin-top-1 margin-right-1 text-bold font-body-xs width-full usa-input--xs display-inline-block">Hard</span>
-          <span class="usa-legend margin-top-1 margin-right-1 text-bold font-body-xs width-full usa-input--xs display-inline-block">Soft</span>
-          <span class="usa-legend margin-top-1 margin-right-1 text-bold font-body-xs width-full usa-input--xs display-inline-block">Rubble</span>
+          <span class="usa-legend margin-top-1 margin-right-0 text-bold font-body-xs width-full maxw-card-lg display-inline-block">Cover</span>
+          <span class="usa-legend margin-top-1 margin-right-05 text-bold font-body-xs width-full usa-input--xs display-inline-block">Hard</span>
+          <span class="usa-legend margin-top-1 margin-right-05 text-bold font-body-xs width-full usa-input--xs display-inline-block">Soft</span>
+          <span class="usa-legend margin-top-1 margin-right-05 text-bold font-body-xs width-full usa-input--xs display-inline-block">Rubble</span>
 
           <%= f.fields_for :point_intercepts do |ff| %>
-            <%= ff.select :cover_cat_id, CoverCat.order(:rank, :code).map { |cc| [cc.display_name, cc.id, { data: { rank: cc.rank }}] }, { include_blank: true }, class: "coverCategory width-full margin-top-1 height-auto usa-input--lg display-inline-block" %>
+            <%= ff.select :cover_cat_id, CoverCat.order(:rank, :code).map { |cc| [cc.display_name, cc.id, { data: { rank: cc.rank }}] }, { include_blank: true }, class: "coverCategory width-full maxw-card-lg margin-top-1 height-auto font-body-3xs display-inline-block" %>
             <%= ff.text_field :hardbottom_num, class: "coverPoints hardbottom-num-field usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
             <%= ff.text_field :softbottom_num, class: "coverPoints softbottom-num-field usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
             <%= ff.text_field :rubble_num, class: "coverPoints rubble-num-field usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
@@ -251,4 +259,44 @@
       </div>
     </div>
   </fieldset>
+
+  <div id="tally-modal" style="display: none">
+    <div class="grid-row grid-gap-sm flex-row">
+      <div id="tally-results-col" class="grid-col-6">
+        <div class="position-sticky top-0">
+          <div class="text-bold font-body-md margin-bottom-1">Tally</div>
+          <%= tag.div id: "tally-results" %>
+          <div class="margin-top-1">
+            <div>
+              <%= link_to "#tally-modal", class: "usa-button usa-button--accent-cool margin-top-0 tally-modal-closer" do %>
+                <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+                  <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#check") %>
+                </svg>
+                Close Tally Sheet
+              <%- end %>
+
+              <%= link_to "#", class: "usa-button usa-button--outline margin-top-0 tally-input-toggle-button" do %>
+                <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+                  <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#visibility") %>
+                </svg>
+
+                <span>Hide Tally Input</span>
+              <%- end %>
+            </div>
+            <div>
+              Please fully save the record when you are finished.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="tally-input-col" class="grid-col-6">
+        <div class="text-bold font-body-md margin-bottom-1">LPI Input</div>
+        <%= tag.div id: "tally-input", "data-tally-marks": @benthic_cover.tally_marks.sort_by(&:meter_mark).to_json, "data-cover-cats": CoverCat.order(:rank, :code).map { |cc| { name: cc.display_name, id: cc.id } }.to_json %>
+      </div>
+    </div>
+  </div>
+
+  <div id="tally-marks">
+    <%# benthic_cover.js updates this area with hidden fields so that tally marks are saved to the database %>
+  </div>
 <% end %>

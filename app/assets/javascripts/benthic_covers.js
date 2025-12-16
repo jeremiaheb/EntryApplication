@@ -3,6 +3,220 @@ $(function () {
     return;
   }
 
+  const $tallyResults = $("#tally-results");
+  const tallyResultsWorksheets = jspreadsheet($tallyResults[0], {
+    worksheets: [
+      {
+        allowComments: false,
+        allowInsertRow: false,
+        allowDeleteRow: false,
+        rowDrag: false,
+        rowResize: false,
+        allowInsertColumn: false,
+        allowDeleteColumn: false,
+        allowRenameColumn: false,
+        columnDrag: false,
+        columnResize: false,
+        columnSorting: false,
+        data: [],
+        columns: [
+          {
+            type: "text",
+            title: "Cover Category",
+            readOnly: true,
+            width: "250px",
+          },
+          { type: "text", title: "H", readOnly: true, width: "50px" },
+          { type: "text", title: "S", readOnly: true, width: "50px" },
+          { type: "text", title: "R", readOnly: true, width: "50px" },
+        ],
+      },
+    ],
+  });
+
+  const updateTallyResults = function () {
+    let tallyByCoverCat = new Map();
+    for (const row of tallyInputWorksheets[0].getData(false, true)) {
+      const coverCat = row[2];
+      const habitat = row[3];
+      if (coverCat === "" || habitat === "") {
+        continue;
+      }
+
+      let tally = tallyByCoverCat.get(coverCat);
+      if (!tally) {
+        tally = [0, 0, 0];
+        tallyByCoverCat.set(coverCat, tally);
+      }
+
+      if (habitat === "H") {
+        tally[0]++;
+      } else if (habitat === "S") {
+        tally[1]++;
+      } else if (habitat === "R") {
+        tally[2]++;
+      }
+    }
+
+    let tallyData = [];
+    for (const [coverCat, tally] of tallyByCoverCat) {
+      tallyData.push([coverCat, tally[0], tally[1], tally[2]]);
+    }
+    tallyResultsWorksheets[0].setData(tallyData);
+  };
+
+  const updateBenthicFormWithTally = function () {
+    let $tallyMarks = $("#tally-marks");
+    $tallyMarks.html(""); // clear
+
+    const rows = tallyInputWorksheets[0].getData(false, false, null, false);
+    for (let i = 0; i < rows.length; i++) {
+      const row = rows[i];
+
+      $tallyMarks.append(
+        $("<input>").attr({
+          type: "hidden",
+          name: "benthic_cover[tally_marks_attributes][" + i + "][id]",
+          value: row[0],
+        }),
+      );
+      $tallyMarks.append(
+        $("<input>").attr({
+          type: "hidden",
+          name: "benthic_cover[tally_marks_attributes][" + i + "][meter_mark]",
+          value: row[1],
+        }),
+      );
+      $tallyMarks.append(
+        $("<input>").attr({
+          type: "hidden",
+          name:
+            "benthic_cover[tally_marks_attributes][" + i + "][cover_cat_id]",
+          value: row[2],
+        }),
+      );
+      $tallyMarks.append(
+        $("<input>").attr({
+          type: "hidden",
+          name: "benthic_cover[tally_marks_attributes][" + i + "][habitat]",
+          value: row[3],
+        }),
+      );
+    }
+  };
+
+  const $tallyInput = $("#tally-input");
+  const tallyInputWorksheets = jspreadsheet($tallyInput[0], {
+    onchange: function (worksheet, cell, x, y, value) {
+      updateTallyResults();
+
+      updateBenthicFormWithTally();
+      $(".benthic-cover-form").trigger("draft:change");
+    },
+    // Instead of inserting a column, move to the first cell of the next row
+    onbeforeinsertcolumn: function (e) {
+      e.first();
+      e.down();
+      return false;
+    },
+    // Hide the first column (ID)
+    onload: function (spreadsheet) {
+      spreadsheet.worksheets[0].hideColumn(0);
+      updateTallyResults();
+    },
+    worksheets: [
+      {
+        allowComments: false,
+        allowInsertRow: false,
+        allowDeleteRow: false,
+        rowDrag: false,
+        rowResize: false,
+        allowInsertColumn: true, // see onbeforeinsertcolumn
+        allowDeleteColumn: false,
+        allowRenameColumn: false,
+        columnDrag: false,
+        columnResize: true,
+        columnSorting: false,
+        data: $tallyInput
+          .data("tally-marks")
+          .map((tallyMark) => [
+            tallyMark["id"],
+            tallyMark["meter_mark"],
+            tallyMark["cover_cat_id"],
+            tallyMark["habitat"],
+          ]),
+        columns: [
+          { type: "text", title: "ID", readOnly: true, width: "0px" },
+          { type: "text", title: "Mark", readOnly: true, width: "50px" },
+          {
+            type: "dropdown",
+            title: "Cover Category",
+            source: $tallyInput.data("cover-cats"),
+            autocomplete: true,
+            width: "250px",
+          },
+          {
+            type: "dropdown",
+            title: "Habitat",
+            source: ["H", "S", "R"],
+            autocomplete: true,
+            width: "75px",
+          },
+        ],
+      },
+    ],
+  });
+
+  const $tallyDialog = $("#tally-modal").dialog({
+    autoOpen: false,
+    closeOnEscape: true,
+    height: 500,
+    width: 1000,
+    modal: false,
+    title: "LPI Tally Sheet",
+    open: function (event, ui) {
+      $(this).parent().find(".ui-dialog-titlebar-close").hide();
+      $(this).scrollTop(0);
+
+      jspreadsheet.current = tallyInputWorksheets[0];
+      tallyInputWorksheets[0].updateSelectionFromCoords(2, 0);
+    },
+  });
+
+  const $tallyResultsCol = $("#tally-results-col");
+  const $tallyInputCol = $("#tally-input-col");
+  const showTallyInputCol = function () {
+    $tallyInputCol.show();
+    $tallyResultsCol.removeClass("grid-col-12").addClass("grid-col-6");
+    $tallyDialog.dialog("option", "width", 1000);
+    $(".tally-input-toggle-button span").text("Hide Tally Input");
+  };
+  const hideTallyInputCol = function () {
+    $tallyInputCol.hide();
+    $tallyResultsCol.removeClass("grid-col-6").addClass("grid-col-12");
+    $tallyDialog.dialog("option", "width", 500);
+    $(".tally-input-toggle-button span").text("Show Tally Input");
+  };
+  $(".tally-input-toggle-button").on("click", function (e) {
+    e.preventDefault();
+
+    if ($tallyInputCol.is(":hidden")) {
+      showTallyInputCol();
+    } else {
+      hideTallyInputCol();
+    }
+  });
+
+  $(".tally-modal-closer").on("click", function (e) {
+    e.preventDefault();
+    $tallyDialog.dialog("close");
+  });
+
+  $(".tally-modal-opener").on("click", function (e) {
+    e.preventDefault();
+    $tallyDialog.dialog("open");
+  });
+
   $.validator.addMethod(
     "isOnlyCat",
     function (value, element, params) {

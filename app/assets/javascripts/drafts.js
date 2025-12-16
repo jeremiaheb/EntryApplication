@@ -85,6 +85,8 @@ $(function () {
     "nested:fieldAdded, nested:fieldRemoved",
     handleChange,
   );
+  // Trigger draft:change to force a draft to be saved
+  $formsWithDraftsURLs.on("draft:change", handleChange);
 
   $formsWithDraftsURLs.each(function () {
     const $form = $(this);

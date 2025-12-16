@@ -27,7 +27,7 @@ class DiversController < ApplicationController
 
   # POST /divers
   def create
-    if @diver.save
+    if @diver.save(context: :admin)
       redirect_to divers_url, notice: "Diver was successfully created."
     else
       render action: "new"
@@ -36,7 +36,12 @@ class DiversController < ApplicationController
 
   # PUT /divers/1
   def update
-    if @diver.update(diver_params)
+    saved = @diver.with_transaction_returning_status do
+      @diver.assign_attributes(diver_params)
+      @diver.save(context: :admin)
+    end
+
+    if saved
       redirect_to divers_url, notice: "Diver was successfully updated."
     else
       render action: "edit"

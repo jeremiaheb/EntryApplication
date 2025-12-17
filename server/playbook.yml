@@ -300,38 +300,48 @@
       become: true
       notify: Restart apache2
 
+    - name: Create port 8000 listener
+      ansible.builtin.copy:
+        dest: "/etc/apache2/conf-available/port-8000.conf"
+        mode: "0644"
+        content: |
+          Listen 8000
+      become: true
+      notify: Reload apache2
+
+    - name: Enable port 8000 listener
+      ansible.builtin.command:
+        cmd: "a2enconf port-8000"
+        creates: "/etc/apache2/conf-enabled/port-8000.conf"
+      become: true
+      notify: Reload apache2
+
     - name: Create entryapplication apache2 site
       ansible.builtin.copy:
         dest: "/etc/apache2/sites-available/entryapplication.conf"
         mode: "0644"
         content: |
-          Listen 8000
-          <VirtualHost *:80 *:8000>
-            # Static assets
-            <Directory "/var/www/apps/EntryApplication/shared/public">
-              Options FollowSymLinks
-              AllowOverride None
-              Require all granted
-            </Directory>
+          # Static assets
+          <Directory "/var/www/apps/EntryApplication/shared/public">
+            Options FollowSymLinks
+            AllowOverride None
+            Require all granted
+          </Directory>
 
-            ProxyPass "/ncrmp_data_entry/assets" "!"
-            Alias "/ncrmp_data_entry/assets" "/var/www/apps/EntryApplication/shared/public/ncrmp_data_entry/assets"
-            ProxyPass "/ncrmp_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/ncrmp_data_entry"
-            ProxyPassReverse "/ncrmp_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/ncrmp_data_entry"
+          ProxyPass "/ncrmp_data_entry/assets" "!"
+          Alias "/ncrmp_data_entry/assets" "/var/www/apps/EntryApplication/shared/public/ncrmp_data_entry/assets"
+          ProxyPass "/ncrmp_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/ncrmp_data_entry"
+          ProxyPassReverse "/ncrmp_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/ncrmp_data_entry"
 
-            ProxyPass "/caribbean_data_entry/assets" "!"
-            Alias "/caribbean_data_entry/assets" "/var/www/apps/EntryApplication/shared/public/caribbean_data_entry/assets"
-            ProxyPass "/caribbean_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/caribbean_data_entry"
-            ProxyPassReverse "/caribbean_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/caribbean_data_entry"
+          ProxyPass "/caribbean_data_entry/assets" "!"
+          Alias "/caribbean_data_entry/assets" "/var/www/apps/EntryApplication/shared/public/caribbean_data_entry/assets"
+          ProxyPass "/caribbean_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/caribbean_data_entry"
+          ProxyPassReverse "/caribbean_data_entry" "unix:////var/www/apps/EntryApplication/shared/tmp/sockets/puma.sock|http://localhost/caribbean_data_entry"
 
-            # Assume TLS-terminating proxy when host is noaa.gov
-            <If "%{HTTP_HOST} =~ /\.noaa\.gov$/">
-              RequestHeader set X-Forwarded-Proto "https"
-            </If>
-
-            ErrorLog "${APACHE_LOG_DIR}/error.log"
-            CustomLog "${APACHE_LOG_DIR}/access.log" combined
-          </VirtualHost>
+          # Assume TLS-terminating proxy when host is noaa.gov
+          <If "%{HTTP_HOST} =~ /\.noaa\.gov$/">
+            RequestHeader set X-Forwarded-Proto "https"
+          </If>
       become: true
       notify: Reload apache2
 

@@ -10,8 +10,11 @@ EntryApplication::Application.routes.draw do
     get "edit_diver_registration",      to: "devise/registrations#edit"
   end
 
+  # Admin only routes
   authenticate :diver, ->(diver) { diver.admin? } do
     mount SolidErrors::Engine, at: "/errors"
+
+    resources :cleanups, only: [:new, :create]
   end
 
   resources :agencies, except: [:show]

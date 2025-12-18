@@ -3,26 +3,7 @@ require "open3"
 namespace :db do
   desc "Backup the database and email it to recipients"
   task backup: :environment do
-    connection_config =  Rails.application.config.database_configuration[Rails.env]
-
-    stdout_s, stderr_s, status = Open3.capture3(
-      { "PGPASSWORD" => connection_config["password"] },
-      "pg_dump",
-      "--clean",
-      "--if-exists",
-      "--encoding=#{connection_config["encoding"]}",
-      "--host=#{connection_config["host"]}",
-      "--username=#{connection_config["username"]}",
-      "--dbname=#{connection_config["database"]}",
-      "--format=custom",
-      "--compress=9",
-    )
-
-    if status.success?
-      DatabaseBackupMailer.with(content: stdout_s).backup.deliver_now
-    else
-      DatabaseBackupMailer.with(stderr_s: stderr_s).backup_failed.deliver_now
-    end
+    DatabaseDumper.new.dump_to_destinations
   end
 
   desc "Restore the database from a dump file"

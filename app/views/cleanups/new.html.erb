@@ -1,0 +1,44 @@
+<%= render "shared/nav_breadcrumbs", object: [["Data Cleanup", ""]] %>
+
+<%= form_for @cleanup, html: { class: "usa-form maxw-full bg-base-lightest", autocomplete: "off" } do |f| %>
+  <%= render "shared/uswds_error_messages", target: @cleanup %>
+
+  <div class="grid-row padding-1">
+    <div class="grid-col-12">
+      <div>
+        <p class="usa-prose margin-top-0">
+          All samples and boat logs within the selected regions, agencies and/or projects <strong>will be deleted</strong>.
+        </p>
+        <p class="usa-prose">
+          A database backup will be saved before the samples and boat logs are deleted.
+        </p>
+        <p class="usa-prose">
+          Samples and boat logs will be deleted only if they match <strong>all</strong> the specified parameters. If a parameter is left empty, it will match <strong>all</strong> samples for that parameter.
+        </p>
+        <p class="usa-prose">
+          To delete data for (e.g.) an entire region, fill out the regions parameter but leave the agencies and projects parameters empty. To delete data for (e.g.) a specific project in a specific region, fill out both the regions and projects parameters.
+        </p>
+      </div>
+
+      <div>
+        <%= f.label :region_ids, "Regions", class: "usa-label" %>
+        <%= f.collection_select :region_ids, Region.order(:name), :id, :name, { include_blank: false, multiple: true }, class: "usa-input--xl width-full" %>
+      </div>
+
+      <div>
+        <%= f.label :agency_ids, "Agencies", class: "usa-label" %>
+        <%= f.collection_select :agency_ids, Agency.order(:name), :id, :name, { include_blank: false, multiple: true }, class: "usa-input--xl width-full" %>
+      </div>
+
+      <div>
+        <%= f.label :region_ids, "Project", class: "usa-label" %>
+        <%= f.collection_select :project_ids, Project.order(:name), :id, :name, { include_blank: false, multiple: true }, class: "usa-input--xl width-full" %>
+      </div>
+
+      <div>
+        <%= f.submit "Delete Data", class: "usa-button usa-button--secondary", data: { confirm: "Are you absolutely sure you have selected the correct data to delete?" } %>
+        <%= link_to "Cancel", root_path, class: "usa-button usa-button--outline" %>
+      </div>
+    </div>
+  </div>
+<% end %>

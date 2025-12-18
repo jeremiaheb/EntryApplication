@@ -8,7 +8,7 @@ class DatabaseBackupMailer < ApplicationMailer
 
     attachments[@filename] = {
       mime_type: "application/octet-stream",
-      content: params[:content],
+      content: params[:io].read,
     }
 
     mail(subject: "Database Backup")

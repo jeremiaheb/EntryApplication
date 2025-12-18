@@ -36,6 +36,7 @@
 //= require ./coral_demographics
 //= require ./samples
 //= require ./missions
+//= require ./cleanups
 //= require ./drafts
 //= require_self
 

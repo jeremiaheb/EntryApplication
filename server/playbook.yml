@@ -564,6 +564,16 @@
         mode: "0440"
       become: true
 
+    - name: Backup the database on a schedule
+      ansible.builtin.cron:
+        name: "Backup database"
+        minute: "59"
+        hour: "23"
+        user: "entryapplication"
+        job: >
+          cd /var/www/apps/EntryApplication/current && $HOME/.rbenv/bin/rbenv exec bundle exec rake db:backup RAILS_ENV=production
+      become: true
+
     # --------------------------
     # The following tasks are conditional on `development_build` being defined,
     # meaning this playbook is running in Vagrant for local development. The

@@ -1,6 +1,5 @@
 class Diver < ApplicationRecord
   ADMIN   = "admin"
-  MANAGER = "manager"
   DIVER   = "diver"
   ROLES   = [ADMIN, DIVER]
 
@@ -50,6 +49,19 @@ class Diver < ApplicationRecord
 
   def admin?
     self.role == Diver::ADMIN
+  end
+
+  def active_for_authentication?
+    # Do not allow deprecated "boatlog manager" users to login anymore
+    super && ROLES.include?(self.role)
+  end
+
+  def inactive_message
+    if !ROLES.include?(self.role)
+      return "Your diver role is not valid."
+    end
+
+    super
   end
 
   # Login always returns email address. However, during a transition period, a

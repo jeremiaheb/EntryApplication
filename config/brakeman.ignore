@@ -7,7 +7,7 @@
       "check_name": "MassAssignment",
       "message": "Specify exact keys allowed for mass assignment instead of using `permit!` which allows any keys",
       "file": "app/controllers/samples_controller.rb",
-      "line": 125,
+      "line": 130,
       "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
       "code": "params.require(:sample).permit!",
       "render_path": null,
@@ -24,46 +24,27 @@
       "note": ""
     },
     {
-      "warning_type": "Mass Assignment",
-      "warning_code": 105,
-      "fingerprint": "6b1c9bb097ad5fbf4a759d21683d2932a8b9b94f5ff73e1d5898ec85ee4e23c7",
-      "check_name": "PermitAttributes",
-      "message": "Potentially dangerous key allowed for mass assignment",
-      "file": "app/controllers/divers_controller.rb",
-      "line": 91,
-      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
-      "code": "params.require(:diver).permit(:active, :diver_number, :diver_name, :username, :password, :password_confirmation, :email, :current_password, :boatlog_manager_id, :role)",
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "22ad9c0c2be328d8598f983a7bfbd00bbf51c4e858ec594f2fb3c2dfad2d9906",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "lib/database_dumper.rb",
+      "line": 66,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "Open3.popen3({ \"PGPASSWORD\" => Rails.application.config.database_configuration[Rails.env][\"password\"] }, \"pg_dump\", \"--clean\", \"--if-exists\", \"--encoding=#{Rails.application.config.database_configuration[Rails.env][\"encoding\"]}\", \"--host=#{Rails.application.config.database_configuration[Rails.env][\"host\"]}\", \"--username=#{Rails.application.config.database_configuration[Rails.env][\"username\"]}\", \"--dbname=#{Rails.application.config.database_configuration[Rails.env][\"database\"]}\", \"--format=custom\", \"--compress=9\")",
       "render_path": null,
       "location": {
         "type": "method",
-        "class": "DiversController",
-        "method": "diver_params"
+        "class": "DatabaseDumper",
+        "method": "dump_to_io"
       },
-      "user_input": ":role",
+      "user_input": "Rails.application.config.database_configuration[Rails.env][\"encoding\"]",
       "confidence": "Medium",
       "cwe_id": [
-        915
+        77
       ],
-      "note": ":role is only allowed for admins"
-    },
-    {
-      "warning_type": "Unmaintained Dependency",
-      "warning_code": 122,
-      "fingerprint": "98b26f60d776fd41ee6f088c833725145be9aac2d7c5b33780241c273622db42",
-      "check_name": "EOLRails",
-      "message": "Support for Rails 7.1.5.1 ends on 2025-10-01",
-      "file": "Gemfile.lock",
-      "line": 307,
-      "link": "https://brakemanscanner.org/docs/warning_types/unmaintained_dependency/",
-      "code": null,
-      "render_path": null,
-      "location": null,
-      "user_input": null,
-      "confidence": "Medium",
-      "cwe_id": [
-        1104
-      ],
-      "note": "Will upgrade as soon as feasible."
+      "note": "The arguments are properly split"
     },
     {
       "warning_type": "Remote Code Execution",
@@ -92,7 +73,7 @@
       "check_name": "MassAssignment",
       "message": "Specify exact keys allowed for mass assignment instead of using `permit!` which allows any keys",
       "file": "app/controllers/coral_demographics_controller.rb",
-      "line": 157,
+      "line": 131,
       "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
       "code": "params.require(:coral_demographic).permit!",
       "render_path": null,
@@ -115,7 +96,7 @@
       "check_name": "MassAssignment",
       "message": "Specify exact keys allowed for mass assignment instead of using `permit!` which allows any keys",
       "file": "app/controllers/boat_logs_controller.rb",
-      "line": 112,
+      "line": 118,
       "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
       "code": "params.require(:boat_log).permit!",
       "render_path": null,
@@ -132,5 +113,5 @@
       "note": ""
     }
   ],
-  "brakeman_version": "7.1.0"
+  "brakeman_version": "7.1.1"
 }

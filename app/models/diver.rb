@@ -2,12 +2,10 @@ class Diver < ApplicationRecord
   ADMIN   = "admin"
   MANAGER = "manager"
   DIVER   = "diver"
-  ROLES   = [ADMIN, MANAGER, DIVER]
+  ROLES   = [ADMIN, DIVER]
 
   devise :database_authenticatable, :recoverable, :registerable, :rememberable, :trackable, :validatable
   devise :omniauthable, omniauth_providers: [:icam, :developer]
-
-  belongs_to  :boatlog_manager
 
   has_many    :samples
   has_many    :samples_missions, through: :samples
@@ -27,7 +25,6 @@ class Diver < ApplicationRecord
   validates   :email, uniqueness: { case_sensitive: false }
   validate    :current_password_is_not_username, except_on: [:admin, :import], unless: -> { password.present? }
   validate    :password_is_not_username, except_on: [:admin, :import], if: -> { password.present? }
-  validates   :boatlog_manager_id, uniqueness: true, allow_nil: true
 
   scope       :active_divers,      lambda { where(active: true) }
 
@@ -53,10 +50,6 @@ class Diver < ApplicationRecord
 
   def admin?
     self.role == Diver::ADMIN
-  end
-
-  def manager?
-    self.role == Diver::MANAGER
   end
 
   # Login always returns email address. However, during a transition period, a

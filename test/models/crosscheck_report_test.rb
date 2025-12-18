@@ -81,8 +81,8 @@ class CrosscheckReportTest < ActiveSupport::TestCase
     assert_equal sampleA, report.missing_samples_from_boat_log[0].related_model
   end
 
-  test "identifies boatlog manager ID mismatches for potentially mismatched entries" do
-    # Sometimes a diver will log a sample under the incorrect boatlog manager
+  test "identifies mission mismatches for potentially mismatched entries" do
+    # Sometimes a diver will log a sample under the incorrect region or mission
     diver1 = FactoryBot.create(:diver)
     diver2 = FactoryBot.create(:diver)
     mission1 = FactoryBot.create(:mission)
@@ -92,7 +92,7 @@ class CrosscheckReportTest < ActiveSupport::TestCase
     station_log = FactoryBot.create(:station_log, stn_number: "1", boat_log: boat_log)
     rep_logA = FactoryBot.create(:rep_log, station_log: station_log, diver: diver1, replicate: "A")
 
-    # Sample would otherwise match up, but the boatlog manager is incorrect
+    # Sample would otherwise match up, but the mission is incorrect
     sample_animalA = FactoryBot.create(:sample_animal, sample: nil)
     sampleA = FactoryBot.create(:sample, sample_date: "2025-05-06", field_id: "12341A", mission: mission2, diver: diver1, buddy: diver2, sample_animals: [sample_animalA])
 

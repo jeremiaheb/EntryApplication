@@ -29,8 +29,6 @@ EntryApplication::Application.routes.draw do
     post :draft, on: :collection
   end
 
-  resources :boatlog_managers, except: [:show]
-
   resources :coral_demographics do
     post :draft, on: :collection
   end

@@ -24,7 +24,7 @@ set :deploy_to, "/var/www/apps/EntryApplication"
 append :linked_files, "config/master.key"
 
 # Default value for linked_dirs is []
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "storage", ".bundle", "node_modules", "public/data"
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "storage", ".bundle", "node_modules", "public/data", "backups"
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }

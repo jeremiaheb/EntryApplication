@@ -8,8 +8,8 @@ class DatabaseDumper
       @action = action
     end
 
-    def dump(io)
-      @mailer_klass.to_s.safe_constantize.with(io: io).send(@action).deliver_now
+    def dump(io, identifier:)
+      @mailer_klass.to_s.safe_constantize.with(io: io, identifier: identifier).send(@action).deliver_now
     end
   end
 
@@ -19,9 +19,9 @@ class DatabaseDumper
       @directory = directory
     end
 
-    def dump(io)
+    def dump(io, identifier:)
       FileUtils.mkdir_p(@directory)
-      File.open(File.join(@directory, "database-#{Time.now.strftime("%Y%m%d_%H%M%S")}-#{SecureRandom.hex(4)}.dump"), "w") do |backup_file|
+      File.open(File.join(@directory, "backup_#{identifier}.dump"), "w") do |backup_file|
         IO.copy_stream(io, backup_file)
       end
     end
@@ -34,8 +34,8 @@ class DatabaseDumper
       @prefix = prefix
     end
 
-    def dump(io)
-      @bucket.upload_file(io, File.join(@prefix, "database-#{Time.now.strftime("%Y%m%d_%H%M%S")}-#{SecureRandom.hex(4)}.dump"))
+    def dump(io, identifier:)
+      @bucket.upload_file(io, File.join(@prefix, "backup_#{identifier}.dump"))
     end
   end
 
@@ -43,11 +43,12 @@ class DatabaseDumper
     Tempfile.open("database_backup") do |io|
       dump_to_io(io)
 
+      identifier = "#{Time.now.strftime("%Y%m%d%H%M%S")}_#{SecureRandom.hex(4)}"
       destinations.each do |destination|
         io.rewind
 
         Rails.error.handle do
-          destination.dump(io)
+          destination.dump(io, identifier: identifier)
         end
       end
     end

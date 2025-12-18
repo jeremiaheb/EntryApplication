@@ -100,13 +100,13 @@ To develop with a more realistic data set, you can import data or restore data f
 
 #### Production Backup
 
-Download a database backup from a recent email. It will be in the form `backup_*.dump`.
+Download a database backup from a recent email or the `/var/www/apps/EntryApplication/current/backups` directory on the server. It will be in the form `backup_TIMESTAMP_ID.dump`.
 
 Copy the `.dump` file to the project directory, connect to the Vagrant VM (`vagrant ssh`) and run:
 
 ```bash
 # Replace FILE= with the actual filename
-bin/rake db:restore FILE=backup_CaribbeanDataEntry_2025-07-10.dump
+bin/rake db:restore FILE=backup_20251218185244_49a29271.dump
 ```
 
 #### Import/Seed

@@ -154,6 +154,9 @@ With the key available, run:
 
 ```
 bin/cap production deploy
+
+# Or to deploy to Google Cloud:
+bin/cap production_cloud deploy
 ```
 
 You will be prompted for a branch name, which defaults to the current branch. If that is what you want to deploy, simply hit &lt;enter&gt;.

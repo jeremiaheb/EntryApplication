@@ -70,7 +70,7 @@
     </div>
     <% if diver_signed_in? && current_diver.admin? %>
       <%= render "admin" %>
-    <% elsif diver_signed_in? && (current_diver.manager? || current_diver.missions_managed.any?) %>
+    <% elsif diver_signed_in? && current_diver.missions_managed.any? %>
       <%= render 'manager' %>'
     <% end %>
 

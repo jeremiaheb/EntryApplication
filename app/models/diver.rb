@@ -1,13 +1,10 @@
 class Diver < ApplicationRecord
-  ADMIN   = "admin"
-  MANAGER = "manager"
   DIVER   = "diver"
-  ROLES   = [ADMIN, MANAGER, DIVER]
+  ADMIN   = "admin"
+  ROLES   = [DIVER, ADMIN]
 
   devise :database_authenticatable, :recoverable, :registerable, :rememberable, :trackable, :validatable
   devise :omniauthable, omniauth_providers: [:icam, :developer]
-
-  belongs_to  :boatlog_manager
 
   has_many    :samples
   has_many    :samples_missions, through: :samples
@@ -25,9 +22,9 @@ class Diver < ApplicationRecord
   validates   :agency, presence: true, except_on: [:admin, :import]
   validates   :username, uniqueness: { case_sensitive: false, allow_blank: true }
   validates   :email, uniqueness: { case_sensitive: false }
+  validates   :role, inclusion: { in: ROLES }
   validate    :current_password_is_not_username, except_on: [:admin, :import], unless: -> { password.present? }
   validate    :password_is_not_username, except_on: [:admin, :import], if: -> { password.present? }
-  validates   :boatlog_manager_id, uniqueness: true, allow_nil: true
 
   scope       :active_divers,      lambda { where(active: true) }
 
@@ -55,8 +52,17 @@ class Diver < ApplicationRecord
     self.role == Diver::ADMIN
   end
 
-  def manager?
-    self.role == Diver::MANAGER
+  def active_for_authentication?
+    # Do not allow deprecated "boatlog manager" users to login anymore
+    super && ROLES.include?(self.role)
+  end
+
+  def inactive_message
+    if !ROLES.include?(self.role)
+      return "Your diver role is not valid."
+    end
+
+    super
   end
 
   # Login always returns email address. However, during a transition period, a

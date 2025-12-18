@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_12_10_234000) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_18_161846) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -45,7 +45,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_10_234000) do
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
     t.integer "boatlog_manager_id"
-    t.integer "mission_id"
+    t.integer "mission_id", null: false
     t.index ["boatlog_manager_id"], name: "index_benthic_covers_on_boatlog_manager_id"
     t.index ["diver_id"], name: "index_benthic_covers_on_diver_id"
     t.index ["mission_id"], name: "index_benthic_covers_on_mission_id"
@@ -57,7 +57,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_10_234000) do
     t.integer "boatlog_manager_id"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
-    t.integer "mission_id"
+    t.integer "mission_id", null: false
     t.index ["boatlog_manager_id"], name: "index_boat_logs_on_boatlog_manager_id"
     t.index ["mission_id"], name: "index_boat_logs_on_mission_id"
   end
@@ -83,7 +83,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_10_234000) do
     t.datetime "updated_at", precision: nil
     t.integer "boatlog_manager_id"
     t.integer "percent_hardbottom"
-    t.integer "mission_id"
+    t.integer "mission_id", null: false
     t.index ["boatlog_manager_id"], name: "index_coral_demographics_on_boatlog_manager_id"
     t.index ["diver_id"], name: "index_coral_demographics_on_diver_id"
     t.index ["mission_id"], name: "index_coral_demographics_on_mission_id"
@@ -349,7 +349,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_10_234000) do
     t.integer "hard_pcov_other2"
     t.integer "diver_id"
     t.integer "buddy_id"
-    t.integer "mission_id"
+    t.integer "mission_id", null: false
     t.index ["boatlog_manager_id"], name: "index_samples_on_boatlog_manager_id"
     t.index ["buddy_id"], name: "index_samples_on_buddy_id"
     t.index ["diver_id"], name: "index_samples_on_diver_id"

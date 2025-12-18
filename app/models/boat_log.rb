@@ -1,12 +1,10 @@
 class BoatLog < ApplicationRecord
-  belongs_to :boatlog_manager, optional: true # TODO: Remove boatlog_manager relation
-
   has_many :station_logs, dependent: :destroy
   has_many :rep_logs, through: :station_logs
   has_many :divers, through: :rep_logs
   accepts_nested_attributes_for :station_logs, allow_destroy: true
 
-  belongs_to :mission, optional: true # TODO: Remove optional
+  belongs_to :mission
   has_one :region, through: :mission
   has_one :agency, through: :mission
   has_one :project, through: :mission

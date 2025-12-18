@@ -6,9 +6,8 @@ class Sample < ApplicationRecord
 
   belongs_to :sample_type
   belongs_to :habitat_type
-  belongs_to :boatlog_manager, optional: true # TODO: Remove boatlog_manager relation
 
-  belongs_to :mission, optional: true # TODO: Remove optional
+  belongs_to :mission
   has_one :region, through: :mission
   has_one :agency, through: :mission
   has_one :project, through: :mission

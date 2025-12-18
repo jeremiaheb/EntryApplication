@@ -30,9 +30,6 @@
       <%= f.label :role, class: "usa-label" %>
       <%= f.collection_select :role, Diver::ROLES, :to_s, :humanize, { include_blank: false }, class: "usa-select usa-input--md", autocomplete: "off" %>
 
-      <%= f.label :boatlog_manager_id, class: "usa-label" %>
-      <%= f.collection_select :boatlog_manager_id, BoatlogManager.all, :id, :agency_name, { include_blank: true }, class: "usa-select usa-input--xl", autocomplete: "off" %>
-
       <%= f.submit class: "usa-button" %>
       <%= link_to "Cancel", divers_path, class: "usa-button usa-button--outline" %>
     </div>

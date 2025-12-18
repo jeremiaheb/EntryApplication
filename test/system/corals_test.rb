@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class CoralsTest < ApplicationSystemTestCase
   test "new coral" do
-    admin_diver = FactoryBot.create(:diver, role: "admin")
+    admin_diver = FactoryBot.create(:diver, role: Diver::ADMIN)
 
     visit root_url
     find(".login-link").click

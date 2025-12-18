@@ -1,7 +1,7 @@
 class Diver < ApplicationRecord
-  ADMIN   = "admin"
   DIVER   = "diver"
-  ROLES   = [ADMIN, DIVER]
+  ADMIN   = "admin"
+  ROLES   = [DIVER, ADMIN]
 
   devise :database_authenticatable, :recoverable, :registerable, :rememberable, :trackable, :validatable
   devise :omniauthable, omniauth_providers: [:icam, :developer]
@@ -22,6 +22,7 @@ class Diver < ApplicationRecord
   validates   :agency, presence: true, except_on: [:admin, :import]
   validates   :username, uniqueness: { case_sensitive: false, allow_blank: true }
   validates   :email, uniqueness: { case_sensitive: false }
+  validates   :role, inclusion: { in: ROLES }
   validate    :current_password_is_not_username, except_on: [:admin, :import], unless: -> { password.present? }
   validate    :password_is_not_username, except_on: [:admin, :import], if: -> { password.present? }
 

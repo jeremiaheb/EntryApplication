@@ -7,7 +7,7 @@ FactoryBot.define do
     email_confirmed { true }
     sequence(:password) { |n| "password#{n}" }
     agency { "NOAA" }
-    role { "diver" }
+    role { Diver::DIVER }
     active { true }
   end
 end

@@ -152,7 +152,7 @@ ssh-add -L
 
 With the key available, run:
 
-```
+```bash
 bin/cap production deploy
 
 # Or to deploy to Google Cloud:

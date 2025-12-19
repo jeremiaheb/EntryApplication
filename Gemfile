@@ -1,6 +1,8 @@
 source "https://rubygems.org"
 
 gem "rails", "8.0.4"
+# Minitest 6 is not yet compatible with Rails 8/8.1: https://github.com/rails/rails/issues/56406
+gem "minitest", "~> 5.27", "< 6"
 
 # PostgreSQL. pg 1.6 removed support for PostgreSQL < 10. The server must be
 # upgraded before upgrading to pg >= 1.6.
@@ -22,7 +24,7 @@ gem "nested_form", "0.3.2"
 
 gem "devise", "~> 4.9", ">= 4.9.4"
 gem "omniauth", "~> 2.1"
-gem "omniauth-rails_csrf_protection", "~> 1.0", ">= 1.0.2"
+gem "omniauth-rails_csrf_protection", "~> 2.0"
 gem "omniauth_openid_connect", "~> 0.8.0"
 gem "cancancan", "~> 3.6", ">= 3.6.1"
 

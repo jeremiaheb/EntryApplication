@@ -2,8 +2,6 @@ class SampleTypesController < ApplicationController
   before_action :authenticate_diver!
   load_and_authorize_resource
 
-  layout "application-uswds"
-
   # GET /sample_types
   def index
     @sample_types = @sample_types.order(:sample_type_name)

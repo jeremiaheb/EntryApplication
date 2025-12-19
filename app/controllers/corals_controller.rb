@@ -2,8 +2,6 @@ class CoralsController < ApplicationController
   before_action :authenticate_diver!
   load_and_authorize_resource
 
-  layout "application-uswds"
-
   # GET /corals
   def index
     @corals = @corals.order(:code, :rank)

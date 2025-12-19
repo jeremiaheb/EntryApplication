@@ -2,8 +2,6 @@ class AnimalsController < ApplicationController
   before_action :authenticate_diver!
   load_and_authorize_resource
 
-  layout "application-uswds"
-
   # GET /animals
   def index
     @animals = @animals.order(:scientific_name)

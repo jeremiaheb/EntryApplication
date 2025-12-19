@@ -17,7 +17,6 @@
 //= require select2
 //= require jquery-validation/dist/jquery.validate
 //= require jquery-validation/dist/additional-methods
-//= require js/bootstrap
 //= require jquery_nested_form
 //= require underscore/underscore-umd
 //= require bootstrap-datepicker/dist/js/bootstrap-datepicker

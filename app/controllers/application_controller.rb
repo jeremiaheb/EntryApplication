@@ -3,8 +3,6 @@ class ApplicationController < ActionController::Base
   before_action :set_error_context
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  layout :determine_layout
-
   def current_ability
     @current_ability ||= Ability.new(current_diver)
   end
@@ -42,14 +40,6 @@ class ApplicationController < ActionController::Base
     end
 
     super
-  end
-
-  def determine_layout
-    if devise_controller?
-      "application-uswds"
-    else
-      "application"
-    end
   end
 
   def configure_permitted_parameters

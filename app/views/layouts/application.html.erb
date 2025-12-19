@@ -1,34 +1,97 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "RVC Data Entry" %></title>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "RVC Data Entry System" %>">
-    <%= stylesheet_link_tag "application", :media => "all" %>
-    <%= javascript_include_tag "application" %>
-    <%= capybara_lockstep if defined?(Capybara::Lockstep) %>
+    <title><%= content_for(:title) || "RVC Data Entry" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= yield(:head) %>
+
+    <%= yield :head %>
+
+    <%= stylesheet_link_tag "uswds-styles", "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "@uswds/uswds/dist/js/uswds-init" %>
+    <%= capybara_lockstep if defined?(Capybara::Lockstep) %>
   </head>
+
   <body class="<%= controller_name %> <%= action_name %>">
-    <header class="navbar navbar-fixed-top">
-      <nav class="navbar-inner">
-        <div class="container">
-          <%= render 'layouts/navigation' %>
-        </div>
-      </nav>
-    </header>
-    <div id="main" role="main">
-      <div class="container">
-          <div class="row">
-            <div class="span12">
-              <%= render 'layouts/messages' %>
-              <%= yield %>
-            </div>
+    <div class="usa-overlay"></div>
+    <header class="usa-header usa-header--basic bg-primary-lighter">
+      <div class="usa-nav-container">
+        <div class="usa-navbar">
+          <div class="usa-logo margin-y-2">
+            <em class="usa-logo__text">
+              <%= link_to root_path, class: "text-base-lightest" do %>
+                <span>Home 2025</span>
+              <%- end %>
+            </em>
           </div>
+          <button type="button" class="usa-menu-btn">Menu</button>
         </div>
-      </div> <!--! end of .container -->
-    </div> <!--! end of #main -->
+        <nav aria-label="Primary navigation" class="usa-nav">
+          <button type="button" class="usa-nav__close">
+            <%= image_tag "@uswds/uswds/dist/img/usa-icons/close.svg", role: "img", alt: "Close" %>
+          </button>
+          <ul class="usa-nav__primary usa-accordion">
+            <li class="usa-nav__primary-item">
+              <%- if diver_signed_in? %>
+                <button type="button" class="usa-accordion__button usa-nav__link" aria-expanded="false" aria-controls="nav-my-account">
+                  <span>
+                    <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+                      <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#account_circle") %>
+                    </svg> 
+                    <%= current_diver.diver_name %>
+                  </span>
+                </button>
+                <ul id="nav-my-account" class="usa-nav__submenu" hidden>
+                  <li class="usa-nav__submenu-item">
+                    <%= link_to "Edit Profile", edit_diver_registration_path %>
+                  </li>
+                  <li class="usa-nav__submenu-item">
+                    <%= link_to destroy_diver_session_path, method: "delete" do %>
+                      <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+                        <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#logout") %>
+                      </svg> 
+                      Logout
+                    <%- end %>
+                  </li>
+                </ul>
+              <%- else %>
+                <%= link_to new_diver_session_path, class: "login-link usa-button usa-button--outline" do %>
+                  <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+                    <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#account_circle") %>
+                  </svg> 
+                  Login
+                <%- end %>
+              <%- end %>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="grid-container" id="main-container">
+      <div class="grid-row">
+        <div class="grid-col-12">
+          <% if flash[:alert].present? %>
+            <div class="usa-alert usa-alert--error usa-alert--slim margin-top-1">
+              <div class="usa-alert__body">
+                <p class="usa-alert__text"><%= flash[:alert] %></p>
+              </div>
+            </div>
+          <% end %>
+          <% if flash[:notice].present? %>
+            <div class="usa-alert usa-alert--info usa-alert--slim margin-top-1">
+              <div class="usa-alert__body">
+                <p class="usa-alert__text"><%= flash[:notice] %></p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <%= yield %>
+    </div>
+
+    <%= javascript_include_tag "@uswds/uswds/dist/js/uswds" %>
   </body>
 </html>

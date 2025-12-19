@@ -2,8 +2,6 @@ class AgenciesController < ApplicationController
   before_action :authenticate_diver!
   load_and_authorize_resource
 
-  layout "application-uswds"
-
   # GET /agencies
   def index
     @agencies = @agencies.order(:name)

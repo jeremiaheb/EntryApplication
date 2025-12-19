@@ -2,8 +2,6 @@ class RegionsController < ApplicationController
   before_action :authenticate_diver!
   load_and_authorize_resource
 
-  layout "application-uswds"
-
   # GET /regions
   def index
     @regions = @regions.includes(:habitat_types).order(:name)

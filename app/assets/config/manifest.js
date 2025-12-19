@@ -1,7 +1,6 @@
 // Application assets
 //= link_tree ../images
 //= link application.css
-//= link application-uswds.css
 //= link uswds-styles.css
 //= link application.js
 

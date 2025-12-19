@@ -2,8 +2,6 @@ class CoverCatsController < ApplicationController
   before_action :authenticate_diver!
   load_and_authorize_resource
 
-  layout "application-uswds"
-
   # GET /cover_cats
   def index
     @cover_cats = @cover_cats.order(:code, :rank)

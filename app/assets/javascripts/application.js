@@ -28,6 +28,7 @@
 //= require jquery-ui/widgets/dialog
 //= require jspreadsheet-ce/dist/index
 //= require jsuites/dist/jsuites
+//= require @splidejs/splide/dist/js/splide.min.js
 //
 //= require ./jquery_extensions
 //= require ./validations
@@ -93,6 +94,12 @@ $(function () {
       { targets: "_all", type: "text" },
     ],
   });
+
+  // Photo carousel (if present)
+  const $photoCarousel = $("#photo-carousel");
+  if ($photoCarousel.length > 0) {
+    new Splide($photoCarousel[0]).mount();
+  }
 
   $("form").attr("autocomplete", "off");
 

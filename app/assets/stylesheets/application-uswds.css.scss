@@ -5,7 +5,19 @@
 //= require jquery-ui
 //= require jspreadsheet-ce/dist/jspreadsheet
 //= require jsuites/dist/jsuites
+//= require @splidejs/splide/dist/css/splide.min.css
 //= require_self
+
+.splide__slide img {
+  width: 100%;
+  height: auto;
+}
+.splide__pagination {
+  bottom: unset;
+  left: unset;
+  top: 0.5em;
+  right: 0;
+}
 
 .habitat-type-select {
   option:disabled {

@@ -2,8 +2,6 @@ class DiversController < ApplicationController
   before_action :authenticate_diver!
   load_and_authorize_resource
 
-  layout "application-uswds"
-
   # GET /divers
   def index
     @divers = @divers.order(:diver_number)

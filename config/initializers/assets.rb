@@ -8,7 +8,6 @@ Rails.application.config.assets.version = "1.0"
 Rails.application.config.assets.paths << Rails.root.join("node_modules")
 Rails.application.config.assets.paths << Rails.root.join("node_modules", "@uswds", "uswds", "dist", "img")
 Rails.application.config.assets.paths << Rails.root.join("node_modules", "@uswds", "uswds", "packages")
-Rails.application.config.assets.paths << Rails.root.join("vendor", "bootstrap")
 Rails.application.config.assets.paths << Rails.root.join("vendor", "select2-3.5.4")
 
 # Serve assets individually in development

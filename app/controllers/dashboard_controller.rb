@@ -2,8 +2,6 @@ class DashboardController < ApplicationController
   before_action :authenticate_diver!
   before_action :require_manager_or_admin!
 
-  layout "application-uswds"
-
   def show
     if current_diver.admin?
       @missions = Mission.active

@@ -2,8 +2,6 @@ class BoatLogsController < ApplicationController
   before_action :authenticate_diver!
   load_and_authorize_resource
 
-  layout "application-uswds"
-
   # GET /boat_logs
   def index
     @boat_logs = @boat_logs.joins(:mission).includes(:station_logs, :region, :agency, :project)

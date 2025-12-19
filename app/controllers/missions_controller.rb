@@ -2,8 +2,6 @@ class MissionsController < ApplicationController
   before_action :authenticate_diver!
   load_and_authorize_resource
 
-  layout "application-uswds"
-
   # GET /missions
   def index
     @missions = @missions.includes(:region, :agency, :project, :manager_divers).standard_order

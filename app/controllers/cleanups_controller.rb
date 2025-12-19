@@ -2,8 +2,6 @@ class CleanupsController < ApplicationController
   before_action :authenticate_diver!
   before_action :require_admin!
 
-  layout "application-uswds"
-
   # GET /cleanups/new
   def new
     @cleanup = Cleanup.new

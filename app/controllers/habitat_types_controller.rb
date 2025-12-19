@@ -2,8 +2,6 @@ class HabitatTypesController < ApplicationController
   before_action :authenticate_diver!
   load_and_authorize_resource
 
-  layout "application-uswds"
-
   # GET /habitat_types
   def index
     @habitat_types = @habitat_types.order(:habitat_name)

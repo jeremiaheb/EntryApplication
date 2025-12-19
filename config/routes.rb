@@ -55,8 +55,5 @@ EntryApplication::Application.routes.draw do
     post :draft, on: :collection
   end
 
-  get "static_pages/home"
-  get "static_pages/help"
-
-  root to: "static_pages#home"
+  root to: "home#index"
 end

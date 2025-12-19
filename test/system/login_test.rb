@@ -24,7 +24,7 @@ class LoginTest < ApplicationSystemTestCase
     find("input#diver_password").fill_in(with: diver.password)
     find("input[type=submit]").click
 
-    assert_css(".alert", text: "Signed in successfully")
+    assert_css(".usa-alert", text: "Signed in successfully")
   end
 
   test "login with email (case insensitive)" do
@@ -37,7 +37,7 @@ class LoginTest < ApplicationSystemTestCase
     find("input#diver_password").fill_in(with: diver.password)
     find("input[type=submit]").click
 
-    assert_css(".alert", text: "Signed in successfully")
+    assert_css(".usa-alert", text: "Signed in successfully")
   end
 
   test "login with username" do
@@ -50,7 +50,7 @@ class LoginTest < ApplicationSystemTestCase
     find("input#diver_password").fill_in(with: diver.password)
     find("input[type=submit]").click
 
-    assert_css(".alert", text: "Signed in successfully")
+    assert_css(".usa-alert", text: "Signed in successfully")
   end
 
   test "login with username (case insensitive)" do
@@ -63,6 +63,6 @@ class LoginTest < ApplicationSystemTestCase
     find("input#diver_password").fill_in(with: diver.password)
     find("input[type=submit]").click
 
-    assert_css(".alert", text: "Signed in successfully")
+    assert_css(".usa-alert", text: "Signed in successfully")
   end
 end

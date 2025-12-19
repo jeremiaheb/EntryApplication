@@ -1,0 +1,137 @@
+<div class="grid-row padding-y-05">
+  <div class="grid-col-12">
+    <%= tag.section id: "photo-carousel", class: "splide", "role": "group", "aria-label": "Photo carousel", data: { splide: {"type": "loop", "autoplay": true, interval: 6000 }.to_json } do %>
+      <div class="splide__track">
+        <ul class="splide__list">
+          <li class="splide__slide">
+            <%= image_tag "RobvGoliath.JPG" %>
+            <div class="font-body-3xs">Photo Credits: Tara Dolan</div>
+          </li>
+          <li class="splide__slide">
+            <%= image_tag "yellowline.jpg" %>
+            <div class="font-body-3xs">Photo Credits: Evan D'Alessandro</div>
+          </li>
+          <li class="splide__slide">
+            <%= image_tag "trio.jpg" %>
+            <div class="font-body-3xs">Photo Credits: David Bryan, Evan D'Alessandro, Jiangang Luo</div>
+          </li>
+          <li class="splide__slide">
+            <%= image_tag "rustygoby_3.jpg" %>
+            <div class="font-body-3xs">Photo Credits: Natalia Zurcher</div>
+          </li>
+        </ul>
+      </div>
+    <%- end %>
+  </div>
+</div>
+
+<div class="grid-row margin-y-05">
+  <div class="grid-col-4 text-center">
+    <%= link_to samples_path, class: "samples-link font-body-2xs" do %>
+      <%= image_tag "FormButton.jpg", width: "145px", height: "145px" %>
+      <div>Fish Samples</div>
+    <%- end %>
+  </div>
+  <div class="grid-col-4 text-center">
+    <%= link_to benthic_covers_path, class: "benthic-covers-link font-body-2xs" do %>
+      <%= image_tag "FormButton.jpg", width: "145px", height: "145px" %>
+      <div>Benthic Assessment Samples</div>
+    <%- end %>
+  </div>
+  <div class="grid-col-4 text-center">
+    <%= link_to coral_demographics_path, class: "coral-demographics-link font-body-2xs" do %>
+      <%= image_tag "FormButton.jpg", width: "145px", height: "145px" %>
+      <div>Coral Demographic Samples</div>
+    <%- end %>
+  </div>
+</div>
+
+<div class="grid-row margin-top-3">
+  <%- if current_diver&.admin? || current_diver&.missions_managed&.any?  %>
+    <div class="grid-col-1 text-center">
+      <%= link_to boat_logs_path, class: "boat-logs-link font-body-2xs" do %>
+        <%= image_tag "FormButton.jpg", width: "70px", height: "70x" %>
+        <div>Boat Logs</div>
+      <%- end %>
+    </div>
+    <div class="grid-col-1 text-center">
+      <%= link_to dashboard_show_path, class: "dashboard-link font-body-2xs" do %>
+        <%= image_tag "FormButton.jpg", width: "70px", height: "70x" %>
+        <div>Manager Dashboard</div>
+      <%- end %>
+    </div>
+  <%- end %>
+  <%- if current_diver&.admin? %>
+    <div class="grid-col-1 text-center">
+      <%= link_to divers_path, class: "font-body-2xs" do %>
+        <%= image_tag "FormButton.jpg", width: "70px", height: "70x" %>
+        <div>Diver List</div>
+      <%- end %>
+    </div>
+    <div class="grid-col-1 text-center">
+      <%= link_to animals_path, class: "font-body-2xs" do %>
+        <%= image_tag "FormButton.jpg", width: "70px", height: "70x" %>
+        <div>Species List</div>
+      <%- end %>
+    </div>
+    <div class="grid-col-1 text-center">
+      <%= link_to sample_types_path, class: "font-body-2xs" do %>
+        <%= image_tag "FormButton.jpg", width: "70px", height: "70x" %>
+        <div>Sample Types</div>
+      <%- end %>
+    </div>
+    <div class="grid-col-1 text-center">
+      <%= link_to habitat_types_path, class: "font-body-2xs" do %>
+        <%= image_tag "FormButton.jpg", width: "70px", height: "70x" %>
+        <div>Habitat Types</div>
+      <%- end %>
+    </div>
+    <div class="grid-col-1 text-center">
+      <%= link_to corals_path, class: "corals-link font-body-2xs" do %>
+        <%= image_tag "FormButton.jpg", width: "70px", height: "70x" %>
+        <div>Coral List</div>
+      <%- end %>
+    </div>
+    <div class="grid-col-1 text-center">
+      <%= link_to cover_cats_path, class: "font-body-2xs" do %>
+        <%= image_tag "FormButton.jpg", width: "70px", height: "70x" %>
+        <div>Cover Category List</div>
+      <%- end %>
+    </div>
+    <div class="grid-col-1 text-center">
+      <%= link_to regions_path, class: "font-body-2xs" do %>
+        <%= image_tag "FormButton.jpg", width: "70px", height: "70x" %>
+        <div>Regions</div>
+      <%- end %>
+    </div>
+    <div class="grid-col-1 text-center">
+      <%= link_to agencies_path, class: "font-body-2xs" do %>
+        <%= image_tag "FormButton.jpg", width: "70px", height: "70x" %>
+        <div>Agencies</div>
+      <%- end %>
+    </div>
+    <div class="grid-col-1 text-center">
+      <%= link_to projects_path, class: "font-body-2xs" do %>
+        <%= image_tag "FormButton.jpg", width: "70px", height: "70x" %>
+        <div>Projects</div>
+      <%- end %>
+    </div>
+    <div class="grid-col-1 text-center">
+      <%= link_to missions_path, class: "font-body-2xs" do %>
+        <%= image_tag "FormButton.jpg", width: "70px", height: "70x" %>
+        <div>Missions</div>
+      <%- end %>
+    </div>
+  <%- end %>
+</div>
+
+<div class="grid-row margin-top-1">
+  <%- if current_diver&.admin? %>
+    <div class="grid-col-1 text-center">
+      <%= link_to new_cleanup_path, class: "boat-logs-link font-body-2xs" do %>
+        <%= image_tag "FormButton.jpg", width: "70px", height: "70x" %>
+        <div>Data Cleanup</div>
+      <%- end %>
+    </div>
+  <%- end %>
+</div>

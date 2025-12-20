@@ -11,6 +11,10 @@ class DatabaseDumper
     def dump(io, identifier:)
       @mailer_klass.to_s.safe_constantize.with(io: io, identifier: identifier).send(@action).deliver_now
     end
+
+    def delete_stale(older_than:)
+      # Not relevant for this destination
+    end
   end
 
   # Save a backup to a local directory
@@ -25,6 +29,14 @@ class DatabaseDumper
         IO.copy_stream(io, backup_file)
       end
     end
+
+    def delete_stale(older_than:)
+      Dir.glob(File.join(@directory, "*.dump")).each do |backup_filename|
+        if File.file?(backup_filename) && File.mtime(backup_filename) < older_than
+          File.delete(backup_filename) rescue nil # best effort
+        end
+      end
+    end
   end
 
   # Save a backup to a Google Cloud bucket
@@ -36,6 +48,14 @@ class DatabaseDumper
 
     def dump(io, identifier:)
       @bucket.upload_file(io, File.join(@prefix, "backup_#{identifier}.dump"))
+    end
+
+    def delete_stale(older_than:)
+      @bucket.files(prefix: @prefix, match_glob: "**.dump").each do |file|
+        if file.created_at < older_than
+          file.delete rescue nil # best effort
+        end
+      end
     end
   end
 

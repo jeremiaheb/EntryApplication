@@ -574,6 +574,16 @@
           cd /var/www/apps/EntryApplication/current && $HOME/.rbenv/bin/rbenv exec bundle exec rake db:backup RAILS_ENV=production
       become: true
 
+    - name: Cleanup stale database backups on a schedule
+      ansible.builtin.cron:
+        name: "Delete stale database backups older than 30 days"
+        minute: "59"
+        hour: "01"
+        user: "entryapplication"
+        job: >
+          cd /var/www/apps/EntryApplication/current && $HOME/.rbenv/bin/rbenv exec bundle exec rake db:delete_stale_backups RAILS_ENV=production
+      become: true
+
     # --------------------------
     # The following tasks are conditional on `development_build` being defined,
     # meaning this playbook is running in Vagrant for local development. The

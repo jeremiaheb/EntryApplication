@@ -6,6 +6,16 @@ namespace :db do
     DatabaseDumper.new.dump_to_destinations
   end
 
+  desc "Cleanup old (stale) backups"
+  task delete_stale_backups: :environment do
+    older_than = 30.days.ago
+    Rails.application.config.x.database_dumper_destinations.each do |destination|
+      Rails.error.handle do
+        destination.delete_stale(older_than: older_than)
+      end
+    end
+  end
+
   desc "Restore the database from a dump file"
   task restore: :environment do
     connection_config =  Rails.application.config.database_configuration[Rails.env]

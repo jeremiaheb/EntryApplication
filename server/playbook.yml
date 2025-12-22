@@ -564,6 +564,16 @@
         mode: "0440"
       become: true
 
+    - name: Cleanup stale drafts on a schedule
+      ansible.builtin.cron:
+        name: "Delete stale drafts older than 30 days"
+        minute: "30"
+        hour: "23"
+        user: "entryapplication"
+        job: >
+          cd /var/www/apps/EntryApplication/current && $HOME/.rbenv/bin/rbenv exec bundle exec rake drafts:destroy_stale RAILS_ENV=production
+      become: true
+
     - name: Backup the database on a schedule
       ansible.builtin.cron:
         name: "Backup database"

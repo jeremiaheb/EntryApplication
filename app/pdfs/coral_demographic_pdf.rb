@@ -1,6 +1,6 @@
 class CoralDemographicPdf < Prawn::Document
   def initialize(coral_demographics)
-      super(margin: 2)
+    super(margin: 2)
     coral_demographics.each do |coral_demographic|
       @coral_demographic = coral_demographic
       sample_head
@@ -25,75 +25,90 @@ class CoralDemographicPdf < Prawn::Document
     data =  [["Diver", "#{@coral_demographic.diver.diver_name}", "Mission:", "#{@coral_demographic.mission.display_name(include_region: true)}"],
               ["Buddy", "#{@coral_demographic.buddy.diver_name}", "Field ID", "#{@coral_demographic.field_id}", "Date", "#{@coral_demographic.sample_date}", "Sample Time", "#{@coral_demographic.sample_begin_time.strftime("%H:%M")}"],
               ["Habitat", "#{@coral_demographic.habitat_type.habitat_name}", "Meters Completed", "#{@coral_demographic.meters_completed}", "Percent Hardbottom", "#{@coral_demographic.percent_hardbottom}"],
-]
+    ]
     table data, cell_style: { size: 8, border_width: 0, height: 17, padding: 5 }
   end
 
   def notes
-    data =  [
-              [{ content: "#{@coral_demographic.sample_description}" }],
-            ]
+    data = [
+      [{ content: "#{@coral_demographic.sample_description}" }],
+    ]
 
     table data,
       cell_style: { size: 8, height: 30, padding: 2  },
       column_widths: { 0 => 500 }
   end
 
- def species_data_30
-   table spp_1_30,
-    cell_style: { size: 8, height: 17, align: :center, padding: 2 },
-    column_widths: { 0 => 10, 1 => 60, 2 => 70, 3 => 30, 4 => 30, 5 => 30, 6 => 30, 7 => 30 }
- end
-
- def spp_1_30
-  [["M", "Species", "MD - PD - MH", "OM%", "RM%", "Blch", "Dis", "Rest"]] +
-  @coral_demographic.demographic_corals[0..29].map.with_index do |spp, index|
-    [spp.meter_mark, spp.coral.try(:code), "%s - %s - %s" % [spp.try(:max_diameter), spp.try(:perpendicular_diameter), spp.try(:height)], spp.old_mortality, spp.recent_mortality, spp.bleach_condition, spp.disease_short, spp.restored_short]
+  def species_data_30
+    table spp_1_30,
+      cell_style: { size: 8, height: 17, align: :center, padding: 2 },
+      column_widths: { 0 => 10, 1 => 60, 2 => 70, 3 => 30, 4 => 30, 5 => 30, 6 => 30, 7 => 30 }
   end
- end
 
- def species_data_60
-   move_up 527
-   indent(290) do
-     table spp_31_60,
-       cell_style: { size: 8, height: 17, align: :center, padding: 2 },
-       column_widths: { 0 => 10, 1 => 60, 2 => 70, 3 => 30, 4 => 30, 5 => 30, 6 => 30, 7 => 30 }
-   end
- end
-
- def spp_31_60
-  [["M", "Species", "MD - PD - MH", "OM%", "RM%", "Blch", "Dis", "Rest"]] +
-    @coral_demographic.demographic_corals[30..59].map.with_index do |spp, index|
-    [spp.meter_mark, spp.coral.try(:code), "%s - %s - %s" % [spp.try(:max_diameter), spp.try(:perpendicular_diameter), spp.try(:height)], spp.old_mortality, spp.recent_mortality, spp.bleach_condition, spp.disease_short, spp.restored_short]
+  def spp_1_30
+    [["M", "Species", "MD - PD - MH", "OM%", "RM%", "Blch", "Dis", "Rest"]] +
+    @coral_demographic.demographic_corals[0..29].map do |spp|
+      demographic_coral_row(spp)
+    end
   end
- end
 
- def species_data_90
-   table spp_61_90,
-    cell_style: { size: 8, height: 17, align: :center, padding: 2 },
-    column_widths: { 0 => 10, 1 => 60, 2 => 70, 3 => 30, 4 => 30, 5 => 30, 6 => 30, 7 => 30 }
- end
-
- def spp_61_90
-  [["M", "Species", "MD - PD - MH", "OM%", "RM%", "Blch", "Dis", "Rest"]] +
-  @coral_demographic.demographic_corals[60..89].map.with_index do |spp, index|
-    [spp.meter_mark, spp.coral.try(:code), "%s - %s - %s" % [spp.try(:max_diameter), spp.try(:perpendicular_diameter), spp.try(:height)], spp.old_mortality, spp.recent_mortality, spp.bleach_condition, spp.disease_short, spp.restored_short]
+  def species_data_60
+    move_up 527
+    indent(290) do
+      table spp_31_60,
+        cell_style: { size: 8, height: 17, align: :center, padding: 2 },
+        column_widths: { 0 => 10, 1 => 60, 2 => 70, 3 => 30, 4 => 30, 5 => 30, 6 => 30, 7 => 30 }
+    end
   end
- end
 
- def species_data_120
-   move_up 527
-   indent(290) do
-   table spp_91_120,
-    cell_style: { size: 8, height: 17, align: :center, padding: 2 },
-    column_widths: { 0 => 10, 1 => 60, 2 => 70, 3 => 30, 4 => 30, 5 => 30, 6 => 30, 7 => 30 }
+  def spp_31_60
+    [["M", "Species", "MD - PD - MH", "OM%", "RM%", "Blch", "Dis", "Rest"]] +
+     @coral_demographic.demographic_corals[30..59].map do |spp|
+      demographic_coral_row(spp)
+    end
   end
- end
 
- def spp_91_120
-  [["M", "Species", "MD - PD - MH", "OM%", "RM%", "Blch", "Dis", "Rest"]] +
-  @coral_demographic.demographic_corals[90..119].map.with_index do |spp, index|
-    [spp.meter_mark, spp.coral.try(:code), "%s - %s - %s" % [spp.try(:max_diameter), spp.try(:perpendicular_diameter), spp.try(:height)], spp.old_mortality, spp.recent_mortality, spp.bleach_condition, spp.disease_short, spp.restored_short]
+  def species_data_90
+    table spp_61_90,
+      cell_style: { size: 8, height: 17, align: :center, padding: 2 },
+      column_widths: { 0 => 10, 1 => 60, 2 => 70, 3 => 30, 4 => 30, 5 => 30, 6 => 30, 7 => 30 }
   end
- end
+
+  def spp_61_90
+    [["M", "Species", "MD - PD - MH", "OM%", "RM%", "Blch", "Dis", "Rest"]] +
+    @coral_demographic.demographic_corals[60..89].map do |spp|
+      demographic_coral_row(spp)
+    end
+  end
+
+  def species_data_120
+    move_up 527
+    indent(290) do
+      table spp_91_120,
+        cell_style: { size: 8, height: 17, align: :center, padding: 2 },
+        column_widths: { 0 => 10, 1 => 60, 2 => 70, 3 => 30, 4 => 30, 5 => 30, 6 => 30, 7 => 30 }
+    end
+  end
+
+  def spp_91_120
+    [["M", "Species", "MD - PD - MH", "OM%", "RM%", "Blch", "Dis", "Rest"]] +
+    @coral_demographic.demographic_corals[90..119].map do |spp|
+      demographic_coral_row(spp)
+    end
+  end
+
+  private
+
+  def demographic_coral_row(spp)
+    [
+    spp.meter_mark,
+    spp.coral&.code,
+    spp.juvenile? ? "Juv: #{spp.height}" : "#{spp.max_diameter} - #{spp.perpendicular_diameter} - #{spp.height}",
+    spp.juvenile? ? "" : spp.old_mortality,
+    spp.juvenile? ? "" : spp.recent_mortality,
+    spp.juvenile? ? "" : spp.bleach_condition,
+    spp.juvenile? ? "" : spp.disease_short,
+    spp.juvenile? ? "" : spp.restored_short,
+    ]
+  end
 end

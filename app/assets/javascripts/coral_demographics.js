@@ -10,7 +10,9 @@ $(function () {
     function (value, element, params) {
       return (
         parseFloat(value) <=
-        parseFloat($(element).parent().find('[id$="max_diameter"]').val())
+        parseFloat(
+          $(element).closest(".fields").find('[id$="max_diameter"]').val(),
+        )
       );
     },
     "must be less than or equal to max diameter",
@@ -21,7 +23,9 @@ $(function () {
     function (value, element, params) {
       return (
         Number(value) +
-          Number($(element).parent().find('[id$="old_mortality"]').val()) <=
+          Number(
+            $(element).closest(".fields").find('[id$="old_mortality"]').val(),
+          ) <=
         100
       );
     },
@@ -154,6 +158,31 @@ $(function () {
       alert(
         "Caution: Please explain in the notes why a value other than 10 was entered",
       );
+    }
+  });
+
+  $(".juvenile-field").on("change", function (e) {
+    const $this = $(this);
+    const $fields = $this.closest(".fields");
+
+    const $fieldsToAdjustVisibility = $fields.find(
+      ".max-diameter-field, .perpendicular-diameter-field, .old-mortality-field, .recent-mortality-field, .bleach-condition-field, .disease-field, .restored-field",
+    );
+    const $tallyLabel = $fields.find(".tally-label");
+    if ($this.is(":checked")) {
+      $fieldsToAdjustVisibility
+        .removeClass("display-inline-block")
+        .addClass("display-none");
+      $tallyLabel
+        .removeClass("display-none")
+        .addClass("display-inline-block");
+    } else {
+      $fieldsToAdjustVisibility
+        .removeClass("display-none")
+        .addClass("display-inline-block");
+      $tallyLabel
+        .removeClass("display-inline-block")
+        .addClass("display-none");
     }
   });
 

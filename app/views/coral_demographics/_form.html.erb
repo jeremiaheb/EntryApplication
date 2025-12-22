@@ -71,16 +71,17 @@
   <div class="grid-row flex-row margin-top-05">
     <div class="grid-col-12">
       <span class="width-full maxw-3 text-bold font-body-2xs display-inline-block">&num;</span>
-      <span class="width-full usa-input--2xs text-bold font-body-2xs display-inline-block">Meter</span>
+      <span class="width-full maxw-4 text-bold font-body-2xs display-inline-block">M</span>
       <span class="width-full maxw-card-lg text-bold font-body-2xs display-inline-block">Coral</span>
-      <span class="width-full usa-input--xs text-bold font-body-2xs display-inline-block">Max Diameter</span>
-      <span class="width-full usa-input--xs text-bold font-body-2xs display-inline-block">Perp Diameter</span>
-      <span class="width-full usa-input--xs text-bold font-body-2xs display-inline-block">Height</span>
-      <span class="width-full usa-input--xs text-bold font-body-2xs display-inline-block">Old Mortality</span>
-      <span class="width-full usa-input--xs text-bold font-body-2xs display-inline-block">Recent Mortality</span>
-      <span class="width-full usa-input--md text-bold font-body-2xs display-inline-block">Bleached</span>
-      <span class="width-full usa-input--sm text-bold font-body-2xs display-inline-block">Disease</span>
-      <span class="width-full usa-input--sm text-bold font-body-2xs display-inline-block">Restored</span>
+      <span class="width-full maxw-4 text-bold font-body-2xs display-inline-block">Juv?</span>
+      <span class="width-full maxw-9 text-bold font-body-2xs display-inline-block">Max Diameter</span>
+      <span class="width-full maxw-9 text-bold font-body-2xs display-inline-block">Perp Diameter</span>
+      <span class="width-full maxw-9 text-bold font-body-2xs display-inline-block">Height</span>
+      <span class="width-full maxw-9 text-bold font-body-2xs display-inline-block">Old Mortality</span>
+      <span class="width-full maxw-9 text-bold font-body-2xs display-inline-block">Recent Mortality</span>
+      <span class="width-full maxw-15 text-bold font-body-2xs display-inline-block">Bleached</span>
+      <span class="width-full maxw-10 text-bold font-body-2xs display-inline-block">Disease</span>
+      <span class="width-full maxw-15 text-bold font-body-2xs display-inline-block">Restored</span>
     </div>
   </div>
   <div class="grid-row flex-row margin-top-0">
@@ -88,16 +89,43 @@
       <ol class="demo_corals margin-top-0 padding-left-3">
         <%= f.fields_for :demographic_corals do |ff| %>
           <li>
-            <%= ff.text_field :meter_mark, class: "meter-mark-field usa-input usa-input--2xs font-body-2xs padding-05 height-auto display-inline-block" %>
-            <%= ff.select :coral_id, Coral.order(:rank, :code).map { |c| [c.display_name, c.id, { "data-rank": c.rank }] }, { include_blank: true }, class: "coralSpecies width-full maxw-card-lg margin-top-1 height-auto font-body-3xs display-inline-block" %>
-            <%= ff.text_field :max_diameter, class: "max-diameter-field usa-input usa-input--xs font-body-2xs padding-05 height-auto display-inline-block" %>
-            <%= ff.text_field :perpendicular_diameter, class: "perpendicular-diameter-field usa-input usa-input--xs font-body-2xs padding-05 height-auto display-inline-block" %>
-            <%= ff.text_field :height, class: "height-field usa-input usa-input--xs font-body-2xs padding-05 height-auto display-inline-block" %>
-            <%= ff.text_field :old_mortality, class: "old-mortality-field usa-input usa-input--xs font-body-2xs padding-05 height-auto display-inline-block" %>
-            <%= ff.text_field :recent_mortality, class: "recent-mortality-field usa-input usa-input--xs font-body-2xs padding-05 height-auto display-inline-block" %>
-            <%= ff.select :bleach_condition, { "None" => "N", "Partial Bleaching" => "PB", "Total" => "T", "Paling" => "P" }, { include_blank: false, selected: ff.object.bleach_condition || "N" }, class: "bleach-condition-field usa-select usa-input--md font-body-2xs padding-05 height-auto display-inline-block" %>
-            <%= ff.select :disease, { "Absent" => "absent", "Present" => "present", "Fast" => "fast", "Slow" => "slow" }, { include_blank: false, selected: ff.object.disease || "absent" }, class: "disease-field usa-select usa-input--sm font-body-2xs padding-05 height-auto display-inline-block" %>
-            <%= ff.select :restored, { "Not Restored" => "not_restored", "Restored/Outplanted" => "restored", "Unknown" => "unknown" }, { include_blank: true, selected: (ff.object.new_record? ? "not_restored" : ff.object.restored) }, class: "restored-field usa-select usa-input--sm font-body-2xs padding-05 height-auto display-inline-block" %>
+            <%= tag.div class: ["meter-mark-field-container", "maxw-4", "width-full", "display-inline-block"] do %>
+              <%= ff.text_field :meter_mark, class: "meter-mark-field usa-input font-body-2xs padding-05 height-auto" %>
+            <%- end %>
+            <%= tag.div class: ["coral-id-field-container", "maxw-card-lg", "width-full", "display-inline-block"] do %>
+              <%= ff.select :coral_id, Coral.order(:rank, :code).map { |c| [c.display_name, c.id, { "data-rank": c.rank }] }, { include_blank: true }, class: "coralSpecies margin-top-1 width-full height-auto font-body-3xs" %>
+            <%- end %>
+            <%= tag.div class: ["juvenile-field-container", "maxw-4", "width-full", "display-inline-block"] do %>
+              <%= ff.checkbox :juvenile, class: "juvenile-field font-body-2xs padding-05 width-full height-auto", tabindex: "-1" %>
+            <%- end %>
+            <%= tag.div class: ["max-diameter-field-container", "maxw-9", "width-full", "display-inline-block"] do %>
+              <%= ff.text_field :max_diameter, class: ["max-diameter-field", "usa-input", "font-body-2xs", "padding-05", "height-auto", ff.object.juvenile? ? "display-none" : "display-inline-block"] %>
+            <%- end %>
+            <%= tag.div class: ["perpendicular-diameter-field-container", "maxw-9", "width-full", "text-right", "display-inline-block"] do %>
+              <%= ff.text_field :perpendicular_diameter, class: ["perpendicular-diameter-field", "usa-input", "font-body-2xs", "padding-05", "height-auto", ff.object.juvenile? ? "display-none" : "display-inline-block"]  %>
+              <%= tag.span class: ["tally-label", ff.object.juvenile? ? "display-inline-block" : "display-none"] do %>
+                Tally:
+              <%- end %>
+            <%- end %>
+            <%= tag.div class: ["height-field-container", "maxw-9", "width-full", "display-inline-block"] do %>
+              <%= ff.text_field :height, class: "height-field usa-input font-body-2xs padding-05 height-auto" %>
+            <%- end %>
+            <%= tag.div class: ["old-mortality-field-container", "maxw-9", "width-full", "display-inline-block"] do %>
+              <%= ff.text_field :old_mortality, class: ["old-mortality-field", "usa-input", "font-body-2xs", "padding-05", "height-auto", ff.object.juvenile? ? "display-none" : "display-inline-block"] %>
+            <%- end %>
+            <%= tag.div class: ["recent-mortality-field-container", "maxw-9", "width-full", "display-inline-block"] do %>
+              <%= ff.text_field :recent_mortality, class: ["recent-mortality-field", "usa-input", "font-body-2xs", "padding-05", "height-auto", ff.object.juvenile? ? "display-none" : "display-inline-block"] %>
+            <%- end %>
+            <%= tag.div class: ["bleach-condition-field-container", "maxw-15", "width-full", "display-inline-block"] do %>
+              <%= ff.select :bleach_condition, { "None" => "N", "Partial Bleaching" => "PB", "Total" => "T", "Paling" => "P" }, { include_blank: false, selected: ff.object.bleach_condition || "N" }, class: ["bleach-condition-field", "usa-select", "font-body-2xs", "padding-05",
+              "height-auto", ff.object.juvenile? ? "display-none" : "display-inline-block"] %>
+            <%- end %>
+            <%= tag.div class: ["disease-field-container", "maxw-10", "width-full", "display-inline-block"] do %>
+              <%= ff.select :disease, { "Absent" => "absent", "Present" => "present", "Fast" => "fast", "Slow" => "slow" }, { include_blank: false, selected: ff.object.disease || "absent" }, class: ["disease-field", "usa-select", "font-body-2xs", "padding-05", "height-auto", ff.object.juvenile? ? "display-none" : "display-inline-block"] %>
+            <%- end %>
+            <%= tag.div class: ["restored-field-container", "maxw-15", "width-full", "display-inline-block"] do %>
+              <%= ff.select :restored, { "Not Restored" => "not_restored", "Restored/Outplanted" => "restored", "Unknown" => "unknown" }, { include_blank: true, selected: (ff.object.new_record? ? "not_restored" : ff.object.restored) }, class: ["restored-field", "usa-select", "font-body-2xs", "padding-05", "height-auto", ff.object.juvenile? ? "display-none" : "display-inline-block"] %>
+            <%- end %>
             <%= ff.link_to_remove tabindex: "-1", class: "font-body-xs" do %>
               <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
                 <%= tag.use href: image_path("@uswds/uswds/dist/img/sprite.svg#remove_circle") %>

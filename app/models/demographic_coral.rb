@@ -4,7 +4,7 @@ class DemographicCoral < ApplicationRecord
 
   default_scope -> { order("id ASC") }
 
-  enum :restored, [:not_restored, :restored, :unknown]
+  enum :restored, [:not_restored, :restored, :unknown], scopes: false, instance_methods: false
 
   validates   :meter_mark, :max_diameter, :perpendicular_diameter, :height, :old_mortality, :recent_mortality, :bleach_condition, :disease, presence: true, if: -> { coral_id != 1 }
   validates   :max_diameter, :perpendicular_diameter, :height, numericality: { greater_than: 0 }

@@ -161,7 +161,7 @@ $(function () {
     }
   });
 
-  $(".coral-demographic-form").on("change", ".juvenile-field", function(e) {
+  $(".coral-demographic-form").on("change", ".juvenile-field", function (e) {
     const $target = $(e.target);
     const $fields = $target.closest(".fields");
 
@@ -173,16 +173,12 @@ $(function () {
       $fieldsToAdjustVisibility
         .removeClass("display-inline-block")
         .addClass("display-none");
-      $tallyLabel
-        .removeClass("display-none")
-        .addClass("display-inline-block");
+      $tallyLabel.removeClass("display-none").addClass("display-inline-block");
     } else {
       $fieldsToAdjustVisibility
         .removeClass("display-none")
         .addClass("display-inline-block");
-      $tallyLabel
-        .removeClass("display-inline-block")
-        .addClass("display-none");
+      $tallyLabel.removeClass("display-inline-block").addClass("display-none");
     }
   });
 

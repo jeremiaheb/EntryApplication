@@ -161,15 +161,15 @@ $(function () {
     }
   });
 
-  $(".juvenile-field").on("change", function (e) {
-    const $this = $(this);
-    const $fields = $this.closest(".fields");
+  $(".coral-demographic-form").on("change", ".juvenile-field", function(e) {
+    const $target = $(e.target);
+    const $fields = $target.closest(".fields");
 
     const $fieldsToAdjustVisibility = $fields.find(
       ".max-diameter-field, .perpendicular-diameter-field, .old-mortality-field, .recent-mortality-field, .bleach-condition-field, .disease-field, .restored-field",
     );
     const $tallyLabel = $fields.find(".tally-label");
-    if ($this.is(":checked")) {
+    if ($target.is(":checked")) {
       $fieldsToAdjustVisibility
         .removeClass("display-inline-block")
         .addClass("display-none");

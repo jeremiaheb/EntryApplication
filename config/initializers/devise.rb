@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require "google_cloud_detector"
 
 # Assuming you have not yet modified this file, each configuration option below
 # is set to its default value. Note that some are commented out while others
@@ -24,7 +25,11 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = "rvcapplications@gmail.com"
+  if GoogleCloudDetector.running_on_google_cloud?
+    config.mailer_sender = "ncrmpdataentry@googleusercontent.com"
+  else
+    config.mailer_sender = "jeremiah.blondeau+entryapplication@noaa.gov"
+  end
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'

@@ -7,4 +7,5 @@ set :ssh_options, {
   proxy: Net::SSH::Proxy::Command.new(File.join(__dir__, "..", "..", "server", "gcloud-iap-tunnel") + " %h %p"),
 }
 
+# <VM name>.<zone>.<project name>
 server "sefsc-ncrmp-web-prod.us-east4-a.ggn-nmfs-sencrmp-prod-1", user: "entryapplication", roles: %w[app db web]

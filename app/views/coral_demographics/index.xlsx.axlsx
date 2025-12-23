@@ -54,14 +54,14 @@ wb.add_worksheet(name: "DemoCorals") do |demo_sheet|
       demo_sheet.add_row [d_coral.coral_demographic.msn,
                           d_coral.meter_mark,
                           d_coral.coral.try(:code),
-                          d_coral.max_diameter,
-                          d_coral.perpendicular_diameter,
+                          d_coral.juvenile? ? 1 : d_coral.max_diameter,
+                          d_coral.juvenile? ? 1 : d_coral.perpendicular_diameter,
                           d_coral.height,
-                          d_coral.old_mortality,
-                          d_coral.recent_mortality,
-                          d_coral.bleach_condition,
-                          d_coral.disease,
-                          d_coral.restored_before_type_cast,],
+                          d_coral.juvenile? ? 0 : d_coral.old_mortality,
+                          d_coral.juvenile? ? 0 : d_coral.recent_mortality,
+                          d_coral.juvenile? ? "N" : d_coral.bleach_condition,
+                          d_coral.juvenile? ? "absent" : d_coral.disease,
+                          d_coral.juvenile? ? 0 : d_coral.restored_before_type_cast,],
                           types: [:string]
     end
   end

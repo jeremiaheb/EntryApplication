@@ -6,9 +6,14 @@ class DemographicCoral < ApplicationRecord
 
   enum :restored, [:not_restored, :restored, :unknown], scopes: false, instance_methods: false
 
-  validates   :meter_mark, :max_diameter, :perpendicular_diameter, :height, :old_mortality, :recent_mortality, :bleach_condition, :disease, presence: true, if: -> { coral_id != 1 }
-  validates   :max_diameter, :perpendicular_diameter, :height, numericality: { greater_than: 0 }
-  validates   :perpendicular_diameter, numericality: { less_than_or_equal_to: :max_diameter }
+  validates   :meter_mark, presence: true
+  validates   :juvenile, inclusion: { in: [true, false] }
+  validates   :height, presence: true, numericality: { greater_than: 0 }
+
+  # For juveniles, only meter mark and height (tally) are required
+  validates   :max_diameter, :perpendicular_diameter, :old_mortality, :recent_mortality, :bleach_condition, :disease, presence: true, unless: :juvenile?
+  validates   :max_diameter, :perpendicular_diameter, numericality: { greater_than: 0 }, unless: :juvenile?
+  validates   :perpendicular_diameter, numericality: { less_than_or_equal_to: :max_diameter }, unless: :juvenile?
 
   # One letter version of disease for use on the proofing report
   def disease_short

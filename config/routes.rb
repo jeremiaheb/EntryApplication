@@ -10,6 +10,9 @@ EntryApplication::Application.routes.draw do
     get "edit_diver_registration",      to: "devise/registrations#edit"
   end
 
+  # For testing unhandled exceptions via solid_errors
+  get "/crash", to: ->(env) { raise "/crash intentionally generated this error for testing error reporting" }
+
   # Admin only routes
   authenticate :diver, ->(diver) { diver.admin? } do
     mount SolidErrors::Engine, at: "/errors"

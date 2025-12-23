@@ -146,7 +146,7 @@ class BenthicCoverPdf < Prawn::Document
  def spp_1_27
   [["Category", "Hard Num", "Soft Num", "Rubble Num"]] +
   @benthic_cover.point_intercepts.map.with_index do |spp, index|
-    [spp.cover_cat.name, spp.hardbottom_num, spp.softbottom_num, spp.rubble_num]
+    [spp.cover_cat.proofing_code, spp.hardbottom_num, spp.softbottom_num, spp.rubble_num]
   end
  end
 end

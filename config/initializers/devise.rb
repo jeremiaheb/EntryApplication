@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "google_cloud_detector"
 
 # Assuming you have not yet modified this file, each configuration option below

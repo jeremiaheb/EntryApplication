@@ -17,10 +17,10 @@ class Diver < ApplicationRecord
   has_many :mission_managers
   has_many :missions_managed, through: :mission_managers, source: :mission
 
-  validates   :diver_number, presence: true
-  validates   :diver_name, presence: true
+  validates   :diver_number, presence: true, uniqueness: true
+  validates   :diver_name, presence: true, uniqueness: { case_sensitive: false }
   validates   :agency, presence: true, except_on: [:admin, :import]
-  validates   :username, uniqueness: { case_sensitive: false, allow_blank: true }
+  validates   :username, uniqueness: { case_sensitive: false }
   validates   :email, uniqueness: { case_sensitive: false }
   validates   :role, inclusion: { in: ROLES }
   validate    :current_password_is_not_username, except_on: [:admin, :import], unless: -> { password.present? }
@@ -79,13 +79,13 @@ class Diver < ApplicationRecord
   end
 
   def current_password_is_not_username
-    if valid_password?(username)
+    if username.present? && valid_password?(username)
       errors.add(:password, "must not be the same as username")
     end
   end
 
   def password_is_not_username
-    if username.downcase == password.downcase || diver_name.downcase == password.downcase || email.downcase == password.downcase
+    if (username.present? && username.downcase == password.downcase) || diver_name.downcase == password.downcase || email.downcase == password.downcase
       errors.add(:password, "must not be the same as username, diver name or email")
     end
   end

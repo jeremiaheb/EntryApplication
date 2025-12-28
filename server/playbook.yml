@@ -416,7 +416,8 @@
       ansible.builtin.git:
         repo: "https://github.com/rbenv/ruby-build"
         dest: "/var/www/apps/EntryApplication/.rbenv/plugins/ruby-build"
-        version: "v20250925"
+        version: "master"
+        update: true
       become: true
       become_user: entryapplication
 
@@ -685,7 +686,8 @@
       ansible.builtin.git:
         repo: "https://github.com/rbenv/ruby-build"
         dest: "{{ ansible_user_dir }}/.rbenv/plugins/ruby-build"
-        version: "v20250925"
+        version: "master"
+        update: true
       when: development_build is defined
 
     - name: Add rbenv init to ~/.bashrc (development)

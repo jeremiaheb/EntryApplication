@@ -441,8 +441,8 @@
 
     - name: Install ruby
       ansible.builtin.command:
-        cmd: "/var/www/apps/EntryApplication/.rbenv/bin/rbenv install 3.4.6"
-        creates: "/var/www/apps/EntryApplication/.rbenv/versions/3.4.6"
+        cmd: "/var/www/apps/EntryApplication/.rbenv/bin/rbenv install 3.4.8"
+        creates: "/var/www/apps/EntryApplication/.rbenv/versions/3.4.8"
       become: true
       become_user: entryapplication
 
@@ -700,8 +700,8 @@
 
     - name: Install ruby (development)
       ansible.builtin.command:
-        cmd: "{{ ansible_user_dir }}/.rbenv/bin/rbenv install 3.4.6"
-        creates: "{{ ansible_user_dir }}/.rbenv/versions/3.4.6"
+        cmd: "{{ ansible_user_dir }}/.rbenv/bin/rbenv install 3.4.8"
+        creates: "{{ ansible_user_dir }}/.rbenv/versions/3.4.8"
       when: development_build is defined
 
     - name: Install nvm (development)

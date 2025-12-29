@@ -137,7 +137,8 @@ class BenthicCoversController < ApplicationController
                                                                       :meter_mark_2, :meter_mark_3, :meter_mark_4, :meter_mark_5, :meter_mark_6,
                                                                       :meter_mark_7, :meter_mark_8, :meter_mark_9, :meter_mark_10, :meter_mark_11,
                                                                       :meter_mark_12, :meter_mark_13, :meter_mark_14, :meter_mark_15,],
-                                         invert_belt_attributes: [:id, "_destroy", :lobster_num, :conch_num, :diadema_num],
+                                         invert_belt_attributes: [:id, "_destroy", :lobster_num,
+                                         :lobster_num_did_not_look, :conch_num, :conch_num_did_not_look, :diadema_num, :diadema_num_did_not_look,],
                                          presence_belt_attributes: [:id, "_destroy", :a_cervicornis, :a_palmata, :d_cylindrus, :m_annularis, :m_faveolata, :m_franksi, :m_ferox],
                                          tally_marks_attributes: [:id, :meter_mark, :cover_cat_id, :habitat])
   end

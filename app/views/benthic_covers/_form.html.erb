@@ -194,17 +194,23 @@
           <legend class="usa-legend text-bold font-body-md">Macro Invertebrates</legend>
 
           <%= f.fields_for :invert_belt do |ff| %>
-            <div>
+            <div class="fields-group">
               <%= ff.label :lobster_num, "Carib. Spiny Lobster", class: "usa-label display-inline-block margin-top-1 width-card" %>
-              <%= ff.text_field :lobster_num, class: "usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+              <%= ff.text_field :lobster_num, class: "usa-input usa-input--xs padding-y-0 height-auto display-inline-block", value: ff.object.lobster_num_did_not_look? ? "" : ff.object.lobster_num, disabled: ff.object.lobster_num_did_not_look? %>
+              <%= ff.checkbox :lobster_num_did_not_look, class: "did-not-look-checkbox", tabindex: "-1" %>
+              <%= ff.label :lobster_num_did_not_look, "did not look", class: "font-body-3xs" %>
             </div>
-            <div>
+            <div class="fields-group">
               <%= ff.label :conch_num, "Queen Conch", class: "usa-label display-inline-block margin-top-1 width-card" %>
-              <%= ff.text_field :conch_num, class: "usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+              <%= ff.text_field :conch_num, class: "usa-input usa-input--xs padding-y-0 height-auto display-inline-block", value: ff.object.conch_num_did_not_look? ? "" : ff.object.conch_num, disabled: ff.object.conch_num_did_not_look? %>
+              <%= ff.checkbox :conch_num_did_not_look, class: "did-not-look-checkbox", tabindex: "-1" %>
+              <%= ff.label :conch_num_did_not_look, "did not look", class: "font-body-3xs" %>
             </div>
-            <div>
+            <div class="fields-group">
               <%= ff.label :diadema_num, "Long-Spined Sea Urchin", class: "usa-label display-inline-block margin-top-1 width-card" %>
-              <%= ff.text_field :diadema_num, class: "usa-input usa-input--xs padding-y-0 height-auto display-inline-block" %>
+              <%= ff.text_field :diadema_num, class: "usa-input usa-input--xs padding-y-0 height-auto display-inline-block", value: ff.object.diadema_num_did_not_look? ? "" : ff.object.diadema_num, disabled: ff.object.diadema_num_did_not_look? %>
+              <%= ff.checkbox :diadema_num_did_not_look, class: "did-not-look-checkbox", tabindex: "-1" %>
+              <%= ff.label :diadema_num_did_not_look, "did not look", class: "font-body-3xs" %>
             </div>
           <%- end %>
         </fieldset>

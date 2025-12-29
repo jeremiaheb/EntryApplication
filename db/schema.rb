@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_12_21_233828) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_29_173405) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -184,6 +184,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_21_233828) do
     t.integer "lobster_num"
     t.integer "conch_num"
     t.integer "diadema_num"
+    t.boolean "lobster_num_did_not_look", default: false, null: false
+    t.boolean "conch_num_did_not_look", default: false, null: false
+    t.boolean "diadema_num_did_not_look", default: false, null: false
   end
 
   create_table "mission_managers", force: :cascade do |t|

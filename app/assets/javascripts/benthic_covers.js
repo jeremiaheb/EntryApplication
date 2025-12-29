@@ -255,7 +255,10 @@ $(function () {
   const validator = $(".benthic-cover-form").validate({
     errorElement: "div",
     errorPlacement: function ($error, $element) {
-      if ($element.closest(".coverCats").length > 0) {
+      if ($element.closest(".fields-group").length > 0) {
+        $element.closest(".fields-group").append($error);
+        return;
+      } else if ($element.closest(".coverCats").length > 0) {
         // Place the error under the row
         $element.closest(".fields").append($error);
         return;
@@ -304,15 +307,27 @@ $(function () {
         maxlength: 150,
       },
       "benthic_cover[invert_belt_attributes][lobster_num]": {
-        required: true,
+        required: function () {
+          return !$(
+            "#benthic_cover_invert_belt_attributes_lobster_num_did_not_look",
+          ).is(":checked");
+        },
         digits: true,
       },
       "benthic_cover[invert_belt_attributes][conch_num]": {
-        required: true,
+        required: function () {
+          return !$(
+            "#benthic_cover_invert_belt_attributes_conch_num_did_not_look",
+          ).is(":checked");
+        },
         digits: true,
       },
       "benthic_cover[invert_belt_attributes][diadema_num]": {
-        required: true,
+        required: function () {
+          return !$(
+            "#benthic_cover_invert_belt_attributes_diadema_num_did_not_look",
+          ).is(":checked");
+        },
         digits: true,
       },
       "benthic_cover[presence_belt_attributes][a_palmata]": {
@@ -596,6 +611,18 @@ $(function () {
     if ($lastCoverSelect.length > 0) {
       $lastCoverSelect[0].scrollIntoView();
       $lastCoverSelect.select2("open");
+    }
+  });
+
+  $(".benthic-cover-form").on("change", ".did-not-look-checkbox", function (e) {
+    const $target = $(e.target);
+    const $siblingTextField = $target.siblings("input[type='text']");
+
+    const checked = $target.is(":checked");
+    $siblingTextField.prop("disabled", checked);
+    if (checked) {
+      $siblingTextField.val("");
+      validator.element($siblingTextField);
     }
   });
 

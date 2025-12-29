@@ -163,7 +163,6 @@
       ansible.builtin.user:
         name: "alindeman"
         create_home: true
-        password: "!" # disable password
         shell: /bin/bash
         groups:
           - users
@@ -184,7 +183,6 @@
       ansible.builtin.user:
         name: "jeremiaheb"
         create_home: true
-        password: "!" # disable password
         shell: /bin/bash
         groups:
           - users

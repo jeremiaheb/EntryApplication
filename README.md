@@ -200,7 +200,7 @@ ansible-playbook --inventory server/production.yml --extra-vars ansible_user=USE
 Replace `USERNAME` with your username on the server. For example:
 
 ```bash
-ansible-playbook --inventory server/production.yml --extra-vars ansible_user=alindeman server/playbook.yml
+ansible-playbook --inventory server/production.yml --extra-vars ansible_user=jeremiaheb server/playbook.yml
 ```
 
 To run the Ansible without actually changing anything, add the `--check` flag. To run the Ansible with more details about what did (or would) change, add the `--verbose` flag.

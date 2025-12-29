@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gem "rails", "8.0.4"
 # Minitest 6 is not yet compatible with Rails 8/8.1: https://github.com/rails/rails/issues/56406
-gem "minitest", "~> 5.27", "< 6"
+gem "minitest", "~> 6.0"
 
 # PostgreSQL. pg 1.6 removed support for PostgreSQL < 10. The server must be
 # upgraded before upgrading to pg >= 1.6.

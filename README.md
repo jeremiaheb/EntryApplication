@@ -66,6 +66,14 @@ To power it back up again, run:
 vagrant up --provision
 ```
 
+### master.key
+
+Rails uses the [config/master.key file](https://guides.rubyonrails.org/security.html#environmental-security) to encrypt credentials, including the session key base.
+
+This file is intentionally _not_ committed to source control, but is required when first deploying the application to a new server or when adding encrypted credentials.
+
+The current `master.key` file can be found in the "NCRMP Web Applications" Google Drive folder, and should be copied to the `config/` directory. Capistrano will automatically upload the `master.key` file when deploying the application for the first time.
+
 ### Testing
 
 See [Rails Guides: Testing Rails Applications](https://guides.rubyonrails.org/testing.html).

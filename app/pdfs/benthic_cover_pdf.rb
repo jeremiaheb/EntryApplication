@@ -87,9 +87,9 @@ class BenthicCoverPdf < Prawn::Document
     move_up 136
     indent(262) do
       data = [[{ content: "Benthic Fauna", align: :center, colspan: 2 }],
-        [{ content: "P. argus:", border_right_width: 0 }, { content: "#{@benthic_cover.invert_belt.lobster_num}", border_left_width: 0 }],
-        [{ content: "S. gigas:", border_right_width: 0 }, { content: "#{@benthic_cover.invert_belt.conch_num}", border_left_width: 0 }],
-        [{ content: "D. antillarum:", border_right_width: 0 }, { content: "#{@benthic_cover.invert_belt.diadema_num}", border_left_width: 0 }],
+        [{ content: "P. argus:", border_right_width: 0 }, { content: "#{@benthic_cover.invert_belt.lobster_num_did_not_look? ? "did not look" : @benthic_cover.invert_belt.lobster_num}", border_left_width: 0 }],
+        [{ content: "S. gigas:", border_right_width: 0 }, { content: "#{@benthic_cover.invert_belt.conch_num_did_not_look? ? "did not look" : @benthic_cover.invert_belt.conch_num}", border_left_width: 0 }],
+        [{ content: "D. antillarum:", border_right_width: 0 }, { content: "#{@benthic_cover.invert_belt.diadema_num_did_not_look? ? "did not look" : @benthic_cover.invert_belt.diadema_num}", border_left_width: 0 }],
 ]
 
       table data,

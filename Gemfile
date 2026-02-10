@@ -17,7 +17,7 @@ gem "dartsass-sprockets", "~> 3.2", ">= 3.2.1"
 gem "sassc-embedded"
 
 # Google Cloud
-gem "google-cloud-storage", "~> 1.57", ">= 1.57.1", require: "google/cloud/storage"
+gem "google-cloud-storage", "~> 1.58", require: "google/cloud/storage"
 
 gem "jquery-ui-rails", "~> 8.0"
 gem "nested_form", "0.3.2"

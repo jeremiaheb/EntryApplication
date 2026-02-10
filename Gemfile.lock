@@ -328,7 +328,7 @@ GEM
       date
       stringio
     public_suffix (7.0.2)
-    puma (7.1.0)
+    puma (7.2.0)
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (3.2.4)
@@ -544,7 +544,7 @@ DEPENDENCIES
   prawn (~> 2.5)
   prawn-table (~> 0.2.2)
   pry
-  puma (~> 7.1)
+  puma (~> 7.2)
   rails (= 8.0.4)
   rubocop-rails-omakase
   sassc-embedded

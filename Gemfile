@@ -9,7 +9,7 @@ gem "minitest", "~> 5.27", "< 6"
 gem "pg", "~> 1.5", "< 1.6"
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 7.1"
+gem "puma", "~> 7.2"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"

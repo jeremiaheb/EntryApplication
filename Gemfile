@@ -22,7 +22,7 @@ gem "google-cloud-storage", "~> 1.58", require: "google/cloud/storage"
 gem "jquery-ui-rails", "~> 8.0"
 gem "nested_form", "0.3.2"
 
-gem "devise", "~> 4.9", ">= 4.9.4"
+gem "devise", "~> 5.0"
 gem "omniauth", "~> 2.1"
 gem "omniauth-rails_csrf_protection", "~> 2.0"
 gem "omniauth_openid_connect", "~> 0.8.0"

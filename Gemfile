@@ -30,7 +30,7 @@ gem "cancancan", "~> 3.6", ">= 3.6.1"
 
 gem "prawn", "~> 2.5"
 gem "prawn-table", "~> 0.2.2"
-gem "caxlsx_rails", "~> 0.6.4"
+gem "caxlsx_rails", "~> 0.7.1"
 gem "csv", "~> 3.3", ">= 3.3.5"
 
 # App-internal exception tracker [https://github.com/fractaledmind/solid_errors]

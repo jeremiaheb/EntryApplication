@@ -94,6 +94,9 @@ jobs:
       - name: Install NodeJS dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Precompile assets
+        run: bin/rails assets:precompile
+
       - name: Run tests
         env:
           RAILS_ENV: test

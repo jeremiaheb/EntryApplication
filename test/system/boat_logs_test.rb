@@ -42,7 +42,7 @@ class BoatLogsTest < ApplicationSystemTestCase
     all("select[id$='diver_id']")[3].select(lpi_diver1.diver_name)
     assert_equal "LPI Diver", all("label.diver_type_label")[3].text
 
-    all("textarea[id$='comments']").first.fill_in(with: "Hello World")
+    all("textarea[id$='comments']", visible: :all, wait: 5).first.fill_in(with: "Hello World")
 
     find("body").click
     find("input[type=submit]").click

@@ -32,7 +32,7 @@ class Draft < ApplicationRecord
 
   # Destroy all drafts created before a certain time, which by now are no longer
   # useful and just clogging up the database.
-  def self.destroy_stale(before: 15.days.ago)
+  def self.destroy_stale(before: 30.days.ago)
     where("created_at < ?", before).destroy_all
   end
 
